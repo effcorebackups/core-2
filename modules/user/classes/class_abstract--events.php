@@ -1,8 +1,9 @@
 <?php
 
 namespace effectivecore\modules\user {
-          use \effectivecore\html;
           use \effectivecore\factory;
+          use \effectivecore\html;
+          use \effectivecore\html_form;
           use \effectivecore\html_table;
           use \effectivecore\html_pager;
           use \effectivecore\url;
@@ -86,17 +87,12 @@ namespace effectivecore\modules\user {
   static function on_page_admin_users_delete_n($user_id) {
     $db_user = table_user::select_first(['email', 'is_locked'], ['id' => $user_id]);
     if ($db_user && empty($db_user['is_locked'])) {
-      page::add_element(new form_user_n_delete([], new html('input', ['type' => 'hidden', 'name' => 'user_id', 'value' => $user_id])));
+      page::add_element(html_form::build('user_n_delete'));
     } else {
       factory::send_header_and_exit('not_found',
         'User not found!'
       );
     }
-  }
-
-  static function on_page_user_register() {
-    $form = new form_user_register();
-    page::add_element($form);
   }
 
   static function on_page_user_n($user_id) {
@@ -123,7 +119,7 @@ namespace effectivecore\modules\user {
     $db_user = table_user::select_first(['*'], ['id' => $user_id]);
     if ($db_user) {
       if ($db_user['id'] == user::$current->id || isset(user::$current->roles['admins'])) {
-        page::add_element(new form_user_n_edit([], new html('input', ['type' => 'hidden', 'name' => 'user_id', 'value' => $user_id])));
+        page::add_element(html_form::build('user_n_edit'));
       } else {
         factory::send_header_and_exit('access_denided',
           'Access denided!'
@@ -136,14 +132,66 @@ namespace effectivecore\modules\user {
     }
   }
 
+  static function on_page_user_register() {
+    page::add_element(html_form::build('user_register'));
+  }
+
   static function on_page_user_login() {
-    $form = new form_user_login();
-    page::add_element($form);
+    page::add_element(html_form::build('user_login'));
   }
 
   static function on_page_user_logout() {
     session::destroy(user::$current->id);
     url::go('/');
+  }
+
+  function on_form_user_login_submit($args) {
+    $user_info = table_user::select_first(['*'], [
+      'email'         => $args['email'],
+      'password_hash' => sha1($args['password']
+    )]);
+    if (!empty($user_info['id'])) {
+      session::init($user_info['id']);
+      url::go('/user/'.$user_info['id']);
+    } else {
+      $this->errors['email'][] = 'Incorrect email or password!';
+    }
+  }
+
+  function on_form_user_n_delete_submit($args = []) {
+    if (!empty($args['user_id']) &&
+        !empty($args['op'])) {
+      if ($args['op'] == 'Delete' && table_user::delete(['id' => $args['user_id']])) {
+        message::set_before_redirect('User with id "'.$args['user_id'].'" was delited.');
+        table_session::delete(['user_id' => $args['user_id']]);
+      }
+    # redirect in any case (on press button 'Cancel' or 'Delete')
+      $back_url = url::$current->args('back', 'query');
+      url::go($back_url ? urldecode($back_url) : '/admin/users');
+    }
+  }
+
+  function on_form_user_n_edit_submit($args = []) {
+    if (table_user::update(['password_hash' => sha1($args['password'])], ['id' => $args['user_id']])) {
+      message::set_before_redirect('Parameters of user with id = '.$args['user_id'].' was updated.');
+    }
+  # redirect to back
+    $back_url = url::$current->args('back', 'query');
+    url::go($back_url ? urldecode($back_url) : '/user/'.$args['user_id']);
+  }
+
+  function on_form_user_register_submit($args = []) {
+    if (table_user::select(['id'], ['email' => $args['email']]) == []) {
+      $new_user_id = table_user::insert([
+        'email'         => $args['email'],
+        'password_hash' => sha1($args['password']),
+        'created'       => date(format_datetime, time())
+      ]);
+      session::init($new_user_id);
+      url::go('/user/'.$new_user_id);
+    } else {
+      $this->errors['email'][] = 'This email is already registered!';
+    }
   }
 
 }}

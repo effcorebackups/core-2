@@ -1,0 +1,35 @@
+forms
+- form_user_n_edit
+    id: user_n_edit
+    properties
+      novalidate: 1
+      method: post
+    on_submit
+      handler: \effectivecore\modules\user\events::on_form_user_n_edit_submit
+    content:
+    - hidden_form_id
+        type: hidden
+        properties
+          type: hidden
+          name: form_id
+          value: user_n_edit
+    - hidden_user_id
+        type: hidden
+        properties
+          type: hidden
+          name: user_id
+          value: %%_user_id
+    - field_password
+        type: input
+        properties
+          type: password
+          name: password
+          placeholder: Password
+          required: 1
+          minlength: 5
+    - button_login
+        type: input
+        properties
+          type: submit
+          name: op
+          value: Save

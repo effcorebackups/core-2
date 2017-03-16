@@ -1,0 +1,37 @@
+forms
+- form_user_register
+    id: user_register
+    properties
+      novalidate: 1
+      method: post
+    on_submit
+      handler: \effectivecore\modules\user\events::on_form_user_register_submit
+    content:
+    - hidden_form_id
+        type: hidden
+        properties
+          type: hidden
+          name: form_id
+          value: user_register
+    - field_email
+        type: input
+        properties
+          type: email
+          name: email
+          placeholder: Email
+          required: 1
+          maxlength: 255
+    - field_password
+        type: input
+        properties
+          type: password
+          name: password
+          placeholder: Password
+          required: 1
+          minlength: 5
+    - button_register
+        type: input
+        properties
+          type: submit
+          name: op
+          value: Register

@@ -6,16 +6,6 @@ namespace effectivecore {
   public $form_id;
   public $errors = [];
 
-  function on_validate($args = []) {}
-  function on_submit($args = []) {}
-
-  function __construct($attr = [], $content = null) {
-    parent::__construct('form', $attr + ['method' => 'post', 'id' => 'form_'.$this->form_id], $content);
-    if (!empty($this->form_id)) {
-      $this->add_element(new html('input', ['type' => 'hidden', 'name' => 'form_id', 'value' => $this->form_id]));
-    }
-  }
-
   function render() {
     $elements = factory::data_to_flat($this->content);
     if (!empty($this->form_id) && !empty($_POST['form_id']) && $this->form_id === $_POST['form_id']) {
@@ -77,6 +67,22 @@ namespace effectivecore {
     }
   # render form
     return parent::render();
+  }
+
+# static declarations
+
+  static function build($form_id) {
+    foreach (settings::$data['forms'] as $c_forms) {
+      foreach ($c_forms as $c_form) {
+        if ($c_form->id == $form_id) {
+          $content = [];
+          foreach ($c_form->content as $c_field) {
+            $content[] = new html($c_field->type, (array)$c_field->properties);
+          }
+          return new html('form', (array)$c_form->properties, $content);
+        }
+      } 
+    }
   }
 
 }}
