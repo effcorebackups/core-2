@@ -1,0 +1,11 @@
+pages
+- page_n
+    url
+      match: %.*%
+    styles
+    - style_css
+        file: misc/style.css
+    - form_css
+        file: misc/form.css
+    - console_css
+        file: misc/console.css

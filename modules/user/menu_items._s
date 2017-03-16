@@ -1,0 +1,74 @@
+menu_items
+- user_root
+    root: user
+- user_anonymous
+    root: user/user
+    title: User
+    properties
+      class: user
+    access
+      roles
+      - anonymous: anonymous
+- user_n
+    root: user/user
+    title: Hello %%_user_email
+    properties
+      href: /user/%%_user_id
+      class: user
+    access
+      roles
+      - admins: admins
+      - logged: logged
+- user_n_edit
+    root: user/user/edit
+    title: Edit profile
+    weight: -100
+    properties
+      href: /user/%%_user_id/edit
+    access
+      roles
+      - admins: admins
+      - logged: logged
+- user_login
+    root: user/user/login
+    title: Login
+    weight: -80
+    properties
+      href: /user/login
+    access
+      roles
+      - anonymous: anonymous
+- user_register
+    root: user/user/register
+    title: Register
+    weight: -60
+    properties
+      href: /user/register
+    access
+      roles
+      - anonymous: anonymous
+- user_logout
+    root: user/user/logout
+    title: Logout
+    weight: -40
+    properties
+      href: /user/logout
+    access
+      roles
+      - logged: logged
+- main_admin_roles
+    root: main/admin/roles
+    title: Roles
+    properties
+      href: /admin/roles
+    access
+      roles
+      - admins: admins
+- main_admin_users
+    root: main/admin/users
+    title: Users
+    properties
+      href: /admin/users
+    access
+      roles
+      - admins: admins

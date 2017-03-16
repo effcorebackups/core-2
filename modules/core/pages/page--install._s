@@ -1,0 +1,10 @@
+pages
+- page_install
+    title: Installation page
+    url
+      match: %^/install$%
+    content
+    - block_install
+        type: code
+        handler: \effectivecore\events::on_page_install
+        region: content

@@ -1,0 +1,13 @@
+pages
+- page_user_logout
+    title: Logout from the system
+    url
+      match: %^/user/logout$%
+    access
+      roles
+      - logged: logged
+    content
+    - code_logout
+        type: code
+        handler: \effectivecore\modules\user\events::on_page_user_logout
+        region: content

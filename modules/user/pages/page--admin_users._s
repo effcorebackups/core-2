@@ -1,0 +1,15 @@
+pages
+- page_admin_users
+    title: Users
+    url
+      match: %^/admin/users$%
+    access
+      roles
+      - admins: admins
+    constants
+    - items_per_page: 50
+    content
+    - block_users
+        type: code
+        handler: \effectivecore\modules\user\events::on_page_admin_users
+        region: content

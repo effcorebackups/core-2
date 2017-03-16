@@ -1,0 +1,11 @@
+module
+  id: page
+  path: modules/page
+  title: Page
+  description: Working with pages and markup.
+  version: 1.0
+  is_embed: 1
+  is_always_on: 1
+  on_init
+    handler: \effectivecore\modules\page\events::on_init
+    weight: 0

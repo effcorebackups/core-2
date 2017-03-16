@@ -1,0 +1,15 @@
+pages
+- page_admin_users_delete_n
+    title: Delete user "%%_user_email"?
+    url
+      match: %^/admin/users/delete/[0-9]+$%
+      args
+      - user_id: 4
+    access
+      roles
+      - admins: admins
+    content
+    - form_user_n_delete
+        type: code
+        handler: \effectivecore\modules\user\events::on_page_admin_users_delete_n
+        region: content

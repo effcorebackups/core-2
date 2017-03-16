@@ -1,0 +1,13 @@
+pages
+- page_user_login
+    title: Login
+    url
+      match: %^/user/login$%
+    access
+      roles
+      - anonymous: anonymous
+    content
+    - form_user_login
+        type: code
+        handler: \effectivecore\modules\user\events::on_page_user_login
+        region: content

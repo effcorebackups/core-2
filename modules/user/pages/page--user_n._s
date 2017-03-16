@@ -1,0 +1,16 @@
+pages
+- page_user_n
+    title: %%_profile_title
+    url
+      match: %^/user/[0-9]+$%
+      args
+      - user_id: 2
+    access
+      roles
+      - admins: admins
+      - logged: logged
+    content
+    - block_user_n
+        type: code
+        handler: \effectivecore\modules\user\events::on_page_user_n
+        region: content

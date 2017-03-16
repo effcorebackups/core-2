@@ -1,0 +1,14 @@
+pages
+- page_front
+    title: Front page
+    url
+      match: %^/$%
+    content
+    - block_wellcome
+        type: text
+        value: Wellcome to our site!
+        region: content
+    - block_copyright
+        type: text
+        value: Copyright © 2017 RysMax
+        region: footer

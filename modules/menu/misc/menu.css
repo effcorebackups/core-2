@@ -1,0 +1,31 @@
+
+  nav {background: %%_nav_bg_color}
+
+  /* menu sizes and orientation */
+  nav menu {margin: 0; padding: 0}
+  nav menu > ul {margin: 0; padding: 0; list-style: none}
+  nav menu > ul > li {float: left; cursor: default; margin: 0; padding: 0; list-style: none}
+  nav menu > ul > li > a {display: block; padding: 20px}
+  nav menu > ul > li > ul {position: absolute; padding: 20px}
+  nav menu > ul > li > ul > li {list-style: none}
+  nav #menu_user > ul > li {float: right}
+
+  /* menu colors */
+  nav menu > ul > li:hover {background: #28334a}
+  nav menu > ul > li > a {color: #fff}
+  nav menu > ul > li > a.active,
+  nav menu > ul > li > a[href]:hover {color: #81a5eb}
+  nav menu > ul > li > a:hover {color: #fff}
+  nav menu > ul > li > ul a {color: #fff}
+  nav menu > ul > li > ul a.active,
+  nav menu > ul > li > ul a:hover {color: #81a5eb}
+  nav menu > ul > li > ul {background: #28334a}
+
+  /* menu dynamic */
+  nav menu > ul > li > ul {display: none}
+  nav menu > ul > li:hover > ul {display: block}
+
+  /* icons */
+  nav #menu_main a.logo  {padding-left: 52px; background: url('menu-icons.svg') no-repeat}
+  nav #menu_main a.admin {padding-left: 52px; background: url('menu-icons.svg') no-repeat 0 -62px}
+  nav #menu_user a.user  {padding-left: 52px; background: url('menu-icons.svg') no-repeat 0 -124px}

@@ -1,0 +1,15 @@
+db
+  prod
+    driver: mysql
+    host: 127.0.0.1
+    database_name: effectivecore
+    username: root
+    password: 123
+    table_prefix: ec_
+  test
+    driver: mysql
+    host: 127.0.0.1
+    database_name: effectivecore
+    username: root
+    password: 123
+    table_prefix: ec_

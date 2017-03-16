@@ -1,0 +1,13 @@
+pages
+- page_user_register
+    title: Register new user
+    url
+      match: %^/user/register$%
+    access
+      roles
+      - anonymous: anonymous
+    content
+    - form_user_register
+        type: code
+        handler: \effectivecore\modules\user\events::on_page_user_register
+        region: content

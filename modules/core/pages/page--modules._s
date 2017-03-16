@@ -1,0 +1,13 @@
+pages
+- page_modules
+    title: Modules
+    url
+      match: %^/admin/modules$%
+    access
+      roles
+      - admins: admins
+    content
+    - block_modules
+        type: code
+        handler: \effectivecore\events::on_page_modules
+        region: content
