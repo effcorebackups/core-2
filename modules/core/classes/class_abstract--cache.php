@@ -12,7 +12,8 @@ namespace effectivecore {
         $file->insert();
       }
     }
-    return static::$data[$name];
+    return isset(static::$data[$name]) ?
+                 static::$data[$name] : null;
   }
 
   static function set($name, $data) {
