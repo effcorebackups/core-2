@@ -1,0 +1,36 @@
+pages
+- page_demo
+    title: Demonstration
+    url
+      match: %^/demo$%
+    access
+      roles
+      - anonymous: anonymous
+    content
+    - demo_text
+        type: text
+        content: Some inline text.
+        region: content
+    - demo_code
+        type: code
+        handler: \effectivecore\modules\demo\events::on_code_show
+        region: content
+    - demo_markup|markup
+        type: h3
+        content
+        - some_link|markup
+            type: a
+            properties
+              class: some-link
+              href: /demo
+            content: some link
+        region: content
+    - demo_text_from_file
+        type: file_text
+        file: include/text.txt
+        region: content
+    - demo_settings_from_file
+        type: file_settings
+        file: include/settings._s
+        entity: demo_tree
+        region: content

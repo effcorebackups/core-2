@@ -1,0 +1,43 @@
+demo_tree|markup
+  type: ul
+  properties
+    class: ul
+  content
+  - li_1|markup
+      type: li
+      properties
+        class: li-1
+      content: item li 1
+  - li_2|markup
+      type: li
+      properties
+        class: li-2
+      content
+      - li_2_title
+          type: text
+          content: item li 2
+      - ul_2|markup
+          type: ul
+          properties
+            class: ul-2
+          content
+          - li_2_1|markup
+              type: li
+              properties
+                class: li-2-1
+              content: item li 2.1
+          - li_2_2|markup
+              type: li
+              properties
+                class: li-2-2
+              content: item li 2.2
+          - li_2_3|markup
+              type: li
+              properties
+                class: li-2-3
+              content: item li 2.3
+  - li_3|markup
+      type: li
+      properties
+        class: li-3
+      content: item li 3

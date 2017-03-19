@@ -7,13 +7,13 @@ forms
     on_submit
       handler: \effectivecore\modules\user\events::on_form_user_register_submit
     content:
-    - hidden_form_id
+    - hidden_form_id|markup
         type: hidden
         properties
           type: hidden
           name: form_id
           value: user_register
-    - field_email
+    - field_email|markup
         type: input
         properties
           type: email
@@ -21,7 +21,7 @@ forms
           placeholder: Email
           required: 1
           maxlength: 255
-    - field_password
+    - field_password|markup
         type: input
         properties
           type: password
@@ -29,7 +29,7 @@ forms
           placeholder: Password
           required: 1
           minlength: 5
-    - button_register
+    - button_register|markup
         type: input
         properties
           type: submit

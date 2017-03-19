@@ -1,0 +1,8 @@
+module
+  id: demo
+  path: modules/demo
+  title: Demonstration
+  description: Demonstration some functionality.
+  version: 1.0
+  is_embed: 1
+  is_always_on: 0

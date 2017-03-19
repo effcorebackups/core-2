@@ -6,25 +6,25 @@ forms
     on_submit
       handler: \effectivecore\modules\user\events::on_form_user_n_delete_submit
     content:
-    - hidden_form_id
+    - hidden_form_id|markup
         type: hidden
         properties
           type: hidden
           name: form_id
           value: user_n_delete
-    - hidden_user_id
+    - hidden_user_id|markup
         type: hidden
         properties
           type: hidden
           name: user_id
           value: %%_user_id
-    - button_delete
+    - button_delete|markup
         type: input
         properties
           type: submit
           name: op
           value: Delete
-    - button_cancel
+    - button_cancel|markup
         type: input
         properties
           type: submit

@@ -8,15 +8,21 @@ namespace effectivecore {
     $p = [-1 => &$return];
     foreach (explode(nl, $data) as $c_line) {
       $matches = [];
-    # p.s. approximately performance - 1'000'000 strings per second.
+    # p.s. performance ~ 1'000'000 strings per second.
       preg_match('%(?<indent>[ ]*)'.
                   '(?<prefix>\- |)'.
                   '(?<name>[a-z0-9_]+)'.
+                  '(?<class>\\|[a-z0-9_\\\\]+|)'.
                   '(?<delimiter>\: |)'.
                   '(?<value>.*|)%s', $c_line, $matches);
       if ($matches['name']) {
         $depth = strlen($matches['indent'].$matches['prefix']) / 2;
-        $value = $matches['delimiter'] == ': ' ? $matches['value'] : new \StdClass();
+        if ($matches['delimiter'] == ': ') {
+          $value = $matches['value'];
+        } else {
+          $class = !empty($matches['class']) ? str_replace('|', '\\effectivecore\\', $matches['class']) : '\StdClass';
+          $value = new $class;
+        }
       # add new item to tree
         if (is_array($p[$depth-1])) {
           $p[$depth-1][$matches['name']] = $value;

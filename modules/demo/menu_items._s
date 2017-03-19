@@ -1,0 +1,9 @@
+menu_items
+- main_demo
+    root: main/demo
+    title: Demo
+    properties
+      href: /demo
+    access
+      roles
+      - anonymous: anonymous
