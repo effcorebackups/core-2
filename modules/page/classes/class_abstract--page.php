@@ -92,7 +92,7 @@ namespace effectivecore\modules\page {
       }
       $template->set_var($region_name, $c_output);
     }
-    return $template->render();
+    print $template->render();
   }
 
   static function add_element($element, $region = 'content') {
