@@ -14,7 +14,6 @@ namespace effectivecore\modules\page {
           use \effectivecore\modules\user\access;
           abstract class page {
 
-  static $template;
   static $data = [];
 
   static function init() {
@@ -56,13 +55,16 @@ namespace effectivecore\modules\page {
           $c_args[$c_arg_name] = url::$current->args($c_arg_num);
         }
       }
-    # collect content
+    # collect page content from settings
       if (isset($c_page->content)) {
         foreach ($c_page->content as $c_content) {
           $c_region = isset($c_content->region) ? $c_content->region : 'content';
           switch ($c_content->type) {
-            case 'code' : static::add_element(call_user_func_array($c_content->handler, $c_args), $c_region); break;
-            default     : static::add_element($c_content->value, $c_region);
+            case 'text': static::add_element($c_content->content, $c_region); break;
+            case 'code': static::add_element(call_user_func_array($c_content->handler, $c_args), $c_region); break;
+            case 'file_text': break;
+            case 'file_settings': break;
+            default: static::add_element($c_content, $c_region);
           }
         }
       }
@@ -79,31 +81,22 @@ namespace effectivecore\modules\page {
     console::set_log('User roles', implode(', ', user::$current->roles));
   # @todo: show console only for admins
     static::add_element(console::render(), 'console');
-  # show page
-    print static::render();
-  }
-
-
-
-  static function set_template($template_name) {
-    static::$template = new template($template_name);
+  # render page
+    $template = new template('page');
+    foreach (static::$data as $region_name => $c_blocks) {
+      $c_output = '';
+      foreach ($c_blocks as $c_block) {
+        $c_output.= method_exists($c_block, 'render') ?
+                                  $c_block->render() :
+                                  $c_block;
+      }
+      $template->set_var($region_name, $c_output);
+    }
+    return $template->render();
   }
 
   static function add_element($element, $region = 'content') {
     static::$data[$region][] = $element;
-  }
-
-
-
-  static function render() {
-    $template = new template(static::$template ?
-                             static::$template : 'page');
-    foreach (static::$data as $region_name => $c_blocks) {
-      $output = '';
-      foreach ($c_blocks as $c_block) $output.= method_exists($c_block, 'render') ? $c_block->render() : $c_block;
-      $template->set_var($region_name, $output);
-    }
-    return $template->render();
   }
 
 }}
