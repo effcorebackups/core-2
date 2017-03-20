@@ -44,7 +44,7 @@ namespace effectivecore {
     }
   # init modules
     ob_start();
-    $call_stack = factory::array_collect_by_property(settings::$data['module'], 'on_init', 'id');
+    $call_stack = factory::collect_by_property(settings::$data['module'], 'on_init', 'id');
     foreach (factory::array_sort_by_weight($call_stack) as $module_id => $c_event) {
       console::set_log('Module ID = '.$module_id, $c_event->handler, 'Init calls');
       call_user_func($c_event->handler);

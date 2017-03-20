@@ -9,21 +9,24 @@ pages
     content
     - demo_text
         type: text
-        content: Some inline text.
+        content: [demo_text] Some inline text.
         region: content
     - demo_code
         type: code
         handler: \effectivecore\modules\demo\events::on_code_show
         region: content
     - demo_markup|markup
-        type: h3
+        type: span
+        properties
+          class: test-span
+          style: font-weight: bold
         content
         - some_link|markup
             type: a
             properties
               class: some-link
               href: /demo
-            content: some link
+            content: [demo_markup] some link
         region: content
     - demo_text_from_file
         type: file_text

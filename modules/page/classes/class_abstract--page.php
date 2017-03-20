@@ -12,6 +12,7 @@ namespace effectivecore\modules\page {
           use \effectivecore\console;
           use \effectivecore\modules\user\user;
           use \effectivecore\modules\user\access;
+          use const \effectivecore\br;
           abstract class page {
 
   static $data = [];
@@ -62,8 +63,8 @@ namespace effectivecore\modules\page {
           switch ($c_content->type) {
             case 'text': static::add_element($c_content->content, $c_region); break;
             case 'code': static::add_element(call_user_func_array($c_content->handler, $c_args), $c_region); break;
-            case 'file_text': break;
-            case 'file_settings': break;
+            case 'file_text'    : static::add_element('[file_text] is under construction', $c_region); break; # @todo: create functionality
+            case 'file_settings': static::add_element('[file_settings] is under construction', $c_region); break; # @todo: create functionality
             default: static::add_element($c_content, $c_region);
           }
         }
@@ -83,14 +84,16 @@ namespace effectivecore\modules\page {
     static::add_element(console::render(), 'console');
   # render page
     $template = new template('page');
-    foreach (static::$data as $region_name => $c_blocks) {
-      $c_output = '';
-      foreach ($c_blocks as $c_block) {
-        $c_output.= method_exists($c_block, 'render') ?
-                                  $c_block->render() :
-                                  $c_block;
+    foreach (static::$data as $c_region_name => $c_blocks) {
+      $c_region_data = [];
+      foreach ($c_blocks as $key => $c_block) {
+        $c_region_data[] = method_exists($c_block, 'render') ?
+                                         $c_block->render() :
+                                         $c_block;
       }
-      $template->set_var($region_name, $c_output);
+      $template->set_var($c_region_name,
+        implode($c_region_name == 'content' ? br : '', $c_region_data)
+      );
     }
     print $template->render();
   }

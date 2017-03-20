@@ -103,17 +103,6 @@ namespace effectivecore {
     return $buf;
   }
 
-  static function data_to_flat($data, $prefix = '', $grp_name = 'content') {
-    $return = [];
-    foreach ($data as $c_key => $c_value) {
-      $return[$prefix ? $prefix.':'.$c_key : $c_key] = $c_value;
-      if (is_array($c_value->$grp_name)) {
-        $return += static::data_to_flat($c_value->$grp_name, $prefix ? $prefix.':'.$c_key : $c_key, $grp_name);
-      }
-    }
-    return $return;
-  }
-
   static function data_export($data, $prefix = '') {
     $return = '';
     switch (gettype($data)) {
@@ -157,11 +146,24 @@ namespace effectivecore {
     return $array;
   }
 
-  static function array_collect_by_property($data, $prop_name, $prop_for_id = null) {
+
+
+  static function collect_by_property($data, $prop_name, $prop_for_id = null) {
     $return = [];
     foreach ($data as $c_item) {
       if (isset($c_item->{$prop_name})) {
         $return[$prop_for_id ? $c_item->{$prop_for_id} : count($return)] = $c_item->{$prop_name};
+      }
+    }
+    return $return;
+  }
+
+  static function collect_content($data) {
+    $return = [];
+    foreach ($data as $c_key => $c_value) {
+      $return[$c_key] = $c_value;
+      if (isset($c_value->content)) {
+        $return += static::collect_content($c_value->content);
       }
     }
     return $return;
