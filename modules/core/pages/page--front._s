@@ -6,9 +6,9 @@ pages
     content
     - block_wellcome
         type: text
-        value: Wellcome to our site!
+        content: Wellcome to our site!
         region: content
     - block_copyright
         type: text
-        value: Copyright © 2017 RysMax
+        content: Copyright © 2017 RysMax
         region: footer
