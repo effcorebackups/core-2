@@ -5,13 +5,7 @@ forms
       method: post
     on_submit
       handler: \effectivecore\modules\user\events::on_form_user_n_delete_submit
-    content:
-    - hidden_form_id|markup
-        type: hidden
-        properties
-          type: hidden
-          name: form_id
-          value: user_n_delete
+    content
     - hidden_user_id|markup
         type: hidden
         properties

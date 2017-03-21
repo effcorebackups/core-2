@@ -26,7 +26,7 @@ pages
             properties
               class: some-link
               href: /demo
-            content: [demo_markup] some link
+            content: [demo_markup] some markup
         region: content
     - demo_text_from_file
         type: file_text

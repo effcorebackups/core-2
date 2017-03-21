@@ -7,7 +7,7 @@ namespace effectivecore {
   public $errors = [];
 
   function render() {
-    $elements = factory::data_to_flat($this->content);
+    $elements = factory::collect_content($this->content);
     if (!empty($this->form_id) && !empty($_POST['form_id']) && $this->form_id === $_POST['form_id']) {
       foreach ($elements as $c_element) {
         $c_name = !empty($c_element->attr['name']) ? $c_element->attr['name'] : null;
@@ -67,22 +67,6 @@ namespace effectivecore {
     }
   # render form
     return parent::render();
-  }
-
-# static declarations
-
-  static function build($form_id) {
-    foreach (settings::$data['forms'] as $c_forms) {
-      foreach ($c_forms as $c_form) {
-        if ($c_form->id == $form_id) {
-          $content = [];
-          foreach ($c_form->content as $c_field) {
-            $content[] = new html($c_field->type, (array)$c_field->properties);
-          }
-          return new html('form', (array)$c_form->properties, $content);
-        }
-      } 
-    }
   }
 
 }}

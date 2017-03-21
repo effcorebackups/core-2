@@ -3,7 +3,7 @@
 namespace effectivecore\modules\user {
           use \effectivecore\factory;
           use \effectivecore\html;
-          use \effectivecore\html_form;
+          use \effectivecore\form;
           use \effectivecore\html_table;
           use \effectivecore\html_pager;
           use \effectivecore\url;
@@ -87,7 +87,7 @@ namespace effectivecore\modules\user {
   static function on_page_admin_users_delete_n($user_id) {
     $db_user = table_user::select_first(['email', 'is_locked'], ['id' => $user_id]);
     if ($db_user && empty($db_user['is_locked'])) {
-      page::add_element(html_form::build('user_n_delete'));
+      page::add_element(form::build('user_n_delete'));
     } else {
       factory::send_header_and_exit('not_found',
         'User not found!'
@@ -119,7 +119,7 @@ namespace effectivecore\modules\user {
     $db_user = table_user::select_first(['*'], ['id' => $user_id]);
     if ($db_user) {
       if ($db_user['id'] == user::$current->id || isset(user::$current->roles['admins'])) {
-        page::add_element(html_form::build('user_n_edit'));
+        page::add_element(form::build('user_n_edit'));
       } else {
         factory::send_header_and_exit('access_denided',
           'Access denided!'
@@ -133,11 +133,11 @@ namespace effectivecore\modules\user {
   }
 
   static function on_page_user_register() {
-    page::add_element(html_form::build('user_register'));
+    page::add_element(form::build('user_register'));
   }
 
   static function on_page_user_login() {
-    page::add_element(html_form::build('user_login'));
+    page::add_element(form::build('user_login'));
   }
 
   static function on_page_user_logout() {
