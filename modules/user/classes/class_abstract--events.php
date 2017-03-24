@@ -146,15 +146,12 @@ namespace effectivecore\modules\user {
   }
 
   function on_form_user_login_submit($args) {
-    $user_info = table_user::select_first(['*'], [
-      'email'         => $args['email'],
-      'password_hash' => sha1($args['password']
-    )]);
+    $user_info = table_user::select_first(['*'], ['email' => $args['email'], 'password_hash' => sha1($args['password'])]);
     if (!empty($user_info['id'])) {
       session::init($user_info['id']);
       url::go('/user/'.$user_info['id']);
     } else {
-      $this->errors['email'][] = 'Incorrect email or password!';
+      message::set('Incorrect email or password!', 'error');
     }
   }
 
@@ -162,7 +159,7 @@ namespace effectivecore\modules\user {
     if (!empty($args['user_id']) &&
         !empty($args['op'])) {
       if ($args['op'] == 'Delete' && table_user::delete(['id' => $args['user_id']])) {
-        message::set_before_redirect('User with id "'.$args['user_id'].'" was delited.');
+        message::set('User with id "'.$args['user_id'].'" was delited.');
         table_session::delete(['user_id' => $args['user_id']]);
       }
     # redirect in any case (on press button 'Cancel' or 'Delete')
@@ -173,7 +170,7 @@ namespace effectivecore\modules\user {
 
   function on_form_user_n_edit_submit($args = []) {
     if (table_user::update(['password_hash' => sha1($args['password'])], ['id' => $args['user_id']])) {
-      message::set_before_redirect('Parameters of user with id = '.$args['user_id'].' was updated.');
+      message::set('Parameters of user with id = '.$args['user_id'].' was updated.');
     }
   # redirect to back
     $back_url = url::$current->args('back', 'query');
@@ -190,7 +187,7 @@ namespace effectivecore\modules\user {
       session::init($new_user_id);
       url::go('/user/'.$new_user_id);
     } else {
-      $this->errors['email'][] = 'This email is already registered!';
+      message::set('This email is already registered!', 'error');
     }
   }
 

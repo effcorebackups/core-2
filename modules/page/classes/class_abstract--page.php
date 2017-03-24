@@ -73,8 +73,6 @@ namespace effectivecore\modules\page {
   # special cases
     if      ($denided == true) factory::send_header_and_exit('access_denided', 'Access denided!');
     else if ($matches == 0)    factory::send_header_and_exit('not_found', 'Page not found!');
-  # add messages
-    message::show_after_redirect();
   # stop timer
     timer::tap('load_time');
   # set some log info
@@ -82,6 +80,8 @@ namespace effectivecore\modules\page {
     console::set_log('User roles', implode(', ', user::$current->roles));
   # @todo: show console only for admins
     static::add_element(console::render(), 'console');
+  # render messages
+    message::render_all();
   # render page
     $template = new template('page');
     foreach (static::$data as $c_region_name => $c_blocks) {

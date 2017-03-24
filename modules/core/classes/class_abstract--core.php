@@ -12,6 +12,7 @@ namespace effectivecore {
     settings::init();
     token::init();
     url::init();
+    message::init();
   # redirect from '/any_path/' to '/any_path'
     if (url::$current->path != '/' && substr(url::$current->path, -1) == '/') {
       $right_url = clone url::$current;
