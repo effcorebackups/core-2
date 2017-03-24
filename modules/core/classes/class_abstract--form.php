@@ -13,13 +13,14 @@ namespace effectivecore {
           if (isset($_POST['form_id']) &&
                     $_POST['form_id'] == $form_id) {
             $content = factory::collect_content($c_form->content);
+          # check each form field
             foreach ($content as $element_id => $c_element) {
               $c_name = isset($c_element->properties->name) ? $c_element->properties->name : '';
               $c_type = isset($c_element->properties->type) ? $c_element->properties->type : '';
               $c_form_value = isset($c_element->properties->value) ? $c_element->properties->value : '';
               $c_post_value = isset($_POST[$c_name]) ? $_POST[$c_name] : ''; # @todo: check security risks
               if ($c_name && $c_name != 'op') {
-                  $c_element->properties->value = $c_post_value;
+                $c_element->properties->value = $c_post_value;
               # check email field
                 switch ($c_type) {
                   case 'email':
@@ -57,8 +58,9 @@ namespace effectivecore {
                   message::set($c_error, 'error');
                 }
               }
-          # or call submit handler if no errors
-            } else {
+            }
+          # call submit handler
+            if (isset(static::$errors[$form_id]) == false && isset($_POST['op'])) {
               call_user_func_array($c_form->on_submit->handler, [$_POST]);
             }
           }
