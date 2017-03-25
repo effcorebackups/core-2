@@ -16,7 +16,7 @@ namespace effectivecore {
     if (urls::$current->path != '/' && substr(urls::$current->path, -1) == '/') {
       $right_url = clone urls::$current;
       $right_url->path = rtrim($right_url->path, '/');
-      urls::go($right_url->full());
+      urls::go($right_url->get_full());
     }
   # single entry point
     $file_types = [];
@@ -25,7 +25,7 @@ namespace effectivecore {
         $file_types[$c_type_name] = $c_type_info;
       }
     }
-    $ext = urls::$current->extension();
+    $ext = urls::$current->get_extension();
     if ($ext) {
       if (!empty($file_types[$ext]->protected)) {
       # file existence is not checking - show access denied messge if url has any protected extension

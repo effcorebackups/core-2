@@ -14,12 +14,12 @@ namespace effectivecore {
   }
 
   static function is_active($url) {
-    return static::$current->full() == (new url($url))->full();
+    return static::$current->get_full() == (new url($url))->get_full();
   }
 
   static function go($url) {
     factory::send_header_and_exit('redirect', '',
-      (new url($url))->full()
+      (new url($url))->get_full()
     );
   }
 

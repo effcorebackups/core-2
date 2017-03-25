@@ -65,14 +65,14 @@ namespace effectivecore {
     $this->anchor   = !empty($matches['anchor']) ? $matches['anchor'] : '';
   }
 
-  function full() {
+  function get_full() {
     return $this->protocol.'://'.$this->domain.
           ($this->path == '/' && !$this->query && !$this->anchor ? '' : $this->path).
           ($this->query  ? '?'.$this->query  : '').
           ($this->anchor ? '#'.$this->anchor : '');
   }
 
-  function extension() {
+  function get_extension() {
     return ltrim(strtolower(strrchr($this->path, '.')), '.');
   }
 
