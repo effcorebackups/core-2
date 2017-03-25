@@ -34,19 +34,19 @@ namespace effectivecore {
           }
         # check required fields
           if (isset($c_element->properties->required)) {
-            if (strlen($c_post_value) == 0) {
+            if ($c_post_value == '') {
               $this->errors[$element_id][] = 'Field '.$c_name.' can not be blank!';
             }
           }
         # check max length
           if (isset($c_element->properties->maxlength)) {
-            if (strlen($c_post_value) > $c_element->properties->maxlength) {
+            if ($c_post_value && strlen($c_post_value) > $c_element->properties->maxlength) {
               $this->errors[$element_id][] = 'Field '.$c_name.' contain too much symbols! Maximum '.$c_element->properties->maxlength.' symbols.';
             }
           }
         # check min length
           if (isset($c_element->properties->minlength)) {
-            if (strlen($c_post_value) < $c_element->properties->minlength) {
+            if ($c_post_value && strlen($c_post_value) < $c_element->properties->minlength) {
               $this->errors[$element_id][] = 'Field '.$c_name.' contain too few symbols! Minimum '.$c_element->properties->minlength.' symbols.';
             }
           }
@@ -73,7 +73,7 @@ namespace effectivecore {
                                    $c_element;
     }
   # return rendered form
-    return (new html('form', (array)$this->properties, $r_content))->render();
+    return (new html('form', ['id' => 'form_'.$this->id] + (array)$this->properties, $r_content))->render();
   }
 
 }}

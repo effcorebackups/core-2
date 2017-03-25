@@ -117,23 +117,8 @@ namespace effectivecore\modules\user {
 
   static function on_page_user_n_edit($user_id) {
     $db_user = table_user::select_first(['*'], ['id' => $user_id]);
-    if ($db_user) {
-      if ($db_user['id'] == user::$current->id || isset(user::$current->roles['admins'])) {
-        page::add_element(form::build('user_n_edit'));
-      } else {
-        factory::send_header_and_exit('access_denided',
-          'Access denided!'
-        );
-      }
-    } else {
-      factory::send_header_and_exit('not_found',
-        'User not found!'
-      );
-    }
-  }
-
-  static function on_page_user_register() {
-    page::add_element(form::build('user_register'));
+    if (isset($db_user['id']) == false)                                                                             factory::send_header_and_exit('not_found', 'User not found!');
+    if (isset($db_user['id']) && !($db_user['id'] == user::$current->id || isset(user::$current->roles['admins']))) factory::send_header_and_exit('access_denided', 'Access denided!');
   }
 
   static function on_page_user_logout() {

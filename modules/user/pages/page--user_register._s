@@ -8,6 +8,6 @@ pages
       - anonymous: anonymous
     content
     - form_user_register
-        type: code
-        handler: \effectivecore\modules\user\events::on_page_user_register
+        type: link
+        entity: forms/user/form_user_register
         region: content

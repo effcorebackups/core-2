@@ -10,7 +10,11 @@ pages
       - admins: admins
       - logged: logged
     content
-    - form_user_n_edit
+    - code_on_page_user_n_edit
         type: code
         handler: \effectivecore\modules\user\events::on_page_user_n_edit
+        region: content
+    - form_user_n_edit
+        type: link
+        entity: forms/user/form_user_n_edit
         region: content
