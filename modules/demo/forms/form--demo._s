@@ -1,5 +1,5 @@
 forms
-- form_demo|form_n
+- form_demo|form
     id: demo
     properties
       novalidate: 1

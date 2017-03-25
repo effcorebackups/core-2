@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          class form_n {
+          class form {
 
   public $page_args = [];
   public $form_args = [];

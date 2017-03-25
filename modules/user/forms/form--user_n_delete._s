@@ -1,5 +1,5 @@
 forms
-- form_user_n_delete|form_n
+- form_user_n_delete|form
     id: user_n_delete
     properties
       method: post
