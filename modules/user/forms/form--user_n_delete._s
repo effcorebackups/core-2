@@ -4,7 +4,7 @@ forms
     properties
       method: post
     on_submit
-      handler: \effectivecore\modules\user\events_form::on_form_user_n_delete_submit
+      handler: \effectivecore\modules\user\events_form::on_submit_user_n_delete
     content
     - button_delete|markup
         type: input

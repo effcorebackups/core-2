@@ -5,7 +5,7 @@ forms
       novalidate: 1
       method: post
     on_submit
-      handler: \effectivecore\modules\user\events_form::on_form_user_register_submit
+      handler: \effectivecore\modules\user\events_form::on_submit_user_register
     content
     - field_email|markup
         type: input

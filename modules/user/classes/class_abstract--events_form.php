@@ -6,7 +6,7 @@ namespace effectivecore\modules\user {
           use \effectivecore\modules\data\db;
           abstract class events_form extends \effectivecore\events_form {
 
-  function on_form_user_login_submit($page_args, $form_args, $post_args) {
+  function on_submit_user_login($page_args, $form_args, $post_args) {
     $db_user = table_user::select_first(['*'], ['email' => $args['email'], 'password_hash' => sha1($args['password'])]);
     if (isset($db_user['id'])) {
       session::init($db_user['id']);
@@ -16,7 +16,7 @@ namespace effectivecore\modules\user {
     }
   }
 
-  function on_form_user_n_delete_submit($page_args, $form_args, $post_args) {
+  function on_submit_user_n_delete($page_args, $form_args, $post_args) {
     if (!empty($args['user_id']) &&
         !empty($args['op'])) {
       if ($args['op'] == 'Delete' && table_user::delete(['id' => $args['user_id']])) {
@@ -29,7 +29,7 @@ namespace effectivecore\modules\user {
     }
   }
 
-  function on_form_user_n_edit_submit($page_args, $form_args, $post_args) {
+  function on_submit_user_n_edit($page_args, $form_args, $post_args) {
     if (table_user::update(['password_hash' => sha1($args['password'])], ['id' => $args['user_id']])) {
       message::set('Parameters of user with id = '.$args['user_id'].' was updated.');
     }
@@ -38,7 +38,7 @@ namespace effectivecore\modules\user {
     url::go($back_url ? urldecode($back_url) : '/user/'.$args['user_id']);
   }
 
-  function on_form_user_register_submit($page_args, $form_args, $post_args) {
+  function on_submit_user_register($page_args, $form_args, $post_args) {
     if (table_user::select(['id'], ['email' => $args['email']]) == []) {
       $new_user_id = table_user::insert([
         'email'         => $args['email'],
