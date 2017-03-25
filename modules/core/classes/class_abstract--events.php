@@ -4,7 +4,8 @@ namespace effectivecore {
           use \effectivecore\modules\page\page;
           abstract class events {
 
-  static function on_page_modules() {
+  static function on_show_modules() {
+    $head = ['Title', 'Id', 'Path', 'Description', 'Version', 'Is embed', 'Is always on'];
     $data = [];
     foreach (settings::$data['module'] as $c_module) {
       $data[] = [
@@ -17,7 +18,7 @@ namespace effectivecore {
         $c_module->is_always_on ? 'Yes' : 'No'
       ];
     }
-    $data_markup = new html_table([], $data, ['Title', 'Id', 'Path', 'Description', 'Version', 'Is embed', 'Is always on']);
+    $data_markup = new html_table([], $data, $head);
     page::add_element($data_markup);
   }
 

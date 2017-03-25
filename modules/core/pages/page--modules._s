@@ -9,5 +9,5 @@ pages
     content
     - block_modules
         type: code
-        handler: \effectivecore\events::on_page_modules
+        handler: \effectivecore\events_page::on_show_modules
         region: content
