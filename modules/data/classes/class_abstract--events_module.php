@@ -2,11 +2,8 @@
 
 namespace effectivecore\modules\data {
           use \effectivecore\settings;
-          use \effectivecore\html;
           use \effectivecore\factory;
-          use \effectivecore\console;
-          use \effectivecore\modules\page\page;
-          abstract class events extends \effectivecore\events {
+          abstract class events_module extends \effectivecore\events_module {
 
   static function on_init() {
     $is_init = db::init(

@@ -7,5 +7,5 @@ module
   is_embed: 1
   is_always_on: 1
   on_init
-    handler: \effectivecore\modules\page\events::on_init
+    handler: \effectivecore\modules\page\events_module::on_init
     weight: 0
