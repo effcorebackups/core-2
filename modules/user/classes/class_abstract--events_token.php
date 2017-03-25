@@ -6,7 +6,7 @@ namespace effectivecore\modules\user {
           use \effectivecore\modules\data\db;
           abstract class events_token extends \effectivecore\events_token {
 
-  static function on_token_replace($match) {
+  static function on_replace($match) {
     switch ($match) {
       case '%%_user_id': return user::$current->id;
       case '%%_user_email': return user::$current->email;

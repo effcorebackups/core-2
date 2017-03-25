@@ -2,16 +2,16 @@ tokens
 - user_id
     match: %%_user_id
     type: code
-    handler: \effectivecore\modules\user\events_token::on_token_replace
+    handler: \effectivecore\modules\user\events_token::on_replace
 - user_email
     match: %%_user_email
     type: code
-    handler: \effectivecore\modules\user\events_token::on_token_replace
+    handler: \effectivecore\modules\user\events_token::on_replace
 - profile_title
     match: %%_profile_title
     type: code
-    handler: \effectivecore\modules\user\events_token::on_token_replace
+    handler: \effectivecore\modules\user\events_token::on_replace
 - profile_edit_title
     match: %%_profile_edit_title
     type: code
-    handler: \effectivecore\modules\user\events_token::on_token_replace
+    handler: \effectivecore\modules\user\events_token::on_replace
