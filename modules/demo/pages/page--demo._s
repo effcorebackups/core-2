@@ -6,6 +6,7 @@ pages
     access
       roles
       - anonymous: anonymous
+      - logged: logged
     content
     - demo_text
         type: text
@@ -13,15 +14,11 @@ pages
         region: content
     - demo_code
         type: code
-        handler: \effectivecore\modules\demo\events::on_code_show
+        handler: \effectivecore\modules\demo\events_page::on_show_code
         region: content
     - demo_text_from_file
         type: file
         file: include/text.txt
-        region: content
-    - demo_link_to_settings
-        type: link
-        entity: forms/user/form_user_login
         region: content
     - demo_markup|markup
         type: span
@@ -35,4 +32,8 @@ pages
               class: some-link
               href: /demo
             content: [demo_markup] some markup
+        region: content
+    - demo_link_to_object
+        type: link
+        entity: forms/demo/form_demo
         region: content

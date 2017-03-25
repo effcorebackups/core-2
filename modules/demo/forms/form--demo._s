@@ -1,0 +1,23 @@
+forms
+- form_demo|form_n
+    id: demo
+    properties
+      novalidate: 1
+      method: post
+    on_submit
+      handler: \effectivecore\modules\demo\events_form::on_submit_demo
+    content
+    - field_text|markup
+        type: input
+        properties
+          type: text
+          name: text
+          placeholder: Any text here...
+          required: 1
+          maxlength: 255
+    - button_login|markup
+        type: input
+        properties
+          type: submit
+          name: op
+          value: Ok

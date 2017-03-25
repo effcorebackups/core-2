@@ -7,3 +7,4 @@ menu_items
     access
       roles
       - anonymous: anonymous
+      - logged: logged
