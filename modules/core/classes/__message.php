@@ -2,10 +2,10 @@
 
 namespace effectivecore {
           use \effectivecore\modules\page\page;
-          abstract class message {
+          abstract class __message {
 
   static function set($message, $type = 'notice') {
-    page::add_element(new message_n($message, $type), 'messages');
+    page::add_element(new message($message, $type), 'messages');
   }
 
 }}

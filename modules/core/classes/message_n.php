@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          class message_n {
+          class message {
 
   public $type;
   public $content;

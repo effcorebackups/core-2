@@ -69,7 +69,7 @@ namespace effectivecore {
         if (!isset($content[$element_id]->properties->class)) $content[$element_id]->properties->class = '';
         $content[$element_id]->properties->class.= ' error';
         foreach ($c_errors as $c_error) {
-          message::set($c_error, 'error');
+          __message::set($c_error, 'error');
         }
       }
     # call submit handler

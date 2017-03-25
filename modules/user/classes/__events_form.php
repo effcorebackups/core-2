@@ -2,7 +2,7 @@
 
 namespace effectivecore\modules\user {
           use \effectivecore\url;
-          use \effectivecore\message;
+          use \effectivecore\__message;
           use \effectivecore\modules\data\db;
           abstract class events_form extends \effectivecore\events_form {
 
@@ -15,7 +15,7 @@ namespace effectivecore\modules\user {
       session::init($db_user['id']);
       url::go('/user/'.$db_user['id']);
     } else {
-      message::set('Incorrect email or password!', 'error');
+      __message::set('Incorrect email or password!', 'error');
     }
   }
 
@@ -23,7 +23,7 @@ namespace effectivecore\modules\user {
     if (!empty($args['user_id']) &&
         !empty($args['op'])) {
       if ($args['op'] == 'Delete' && table_user::delete(['id' => $args['user_id']])) {
-        message::set('User with id "'.$args['user_id'].'" was delited.');
+        __message::set('User with id "'.$args['user_id'].'" was delited.');
         table_session::delete(['user_id' => $args['user_id']]);
       }
     # redirect in any case (on press button 'Cancel' or 'Delete')
@@ -34,7 +34,7 @@ namespace effectivecore\modules\user {
 
   function on_submit_user_n_edit($page_args, $form_args, $post_args) {
     if (table_user::update(['password_hash' => sha1($args['password'])], ['id' => $args['user_id']])) {
-      message::set('Parameters of user with id = '.$args['user_id'].' was updated.');
+      __message::set('Parameters of user with id = '.$args['user_id'].' was updated.');
     }
   # redirect to back
     $back_url = url::$current->args('back', 'query');
@@ -51,7 +51,7 @@ namespace effectivecore\modules\user {
       session::init($new_user_id);
       url::go('/user/'.$new_user_id);
     } else {
-      message::set('This email is already registered!', 'error');
+      __message::set('This email is already registered!', 'error');
     }
   }
 

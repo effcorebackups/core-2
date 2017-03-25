@@ -2,7 +2,7 @@
 
 namespace effectivecore\modules\user {
           use \effectivecore\url;
-          use \effectivecore\message;
+          use \effectivecore\__message;
           use \effectivecore\modules\data\db;
           abstract class events_module extends \effectivecore\events_module {
 
@@ -20,7 +20,7 @@ namespace effectivecore\modules\user {
       table_role_by_user::install();
       table_role_by_permission::install();
       db::transaction_commit();
-      message::set('Database for module "user" was installed');
+      __message::set('Database for module "user" was installed');
     } catch (\Exception $e) {
       db::transaction_roll_back();
     }

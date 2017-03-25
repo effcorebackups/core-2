@@ -2,7 +2,6 @@
 
 namespace effectivecore\modules\user {
           use \effectivecore\url;
-          use \effectivecore\message;
           use \effectivecore\modules\data\db;
           abstract class events_token extends \effectivecore\events_token {
 
