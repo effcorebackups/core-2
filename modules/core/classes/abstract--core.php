@@ -11,12 +11,12 @@ namespace effectivecore {
   # classes initialization
     settings::init();
     token::init();
-    url::init();
+    urls::init();
   # redirect from '/any_path/' to '/any_path'
-    if (url::$current->path != '/' && substr(url::$current->path, -1) == '/') {
-      $right_url = clone url::$current;
+    if (urls::$current->path != '/' && substr(urls::$current->path, -1) == '/') {
+      $right_url = clone urls::$current;
       $right_url->path = rtrim($right_url->path, '/');
-      url::go($right_url->full());
+      urls::go($right_url->full());
     }
   # single entry point
     $file_types = [];
@@ -25,7 +25,7 @@ namespace effectivecore {
         $file_types[$c_type_name] = $c_type_info;
       }
     }
-    $ext = url::$current->extension();
+    $ext = urls::$current->extension();
     if ($ext) {
       if (!empty($file_types[$ext]->protected)) {
       # file existence is not checking - show access denied messge if url has any protected extension
@@ -33,7 +33,7 @@ namespace effectivecore {
           'Any file with this extension is protected by settings in file_types!'
         );
       }
-      $path = dir_root.url::$current->path;
+      $path = dir_root.urls::$current->path;
       if (is_file($path) && is_readable($path)) {
         $data = (new file($path))->load();
         if (isset($file_types[$ext]->mime)) header('Content-type: '.$file_types[$ext]->mime, true);

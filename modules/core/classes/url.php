@@ -88,26 +88,4 @@ namespace effectivecore {
     }
   }
 
-# static declarations
-
-  static $current;
-
-  static function init() {
-    static::$current = new static($_SERVER['REQUEST_URI']);
-  }
-
-  static function is_local($url) {
-    return (new static($url))->domain == $_SERVER['HTTP_HOST'];
-  }
-
-  static function is_active($url) {
-    return static::$current->full() == (new static($url))->full();
-  }
-
-  static function go($url) {
-    factory::send_header_and_exit('redirect', '',
-      (new static($url))->full()
-    );
-  }
-
 }}

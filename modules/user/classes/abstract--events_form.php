@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore\modules\user {
-          use \effectivecore\url;
+          use \effectivecore\urls;
           use \effectivecore\messages;
           use \effectivecore\modules\data\db;
           abstract class events_form extends \effectivecore\events_form {
@@ -13,7 +13,7 @@ namespace effectivecore\modules\user {
     ]);
     if (isset($db_user['id'])) {
       session::init($db_user['id']);
-      url::go('/user/'.$db_user['id']);
+      urls::go('/user/'.$db_user['id']);
     } else {
       messages::add_new('Incorrect email or password!', 'error');
     }
@@ -27,8 +27,8 @@ namespace effectivecore\modules\user {
         table_session::delete(['user_id' => $args['user_id']]);
       }
     # redirect in any case (on press button 'Cancel' or 'Delete')
-      $back_url = url::$current->args('back', 'query');
-      url::go($back_url ? urldecode($back_url) : '/admin/users');
+      $back_url = urls::$current->args('back', 'query');
+      urls::go($back_url ? urldecode($back_url) : '/admin/users');
     }
   }
 
@@ -37,8 +37,8 @@ namespace effectivecore\modules\user {
       messages::add_new('Parameters of user with id = '.$args['user_id'].' was updated.');
     }
   # redirect to back
-    $back_url = url::$current->args('back', 'query');
-    url::go($back_url ? urldecode($back_url) : '/user/'.$args['user_id']);
+    $back_url = urls::$current->args('back', 'query');
+    urls::go($back_url ? urldecode($back_url) : '/user/'.$args['user_id']);
   }
 
   function on_submit_user_register($page_args, $form_args, $post_args) {
@@ -49,7 +49,7 @@ namespace effectivecore\modules\user {
         'created'       => date(format_datetime, time())
       ]);
       session::init($new_user_id);
-      url::go('/user/'.$new_user_id);
+      urls::go('/user/'.$new_user_id);
     } else {
       messages::add_new('This email is already registered!', 'error');
     }

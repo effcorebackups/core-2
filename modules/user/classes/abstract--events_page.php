@@ -5,6 +5,7 @@ namespace effectivecore\modules\user {
           use \effectivecore\html;
           use \effectivecore\html_table;
           use \effectivecore\html_pager;
+          use \effectivecore\urls;
           use \effectivecore\url;
           use \effectivecore\modules\page\page;
           abstract class events_page extends \effectivecore\events_page {
@@ -26,7 +27,7 @@ namespace effectivecore\modules\user {
       );
     } else {
       $db_user = table_user::select(['id', 'email', 'created', 'is_locked'], [], ['id'], $items_per_page, ($pager->c_page_num - 1) * $items_per_page);
-      $url_back = urlencode(url::$current->full());
+      $url_back = urlencode(urls::$current->full());
       foreach ($db_user as &$c_row) {
         $c_row['actions']['_attr']['class'][] = 'actions';
         $c_row['actions'][] = new html('a', ['href' => (new url('/user/'.$c_row['id']))->full()], 'view');
@@ -74,7 +75,7 @@ namespace effectivecore\modules\user {
 
   static function on_code_user_logout() {
     session::destroy(user::$current->id);
-    url::go('/');
+    urls::go('/');
   }
 
 }}

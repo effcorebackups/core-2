@@ -12,7 +12,7 @@ namespace effectivecore {
 
   function __construct($attr = [], $items_total, $items_per_page, $name = 'main') {
     parent::__construct('pager', $attr);
-    $c_url = url::$current;
+    $c_url = urls::$current;
     $c_url_page_num = $c_url->args('page');
     $this->name = $name;
     $this->pages_total = $items_total ? ceil($items_total / $items_per_page) : 1;

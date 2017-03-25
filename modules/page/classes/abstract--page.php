@@ -3,6 +3,7 @@
 namespace effectivecore\modules\page {
           use \effectivecore\factory;
           use \effectivecore\settings;
+          use \effectivecore\urls;
           use \effectivecore\url;
           use \effectivecore\html;
           use \effectivecore\timer;
@@ -24,7 +25,7 @@ namespace effectivecore\modules\page {
     $call_stack = [];
     foreach (settings::$data['pages'] as $module_id => $c_pages) {
       foreach ($c_pages as $c_page) {
-        if (isset($c_page->url->match) && preg_match($c_page->url->match, url::$current->path)) {
+        if (isset($c_page->url->match) && preg_match($c_page->url->match, urls::$current->path)) {
           if (!isset($c_page->access) ||
               (isset($c_page->access) && access::check($c_page->access))) {
             if ($c_page->url->match != '%.*%') $matches++;
@@ -52,7 +53,7 @@ namespace effectivecore\modules\page {
       $c_args = [];
       if (isset($c_page->url->args)) {
         foreach ($c_page->url->args as $c_arg_name => $c_arg_num) {
-          $c_args[$c_arg_name] = url::$current->args($c_arg_num);
+          $c_args[$c_arg_name] = urls::$current->args($c_arg_num);
         }
       }
     # collect page content from settings
