@@ -3,6 +3,10 @@
 namespace effectivecore {
           class form_n {
 
+  public $page_args = [];
+  public $form_args = [];
+  public $post_args = [];
+
   public $id;
   public $properties = [];
   public $on_submit = null;
@@ -22,7 +26,15 @@ namespace effectivecore {
         $c_type = isset($c_element->properties->type) ? $c_element->properties->type : '';
         $c_form_value = isset($c_element->properties->value) ? $c_element->properties->value : '';
         $c_post_value = isset($_POST[$c_name]) ? $_POST[$c_name] : ''; # @todo: check security risks
-        if ($c_name && $c_name != 'op') {
+      # define form_args and post_args
+        if ($c_name) {
+          $this->form_args[$c_name] = $c_form_value;
+          $this->post_args[$c_name] = $c_post_value;
+        }
+      # check all post args
+        if ($c_name &&
+            $c_type != 'hidden' &&
+            $c_type != 'submit') {
           $c_element->properties->value = $c_post_value;
         # check email field
           switch ($c_type) {
@@ -62,7 +74,11 @@ namespace effectivecore {
       }
     # call submit handler
       if (count($this->errors) == 0 && isset($_POST['op'])) {
-        call_user_func_array($this->on_submit->handler, [$_POST]);
+        call_user_func($this->on_submit->handler,
+          $this->page_args,
+          $this->form_args,
+          $this->post_args
+        );
       }
     }
   # render form elements

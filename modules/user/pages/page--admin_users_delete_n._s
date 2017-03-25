@@ -16,4 +16,5 @@ pages
     - form_user_n_delete
         type: link
         entity: forms/user/form_user_n_delete
+        use_page_args: 1
         region: content

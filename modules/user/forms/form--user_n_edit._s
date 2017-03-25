@@ -7,12 +7,6 @@ forms
     on_submit
       handler: \effectivecore\modules\user\events::on_form_user_n_edit_submit
     content
-    - hidden_user_id|markup
-        type: hidden
-        properties
-          type: hidden
-          name: user_id
-          value: %%_user_id
     - field_password|markup
         type: input
         properties
