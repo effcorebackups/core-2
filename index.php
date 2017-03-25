@@ -12,7 +12,7 @@ namespace effectivecore {
   const nl              = "\n";
   const br              = "<br/>";
 
-  require_once('modules/core/classes/class_abstract--core.php');
+  require_once('modules/core/classes/__core.php');
   core::init();
 
 }
