@@ -5,7 +5,7 @@ namespace effectivecore\modules\demo {
           abstract class events_form extends \effectivecore\events {
 
   static function on_submit_demo($page_args, $form_args, $post_args) {
-    messages::set('Your text is: '.$post_args['text']);
+    messages::add_new('Your text is: '.$post_args['text']);
   }
 
 }}

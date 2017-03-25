@@ -20,7 +20,7 @@ namespace effectivecore\modules\user {
       table_role_by_user::install();
       table_role_by_permission::install();
       db::transaction_commit();
-      messages::set('Database for module "user" was installed');
+      messages::add_new('Database for module "user" was installed');
     } catch (\Exception $e) {
       db::transaction_roll_back();
     }
