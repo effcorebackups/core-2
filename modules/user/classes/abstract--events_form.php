@@ -27,7 +27,7 @@ namespace effectivecore\modules\user {
         table_session::delete(['user_id' => $args['user_id']]);
       }
     # redirect in any case (on press button 'Cancel' or 'Delete')
-      $back_url = urls::$current->args('back', 'query');
+      $back_url = urls::$current->get_args('back', 'query');
       urls::go($back_url ? urldecode($back_url) : '/admin/users');
     }
   }
@@ -37,7 +37,7 @@ namespace effectivecore\modules\user {
       messages::add_new('Parameters of user with id = '.$args['user_id'].' was updated.');
     }
   # redirect to back
-    $back_url = urls::$current->args('back', 'query');
+    $back_url = urls::$current->get_args('back', 'query');
     urls::go($back_url ? urldecode($back_url) : '/user/'.$args['user_id']);
   }
 

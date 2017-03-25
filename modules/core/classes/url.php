@@ -76,7 +76,7 @@ namespace effectivecore {
     return ltrim(strtolower(strrchr($this->path, '.')), '.');
   }
 
-  function args($arg_id, $scope = 'path') {
+  function get_args($arg_id, $scope = 'path') {
     switch ($scope) {
       case 'path':
         $args = explode('/', $this->path);
