@@ -9,14 +9,14 @@ namespace effectivecore\modules\user {
           use \effectivecore\modules\page\page;
           abstract class events_page extends \effectivecore\events_page {
 
-  static function on_page_admin_roles() {
+  static function on_show_admin_roles() {
     $data = table_role::select(['id', 'title', 'is_embed'], [], ['is_embed!']);
     foreach ($data as &$c_row) $c_row['is_embed'] = $c_row['is_embed'] ? 'Yes' : 'No';
     $markup = new html_table([], $data, ['ID', 'Title', 'Is embed']);
     page::add_element($markup);
   }
 
-  static function on_page_admin_users() {
+  static function on_show_admin_users() {
     $total_items = table_user::select_first(['count(id)'])['count(id)'];
     $items_per_page = 50; // # @todo: settings::$data['admin_users']['constants']['items_per_page'];
     $pager = new html_pager([], $total_items, $items_per_page);
@@ -40,13 +40,13 @@ namespace effectivecore\modules\user {
     }
   }
 
-  static function on_page_admin_users_delete_n($user_id) {
+  static function on_show_admin_users_delete_n($user_id) {
     $db_user = table_user::select_first(['id', 'email', 'is_locked'], ['id' => $user_id]);
     if (isset($db_user['id']) == false)                               factory::send_header_and_exit('not_found', 'User not found!');
     if (isset($db_user['is_locked']) && $db_user['is_locked'] == '1') factory::send_header_and_exit('access_denided', 'This user is locked!');
   }
 
-  static function on_page_user_n($user_id) {
+  static function on_show_user_n($user_id) {
     $db_user = table_user::select_first(['*'], ['id' => $user_id]);
     $db_user_roles = table_role_by_user::select(['role_id'], ['user_id' => $user_id]);
     if ($db_user) {
@@ -66,13 +66,13 @@ namespace effectivecore\modules\user {
     }
   }
 
-  static function on_page_user_n_edit($user_id) {
+  static function on_show_user_n_edit($user_id) {
     $db_user = table_user::select_first(['*'], ['id' => $user_id]);
     if (isset($db_user['id']) == false)                                                                             factory::send_header_and_exit('not_found', 'User not found!');
     if (isset($db_user['id']) && !($db_user['id'] == user::$current->id || isset(user::$current->roles['admins']))) factory::send_header_and_exit('access_denided', 'Access denided!');
   }
 
-  static function on_page_user_logout() {
+  static function on_code_user_logout() {
     session::destroy(user::$current->id);
     url::go('/');
   }

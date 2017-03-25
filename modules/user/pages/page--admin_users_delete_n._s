@@ -11,7 +11,7 @@ pages
     content
     - code_user_n_delete
         type: code
-        handler: \effectivecore\modules\user\events_page::on_page_admin_users_delete_n
+        handler: \effectivecore\modules\user\events_page::on_show_admin_users_delete_n
         region: content
     - form_user_n_delete
         type: link
