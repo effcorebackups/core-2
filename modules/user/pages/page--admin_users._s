@@ -11,5 +11,5 @@ pages
     content
     - block_users
         type: code
-        handler: \effectivecore\modules\user\events::on_page_admin_users
+        handler: \effectivecore\modules\user\events_page::on_page_admin_users
         region: content
