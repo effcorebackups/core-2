@@ -9,7 +9,11 @@ pages
       roles
       - admins: admins
     content
-    - form_user_n_delete
+    - code_user_n_delete
         type: code
         handler: \effectivecore\modules\user\events::on_page_admin_users_delete_n
+        region: content
+    - form_user_n_delete
+        type: link
+        entity: forms/user/form_user_n_delete
         region: content

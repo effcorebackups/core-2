@@ -3,7 +3,6 @@
 namespace effectivecore\modules\user {
           use \effectivecore\factory;
           use \effectivecore\html;
-          use \effectivecore\form;
           use \effectivecore\html_table;
           use \effectivecore\html_pager;
           use \effectivecore\url;
@@ -40,15 +39,15 @@ namespace effectivecore\modules\user {
         if (user::$current->id == url::$current->args('2')) {
           return 'My profile';
         } else {
-          $info = table_user::select_first(['email'], ['id' => url::$current->args('2')]);
-          return 'Profile of '.$info['email'];
+          $db_user = table_user::select_first(['email'], ['id' => url::$current->args('2')]);
+          return 'Profile of '.$db_user['email'];
         }
       case '%%_profile_edit_title':
         if (user::$current->id == url::$current->args('2')) {
           return 'Edit my profile';
         } else {
-          $info = table_user::select_first(['email'], ['id' => url::$current->args('2')]);
-          return 'Edit profile of '.$info['email'];
+          $db_user = table_user::select_first(['email'], ['id' => url::$current->args('2')]);
+          return 'Edit profile of '.$db_user['email'];
         }
     }
   }
@@ -56,8 +55,8 @@ namespace effectivecore\modules\user {
   static function on_page_admin_roles() {
     $data = table_role::select(['id', 'title', 'is_embed'], [], ['is_embed!']);
     foreach ($data as &$c_row) $c_row['is_embed'] = $c_row['is_embed'] ? 'Yes' : 'No';
-    $data_markup = new html_table([], $data, ['ID', 'Title', 'Is embed']);
-    page::add_element($data_markup);
+    $markup = new html_table([], $data, ['ID', 'Title', 'Is embed']);
+    page::add_element($markup);
   }
 
   static function on_page_admin_users() {
@@ -69,30 +68,25 @@ namespace effectivecore\modules\user {
         'Page not found!'
       );
     } else {
-      $data = table_user::select(['id', 'email', 'created', 'is_locked'], [], ['id'], $items_per_page, ($pager->c_page_num - 1) * $items_per_page);
+      $db_user = table_user::select(['id', 'email', 'created', 'is_locked'], [], ['id'], $items_per_page, ($pager->c_page_num - 1) * $items_per_page);
       $url_back = urlencode(url::$current->full());
-      foreach ($data as &$c_row) {
+      foreach ($db_user as &$c_row) {
         $c_row['actions']['_attr']['class'][] = 'actions';
         $c_row['actions'][] = new html('a', ['href' => (new url('/user/'.$c_row['id']))->full()], 'view');
         $c_row['actions'][] = new html('a', ['href' => (new url('/user/'.$c_row['id'].'/edit?back='.$url_back))->full()], 'edit');
         if (empty($c_row['is_locked'])) $c_row['actions'][] = new html('a', ['href' => (new url('/admin/users/delete/'.$c_row['id'].'?back='.$url_back))->full()], 'delete');
         $c_row['is_locked'] = $c_row['is_locked'] ? 'Yes' : 'No';
       }
-      $data_markup = new html_table([], $data, ['ID', 'EMail', 'Created', 'Is embed', '']);
-      page::add_element($data_markup);
+      $markup = new html_table([], $db_user, ['ID', 'EMail', 'Created', 'Is embed', '']);
+      page::add_element($markup);
       page::add_element($pager);
     }
   }
 
   static function on_page_admin_users_delete_n($user_id) {
-    $db_user = table_user::select_first(['email', 'is_locked'], ['id' => $user_id]);
-    if ($db_user && empty($db_user['is_locked'])) {
-      page::add_element(form::build('user_n_delete'));
-    } else {
-      factory::send_header_and_exit('not_found',
-        'User not found!'
-      );
-    }
+    $db_user = table_user::select_first(['id', 'email', 'is_locked'], ['id' => $user_id]);
+    if (isset($db_user['id']) == false)                               factory::send_header_and_exit('not_found', 'User not found!');
+    if (isset($db_user['is_locked']) && $db_user['is_locked'] == '1') factory::send_header_and_exit('access_denided', 'This user is locked!');
   }
 
   static function on_page_user_n($user_id) {
@@ -127,10 +121,10 @@ namespace effectivecore\modules\user {
   }
 
   function on_form_user_login_submit($args) {
-    $user_info = table_user::select_first(['*'], ['email' => $args['email'], 'password_hash' => sha1($args['password'])]);
-    if (!empty($user_info['id'])) {
-      session::init($user_info['id']);
-      url::go('/user/'.$user_info['id']);
+    $db_user = table_user::select_first(['*'], ['email' => $args['email'], 'password_hash' => sha1($args['password'])]);
+    if (isset($db_user['id'])) {
+      session::init($db_user['id']);
+      url::go('/user/'.$db_user['id']);
     } else {
       message::set('Incorrect email or password!', 'error');
     }
