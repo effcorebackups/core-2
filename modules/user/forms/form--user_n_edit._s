@@ -1,5 +1,5 @@
 forms
-- form_user_n_edit
+- form_user_n_edit|form_n
     id: user_n_edit
     properties
       novalidate: 1

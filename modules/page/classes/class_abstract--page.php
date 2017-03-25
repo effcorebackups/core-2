@@ -3,7 +3,6 @@
 namespace effectivecore\modules\page {
           use \effectivecore\factory;
           use \effectivecore\settings;
-          use \effectivecore\message;
           use \effectivecore\url;
           use \effectivecore\html;
           use \effectivecore\timer;
@@ -63,8 +62,8 @@ namespace effectivecore\modules\page {
           switch ($c_content->type) {
             case 'text': static::add_element($c_content->content, $c_region); break;
             case 'code': static::add_element(call_user_func_array($c_content->handler, $c_args), $c_region); break;
-            case 'file_text'    : static::add_element('[file_text] is under construction', $c_region); break; # @todo: create functionality
-            case 'file_settings': static::add_element('[file_settings] is under construction', $c_region); break; # @todo: create functionality
+            case 'link': static::add_element(factory::npath_get_object($c_content->entity, settings::$data), $c_region); break;
+            case 'file': static::add_element('[file] is under construction', $c_region); break; # @todo: create functionality
             default: static::add_element($c_content, $c_region);
           }
         }
@@ -80,13 +79,11 @@ namespace effectivecore\modules\page {
     console::set_log('User roles', implode(', ', user::$current->roles));
   # @todo: show console only for admins
     static::add_element(console::render(), 'console');
-  # render messages
-    message::render_all();
   # render page
     $template = new template('page');
-    foreach (static::$data as $c_region_name => $c_blocks) {
+    foreach (static::$data as $c_region_name => &$c_blocks) { # use '&' for dynamic static::$data
       $c_region_data = [];
-      foreach ($c_blocks as $key => $c_block) {
+      foreach ($c_blocks as $c_block) {
         $c_region_data[] = method_exists($c_block, 'render') ?
                                          $c_block->render() :
                                          $c_block;
@@ -95,6 +92,7 @@ namespace effectivecore\modules\page {
         implode($c_region_name == 'content' ? br : '', $c_region_data)
       );
     }
+  # render page
     print $template->render();
   }
 

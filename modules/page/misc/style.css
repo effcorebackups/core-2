@@ -5,7 +5,7 @@
   /* page sizes */
   nav {display: block; max-width: 800px; margin: 0 auto}
   nav:after {content: ''; clear: both; display: block}
-  messages {display: block; max-width: 800px; margin: 0 auto}
+  messages {display: block; max-width: 800px; margin: 50px auto}
   header {display: block; max-width: 800px; margin: 0 auto}
   content {display: block; max-width: 800px; margin: 0 auto; min-height: 200px}
   footer {display: block; max-width: 800px; margin: 0 auto}
@@ -22,9 +22,8 @@
   a.active {color: #000}
 
   /* messages */
-  messages ul {margin: 30px 0; padding: 30px 30px 30px 50px; font-size: 16px; border: 3px solid #41c25d; background: #f1fcf9}
-  messages ul ul {margin: 0; padding: 0 0 0 30px; border: none}
-  messages ul.error {border: 3px solid #e42034; background: #fff5ee}
+  messages div {margin: 5px 0; padding: 15px; font-size: 16px; border: 3px solid #41c25d; background: #f1fcf9}
+  messages div.error {border-color: #e42034; background-color: #fff5ee}
 
   /* table */
   content table {border-collapse: collapse; width: 100%; margin: 20px 0}

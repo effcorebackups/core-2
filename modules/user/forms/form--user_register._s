@@ -1,5 +1,5 @@
 forms
-- form_user_register
+- form_user_register|form_n
     id: user_register
     properties
       novalidate: 1

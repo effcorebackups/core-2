@@ -171,6 +171,20 @@ namespace effectivecore {
 
 
 
+  static function npath_get_object($npath, $data) {
+    $p = null;
+    foreach (explode('/', $npath) as $c_part) {
+      $p = $p ? $p[$c_part] :
+             $data[$c_part];
+    }
+    return $p;
+  }
+
+  static function npath_collect_objects($npath, $data) {
+  }
+
+
+
   static function _compare_by_weight($a, $b) {
     return $a->weight == $b->weight ? 0 : ($a->weight < $b->weight ? -1 : 1);
   }

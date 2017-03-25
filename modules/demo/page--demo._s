@@ -15,6 +15,14 @@ pages
         type: code
         handler: \effectivecore\modules\demo\events::on_code_show
         region: content
+    - demo_text_from_file
+        type: file
+        file: include/text.txt
+        region: content
+    - demo_link_to_settings
+        type: link
+        entity: forms/user/form_user_login
+        region: content
     - demo_markup|markup
         type: span
         properties
@@ -27,13 +35,4 @@ pages
               class: some-link
               href: /demo
             content: [demo_markup] some markup
-        region: content
-    - demo_text_from_file
-        type: file_text
-        file: include/text.txt
-        region: content
-    - demo_settings_from_file
-        type: file_settings
-        file: include/settings._s
-        entity: demo_tree
         region: content

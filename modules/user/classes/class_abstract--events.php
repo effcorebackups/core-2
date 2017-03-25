@@ -136,10 +136,6 @@ namespace effectivecore\modules\user {
     page::add_element(form::build('user_register'));
   }
 
-  static function on_page_user_login() {
-    page::add_element(form::build('user_login'));
-  }
-
   static function on_page_user_logout() {
     session::destroy(user::$current->id);
     url::go('/');

@@ -1,5 +1,5 @@
 forms
-- form_user_login
+- form_user_login|form_n
     id: user_login
     properties
       novalidate: 1
