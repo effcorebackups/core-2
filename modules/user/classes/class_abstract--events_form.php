@@ -7,7 +7,10 @@ namespace effectivecore\modules\user {
           abstract class events_form extends \effectivecore\events_form {
 
   function on_submit_user_login($page_args, $form_args, $post_args) {
-    $db_user = table_user::select_first(['*'], ['email' => $args['email'], 'password_hash' => sha1($args['password'])]);
+    $db_user = table_user::select_first(['*'], [
+      'password_hash' => sha1($post_args['password']),
+      'email'         => $post_args['email'],
+    ]);
     if (isset($db_user['id'])) {
       session::init($db_user['id']);
       url::go('/user/'.$db_user['id']);
