@@ -8,5 +8,5 @@ pages
     content
     - block_menus
         type: code
-        handler: \effectivecore\modules\menu\events::on_block_menus
+        handler: \effectivecore\modules\menu\events_page::on_show_menus
         region: nav

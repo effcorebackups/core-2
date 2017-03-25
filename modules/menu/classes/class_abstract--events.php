@@ -4,9 +4,9 @@ namespace effectivecore\modules\menu {
           use \effectivecore\settings;
           use \effectivecore\html;
           use \effectivecore\modules\user\access;
-          abstract class events {
+          abstract class events_page extends \effectivecore\events {
 
-  static function on_block_menus() {
+  static function on_show_menus() {
   # collect all menu items
     $menus = new menu_item('menu');
     foreach (settings::$data['menu_items'] as $c_grp_items) {
