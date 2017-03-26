@@ -8,7 +8,7 @@ namespace effectivecore {
   public $post_args = [];
 
   public $id;
-  public $properties = [];
+  public $attributes = [];
   public $on_submit = null;
   public $on_validate = null;
   public $content = [];
@@ -22,9 +22,9 @@ namespace effectivecore {
       $content = factory::collect_content($this->content);
     # check each form field
       foreach ($content as $element_id => $c_element) {
-        $c_name = isset($c_element->properties->name) ? $c_element->properties->name : '';
-        $c_type = isset($c_element->properties->type) ? $c_element->properties->type : '';
-        $c_form_value = isset($c_element->properties->value) ? $c_element->properties->value : '';
+        $c_name = isset($c_element->attributes->name) ? $c_element->attributes->name : '';
+        $c_type = isset($c_element->attributes->type) ? $c_element->attributes->type : '';
+        $c_form_value = isset($c_element->attributes->value) ? $c_element->attributes->value : '';
         $c_post_value = isset($_POST[$c_name]) ? $_POST[$c_name] : ''; # @todo: check security risks
       # define form_args and post_args
         if ($c_name) {
@@ -35,7 +35,7 @@ namespace effectivecore {
         if ($c_name &&
             $c_type != 'hidden' &&
             $c_type != 'submit') {
-          $c_element->properties->value = $c_post_value;
+          $c_element->attributes->value = $c_post_value;
         # check email field
           switch ($c_type) {
             case 'email':
@@ -45,29 +45,29 @@ namespace effectivecore {
               break;
           }
         # check required fields
-          if (isset($c_element->properties->required)) {
+          if (isset($c_element->attributes->required)) {
             if ($c_post_value == '') {
               $this->errors[$element_id][] = 'Field '.$c_name.' can not be blank!';
             }
           }
         # check max length
-          if (isset($c_element->properties->maxlength)) {
-            if ($c_post_value && strlen($c_post_value) > $c_element->properties->maxlength) {
-              $this->errors[$element_id][] = 'Field '.$c_name.' contain too much symbols! Maximum '.$c_element->properties->maxlength.' symbols.';
+          if (isset($c_element->attributes->maxlength)) {
+            if ($c_post_value && strlen($c_post_value) > $c_element->attributes->maxlength) {
+              $this->errors[$element_id][] = 'Field '.$c_name.' contain too much symbols! Maximum '.$c_element->attributes->maxlength.' symbols.';
             }
           }
         # check min length
-          if (isset($c_element->properties->minlength)) {
-            if ($c_post_value && strlen($c_post_value) < $c_element->properties->minlength) {
-              $this->errors[$element_id][] = 'Field '.$c_name.' contain too few symbols! Minimum '.$c_element->properties->minlength.' symbols.';
+          if (isset($c_element->attributes->minlength)) {
+            if ($c_post_value && strlen($c_post_value) < $c_element->attributes->minlength) {
+              $this->errors[$element_id][] = 'Field '.$c_name.' contain too few symbols! Minimum '.$c_element->attributes->minlength.' symbols.';
             }
           }
         }
       }
     # show errors and set error class
       foreach ($this->errors as $element_id => $c_errors) {
-        if (!isset($content[$element_id]->properties->class)) $content[$element_id]->properties->class = '';
-        $content[$element_id]->properties->class.= ' error';
+        if (!isset($content[$element_id]->attributes->class)) $content[$element_id]->attributes->class = '';
+        $content[$element_id]->attributes->class.= ' error';
         foreach ($c_errors as $c_error) {
           messages::add_new($c_error, 'error');
         }
@@ -89,7 +89,7 @@ namespace effectivecore {
                                    $c_element;
     }
   # return rendered form
-    return (new html('form', ['id' => 'form_'.$this->id] + (array)$this->properties, $r_content))->render();
+    return (new html('form', ['id' => 'form_'.$this->id] + (array)$this->attributes, $r_content))->render();
   }
 
 }}

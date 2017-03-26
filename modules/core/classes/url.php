@@ -42,7 +42,7 @@ namespace effectivecore {
   # note:
   # ─────────────────────────────────────────────────────────────────────
   # in the next url "http://login:pass@subdomain.domain:port/dir/subdir/page?key=value#anchor"
-  # the login, pass and port properties after parsing will be in the $domain property
+  # the login, password and port attributes after parsing will be in the $domain property
   # ─────────────────────────────────────────────────────────────────────
 
   public $protocol;

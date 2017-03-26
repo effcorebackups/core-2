@@ -1,7 +1,7 @@
 forms
 - form_user_n_delete|form
     id: user_n_delete
-    properties
+    attributes
       method: post
       class: form-user
     on_submit
@@ -9,13 +9,13 @@ forms
     content
     - button_delete|markup
         type: input
-        properties
+        attributes
           type: submit
           name: op
           value: Delete
     - button_cancel|markup
         type: input
-        properties
+        attributes
           type: submit
           name: op
           value: Cancel

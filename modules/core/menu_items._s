@@ -4,13 +4,13 @@ menu_items
 - main_home
     root: main/home
     title: Home
-    properties
+    attributes
     - href: /
     - class: logo
 - main_admin
     root: main/admin
     title: Administer
-    properties
+    attributes
     - class: admin
     access
       roles
@@ -18,7 +18,7 @@ menu_items
 - main_admin_modules
     root: main/admin/modules
     title: Modules
-    properties
+    attributes
     - class: modules
     - href: /admin/modules
     access

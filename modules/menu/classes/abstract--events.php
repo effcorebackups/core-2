@@ -15,7 +15,7 @@ namespace effectivecore\modules\menu {
             (isset($c_item->access) && access::check($c_item->access))) {
           $menus->add_child($c_item->root, isset(
                             $c_item->title) ? $c_item->title : '', isset(
-                            $c_item->properties) ? $c_item->properties : null, isset(
+                            $c_item->attributes) ? $c_item->attributes : null, isset(
                             $c_item->weight) ? $c_item->weight : 0);
         }
       }

@@ -4,7 +4,7 @@ namespace effectivecore {
           class markup {
 
   public $type;
-  public $properties;
+  public $attributes;
   public $content;
 
   function render() {
@@ -22,7 +22,7 @@ namespace effectivecore {
   # generate output
     $template = new template(count($r_content) ? 'html_element' : 'html_element_simple');
     $template->set_var('type', $this->type);
-    $template->set_var('attributes', implode(' ', factory::data_to_attr($this->properties)));
+    $template->set_var('attributes', implode(' ', factory::data_to_attr($this->attributes)));
     $template->set_var('content', implode(nl, $r_content));
     return $template->render();
   }

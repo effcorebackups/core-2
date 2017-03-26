@@ -1,7 +1,7 @@
 forms
 - form_demo|form
     id: demo
-    properties
+    attributes
       novalidate: 1
       method: post
     on_submit
@@ -9,7 +9,7 @@ forms
     content
     - field_text|markup
         type: input
-        properties
+        attributes
           type: text
           name: text
           placeholder: Any text here...
@@ -17,7 +17,7 @@ forms
           maxlength: 255
     - button_login|markup
         type: input
-        properties
+        attributes
           type: submit
           name: op
           value: Ok

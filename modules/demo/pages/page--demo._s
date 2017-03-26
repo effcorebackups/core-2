@@ -22,13 +22,13 @@ pages
         region: content
     - demo_markup|markup
         type: span
-        properties
+        attributes
           class: test-span
           style: font-weight: bold
         content
         - some_link|markup
             type: a
-            properties
+            attributes
               class: some-link
               href: /demo
             content: [demo_markup] some markup

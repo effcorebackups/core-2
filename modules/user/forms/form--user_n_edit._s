@@ -1,7 +1,7 @@
 forms
 - form_user_n_edit|form
     id: user_n_edit
-    properties
+    attributes
       novalidate: 1
       method: post
       class: form-user
@@ -10,7 +10,7 @@ forms
     content
     - field_password|markup
         type: input
-        properties
+        attributes
           type: password
           name: password
           placeholder: Password
@@ -19,7 +19,7 @@ forms
           maxlength: 255
     - button_login|markup
         type: input
-        properties
+        attributes
           type: submit
           name: op
           value: Save

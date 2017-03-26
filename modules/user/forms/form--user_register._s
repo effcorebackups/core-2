@@ -1,7 +1,7 @@
 forms
 - form_user_register|form
     id: user_register
-    properties
+    attributes
       novalidate: 1
       method: post
       class: form-user
@@ -10,7 +10,7 @@ forms
     content
     - field_email|markup
         type: input
-        properties
+        attributes
           type: email
           name: email
           placeholder: Email
@@ -18,7 +18,7 @@ forms
           maxlength: 255
     - field_password|markup
         type: input
-        properties
+        attributes
           type: password
           name: password
           placeholder: Password
@@ -27,7 +27,7 @@ forms
           maxlength: 255
     - button_register|markup
         type: input
-        properties
+        attributes
           type: submit
           name: op
           value: Register

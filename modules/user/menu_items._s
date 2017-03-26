@@ -4,7 +4,7 @@ menu_items
 - user_anonymous
     root: user/user
     title: User
-    properties
+    attributes
       class: user
     access
       roles
@@ -12,7 +12,7 @@ menu_items
 - user_n
     root: user/user
     title: Hello %%_user_email
-    properties
+    attributes
       href: /user/%%_user_id
       class: user
     access
@@ -23,7 +23,7 @@ menu_items
     root: user/user/edit
     title: Edit profile
     weight: -100
-    properties
+    attributes
       href: /user/%%_user_id/edit
     access
       roles
@@ -33,7 +33,7 @@ menu_items
     root: user/user/login
     title: Login
     weight: -80
-    properties
+    attributes
       href: /user/login
     access
       roles
@@ -42,7 +42,7 @@ menu_items
     root: user/user/register
     title: Register
     weight: -60
-    properties
+    attributes
       href: /user/register
     access
       roles
@@ -51,7 +51,7 @@ menu_items
     root: user/user/logout
     title: Logout
     weight: -40
-    properties
+    attributes
       href: /user/logout
     access
       roles
@@ -59,7 +59,7 @@ menu_items
 - main_admin_roles
     root: main/admin/roles
     title: Roles
-    properties
+    attributes
       href: /admin/roles
     access
       roles
@@ -67,7 +67,7 @@ menu_items
 - main_admin_users
     root: main/admin/users
     title: Users
-    properties
+    attributes
       href: /admin/users
     access
       roles

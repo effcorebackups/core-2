@@ -8,7 +8,7 @@ namespace effectivecore\modules\menu {
           class menu_item extends \effectivecore\folder {
 
   function render() {
-    $attr = (array)$this->properties;
+    $attr = (array)$this->attributes;
     if (isset($attr['href'])) {
       $attr['href'] = token::replace($attr['href']);
       if (urls::is_active($attr['href'])) {

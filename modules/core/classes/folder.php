@@ -5,24 +5,24 @@ namespace effectivecore {
 
   public $root;
   public $title;
-  public $properties;
+  public $attributes;
   public $weight;
   public $children = [];
 
-  function __construct($title = '', $properties = [], $weight = 0) {
+  function __construct($title = '', $attributes = [], $weight = 0) {
     $this->title = $title;
-    $this->properties = $properties;
+    $this->attributes = $attributes;
     $this->weight = $weight;
   }
 
-  function add_child($root, $title = '', $properties = [], $weight = 0) {
+  function add_child($root, $title = '', $attributes = [], $weight = 0) {
     $c_folder = &$this->children;
     foreach ($levels = explode('/', $root) as $c_level) {
       if (!isset($c_folder[$c_level])) $c_folder[$c_level] = new static();
       if ($c_level == end($levels)) {
         $c_folder[$c_level]->root = $root;
         $c_folder[$c_level]->title = $title;
-        $c_folder[$c_level]->properties = $properties;
+        $c_folder[$c_level]->attributes = $attributes;
         $c_folder[$c_level]->weight = $weight;
       }
       $c_folder = &$c_folder[$c_level]->children;
