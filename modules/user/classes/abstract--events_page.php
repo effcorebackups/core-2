@@ -73,9 +73,4 @@ namespace effectivecore\modules\user {
     if (isset($db_user['id']) && !($db_user['id'] == user::$current->id || isset(user::$current->roles['admins']))) factory::send_header_and_exit('access_denided', 'Access denided!');
   }
 
-  static function on_code_user_logout() {
-    session::destroy(user::$current->id);
-    urls::go('/');
-  }
-
 }}

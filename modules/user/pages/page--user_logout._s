@@ -7,7 +7,7 @@ pages
       roles
       - logged: logged
     content
-    - code_logout
-        type: code
-        handler: \effectivecore\modules\user\events_page::on_code_user_logout
+    - form_user_login
+        type: link
+        entity: forms/user/form_user_logout
         region: content

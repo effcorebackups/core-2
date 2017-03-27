@@ -1,0 +1,15 @@
+forms
+- form_user_logout|form
+    id: user_logout
+    attributes
+      method: post
+      class: form-user
+    on_submit
+      handler: \effectivecore\modules\user\events_form::on_submit_user_logout
+    content
+    - button_logout|markup
+        type: input
+        attributes
+          type: submit
+          name: button
+          value: logout
