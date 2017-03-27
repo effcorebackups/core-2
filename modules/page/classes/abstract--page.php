@@ -19,7 +19,7 @@ namespace effectivecore\modules\page {
   static $data = [
     'meta'     => [],
     'styles'   => [],
-    'js'       => [],
+    'script'   => [],
     'title'    => [],
     'nav'      => [],
     'header'   => [],
