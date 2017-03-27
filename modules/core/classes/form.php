@@ -72,8 +72,19 @@ namespace effectivecore {
           messages::add_new($c_error, 'error');
         }
       }
+    # call validate handler
+      if (isset($_POST['button']) &&
+          isset($this->on_validate->handler)) {
+        call_user_func(
+          $this->on_validate->handler, page::$args,
+          $this->form_args,
+          $this->post_args
+        );
+      }
     # call submit handler
-      if (count($this->errors) == 0 && isset($_POST['button'])) {
+      if (isset($_POST['button']) &&
+          isset($this->on_submit->handler) &&
+          count($this->errors) == 0) {
         call_user_func(
           $this->on_submit->handler, page::$args,
           $this->form_args,
