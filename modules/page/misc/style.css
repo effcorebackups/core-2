@@ -22,8 +22,10 @@
   a.active {color: #000}
 
   /* messages */
-  messages div {margin: 5px 0; padding: 15px; font-size: 16px; border: 3px solid #41c25d; background: #f1fcf9}
-  messages div.error {border-color: #e42034; background-color: #fff5ee}
+  messages ul {margin: 10px 0; padding: 15px; font-size: 16px; border: 3px solid #41c25d; background: #f1fcf9}
+  messages ul.error {border-color: #e42034; background-color: #fff5ee}
+  messages ul li {margin: 0 0 0 15px; padding: 0}
+  messages ul li:only-child {margin: 0; list-style: none}
 
   /* table */
   content table {border-collapse: collapse; width: 100%; margin: 20px 0}

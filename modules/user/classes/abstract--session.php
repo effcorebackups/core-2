@@ -16,7 +16,7 @@ namespace effectivecore\modules\user {
     }
  /* restore session for authenticated user */
     if ($user_id == 0 && isset($_REQUEST[session_name()])) {
-      $db_session = table_session::select_first(['user_id'], ['id' => $_REQUEST[session_name()]]);
+      $db_session = table_session::select_one(['user_id'], ['id' => $_REQUEST[session_name()]]);
       if (isset($db_session['user_id'])) {
         $user_id = $db_session['user_id'];
         session_start();

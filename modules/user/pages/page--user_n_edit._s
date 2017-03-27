@@ -17,5 +17,4 @@ pages
     - form_user_n_edit
         type: link
         entity: forms/user/form_user_n_edit
-        use_page_args: 1
         region: content

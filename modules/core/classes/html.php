@@ -3,6 +3,12 @@
 namespace effectivecore {
           class html {
 
+ static function to_css_class($string) {
+    return str_replace(['/', ' '], '-', strtolower($string));
+  }
+
+# non static declarations
+
   public $type;            # example: a, p, b, br, div, span ...
   public $content = null;  # example: null, 'str', html object
   public $attr = [];       # example: ['selected' => false]        rendered as: <type>...</type>
@@ -67,12 +73,6 @@ namespace effectivecore {
     $template->set_var('attributes', implode(' ', factory::data_to_attr($this->attr)));
     $template->set_var('content', implode(nl, $cont_rendered));
     return $template->render();
-  }
-
-# static declarations
-
-  static function to_css_class($string) {
-    return str_replace(['/', ' '], '-', strtolower($string));
   }
 
 }}

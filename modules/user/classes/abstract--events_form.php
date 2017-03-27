@@ -7,7 +7,7 @@ namespace effectivecore\modules\user {
           abstract class events_form extends \effectivecore\events_form {
 
   function on_submit_user_login($page_args, $form_args, $post_args) {
-    $db_user = table_user::select_first(['*'], [
+    $db_user = table_user::select_one(['*'], [
       'password_hash' => sha1($post_args['password']),
       'email'         => $post_args['email'],
     ]);
@@ -20,16 +20,16 @@ namespace effectivecore\modules\user {
   }
 
   function on_submit_user_n_delete($page_args, $form_args, $post_args) {
-    if (!empty($args['user_id']) &&
-        !empty($args['op'])) {
-      if ($args['op'] == 'Delete' && table_user::delete(['id' => $args['user_id']])) {
-        messages::add_new('User with id "'.$args['user_id'].'" was delited.');
-        table_session::delete(['user_id' => $args['user_id']]);
+    $user_id = $page_args['user_id'];
+    if ($post_args['button'] == 'delete') {
+      if (table_user::delete(['id' => $user_id])) {
+        table_session::delete(['user_id' => $user_id]);
+        messages::add_new('User with id "'.$user_id.'" was delited.');
       }
-    # redirect in any case (on press button 'Cancel' or 'Delete')
-      $back_url = urls::$current->get_args('back', 'query');
-      urls::go($back_url ? urldecode($back_url) : '/admin/users');
     }
+  # redirect in any case
+    $back_url = urls::$current->get_args('back', 'query');
+    urls::go($back_url ? urldecode($back_url) : '/admin/users');
   }
 
   function on_submit_user_n_edit($page_args, $form_args, $post_args) {

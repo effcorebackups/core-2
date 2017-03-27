@@ -18,7 +18,7 @@ namespace effectivecore\modules\user {
   }
 
   static function on_show_admin_users() {
-    $total_items = table_user::select_first(['count(id)'])['count(id)'];
+    $total_items = table_user::select_one(['count(id)'])['count(id)'];
     $items_per_page = 50; // # @todo: settings::$data['admin_users']['constants']['items_per_page'];
     $pager = new html_pager([], $total_items, $items_per_page);
     if ($pager->has_error) {
@@ -42,13 +42,13 @@ namespace effectivecore\modules\user {
   }
 
   static function on_show_admin_users_delete_n($user_id) {
-    $db_user = table_user::select_first(['id', 'email', 'is_locked'], ['id' => $user_id]);
+    $db_user = table_user::select_one(['id', 'email', 'is_locked'], ['id' => $user_id]);
     if (isset($db_user['id']) == false)                               factory::send_header_and_exit('not_found', 'User not found!');
     if (isset($db_user['is_locked']) && $db_user['is_locked'] == '1') factory::send_header_and_exit('access_denided', 'This user is locked!');
   }
 
   static function on_show_user_n($user_id) {
-    $db_user = table_user::select_first(['*'], ['id' => $user_id]);
+    $db_user = table_user::select_one(['*'], ['id' => $user_id]);
     $db_user_roles = table_role_by_user::select(['role_id'], ['user_id' => $user_id]);
     if ($db_user) {
       if ($db_user['id'] == user::$current->id || isset(user::$current->roles['admins'])) {
@@ -68,7 +68,7 @@ namespace effectivecore\modules\user {
   }
 
   static function on_show_user_n_edit($user_id) {
-    $db_user = table_user::select_first(['*'], ['id' => $user_id]);
+    $db_user = table_user::select_one(['*'], ['id' => $user_id]);
     if (isset($db_user['id']) == false)                                                                             factory::send_header_and_exit('not_found', 'User not found!');
     if (isset($db_user['id']) && !($db_user['id'] == user::$current->id || isset(user::$current->roles['admins']))) factory::send_header_and_exit('access_denided', 'Access denided!');
   }

@@ -29,5 +29,5 @@ forms
         type: input
         attributes
           type: submit
-          name: op
-          value: Register
+          name: button
+          value: register

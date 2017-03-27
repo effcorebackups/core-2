@@ -45,7 +45,7 @@ namespace effectivecore\modules\data {
     }
   }
 
-  static function select_first($fields = ['*'], $conditions = [], $order = []) {
+  static function select_one($fields = ['*'], $conditions = [], $order = []) {
     if (static::$table_name) {
       $res = db::query('SELECT '.implode(', ', $fields).' '.
                        'FROM %T_'.static::$table_name.

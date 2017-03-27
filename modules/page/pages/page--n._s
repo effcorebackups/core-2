@@ -9,3 +9,7 @@ pages
         file: misc/form.css
     - console_css
         file: misc/console.css
+    content
+    - all_messages|messages
+        type: messages
+        region: messages

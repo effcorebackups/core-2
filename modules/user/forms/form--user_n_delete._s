@@ -11,11 +11,11 @@ forms
         type: input
         attributes
           type: submit
-          name: op
-          value: Delete
+          name: button
+          value: delete
     - button_cancel|markup
         type: input
         attributes
           type: submit
-          name: op
-          value: Cancel
+          name: button
+          value: cancel

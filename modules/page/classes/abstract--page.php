@@ -15,7 +15,19 @@ namespace effectivecore\modules\page {
           use const \effectivecore\br;
           abstract class page {
 
-  static $data = [];
+  static $args = [];
+  static $data = [
+    'meta'     => [],
+    'title'    => [],
+    'css'      => [],
+    'js'       => [],
+    'nav'      => [],
+    'header'   => [],
+    'content'  => [],
+    'footer'   => [],
+    'console'  => [],
+    'messages' => [],
+  ];
 
   static function init() {
     timer::tap('load_time');
@@ -50,10 +62,9 @@ namespace effectivecore\modules\page {
         }
       }
     # collect arguments
-      $c_args = [];
       if (isset($c_page->url->args)) {
         foreach ($c_page->url->args as $c_arg_name => $c_arg_num) {
-          $c_args[$c_arg_name] = urls::$current->get_args($c_arg_num);
+          static::$args[$c_arg_name] = urls::$current->get_args($c_arg_num);
         }
       }
     # collect page content from settings
@@ -62,14 +73,9 @@ namespace effectivecore\modules\page {
           $c_region = isset($c_content->region) ? $c_content->region : 'content';
           switch ($c_content->type) {
             case 'text': static::add_element($c_content->content, $c_region); break;
-            case 'code': static::add_element(call_user_func_array($c_content->handler, $c_args), $c_region); break;
+            case 'code': static::add_element(call_user_func_array($c_content->handler, static::$args), $c_region); break;
             case 'file': static::add_element('[file] is under construction', $c_region); break; # @todo: create functionality
-            case 'link':
-              $object = factory::npath_get_object($c_content->entity, settings::$data);
-              if (isset($object->use_page_args) &&
-                        $object->use_page_args) $object->page_args = $c_args;
-              static::add_element($object, $c_region);
-              break;
+            case 'link': static::add_element(factory::npath_get_object($c_content->entity, settings::$data), $c_region); break;
             default: static::add_element($c_content, $c_region);
           }
         }
@@ -83,8 +89,7 @@ namespace effectivecore\modules\page {
   # set some log info
     console::set_log('Generation time', timer::get_period('load_time', 0, 1).' sec.');
     console::set_log('User roles', implode(', ', user::$current->roles));
-  # @todo: show console only for admins
-    static::add_element(console::render(), 'console');
+    static::add_element(console::render(), 'console'); # @todo: show console only for admins
   # render page
     $template = new template('page');
     foreach (static::$data as $c_region_name => &$c_blocks) { # use '&' for dynamic static::$data

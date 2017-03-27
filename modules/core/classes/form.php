@@ -1,9 +1,9 @@
 <?php
 
 namespace effectivecore {
+          use \effectivecore\modules\page\page;
           class form {
 
-  public $page_args = [];
   public $form_args = [];
   public $post_args = [];
 
@@ -73,9 +73,9 @@ namespace effectivecore {
         }
       }
     # call submit handler
-      if (count($this->errors) == 0 && isset($_POST['op'])) {
-        call_user_func($this->on_submit->handler,
-          $this->page_args,
+      if (count($this->errors) == 0 && isset($_POST['button'])) {
+        call_user_func(
+          $this->on_submit->handler, page::$args,
           $this->form_args,
           $this->post_args
         );
