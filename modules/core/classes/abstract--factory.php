@@ -172,15 +172,24 @@ namespace effectivecore {
 
 
   static function npath_get_object($npath, $data) {
+    $path_parts = explode('/', $npath);
     $p = null;
-    foreach (explode('/', $npath) as $c_part) {
-      $p = $p ? $p[$c_part] :
-             $data[$c_part];
+    foreach ($path_parts as $c_part) {
+      if ($p == null) { if (isset($data[$c_part])) {$p = $data[$c_part]; continue;} else {$p = null; break;} } # iteration 1
+      if ($p != null) { if (isset(   $p[$c_part])) {$p =    $p[$c_part]; continue;} else {$p = null; break;} } # iteration 2, 3, 4 ...
     }
     return $p;
   }
 
   static function npath_collect_objects($npath, $data) {
+    $result = [];
+    foreach ($data as $c_key => $c_item) {
+      $c_result = static::npath_get_object($npath, [$c_key => $c_item]);
+      if ($c_result) {
+        $result[] = $c_result;
+      }
+    }
+    return $result;
   }
 
 
