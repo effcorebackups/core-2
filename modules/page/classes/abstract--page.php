@@ -3,6 +3,7 @@
 namespace effectivecore\modules\page {
           use \effectivecore\factory;
           use \effectivecore\settings;
+          use \effectivecore\messages;
           use \effectivecore\urls;
           use \effectivecore\url;
           use \effectivecore\html;
@@ -30,6 +31,7 @@ namespace effectivecore\modules\page {
   ];
 
   static function init() {
+    messages::init();
     timer::tap('load_time');
   # create call stack and call each page
     $matches = 0;
