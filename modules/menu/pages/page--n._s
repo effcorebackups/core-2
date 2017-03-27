@@ -3,7 +3,7 @@ pages
     url
       match: %.*%
     styles
-    - menu_css
+    - style_menu
         file: misc/menu.css
     content
     - block_menus
