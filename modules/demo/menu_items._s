@@ -1,6 +1,6 @@
 menu_items
-- main_demo
-    root: main/demo
+- demo|menu_item
+    parent: menus/core/main
     title: Demo
     attributes
       href: /demo

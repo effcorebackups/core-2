@@ -1,0 +1,9 @@
+pages
+- page_n
+    url
+      match: %.*%
+    content
+    - menu_user
+        type: link
+        entity: menus/user/user
+        region: nav

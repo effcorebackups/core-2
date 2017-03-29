@@ -1,10 +1,6 @@
 <?php
 
-namespace effectivecore\modules\menu {
-          use \effectivecore\factory;
-          use \effectivecore\urls;
-          use \effectivecore\token;
-          use \effectivecore\html;
+namespace effectivecore {
           class menu_item extends \effectivecore\folder {
 
   function render() {

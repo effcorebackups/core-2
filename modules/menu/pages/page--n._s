@@ -6,7 +6,7 @@ pages
     - style_menu
         file: misc/menu.css
     content
-    - block_menus
-        type: code
-        handler: \effectivecore\modules\menu\events_page::on_show_menus
+    - menu_main
+        type: link
+        entity: menus/core/main
         region: nav

@@ -1,22 +1,20 @@
 menu_items
-- main_root
-    root: main
-- main_home
-    root: main/home
+- main_home|menu_item
+    parent: menus/core/main
     title: Home
     attributes
     - href: /
     - class: logo
-- main_admin
-    root: main/admin
+- main_admin|menu_item
+    parent: menus/core/main
     title: Administer
     attributes
     - class: admin
     access
       roles
       - admins: admins
-- main_admin_modules
-    root: main/admin/modules
+- main_admin_modules|menu_item
+    parent: menu_items/core/main_admin
     title: Modules
     attributes
     - class: modules
