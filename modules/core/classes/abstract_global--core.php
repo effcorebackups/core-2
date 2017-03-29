@@ -4,9 +4,9 @@ namespace effectivecore {
           abstract class core {
 
   static function init() {
-    require_once('abstract--cache.php');
-    require_once('abstract--factory.php');
-    require_once('file.php');
+    require_once('abstract_global--cache.php');
+    require_once('abstract_global--factory.php');
+    require_once('global--file.php');
     spl_autoload_register('\effectivecore\factory::autoload');
   # classes initialization
     settings::init();
