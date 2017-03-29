@@ -8,7 +8,7 @@
   nav menu > ul > li > a {display: block; padding: 20px}
   nav menu > ul > li > ul {position: absolute; padding: 20px}
   nav menu > ul > li > ul > li {list-style: none}
-  nav #menu_user > ul > li {float: right}
+  nav menu.user > ul > li {float: right}
 
   /* menu colors */
   nav menu > ul > li:hover {background: #28334a}
@@ -26,6 +26,6 @@
   nav menu > ul > li:hover > ul {display: block}
 
   /* icons */
-  nav #menu_main a.logo  {padding-left: 52px; background: url('menu-icons.svg') no-repeat}
-  nav #menu_main a.admin {padding-left: 52px; background: url('menu-icons.svg') no-repeat 0 -62px}
-  nav #menu_user a.user  {padding-left: 52px; background: url('menu-icons.svg') no-repeat 0 -124px}
+  nav menu.main a.logo  {padding-left: 52px; background: url('menu-icons.svg') no-repeat}
+  nav menu.main a.admin {padding-left: 52px; background: url('menu-icons.svg') no-repeat 0 -62px}
+  nav menu.user a.user  {padding-left: 52px; background: url('menu-icons.svg') no-repeat 0 -124px}

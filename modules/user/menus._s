@@ -1,4 +1,4 @@
 menus
 - user|menu
     attributes
-      class: menu-user
+      class: user
