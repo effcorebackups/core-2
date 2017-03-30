@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          class files {
+          abstract class files {
 
   # path parts:
   # ─────────────────────────────────────────────────────────────────────
