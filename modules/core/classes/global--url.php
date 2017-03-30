@@ -33,16 +33,16 @@ namespace effectivecore {
 
   # wrong urls:
   # ─────────────────────────────────────────────────────────────────────
-  # - 'http://subdomain.domain/' - should be redirected to 'http://subdomain.domain'
-  # - 'subdomain.domain/'        - should be redirected to 'http://subdomain.domain'
-  # - '/subdomain.domain'        - this domain described like a directory (first char is the slash)
-  # - 'dir/subdir/page'          - this directory described like a domain (first char is not the slash)
+  # 1. 'http://subdomain.domain/' - should be redirected to 'http://subdomain.domain'
+  # 2. 'subdomain.domain/'        - should be redirected to 'http://subdomain.domain'
+  # 3. '/subdomain.domain'        - this domain described like a directory (first char is the slash)
+  # 4. 'dir/subdir/page'          - this directory described like a domain (first char is not the slash)
   # ─────────────────────────────────────────────────────────────────────
 
   # note:
   # ─────────────────────────────────────────────────────────────────────
-  # in the next url "http://login:pass@subdomain.domain:port/dir/subdir/page?key=value#anchor"
-  # the login, password and port attributes after parsing will be in the $domain property
+  # 1. in the next url "http://login:pass@subdomain.domain:port/dir/subdir/page?key=value#anchor"
+  #    the login, password and port attributes after parsing will be in the $domain property
   # ─────────────────────────────────────────────────────────────────────
 
   public $protocol;
