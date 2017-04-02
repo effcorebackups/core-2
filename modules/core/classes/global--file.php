@@ -15,7 +15,7 @@ namespace effectivecore {
     $obj->name = substr($obj->name_full, 0, -strlen(strrchr($obj->name_full, '.')));
     $obj->type = ltrim(strrchr($obj->name_full, '.'), '.');
     $obj->parent_dir = end($path_parts);
-    $obj->path_relative_full = substr($obj->path_full, strlen(dir_root) + 1);
+    $obj->path_relative_full = substr($obj->path_full, strlen(dir_root));
     $obj->path_relative = substr($obj->path, strlen(dir_root) + 1);
     return $obj;
   }
@@ -63,7 +63,8 @@ namespace effectivecore {
   }
 
   function insert($once = true) {
-    return $once ? require_once($this->path_full) : require($this->path_full);
+    return $once ? require_once($this->path_full) : 
+                        require($this->path_full);
   }
 
   function is_exist() {

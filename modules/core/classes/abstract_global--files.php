@@ -5,57 +5,70 @@ namespace effectivecore {
 
   # path parts:
   # ─────────────────────────────────────────────────────────────────────
-  # /var/www/modules/core           - dirs->full
-  #          modules/core           - dirs->relative
+  # /var/www/modules/core/          - dirs->full
+  #          modules/core/          - dirs->relative
   # /var/www/modules/core/file.type - dirs->full     + file->full
   #          modules/core/file.type - dirs->relative + file->full
+  #                      /file.type - dirs->full     + file->full
   #                       file.type - file->full
   #                       file      - file->name
   #                            type - file->type
   # ─────────────────────────────────────────────────────────────────────
 
-  # wrong paths:
-  # ─────────────────────────────────────────────────────────────────────
-  # 1. '...core/file.type/' - should be writen as '...core/file.type'
-  # 2. '...core/directory/' - should be writen as '...core/directory'
-  # ─────────────────────────────────────────────────────────────────────
-
   # note:
   # ─────────────────────────────────────────────────────────────────────
-  # 1. if the first letter in the path is '/' - it's the full path,
-  #    оtherwise it's the relative path
-  # 2. in other system the last letter '/' mean that entity is an directory
-  #    but in this system only '.' defined is this file or directory
-  # p.s.1 any file without extensions is the bad practice
-  # p.s.2 using letter '/' at last is bad practice because it's the
-  #       reason of many errors in the code
+  # 1. if the first letter in the path is '/' - it's a full path, оtherwise - relative path
+  # 2. if the last letter in the path is '/' - it's a directory, оtherwise - file
+  # 3. path components like '../' is ignored!
+  # 4. path components like './' is ignored!
+  # 5. windows files naming rules is ignored!
   # ─────────────────────────────────────────────────────────────────────
 
-  static function parse_path($path) {
-    $info = new \StdClass;
-    $info->file = new \StdClass;
-    $info->file->full = '';
-    $info->file->name = '';
-    $info->file->type = '';
-    $info->dirs = new \StdClass;
-    $info->dirs->full = '';
-    $info->dirs->relative = '';
-  # set file and dirs info
-    $last_part = ltrim(strrchr($path, '/'), '/');
-    $type = ltrim(strrchr($last_part, '.'), '.');
-    if ($type) {
-      $info->file->type = $type;
-      $info->file->full = $last_part;
-      $info->file->name = substr($last_part, 0, -1 - strlen($type));
-      $info->dirs->full = substr($path, 0, -1 - strlen($last_part));
+  static function parse_path($path, &$obj = null) {
+    if (!$obj) $obj = new \stdClass();
+    $obj->original = $path;
+    $obj->file = new \StdClass;
+    $obj->dirs = new \StdClass;
+    $obj->file->full = '';
+    $obj->file->name = '';
+    $obj->file->type = '';
+    $obj->dirs->full = '';
+    $obj->dirs->relative = '';
+    $char_0 = $path[0];
+    $char_N = $path[strlen($path)-1];
+  # parse
+    if ($char_N == '/') {
+      $obj->dirs->full = rtrim($path, '/');
     } else {
-      $info->dirs->full = $path;
+      $obj->file->full = ltrim(strrchr($path, '/') ? : $path, '/');
+      $obj->file->type = ltrim(strrchr($obj->file->full, '.') ? : '', '.');
+      $obj->file->name = rtrim(substr($obj->file->full, 0, -strlen($obj->file->type)), '.');
+      $obj->dirs->full = rtrim(substr($path, 0, -strlen($obj->file->full)), '/');
     }
-  # set relative dirs info
-    if (dir_root === substr($info->dirs->full, 0, strlen(dir_root))) {
-      $info->dirs->relative = substr($info->dirs->full, strlen(dir_root) + 2);
+  # define relative path
+    if ($char_0 != '/') {
+      $obj->dirs->relative = $obj->dirs->full;
+    } elseif (dir_root === substr($obj->dirs->full, 0, strlen(dir_root))) {
+      $obj->dirs->relative = substr($obj->dirs->full, strlen(dir_root));
     }
-    return $info;
+    return $obj;
+  }
+
+  static function get_all($parent_dir, $filter = '') {
+    $files = [];
+    $parent_dir = rtrim($parent_dir, '/');
+    foreach (scandir($parent_dir) as $c_name) {
+      if ($c_name != '.' && $c_name != '..') {
+        if (is_file($parent_dir.'/'.$c_name)) {
+          if (!$filter || ($filter && preg_match($filter, $parent_dir.'/'.$c_name))) {
+            $files[$parent_dir.'/'.$c_name] = new static($parent_dir.'/'.$c_name);
+          }
+        } elseif (is_dir($parent_dir.'/'.$c_name)) {
+          $files += static::get_all($parent_dir.'/'.$c_name, $filter);
+        }
+      }
+    }
+    return $files;
   }
 
 }}

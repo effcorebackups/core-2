@@ -6,7 +6,7 @@ namespace effectivecore {
   static $data;
 
   static function init() {
-    $file = new file(dir_cache.'/settings.php');
+    $file = new file(dir_cache.'settings.php');
     if ($file->is_exist()) $file->insert();
     else static::_update();
   }
@@ -39,7 +39,7 @@ namespace effectivecore {
         }
       }
     }
-    $file = new file(dir_cache.'/settings.php');
+    $file = new file(dir_cache.'settings.php');
     $file->content = "<?php \n\nnamespace effectivecore { # settings::\$data[entity_type][scope]...\n\n".
                        factory::data_export($parse, '  settings::$data').
                      "\n}";

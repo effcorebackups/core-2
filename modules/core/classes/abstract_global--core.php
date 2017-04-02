@@ -33,7 +33,7 @@ namespace effectivecore {
           'Any file with this extension is protected by settings in file_types!'
         );
       }
-      $path = dir_root.urls::$current->path;
+      $path = dir_root.ltrim(urls::$current->path, '/');
       if (is_file($path) && is_readable($path)) {
         $data = (new file($path))->load();
         if (isset($file_types[$ext]->mime)) header('Content-type: '.$file_types[$ext]->mime, true);

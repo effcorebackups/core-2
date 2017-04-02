@@ -7,7 +7,7 @@ namespace effectivecore {
 
   static function get($name) {
     if (!isset(static::$data[$name])) {
-      $file = new file(dir_cache.'/'.$name.'.php');
+      $file = new file(dir_cache.$name.'.php');
       if ($file->is_exist()) {
         $file->insert();
       }
@@ -17,7 +17,7 @@ namespace effectivecore {
   }
 
   static function set($name, $data) {
-    $file = new file(dir_cache.'/'.$name.'.php');
+    $file = new file(dir_cache.$name.'.php');
     $file->content = "<?php \n\nnamespace effectivecore { # cache for ".$name."\n\n".
                        factory::data_export($data, '  cache::$data[\''.$name.'\']').
                      "\n}";
