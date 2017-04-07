@@ -2,7 +2,7 @@
 
 namespace effectivecore {
           use \effectivecore\modules\user\access;
-          class menu extends \effectivecore\folder {
+          class menu extends \effectivecore\node {
 
   function render() {
     $rendered = [];

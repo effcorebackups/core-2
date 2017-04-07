@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          class folder {
+          class node {
 
   public $title;
   public $attributes;

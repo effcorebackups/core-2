@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          class menu_item extends \effectivecore\folder {
+          class menu_item extends \effectivecore\node {
 
   function render() {
     $attr = (array)$this->attributes;
