@@ -8,7 +8,7 @@ namespace effectivecore {
   public $weight = 0;
   public $children = [];
 
-  function __construct($title = '', $attributes = [], $weight = 0) {
+  function __construct($title = '', $attributes = null, $weight = 0) {
     $this->title = $title;
     $this->attributes = $attributes;
     $this->weight = $weight;

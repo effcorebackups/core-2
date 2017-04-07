@@ -3,9 +3,11 @@
 namespace effectivecore {
           class markup extends node {
 
-  public $type = 'div';
+  public $type;
 
-  function __construct() {
+  function __construct($type = 'div', $attributes = null, $weight = 0) {
+    parent::__construct(null, $attributes, $weight);
+    $this->type = $type;
     unset($this->title);
   }
 
