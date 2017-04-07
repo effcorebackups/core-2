@@ -5,7 +5,7 @@ namespace effectivecore {
 
   public $title;
   public $attributes;
-  public $weight;
+  public $weight = 0;
   public $children = [];
 
   function __construct($title = '', $attributes = [], $weight = 0) {
@@ -15,12 +15,29 @@ namespace effectivecore {
   }
 
   function render() {
+    return $this->render_self().implode("\n",
+           $this->render_children($this->children));
+  }
+
+  protected function render_self() {
+    return $this->title;
+  }
+
+  protected function render_children($children) {
     $rendered = [];
-    foreach ($this->children as $c_child) {
-      $rendered[] = $c_child->render();
+    if (is_array($children)) {
+      foreach ($children as $c_child) {
+        $rendered[] = $this->render_child($c_child);
+      }
+    } elseif (is_string($children)) {
+      $rendered[] = $children;
     }
-    return count($rendered) ? (new html('li', [], [new html('span', [], $this->title), new html('ul', [], $rendered)]))->render() :
-                              (new html('li', [], [new html('span', [], $this->title)]))->render();
+    return $rendered;
+  }
+
+  protected function render_child($child) {
+    return method_exists($child, 'render') ? $child->render() :
+                                             $child;
   }
 
 }}

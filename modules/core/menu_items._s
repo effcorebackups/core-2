@@ -3,13 +3,13 @@ menu_items
     parent: menus/core/main
     title: Home
     attributes
-    - href: /
-    - class: logo
+      href: /
+      class: logo
 - main_admin|menu_item
     parent: menus/core/main
     title: Administer
     attributes
-    - class: admin
+      class: admin
     access
       roles
       - admins: admins
@@ -17,8 +17,8 @@ menu_items
     parent: menu_items/core/main_admin
     title: Modules
     attributes
-    - class: modules
-    - href: /admin/modules
+      class: modules
+      href: /admin/modules
     access
       roles
       - admins: admins

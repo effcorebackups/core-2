@@ -25,13 +25,13 @@ pages
         attributes
           class: test-span
           style: font-weight: bold
-        content
+        children
         - some_link|markup
             type: a
             attributes
               class: some-link
               href: /demo
-            content: [demo_markup] some markup
+            children: [demo_markup] some markup
         region: content
     - demo_link_to_object
         type: link

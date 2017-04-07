@@ -3,7 +3,7 @@
 namespace effectivecore {
           class html {
 
- static function to_css_class($string) {
+  static function to_css_class($string) {
     return str_replace(['/', ' '], '-', strtolower($string));
   }
 

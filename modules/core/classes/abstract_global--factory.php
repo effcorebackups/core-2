@@ -93,7 +93,7 @@ namespace effectivecore {
 
   static function data_to_attr($data) {
     $buf = [];
-    foreach ($data as $c_name => $c_value) {
+    foreach ((array)$data as $c_name => $c_value) {
       switch (gettype($c_value)) {
         case 'boolean': $buf[] = $c_name; break;
         case 'array'  : $buf[] = $c_name.'="'.implode(' ', $c_value).'"'; break;

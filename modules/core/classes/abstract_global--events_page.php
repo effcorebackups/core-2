@@ -12,7 +12,15 @@ namespace effectivecore {
   }
 
   static function on_show_modules() {
-    $head = ['Title', 'Id', 'Path', 'Description', 'Version', 'Is embed', 'Is always on'];
+    $head = [
+      'Title',
+      'Id',
+      'Path',
+      'Description',
+      'Version',
+      'Is embed',
+      'Is always on'
+    ];
     $data = [];
     foreach (settings::$data['module'] as $c_module) {
       $data[] = [
@@ -25,8 +33,9 @@ namespace effectivecore {
         $c_module->is_always_on ? 'Yes' : 'No'
       ];
     }
-    $data_markup = new html_table([], $data, $head);
-    page::add_element($data_markup);
+    page::add_element(
+      new html_table([], $data, $head)
+    );
   }
 
 }}

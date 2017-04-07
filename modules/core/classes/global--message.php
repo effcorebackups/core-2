@@ -4,15 +4,15 @@ namespace effectivecore {
           class message {
 
   public $type;
-  public $content;
+  public $data;
 
-  function __construct($content, $type = 'notice') {
+  function __construct($data, $type = 'notice') {
     $this->type = $type;
-    $this->content = $content;
+    $this->data = $data;
   }
 
   function render() {
-    return (new html('li', [], $this->content))->render();
+    return (new html('li', [], $this->data))->render();
   }
 
 }}
