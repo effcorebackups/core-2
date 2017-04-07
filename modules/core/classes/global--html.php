@@ -59,19 +59,19 @@ namespace effectivecore {
 
   function render() {
   # collect content
-    $cont_rendered = [];
+    $rendered = [];
     if (is_array($this->content)) {
       foreach ($this->content as $c_element) {
-        $cont_rendered[]= method_exists($c_element, 'render') ?
-                          $c_element->render() :
-                          $c_element;
+        $rendered[]= method_exists($c_element, 'render') ?
+                                   $c_element->render() :
+                                   $c_element;
       }
     }
   # generate output
     $template = new template(is_null($this->content) ? 'html_element_simple' : 'html_element');
     $template->set_var('type', $this->type);
     $template->set_var('attributes', implode(' ', factory::data_to_attr($this->attr)));
-    $template->set_var('content', implode(nl, $cont_rendered));
+    $template->set_var('content', implode(nl, $rendered));
     return $template->render();
   }
 

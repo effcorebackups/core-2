@@ -12,7 +12,9 @@ namespace effectivecore {
         $rendered[] = $c_child->render();
       }
     }
-    return (new html('menu', ['class' => $this->attributes->class], new html('ul', [], $rendered)))->render();
+    return (new html('menu', ['class' => $this->attributes->class],
+              new html('ul', [], $rendered)
+           ))->render();
   }
 
 }}

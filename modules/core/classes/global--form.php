@@ -93,14 +93,14 @@ namespace effectivecore {
       }
     }
   # render form elements
-    $r_content = [new html('input', ['type' => 'hidden', 'name' => 'form_id', 'value' => $this->id])];
+    $rendered = [new html('input', ['type' => 'hidden', 'name' => 'form_id', 'value' => $this->id])];
     foreach ($this->content as $c_element) {
-      $r_content[] = method_exists($c_element, 'render') ?
-                                   $c_element->render() :
-                                   $c_element;
+      $rendered[] = method_exists($c_element, 'render') ?
+                                  $c_element->render() :
+                                  $c_element;
     }
   # return rendered form
-    return (new html('form', ['id' => 'form_'.$this->id] + (array)$this->attributes, $r_content))->render();
+    return (new html('form', ['id' => 'form_'.$this->id] + (array)$this->attributes, $rendered))->render();
   }
 
 }}

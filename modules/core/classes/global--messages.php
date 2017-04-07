@@ -20,12 +20,12 @@ namespace effectivecore {
 # non static declarations
 
   function render() {
-    $r_content = [];
+    $rendered = [];
     foreach (static::$data as $c_type => $c_messages) {
-      $r_content[] = (new html('ul', ['class' => $c_type], $c_messages))->render();
+      $rendered[] = (new html('ul', ['class' => $c_type], $c_messages))->render();
       unset(static::$data[$c_type]);
     }
-    return count($r_content) ? (new html('messages', [], $r_content))->render() : '';
+    return count($rendered) ? (new html('messages', [], $rendered))->render() : '';
   }
 
 }}
