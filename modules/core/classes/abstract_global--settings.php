@@ -17,20 +17,21 @@ namespace effectivecore {
              files::get_all(dir_settings, '%^.*\._s$%');
     $modules = [];
     foreach ($files as $c_file) {
-      if ($c_file->file->full == 'module._s') {
-        $modules[$c_file->dirs->full] = $c_file->get_dir_parent();
+      if ($c_file->get_file_full() == 'module._s') {
+        $modules[$c_file->get_dir_parent()] = $c_file->get_dirs_relative();
       }
     }
     foreach ($files as $c_file) {
       $c_scope = 'global';
-      foreach ($modules as $c_module_path => $c_module_id) {
-        if (strpos($c_file->dirs->full, $c_module_path) === 0) {
+      foreach ($modules as $c_module_id => $c_module_path) {
+        if (strpos($c_file->get_dirs_relative(), $c_module_path) === 0) {
           $c_scope = $c_module_id;
           break;
         }
       }
       foreach (parser::parse_settings($c_file->load()) as $c_type => $c_data) {
         if (is_object($c_data)) {
+          if ($c_type == 'module') $c_data->path = $modules[$c_scope];
           $parse[$c_type][$c_scope] = $c_data;
         }
         if (is_array($c_data)) {

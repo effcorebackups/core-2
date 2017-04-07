@@ -1,6 +1,5 @@
 module
   id: user
-  path: modules/user
   title: User
   description: Working with user accounts and permissions.
   version: 1.0

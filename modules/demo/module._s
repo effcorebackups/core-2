@@ -1,6 +1,5 @@
 module
   id: demo
-  path: modules/demo
   title: Demonstration
   description: Demonstration some functionality.
   version: 1.0

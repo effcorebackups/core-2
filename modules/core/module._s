@@ -1,6 +1,5 @@
 module
   id: core
-  path: modules/core
   title: Core
   description: Core module.
   version: 1.0

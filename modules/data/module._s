@@ -1,6 +1,5 @@
 module
   id: data
-  path: modules/data
   title: Data
   description: Database support module.
   version: 1.0

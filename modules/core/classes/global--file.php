@@ -30,15 +30,11 @@ namespace effectivecore {
     return file_exists($this->get_path_full());
   }
 
-  function get_path_full() {
-    return $this->dirs->full.'/'.
-           $this->file->full;
-  }
-
-  function get_path_relative() {
-    return $this->dirs->relative.'/'.
-           $this->file->full;
-  }
+  function get_dirs_relative() {return $this->dirs->relative;}
+  function get_dirs_full() {return $this->dirs->full;}
+  function get_file_full() {return $this->file->full;}
+  function get_path_full() {return $this->dirs->full.'/'.$this->file->full;}
+  function get_path_relative() {return $this->dirs->relative.'/'.$this->file->full;}
 
   function get_dir_parent() {
     return ltrim(strrchr($this->dirs->full, '/'), '/');

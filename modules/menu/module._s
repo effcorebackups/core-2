@@ -1,6 +1,5 @@
 module
   id: menu
-  path: modules/menu
   title: Menu
   description: Working with menus.
   version: 1.0
