@@ -6,19 +6,19 @@ namespace effectivecore {
   public $file;
   public $dirs;
   public $original;
-  public $content;
+  public $data;
 
   function __construct($path) {
     files::parse_path($path, $this);
   }
 
   function load() {
-    $this->content = file_get_contents($this->get_path_full());
-    return $this->content;
+    $this->data = file_get_contents($this->get_path_full());
+    return $this->data;
   }
 
   function save() {
-    return file_put_contents($this->get_path_full(), $this->content);
+    return file_put_contents($this->get_path_full(), $this->data);
   }
 
   function insert($once = true) {
@@ -38,5 +38,6 @@ namespace effectivecore {
   function get_path_full()     {return $this->dirs->full.'/'.$this->file->full;}
   function get_path_relative() {return $this->dirs->relative.'/'.$this->file->full;}
   function get_dir_parent()    {return ltrim(strrchr($this->dirs->full, '/'), '/');}
+  function set_data($data)     {$this->data = $data;}
 
 }}

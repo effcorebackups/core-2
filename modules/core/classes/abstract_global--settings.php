@@ -41,9 +41,10 @@ namespace effectivecore {
       }
     }
     $file = new file(dir_cache.'settings.php');
-    $file->content = "<?php \n\nnamespace effectivecore { # settings::\$data[entity_type][scope]...\n\n".
-                       factory::data_export($parse, '  settings::$data').
-                     "\n}";
+    $file->set_data(
+      "<?php \n\nnamespace effectivecore { # settings::\$data[entity_type][scope]...\n\n".
+         factory::data_export($parse, '  settings::$data').
+      "\n}");
     $file->save();
     factory::send_header_and_exit('page_refresh',
       'Make cache directory writable if you see this message!', 0

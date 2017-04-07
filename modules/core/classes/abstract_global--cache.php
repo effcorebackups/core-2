@@ -18,9 +18,10 @@ namespace effectivecore {
 
   static function set($name, $data) {
     $file = new file(dir_cache.$name.'.php');
-    $file->content = "<?php \n\nnamespace effectivecore { # cache for ".$name."\n\n".
-                       factory::data_export($data, '  cache::$data[\''.$name.'\']').
-                     "\n}";
+    $file->set_data(
+      "<?php \n\nnamespace effectivecore { # cache for ".$name."\n\n".
+         factory::data_export($data, '  cache::$data[\''.$name.'\']').
+      "\n}");
     return $file->save();
   }
 
