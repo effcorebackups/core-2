@@ -32,7 +32,7 @@ namespace effectivecore {
       return $cache;
     } else {
       $classes_map = [];
-      $files = file::get_all(dir_modules, '%^.*\.php$%');
+      $files = files::get_all(dir_modules, '%^.*\.php$%');
       foreach ($files as $c_file) {
         $matches = [];
         preg_match('%namespace (?<namespace>[a-z0-9_\\\\]+) .*? '.
@@ -44,7 +44,7 @@ namespace effectivecore {
             'namespace' => $matches['namespace'],
             'classname' => $matches['classname'],
             'parents'   => isset($matches['parent']) ? [ltrim($matches['parent'], '\\') => ltrim($matches['parent'], '\\')] : [],
-            'file'      => $c_file->path_relative_full
+            'file'      => $c_file->get_path_relative()
           ];
         }
       }

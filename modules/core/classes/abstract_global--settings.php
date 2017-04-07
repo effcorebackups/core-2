@@ -13,18 +13,18 @@ namespace effectivecore {
 
   static protected function _update() {
     $parse = [];
-    $files = file::get_all(dir_modules, '%^.*\._s$%') +
-             file::get_all(dir_settings, '%^.*\._s$%');
+    $files = files::get_all(dir_modules, '%^.*\._s$%') +
+             files::get_all(dir_settings, '%^.*\._s$%');
     $modules = [];
     foreach ($files as $c_file) {
-      if ($c_file->name_full == 'module._s') {
-        $modules[$c_file->path] = $c_file->parent_dir;
+      if ($c_file->file->full == 'module._s') {
+        $modules[$c_file->dirs->full] = $c_file->get_dir_parent();
       }
     }
-    foreach ($files as $c_file_path => $c_file) {
+    foreach ($files as $c_file) {
       $c_scope = 'global';
       foreach ($modules as $c_module_path => $c_module_id) {
-        if (strpos($c_file_path, $c_module_path) === 0) {
+        if (strpos($c_file->dirs->full, $c_module_path) === 0) {
           $c_scope = $c_module_id;
           break;
         }

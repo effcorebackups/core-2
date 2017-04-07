@@ -6,6 +6,7 @@ namespace effectivecore {
   static function init() {
     require_once('abstract_global--cache.php');
     require_once('abstract_global--factory.php');
+    require_once('abstract_global--files.php');
     require_once('global--file.php');
     spl_autoload_register('\effectivecore\factory::autoload');
   # classes initialization

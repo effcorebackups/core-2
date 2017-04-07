@@ -56,15 +56,15 @@ namespace effectivecore {
 
   static function get_all($parent_dir, $filter = '') {
     $files = [];
-    $parent_dir = rtrim($parent_dir, '/');
     foreach (scandir($parent_dir) as $c_name) {
-      if ($c_name != '.' && $c_name != '..') {
-        if (is_file($parent_dir.'/'.$c_name)) {
-          if (!$filter || ($filter && preg_match($filter, $parent_dir.'/'.$c_name))) {
-            $files[$parent_dir.'/'.$c_name] = new static($parent_dir.'/'.$c_name);
+      if ($c_name != '.' &&
+          $c_name != '..') {
+        if (is_file($parent_dir.$c_name)) {
+          if (!$filter || ($filter && preg_match($filter, $parent_dir.$c_name))) {
+            $files[$parent_dir.$c_name] = new file($parent_dir.$c_name);
           }
-        } elseif (is_dir($parent_dir.'/'.$c_name)) {
-          $files += static::get_all($parent_dir.'/'.$c_name, $filter);
+        } elseif (is_dir($parent_dir.$c_name)) {
+          $files += static::get_all($parent_dir.$c_name.'/', $filter);
         }
       }
     }
