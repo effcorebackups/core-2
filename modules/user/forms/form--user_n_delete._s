@@ -1,7 +1,7 @@
 forms
 - form_user_n_delete|form
-    id: user_n_delete
     attributes
+      id: user_n_delete
       method: post
       class: form-user
     on_submit

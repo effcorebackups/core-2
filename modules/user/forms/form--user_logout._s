@@ -1,7 +1,7 @@
 forms
 - form_user_logout|form
-    id: user_logout
     attributes
+      id: user_logout
       method: post
       class: form-user
     on_submit

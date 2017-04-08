@@ -2,22 +2,27 @@
 
 namespace effectivecore {
           use \effectivecore\modules\page\page;
-          class form {
+          class form extends markup {
 
   public $form_args = [];
   public $post_args = [];
-
-  public $id;
-  public $attributes = [];
   public $on_submit = null;
   public $on_validate = null;
-  public $children = [];
   public $errors = [];
 
+  function __construct($attributes = null, $children = null, $weight = 0) {
+    parent::__construct('form', $attributes, $children, $weight);
+  }
+
   function render() {
+    $this->build();
+    return parent::render();
+  }
+
+  function build() {
   # set and validate new values after submit
     if (isset($_POST['form_id']) &&
-              $_POST['form_id'] == $this->id) {
+              $_POST['form_id'] == $this->attributes->id) {
     # get all form elements as flat array
       $children = factory::collect_children($this->children);
     # check each form field
@@ -92,15 +97,12 @@ namespace effectivecore {
         );
       }
     }
-  # render form elements
-    $rendered = [new html('input', ['type' => 'hidden', 'name' => 'form_id', 'value' => $this->id])];
-    foreach ($this->children as $c_element) {
-      $rendered[] = method_exists($c_element, 'render') ?
-                                  $c_element->render() :
-                                  $c_element;
-    }
-  # return rendered form
-    return (new html('form', ['id' => 'form_'.$this->id] + (array)$this->attributes, $rendered))->render();
+  # add form id to form markup
+    $this->children['hidden_form_id'] = new markup('input', [
+      'type' => 'hidden',
+      'name' => 'form_id',
+      'value' => $this->attributes->id,
+    ]);
   }
 
 }}

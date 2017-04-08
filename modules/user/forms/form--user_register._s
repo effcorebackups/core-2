@@ -1,7 +1,7 @@
 forms
 - form_user_register|form
-    id: user_register
     attributes
+      id: user_register
       novalidate: 1
       method: post
       class: form-user

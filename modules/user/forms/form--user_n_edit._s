@@ -1,7 +1,7 @@
 forms
 - form_user_n_edit|form
-    id: user_n_edit
     attributes
+      id: user_n_edit
       novalidate: 1
       method: post
       class: form-user

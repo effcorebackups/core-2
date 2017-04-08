@@ -1,7 +1,7 @@
 forms
 - form_demo|form
-    id: demo
     attributes
+      id: demo
       novalidate: 1
       method: post
     on_submit
