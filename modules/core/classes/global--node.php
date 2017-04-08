@@ -26,7 +26,7 @@ namespace effectivecore {
   protected function render_children($children) {
     $rendered = [];
     if (is_array($children)) {
-      foreach ($children as $c_child) {
+      foreach (factory::array_sort_by_weight($children) as $c_child) {
         $rendered[] = $this->render_child($c_child);
       }
     } elseif (is_string($children)) {
