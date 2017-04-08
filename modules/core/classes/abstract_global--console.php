@@ -21,7 +21,7 @@ namespace effectivecore {
         $c_data[] = new html('dt', [], $c_log->key);
         $c_data[] = new html('dd', [], $c_log->value);
       }
-      $sections[] = new html('section', ['class' => html::to_css_class($c_section_title)], [
+      $sections[] = new html('section', ['class' => factory::to_css_class($c_section_title)], [
         new html('h2', [], $c_section_title),
         new html('dl', [], $c_data),
       ]);

@@ -3,10 +3,6 @@
 namespace effectivecore {
           class html {
 
-  static function to_css_class($string) {
-    return str_replace(['/', ' '], '-', strtolower($string));
-  }
-
 # non static declarations
 
   public $type;            # example: a, p, b, br, div, span ...

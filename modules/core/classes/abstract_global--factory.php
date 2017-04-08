@@ -198,4 +198,10 @@ namespace effectivecore {
     return $a->weight == $b->weight ? 0 : ($a->weight < $b->weight ? -1 : 1);
   }
 
+
+
+  static function to_css_class($string) {
+    return str_replace(['/', ' '], '-', strtolower($string));
+  }
+
 }}
