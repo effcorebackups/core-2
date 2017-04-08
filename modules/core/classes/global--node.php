@@ -5,12 +5,13 @@ namespace effectivecore {
 
   public $title;
   public $attributes;
-  public $weight = 0;
-  public $children = [];
+  public $weight;
+  public $children;
 
-  function __construct($title = '', $attributes = null, $weight = 0) {
+  function __construct($title = '', $attributes = null, $children = null, $weight = 0) {
     $this->title = $title;
     $this->attributes = $attributes;
+    $this->children = $children;
     $this->weight = $weight;
   }
 

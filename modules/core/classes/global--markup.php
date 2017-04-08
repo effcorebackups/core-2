@@ -5,8 +5,8 @@ namespace effectivecore {
 
   public $type;
 
-  function __construct($type = 'div', $attributes = null, $weight = 0) {
-    parent::__construct(null, $attributes, $weight);
+  function __construct($type = 'div', $attributes = null, $children = null, $weight = 0) {
+    parent::__construct(null, $attributes, $children, $weight);
     unset($this->title);
     $this->type = $type;
   }
