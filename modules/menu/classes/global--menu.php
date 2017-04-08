@@ -5,15 +5,15 @@ namespace effectivecore {
           class menu extends \effectivecore\node {
 
   function render() {
-    $rendered = [];
+    $rendered_children = [];
     foreach ($this->children as $c_child) {
       if (!isset($c_child->access) ||
           (isset($c_child->access) && access::check($c_child->access))) {
-        $rendered[] = $c_child->render();
+        $rendered_children[] = $c_child->render();
       }
     }
     return (new html('menu', ['class' => $this->attributes->class],
-              new html('ul', [], $rendered)
+              new html('ul', [], $rendered_children)
            ))->render();
   }
 
