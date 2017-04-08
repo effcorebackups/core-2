@@ -1,7 +1,6 @@
 <?php
 
 namespace effectivecore {
-          use \effectivecore\modules\page\page;
           class messages {
 
   static $data = [];

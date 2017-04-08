@@ -10,4 +10,4 @@ pages
     - form_user_register
         type: link
         entity: forms/user/form_user_register
-        region: content
+        region: c_1_1

@@ -11,15 +11,15 @@ pages
     - demo_text
         type: text
         content: [demo_text] Some inline text.
-        region: content
+        region: c_1_1
     - demo_code
         type: code
         handler: \effectivecore\modules\demo\events_page::on_show_code
-        region: content
+        region: c_1_1
     - demo_text_from_file
         type: file
         file: include/text.txt
-        region: content
+        region: c_1_1
     - demo_markup|markup
         type: span
         attributes
@@ -32,8 +32,8 @@ pages
               class: some-link
               href: /demo
             children: [demo_markup] some markup
-        region: content
+        region: c_1_1
     - demo_link_to_object
         type: link
         entity: forms/demo/form_demo
-        region: content
+        region: c_1_1

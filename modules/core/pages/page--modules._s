@@ -10,4 +10,4 @@ pages
     - block_modules
         type: code
         handler: \effectivecore\events_page::on_show_modules
-        region: content
+        region: c_1_1

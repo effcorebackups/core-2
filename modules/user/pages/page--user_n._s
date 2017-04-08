@@ -13,4 +13,4 @@ pages
     - block_user_n
         type: code
         handler: \effectivecore\modules\user\events_page::on_show_user_n
-        region: content
+        region: c_1_1

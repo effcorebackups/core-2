@@ -12,4 +12,4 @@ pages
     - block_users
         type: code
         handler: \effectivecore\modules\user\events_page::on_show_admin_users
-        region: content
+        region: c_1_1

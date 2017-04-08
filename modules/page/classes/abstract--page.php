@@ -17,18 +17,7 @@ namespace effectivecore\modules\page {
           abstract class page {
 
   static $args = [];
-  static $data = [
-    'meta'     => [],
-    'styles'   => [],
-    'script'   => [],
-    'title'    => [],
-    'nav'      => [],
-    'header'   => [],
-    'content'  => [],
-    'footer'   => [],
-    'console'  => [],
-    'messages' => [],
-  ];
+  static $data = [];
 
   static function init() {
     messages::init();
@@ -54,7 +43,7 @@ namespace effectivecore\modules\page {
     foreach ($call_stack as $c_page) {
     # show title
       if (isset($c_page->title)) {
-        static::add_element(new html('h1', [], stripslashes(token::replace($c_page->title))), 'header');
+        static::add_element(stripslashes(token::replace($c_page->title)), 'title');
       }
     # collect styles
       if (isset($c_page->styles)) {
@@ -72,7 +61,7 @@ namespace effectivecore\modules\page {
     # collect page content from settings
       if (isset($c_page->content)) {
         foreach ($c_page->content as $c_content) {
-          $c_region = isset($c_content->region) ? $c_content->region : 'content';
+          $c_region = isset($c_content->region) ? $c_content->region : 'c_1_1';
           switch ($c_content->type) {
             case 'text': static::add_element($c_content->content, $c_region); break;
             case 'code': static::add_element(call_user_func_array($c_content->handler, static::$args), $c_region); break;
@@ -92,6 +81,10 @@ namespace effectivecore\modules\page {
     console::set_log('Generation time', timer::get_period('load_time', 0, 1).' sec.');
     console::set_log('User roles', implode(', ', user::$current->roles));
     static::add_element(console::render(), 'console'); # @todo: show console only for admins
+  # move messages to last position
+    $messages = static::$data['messages'];
+    unset(static::$data['messages']);
+    static::$data['messages'] = $messages;
   # render page
     $template = new template('page');
     foreach (static::$data as $c_region_name => &$c_blocks) { # use '&' for dynamic static::$data
@@ -102,14 +95,14 @@ namespace effectivecore\modules\page {
                                          $c_block;
       }
       $template->set_var($c_region_name,
-        implode($c_region_name == 'content' ? br : '', $c_region_data)
+        implode($c_region_name == 'c_1_1' ? br : '', $c_region_data)
       );
     }
   # render page
     print $template->render();
   }
 
-  static function add_element($element, $region = 'content') {
+  static function add_element($element, $region = 'c_1_1') {
     static::$data[$region][] = $element;
   }
 

@@ -11,4 +11,4 @@ pages
     - block_copyright
         type: text
         content: Copyright © 2017 RysMax
-        region: footer
+        region: f_1_1

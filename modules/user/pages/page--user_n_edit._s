@@ -13,8 +13,8 @@ pages
     - code_on_page_user_n_edit
         type: code
         handler: \effectivecore\modules\user\events_page::on_show_user_n_edit
-        region: content
+        region: c_1_1
     - form_user_n_edit
         type: link
         entity: forms/user/form_user_n_edit
-        region: content
+        region: c_1_1
