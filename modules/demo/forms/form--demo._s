@@ -6,7 +6,7 @@ forms
       method: post
     on_submit
       handler: \effectivecore\modules\demo\events_form::on_submit_demo
-    content
+    children
     - field_text|markup
         type: input
         attributes

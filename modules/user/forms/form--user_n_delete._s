@@ -6,7 +6,7 @@ forms
       class: form-user
     on_submit
       handler: \effectivecore\modules\user\events_form::on_submit_user_n_delete
-    content
+    children
     - button_delete|markup
         type: input
         attributes

@@ -158,12 +158,12 @@ namespace effectivecore {
     return $return;
   }
 
-  static function collect_content($data) {
+  static function collect_children($data) {
     $return = [];
     foreach ($data as $c_key => $c_item) {
       $return[$c_key] = $c_item;
-      if (isset($c_item->content)) {
-        $return += static::collect_content($c_item->content);
+      if (isset($c_item->children)) {
+        $return += static::collect_children($c_item->children);
       }
     }
     return $return;

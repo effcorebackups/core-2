@@ -7,7 +7,7 @@ forms
       class: form-user
     on_submit
       handler: \effectivecore\modules\user\events_form::on_submit_user_n_edit
-    content
+    children
     - field_password|markup
         type: input
         attributes

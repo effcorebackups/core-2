@@ -11,7 +11,7 @@ namespace effectivecore {
   public $attributes = [];
   public $on_submit = null;
   public $on_validate = null;
-  public $content = [];
+  public $children = [];
   public $errors = [];
 
   function render() {
@@ -19,9 +19,9 @@ namespace effectivecore {
     if (isset($_POST['form_id']) &&
               $_POST['form_id'] == $this->id) {
     # get all form elements as flat array
-      $content = factory::collect_content($this->content);
+      $children = factory::collect_children($this->children);
     # check each form field
-      foreach ($content as $element_id => $c_element) {
+      foreach ($children as $element_id => $c_element) {
         $c_name = isset($c_element->attributes->name) ? $c_element->attributes->name : '';
         $c_type = isset($c_element->attributes->type) ? $c_element->attributes->type : '';
         $c_form_value = isset($c_element->attributes->value) ? $c_element->attributes->value : '';
@@ -66,8 +66,8 @@ namespace effectivecore {
       }
     # show errors and set error class
       foreach ($this->errors as $element_id => $c_errors) {
-        if (!isset($content[$element_id]->attributes->class)) $content[$element_id]->attributes->class = '';
-        $content[$element_id]->attributes->class.= ' error';
+        if (!isset($children[$element_id]->attributes->class)) $children[$element_id]->attributes->class = '';
+        $children[$element_id]->attributes->class.= ' error';
         foreach ($c_errors as $c_error) {
           messages::add_new($c_error, 'error');
         }
@@ -94,7 +94,7 @@ namespace effectivecore {
     }
   # render form elements
     $rendered = [new html('input', ['type' => 'hidden', 'name' => 'form_id', 'value' => $this->id])];
-    foreach ($this->content as $c_element) {
+    foreach ($this->children as $c_element) {
       $rendered[] = method_exists($c_element, 'render') ?
                                   $c_element->render() :
                                   $c_element;
