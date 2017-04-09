@@ -1,4 +1,6 @@
 menus
 - user|menu
+    title: User menu
+    weight: 1
     attributes
       class: user

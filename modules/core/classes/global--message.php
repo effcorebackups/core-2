@@ -12,7 +12,7 @@ namespace effectivecore {
   }
 
   function render() {
-    return (new html('li', [], $this->data))->render();
+    return (new markup('li', [], $this->data))->render();
   }
 
 }}

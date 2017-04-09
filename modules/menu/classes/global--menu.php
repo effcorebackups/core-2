@@ -5,16 +5,23 @@ namespace effectivecore {
           class menu extends \effectivecore\node {
 
   function render() {
-    $rendered_children = [];
-    foreach ($this->children as $c_child) {
-      if (!isset($c_child->access) ||
-          (isset($c_child->access) && access::check($c_child->access))) {
-        $rendered_children[] = $c_child->render();
-      }
+    return (new html('menu', ['class' => $this->attributes->class], [
+              ($this->render_self()),
+              (new html('ul', [], $this->render_children($this->children)))->render()
+           ]))->render();
+  }
+
+  protected function render_self() {
+    return (new markup('h3', ['class' => 'hidden'],
+      $this->title
+    ))->render();
+  }
+
+  protected function render_child($child) {
+    if (!isset($child->access) ||
+        (isset($child->access) && access::check($child->access))) {
+      return parent::render_child($child);
     }
-    return (new html('menu', ['class' => $this->attributes->class],
-              new html('ul', [], $rendered_children)
-           ))->render();
   }
 
 }}

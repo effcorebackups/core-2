@@ -1,4 +1,6 @@
 menus
 - main|menu
+    title: Main menu
+    weight: 2
     attributes
       class: main
