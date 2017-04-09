@@ -1,7 +1,6 @@
 <?php
 
 namespace effectivecore {
-          use \effectivecore\modules\user\access;
           class menu extends \effectivecore\node {
 
   function render() {
@@ -19,13 +18,6 @@ namespace effectivecore {
     return (new template('menu_self', [
       'title' => $this->title
     ]))->render();
-  }
-
-  protected function render_child($child) {
-    if (!isset($child->access) ||
-        (isset($child->access) && access::check($child->access))) {
-      return parent::render_child($child);
-    }
   }
 
 }}

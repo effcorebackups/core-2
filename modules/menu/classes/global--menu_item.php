@@ -1,20 +1,24 @@
 <?php
 
 namespace effectivecore {
+          use \effectivecore\modules\user\access;
           class menu_item extends \effectivecore\node {
 
   function render() {
-    $rendered_children = '';
-    if (count($this->children)) {
-      $rendered_children = (new template('menu_item_children', [
-        'children' => implode(nl, $this->render_children($this->children))
+    if (!isset($this->access) ||
+        (isset($this->access) && access::check($this->access))) {
+      $rendered_children = '';
+      if (count($this->children)) {
+        $rendered_children = (new template('menu_item_children', [
+          'children' => implode(nl, $this->render_children($this->children))
+        ]))->render();
+      }
+      return (new template('menu_item', [
+        'attributes' => implode(' ', factory::data_to_attr($this->attributes)),
+        'self'       => $this->render_self(),
+        'children'   => $rendered_children
       ]))->render();
     }
-    return (new template('menu_item', [
-      'attributes' => implode(' ', factory::data_to_attr($this->attributes)),
-      'self'       => $this->render_self(),
-      'children'   => $rendered_children
-    ]))->render();
   }
 
   protected function render_self() {
