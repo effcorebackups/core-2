@@ -142,6 +142,14 @@ namespace effectivecore {
   }
 
   static function array_sort_by_weight(&$array) {
+  # prepare array for stable sorting when weight = 0
+    $c_weight = 0;
+    foreach ($array as $c_item) {
+      if ($c_item->weight == 0) {
+        $c_item->weight = ($c_weight += .0001);
+      }
+    }
+  # sorting
     uasort($array, '\\effectivecore\\factory::_compare_by_weight');
     return $array;
   }
