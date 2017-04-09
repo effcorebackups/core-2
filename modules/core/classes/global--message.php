@@ -14,7 +14,9 @@ namespace effectivecore {
   }
 
   function render() {
-    return (new markup('li', [], $this->data))->render();
+    return (new template('message', [
+      'data' => $this->data
+    ]))->render();
   }
 
 }}

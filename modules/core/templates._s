@@ -1,0 +1,4 @@
+templates
+- messages: templates/template--messages.html
+- message_group: templates/template--message_group.html
+- message: templates/template--message.html

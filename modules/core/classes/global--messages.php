@@ -21,10 +21,18 @@ namespace effectivecore {
   function render() {
     $rendered = [];
     foreach (static::$data as $c_type => $c_messages) {
-      $rendered[] = (new markup('ul', ['class' => $c_type], $c_messages))->render();
+      foreach ($c_messages as $c_message) $rendered[$c_type][] = $c_message->render();
+      $rendered[$c_type] = (new template('message_group', [
+        'class'    => $c_type,
+        'messages' => implode('', $rendered[$c_type]),
+      ]))->render();
       unset(static::$data[$c_type]);
     }
-    return count($rendered) ? (new html('messages', [], $rendered))->render() : '';
+    if (count($rendered)) {
+      return (new template('messages', [
+        'message_groups' => implode('', $rendered),
+      ]))->render();
+    }
   }
 
 }}
