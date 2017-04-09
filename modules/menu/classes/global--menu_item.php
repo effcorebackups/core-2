@@ -4,10 +4,17 @@ namespace effectivecore {
           class menu_item extends \effectivecore\node {
 
   function render() {
-    $rendered_children = $this->render_children($this->children);
-    return count($rendered_children) ?
-      (new html('li', [], [$this->render_self(), new html('ul', [], $rendered_children)]))->render() :
-      (new html('li', [], [$this->render_self()]))->render();
+    $rendered_children = '';
+    if (count($this->children)) {
+      $rendered_children = (new template('menu_item_children', [
+        'children' => implode(nl, $this->render_children($this->children))
+      ]))->render();
+    }
+    return (new template('menu_item', [
+      'attributes' => implode(' ', factory::data_to_attr($this->attributes)),
+      'self'       => $this->render_self(),
+      'children'   => $rendered_children
+    ]))->render();
   }
 
   protected function render_self() {
@@ -18,9 +25,10 @@ namespace effectivecore {
         $attr->class = isset($attr->class) ? $attr->class.' active' : 'active';
       }
     }
-    return (
-      new markup('a', (array)$attr, token::replace($this->title))
-    )->render();
+    return (new template('menu_item_self', [
+      'attributes' => implode(' ', factory::data_to_attr($attr)),
+      'title' => token::replace($this->title)
+    ]))->render();
   }
 
 }}
