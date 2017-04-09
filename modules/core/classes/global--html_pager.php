@@ -49,8 +49,8 @@ namespace effectivecore {
         $query_args['page'][$name] = $c_num;
         $c_url->query_args = $query_args;
         $this->add_element($c_num == '...' ?
-          new html('span', [], $c_num) :
-          new html('a', $this->c_page_num == $c_num ? ['class' => ['active']] : ['href' => $c_url->full], $c_num)
+          new markup('span', [], $c_num) :
+          new markup('a', $this->c_page_num == $c_num ? ['class' => ['active']] : ['href' => $c_url->full], $c_num)
         );
       }
     }

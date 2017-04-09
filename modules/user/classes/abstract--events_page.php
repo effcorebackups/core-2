@@ -2,7 +2,7 @@
 
 namespace effectivecore\modules\user {
           use \effectivecore\factory;
-          use \effectivecore\html;
+          use \effectivecore\markup;
           use \effectivecore\html_table;
           use \effectivecore\html_pager;
           use \effectivecore\urls;
@@ -30,9 +30,9 @@ namespace effectivecore\modules\user {
       $url_back = urlencode(urls::$current->get_full());
       foreach ($db_user as &$c_row) {
         $c_row['actions']['_attr']['class'][] = 'actions';
-        $c_row['actions'][] = new html('a', ['href' => (new url('/user/'.$c_row['id']))->get_full()], 'view');
-        $c_row['actions'][] = new html('a', ['href' => (new url('/user/'.$c_row['id'].'/edit?back='.$url_back))->get_full()], 'edit');
-        if (empty($c_row['is_locked'])) $c_row['actions'][] = new html('a', ['href' => (new url('/admin/users/delete/'.$c_row['id'].'?back='.$url_back))->get_full()], 'delete');
+        $c_row['actions'][] = new markup('a', ['href' => (new url('/user/'.$c_row['id']))->get_full()], 'view');
+        $c_row['actions'][] = new markup('a', ['href' => (new url('/user/'.$c_row['id'].'/edit?back='.$url_back))->get_full()], 'edit');
+        if (empty($c_row['is_locked'])) $c_row['actions'][] = new markup('a', ['href' => (new url('/admin/users/delete/'.$c_row['id'].'?back='.$url_back))->get_full()], 'delete');
         $c_row['is_locked'] = $c_row['is_locked'] ? 'Yes' : 'No';
       }
       $table = new html_table([], $db_user, ['ID', 'EMail', 'Created', 'Is embed', '']);

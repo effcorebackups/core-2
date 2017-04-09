@@ -21,7 +21,7 @@ namespace effectivecore {
   function render() {
     $rendered = [];
     foreach (static::$data as $c_type => $c_messages) {
-      $rendered[] = (new html('ul', ['class' => $c_type], $c_messages))->render();
+      $rendered[] = (new markup('ul', ['class' => $c_type], $c_messages))->render();
       unset(static::$data[$c_type]);
     }
     return count($rendered) ? (new html('messages', [], $rendered))->render() : '';

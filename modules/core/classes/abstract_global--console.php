@@ -18,16 +18,16 @@ namespace effectivecore {
     foreach (static::get_all_logs() as $c_section_title => $c_section) {
       $c_data = [];
       foreach ($c_section as $c_log) {
-        $c_data[] = new html('dt', [], $c_log->key);
-        $c_data[] = new html('dd', [], $c_log->value);
+        $c_data[] = new markup('dt', [], $c_log->key);
+        $c_data[] = new markup('dd', [], $c_log->value);
       }
-      $sections[] = new html('section', ['class' => factory::to_css_class($c_section_title)], [
-        new html('h2', [], $c_section_title),
-        new html('dl', [], $c_data),
+      $sections[] = new markup('section', ['class' => factory::to_css_class($c_section_title)], [
+        new markup('h2', [], $c_section_title),
+        new markup('dl', [], $c_data),
       ]);
     }
     return (
-      new html('console', [], $sections)
+      new markup('console', [], $sections)
     )->render();
   }
 
