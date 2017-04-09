@@ -1,0 +1,4 @@
+templates
+- menu: templates/template--menu.html
+- menu_self: templates/template--menu_self.html
+- menu_children: templates/template--menu_children.html

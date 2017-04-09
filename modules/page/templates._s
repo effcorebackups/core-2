@@ -1,4 +1,4 @@
 templates
--  html_element: templates/template--html_element.html
--  html_element_simple: templates/template--html_element.simple.html
--  page: templates/template--page.html
+- html_element: templates/template--html_element.html
+- html_element_simple: templates/template--html_element.simple.html
+- page: templates/template--page.html

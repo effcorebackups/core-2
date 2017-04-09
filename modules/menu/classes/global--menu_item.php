@@ -19,7 +19,7 @@ namespace effectivecore {
       }
     }
     return (
-      new html('a', (array)$attr, token::replace($this->title))
+      new markup('a', (array)$attr, token::replace($this->title))
     )->render();
   }
 

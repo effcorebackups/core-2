@@ -7,17 +7,17 @@ namespace effectivecore {
   public $markup;
   public $vars = [];
 
-  function __construct($tpl_name, $vars = []) {
-    $this->name = $tpl_name;
+  function __construct($name, $vars = []) {
+    $this->name = $name;
   # save vars
     foreach ($vars as $c_var_name => $c_var_value) {
       static::set_var($c_var_name, $c_var_value);
     }
   # find template
     foreach (settings::$data['templates'] as $c_module_id => $c_templates) {
-      foreach ($c_templates as $c_tpl_name => $c_tpl_path) {
-        if ($tpl_name == $c_tpl_name) {
-          $file = new file(settings::$data['module'][$c_module_id]->path.'/'.$c_tpl_path);
+      foreach ($c_templates as $c_name => $c_path) {
+        if ($name == $c_name) {
+          $file = new file(settings::$data['module'][$c_module_id]->path.'/'.$c_path);
           $this->markup = $file->load();
           return $this;
         }
