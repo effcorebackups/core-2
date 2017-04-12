@@ -42,11 +42,11 @@ namespace effectivecore {
     ]))->render();
   }
 
-  function render_head($rows)          {return (new template($this->template_head,          ['rows' => $rows]))->render();}
-  function render_head_row($cells)     {return (new template($this->template_head_row,      ['cells' => $cells]))->render();}
-  function render_head_row_cell($cell) {return (new template($this->template_head_row_cell, ['cell' => $cell]))->render();}
-  function render_body($rows)          {return (new template($this->template_body,          ['rows' => $rows]))->render();}
-  function render_body_row($cells)     {return (new template($this->template_body_row,      ['cells' => $cells]))->render();}
-  function render_body_row_cell($cell) {return (new template($this->template_body_row_cell, ['cell' => $cell]))->render();}
+  function render_head($data, $attributes = null)          {return (new template($this->template_head,          ['data' => method_exists($data, 'render') ? $data->render() : $data, 'attributes' => $attributes]))->render();}
+  function render_head_row($data, $attributes = null)      {return (new template($this->template_head_row,      ['data' => method_exists($data, 'render') ? $data->render() : $data, 'attributes' => $attributes]))->render();}
+  function render_head_row_cell($data, $attributes = null) {return (new template($this->template_head_row_cell, ['data' => method_exists($data, 'render') ? $data->render() : $data, 'attributes' => $attributes]))->render();}
+  function render_body($data, $attributes = null)          {return (new template($this->template_body,          ['data' => method_exists($data, 'render') ? $data->render() : $data, 'attributes' => $attributes]))->render();}
+  function render_body_row($data, $attributes = null)      {return (new template($this->template_body_row,      ['data' => method_exists($data, 'render') ? $data->render() : $data, 'attributes' => $attributes]))->render();}
+  function render_body_row_cell($data, $attributes = null) {return (new template($this->template_body_row_cell, ['data' => method_exists($data, 'render') ? $data->render() : $data, 'attributes' => $attributes]))->render();}
 
 }}

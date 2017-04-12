@@ -15,6 +15,10 @@ namespace effectivecore {
     $this->weight = $weight;
   }
 
+  function add_child($child) {
+    $this->children[] = $child;
+  }
+
   function render() {
     return $this->render_self().implode("\n",
            $this->render_children($this->children));

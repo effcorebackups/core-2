@@ -34,7 +34,7 @@ namespace effectivecore {
       ];
     }
     page::add_element(
-      new html_table([], $data, $head)
+      new table([], $data, [$head])
     );
   }
 
