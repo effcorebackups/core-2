@@ -2,3 +2,13 @@ templates
 - html_element: templates/template--html_element.html
 - html_element_simple: templates/template--html_element.simple.html
 - page: templates/template--page.html
+- messages: templates/template--messages.html
+- message_group: templates/template--message_group.html
+- message: templates/template--message.html
+- table: templates/template--table.html
+- table_head: templates/template--table_head.html
+- table_head_row: templates/template--table_head_row.html
+- table_head_row_cell: templates/template--table_head_row_cell.html
+- table_body: templates/template--table_body.html
+- table_body_row: templates/template--table_body_row.html
+- table_body_row_cell: templates/template--table_body_row_cell.html
