@@ -8,15 +8,25 @@ namespace effectivecore {
   public $weight;
   public $children;
 
+  public $template;          # @todo: make working
+  public $template_self;     # @todo: make working
+  public $template_children; # @todo: make working
+
   function __construct($title = '', $attributes = null, $children = null, $weight = 0) {
     $this->title = $title;
     $this->attributes = $attributes;
-    $this->children = $children;
     $this->weight = $weight;
+    if (is_array($children)) {
+      foreach ($children as $id => $c_child) {
+        $this->add_child($c_child, $id);
+      }
+    } else {
+      $this->children = $children;
+    }
   }
 
-  function add_child($child) {
-    $this->children[] = $child;
+  function add_child($child, $id = null) {
+    $this->children[$id ?: count($this->children)] = $child;
   }
 
   function render() {
