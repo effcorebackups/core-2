@@ -4,6 +4,13 @@ namespace effectivecore {
           use \effectivecore\modules\user\access;
           class menu_item extends \effectivecore\node {
 
+  public $title;
+
+  function __construct($title = '', $attributes = null, $children = null, $weight = 0) {
+    parent::__construct($attributes, $children, $weight);
+    $this->title = $title;
+  }
+
   function render() {
     if (!isset($this->access) ||
         (isset($this->access) && access::check($this->access))) {

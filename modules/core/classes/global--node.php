@@ -3,7 +3,6 @@
 namespace effectivecore {
           class node {
 
-  public $title;
   public $attributes;
   public $weight;
   public $children;
@@ -12,8 +11,7 @@ namespace effectivecore {
   public $template_self;     # @todo: make working
   public $template_children; # @todo: make working
 
-  function __construct($title = '', $attributes = null, $children = null, $weight = 0) {
-    $this->title = $title;
+  function __construct($attributes = null, $children = null, $weight = 0) {
     $this->attributes = $attributes;
     $this->weight = $weight;
     if (is_array($children)) {
@@ -35,7 +33,7 @@ namespace effectivecore {
   }
 
   protected function render_self() {
-    return $this->title;
+    return '';
   }
 
   protected function render_children($children) {

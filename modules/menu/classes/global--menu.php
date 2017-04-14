@@ -3,6 +3,13 @@
 namespace effectivecore {
           class menu extends \effectivecore\node {
 
+  public $title;
+
+  function __construct($title = '', $attributes = null, $children = null, $weight = 0) {
+    parent::__construct($attributes, $children, $weight);
+    $this->title = $title;
+  }
+
   function render() {
     $rendered_children = (new template('menu_children', [
       'children' => implode(nl, $this->render_children($this->children))

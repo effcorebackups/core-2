@@ -6,8 +6,7 @@ namespace effectivecore {
   public $template = 'table_body_row_cell';
 
   function __construct($attributes = null, $children = null) {
-    parent::__construct(null, $attributes);
-    unset($this->title);
+    parent::__construct($attributes);
     $this->add_child($children);
   }
 
