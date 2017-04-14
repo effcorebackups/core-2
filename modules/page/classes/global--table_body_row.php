@@ -5,11 +5,10 @@ namespace effectivecore {
 
   public $template = 'table_body_row';
 
-  function __construct($attributes = null, $children = null) {
-    parent::__construct($attributes);
-    foreach ($children as $c_child) {
-      $this->add_child(new table_body_row_cell([], $c_child));
-    }
+  function add_child($child, $id = null) {
+    parent::add_child(
+      new table_body_row_cell([], $child), $id
+    );
   }
 
   function render() {
