@@ -19,7 +19,7 @@ namespace effectivecore {
         $this->add_child($c_child, $id);
       }
     } else {
-      $this->children = $children;
+      $this->add_child($children);
     }
   }
 

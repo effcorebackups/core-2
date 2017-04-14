@@ -11,12 +11,12 @@ namespace effectivecore {
   }
 
   function render() {
-    $rendered_children = $this->render_children($this->children);
-    $template = new template(count($rendered_children) ? 'html_element' : 'html_element_simple');
-    $template->set_var('type', $this->type);
-    $template->set_var('attributes', implode(' ', factory::data_to_attr($this->attributes)));
-    $template->set_var('content', implode(nl, $rendered_children));
-    return $template->render();
+    $rendered_children = $this->render_children($this->children);    
+    return (new template(count($rendered_children) ? 'html_element' : 'html_element_simple', [
+      'type'       => $this->type,
+      'attributes' => implode(' ', factory::data_to_attr($this->attributes)),
+      'content'    => implode(nl, $rendered_children)
+    ]))->render();
   }
 
 }}
