@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          class menu extends \effectivecore\node {
+          class menu extends \effectivecore\dom_node {
 
   public $title;
 

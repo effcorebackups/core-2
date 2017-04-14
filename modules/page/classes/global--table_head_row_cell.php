@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          class table_head_row_cell extends node {
+          class table_head_row_cell extends dom_node {
 
   public $template = 'table_head_row_cell';
 

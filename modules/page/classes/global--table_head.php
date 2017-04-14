@@ -1,13 +1,13 @@
 <?php
 
 namespace effectivecore {
-          class table_head extends node {
+          class table_head extends dom_node {
 
   public $template = 'table_head';
 
   function add_child($child, $id = null) {
     parent::add_child(
-      new table_body_row([], $child), $id
+      new table_head_row([], $child), $id
     );
   }
 

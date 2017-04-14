@@ -4,7 +4,7 @@ namespace effectivecore\modules\user {
           use \effectivecore\factory;
           use \effectivecore\markup;
           use \effectivecore\table;
-          use \effectivecore\node;
+          use \effectivecore\dom_node;
           use \effectivecore\html_pager;
           use \effectivecore\urls;
           use \effectivecore\url;
@@ -31,7 +31,7 @@ namespace effectivecore\modules\user {
       $db_user = table_user::select(['id', 'email', 'created', 'is_locked'], [], ['id'], $items_per_page, ($pager->c_page_num - 1) * $items_per_page);
       $url_back = urlencode(urls::$current->get_full());
       foreach ($db_user as &$c_row) {
-        $c_row['actions'] = new node(null, ['class' => 'actions']);
+        $c_row['actions'] = new dom_node(null, ['class' => 'actions']);
         $c_row['actions']->add_child( new markup('a', ['href' => (new url('/user/'.$c_row['id']))->get_full()], 'view') );
         $c_row['actions']->add_child( new markup('a', ['href' => (new url('/user/'.$c_row['id'].'/edit?back='.$url_back))->get_full()], 'edit') );
         if (empty($c_row['is_locked'])) $c_row['actions']->add_child( new markup('a', ['href' => (new url('/admin/users/delete/'.$c_row['id'].'?back='.$url_back))->get_full()], 'delete') );

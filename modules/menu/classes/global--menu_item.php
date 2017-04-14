@@ -2,7 +2,7 @@
 
 namespace effectivecore {
           use \effectivecore\modules\user\access;
-          class menu_item extends \effectivecore\node {
+          class menu_item extends \effectivecore\dom_node {
 
   public $title;
 

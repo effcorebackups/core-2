@@ -1,13 +1,13 @@
 <?php
 
 namespace effectivecore {
-          class table_body_row extends node {
+          class table_body_row extends dom_node {
 
   public $template = 'table_body_row';
 
   function add_child($child, $id = null) {
     parent::add_child(
-      new table_body_row_cell([], $child), $id
+      new table_body_row_cell([], is_string($child) ? new dom_text($child) : $child), $id
     );
   }
 
