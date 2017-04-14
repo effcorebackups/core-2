@@ -37,7 +37,7 @@ namespace effectivecore\modules\user {
         if (empty($c_row['is_locked'])) $c_row['actions']->add_child( new markup('a', ['href' => (new url('/admin/users/delete/'.$c_row['id'].'?back='.$url_back))->get_full()], 'delete') );
         $c_row['is_locked'] = $c_row['is_locked'] ? 'Yes' : 'No';
       }
-      $table = new table([], $db_user, [['ID', 'EMail', 'Created', 'Is embed', '']]);
+      $table = new table([], $db_user, [['ID', 'EMail', 'Created', 'Is embed', 'Actions']]);
       page::add_element($table);
       page::add_element($pager);
     }

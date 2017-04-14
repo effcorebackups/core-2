@@ -38,7 +38,7 @@ namespace effectivecore {
     }
     return (new template('menu_item_self', [
       'attributes' => implode(' ', factory::data_to_attr($attr)),
-      'title' => token::replace($this->title)
+      'title'      => token::replace($this->title)
     ]))->render();
   }
 

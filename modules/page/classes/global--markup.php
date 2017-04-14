@@ -10,6 +10,12 @@ namespace effectivecore {
     $this->type = $type;
   }
 
+  function add_child($child, $id = null) {
+    parent::add_child(
+      is_string($child) ? new dom_text($child) : $child, $id
+    );
+  }
+
   function render() {
     $rendered_children = $this->render_children($this->children);    
     return (new template(count($rendered_children) ? 'html_element' : 'html_element_simple', [

@@ -44,8 +44,8 @@ namespace effectivecore {
       foreach (factory::array_sort_by_weight($children) as $c_child) {
         $rendered[] = $this->render_child($c_child);
       }
-    } elseif (is_string($children)) {
-      $rendered[] = $children;
+    } else {
+      $rendered[] = $this->render_child($children);
     }
     return $rendered;
   }
