@@ -14,12 +14,14 @@ namespace effectivecore {
   function __construct($attributes = null, $children = null, $weight = 0) {
     $this->attributes = $attributes;
     $this->weight = $weight;
-    if (is_array($children)) {
-      foreach ($children as $id => $c_child) {
-        $this->add_child($c_child, $id);
+    if ($children) {
+      if (is_array($children)) {
+        foreach ($children as $id => $c_child) {
+          $this->add_child($c_child, $id);
+        }
+      } else {
+        $this->add_child($children);
       }
-    } else {
-      $this->add_child($children);
     }
   }
 

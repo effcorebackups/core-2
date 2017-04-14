@@ -7,7 +7,7 @@ namespace effectivecore {
 
   function add_child($child, $id = null) {
     parent::add_child(
-      new table_head_row([], $child), $id
+      is_array($child) ? new table_head_row([], $child) : $child, $id
     );
   }
 
