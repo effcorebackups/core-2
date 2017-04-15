@@ -18,10 +18,12 @@ forms
           required: 1
           minlength: 5
           maxlength: 255
-    - button_login|markup
-        type: input
+    - button_save|markup
+        type: button
         attributes
           type: submit
           name: button
-          value|translated_text
+          value: save
+        children
+        - label|translated_text
             text: save

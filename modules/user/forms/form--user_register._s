@@ -28,9 +28,11 @@ forms
           minlength: 5
           maxlength: 255
     - button_register|markup
-        type: input
+        type: button
         attributes
           type: submit
           name: button
-          value|translated_text
+          value: register
+        children
+        - label|translated_text
             text: register
