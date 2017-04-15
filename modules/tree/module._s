@@ -7,4 +7,4 @@ module
   is_always_on: 1
   on_init
     handler: \effectivecore\modules\tree\events_module::on_init
-    weight: 0
+    weight: -100
