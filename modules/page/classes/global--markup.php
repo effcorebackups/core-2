@@ -20,7 +20,7 @@ namespace effectivecore {
     $rendered_children = $this->render_children($this->children);    
     return (new template(strlen($rendered_children) ? 'html_element' : 'html_element_simple', [
       'type'       => $this->type,
-      'attributes' => implode(' ', factory::data_to_attr($this->attributes)),
+      'attributes' => factory::data_to_attr($this->attributes, ' '),
       'content'    => $rendered_children
     ]))->render();
   }

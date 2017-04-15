@@ -91,16 +91,17 @@ namespace effectivecore {
 
 
 
-  static function data_to_attr($data) {
-    $buf = [];
+  static function data_to_attr($data, $join_part = null) {
+    $return = [];
     foreach ((array)$data as $c_name => $c_value) {
       switch (gettype($c_value)) {
-        case 'boolean': $buf[] = $c_name; break;
-        case 'array'  : $buf[] = $c_name.'="'.implode(' ', $c_value).'"'; break;
-        default       : $buf[] = $c_name.'="'.$c_value.'"'; break;
+        case 'boolean': $return[] = $c_name; break;
+        case 'array'  : $return[] = $c_name.'="'.implode(' ', $c_value).'"'; break;
+        default       : $return[] = $c_name.'="'.$c_value.'"'; break;
       }
     }
-    return $buf;
+    return $join_part ? implode($join_part, $return) :
+                                            $return;
   }
 
   static function data_export($data, $prefix = '') {

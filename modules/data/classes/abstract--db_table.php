@@ -38,7 +38,7 @@ namespace effectivecore\modules\data {
     if (static::$table_name) {
       return db::query('SELECT '.implode(', ', $fields).' '.
                        'FROM %T_'.static::$table_name.
-                       (count($conditions) ? ' WHERE '.implode(' and ', factory::data_to_attr($conditions)) : '').
+                       (count($conditions) ? ' WHERE '.factory::data_to_attr($conditions, ' and ') : '').
                        (count($order) ? ' ORDER BY '.str_replace('!', ' DESC ', implode(', ', $order)) : '').
                        ($rcount ? ' LIMIT  '.$rcount : '').
                        ($offset ? ' OFFSET '.$offset : ''));
@@ -49,7 +49,7 @@ namespace effectivecore\modules\data {
     if (static::$table_name) {
       $res = db::query('SELECT '.implode(', ', $fields).' '.
                        'FROM %T_'.static::$table_name.
-                       (count($conditions) ? ' WHERE '.implode(' and ', factory::data_to_attr($conditions)) : '').
+                       (count($conditions) ? ' WHERE '.factory::data_to_attr($conditions, ' and ') : '').
                        (count($order) ? ' ORDER BY '.str_replace('!', ' DESC ', implode(', ', $order)) : '').
                        (' LIMIT 1'));
       return reset($res);
@@ -66,15 +66,15 @@ namespace effectivecore\modules\data {
   static function update($fields, $conditions = []) {
     if (static::$table_name) {
       return db::query('UPDATE %T_'.static::$table_name.' '.
-                       'SET '.implode(', ', factory::data_to_attr($fields)).' '.
-                       'WHERE '.implode(' and ', factory::data_to_attr($conditions)));
+                       'SET '.factory::data_to_attr($fields, ', ').' '.
+                       'WHERE '.factory::data_to_attr($conditions, ' and '));
     }
   }
 
   static function delete($conditions) {
     if (static::$table_name) {
       return db::query('DELETE FROM %T_'.static::$table_name.' '.
-                       'WHERE '.implode(' and ', factory::data_to_attr($conditions)));
+                       'WHERE '.factory::data_to_attr($conditions, ' and '));
     }
   }
 

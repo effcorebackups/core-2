@@ -13,7 +13,7 @@ namespace effectivecore {
 
   function render() {
     return (new template($this->template, [
-      'attributes' => implode(' ', factory::data_to_attr($this->attributes)),
+      'attributes' => factory::data_to_attr($this->attributes, ' '),
       'head'       => $this->children['head']->render(),
       'body'       => $this->children['body']->render(),
     ]))->render();

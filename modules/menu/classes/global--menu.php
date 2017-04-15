@@ -15,7 +15,7 @@ namespace effectivecore {
       'children' => $this->render_children($this->children)
     ]))->render();
     return (new template('menu', [
-      'attributes' => implode(' ', factory::data_to_attr($this->attributes)),
+      'attributes' => factory::data_to_attr($this->attributes, ' '),
       'self'       => $this->render_self(),
       'children'   => $rendered_children
     ]))->render();

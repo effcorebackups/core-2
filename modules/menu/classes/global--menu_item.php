@@ -21,7 +21,7 @@ namespace effectivecore {
         ]))->render();
       }
       return (new template('menu_item', [
-        'attributes' => implode(' ', factory::data_to_attr($this->attributes)),
+        'attributes' => factory::data_to_attr($this->attributes, ' '),
         'self'       => $this->render_self(),
         'children'   => $rendered_children
       ]))->render();
@@ -37,7 +37,7 @@ namespace effectivecore {
       }
     }
     return (new template('menu_item_self', [
-      'attributes' => implode(' ', factory::data_to_attr($attr)),
+      'attributes' => factory::data_to_attr($attr, ' '),
       'title'      => token::replace($this->title)
     ]))->render();
   }
