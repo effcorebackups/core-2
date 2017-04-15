@@ -4,6 +4,7 @@ namespace effectivecore {
           class translated_text {
 
   public $text;
+  public $weight = 0;
 
   function __construct($text = '') {
     $this->text = $text;
