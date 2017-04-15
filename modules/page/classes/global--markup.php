@@ -12,7 +12,7 @@ namespace effectivecore {
 
   function add_child($child, $id = null) {
     parent::add_child(
-      is_string($child) ? new dom_text($child) : $child, $id
+      is_string($child) ? new text($child) : $child, $id
     );
   }
 

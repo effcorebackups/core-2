@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          class dom_text {
+          class text {
 
   public $data;
   public $weight;
