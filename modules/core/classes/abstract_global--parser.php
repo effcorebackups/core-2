@@ -19,7 +19,9 @@ namespace effectivecore {
         $depth = strlen($matches['indent'].$matches['prefix']) / 2;
         if ($matches['delimiter'] == ': ') {
           $value = $matches['value'];
-          if ((string)(int)$value === $value) $value = (int)$value;
+          if ((string)(int)$value === $value) {
+            $value = (int)$value;
+          }
         } else {
           $class = !empty($matches['class']) ? str_replace('|', '\\effectivecore\\', $matches['class']) : '\StdClass';
           $value = new $class;

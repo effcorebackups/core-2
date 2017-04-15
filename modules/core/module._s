@@ -2,6 +2,6 @@ module
   id: core
   title: Core
   description: Core module.
-  version: 1.0
+  version: 1-0
   is_embed: 1
   is_always_on: 1
