@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          class markup extends dom_node {
+          class markup extends node {
 
   public $type;
 

@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          class table_body extends dom_node {
+          class table_body extends node {
 
   public $template = 'table_body';
 

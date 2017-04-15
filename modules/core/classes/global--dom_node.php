@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          class dom_node {
+          class node {
 
   public $attributes;
   public $weight;

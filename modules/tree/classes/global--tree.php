@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          class tree extends \effectivecore\dom_node {
+          class tree extends \effectivecore\node {
 
   public $title;
 
