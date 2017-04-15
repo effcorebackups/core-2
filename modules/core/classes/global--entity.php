@@ -17,4 +17,8 @@ namespace effectivecore {
     $this->fields[] = $field;
   }
 
+  function select() {}
+  function insert() {}
+  function delete() {}
+
 }}
