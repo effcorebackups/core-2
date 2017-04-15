@@ -5,7 +5,7 @@ pages
       match: %^/user/logout$%
     access
       roles
-      - logged: logged
+      - registered: registered
     content
     - form_user_login
         type: link

@@ -12,8 +12,8 @@ namespace effectivecore\modules\user {
 
   static function install() {
     parent::install();
-    static::insert(['id' => 'anonymous',  'title' => 'Anonymous users', 'is_embed' => 1]);
-    static::insert(['id' => 'logged',     'title' => 'Logged users',    'is_embed' => 1]);
+    static::insert(['id' => 'anonymous',  'title' => 'Anonymous',  'is_embed' => 1]);
+    static::insert(['id' => 'registered', 'title' => 'Registered', 'is_embed' => 1]);
     static::insert(['id' => 'admins',     'title' => 'Administrators']);
     static::insert(['id' => 'moderators', 'title' => 'Moderators']);
   }

@@ -8,3 +8,30 @@ translate
   - Front page: Главная страница
   - Installation: Установка
   - Modules: Модули
+  - Parameter: Параметр
+  - Value: Значение
+  - created: создано
+  - Created: Создано
+  - Init calls: Инициализирующие вызовы
+  - SQL queries: SQL запросы
+  - Total: Всего
+  - User roles: Роли пользователя
+  - Generation time: Время генерации
+  - Title: Заголовок
+  - Path: Путь
+  - Description: Описание
+  - Version: Версия
+  - Is embed: Встроенный
+  - Is always on: Всегда включен
+  - Yes: Да
+  - No: Нет
+  - Administrators: Администраторы
+  - Moderators: Модераторы
+  - Anonymous: Анонимы
+  - Registered: Зарегистрированные
+  - Actions: Действия
+  - view: смотреть
+  - edit: ред.
+  - delete: удалить
+  - save: сохранить
+  - Password: Пароль

@@ -34,7 +34,7 @@ tree_items
     access
       roles
       - admins: admins
-      - logged: logged
+      - registered: registered
 - user_n_edit|tree_item
     parent: tree_items/user/user_n
     title: Edit profile
@@ -44,7 +44,7 @@ tree_items
     access
       roles
       - admins: admins
-      - logged: logged
+      - registered: registered
 - user_logout|tree_item
     parent: tree_items/user/user_n
     title: Logout
@@ -53,7 +53,7 @@ tree_items
       href: /user/logout
     access
       roles
-      - logged: logged
+      - registered: registered
 - main_admin_roles|tree_item
     parent: tree_items/core/main_admin
     title: Roles

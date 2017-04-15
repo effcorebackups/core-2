@@ -15,7 +15,7 @@ namespace effectivecore\modules\user {
       $db_user_roles = table_role_by_user::select(['role_id'], ['user_id' => $id]);
       if (isset($db_user['id'])) {
         static::$current = (object)$db_user;
-        static::$current->roles = ['logged' => 'logged'];
+        static::$current->roles = ['registered' => 'registered'];
         foreach ($db_user_roles as $c_role) {
           static::$current->roles[$c_role['role_id']] = $c_role['role_id'];
         }

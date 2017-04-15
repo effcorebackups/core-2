@@ -14,7 +14,7 @@ namespace effectivecore {
   static function on_show_modules() {
     $head = [
       'Title',
-      'Id',
+      'ID',
       'Path',
       'Description',
       'Version',

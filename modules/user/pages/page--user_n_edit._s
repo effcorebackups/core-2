@@ -8,7 +8,7 @@ pages
     access
       roles
       - admins: admins
-      - logged: logged
+      - registered: registered
     content
     - code_on_page_user_n_edit
         type: code

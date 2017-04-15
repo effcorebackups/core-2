@@ -12,7 +12,7 @@ namespace effectivecore {
   }
 
   function render() {
-    return $this->data;
+    return translate::t($this->data);
   }
 
 }}
