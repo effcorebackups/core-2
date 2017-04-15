@@ -30,8 +30,8 @@ namespace effectivecore {
   }
 
   function render() {
-    return $this->render_self().implode("\n",
-           $this->render_children($this->children));
+    return $this->render_self().
+           $this->render_children($this->children);
   }
 
   protected function render_self() {
