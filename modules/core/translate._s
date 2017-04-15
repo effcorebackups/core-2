@@ -1,37 +1,30 @@
 translate
   ru
   - Core module.: Модуль Core.
-  - Home: Дом
+  - Actions: Действия
   - Administer: Администрирование
-  - Modules: Модули
-  - Main menu: Главное меню
-  - Front page: Главная страница
-  - Installation: Установка
-  - Modules: Модули
-  - Parameter: Параметр
-  - Value: Значение
   - created: создано
   - Created: Создано
-  - Total: Всего
-  - Title: Заголовок
-  - Path: Путь
-  - Description: Описание
-  - Version: Версия
-  - Actions: Действия
-  - view: смотреть
-  - edit: ред.
   - delete: удалить
-  - save: сохранить
-  - Is embed: Встроенный
-  - Is always on: Всегда включен
-  - Yes: Да
-  - No: Нет
-  - Administrators: Администраторы
-  - Moderators: Модераторы
-  - Anonymous: Анонимы
-  - Registered: Зарегистрированные
-  - Init calls: Инициализирующие вызовы
-  - SQL queries: SQL запросы
-  - User roles: Роли пользователя
+  - Description: Описание
+  - edit: ред.
+  - Front page: Главная страница
   - Generation time: Время генерации
-  - Logout from the system: Выйти из системы
+  - Home: Дом
+  - Init calls: Инициализирующие вызовы
+  - Installation: Установка
+  - Is always on: Всегда включен
+  - Is embed: Встроенный
+  - Main menu: Главное меню
+  - Modules: Модули
+  - No: Нет
+  - Parameter: Параметр
+  - Path: Путь
+  - save: сохранить
+  - SQL queries: SQL запросы
+  - Title: Заголовок
+  - Total: Всего
+  - Value: Значение
+  - Version: Версия
+  - view: смотреть
+  - Yes: Да
