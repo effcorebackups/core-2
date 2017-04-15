@@ -1,5 +1,5 @@
-menus
-- main|menu
+trees
+- main|tree
     title: Main menu
     weight: 2
     attributes

@@ -1,0 +1,31 @@
+
+  nav {background: %%_nav_bg_color}
+
+  /* tree sizes and orientation */
+  nav tree {margin: 0; padding: 0}
+  nav tree > ul {margin: 0; padding: 0; list-style: none}
+  nav tree > ul > li {float: left; cursor: default; margin: 0; padding: 0; list-style: none}
+  nav tree > ul > li > a {display: block; padding: 20px}
+  nav tree > ul > li > ul {position: absolute; padding: 20px}
+  nav tree > ul > li > ul > li {list-style: none}
+  nav tree.user > ul > li {float: right}
+
+  /* tree colors */
+  nav tree > ul > li:hover {background: #28334a}
+  nav tree > ul > li > a {color: #fff}
+  nav tree > ul > li > a.active,
+  nav tree > ul > li > a[href]:hover {color: #81a5eb}
+  nav tree > ul > li > a:hover {color: #fff}
+  nav tree > ul > li > ul a {color: #fff}
+  nav tree > ul > li > ul a.active,
+  nav tree > ul > li > ul a:hover {color: #81a5eb}
+  nav tree > ul > li > ul {background: #28334a}
+
+  /* tree dynamic */
+  nav tree > ul > li > ul {display: none}
+  nav tree > ul > li:hover > ul {display: block}
+
+  /* icons */
+  nav tree.main a.logo  {padding-left: 52px; background: url('tree-icons.svg') no-repeat}
+  nav tree.main a.admin {padding-left: 52px; background: url('tree-icons.svg') no-repeat 0 -62px}
+  nav tree.user a.user  {padding-left: 52px; background: url('tree-icons.svg') no-repeat 0 -124px}

@@ -2,7 +2,7 @@
 
 namespace effectivecore {
           use \effectivecore\modules\user\access;
-          class menu_item extends \effectivecore\dom_node {
+          class tree_item extends \effectivecore\dom_node {
 
   public $title;
 
@@ -16,11 +16,11 @@ namespace effectivecore {
         (isset($this->access) && access::check($this->access))) {
       $rendered_children = '';
       if (count($this->children)) {
-        $rendered_children = (new template('menu_item_children', [
+        $rendered_children = (new template('tree_item_children', [
           'children' => $this->render_children($this->children)
         ]))->render();
       }
-      return (new template('menu_item', [
+      return (new template('tree_item', [
         'attributes' => factory::data_to_attr($this->attributes, ' '),
         'self'       => $this->render_self(),
         'children'   => $rendered_children
@@ -36,7 +36,7 @@ namespace effectivecore {
         $attr->class = isset($attr->class) ? $attr->class.' active' : 'active';
       }
     }
-    return (new template('menu_item_self', [
+    return (new template('tree_item_self', [
       'attributes' => factory::data_to_attr($attr, ' '),
       'title'      => token::replace($this->title)
     ]))->render();

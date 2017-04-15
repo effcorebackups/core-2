@@ -1,10 +1,10 @@
 module
-  id: menu
-  title: Menu
-  description: Working with menus.
+  id: tree
+  title: Tree
+  description: Working with trees.
   version: 1.0
   is_embed: 1
   is_always_on: 1
   on_init
-    handler: \effectivecore\modules\menu\events_module::on_init
+    handler: \effectivecore\modules\tree\events_module::on_init
     weight: 0

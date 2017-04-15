@@ -3,10 +3,10 @@ pages
     url
       match: %.*%
     styles
-    - style_menu
-        file: misc/menu.css
+    - style_tree
+        file: misc/tree.css
     content
-    - menu_main
+    - tree_main
         type: link
-        entity: menus/core/main
+        entity: trees/core/main
         region: nav

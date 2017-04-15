@@ -3,7 +3,7 @@ pages
     url
       match: %.*%
     content
-    - menu_user
+    - tree_user
         type: link
-        entity: menus/user/user
+        entity: trees/user/user
         region: nav

@@ -1,5 +1,5 @@
-menus
-- user|menu
+trees
+- user|tree
     title: User menu
     weight: 1
     attributes

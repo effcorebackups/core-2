@@ -1,20 +1,20 @@
-menu_items
-- main_home|menu_item
-    parent: menus/core/main
+tree_items
+- main_home|tree_item
+    parent: trees/core/main
     title: Home
     attributes
       href: /
       class: logo
-- main_admin|menu_item
-    parent: menus/core/main
+- main_admin|tree_item
+    parent: trees/core/main
     title: Administer
     attributes
       class: admin
     access
       roles
       - admins: admins
-- main_admin_modules|menu_item
-    parent: menu_items/core/main_admin
+- main_admin_modules|tree_item
+    parent: tree_items/core/main_admin
     title: Modules
     attributes
       class: modules

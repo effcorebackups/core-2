@@ -1,14 +1,14 @@
-menu_items
-- user_anonymous|menu_item
-    parent: menus/user/user
+tree_items
+- user_anonymous|tree_item
+    parent: trees/user/user
     title: User
     attributes
       class: user
     access
       roles
       - anonymous: anonymous
-- user_login|menu_item
-    parent: menu_items/user/user_anonymous
+- user_login|tree_item
+    parent: tree_items/user/user_anonymous
     title: Login
     weight: -80
     attributes
@@ -16,8 +16,8 @@ menu_items
     access
       roles
       - anonymous: anonymous
-- user_register|menu_item
-    parent: menu_items/user/user_anonymous
+- user_register|tree_item
+    parent: tree_items/user/user_anonymous
     title: Register
     weight: -60
     attributes
@@ -25,8 +25,8 @@ menu_items
     access
       roles
       - anonymous: anonymous
-- user_n|menu_item
-    parent: menus/user/user
+- user_n|tree_item
+    parent: trees/user/user
     title: Hello %%_user_email
     attributes
       href: /user/%%_user_id
@@ -35,8 +35,8 @@ menu_items
       roles
       - admins: admins
       - logged: logged
-- user_n_edit|menu_item
-    parent: menu_items/user/user_n
+- user_n_edit|tree_item
+    parent: tree_items/user/user_n
     title: Edit profile
     weight: -100
     attributes
@@ -45,8 +45,8 @@ menu_items
       roles
       - admins: admins
       - logged: logged
-- user_logout|menu_item
-    parent: menu_items/user/user_n
+- user_logout|tree_item
+    parent: tree_items/user/user_n
     title: Logout
     weight: -40
     attributes
@@ -54,16 +54,16 @@ menu_items
     access
       roles
       - logged: logged
-- main_admin_roles|menu_item
-    parent: menu_items/core/main_admin
+- main_admin_roles|tree_item
+    parent: tree_items/core/main_admin
     title: Roles
     attributes
       href: /admin/roles
     access
       roles
       - admins: admins
-- main_admin_users|menu_item
-    parent: menu_items/core/main_admin
+- main_admin_users|tree_item
+    parent: tree_items/core/main_admin
     title: Users
     attributes
       href: /admin/users

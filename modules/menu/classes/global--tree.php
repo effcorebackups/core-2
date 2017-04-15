@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          class menu extends \effectivecore\dom_node {
+          class tree extends \effectivecore\dom_node {
 
   public $title;
 
@@ -11,10 +11,10 @@ namespace effectivecore {
   }
 
   function render() {
-    $rendered_children = (new template('menu_children', [
+    $rendered_children = (new template('tree_children', [
       'children' => $this->render_children($this->children)
     ]))->render();
-    return (new template('menu', [
+    return (new template('tree', [
       'attributes' => factory::data_to_attr($this->attributes, ' '),
       'self'       => $this->render_self(),
       'children'   => $rendered_children
@@ -22,7 +22,7 @@ namespace effectivecore {
   }
 
   protected function render_self() {
-    return (new template('menu_self', [
+    return (new template('tree_self', [
       'title' => $this->title
     ]))->render();
   }
