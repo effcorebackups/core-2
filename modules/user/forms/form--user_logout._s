@@ -8,9 +8,11 @@ forms
       handler: \effectivecore\modules\user\events_form::on_submit_user_logout
     children
     - button_logout|markup
-        type: input
+        type: button
         attributes
           type: submit
           name: button
-          value|translated_text
+          value: logout
+        children
+        - label|translated_text
             text: logout

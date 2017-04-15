@@ -8,16 +8,20 @@ forms
       handler: \effectivecore\modules\user\events_form::on_submit_user_n_delete
     children
     - button_delete|markup
-        type: input
+        type: button
         attributes
           type: submit
           name: button
-          value|translated_text
+          value: delete
+        children
+        - label|translated_text
             text: delete
     - button_cancel|markup
-        type: input
+        type: button
         attributes
           type: submit
           name: button
-          value|translated_text
+          value: cancel
+        children
+        - label|translated_text
             text: cancel
