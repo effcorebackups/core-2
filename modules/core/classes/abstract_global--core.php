@@ -11,6 +11,7 @@ namespace effectivecore {
     spl_autoload_register('\effectivecore\factory::autoload');
   # classes initialization
     settings::init();
+    translate::init();
     token::init();
     urls::init();
   # redirect from '/any_path/' to '/any_path'
