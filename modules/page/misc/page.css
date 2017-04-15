@@ -26,7 +26,7 @@
   body .hidden {display: none}
 
   /* messages */
-  messages ul {margin: 10px 0; padding: 15px; font-size: 16px; border: 3px solid #41c25d; background: #f1fcf9}
+  messages ul {margin: 10px 0; padding: 15px; font-size: 16px; border: 3px solid #66c048; background: #f4ffee}
   messages ul.error {border-color: #e42034; background-color: #fff5ee}
   messages ul li {margin: 0 0 0 15px; padding: 0}
   messages ul li:only-child {margin: 0; list-style: none}
