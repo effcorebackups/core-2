@@ -12,10 +12,12 @@ forms
         attributes
           type: submit
           name: button
-          value: delete
+          value|translated_text
+            text: delete
     - button_cancel|markup
         type: input
         attributes
           type: submit
           name: button
-          value: cancel
+          value|translated_text
+            text: cancel

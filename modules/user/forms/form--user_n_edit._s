@@ -13,7 +13,8 @@ forms
         attributes
           type: password
           name: password
-          placeholder: Password
+          placeholder|translated_text
+            text: Password
           required: 1
           minlength: 5
           maxlength: 255
@@ -22,4 +23,5 @@ forms
         attributes
           type: submit
           name: button
-          value: save
+          value|translated_text
+            text: save

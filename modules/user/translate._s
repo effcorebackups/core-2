@@ -4,9 +4,13 @@ translate
   - User menu: Меню пользователя
   - User: Пользователь
   - Login: Вход
+  - login: вход
+  - Logout: Выход
+  - logout: выход
   - Register: Регистрация
+  - register: регистрация
   - Hello %%_user_email: Привет %%_user_email
   - Edit profile: Редактировать профиль
-  - Logout: Выход
   - Roles: Роли
   - Users: Пользователи
+  - Password: Пароль

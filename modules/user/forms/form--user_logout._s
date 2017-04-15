@@ -12,4 +12,5 @@ forms
         attributes
           type: submit
           name: button
-          value: logout
+          value|translated_text
+            text: logout

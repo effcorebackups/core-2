@@ -97,6 +97,7 @@ namespace effectivecore {
       switch (gettype($c_value)) {
         case 'boolean': $return[] = $c_name; break;
         case 'array'  : $return[] = $c_name.'="'.implode(' ', $c_value).'"'; break;
+        case 'object' : $return[] = $c_name.'="'.(method_exists($c_value, 'render') ? $c_value->render() : '').'"'; break;
         default       : $return[] = $c_name.'="'.$c_value.'"'; break;
       }
     }
