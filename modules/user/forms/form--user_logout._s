@@ -14,5 +14,5 @@ forms
           name: button
           value: logout
         children
-        - label|translated_text
+        - label|text
             text: logout

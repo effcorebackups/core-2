@@ -13,7 +13,7 @@ forms
         attributes
           type: email
           name: email
-          placeholder|translated_text
+          placeholder|text
             text: Email
           required: 1
           maxlength: 255
@@ -22,7 +22,7 @@ forms
         attributes
           type: password
           name: password
-          placeholder|translated_text
+          placeholder|text
             text: Password
           required: 1
           minlength: 5
@@ -34,5 +34,5 @@ forms
           name: button
           value: register
         children
-        - label|translated_text
+        - label|text
             text: register

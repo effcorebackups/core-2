@@ -14,7 +14,7 @@ forms
           name: button
           value: delete
         children
-        - label|translated_text
+        - label|text
             text: delete
     - button_cancel|markup
         type: button
@@ -23,5 +23,5 @@ forms
           name: button
           value: cancel
         children
-        - label|translated_text
+        - label|text
             text: cancel

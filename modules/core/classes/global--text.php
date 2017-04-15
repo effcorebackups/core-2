@@ -3,16 +3,16 @@
 namespace effectivecore {
           class text {
 
-  public $data;
+  public $text;
   public $weight;
 
-  function __construct($data = '', $weight = 0) {
-    $this->data = $data;
+  function __construct($text = '', $weight = 0) {
+    $this->text = $text;
     $this->weight = $weight;
   }
 
   function render() {
-    return translate::t($this->data);
+    return translate::t($this->text);
   }
 
 }}
