@@ -12,7 +12,7 @@ namespace effectivecore {
 
   function render() {
     $rendered_children = (new template('menu_children', [
-      'children' => implode(nl, $this->render_children($this->children))
+      'children' => $this->render_children($this->children)
     ]))->render();
     return (new template('menu', [
       'attributes' => implode(' ', factory::data_to_attr($this->attributes)),

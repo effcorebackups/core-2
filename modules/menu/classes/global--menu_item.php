@@ -17,7 +17,7 @@ namespace effectivecore {
       $rendered_children = '';
       if (count($this->children)) {
         $rendered_children = (new template('menu_item_children', [
-          'children' => implode(nl, $this->render_children($this->children))
+          'children' => $this->render_children($this->children)
         ]))->render();
       }
       return (new template('menu_item', [

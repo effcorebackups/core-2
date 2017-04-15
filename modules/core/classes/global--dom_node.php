@@ -38,7 +38,7 @@ namespace effectivecore {
     return '';
   }
 
-  protected function render_children($children) {
+  protected function render_children($children, $join = true) {
     $rendered = [];
     if (is_array($children)) {
       foreach (factory::array_sort_by_weight($children) as $c_child) {
@@ -47,7 +47,8 @@ namespace effectivecore {
     } else {
       $rendered[] = $this->render_child($children);
     }
-    return $rendered;
+    return $join ? implode(nl, $rendered) :
+                               $rendered;
   }
 
   protected function render_child($child) {

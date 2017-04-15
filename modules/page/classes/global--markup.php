@@ -18,10 +18,10 @@ namespace effectivecore {
 
   function render() {
     $rendered_children = $this->render_children($this->children);    
-    return (new template(count($rendered_children) ? 'html_element' : 'html_element_simple', [
+    return (new template(strlen($rendered_children) ? 'html_element' : 'html_element_simple', [
       'type'       => $this->type,
       'attributes' => implode(' ', factory::data_to_attr($this->attributes)),
-      'content'    => implode(nl, $rendered_children)
+      'content'    => $rendered_children
     ]))->render();
   }
 
