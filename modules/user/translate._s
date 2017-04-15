@@ -1,0 +1,12 @@
+translate
+  ru
+  - Module for working with user accounts and permissions.: Модуль работы с пользовательскими аккаунтами и разрешениями.
+  - User menu: Меню пользователя
+  - User: Пользователь
+  - Login: Вход
+  - Register: Регистрация
+  - Hello %%_user_email: Привет %%_user_email
+  - Edit profile: Редактировать профиль
+  - Logout: Выход
+  - Roles: Роли
+  - Users: Пользователи

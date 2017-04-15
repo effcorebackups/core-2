@@ -1,7 +1,7 @@
 module
   id: user
   title: User
-  description: Working with user accounts and permissions.
+  description: Module for working with user accounts and permissions.
   version: 1-0
   is_embed: 1
   is_always_on: 1

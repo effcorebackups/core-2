@@ -1,7 +1,7 @@
 module
   id: page
   title: Page
-  description: Working with pages.
+  description: Module for working with pages.
   version: 1-0
   is_embed: 1
   is_always_on: 1
