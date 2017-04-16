@@ -1,0 +1,15 @@
+entities
+- user|entity
+    fields
+    - id
+        type: int
+        unsigned: true
+        auto_increment: true
+        primary_key: true
+    - email
+        type: varchar
+        size: 255
+    - created
+        type: timestamp
+    - is_locked
+        type: int
