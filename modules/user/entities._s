@@ -1,5 +1,6 @@
 entities
 - user|entity
+    type: user
     fields
     - id
         type: int
@@ -13,3 +14,4 @@ entities
         type: timestamp
     - is_locked
         type: int
+- session|entity
