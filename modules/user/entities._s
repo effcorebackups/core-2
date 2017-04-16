@@ -1,6 +1,7 @@
 entities
 - user|entity
     name: user
+    charset: utf8
     fields
     - id
         type: int
@@ -19,6 +20,7 @@ entities
     - id: id
 - session|entity
     name: session
+    charset: utf8
     fields
     - id
         type: int

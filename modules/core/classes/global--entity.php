@@ -20,7 +20,7 @@ namespace effectivecore {
     return db::query('CREATE TABLE `'.$this->name.'` ('.(isset($this->primary_keys) ?
       implode(', ', $field_sql).', PRIMARY KEY (`'.implode('`, `', $this->primary_keys).'`)' :
       implode(', ', $field_sql)
-    ).') default charset=utf8;');
+    ).') default charset='.$this->charset.';');
   }
 
   function uninstall() {
