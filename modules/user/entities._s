@@ -1,6 +1,6 @@
 entities
 - user|entity
-    type: user
+    name: user
     fields
     - id
         type: int
@@ -11,12 +11,14 @@ entities
         size: 255
     - created
         type: timestamp
+        null: true
+        default: null
     - is_locked
         type: int
     primary_keys
     - id: id
 - session|entity
-    type: session
+    name: session
     fields
     - id
         type: int
@@ -27,6 +29,8 @@ entities
         unsigned: true
     - created
         type: timestamp
+        null: true
+        default: null
     - data
         type: longblob
     primary_keys

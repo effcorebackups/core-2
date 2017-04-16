@@ -11,18 +11,30 @@ namespace effectivecore {
       if (property_exists($c_info, 'unsigned')       && $c_info->unsigned)       $c_prop[] = 'unsigned';
       if (property_exists($c_info, 'auto_increment') && $c_info->auto_increment) $c_prop[] = 'auto_increment';
       if (property_exists($c_info, 'not_null')       && $c_info->not_null)       $c_prop[] = 'not null';
+      if (property_exists($c_info, 'null')           && $c_info->null)           $c_prop[] = 'null';
       if (property_exists($c_info, 'default') && is_string($c_info->default))    $c_prop[] = 'default "'.$c_info->default.'"';
       if (property_exists($c_info, 'default') && is_int($c_info->default))       $c_prop[] = 'default "'.$c_info->default.'"';
       if (property_exists($c_info, 'default') && is_null($c_info->default))      $c_prop[] = 'default null';
       $field_sql[] = '`'.$c_name.'` '.implode(' ', $c_prop);
     }
-    return db::query('CREATE TABLE `'.$this->type.'` ('.(isset($this->primary_keys) ?
+    return db::query('CREATE TABLE `'.$this->name.'` ('.(isset($this->primary_keys) ?
       implode(', ', $field_sql).', PRIMARY KEY (`'.implode('`, `', $this->primary_keys).'`)' :
       implode(', ', $field_sql)
     ).') default charset=utf8;');
   }
 
   function uninstall() {
+    db::query('DROP TABLE `'.$this->name.'`;');
+  }
+
+  function select_instance($id) {
+    
+  }
+
+  function update_instance() {
+  }
+
+  function delete_instance() {
   }
 
 }}
