@@ -2,6 +2,7 @@
 
 namespace effectivecore\modules\user {
           use \effectivecore\url;
+          use \effectivecore\settings;
           use \effectivecore\messages;
           use \effectivecore\modules\data\db;
           abstract class events_module extends \effectivecore\events_module {
@@ -12,13 +13,10 @@ namespace effectivecore\modules\user {
 
   static function on_install() {
     db::transaction_begin(); # @todo: test transactions
-    try { 
-      table_session::install();
-      table_user::install();
-      table_role::install();
-      table_permission::install();
-      table_role_by_user::install();
-      table_role_by_permission::install();
+    try {
+      foreach (settings::$data['entities']['user'] as $c_entity) {
+        $c_entity->install();
+      }
       db::transaction_commit();
       messages::add_new('Database for module "user" was installed');
     } catch (\Exception $e) {

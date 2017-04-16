@@ -10,3 +10,4 @@ module
     weight: -80
   on_install
     handler: \effectivecore\modules\user\events_module::on_install
+    weight: 0

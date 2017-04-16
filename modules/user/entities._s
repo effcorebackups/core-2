@@ -6,7 +6,6 @@ entities
         type: int
         unsigned: true
         auto_increment: true
-        primary_key: true
     - email
         type: varchar
         size: 255
@@ -14,4 +13,21 @@ entities
         type: timestamp
     - is_locked
         type: int
+    primary_keys
+    - id: id
 - session|entity
+    type: session
+    fields
+    - id
+        type: int
+        unsigned: true
+        auto_increment: true
+    - user_id
+        type: int
+        unsigned: true
+    - created
+        type: timestamp
+    - data
+        type: longblob
+    primary_keys
+    - id: id
