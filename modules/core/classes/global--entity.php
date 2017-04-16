@@ -28,7 +28,10 @@ namespace effectivecore {
   }
 
   function select_instance($id) {
-    
+    return (object)reset(db::query('SELECT '.implode(', ', array_keys($this->fields)).' '.
+                                   'FROM `'.$this->name.'` '.
+                                   'WHERE id = '.$id.' '.
+                                   'LIMIT 1'));
   }
 
   function update_instance() {

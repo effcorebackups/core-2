@@ -2,6 +2,7 @@
 
 namespace effectivecore\modules\user {
           use \effectivecore\factory;
+          use \effectivecore\settings;
           use \effectivecore\markup;
           use \effectivecore\table;
           use \effectivecore\table_body_row_cell;
@@ -49,14 +50,13 @@ namespace effectivecore\modules\user {
     if (isset($db_user['is_locked']) && $db_user['is_locked'] == '1') factory::send_header_and_exit('access_denided', 'This user is locked!');
   }
 
-  static function on_show_user_n($user_id) {
-    $db_user = table_user::select_one(['*'], ['id' => $user_id]);
-    $db_user_roles = table_role_by_user::select(['role_id'], ['user_id' => $user_id]);
-    if ($db_user) {
-      if ($db_user['id'] == user::$current->id || isset(user::$current->roles['admins'])) {
-        unset($db_user['password_hash'], $db_user['is_locked']);
-        page::add_element(new table([], factory::array_rotate([array_keys($db_user), array_values($db_user)]), [['Parameter', 'Value']]));
-        page::add_element(new table([], $db_user_roles, [['Roles']]));
+  static function on_show_user_n($id) {
+    $user = settings::$data['entities']['user']['user']->select_instance($id);
+    if ($user) {
+      if ($user->id == user::$current->id || isset(user::$current->roles['admins'])) {
+        unset($user->password_hash);
+        unset($user->is_locked);
+        page::add_element(new table([], factory::array_rotate([array_keys((array)$user), array_values((array)$user)]), [['Parameter', 'Value']]));
       } else {
         factory::send_header_and_exit('access_denided',
           'Access denided!'
