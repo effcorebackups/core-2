@@ -52,6 +52,13 @@ namespace effectivecore\modules\page {
           static::add_element(new markup('style', [], '@import url("'.$c_style_url->get_full().'");'), 'styles');
         }
       }
+    # collect scripts
+      if (isset($c_page->scripts)) {
+        foreach ($c_page->scripts as $c_script) {
+          $c_script_url = new url('/modules/'.$c_page->module_id.'/'.$c_script->file);
+          static::add_element(new markup('script', ['src' => $c_script_url->get_full()], ' '), 'script');
+        }
+      }
     # collect arguments
       if (isset($c_page->url->args)) {
         foreach ($c_page->url->args as $c_arg_name => $c_arg_num) {

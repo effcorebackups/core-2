@@ -9,6 +9,9 @@ pages
         file: misc/form.css
     - style_console
         file: misc/console.css
+    scripts
+    - script_page
+        file: misc/script.js
     content
     - all_messages|messages
         type: messages
