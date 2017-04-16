@@ -5,6 +5,7 @@ pages
     styles
     - style_tree
         file: misc/tree.css
+        media: all
     content
     - tree_main
         type: link

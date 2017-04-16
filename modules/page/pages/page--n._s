@@ -5,10 +5,13 @@ pages
     styles
     - style_page
         file: misc/page.css
+        media: all
     - style_form
         file: misc/form.css
+        media: all
     - style_console
         file: misc/console.css
+        media: all
     scripts
     - script_page
         file: misc/script.js

@@ -49,7 +49,10 @@ namespace effectivecore\modules\page {
       if (isset($c_page->styles)) {
         foreach ($c_page->styles as $c_style) {
           $c_style_url = new url('/modules/'.$c_page->module_id.'/'.$c_style->file);
-          static::add_element(new markup('style', [], '@import url("'.$c_style_url->get_full().'");'), 'styles');
+          static::add_element(new markup('link', [
+            'rel'   => 'stylesheet',
+            'media' => $c_style->media,
+            'href'  => $c_style_url->get_full()]), 'styles');
         }
       }
     # collect scripts
