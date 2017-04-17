@@ -1,72 +1,72 @@
 instances
 - user_1|instance
-    type: user
+    name: user
     fields:
       id: 1
       password: 12345
       email: admin@example.com
       is_locked: 1
 - user_2|instance
-    type: user
+    name: user
     fields:
       id: 2
       password: 12345
       email: user@example.com
 - role_anonymous|instance
-    type: role
+    name: role
     fields:
       id: anonymous
       title: Anonymous
       is_embed: 1
 - role_registered|instance
-    type: role
+    name: role
     fields:
       id: registered
       title: Registered
       is_embed: 1
 - role_admins|instance
-    type: role
+    name: role
     fields:
       id: admins
       title: Administrators
       is_embed: 1
 - role_moderators|instance
-    type: role
+    name: role
     fields:
       id: moderators
       title: Moderators
 - permission_user_profile_select|instance
-    type: permission
+    name: permission
     fields:
       id: user_profile_select
       title: User profile: select
 - permission_user_profile_update|instance
-    type: permission
+    name: permission
     fields:
       id: user_profile_update
       title: User profile: update
 - permission_user_profile_delete|instance
-    type: permission
+    name: permission
     fields:
       id: user_profile_delete
       title: User profile: delete
 - role_ws_user_admins_1|instance
-    type: role_ws_user
+    name: role_ws_user
     fields:
       role_id: admins
       user_id: 1
 - role_ws_permission_admins_user_profile_select|instance
-    type: role_ws_permission
+    name: role_ws_permission
     fields:
     - role_id: admins
     - permission_id: user_profile_select
 - role_ws_permission_admins_user_profile_update|instance
-    type: role_ws_permission
+    name: role_ws_permission
     fields:
     - role_id: admins
     - permission_id: user_profile_update
 - role_ws_permission_admins_user_profile_insert|instance
-    type: role_ws_permission
+    name: role_ws_permission
     fields:
     - role_id: admins
     - permission_id: user_profile_insert
