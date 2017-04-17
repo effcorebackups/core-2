@@ -1,0 +1,51 @@
+instances
+- user
+  - user_root
+      id: 1
+      password: 12345
+      email: admin@example.com
+      is_locked: 1
+  - user_user
+      id: 2
+      password: 12345
+      email: user@example.com
+- role
+  - role_anonymous
+      id: anonymous
+      title: Anonymous
+      is_embed: 1
+  - role_registered
+      id: registered
+      title: Registered
+      is_embed: 1
+  - role_admins
+      id: admins
+      title: Administrators
+      is_embed: 1
+  - role_moderators
+      id: moderators
+      title: Moderators
+- permission
+  - permission_user_profile_select
+      id: user_profile_select
+      title: User profile: select
+  - permission_user_profile_update
+      id: user_profile_update
+      title: User profile: update
+  - permission_user_profile_delete
+      id: user_profile_delete
+      title: User profile: delete
+- role_ws_user
+  - admin_ws_admin
+      user_id: 1
+      role_id: admins
+- role_ws_permission
+  - admins_ws_user_profile_select
+    - role_id: admins
+    - permission_id: user_profile_select
+  - admins_ws_user_profile_update
+    - role_id: admins
+    - permission_id: user_profile_update
+  - admins_ws_user_profile_insert
+    - role_id: admins
+    - permission_id: user_profile_insert

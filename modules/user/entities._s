@@ -93,3 +93,18 @@ entities
     primary_keys
     - role_id: role_id
     - user_id: user_id
+- role_ws_permission|entity
+    name: role_ws_permission
+    charset: utf8
+    fields
+    - role_id
+        type: varchar
+        size: 255
+        not_null: true
+    - permission_id
+        type: varchar
+        size: 255
+        not_null: true
+    primary_keys
+    - role_id: role_id
+    - permission_id: permission_id
