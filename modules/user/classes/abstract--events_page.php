@@ -2,6 +2,7 @@
 
 namespace effectivecore\modules\user {
           use \effectivecore\factory;
+          use \effectivecore\entity_instance;
           use \effectivecore\settings;
           use \effectivecore\markup;
           use \effectivecore\table;
@@ -51,12 +52,12 @@ namespace effectivecore\modules\user {
   }
 
   static function on_show_user_n($id) {
-    $user = settings::$data['entities']['user']['user']->select_instance($id);
+    $user = (new entity_instance('user', ['id' => $id]))->load();
     if ($user) {
-      if ($user->id == user::$current->id || isset(user::$current->roles['admins'])) {
-        unset($user->password_hash);
-        unset($user->is_locked);
-        page::add_element(new table([], factory::array_rotate([array_keys((array)$user), array_values((array)$user)]), [['Parameter', 'Value']]));
+      if ($user->fields->id == user::$current->id || isset(user::$current->roles['admins'])) {
+        unset($user->fields->password_hash);
+        unset($user->fields->is_locked);
+        page::add_element(new table([], factory::array_rotate([array_keys((array)$user->fields), array_values((array)$user->fields)]), [['Parameter', 'Value']]));
       } else {
         factory::send_header_and_exit('access_denided',
           'Access denided!'

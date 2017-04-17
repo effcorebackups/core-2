@@ -1,71 +1,71 @@
-instances
-- user_1|instance
+entities_instances
+- user_1|entity_instance
     name: user
     fields:
       id: 1
       password: 12345
       email: admin@example.com
       is_locked: 1
-- user_2|instance
+- user_2|entity_instance
     name: user
     fields:
       id: 2
       password: 12345
       email: user@example.com
-- role_anonymous|instance
+- role_anonymous|entity_instance
     name: role
     fields:
       id: anonymous
       title: Anonymous
       is_embed: 1
-- role_registered|instance
+- role_registered|entity_instance
     name: role
     fields:
       id: registered
       title: Registered
       is_embed: 1
-- role_admins|instance
+- role_admins|entity_instance
     name: role
     fields:
       id: admins
       title: Administrators
       is_embed: 1
-- role_moderators|instance
+- role_moderators|entity_instance
     name: role
     fields:
       id: moderators
       title: Moderators
-- permission_user_profile_select|instance
+- permission_user_profile_select|entity_instance
     name: permission
     fields:
       id: user_profile_select
       title: User profile: select
-- permission_user_profile_update|instance
+- permission_user_profile_update|entity_instance
     name: permission
     fields:
       id: user_profile_update
       title: User profile: update
-- permission_user_profile_delete|instance
+- permission_user_profile_delete|entity_instance
     name: permission
     fields:
       id: user_profile_delete
       title: User profile: delete
-- role_ws_user_admins_1|instance
+- role_ws_user_admins_1|entity_instance
     name: role_ws_user
     fields:
       role_id: admins
       user_id: 1
-- role_ws_permission_admins_user_profile_select|instance
+- role_ws_permission_admins_user_profile_select|entity_instance
     name: role_ws_permission
     fields:
     - role_id: admins
     - permission_id: user_profile_select
-- role_ws_permission_admins_user_profile_update|instance
+- role_ws_permission_admins_user_profile_update|entity_instance
     name: role_ws_permission
     fields:
     - role_id: admins
     - permission_id: user_profile_update
-- role_ws_permission_admins_user_profile_insert|instance
+- role_ws_permission_admins_user_profile_insert|entity_instance
     name: role_ws_permission
     fields:
     - role_id: admins

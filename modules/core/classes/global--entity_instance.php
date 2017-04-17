@@ -2,7 +2,7 @@
 
 namespace effectivecore {
           use \effectivecore\modules\data\db;
-          class instance {
+          class entity_instance {
 
   public $name;
   public $fields;
@@ -17,7 +17,7 @@ namespace effectivecore {
     }
   }
 
-  function select() {
+  function load() {
     $entities = [];
     foreach (settings::$data['entities'] as $c_entities) {
       foreach ($c_entities as $c_entity) {
@@ -37,13 +37,7 @@ namespace effectivecore {
     }
   }
 
-  function insert() {
-  }
-
-  function update() {
-  }
-
-  function delete() {
+  function save() {
   }
 
 }}
