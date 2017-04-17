@@ -1,51 +1,72 @@
 instances
-- user
-  - user_root
+- user_1|instance
+    type: user
+    fields:
       id: 1
       password: 12345
       email: admin@example.com
       is_locked: 1
-  - user_user
+- user_2|instance
+    type: user
+    fields:
       id: 2
       password: 12345
       email: user@example.com
-- role
-  - role_anonymous
+- role_anonymous|instance
+    type: role
+    fields:
       id: anonymous
       title: Anonymous
       is_embed: 1
-  - role_registered
+- role_registered|instance
+    type: role
+    fields:
       id: registered
       title: Registered
       is_embed: 1
-  - role_admins
+- role_admins|instance
+    type: role
+    fields:
       id: admins
       title: Administrators
       is_embed: 1
-  - role_moderators
+- role_moderators|instance
+    type: role
+    fields:
       id: moderators
       title: Moderators
-- permission
-  - permission_user_profile_select
+- permission_user_profile_select|instance
+    type: permission
+    fields:
       id: user_profile_select
       title: User profile: select
-  - permission_user_profile_update
+- permission_user_profile_update|instance
+    type: permission
+    fields:
       id: user_profile_update
       title: User profile: update
-  - permission_user_profile_delete
+- permission_user_profile_delete|instance
+    type: permission
+    fields:
       id: user_profile_delete
       title: User profile: delete
-- role_ws_user
-  - admin_ws_admin
-      user_id: 1
+- role_ws_user_admins_1|instance
+    type: role_ws_user
+    fields:
       role_id: admins
-- role_ws_permission
-  - admins_ws_user_profile_select
+      user_id: 1
+- role_ws_permission_admins_user_profile_select|instance
+    type: role_ws_permission
+    fields:
     - role_id: admins
     - permission_id: user_profile_select
-  - admins_ws_user_profile_update
+- role_ws_permission_admins_user_profile_update|instance
+    type: role_ws_permission
+    fields:
     - role_id: admins
     - permission_id: user_profile_update
-  - admins_ws_user_profile_insert
+- role_ws_permission_admins_user_profile_insert|instance
+    type: role_ws_permission
+    fields:
     - role_id: admins
     - permission_id: user_profile_insert
