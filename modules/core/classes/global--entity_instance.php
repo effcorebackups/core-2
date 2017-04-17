@@ -7,6 +7,16 @@ namespace effectivecore {
   public $name;
   public $fields;
 
+  static function get_entities() { # @todo: use cache
+    $entities = [];
+    foreach (settings::$data['entities'] as $c_entities) {
+      foreach ($c_entities as $c_entity) {
+        $entities[$c_entity->name] = $c_entity;
+      }
+    }
+    return $entities;
+  }
+
   function __construct($name = '', $fields = null) {
     $this->name = $name;
     if (is_array($fields)) {
@@ -18,12 +28,7 @@ namespace effectivecore {
   }
 
   function load() {
-    $entities = [];
-    foreach (settings::$data['entities'] as $c_entities) {
-      foreach ($c_entities as $c_entity) {
-        $entities[$c_entity->name] = $c_entity;
-      }
-    }
+    $entities = static::get_entities();
     $data = reset(db::query('SELECT '.implode(', ', array_keys((array)$entities[$this->name]->fields)).' '.
                             'FROM `'.$this->name.'` '.
                             'WHERE id = "'.$this->fields->id.'" '.
@@ -38,6 +43,12 @@ namespace effectivecore {
   }
 
   function save() {
+    $entities = static::get_entities();
+    $result = db::query('INSERT INTO `'.$this->name.'` (`'.
+                         implode('`, `', array_keys((array)$entities[$this->name]->fields)).'`) VALUES ("'.
+                         implode('", "', array_values((array)$this->fields)).'")'
+    );
+    return $result;
   }
 
 }}
