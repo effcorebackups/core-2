@@ -5,17 +5,24 @@ entities
     fields
     - id
         type: int
+        size: 11
         unsigned: true
         auto_increment: true
+        not_null: true
+    - password
+        type: varchar
+        size: 255
     - email
         type: varchar
         size: 255
+        not_null: true
     - created
         type: timestamp
         null: true
-        default: null
     - is_locked
         type: int
+        size: 1
+        null: true
     primary_keys
     - id: id
 - session|entity
@@ -23,17 +30,66 @@ entities
     charset: utf8
     fields
     - id
-        type: int
-        unsigned: true
-        auto_increment: true
+        type: varchar
+        size: 255
     - user_id
         type: int
+        size: 11
         unsigned: true
+        not_null: true
     - created
         type: timestamp
         null: true
-        default: null
     - data
         type: longblob
+        null: true
     primary_keys
     - id: id
+- role|entity
+    name: role
+    charset: utf8
+    fields
+    - id
+        type: varchar
+        size: 255
+        not_null: true
+    - title
+        type: varchar
+        size: 255
+        not_null: true
+    - is_embed
+        type: int
+        size: 1
+        null: true
+    primary_keys
+    - id: id
+- permission|entity
+    name: permission
+    charset: utf8
+    fields
+    - id
+        type: varchar
+        size: 255
+        not_null: true
+    - title
+        type: varchar
+        size: 255
+        not_null: true
+    primary_keys
+    - id: id
+- role_ws_user|entity
+    name: role_ws_user
+    charset: utf8
+    fields
+    - role_id
+        type: varchar
+        size: 255
+        not_null: true
+    - user_id
+        type: int
+        size: 11
+        unsigned: true
+        not_null: true
+    primary_keys
+    - role_id: role_id
+    - user_id: user_id
