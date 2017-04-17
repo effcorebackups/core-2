@@ -4,7 +4,7 @@ namespace effectivecore\modules\user {
           use \effectivecore\url;
           use \effectivecore\settings;
           use \effectivecore\messages;
-          use \effectivecore\modules\data\db;
+          use \effectivecore\modules\storage\db;
           abstract class events_module extends \effectivecore\events_module {
 
   static function on_init() {

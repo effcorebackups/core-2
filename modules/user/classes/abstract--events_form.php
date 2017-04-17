@@ -3,7 +3,7 @@
 namespace effectivecore\modules\user {
           use \effectivecore\urls;
           use \effectivecore\messages;
-          use \effectivecore\modules\data\db;
+          use \effectivecore\modules\storage\db;
           use const \effectivecore\format_datetime;
           abstract class events_form extends \effectivecore\events_form {
 

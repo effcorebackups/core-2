@@ -2,7 +2,7 @@
 
 namespace effectivecore\modules\user {
           use \effectivecore\urls;
-          use \effectivecore\modules\data\db;
+          use \effectivecore\modules\storage\db;
           abstract class events_token extends \effectivecore\events_token {
 
   static function on_replace($match) {

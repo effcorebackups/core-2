@@ -2,7 +2,7 @@
 
 namespace effectivecore\modules\user {
           use \effectivecore\core;
-          abstract class table_role_by_user extends \effectivecore\modules\data\db_table {
+          abstract class table_role_by_user extends \effectivecore\modules\storage\db_table {
 
   static $table_name = 'role_by_user';
   static $fields = [

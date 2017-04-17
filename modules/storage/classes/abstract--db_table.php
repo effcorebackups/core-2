@@ -1,6 +1,6 @@
 <?php
 
-namespace effectivecore\modules\data {
+namespace effectivecore\modules\storage {
           use \effectivecore\factory;
           abstract class db_table {
 

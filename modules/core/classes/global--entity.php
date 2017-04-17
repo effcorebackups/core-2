@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          use \effectivecore\modules\data\db;
+          use \effectivecore\modules\storage\db;
           class entity {
 
   function install() {
