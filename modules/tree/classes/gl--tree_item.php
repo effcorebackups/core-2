@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          use \effectivecore\modules\user\access;
+          use \effectivecore\modules\user\access_factory as access;
           class tree_item extends \effectivecore\node {
 
   public $title;

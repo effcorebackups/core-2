@@ -26,7 +26,7 @@ namespace effectivecore\modules\user {
       }
     }
  /* init user */
-    user::init($user_id);
+    user_factory::init($user_id);
   }
 
   static function destroy($user_id) {

@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore\modules\user {
-          abstract class user {
+          abstract class user_factory {
 
   static $current;
 

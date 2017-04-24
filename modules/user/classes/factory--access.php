@@ -1,7 +1,8 @@
 <?php
 
 namespace effectivecore\modules\user {
-          abstract class access {
+          use \effectivecore\modules\user\user_factory as user;
+          abstract class access_factory {
 
   static function check($access) {
     foreach (user::$current->roles as $c_role) {

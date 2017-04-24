@@ -4,6 +4,7 @@ namespace effectivecore\modules\user {
           use \effectivecore\urls_factory;
           use \effectivecore\messages_factory;
           use \effectivecore\modules\storage\db;
+          use \effectivecore\modules\user\user_factory as user;
           use const \effectivecore\format_datetime;
           abstract class events_form extends \effectivecore\events_form {
 

@@ -10,8 +10,8 @@ namespace effectivecore\modules\page {
           use \effectivecore\token_factory;
           use \effectivecore\template;
           use \effectivecore\console_factory;
-          use \effectivecore\modules\user\user;
-          use \effectivecore\modules\user\access;
+          use \effectivecore\modules\user\user_factory as user;
+          use \effectivecore\modules\user\access_factory as access;
           use const \effectivecore\br;
           abstract class page_factory {
 
