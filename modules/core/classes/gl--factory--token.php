@@ -1,12 +1,13 @@
 <?php
 
 namespace effectivecore {
+          use \effectivecore\settings_factory as settings;
           abstract class token_factory {
 
   static $data;
 
   static function init() {
-    foreach (settings_factory::$data['tokens'] as $c_tokens) {
+    foreach (settings::$data['tokens'] as $c_tokens) {
       foreach ($c_tokens as $c_token) {
         static::$data[$c_token->match] = $c_token;
       }

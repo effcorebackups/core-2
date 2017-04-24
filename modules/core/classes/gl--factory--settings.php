@@ -2,6 +2,7 @@
 
 namespace effectivecore {
           use \effectivecore\files_factory as files;
+          use \effectivecore\parser_factory as parser;
           abstract class settings_factory {
 
   static $data;
@@ -30,7 +31,7 @@ namespace effectivecore {
           break;
         }
       }
-      foreach (parser_factory::parse_settings($c_file->load()) as $c_type => $c_data) {
+      foreach (parser::parse_settings($c_file->load()) as $c_type => $c_data) {
         if (is_object($c_data)) {
           if ($c_type == 'module') $c_data->path = $modules[$c_scope];
           $parse[$c_type][$c_scope] = $c_data;

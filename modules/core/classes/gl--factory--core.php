@@ -1,6 +1,7 @@
 <?php
 
 namespace effectivecore {
+          use \effectivecore\settings_factory as settings;
           abstract class core_factory {
 
   static function init() {    
@@ -12,7 +13,7 @@ namespace effectivecore {
     }
   # single entry point
     $file_types = [];
-    foreach (settings_factory::$data['file_types'] as $c_types) {
+    foreach (settings::$data['file_types'] as $c_types) {
       foreach ($c_types as $c_type_name => $c_type_info) {
         $file_types[$c_type_name] = $c_type_info;
       }

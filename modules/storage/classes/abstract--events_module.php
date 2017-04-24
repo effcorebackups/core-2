@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore\modules\storage {
-          use \effectivecore\settings_factory;
+          use \effectivecore\settings_factory as settings;
           use \effectivecore\factory;
           abstract class events_module extends \effectivecore\events_module {
 
@@ -9,12 +9,12 @@ namespace effectivecore\modules\storage {
     storage_factory::init();
   # old code
     $is_init = db_factory::init(
-      settings_factory::$data['db']['storage']->prod->driver,
-      settings_factory::$data['db']['storage']->prod->host,
-      settings_factory::$data['db']['storage']->prod->database_name,
-      settings_factory::$data['db']['storage']->prod->username,
-      settings_factory::$data['db']['storage']->prod->password,
-      settings_factory::$data['db']['storage']->prod->table_prefix
+      settings::$data['db']['storage']->prod->driver,
+      settings::$data['db']['storage']->prod->host,
+      settings::$data['db']['storage']->prod->database_name,
+      settings::$data['db']['storage']->prod->username,
+      settings::$data['db']['storage']->prod->password,
+      settings::$data['db']['storage']->prod->table_prefix
     );
     if (!$is_init) {
       factory::send_header_and_exit('access_denided',
