@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          abstract class console {
+          abstract class console_factory {
 
   static $data = [];
 

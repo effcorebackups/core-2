@@ -10,7 +10,7 @@ namespace effectivecore\modules\page {
           use \effectivecore\timer;
           use \effectivecore\token;
           use \effectivecore\template;
-          use \effectivecore\console;
+          use \effectivecore\console_factory;
           use \effectivecore\modules\user\user;
           use \effectivecore\modules\user\access;
           use const \effectivecore\br;
@@ -87,9 +87,9 @@ namespace effectivecore\modules\page {
   # stop timer
     timer::tap('load_time');
   # set some log info
-    console::set_log('Generation time', timer::get_period('load_time', 0, 1).' sec.');
-    console::set_log('User roles', implode(', ', user::$current->roles));
-    static::add_element(console::render(), 'console'); # @todo: show console only for admins
+    console_factory::set_log('Generation time', timer::get_period('load_time', 0, 1).' sec.');
+    console_factory::set_log('User roles', implode(', ', user::$current->roles));
+    static::add_element(console_factory::render(), 'console'); # @todo: show console only for admins
   # move messages to last position
     $messages = static::$data['messages'];
     unset(static::$data['messages']);
