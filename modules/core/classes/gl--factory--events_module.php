@@ -2,7 +2,7 @@
 
 namespace effectivecore {
           use \effectivecore\console_factory as console;
-          abstract class events_module extends events_factory {
+          abstract class events_module_factory extends events_factory {
 
   static function on_init() {
     require_once('gl--factory--cache.php');

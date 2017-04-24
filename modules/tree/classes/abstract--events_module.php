@@ -3,7 +3,7 @@
 namespace effectivecore\modules\tree {
           use \effectivecore\factory;
           use \effectivecore\settings_factory as settings;
-          abstract class events_module extends \effectivecore\events_module {
+          abstract class events_module extends \effectivecore\events_module_factory {
 
   static function on_init() {
   # link all parents for tree_items

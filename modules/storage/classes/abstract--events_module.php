@@ -5,7 +5,7 @@ namespace effectivecore\modules\storage {
           use \effectivecore\settings_factory as settings;
           use \effectivecore\modules\storage\db_factory as db;
           use \effectivecore\modules\storage\storage_factory as storage;
-          abstract class events_module extends \effectivecore\events_module {
+          abstract class events_module extends \effectivecore\events_module_factory {
 
   static function on_init() {
     storage::init();
