@@ -2,7 +2,7 @@
 
 namespace effectivecore\modules\user {
           use const \effectivecore\format_datetime;
-          abstract class table_user extends \effectivecore\modules\storage\db_table {
+          abstract class table_user extends \effectivecore\modules\storage\db_table_factory {
 
   static $table_name = 'user';
   static $fields = [

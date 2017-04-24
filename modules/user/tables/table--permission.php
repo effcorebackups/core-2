@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore\modules\user {
-          abstract class table_permission extends \effectivecore\modules\storage\db_table {
+          abstract class table_permission extends \effectivecore\modules\storage\db_table_factory {
 
   static $table_name = 'permission';
   static $fields = [

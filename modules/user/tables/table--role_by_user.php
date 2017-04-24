@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore\modules\user {
-          abstract class table_role_by_user extends \effectivecore\modules\storage\db_table {
+          abstract class table_role_by_user extends \effectivecore\modules\storage\db_table_factory {
 
   static $table_name = 'role_by_user';
   static $fields = [
