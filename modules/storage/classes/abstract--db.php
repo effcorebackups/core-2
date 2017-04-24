@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore\modules\storage {
-          use \effectivecore\timer;
+          use \effectivecore\timer_factory;
           use \effectivecore\console_factory;
           abstract class db {
 
@@ -32,11 +32,11 @@ namespace effectivecore\modules\storage {
   static function query($sql, $fetch_mode = null) {
     $sql = str_replace('%T_', static::$table_prefix, $sql);
     static::$queries[] = $sql;
-    timer::tap('sql_'.count(static::$queries));
+    timer_factory::tap('sql_'.count(static::$queries));
     $query_result = static::$connection->query($sql);
-    timer::tap('sql_'.count(static::$queries));
+    timer_factory::tap('sql_'.count(static::$queries));
     console_factory::set_log(
-      timer::get_period('sql_'.count(static::$queries), 0, 1).' sec.', $sql, 'SQL queries'
+      timer_factory::get_period('sql_'.count(static::$queries), 0, 1).' sec.', $sql, 'SQL queries'
     );
     switch (substr($sql, 0, 6)) {
       case 'SELECT':

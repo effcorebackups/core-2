@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          abstract class timer {
+          abstract class timer_factory {
 
   static $data = [];
 
