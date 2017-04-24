@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          abstract class translate {
+          abstract class translate_factory {
 
   static $lang_current = 'ru';
   static $data;
