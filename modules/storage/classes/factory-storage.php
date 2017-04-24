@@ -1,13 +1,13 @@
 <?php
 
 namespace effectivecore\modules\storage {
-          use \effectivecore\settings;
+          use \effectivecore\settings_factory;
           abstract class storage_factory {
 
   static $data;
 
   static function init() {
-    foreach (settings::$data['storages'] as $c_storages) {
+    foreach (settings_factory::$data['storages'] as $c_storages) {
       foreach ($c_storages as $c_storage) {
         static::$data[$c_storage->id] = $c_storage;
       }

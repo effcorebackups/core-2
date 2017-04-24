@@ -14,10 +14,10 @@ namespace effectivecore {
       static::set_var($c_var_name, $c_var_value);
     }
   # find template
-    foreach (settings::$data['templates'] as $c_module_id => $c_templates) {
+    foreach (settings_factory::$data['templates'] as $c_module_id => $c_templates) {
       foreach ($c_templates as $c_name => $c_path) {
         if ($name == $c_name) {
-          $file = new file(settings::$data['module'][$c_module_id]->path.'/'.$c_path);
+          $file = new file(settings_factory::$data['module'][$c_module_id]->path.'/'.$c_path);
           $this->markup = $file->load();
           return $this;
         }

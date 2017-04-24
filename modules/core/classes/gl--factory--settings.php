@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          abstract class settings {
+          abstract class settings_factory {
 
   static $data;
 
@@ -42,8 +42,8 @@ namespace effectivecore {
     }
     $file = new file(dir_cache.'settings.php');
     $file->set_data(
-      "<?php \n\nnamespace effectivecore { # settings::\$data[type][scope]...\n\n".
-         factory::data_export($parse, '  settings::$data').
+      "<?php \n\nnamespace effectivecore { # settings_factory::\$data[type][scope]...\n\n".
+         factory::data_export($parse, '  settings_factory::$data').
       "\n}");
     $file->save();
     factory::send_header_and_exit('page_refresh',

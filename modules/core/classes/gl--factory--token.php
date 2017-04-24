@@ -6,7 +6,7 @@ namespace effectivecore {
   static $data;
 
   static function init() {
-    foreach (settings::$data['tokens'] as $c_tokens) {
+    foreach (settings_factory::$data['tokens'] as $c_tokens) {
       foreach ($c_tokens as $c_token) {
         static::$data[$c_token->match] = $c_token;
       }

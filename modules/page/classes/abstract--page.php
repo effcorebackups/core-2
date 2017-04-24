@@ -2,7 +2,7 @@
 
 namespace effectivecore\modules\page {
           use \effectivecore\factory;
-          use \effectivecore\settings;
+          use \effectivecore\settings_factory;
           use \effectivecore\messages;
           use \effectivecore\urls_factory;
           use \effectivecore\url;
@@ -25,7 +25,7 @@ namespace effectivecore\modules\page {
     $matches = 0;
     $denided = false;
     $call_stack = [];
-    foreach (settings::$data['pages'] as $module_id => $c_pages) {
+    foreach (settings_factory::$data['pages'] as $module_id => $c_pages) {
       foreach ($c_pages as $c_page) {
         if (isset($c_page->url->match) && preg_match($c_page->url->match, urls_factory::$current->path)) {
           if (!isset($c_page->access) ||
@@ -75,7 +75,7 @@ namespace effectivecore\modules\page {
             case 'text': static::add_element($c_content->content, $c_region); break;
             case 'code': static::add_element(call_user_func_array($c_content->handler, static::$args), $c_region); break;
             case 'file': static::add_element('[file] is under construction', $c_region); break; # @todo: create functionality
-            case 'link': static::add_element(factory::npath_get_object($c_content->link, settings::$data), $c_region); break;
+            case 'link': static::add_element(factory::npath_get_object($c_content->link, settings_factory::$data), $c_region); break;
             default: static::add_element($c_content, $c_region);
           }
         }

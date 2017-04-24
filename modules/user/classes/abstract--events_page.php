@@ -3,7 +3,6 @@
 namespace effectivecore\modules\user {
           use \effectivecore\factory;
           use \effectivecore\entity_instance;
-          use \effectivecore\settings;
           use \effectivecore\markup;
           use \effectivecore\table;
           use \effectivecore\table_body_row_cell;

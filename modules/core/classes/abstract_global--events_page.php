@@ -21,7 +21,7 @@ namespace effectivecore {
       'Is always on'
     ];
     $data = [];
-    foreach (settings::$data['module'] as $c_module) {
+    foreach (settings_factory::$data['module'] as $c_module) {
       $data[] = [
         $c_module->title,
         $c_module->id,
