@@ -3,7 +3,7 @@
 namespace effectivecore\modules\user {
           use \effectivecore\urls_factory as urls;
           use \effectivecore\modules\user\user_factory as user;
-          abstract class events_token extends \effectivecore\events_token {
+          abstract class events_token extends \effectivecore\events_token_factory {
 
   static function on_replace($match) {
     if (!empty(user::$current->id)) {
