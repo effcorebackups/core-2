@@ -14,7 +14,7 @@ namespace effectivecore {
     token::init();
     urls::init();
     events::init();
-    core::init();
+    core_factory::init();
   # init modules
     ob_start();
     console::set_log('init_core', '\effectivecore\events_module::on_init', 'Init calls');

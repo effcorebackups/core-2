@@ -1,7 +1,6 @@
 <?php
 
 namespace effectivecore\modules\user {
-          use \effectivecore\core;
           abstract class table_permission extends \effectivecore\modules\storage\db_table {
 
   static $table_name = 'permission';

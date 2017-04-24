@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          abstract class core {
+          abstract class core_factory {
 
   static function init() {    
   # redirect from '/any_path/' to '/any_path'
