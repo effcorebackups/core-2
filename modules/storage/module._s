@@ -5,6 +5,3 @@ module
   version: 1-0
   is_embed: true
   is_always_on: true
-  on_init
-    handler: \effectivecore\modules\storage\events_module::on_init
-    weight: -90

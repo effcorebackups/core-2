@@ -3,17 +3,7 @@
 namespace effectivecore {
           abstract class core {
 
-  static function init() {
-    require_once('abstract_global--cache.php');
-    require_once('abstract_global--factory.php');
-    require_once('abstract_global--files.php');
-    require_once('global--file.php');
-    spl_autoload_register('\effectivecore\factory::autoload');
-  # classes initialization
-    settings::init();
-    translate::init();
-    token::init();
-    urls::init();
+  static function init() {    
   # redirect from '/any_path/' to '/any_path'
     if (urls::$current->path != '/' && substr(urls::$current->path, -1) == '/') {
       $right_url = clone urls::$current;
@@ -43,13 +33,6 @@ namespace effectivecore {
         print $data;
         exit();
       }
-    }
-  # init modules
-    ob_start();
-    $call_stack = factory::collect_by_property(settings::$data['module'], 'on_init', 'id');
-    foreach (factory::array_sort_by_weight($call_stack) as $module_id => $c_event) {
-      console::set_log('Module ID = '.$module_id, $c_event->handler, 'Init calls');
-      call_user_func($c_event->handler);
     }
   }
 

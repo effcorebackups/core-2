@@ -3,4 +3,6 @@
 namespace effectivecore {
           abstract class events {
 
+  static $data;
+
 }}
