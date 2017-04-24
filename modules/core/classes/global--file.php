@@ -9,7 +9,7 @@ namespace effectivecore {
   public $data;
 
   function __construct($path) {
-    files::parse_path($path, $this);
+    files_factory::parse_path($path, $this);
   }
 
   function load() {
