@@ -27,7 +27,7 @@ namespace effectivecore {
   }
 
   static function get_classes_map() {
-    $cache = cache::get('classes_map');
+    $cache = cache_factory::get('classes_map');
     if ($cache) {
       return $cache;
     } else {
@@ -48,7 +48,7 @@ namespace effectivecore {
           ];
         }
       }
-      cache::set('classes_map', $classes_map);
+      cache_factory::set('classes_map', $classes_map);
       return $classes_map;
     }
   }

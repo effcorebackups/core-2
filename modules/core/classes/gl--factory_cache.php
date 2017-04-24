@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          abstract class cache {
+          abstract class cache_factory {
 
   static $data = [];
 
@@ -20,7 +20,7 @@ namespace effectivecore {
     $file = new file(dir_cache.$name.'.php');
     $file->set_data(
       "<?php \n\nnamespace effectivecore { # cache for ".$name."\n\n".
-         factory::data_export($data, '  cache::$data[\''.$name.'\']').
+         factory::data_export($data, '  cache_factory::$data[\''.$name.'\']').
       "\n}");
     return $file->save();
   }

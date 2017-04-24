@@ -4,7 +4,7 @@ namespace effectivecore {
           abstract class events_module extends events {
 
   static function on_init() {
-    require_once('abstract_global--cache.php');
+    require_once('gl--factory_cache.php');
     require_once('abstract_global--factory.php');
     require_once('abstract_global--files.php');
     require_once('global--file.php');
