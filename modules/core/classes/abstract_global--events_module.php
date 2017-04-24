@@ -5,7 +5,7 @@ namespace effectivecore {
 
   static function on_init() {
     require_once('gl--factory--cache.php');
-    require_once('abstract_global--factory.php');
+    require_once('gl--factory.php');
     require_once('gl--factory--files.php');
     require_once('global--file.php');
     spl_autoload_register('\effectivecore\factory::autoload');
