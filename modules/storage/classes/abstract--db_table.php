@@ -10,30 +10,6 @@ namespace effectivecore\modules\storage {
   static $indexes     = [];
   static $charset     = 'utf8';
 
-  static function install() {
-    $fields_sql = [];
-    $p_keys = [];
-    foreach (static::$fields as $c_id => $c_info) {
-      $fields_sql[] = $c_id.' '.implode(' ', ['primary key' => false] + $c_info);
-      if (!empty($c_info['primary key'])) {
-        $p_keys[] = $c_id;
-      }
-    }
-    db::query('CREATE TABLE %T_'.static::$table_name.' ('.implode(', ', $fields_sql).(count($p_keys) ? ', primary key ('.implode(', ', $p_keys).')' : '').') default charset='.static::$charset);
-  # add unique keys
-    foreach (static::$unique_keys as $key_name => $fields) {
-      db::query('ALTER TABLE %T_'.static::$table_name.' ADD UNIQUE KEY '.$key_name.' ('.implode(', ', $fields).')');
-    }
-  # add indexes
-    foreach (static::$indexes as $index_name => $fields) {
-      db::query('ALTER TABLE %T_'.static::$table_name.' ADD INDEX '.$index_name.' ('.implode(', ', $fields).')');
-    }
-  }
-
-  static function uninstall() {
-    db::query('DROP TABLE %T_'.static::$table_name);
-  }
-
   static function select($fields = ['*'], $conditions = [], $order = [], $rcount = 0, $offset = 0) {
     if (static::$table_name) {
       return db::query('SELECT '.implode(', ', $fields).' '.

@@ -2,7 +2,7 @@
 
 namespace effectivecore\modules\storage {
           use \effectivecore\settings;
-          abstract class storage {
+          abstract class storage_factory {
 
   static $data;
 
@@ -12,6 +12,10 @@ namespace effectivecore\modules\storage {
         static::$data[$c_storage->id] = $c_storage;
       }
     }
+  }
+
+  static function get_instance($storage_id) {
+    return static::$data[$storage_id];
   }
 
 }}
