@@ -2,7 +2,7 @@
 
 namespace effectivecore\modules\user {
           use const \effectivecore\format_datetime;
-          abstract class session {
+          abstract class session_factory {
 
   static function init($user_id = 0) {
  /* renew session for user with selected id */
