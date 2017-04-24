@@ -6,6 +6,8 @@ namespace effectivecore\modules\storage {
           abstract class events_module extends \effectivecore\events_module {
 
   static function on_init() {
+    storage::init();
+
     $is_init = db::init(
       settings::$data['db']['storage']->prod->driver,
       settings::$data['db']['storage']->prod->host,

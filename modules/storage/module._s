@@ -1,7 +1,7 @@
 module
   id: storage
   title: Storage
-  description: Module for database storage support.
+  description: Module for storages support.
   version: 1-0
   is_embed: true
   is_always_on: true

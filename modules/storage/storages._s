@@ -1,0 +1,9 @@
+storages
+- storage_db_main
+    id: db_main
+    type: sql
+    name: effectivecore
+    host: 127.0.0.1
+    username: root
+    password: 123
+    driver: mysql
