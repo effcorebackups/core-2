@@ -16,5 +16,5 @@ pages
         region: c_1_1
     - form_user_n_edit
         type: link
-        entity: forms/user/form_user_n_edit
+        link: forms/user/form_user_n_edit
         region: c_1_1

@@ -5,5 +5,5 @@ pages
     content
     - tree_user
         type: link
-        entity: trees/user/user
+        link: trees/user/user
         region: nav

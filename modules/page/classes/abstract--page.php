@@ -76,7 +76,7 @@ namespace effectivecore\modules\page {
             case 'text': static::add_element($c_content->content, $c_region); break;
             case 'code': static::add_element(call_user_func_array($c_content->handler, static::$args), $c_region); break;
             case 'file': static::add_element('[file] is under construction', $c_region); break; # @todo: create functionality
-            case 'link': static::add_element(factory::npath_get_object($c_content->entity, settings::$data), $c_region); break;
+            case 'link': static::add_element(factory::npath_get_object($c_content->link, settings::$data), $c_region); break;
             default: static::add_element($c_content, $c_region);
           }
         }

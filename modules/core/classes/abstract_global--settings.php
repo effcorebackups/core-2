@@ -42,7 +42,7 @@ namespace effectivecore {
     }
     $file = new file(dir_cache.'settings.php');
     $file->set_data(
-      "<?php \n\nnamespace effectivecore { # settings::\$data[entity_type][scope]...\n\n".
+      "<?php \n\nnamespace effectivecore { # settings::\$data[type][scope]...\n\n".
          factory::data_export($parse, '  settings::$data').
       "\n}");
     $file->save();

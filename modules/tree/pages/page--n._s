@@ -9,5 +9,5 @@ pages
     content
     - tree_main
         type: link
-        entity: trees/core/main
+        link: trees/core/main
         region: nav

@@ -15,5 +15,5 @@ pages
         region: c_1_1
     - form_user_n_delete
         type: link
-        entity: forms/user/form_user_n_delete
+        link: forms/user/form_user_n_delete
         region: c_1_1

@@ -9,5 +9,5 @@ pages
     content
     - form_user_login
         type: link
-        entity: forms/user/form_user_login
+        link: forms/user/form_user_login
         region: c_1_1
