@@ -32,7 +32,7 @@ namespace effectivecore {
     $attr = clone $this->attributes;
     if (isset($attr->href)) {
       $attr->href = token::replace($attr->href);
-      if (urls::is_active($attr->href)) {
+      if (urls_factory::is_active($attr->href)) {
         $attr->class = isset($attr->class) ? $attr->class.' active' : 'active';
       }
     }

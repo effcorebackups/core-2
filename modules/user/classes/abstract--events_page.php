@@ -8,7 +8,7 @@ namespace effectivecore\modules\user {
           use \effectivecore\table;
           use \effectivecore\table_body_row_cell;
           use \effectivecore\pager;
-          use \effectivecore\urls;
+          use \effectivecore\urls_factory;
           use \effectivecore\url;
           use \effectivecore\modules\page\page;
           abstract class events_page extends \effectivecore\events_page {
@@ -31,7 +31,7 @@ namespace effectivecore\modules\user {
       );
     } else {
       $db_user = table_user::select(['id', 'email', 'created', 'is_locked'], [], ['id'], $items_per_page, ($pager->get_current_page_num() - 1) * $items_per_page);
-      $url_back = urlencode(urls::$current->get_full());
+      $url_back = urlencode(urls_factory::$current->get_full());
       foreach ($db_user as &$c_row) {
         $c_row['actions'] = new table_body_row_cell(['class' => 'actions']);
         $c_row['actions']->add_child( new markup('a', ['href' => (new url('/user/'.$c_row['id']))->get_full()], 'view') );

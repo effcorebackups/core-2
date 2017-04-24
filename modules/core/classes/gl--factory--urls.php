@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          abstract class urls {
+          abstract class urls_factory {
 
   static $current;
 

@@ -12,7 +12,7 @@ namespace effectivecore {
     settings::init();
     translate::init();
     token::init();
-    urls::init();
+    urls_factory::init();
     events::init();
     core_factory::init();
   # init modules
