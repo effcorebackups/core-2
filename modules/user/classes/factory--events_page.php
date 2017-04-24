@@ -11,7 +11,7 @@ namespace effectivecore\modules\user {
           use \effectivecore\urls_factory as urls;
           use \effectivecore\modules\page\page_factory as page;
           use \effectivecore\modules\user\user_factory as user;
-          abstract class events_page extends \effectivecore\events_page {
+          abstract class events_page_factory extends \effectivecore\events_page_factory {
 
   static function on_show_admin_roles() {
     $data = table_role::select(['id', 'title', 'is_embed'], [], ['is_embed!']);

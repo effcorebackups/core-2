@@ -12,7 +12,7 @@ pages
     content
     - code_on_page_user_n_edit
         type: code
-        handler: \effectivecore\modules\user\events_page::on_show_user_n_edit
+        handler: \effectivecore\modules\user\events_page_factory::on_show_user_n_edit
         region: c_1_1
     - form_user_n_edit
         type: link

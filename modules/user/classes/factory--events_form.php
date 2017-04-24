@@ -7,7 +7,7 @@ namespace effectivecore\modules\user {
           use \effectivecore\modules\user\session_factory as session;
           use \effectivecore\modules\user\user_factory as user;
           use \effectivecore\modules\storage\db_factory as db;
-          abstract class events_form extends \effectivecore\events_form_factory {
+          abstract class events_form_factory extends \effectivecore\events_form_factory {
 
   function on_submit_user_n_delete($page_args, $form_args, $post_args) {
     $back_url = urldecode(urls::$current->get_args('back', 'query'));
