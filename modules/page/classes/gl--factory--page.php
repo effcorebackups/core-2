@@ -13,7 +13,7 @@ namespace effectivecore\modules\page {
           use \effectivecore\modules\user\user;
           use \effectivecore\modules\user\access;
           use const \effectivecore\br;
-          abstract class page {
+          abstract class page_factory {
 
   static $args = [];
   static $data = [];

@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          use \effectivecore\modules\page\page;
+          use \effectivecore\modules\page\page_factory;
           class form extends markup {
 
   public $form_args = [];
@@ -81,7 +81,7 @@ namespace effectivecore {
       if (isset($_POST['button']) &&
           isset($this->on_validate->handler)) {
         call_user_func(
-          $this->on_validate->handler, page::$args,
+          $this->on_validate->handler, page_factory::$args,
           $this->form_args,
           $this->post_args
         );
@@ -91,7 +91,7 @@ namespace effectivecore {
           isset($this->on_submit->handler) &&
           count($this->errors) == 0) {
         call_user_func(
-          $this->on_submit->handler, page::$args,
+          $this->on_submit->handler, page_factory::$args,
           $this->form_args,
           $this->post_args
         );

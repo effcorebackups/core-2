@@ -9,13 +9,13 @@ namespace effectivecore\modules\user {
           use \effectivecore\pager;
           use \effectivecore\urls_factory;
           use \effectivecore\url;
-          use \effectivecore\modules\page\page;
+          use \effectivecore\modules\page\page_factory;
           abstract class events_page extends \effectivecore\events_page {
 
   static function on_show_admin_roles() {
     $data = table_role::select(['id', 'title', 'is_embed'], [], ['is_embed!']);
     foreach ($data as &$c_row) $c_row['is_embed'] = $c_row['is_embed'] ? 'Yes' : 'No';
-    page::add_element(
+    page_factory::add_element(
       new table([], $data, [['ID', 'Title', 'Is embed']])
     );
   }
@@ -39,8 +39,8 @@ namespace effectivecore\modules\user {
         $c_row['is_locked'] = $c_row['is_locked'] ? 'Yes' : 'No';
       }
       $table = new table([], $db_user, [['ID', 'EMail', 'Created', 'Is embed', 'Actions']]);
-      page::add_element($table);
-      page::add_element($pager);
+      page_factory::add_element($table);
+      page_factory::add_element($pager);
     }
   }
 
@@ -56,7 +56,7 @@ namespace effectivecore\modules\user {
       if ($user->fields->id == user::$current->id || isset(user::$current->roles['admins'])) {
         unset($user->fields->password_hash);
         unset($user->fields->is_locked);
-        page::add_element(new table([], factory::array_rotate([array_keys((array)$user->fields), array_values((array)$user->fields)]), [['Parameter', 'Value']]));
+        page_factory::add_element(new table([], factory::array_rotate([array_keys((array)$user->fields), array_values((array)$user->fields)]), [['Parameter', 'Value']]));
       } else {
         factory::send_header_and_exit('access_denided',
           'Access denided!'

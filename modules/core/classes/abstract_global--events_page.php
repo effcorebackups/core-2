@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          use \effectivecore\modules\page\page;
+          use \effectivecore\modules\page\page_factory;
           abstract class events_page extends events {
 
   static function on_show_install() {
@@ -32,7 +32,7 @@ namespace effectivecore {
         $c_module->is_always_on ? 'Yes' : 'No'
       ];
     }
-    page::add_element(
+    page_factory::add_element(
       new table([], $data, [$head])
     );
   }

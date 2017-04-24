@@ -6,7 +6,7 @@ namespace effectivecore\modules\page {
 
   static function on_init() {
     messages_factory::init();
-    page::init();
+    page_factory::init();
   }
 
 }}
