@@ -6,7 +6,7 @@ namespace effectivecore\modules\page {
           use \effectivecore\urls_factory;
           use \effectivecore\url;
           use \effectivecore\markup;
-          use \effectivecore\timer_factory;
+          use \effectivecore\timer_factory as timer;
           use \effectivecore\token_factory;
           use \effectivecore\template;
           use \effectivecore\console_factory as console;
@@ -19,7 +19,7 @@ namespace effectivecore\modules\page {
   static $data = [];
 
   static function init() {
-    timer_factory::tap('load_time');
+    timer::tap('load_time');
   # create call stack and call each page
     $matches = 0;
     $denided = false;
@@ -84,9 +84,9 @@ namespace effectivecore\modules\page {
     if      ($denided == true) factory::send_header_and_exit('access_denided', 'Access denided!');
     else if ($matches == 0)    factory::send_header_and_exit('not_found', 'Page not found!');
   # stop timer
-    timer_factory::tap('load_time');
+    timer::tap('load_time');
   # set some log info
-    console::set_log('Generation time', timer_factory::get_period('load_time', 0, 1).' sec.');
+    console::set_log('Generation time', timer::get_period('load_time', 0, 1).' sec.');
     console::set_log('User roles', implode(', ', user::$current->roles));
     static::add_element(console::render(), 'console'); # @todo: show console only for admins
   # move messages to last position
