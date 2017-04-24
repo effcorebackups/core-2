@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          abstract class parser {
+          abstract class parser_factory {
 
   static function parse_settings($data) {
     $return = new \StdClass();

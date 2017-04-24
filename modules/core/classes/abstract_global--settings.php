@@ -29,7 +29,7 @@ namespace effectivecore {
           break;
         }
       }
-      foreach (parser::parse_settings($c_file->load()) as $c_type => $c_data) {
+      foreach (parser_factory::parse_settings($c_file->load()) as $c_type => $c_data) {
         if (is_object($c_data)) {
           if ($c_type == 'module') $c_data->path = $modules[$c_scope];
           $parse[$c_type][$c_scope] = $c_data;
