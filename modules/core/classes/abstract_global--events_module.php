@@ -11,7 +11,7 @@ namespace effectivecore {
     spl_autoload_register('\effectivecore\factory::autoload');
     settings::init();
     translate::init();
-    token::init();
+    token_factory::init();
     urls_factory::init();
     events::init();
     core_factory::init();

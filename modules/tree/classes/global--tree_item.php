@@ -31,14 +31,14 @@ namespace effectivecore {
   protected function render_self() {
     $attr = clone $this->attributes;
     if (isset($attr->href)) {
-      $attr->href = token::replace($attr->href);
+      $attr->href = token_factory::replace($attr->href);
       if (urls_factory::is_active($attr->href)) {
         $attr->class = isset($attr->class) ? $attr->class.' active' : 'active';
       }
     }
     return (new template('tree_item_self', [
       'attributes' => factory::data_to_attr($attr, ' '),
-      'title'      => token::replace(translate::t($this->title))
+      'title'      => token_factory::replace(translate::t($this->title))
     ]))->render();
   }
 

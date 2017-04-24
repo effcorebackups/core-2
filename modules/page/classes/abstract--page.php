@@ -8,7 +8,7 @@ namespace effectivecore\modules\page {
           use \effectivecore\url;
           use \effectivecore\markup;
           use \effectivecore\timer;
-          use \effectivecore\token;
+          use \effectivecore\token_factory;
           use \effectivecore\template;
           use \effectivecore\console_factory;
           use \effectivecore\modules\user\user;
@@ -42,7 +42,7 @@ namespace effectivecore\modules\page {
     foreach ($call_stack as $c_page) {
     # show title
       if (isset($c_page->title)) {
-        static::add_element(stripslashes(token::replace($c_page->title)), 'title');
+        static::add_element(stripslashes(token_factory::replace($c_page->title)), 'title');
       }
     # collect styles
       if (isset($c_page->styles)) {

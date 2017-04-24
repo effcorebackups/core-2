@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          abstract class token {
+          abstract class token_factory {
 
   static $data;
 
@@ -14,7 +14,7 @@ namespace effectivecore {
   }
 
   static function replace($string) {
-    return preg_replace_callback('/%%_[a-z0-9_]+/s', '\\effectivecore\\token::_replace_callback', $string);
+    return preg_replace_callback('/%%_[a-z0-9_]+/s', '\\effectivecore\\token_factory::_replace_callback', $string);
   }
 
   static protected function _replace_callback($found) {
