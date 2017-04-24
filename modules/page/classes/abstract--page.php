@@ -20,7 +20,6 @@ namespace effectivecore\modules\page {
   static $data = [];
 
   static function init() {
-    messages::init();
     timer::tap('load_time');
   # create call stack and call each page
     $matches = 0;
