@@ -2,7 +2,7 @@
 
 namespace effectivecore\modules\user {
           use \effectivecore\urls_factory;
-          use \effectivecore\messages;
+          use \effectivecore\messages_factory;
           use \effectivecore\modules\storage\db;
           use const \effectivecore\format_datetime;
           abstract class events_form extends \effectivecore\events_form {
@@ -15,10 +15,10 @@ namespace effectivecore\modules\user {
         $result = table_user::delete(['id' => $user_id]);
         if ($result) {
           table_session::delete(['user_id' => $user_id]);
-          messages::add_new('User with id = '.$user_id.' was deleted.');
+          messages_factory::add_new('User with id = '.$user_id.' was deleted.');
           urls_factory::go($back_url ?: '/admin/users');
         } else {
-          messages::add_new('User is not deleted!', 'error');
+          messages_factory::add_new('User is not deleted!', 'error');
         }
         break;
       case 'cancel':
@@ -35,10 +35,10 @@ namespace effectivecore\modules\user {
       case 'save':
         $result = table_user::update(['password_hash' => $password_hash], ['id' => $user_id]);
         if ($result) {
-          messages::add_new('Parameters of user with id = '.$user_id.' was updated.');
+          messages_factory::add_new('Parameters of user with id = '.$user_id.' was updated.');
           urls_factory::go($back_url ?: '/user/'.$user_id);
         } else {
-          messages::add_new('Parameters is not updated!', 'error');
+          messages_factory::add_new('Parameters is not updated!', 'error');
         }
         break;
     }
@@ -54,7 +54,7 @@ namespace effectivecore\modules\user {
           session::init($result['id']);
           urls_factory::go('/user/'.$result['id']);
         } else {
-          messages::add_new('Incorrect email or password!', 'error');
+          messages_factory::add_new('Incorrect email or password!', 'error');
         }
         break;
     }
@@ -68,14 +68,14 @@ namespace effectivecore\modules\user {
       case 'register':
         $is_exist = table_user::select_one(['id'], ['email' => $email]);
         if ($is_exist) {
-          messages::add_new('User with this email is already exist!', 'error');
+          messages_factory::add_new('User with this email is already exist!', 'error');
         } else {
           $new_id = table_user::insert(['email' => $email, 'password_hash' => $password_hash, 'created' => $created]);
           if ($new_id) {
             session::init($new_id);
             urls_factory::go('/user/'.$new_id);
           } else {
-            messages::add_new('User is not created!', 'error');
+            messages_factory::add_new('User is not created!', 'error');
           }
         }
         break;

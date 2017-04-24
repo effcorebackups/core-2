@@ -3,7 +3,6 @@
 namespace effectivecore\modules\page {
           use \effectivecore\factory;
           use \effectivecore\settings_factory;
-          use \effectivecore\messages;
           use \effectivecore\urls_factory;
           use \effectivecore\url;
           use \effectivecore\markup;

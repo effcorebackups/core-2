@@ -74,7 +74,7 @@ namespace effectivecore {
         if (!isset($children[$element_id]->attributes->class)) $children[$element_id]->attributes->class = '';
         $children[$element_id]->attributes->class.= ' error';
         foreach ($c_errors as $c_error) {
-          messages::add_new($c_error, 'error');
+          messages_factory::add_new($c_error, 'error');
         }
       }
     # call validate handler
