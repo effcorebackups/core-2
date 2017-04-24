@@ -8,7 +8,7 @@ namespace effectivecore\modules\storage {
   static function on_init() {
     storage_factory::init();
   # old code
-    $is_init = db::init(
+    $is_init = db_factory::init(
       settings_factory::$data['db']['storage']->prod->driver,
       settings_factory::$data['db']['storage']->prod->host,
       settings_factory::$data['db']['storage']->prod->database_name,

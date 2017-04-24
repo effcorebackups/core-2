@@ -15,7 +15,7 @@ namespace effectivecore {
 
   function init() {
     if (empty($this->is_init)) {
-      $this->is_init = db::init('mysql',
+      $this->is_init = db_factory::init('mysql',
         storage_factory::$data[$this->id]->hostname,
         storage_factory::$data[$this->id]->name,
         storage_factory::$data[$this->id]->username,
@@ -43,7 +43,7 @@ namespace effectivecore {
       if (property_exists($c_info, 'default') && is_null($c_info->default))      $c_prop[] = 'default null';
       $field_sql[] = '`'.$c_name.'` '.implode(' ', $c_prop);
     }
-    return db::query('CREATE TABLE `'.$entity->name.'` ('.(isset($entity->primary_keys) ?
+    return db_factory::query('CREATE TABLE `'.$entity->name.'` ('.(isset($entity->primary_keys) ?
       implode(', ', $field_sql).', PRIMARY KEY (`'.implode('`, `', $entity->primary_keys).'`)' :
       implode(', ', $field_sql)
     ).') default charset='.$entity->charset.';');
@@ -51,7 +51,7 @@ namespace effectivecore {
 
   function uninstall_entity($entity) {
     $this->init();
-    db::query('DROP TABLE `'.$entity->name.'`;');
+    db_factory::query('DROP TABLE `'.$entity->name.'`;');
   }
 
   function load_entity() {

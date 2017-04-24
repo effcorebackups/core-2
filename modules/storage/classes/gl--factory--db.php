@@ -3,7 +3,7 @@
 namespace effectivecore\modules\storage {
           use \effectivecore\timer_factory;
           use \effectivecore\console_factory;
-          abstract class db {
+          abstract class db_factory {
 
   static $connection;
   static $driver;

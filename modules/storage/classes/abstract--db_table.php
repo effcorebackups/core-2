@@ -2,6 +2,7 @@
 
 namespace effectivecore\modules\storage {
           use \effectivecore\factory;
+          use \effectivecore\modules\storage\db_factory as db;
           abstract class db_table {
 
   static $table_name  = null;

@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          use \effectivecore\modules\storage\db;
+          use \effectivecore\modules\storage\db_factory as db;
           class entity_instance {
 
   public $name;
