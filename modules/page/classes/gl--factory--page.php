@@ -1,6 +1,7 @@
 <?php
 
 namespace effectivecore\modules\page {
+          use const \effectivecore\br;
           use \effectivecore\url;
           use \effectivecore\markup;
           use \effectivecore\template;
@@ -12,7 +13,6 @@ namespace effectivecore\modules\page {
           use \effectivecore\console_factory as console;
           use \effectivecore\modules\user\user_factory as user;
           use \effectivecore\modules\user\access_factory as access;
-          use const \effectivecore\br;
           abstract class page_factory {
 
   static $args = [];

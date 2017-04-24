@@ -1,12 +1,12 @@
 <?php
 
 namespace effectivecore\modules\user {
+          use const \effectivecore\format_datetime;
           use \effectivecore\urls_factory as urls;
           use \effectivecore\messages_factory as messages;
           use \effectivecore\modules\user\session_factory as session;
           use \effectivecore\modules\user\user_factory as user;
           use \effectivecore\modules\storage\db_factory as db;
-          use const \effectivecore\format_datetime;
           abstract class events_form extends \effectivecore\events_form {
 
   function on_submit_user_n_delete($page_args, $form_args, $post_args) {

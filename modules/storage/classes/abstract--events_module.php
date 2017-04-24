@@ -1,14 +1,16 @@
 <?php
 
 namespace effectivecore\modules\storage {
-          use \effectivecore\settings_factory as settings;
           use \effectivecore\factory;
+          use \effectivecore\settings_factory as settings;
+          use \effectivecore\modules\storage\db_factory as db;
+          use \effectivecore\modules\storage\storage_factory as storage;
           abstract class events_module extends \effectivecore\events_module {
 
   static function on_init() {
-    storage_factory::init();
+    storage::init();
   # old code
-    $is_init = db_factory::init(
+    $is_init = db::init(
       settings::$data['db']['storage']->prod->driver,
       settings::$data['db']['storage']->prod->host,
       settings::$data['db']['storage']->prod->database_name,

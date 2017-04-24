@@ -7,16 +7,16 @@ namespace effectivecore\modules\user {
           use \effectivecore\table;
           use \effectivecore\table_body_row_cell;
           use \effectivecore\pager;
-          use \effectivecore\urls_factory;
           use \effectivecore\url;
-          use \effectivecore\modules\page\page_factory;
+          use \effectivecore\urls_factory as urls;
+          use \effectivecore\modules\page\page_factory as page;
           use \effectivecore\modules\user\user_factory as user;
           abstract class events_page extends \effectivecore\events_page {
 
   static function on_show_admin_roles() {
     $data = table_role::select(['id', 'title', 'is_embed'], [], ['is_embed!']);
     foreach ($data as &$c_row) $c_row['is_embed'] = $c_row['is_embed'] ? 'Yes' : 'No';
-    page_factory::add_element(
+    page::add_element(
       new table([], $data, [['ID', 'Title', 'Is embed']])
     );
   }
@@ -31,7 +31,7 @@ namespace effectivecore\modules\user {
       );
     } else {
       $db_user = table_user::select(['id', 'email', 'created', 'is_locked'], [], ['id'], $items_per_page, ($pager->get_current_page_num() - 1) * $items_per_page);
-      $url_back = urlencode(urls_factory::$current->get_full());
+      $url_back = urlencode(urls::$current->get_full());
       foreach ($db_user as &$c_row) {
         $c_row['actions'] = new table_body_row_cell(['class' => 'actions']);
         $c_row['actions']->add_child( new markup('a', ['href' => (new url('/user/'.$c_row['id']))->get_full()], 'view') );
@@ -40,8 +40,8 @@ namespace effectivecore\modules\user {
         $c_row['is_locked'] = $c_row['is_locked'] ? 'Yes' : 'No';
       }
       $table = new table([], $db_user, [['ID', 'EMail', 'Created', 'Is embed', 'Actions']]);
-      page_factory::add_element($table);
-      page_factory::add_element($pager);
+      page::add_element($table);
+      page::add_element($pager);
     }
   }
 
@@ -57,7 +57,7 @@ namespace effectivecore\modules\user {
       if ($user->fields->id == user::$current->id || isset(user::$current->roles['admins'])) {
         unset($user->fields->password_hash);
         unset($user->fields->is_locked);
-        page_factory::add_element(new table([], factory::array_rotate([array_keys((array)$user->fields), array_values((array)$user->fields)]), [['Parameter', 'Value']]));
+        page::add_element(new table([], factory::array_rotate([array_keys((array)$user->fields), array_values((array)$user->fields)]), [['Parameter', 'Value']]));
       } else {
         factory::send_header_and_exit('access_denided',
           'Access denided!'

@@ -2,6 +2,7 @@
 
 namespace effectivecore\modules\user {
           use const \effectivecore\format_datetime;
+          use \effectivecore\modules\user\user_factory as user;
           abstract class session_factory {
 
   static function init($user_id = 0) {
@@ -26,7 +27,7 @@ namespace effectivecore\modules\user {
       }
     }
  /* init user */
-    user_factory::init($user_id);
+    user::init($user_id);
   }
 
   static function destroy($user_id) {
