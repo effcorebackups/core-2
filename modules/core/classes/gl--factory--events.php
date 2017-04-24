@@ -2,7 +2,7 @@
 
 namespace effectivecore {
           use \effectivecore\settings_factory as settings;
-          abstract class events {
+          abstract class events_factory {
 
   static $data;
 

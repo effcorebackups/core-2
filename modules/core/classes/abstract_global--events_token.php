@@ -1,6 +1,6 @@
 <?php
 
 namespace effectivecore {
-          abstract class events_token extends events {
+          abstract class events_token extends events_factory {
 
 }}

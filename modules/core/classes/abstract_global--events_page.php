@@ -3,7 +3,7 @@
 namespace effectivecore {
           use \effectivecore\settings_factory as settings;
           use \effectivecore\modules\page\page_factory as page;
-          abstract class events_page extends events {
+          abstract class events_page extends events_factory {
 
   static function on_show_install() {
     foreach (static::$data->on_install as $c_event) {
