@@ -1,6 +1,7 @@
 <?php
 
 namespace effectivecore {
+          use \effectivecore\token_factory as token;
           use \effectivecore\settings_factory as settings;
           abstract class core_factory {
 
@@ -30,7 +31,7 @@ namespace effectivecore {
       if (is_file($path) && is_readable($path)) {
         $data = (new file($path))->load();
         if (isset($file_types[$ext]->mime)) header('Content-type: '.$file_types[$ext]->mime, true);
-        if (isset($file_types[$ext]->use_tokens)) $data = token_factory::replace($data);
+        if (isset($file_types[$ext]->use_tokens)) $data = token::replace($data);
         print $data;
         exit();
       }

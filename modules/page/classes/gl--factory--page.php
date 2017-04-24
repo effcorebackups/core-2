@@ -1,14 +1,14 @@
 <?php
 
 namespace effectivecore\modules\page {
-          use \effectivecore\factory;
-          use \effectivecore\settings_factory as settings;
-          use \effectivecore\urls_factory;
           use \effectivecore\url;
           use \effectivecore\markup;
-          use \effectivecore\timer_factory as timer;
-          use \effectivecore\token_factory;
           use \effectivecore\template;
+          use \effectivecore\factory;
+          use \effectivecore\urls_factory as urls;
+          use \effectivecore\settings_factory as settings;
+          use \effectivecore\timer_factory as timer;
+          use \effectivecore\token_factory as token;
           use \effectivecore\console_factory as console;
           use \effectivecore\modules\user\user_factory as user;
           use \effectivecore\modules\user\access_factory as access;
@@ -26,7 +26,7 @@ namespace effectivecore\modules\page {
     $call_stack = [];
     foreach (settings::$data['pages'] as $module_id => $c_pages) {
       foreach ($c_pages as $c_page) {
-        if (isset($c_page->url->match) && preg_match($c_page->url->match, urls_factory::$current->path)) {
+        if (isset($c_page->url->match) && preg_match($c_page->url->match, urls::$current->path)) {
           if (!isset($c_page->access) ||
               (isset($c_page->access) && access::check($c_page->access))) {
             if ($c_page->url->match != '%.*%') $matches++;
@@ -41,7 +41,7 @@ namespace effectivecore\modules\page {
     foreach ($call_stack as $c_page) {
     # show title
       if (isset($c_page->title)) {
-        static::add_element(stripslashes(token_factory::replace($c_page->title)), 'title');
+        static::add_element(stripslashes(token::replace($c_page->title)), 'title');
       }
     # collect styles
       if (isset($c_page->styles)) {
@@ -63,7 +63,7 @@ namespace effectivecore\modules\page {
     # collect arguments
       if (isset($c_page->url->args)) {
         foreach ($c_page->url->args as $c_arg_name => $c_arg_num) {
-          static::$args[$c_arg_name] = urls_factory::$current->get_args($c_arg_num);
+          static::$args[$c_arg_name] = urls::$current->get_args($c_arg_num);
         }
       }
     # collect page content from settings
