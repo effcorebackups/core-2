@@ -1,6 +1,7 @@
 <?php
 
 namespace effectivecore {
+          use \effectivecore\messages_factory as messages_factory;
           class messages {
 
   function render() {

@@ -1,6 +1,7 @@
 <?php
 
 namespace effectivecore {
+          use \effectivecore\files_factory as files;
           class file {
 
   public $file;
@@ -9,7 +10,7 @@ namespace effectivecore {
   public $data;
 
   function __construct($path) {
-    files_factory::parse_path($path, $this);
+    files::parse_path($path, $this);
   }
 
   function load() {

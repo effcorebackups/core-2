@@ -1,6 +1,7 @@
 <?php
 
 namespace effectivecore {
+          use \effectivecore\files_factory as files;
           abstract class settings_factory {
 
   static $data;
@@ -13,8 +14,8 @@ namespace effectivecore {
 
   static protected function _update() {
     $parse = [];
-    $files = files_factory::get_all(dir_modules, '%^.*\._s$%') +
-             files_factory::get_all(dir_settings, '%^.*\._s$%');
+    $files = files::get_all(dir_modules, '%^.*\._s$%') +
+             files::get_all(dir_settings, '%^.*\._s$%');
     $modules = [];
     foreach ($files as $c_file) {
       if ($c_file->get_file_full() == 'module._s') {

@@ -2,7 +2,7 @@
 
 namespace effectivecore\modules\storage {
           use \effectivecore\timer_factory;
-          use \effectivecore\console_factory;
+          use \effectivecore\console_factory as console;
           abstract class db_factory {
 
   static $connection;
@@ -35,7 +35,7 @@ namespace effectivecore\modules\storage {
     timer_factory::tap('sql_'.count(static::$queries));
     $query_result = static::$connection->query($sql);
     timer_factory::tap('sql_'.count(static::$queries));
-    console_factory::set_log(
+    console::set_log(
       timer_factory::get_period('sql_'.count(static::$queries), 0, 1).' sec.', $sql, 'SQL queries'
     );
     switch (substr($sql, 0, 6)) {

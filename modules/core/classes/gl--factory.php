@@ -1,6 +1,8 @@
 <?php
 
 namespace effectivecore {
+          use \effectivecore\files_factory as files;
+          use \effectivecore\cache_factory as cache;
           abstract class factory {
 
   static function autoload($name) {
@@ -27,12 +29,12 @@ namespace effectivecore {
   }
 
   static function get_classes_map() {
-    $cache = cache_factory::get('classes_map');
+    $cache = cache::get('classes_map');
     if ($cache) {
       return $cache;
     } else {
       $classes_map = [];
-      $files = files_factory::get_all(dir_modules, '%^.*\.php$%');
+      $files = files::get_all(dir_modules, '%^.*\.php$%');
       foreach ($files as $c_file) {
         $matches = [];
         preg_match('%namespace (?<namespace>[a-z0-9_\\\\]+) .*? '.
@@ -48,7 +50,7 @@ namespace effectivecore {
           ];
         }
       }
-      cache_factory::set('classes_map', $classes_map);
+      cache::set('classes_map', $classes_map);
       return $classes_map;
     }
   }
