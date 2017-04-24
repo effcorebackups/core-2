@@ -5,7 +5,7 @@ forms
       method: post
       class: form-user
     on_submit
-      handler: \effectivecore\modules\user\events_form::on_submit_user_logout
+      handler: \effectivecore\modules\user\events_form_factory::on_submit_user_logout
     children
     - button_logout|markup
         type: button

@@ -6,7 +6,7 @@ forms
       method: post
       class: form-user
     on_submit
-      handler: \effectivecore\modules\user\events_form::on_submit_user_login
+      handler: \effectivecore\modules\user\events_form_factory::on_submit_user_login
     children
     - field_email|markup
         type: input
