@@ -9,7 +9,7 @@ namespace effectivecore\modules\user {
           use \effectivecore\modules\storage\db_factory as db;
           abstract class events_form_factory extends \effectivecore\events_form_factory {
 
-  function on_submit_user_n_delete($page_args, $form_args, $post_args) {
+  static function on_submit_user_n_delete($page_args, $form_args, $post_args) {
     $back_url = urldecode(urls::$current->get_args('back', 'query'));
     $user_id  = $page_args['user_id'];
     switch ($post_args['button']) {
@@ -29,7 +29,7 @@ namespace effectivecore\modules\user {
     }
   }
 
-  function on_submit_user_n_edit($page_args, $form_args, $post_args) {
+  static function on_submit_user_n_edit($page_args, $form_args, $post_args) {
     $back_url      = urldecode(urls::$current->get_args('back', 'query'));
     $user_id       = $page_args['user_id'];
     $password_hash = sha1($post_args['password']);
@@ -46,7 +46,7 @@ namespace effectivecore\modules\user {
     }
   }
 
-  function on_submit_user_login($page_args, $form_args, $post_args) {
+  static function on_submit_user_login($page_args, $form_args, $post_args) {
     $email         = $post_args['email'];
     $password_hash = sha1($post_args['password']);
     switch ($post_args['button']) {
@@ -62,7 +62,7 @@ namespace effectivecore\modules\user {
     }
   }
 
-  function on_submit_user_register($page_args, $form_args, $post_args) {
+  static function on_submit_user_register($page_args, $form_args, $post_args) {
     $email         = $post_args['email'];
     $password_hash = sha1($post_args['password']);
     $created       = date(format_datetime, time());
