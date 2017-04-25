@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          use \effectivecore\messages_factory as messages_f;
+          use \effectivecore\messages_factory as messages;
           use \effectivecore\modules\page\page_factory as page;
           class form extends markup {
 
@@ -75,7 +75,7 @@ namespace effectivecore {
         if (!isset($children[$element_id]->attributes->class)) $children[$element_id]->attributes->class = '';
         $children[$element_id]->attributes->class.= ' error';
         foreach ($c_errors as $c_error) {
-          messages_f::add_new($c_error, 'error');
+          messages::add_new($c_error, 'error');
         }
       }
     # call validate handler

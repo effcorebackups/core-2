@@ -16,6 +16,6 @@ pages
     - script_page
         file: misc/script.js
     content
-    - all_messages|messages
+    - all_messages|message_set
         type: messages
         region: messages

@@ -5,10 +5,10 @@ namespace effectivecore {
           abstract class events_module_factory extends events_factory {
 
   static function on_init() {
-    require_once('gl--factory--cache.php');
-    require_once('gl--factory.php');
-    require_once('gl--factory--files.php');
     require_once('gl--file.php');
+    require_once('gl--factory.php');
+    require_once('gl--factory--cache.php');
+    require_once('gl--factory--files.php');
     spl_autoload_register('\effectivecore\factory::autoload');
     settings_factory::init();
     translate_factory::init();
