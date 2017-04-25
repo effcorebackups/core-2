@@ -31,7 +31,7 @@ namespace effectivecore {
     }
   }
 
-  protected function render_self() {
+  function render_self() {
     $attr = clone $this->attributes;
     if (isset($attr->href)) {
       $attr->href = token::replace($attr->href);

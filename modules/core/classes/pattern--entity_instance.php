@@ -8,7 +8,8 @@ namespace effectivecore {
   public $name;
   public $fields;
 
-  static function get_entities() { # @todo: use cache
+  # @todo: use static init from factory
+  static function get_entities() {
     $entities = [];
     foreach (settings::$data['entities'] as $c_entities) {
       foreach ($c_entities as $c_entity) {

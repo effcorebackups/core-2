@@ -21,7 +21,7 @@ namespace effectivecore {
     ]))->render();
   }
 
-  protected function render_self() {
+  function render_self() {
     return (new template('tree_self', [
       'title' => $this->title
     ]))->render();

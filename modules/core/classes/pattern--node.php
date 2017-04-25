@@ -34,11 +34,11 @@ namespace effectivecore {
            $this->render_children($this->children);
   }
 
-  protected function render_self() {
+  function render_self() {
     return '';
   }
 
-  protected function render_children($children, $join = true) {
+  function render_children($children, $join = true) {
     $rendered = [];
     if (is_array($children)) {
       foreach (factory::array_sort_by_weight($children) as $c_child) {
@@ -51,7 +51,7 @@ namespace effectivecore {
                                $rendered;
   }
 
-  protected function render_child($child) {
+  function render_child($child) {
     return method_exists($child, 'render') ? $child->render() :
                                              $child;
   }
