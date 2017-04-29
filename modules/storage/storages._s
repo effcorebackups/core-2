@@ -2,7 +2,7 @@ storages
 - storage_db_main|storage_instance
     id: db_main
     directory_name: effectivecore
-    hostname: 127.0.0.1
-    username: root
+    host_name: 127.0.0.1
+    user_name: root
     password: 123
     driver: mysql

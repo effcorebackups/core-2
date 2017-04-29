@@ -9,8 +9,8 @@ namespace effectivecore {
   public $id;
   public $connection;
   public $directory_name;
-  public $hostname;
-  public $username;
+  public $host_name;
+  public $user_name;
   public $password;
   public $driver;
   public $is_init;
@@ -20,9 +20,9 @@ namespace effectivecore {
     if (empty($this->is_init)) {
       try {
         $this->connection = new \PDO($this->driver.':host='.
-          $this->hostname.';dbname='.
+          $this->host_name.';dbname='.
           $this->directory_name,
-          $this->username,
+          $this->user_name,
           $this->password
         );
         $this->is_init = true;
