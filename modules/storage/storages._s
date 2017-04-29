@@ -1,7 +1,7 @@
 storages
 - storage_db_main|storage_instance
     id: db_main
-    name: effectivecore
+    directory_name: effectivecore
     hostname: 127.0.0.1
     username: root
     password: 123
