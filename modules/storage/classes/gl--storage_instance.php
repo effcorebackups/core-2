@@ -90,7 +90,7 @@ namespace effectivecore {
     $this->query('DROP TABLE `'.$entity->name.'`;');
   }
 
-  function select_entity($entity, $conditions = [], $order = [], $count = 0, $offset = 0) {
+  function select_instance($entity, $conditions = [], $order = [], $count = 0, $offset = 0) {
     $this->init();
     return $this->query(
       'SELECT `'.implode('`, `', array_keys($entity->fields)).'` '.
@@ -102,26 +102,28 @@ namespace effectivecore {
     );
   }
 
-  function insert_entity($instance) {
+  function insert_instance($instance) {
     $this->init();
-    return $this->query('INSERT INTO `'.$instance->name.'` (`'.implode('`, `', array_keys((array)$instance->fields)).'`) '.
-                        'VALUES ("'.implode('", "', array_values((array)$instance->fields)).'")');
-  }
-
-  function update_entity($instance, $conditions = []) {
-    $this->init();
-    return $this->query(
-      'UPDATE '.$instance->name.' '.
-      'SET '.  factory::data_to_attr(array_keys($instance->fields), ', ').' '.
-      'WHERE '.factory::data_to_attr($conditions, ' and ')
+    return $instance->fields->id = $this->query(
+      'INSERT INTO `'.$instance->name.'` (`'.implode('`, `', array_keys((array)$instance->fields)).'`) '.
+      'VALUES ("'.implode('", "', array_values((array)$instance->fields)).'")'
     );
   }
 
-  function delete_entity($instance, $conditions) {
+  function update_instance($instance) {
     $this->init();
     return $this->query(
-      'DELETE FROM '.$instance->name.' '.
-      'WHERE '.factory::data_to_attr($conditions, ' and ')
+      'UPDATE `'.$instance->name.'` '.
+      'SET '.factory::data_to_attr($instance->fields, ', ').' '. # @todo: add "`"
+      'WHERE `id` = "'.$instance->fields->id.'"'
+    );
+  }
+
+  function delete_instance($instance) {
+    $this->init();
+    return $this->query(
+      'DELETE FROM `'.$instance->name.'` '.
+      'WHERE `id` = "'.$instance->fields->id.'"'
     );
   }
 
