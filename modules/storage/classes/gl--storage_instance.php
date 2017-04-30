@@ -95,23 +95,25 @@ namespace effectivecore {
     );
   }
 
-  function insert_entity($entity) {
+  function insert_entity($instance) {
     $this->init();
+    return $this->query('INSERT INTO `'.$instance->name.'` (`'.implode('`, `', array_keys((array)$instance->fields)).'`) '.
+                        'VALUES ("'.implode('", "', array_values((array)$instance->fields)).'")');
   }
 
-  function update_entity($entity_instance, $conditions = []) {
+  function update_entity($instance, $conditions = []) {
     $this->init();
     return $this->query(
-      'UPDATE '.$entity_instance->name.' '.
-      'SET '.  factory::data_to_attr(array_keys($entity_instance->fields), ', ').' '.
+      'UPDATE '.$instance->name.' '.
+      'SET '.  factory::data_to_attr(array_keys($instance->fields), ', ').' '.
       'WHERE '.factory::data_to_attr($conditions, ' and ')
     );
   }
 
-  function delete_entity($entity_instance, $conditions) {
+  function delete_entity($instance, $conditions) {
     $this->init();
     return $this->query(
-      'DELETE FROM '.$entity_instance->name.' '.
+      'DELETE FROM '.$instance->name.' '.
       'WHERE '.factory::data_to_attr($conditions, ' and ')
     );
   }
