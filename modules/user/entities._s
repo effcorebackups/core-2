@@ -9,6 +9,7 @@ entities
         size: 11
         unsigned: true
         not_null: true
+        auto_increment: true
     - password_hash
         type: varchar
         size: 255
@@ -28,6 +29,10 @@ entities
         type: primary key
         fields
         - id: id
+    - unique_email
+        type: unique key
+        fields
+        - email: email
 - session|entity
     name: session
     storage_id: db_main

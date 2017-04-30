@@ -69,21 +69,17 @@ namespace effectivecore {
       if (property_exists($c_info, 'not_null')       && $c_info->not_null)           $c_properties[] = 'not null';
       if (property_exists($c_info, 'null')           && $c_info->null)               $c_properties[] = 'null';
       if (property_exists($c_info, 'default')        && is_string($c_info->default)) $c_properties[] = 'default "'.$c_info->default.'"';
-      if (property_exists($c_info, 'default')        && is_int($c_info->default))    $c_properties[] = 'default "'.$c_info->default.'"';
-      if (property_exists($c_info, 'default')        && is_null($c_info->default))   $c_properties[] = 'default null';
+      if (property_exists($c_info, 'default')        &&    is_int($c_info->default)) $c_properties[] = 'default "'.$c_info->default.'"';
+      if (property_exists($c_info, 'default')        &&   is_null($c_info->default)) $c_properties[] = 'default null';
       $field_desc[] = '`'.$c_name.'` '.implode(' ', $c_properties);
+    }
+    foreach ($entity->indexes as $c_info) {
+      $field_desc[] = $c_info->type.' (`'.implode('`, `', $c_info->fields).'`)';
     }
     $this->query(
       'CREATE TABLE `'.$entity->name.'` ('.implode(', ', $field_desc).') '.
       'default charset='.$entity->charset.';'
     );
-  # add indexes
-    foreach ($entity->indexes as $c_info) {
-      $this->query(
-        'ALTER TABLE `'.$entity->name.'` '.
-        'ADD '.$c_info->type.' (`'.implode('`, `', $c_info->fields).'`);'
-      );
-    }
   }
 
   function uninstall_entity($entity) {
