@@ -90,7 +90,7 @@ namespace effectivecore {
     $this->query('DROP TABLE `'.$entity->name.'`;');
   }
 
-  function select_instance($entity, $conditions = [], $order = [], $count = 0, $offset = 0) {
+  function select_instance_set($entity, $conditions = [], $order = [], $count = 0, $offset = 0) {
     $this->init();
     return $this->query(
       'SELECT `'.implode('`, `', array_keys($entity->fields)).'` '.
@@ -102,11 +102,26 @@ namespace effectivecore {
     );
   }
 
+  function select_instance($instance) {
+    $this->init();
+    $result = reset($this->query(
+      'SELECT `'.implode('`, `', array_keys((array)$instance->fields)).'` '.
+      'FROM `'.$instance->name.'` '.
+      'WHERE `id` = "'.$instance->fields->id.'";'
+    ));
+    if (isset($result->id) && $result->id === $instance->fields->id) {
+      foreach ($result as $prop => $value) {
+        $instance->fields->{$prop} = $value;
+      }
+      return $instance;
+    }
+  }
+
   function insert_instance($instance) {
     $this->init();
     return $instance->fields->id = $this->query(
       'INSERT INTO `'.$instance->name.'` (`'.implode('`, `', array_keys((array)$instance->fields)).'`) '.
-      'VALUES ("'.implode('", "', array_values((array)$instance->fields)).'")'
+      'VALUES ("'.implode('", "', array_values((array)$instance->fields)).'");'
     );
   }
 
@@ -115,7 +130,7 @@ namespace effectivecore {
     return $this->query(
       'UPDATE `'.$instance->name.'` '.
       'SET '.factory::data_to_attr($instance->fields, ', ').' '. # @todo: add "`"
-      'WHERE `id` = "'.$instance->fields->id.'"'
+      'WHERE `id` = "'.$instance->fields->id.'";'
     );
   }
 
@@ -123,7 +138,7 @@ namespace effectivecore {
     $this->init();
     return $this->query(
       'DELETE FROM `'.$instance->name.'` '.
-      'WHERE `id` = "'.$instance->fields->id.'"'
+      'WHERE `id` = "'.$instance->fields->id.'";'
     );
   }
 
