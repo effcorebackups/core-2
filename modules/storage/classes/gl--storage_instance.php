@@ -26,7 +26,7 @@ namespace effectivecore {
           $this->password
         );
         $this->is_init = true;
-        console::set_log('', 'The database was initialized on first request.', 'queries');
+        console::set_log('', 'The database was initialized on first request.', 'Queries');
       } catch (\PDOException $e) {
         factory::send_header_and_exit('access_denided',
           'Database is unavailable!'
@@ -41,7 +41,7 @@ namespace effectivecore {
     $result = $this->connection->query($query);
     timer::tap('query_'.count($this->queries));
     console::set_log(
-      timer::get_period('query_'.count($this->queries), 0, 1).' sec.', $query, 'queries'
+      timer::get_period('query_'.count($this->queries), 0, 1).' sec.', $query, 'Queries'
     );
     switch (substr($query, 0, 6)) {
       case 'SELECT':

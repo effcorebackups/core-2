@@ -3,15 +3,15 @@ entities_instances
     name: user
     fields:
       id: 1
-      password_hash: 8cb2237d0679ca88db6464eac60da96345513964
       email: admin@example.com
+      password_hash: 8cb2237d0679ca88db6464eac60da96345513964
       is_locked: 1
 - user_2|entity_instance
     name: user
     fields:
       id: 2
-      password_hash: 8cb2237d0679ca88db6464eac60da96345513964
       email: user@example.com
+      password_hash: 8cb2237d0679ca88db6464eac60da96345513964
 - role_anonymous|entity_instance
     name: role
     fields:
