@@ -61,19 +61,19 @@ namespace effectivecore {
 
   function install_entity($entity) {
     $this->init();
-    $field_sql = [];
+    $field_desc = [];
     foreach ($entity->fields as $c_name => $c_info) {
-      $c_prop = [$c_info->type.(isset($c_info->size) ? '('.$c_info->size.')' : '')];
-      if (property_exists($c_info, 'unsigned')       && $c_info->unsigned)       $c_prop[] = 'unsigned';
-      if (property_exists($c_info, 'auto_increment') && $c_info->auto_increment) $c_prop[] = 'auto_increment';
-      if (property_exists($c_info, 'not_null')       && $c_info->not_null)       $c_prop[] = 'not null';
-      if (property_exists($c_info, 'null')           && $c_info->null)           $c_prop[] = 'null';
-      if (property_exists($c_info, 'default') && is_string($c_info->default))    $c_prop[] = 'default "'.$c_info->default.'"';
-      if (property_exists($c_info, 'default') && is_int($c_info->default))       $c_prop[] = 'default "'.$c_info->default.'"';
-      if (property_exists($c_info, 'default') && is_null($c_info->default))      $c_prop[] = 'default null';
-      $field_sql[] = '`'.$c_name.'` '.implode(' ', $c_prop);
+      $c_properties = [$c_info->type.(isset($c_info->size) ? '('.$c_info->size.')' : '')];
+      if (property_exists($c_info, 'unsigned')       && $c_info->unsigned)       $c_properties[] = 'unsigned';
+      if (property_exists($c_info, 'auto_increment') && $c_info->auto_increment) $c_properties[] = 'auto_increment';
+      if (property_exists($c_info, 'not_null')       && $c_info->not_null)       $c_properties[] = 'not null';
+      if (property_exists($c_info, 'null')           && $c_info->null)           $c_properties[] = 'null';
+      if (property_exists($c_info, 'default') && is_string($c_info->default))    $c_properties[] = 'default "'.$c_info->default.'"';
+      if (property_exists($c_info, 'default') && is_int($c_info->default))       $c_properties[] = 'default "'.$c_info->default.'"';
+      if (property_exists($c_info, 'default') && is_null($c_info->default))      $c_properties[] = 'default null';
+      $field_desc[] = '`'.$c_name.'` '.implode(' ', $c_properties);
     }
-    return $this->query('CREATE TABLE `'.$entity->name.'` ('.implode(', ', $field_sql).') default charset='.$entity->charset.';');
+    return $this->query('CREATE TABLE `'.$entity->name.'` ('.implode(', ', $field_desc).') default charset='.$entity->charset.';');
   }
 
   function uninstall_entity($entity) {

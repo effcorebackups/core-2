@@ -8,7 +8,6 @@ entities
         type: int
         size: 11
         unsigned: true
-        auto_increment: true
         not_null: true
     - password_hash
         type: varchar
