@@ -19,12 +19,13 @@ entities
         size: 255
     - created
         type: timestamp
-        null: true
+        not_null: true
         default: current_timestamp
     - is_locked
         type: int
         size: 1
-        null: true
+        not_null: true
+        default: 0
     indexes
     - primary
         type: primary key
