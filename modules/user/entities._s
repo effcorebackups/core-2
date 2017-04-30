@@ -43,6 +43,7 @@ entities
     - id
         type: varchar
         size: 255
+        not_null: true
     - user_id
         type: int
         size: 11
@@ -50,7 +51,8 @@ entities
         not_null: true
     - created
         type: timestamp
-        null: true
+        not_null: true
+        default: current_timestamp
     - data
         type: longblob
         null: true
@@ -75,7 +77,8 @@ entities
     - is_embed
         type: int
         size: 1
-        null: true
+        not_null: true
+        default: 0
     indexes
     - primary
         type: primary key
