@@ -10,16 +10,17 @@ entities
         unsigned: true
         not_null: true
         auto_increment: true
-    - password_hash
-        type: varchar
-        size: 255
     - email
         type: varchar
         size: 255
         not_null: true
+    - password_hash
+        type: varchar
+        size: 255
     - created
         type: timestamp
         null: true
+        default: current_timestamp
     - is_locked
         type: int
         size: 1

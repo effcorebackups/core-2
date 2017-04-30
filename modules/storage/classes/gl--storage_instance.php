@@ -64,13 +64,14 @@ namespace effectivecore {
     $field_desc = [];
     foreach ($entity->fields as $c_name => $c_info) {
       $c_properties = [$c_info->type.(isset($c_info->size) ? '('.$c_info->size.')' : '')];
-      if (property_exists($c_info, 'unsigned')       && $c_info->unsigned)           $c_properties[] = 'unsigned';
-      if (property_exists($c_info, 'auto_increment') && $c_info->auto_increment)     $c_properties[] = 'auto_increment';
-      if (property_exists($c_info, 'not_null')       && $c_info->not_null)           $c_properties[] = 'not null';
-      if (property_exists($c_info, 'null')           && $c_info->null)               $c_properties[] = 'null';
-      if (property_exists($c_info, 'default')        && is_string($c_info->default)) $c_properties[] = 'default "'.$c_info->default.'"';
-      if (property_exists($c_info, 'default')        &&    is_int($c_info->default)) $c_properties[] = 'default "'.$c_info->default.'"';
-      if (property_exists($c_info, 'default')        &&   is_null($c_info->default)) $c_properties[] = 'default null';
+      if (property_exists($c_info, 'unsigned')       && $c_info->unsigned)                       $c_properties[] = 'unsigned';
+      if (property_exists($c_info, 'auto_increment') && $c_info->auto_increment)                 $c_properties[] = 'auto_increment';
+      if (property_exists($c_info, 'not_null')       && $c_info->not_null)                       $c_properties[] = 'not null';
+      if (property_exists($c_info, 'null')           && $c_info->null)                           $c_properties[] = 'null';
+      if (property_exists($c_info, 'default')        && is_string($c_info->default))             $c_properties[] = 'default "'.$c_info->default.'"';
+      if (property_exists($c_info, 'default')        &&    is_int($c_info->default))             $c_properties[] = 'default "'.$c_info->default.'"';
+      if (property_exists($c_info, 'default')        &&   is_null($c_info->default))             $c_properties[] = 'default null';
+      if (property_exists($c_info, 'default')        && $c_info->default == 'current_timestamp') $c_properties[] = 'default current_timestamp';
       $field_desc[] = '`'.$c_name.'` '.implode(' ', $c_properties);
     }
     foreach ($entity->indexes as $c_info) {
