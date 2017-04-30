@@ -10,7 +10,7 @@ entities
         unsigned: true
         auto_increment: true
         not_null: true
-    - password
+    - password_hash
         type: varchar
         size: 255
     - email
@@ -24,8 +24,11 @@ entities
         type: int
         size: 1
         null: true
-    primary_keys
-    - id: id
+    indexes
+    - primary
+        type: primary key
+        fields
+        - id: id
 - session|entity
     name: session
     storage_id: db_main
@@ -45,8 +48,11 @@ entities
     - data
         type: longblob
         null: true
-    primary_keys
-    - id: id
+    indexes
+    - primary
+        type: primary key
+        fields
+        - id: id
 - role|entity
     name: role
     storage_id: db_main
@@ -64,8 +70,11 @@ entities
         type: int
         size: 1
         null: true
-    primary_keys
-    - id: id
+    indexes
+    - primary
+        type: primary key
+        fields
+        - id: id
 - permission|entity
     name: permission
     storage_id: db_main
@@ -79,8 +88,11 @@ entities
         type: varchar
         size: 255
         not_null: true
-    primary_keys
-    - id: id
+    indexes
+    - primary
+        type: primary key
+        fields
+        - id: id
 - role_ws_user|entity
     name: role_ws_user
     storage_id: db_main
@@ -95,9 +107,12 @@ entities
         size: 11
         unsigned: true
         not_null: true
-    primary_keys
-    - role_id: role_id
-    - user_id: user_id
+    indexes
+    - primary
+        type: primary key
+        fields
+        - role_id: role_id
+        - user_id: user_id
 - role_ws_permission|entity
     name: role_ws_permission
     storage_id: db_main
@@ -111,6 +126,9 @@ entities
         type: varchar
         size: 255
         not_null: true
-    primary_keys
-    - role_id: role_id
-    - permission_id: permission_id
+    indexes
+    - primary
+        type: primary key
+        fields
+        - role_id: role_id
+        - permission_id: permission_id

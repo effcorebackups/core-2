@@ -26,6 +26,7 @@ namespace effectivecore {
           $this->password
         );
         $this->is_init = true;
+        console::set_log('', 'The database was initialized on first request.', 'queries');
       } catch (\PDOException $e) {
         factory::send_header_and_exit('access_denided',
           'Database is unavailable!'
@@ -72,10 +73,7 @@ namespace effectivecore {
       if (property_exists($c_info, 'default') && is_null($c_info->default))      $c_prop[] = 'default null';
       $field_sql[] = '`'.$c_name.'` '.implode(' ', $c_prop);
     }
-    return $this->query('CREATE TABLE `'.$entity->name.'` ('.(isset($entity->primary_keys) ?
-      implode(', ', $field_sql).', PRIMARY KEY (`'.implode('`, `', $entity->primary_keys).'`)' :
-      implode(', ', $field_sql)
-    ).') default charset='.$entity->charset.';');
+    return $this->query('CREATE TABLE `'.$entity->name.'` ('.implode(', ', $field_sql).') default charset='.$entity->charset.';');
   }
 
   function uninstall_entity($entity) {
