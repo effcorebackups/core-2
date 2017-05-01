@@ -13,8 +13,8 @@ namespace effectivecore {
   public $user_name;
   public $password;
   public $driver;
-  public $is_init;
-  public $queries;
+  public $is_init = false;
+  public $queries = [];
 
   function init() {
     if (empty($this->is_init)) {
@@ -140,6 +140,15 @@ namespace effectivecore {
       'DELETE FROM `'.$instance->name.'` '.
       'WHERE `id` = "'.$instance->fields->id.'";'
     );
+  }
+
+  function load_data($name, $fields, $conditions) {
+    $this->init();
+    return reset($this->query(
+      'SELECT `'.implode('`, `', $fields).'` '.
+      'FROM `'.$name.'` '.
+      'WHERE '.factory::data_to_attr($conditions, ' and ').';'
+    ));
   }
 
 }}

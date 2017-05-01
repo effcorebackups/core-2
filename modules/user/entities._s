@@ -4,24 +4,24 @@ entities
     storage_id: db_main
     charset: utf8
     fields
-    - id
+      id
         type: int
         size: 11
         unsigned: true
         not_null: true
         auto_increment: true
-    - email
+      email
         type: varchar
         size: 255
         not_null: true
-    - password_hash
+      password_hash
         type: varchar
         size: 255
-    - created
+      created
         type: timestamp
         not_null: true
         default: current_timestamp
-    - is_locked
+      is_locked
         type: int
         size: 1
         not_null: true
@@ -40,20 +40,20 @@ entities
     storage_id: db_main
     charset: utf8
     fields
-    - id
+      id
         type: varchar
         size: 255
         not_null: true
-    - user_id
+      user_id
         type: int
         size: 11
         unsigned: true
         not_null: true
-    - created
+      created
         type: timestamp
         not_null: true
         default: current_timestamp
-    - data
+      data
         type: longblob
         null: true
     indexes
@@ -66,15 +66,15 @@ entities
     storage_id: db_main
     charset: utf8
     fields
-    - id
+      id
         type: varchar
         size: 255
         not_null: true
-    - title
+      title
         type: varchar
         size: 255
         not_null: true
-    - is_embed
+      is_embed
         type: int
         size: 1
         not_null: true
@@ -89,11 +89,11 @@ entities
     storage_id: db_main
     charset: utf8
     fields
-    - id
+      id
         type: varchar
         size: 255
         not_null: true
-    - title
+      title
         type: varchar
         size: 255
         not_null: true
@@ -107,11 +107,11 @@ entities
     storage_id: db_main
     charset: utf8
     fields
-    - role_id
+      role_id
         type: varchar
         size: 255
         not_null: true
-    - user_id
+      user_id
         type: int
         size: 11
         unsigned: true
@@ -127,11 +127,11 @@ entities
     storage_id: db_main
     charset: utf8
     fields
-    - role_id
+      role_id
         type: varchar
         size: 255
         not_null: true
-    - permission_id
+      permission_id
         type: varchar
         size: 255
         not_null: true

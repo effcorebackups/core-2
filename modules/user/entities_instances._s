@@ -58,15 +58,15 @@ entities_instances
 - role_ws_permission_admins_user_profile_select|entity_instance
     name: role_ws_permission
     fields:
-    - role_id: admins
-    - permission_id: user_profile_select
+      role_id: admins
+      permission_id: user_profile_select
 - role_ws_permission_admins_user_profile_update|entity_instance
     name: role_ws_permission
     fields:
-    - role_id: admins
-    - permission_id: user_profile_update
+      role_id: admins
+      permission_id: user_profile_update
 - role_ws_permission_admins_user_profile_insert|entity_instance
     name: role_ws_permission
     fields:
-    - role_id: admins
-    - permission_id: user_profile_insert
+      role_id: admins
+      permission_id: user_profile_insert
