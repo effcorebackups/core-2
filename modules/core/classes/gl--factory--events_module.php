@@ -15,6 +15,7 @@ namespace effectivecore {
     token_factory::init();
     urls_factory::init();
     events_factory::init();
+    entity_factory::init();
     core_factory::init();
   # init modules
     ob_start();

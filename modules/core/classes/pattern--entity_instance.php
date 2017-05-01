@@ -8,38 +8,28 @@ namespace effectivecore {
   public $name;
   public $fields;
 
-  static function get_entity($name) { # @todo: optimize this
-    foreach (settings::$data['entities'] as $c_entities) {
-      foreach ($c_entities as $c_entity) {
-        if ($c_entity->name == $name) {
-          return $c_entity;
-        }
-      }
-    }
-  }
-
   function select() {
-    $entity = static::get_entity($this->name);
+    $entity = entity_factory::get_entity($this->name);
     $storage = storage::get_instance($entity->storage_id);
-    $storage->select_entity($this);
+    $storage->select_instance($this);
   }
 
   function insert() {
-    $entity = static::get_entity($this->name);
+    $entity = entity_factory::get_entity($this->name);
     $storage = storage::get_instance($entity->storage_id);
-    $storage->insert_entity($this);
+    $storage->insert_instance($this);
   }
 
   function update() {
-    $entity = static::get_entity($this->name);
+    $entity = entity_factory::get_entity($this->name);
     $storage = storage::get_instance($entity->storage_id);
-    $storage->update_entity($this);
+    $storage->update_instance($this);
   }
 
   function delete() {
-    $entity = static::get_entity($this->name);
+    $entity = entity_factory::get_entity($this->name);
     $storage = storage::get_instance($entity->storage_id);
-    $storage->delete_entity($this);
+    $storage->delete_instance($this);
   }
 
 }}
