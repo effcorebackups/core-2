@@ -105,13 +105,13 @@ namespace effectivecore {
   function select_instance($instance) {
     $this->init();
     $result = reset($this->query(
-      'SELECT `'.implode('`, `', array_keys((array)$instance->fields)).'` '.
-      'FROM `'.$instance->name.'` '.
-      'WHERE `id` = "'.$instance->fields->id.'";'
+      'SELECT `'.implode('`, `', $instance->get_entity_fields()).'` '.
+      'FROM `'.$instance->get_entity_name().'` '.
+      'WHERE '.factory::data_to_attr($instance->get_ids(), ' and ').';' # @todo: add "`"
     ));
-    if (isset($result->id) && $result->id === $instance->fields->id) {
-      foreach ($result as $prop => $value) {
-        $instance->fields->{$prop} = $value;
+    if ($result) {
+      foreach ($result as $name => $value) {
+        $instance->values[$name] = $value;
       }
       return $instance;
     }

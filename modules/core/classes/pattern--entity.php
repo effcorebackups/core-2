@@ -7,6 +7,10 @@ namespace effectivecore {
   public $name;
   public $fields;
 
+  function get_ids() {
+    return $this->indexes['primary']->fields;
+  }
+
   function install() {
     $storage = storage::get_instance($this->storage_id);
     $storage->install_entity($this);

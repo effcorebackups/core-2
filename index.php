@@ -16,4 +16,11 @@ namespace effectivecore {
   require_once('modules/core/classes/gl--factory--events_module.php');
   events_module_factory::on_init();
 
+# init storage
+  $storage = \effectivecore\modules\storage\storage_factory::get_instance('db_main');
+# init instance
+  $instance = new entity_instance('entities/user/user', ['id' => 1]);
+  $storage->select_instance($instance);
+  print_R( $instance );
+
 }
