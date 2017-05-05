@@ -6,8 +6,8 @@ namespace effectivecore {
   public $entity;
   public $values;
 
-  function __construct($name = '', $values = []) {
-    $this->name = $name;
+  function __construct($entity = '', $values = []) {
+    $this->entity = $entity;
     $this->values = $values;
   }
 
