@@ -142,13 +142,4 @@ namespace effectivecore {
     );
   }
 
-  function load_data($name, $fields, $conditions) {
-    $this->init();
-    return reset($this->query(
-      'SELECT `'.implode('`, `', $fields).'` '.
-      'FROM `'.$name.'` '.
-      'WHERE '.factory::data_to_attr($conditions, ' and ').';'
-    ));
-  }
-
 }}
