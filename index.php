@@ -18,9 +18,16 @@ namespace effectivecore {
 
 # init storage
   $storage = \effectivecore\modules\storage\storage_factory::get_instance('db_main');
-# init instance
+# select instance
   $instance = new entity_instance('entities/user/user', ['id' => 1]);
   $storage->select_instance($instance);
-  print_R( $instance );
-
+  //print_R( $instance );
+# insert instance
+  $instance = new entity_instance('entities/user/user', [
+    'email' => '',
+    'password_hash' => sha1('12345'),
+    'created' => date(format_datetime, time()),
+    'is_locked' => 1,
+  ]);
+  
 }

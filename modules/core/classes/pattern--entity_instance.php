@@ -7,26 +7,24 @@ namespace effectivecore {
   public $entity;
   public $values;
 
-  function __construct($entity = '', $values = []) {
-    $this->entity = $entity;
+  function __construct($npath = '', $values = []) {
     $this->values = $values;
-  }
-
-  function get_entity() {
-    return factory::npath_get_object($this->entity, settings::$data);
+    if ($npath) {
+      $this->entity = new linker($npath);
+    }
   }
 
   function get_entity_name() {
-    return $this->get_entity()->name;
+    return $this->entity->get()->name;
   }
 
   function get_entity_fields() {
-    return array_keys((array)$this->get_entity()->fields);
+    return array_keys((array)$this->entity->get()->fields);
   }
 
   function get_ids() {
     $return = [];
-    foreach ($this->get_entity()->get_ids() as $c_id) {
+    foreach ($this->entity->get()->get_ids() as $c_id) {
       $return[$c_id] = $this->values[$c_id];
     }
     return $return;
