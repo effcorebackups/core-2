@@ -14,17 +14,9 @@ namespace effectivecore {
     }
   }
 
-  function get_name() {
-    return $this->entity->get()->name;
-  }
-
-  function get_fields() {
-    return array_keys((array)$this->entity->get()->fields);
-  }
-
-  function get_ids() {
-    return $this->entity->get()->get_ids();
-  }
+  function get_name()   {return $this->entity->get()->get_name();}
+  function get_fields() {return $this->entity->get()->get_fields();}
+  function get_ids()    {return $this->entity->get()->get_ids();}
 
   function get_values($is_ids_only = false) {
     if ($is_ids_only) {

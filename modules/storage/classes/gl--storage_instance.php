@@ -72,7 +72,7 @@ namespace effectivecore {
   function install_entity($entity) {
     $this->init();
     $field_desc = [];
-    foreach ($entity->fields as $c_name => $c_info) {
+    foreach ($entity->get_fields_info() as $c_name => $c_info) {
       $c_properties = [$c_info->type.(isset($c_info->size) ? '('.$c_info->size.')' : '')];
       if (property_exists($c_info, 'unsigned')       && $c_info->unsigned)       $c_properties[] = 'unsigned';
       if (property_exists($c_info, 'auto_increment') && $c_info->auto_increment) $c_properties[] = 'auto_increment';
@@ -86,26 +86,26 @@ namespace effectivecore {
       }
       $field_desc[] = '`'.$c_name.'` '.implode(' ', $c_properties);
     }
-    foreach ($entity->indexes as $c_info) {
+    foreach ($entity->get_indexes_info() as $c_info) {
       $field_desc[] = $c_info->type.' (`'.implode('`, `', $c_info->fields).'`)';
     }
     $this->query(
-      'CREATE TABLE `'.$entity->name.'` ('.implode(', ', $field_desc).') '.
+      'CREATE TABLE `'.$entity->get_name().'` ('.implode(', ', $field_desc).') '.
       'default charset='.$entity->charset.';'
     );
   }
 
   function uninstall_entity($entity) {
     $this->init();
-    $this->query('DROP TABLE `'.$entity->name.'`;');
+    $this->query('DROP TABLE `'.$entity->get_name().'`;');
   }
 
   function select_instance_set($entity, $conditions = [], $order = [], $count = 0, $offset = 0) {
     $this->init();
     return $this->query(
-      'SELECT `'.implode('`, `', array_keys($entity->fields)).'` '.
-      'FROM `'.$entity->name.'`'.
-      (count($conditions) ? ' WHERE '.factory::data_to_attr($conditions, ' and ') : ''). # @todo: add "`"
+      'SELECT `'.implode('`, `', $entity->get_fields()).'` '.
+      'FROM `'.$entity->get_name().'`'.
+      (count($conditions) ? ' WHERE '.factory::data_to_attr($conditions, ' and ', '`') : '').
       (count($order)      ? ' ORDER BY `'.str_replace('!', ' DESC ', implode('`, `', $order)).'`' : '').
       ($count             ? ' LIMIT ' .$count  : '').
       ($offset            ? ' OFFSET '.$offset : '').';'
