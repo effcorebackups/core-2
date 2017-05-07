@@ -129,10 +129,15 @@ namespace effectivecore {
 
   function insert_instance($instance) {
     $this->init();
-    return $this->query(
+    $result = $this->query(
       'INSERT INTO `'.$instance->get_entity_name().'` (`'.implode('`, `', array_keys($instance->get_values())).'`) '.
       'VALUES ("'.implode('", "', $instance->get_values()).'");'
     );
+    if (!empty($result) && count($instance->get_ids()) == 1) {
+      $id = reset($instance->get_ids());
+      $instance->values[$id] = $result;
+      return $instance;
+    }
   }
 
   function update_instance($instance) {
