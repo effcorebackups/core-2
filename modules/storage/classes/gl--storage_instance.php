@@ -1,6 +1,7 @@
 <?php
 
 namespace effectivecore {
+          use \effectivecore\messages_factory as messages;
           use \effectivecore\timer_factory as timer;
           use \effectivecore\console_factory as console;
           use \effectivecore\modules\storage\storage_factory as storage;
@@ -39,7 +40,16 @@ namespace effectivecore {
     $this->queries[] = $query;
     timer::tap('query_'.count($this->queries));
     $result = $this->connection->query($query);
+    $errors = $this->connection->errorInfo();
     timer::tap('query_'.count($this->queries));
+    if ($errors[0] != '00000') {
+      messages::add_new(
+        'Query error! '.br.
+        'SQLSTATE: '.$errors[0].br.
+        'Driver error code: '.$errors[1].br.
+        'Driver error text: '.$errors[2], 'error'
+      );
+    }
     console::set_log(
       timer::get_period('query_'.count($this->queries), 0, 1).' sec.', $query, 'Queries'
     );
