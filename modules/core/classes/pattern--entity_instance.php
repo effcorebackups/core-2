@@ -22,14 +22,18 @@ namespace effectivecore {
     return array_keys((array)$this->entity->get()->fields);
   }
 
-  function get_ids() {
-    $return = [];
-    foreach ($this->entity->get()->get_ids() as $c_id) {
-      $return[$c_id] = $this->values[$c_id];
+  function get_values($filter_ids = false) {
+    if ($filter_ids) {
+      $values = [];
+      foreach ($this->entity->get()->get_ids() as $c_id) {
+        $values[$c_id] = $this->values[$c_id];
+      }
+      return $values;
+    } else {
+      return $this->values;
     }
-    return $return;
   }
-
+  
   function select() {
   }
 

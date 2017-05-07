@@ -117,7 +117,7 @@ namespace effectivecore {
     $result = reset($this->query(
       'SELECT `'.implode('`, `', $instance->get_entity_fields()).'` '.
       'FROM `'.$instance->get_entity_name().'` '.
-      'WHERE '.factory::data_to_attr($instance->get_ids(), ' and ', '`').';'
+      'WHERE '.factory::data_to_attr($instance->get_values(true), ' and ', '`').';'
     ));
     if ($result) {
       foreach ($result as $name => $value) {
@@ -129,9 +129,9 @@ namespace effectivecore {
 
   function insert_instance($instance) {
     $this->init();
-    return $instance->fields->id = $this->query(
-      'INSERT INTO `'.$instance->name.'` (`'.implode('`, `', array_keys((array)$instance->fields)).'`) '.
-      'VALUES ("'.implode('", "', array_values((array)$instance->fields)).'");'
+    return $this->query(
+      'INSERT INTO `'.$instance->get_entity_name().'` (`'.implode('`, `', array_keys($instance->get_values())).'`) '.
+      'VALUES ("'.implode('", "', $instance->get_values()).'");'
     );
   }
 

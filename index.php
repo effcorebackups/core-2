@@ -29,5 +29,6 @@ namespace effectivecore {
     'created' => date(format_datetime, time()),
     'is_locked' => 1,
   ]);
+  $storage->insert_instance($instance);
   
 }
