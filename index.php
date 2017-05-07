@@ -16,19 +16,32 @@ namespace effectivecore {
   require_once('modules/core/classes/gl--factory--events_module.php');
   events_module_factory::on_init();
 
-# init storage
   $storage = \effectivecore\modules\storage\storage_factory::get_instance('db_main');
-# select instance
-  $instance = new entity_instance('entities/user/user', ['id' => 1]);
-  $storage->select_instance($instance);
-  //print_R( $instance );
-# insert instance
-  $instance = new entity_instance('entities/user/user', [
-    'email' => '',
-    'password_hash' => sha1('12345'),
-    'created' => date(format_datetime, time()),
-    'is_locked' => 1,
-  ]);
-  $storage->insert_instance($instance);
-  
+  if ($storage) {
+  # create instance dummy
+    $instance = new entity_instance('entities/user/user', [
+      'email'         => 'test@example.com',
+      'password_hash' => sha1('12345'),
+      'created'       => date(format_datetime, time()),
+      'is_locked'     => 0,
+    ]);
+  # insert instance
+    if ($storage->insert_instance($instance)) {
+      print 'new instance "user" was inserted with ID = '.$instance->get_values()['id'].'!'.br;
+    # update instance
+      $instance->set_value('is_locked', '1');
+      if ($storage->update_instance($instance)) {
+        print 'instance was updated!'.br;
+      # select instance
+        $storage->select_instance($instance);
+        print 'instance was selected:'.br;
+        foreach ($instance->get_values() as $key => $value) {
+          print '# '.$key.' = '.$value.br;
+        }
+      # delete instance
+        $storage->delete_instance($instance);
+      }
+    };
+  }
+
 }
