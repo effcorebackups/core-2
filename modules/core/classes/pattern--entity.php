@@ -10,7 +10,7 @@ namespace effectivecore {
   function get_name()         {return $this->name;}
   function get_fields_info()  {return $this->fields;}
   function get_indexes_info() {return $this->indexes;}
-  function get_ids()          {return $this->indexes['primary']->fields;}
+  function get_ids()          {return array_keys((array)$this->indexes['primary']->fields);}
   function get_fields()       {return array_keys((array)$this->fields);}
 
   function install() {
