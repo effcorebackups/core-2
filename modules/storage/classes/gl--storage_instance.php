@@ -117,7 +117,7 @@ namespace effectivecore {
     $result = reset($this->query(
       'SELECT `'.implode('`, `', $instance->get_entity_fields()).'` '.
       'FROM `'.$instance->get_entity_name().'` '.
-      'WHERE '.factory::data_to_attr($instance->get_ids(), ' and ').';' # @todo: add "`"
+      'WHERE '.factory::data_to_attr($instance->get_ids(), ' and ', '`').';'
     ));
     if ($result) {
       foreach ($result as $name => $value) {
