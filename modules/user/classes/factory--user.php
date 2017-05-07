@@ -1,6 +1,8 @@
 <?php
 
 namespace effectivecore\modules\user {
+          use \effectivecore\entity_factory as entity_factory;
+          use \effectivecore\entity_instance as entity_instance;
           abstract class user_factory {
 
   static $current;
@@ -11,13 +13,12 @@ namespace effectivecore\modules\user {
     static::$current->roles = ['anonymous' => 'anonymous'];
  /* load user from db */
     if ($id) {
-      $db_user = table_user::select_one(['*'], ['id' => $id]);
-      $db_user_roles = table_role_by_user::select(['role_id'], ['user_id' => $id]);
-      if (isset($db_user['id'])) {
-        static::$current = (object)$db_user;
+      $user = (new entity_instance('entities/user/user', ['id' => $id]))->select();
+      if ($user->get_value('id')) {
+        static::$current = (object)($user->get_values());
         static::$current->roles = ['registered' => 'registered'];
-        foreach ($db_user_roles as $c_role) {
-          static::$current->roles[$c_role['role_id']] = $c_role['role_id'];
+        foreach (entity_factory::get_entity('role_ws_user')->get_set(['user_id' => $id]) as $c_role) {
+          static::$current->roles[$c_role->role_id] = $c_role->role_id;
         }
       }
     }

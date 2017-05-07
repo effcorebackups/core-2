@@ -3,6 +3,7 @@
 namespace effectivecore\modules\user {
           use const \effectivecore\format_datetime;
           use \effectivecore\urls_factory as urls;
+          use \effectivecore\entity_instance as entity_instance;
           use \effectivecore\messages_factory as messages;
           use \effectivecore\modules\user\session_factory as session;
           use \effectivecore\modules\user\user_factory as user;
@@ -51,10 +52,12 @@ namespace effectivecore\modules\user {
     $password_hash = sha1($post_args['password']);
     switch ($post_args['button']) {
       case 'login':
-        $result = table_user::select_one(['id'], ['password_hash' => $password_hash, 'email' => $email]);
-        if (isset($result['id'])) {
-          session::init($result['id']);
-          urls::go('/user/'.$result['id']);
+        $instance = new entity_instance('entities/user/user', ['email' => $email]);
+        $instance->select(['email']);
+        if ($instance->get_value('id') &&
+            $instance->get_value('password_hash') === $password_hash) {
+          session::init($instance->get_value('id'));
+          urls::go('/user/'.$instance->get_value('id'));
         } else {
           messages::add_new('Incorrect email or password!', 'error');
         }

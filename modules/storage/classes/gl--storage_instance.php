@@ -116,12 +116,13 @@ namespace effectivecore {
     );
   }
 
-  function select_instance($instance) {
+  function select_instance($instance, $custom_ids = []) {
     $this->init();
     $result = reset($this->query(
       'SELECT `'.implode('`, `', $instance->get_fields()).'` '.
       'FROM `'.$instance->get_name().'` '.
-      'WHERE '.factory::data_to_attr($instance->get_values(true), ' and ', '`').';'
+      'WHERE '.factory::data_to_attr($instance->get_values($custom_ids ?: $instance->get_ids()), ' and ', '`').
+      'LIMIT 1;'
     ));
     if ($result) {
       foreach ($result as $name => $value) {
@@ -149,7 +150,7 @@ namespace effectivecore {
     return $this->query(
       'UPDATE `'.$instance->get_name().'` '.
       'SET '.factory::data_to_attr($instance->get_values(), ', ', '`').' '.
-      'WHERE '.factory::data_to_attr($instance->get_values(true), ' and ', '`').';'
+      'WHERE '.factory::data_to_attr($instance->get_values($instance->get_ids()), ' and ', '`').';'
     );
   }
 
@@ -157,7 +158,7 @@ namespace effectivecore {
     $this->init();
     return $this->query(
       'DELETE FROM `'.$instance->get_name().'` '.
-      'WHERE '.factory::data_to_attr($instance->get_values(true), ' and ', '`').';'
+      'WHERE '.factory::data_to_attr($instance->get_values($instance->get_ids()), ' and ', '`').';'
     );
   }
 

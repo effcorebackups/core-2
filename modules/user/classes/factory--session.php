@@ -3,23 +3,26 @@
 namespace effectivecore\modules\user {
           use const \effectivecore\format_datetime;
           use \effectivecore\modules\user\user_factory as user;
+          use \effectivecore\entity_instance as entity_instance;
           abstract class session_factory {
 
   static function init($user_id = 0) {
  /* renew session for user with selected id */
     if ($user_id != 0) {
       session_start();
-      table_session::insert([
-        'id' => session_id(),
+      $instance = new entity_instance('entities/user/session', [
+        'id'      => session_id(),
         'user_id' => $user_id,
         'created' => date(format_datetime, time())
       ]);
+      $instance->insert();
     }
  /* restore session for authenticated user */
     if ($user_id == 0 && isset($_REQUEST[session_name()])) {
-      $db_session = table_session::select_one(['user_id'], ['id' => $_REQUEST[session_name()]]);
-      if (isset($db_session['user_id'])) {
-        $user_id = $db_session['user_id'];
+      $instance = new entity_instance('entities/user/session', ['id' => $_REQUEST[session_name()]]);
+      $instance->select();
+      if ($instance->get_value('user_id')) {
+        $user_id = $instance->get_value('user_id');
         session_start();
       } else {
       # remove lost or substituted sid in browser

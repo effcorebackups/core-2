@@ -14,15 +14,16 @@ namespace effectivecore {
     }
   }
 
-  function get_name()   {return $this->entity->get()->get_name();}
-  function get_fields() {return $this->entity->get()->get_fields();}
-  function get_ids()    {return $this->entity->get()->get_ids();}
-
-  function get_values($is_ids_only = false) {
-    if ($is_ids_only) {
+  function get_name()               {return $this->entity->get()->get_name();}
+  function get_fields()             {return $this->entity->get()->get_fields();}
+  function get_ids()                {return $this->entity->get()->get_ids();}
+  function get_value($name)         {return isset($this->values[$name]) ? $this->values[$name] : null;}
+  function set_value($name, $value) {$this->values[$name] = $value;}
+  function get_values($names = []) {
+    if (count($names)) {
       $values = [];
-      foreach ($this->get_ids() as $c_id) {
-        $values[$c_id] = $this->values[$c_id];
+      foreach ($names as $c_name) {
+        $values[$c_name] = $this->values[$c_name];
       }
       return $values;
     } else {
@@ -30,13 +31,9 @@ namespace effectivecore {
     }
   }
 
-  function set_value($name, $value) {
-    $this->values[$name] = $value;
-  }
-  
-  function select() {
+  function select($custom_ids = []) {
     $storage = storage::get_instance($this->entity->get()->storage_id);
-    return $storage->select_instance($this);
+    return $storage->select_instance($this, $custom_ids);
   }
 
   function insert() {
