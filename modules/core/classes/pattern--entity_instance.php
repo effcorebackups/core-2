@@ -14,11 +14,11 @@ namespace effectivecore {
     }
   }
 
-  function get_entity_name() {
+  function get_name() {
     return $this->entity->get()->name;
   }
 
-  function get_entity_fields() {
+  function get_fields() {
     return array_keys((array)$this->entity->get()->fields);
   }
 
@@ -26,8 +26,8 @@ namespace effectivecore {
     return $this->entity->get()->get_ids();
   }
 
-  function get_values($filter_ids = false) {
-    if ($filter_ids) {
+  function get_values($is_ids_only = false) {
+    if ($is_ids_only) {
       $values = [];
       foreach ($this->get_ids() as $c_id) {
         $values[$c_id] = $this->values[$c_id];
@@ -36,6 +36,10 @@ namespace effectivecore {
     } else {
       return $this->values;
     }
+  }
+
+  function set_value($name, $value) {
+    $this->values[$name] = $value;
   }
   
   function select() {

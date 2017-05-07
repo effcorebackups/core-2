@@ -115,8 +115,8 @@ namespace effectivecore {
   function select_instance($instance) {
     $this->init();
     $result = reset($this->query(
-      'SELECT `'.implode('`, `', $instance->get_entity_fields()).'` '.
-      'FROM `'.$instance->get_entity_name().'` '.
+      'SELECT `'.implode('`, `', $instance->get_fields()).'` '.
+      'FROM `'.$instance->get_name().'` '.
       'WHERE '.factory::data_to_attr($instance->get_values(true), ' and ', '`').';'
     ));
     if ($result) {
@@ -130,30 +130,30 @@ namespace effectivecore {
   function insert_instance($instance) {
     $this->init();
     $result = $this->query(
-      'INSERT INTO `'.$instance->get_entity_name().'` (`'.implode('`, `', array_keys($instance->get_values())).'`) '.
+      'INSERT INTO `'.$instance->get_name().'` (`'.implode('`, `', array_keys($instance->get_values())).'`) '.
       'VALUES ("'.implode('", "', $instance->get_values()).'");'
     );
     if (!empty($result) && count($instance->get_ids()) == 1) {
       $id = reset($instance->get_ids());
       $instance->values[$id] = $result;
-      return $instance;
+      return true;
     }
   }
 
   function update_instance($instance) {
     $this->init();
     return $this->query(
-      'UPDATE `'.$instance->name.'` '.
-      'SET '.factory::data_to_attr($instance->fields, ', ').' '. # @todo: add "`"
-      'WHERE `id` = "'.$instance->fields->id.'";'
+      'UPDATE `'.$instance->get_name().'` '.
+      'SET '.factory::data_to_attr($instance->get_values(), ', ', '`').' '.
+      'WHERE '.factory::data_to_attr($instance->get_values(true), ' and ', '`').';'
     );
   }
 
   function delete_instance($instance) {
     $this->init();
     return $this->query(
-      'DELETE FROM `'.$instance->name.'` '.
-      'WHERE `id` = "'.$instance->fields->id.'";'
+      'DELETE FROM `'.$instance->get_name().'` '.
+      'WHERE '.factory::data_to_attr($instance->get_values(true), ' and ', '`').';'
     );
   }
 
