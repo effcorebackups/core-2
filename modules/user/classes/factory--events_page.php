@@ -75,9 +75,19 @@ namespace effectivecore\modules\user {
   }
 
   static function on_show_user_n_edit($user_id) {
-    $db_user = table_user::select_one(['*'], ['id' => $user_id]);
-    if (isset($db_user['id']) == false)                                                                             factory::send_header_and_exit('not_found', 'User not found!');
-    if (isset($db_user['id']) && !($db_user['id'] == user::$current->id || isset(user::$current->roles['admins']))) factory::send_header_and_exit('access_denided', 'Access denided!');
+    $user = (new entity_instance('entities/user/user', ['id' => $user_id]))->select();
+    if ($user) {
+      if (!($user->get_value('id') == user::$current->id || # not owner or
+            isset(user::$current->roles['admins']))) {      # not admin
+        factory::send_header_and_exit('access_denided',
+          'Access denided!'
+        );
+      }
+    } else {
+      factory::send_header_and_exit('not_found',
+        'User not found!'
+      );
+    }
   }
 
 }}
