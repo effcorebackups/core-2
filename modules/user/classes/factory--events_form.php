@@ -11,7 +11,6 @@ namespace effectivecore\modules\user {
           abstract class events_form_factory extends \effectivecore\events_form_factory {
 
   static function on_submit_user_n_delete($page_args, $form_args, $post_args) {
-    $back_url = urldecode(urls::$current->get_args('back', 'query'));
     $user_id  = $page_args['user_id'];
     switch ($post_args['button']) {
       case 'delete':
@@ -19,19 +18,18 @@ namespace effectivecore\modules\user {
         if ($result) {
           table_session::delete(['user_id' => $user_id]);
           messages::add_new('User with id = '.$user_id.' was deleted.');
-          urls::go($back_url ?: '/admin/users');
+          urls::go(urls::get_back_part() ?: '/admin/users');
         } else {
           messages::add_new('User is not deleted!', 'error');
         }
         break;
       case 'cancel':
-        urls::go($back_url ?: '/admin/users');
+        urls::go(urls::get_back_part() ?: '/admin/users');
         break;
     }
   }
 
   static function on_submit_user_n_edit($page_args, $form_args, $post_args) {
-    $back_url      = urldecode(urls::$current->get_args('back', 'query'));
     $user_id       = $page_args['user_id'];
     $password_hash = sha1($post_args['password']);
     switch ($post_args['button']) {
@@ -42,7 +40,7 @@ namespace effectivecore\modules\user {
         ]))->update();
         if ($result) {
           messages::add_new('Parameters of user with id = '.$user_id.' was updated.');
-          urls::go($back_url ?: '/user/'.$user_id);
+          urls::go(urls::get_back_part() ?: '/user/'.$user_id);
         } else {
           messages::add_new('Parameters is not updated!', 'error');
         }
