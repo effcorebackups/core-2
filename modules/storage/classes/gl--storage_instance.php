@@ -121,7 +121,7 @@ namespace effectivecore {
     $result = reset($this->query(
       'SELECT `'.implode('`, `', $instance->get_fields()).'` '.
       'FROM `'.$instance->get_name().'` '.
-      'WHERE '.factory::data_to_attr($instance->get_values($custom_ids ?: $instance->get_ids()), ' and ', '`').
+      'WHERE '.factory::data_to_attr($instance->get_values($custom_ids ?: $instance->get_ids()), ' and ', '`').' '.
       'LIMIT 1;'
     ));
     if ($result) {

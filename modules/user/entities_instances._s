@@ -59,9 +59,9 @@ entities_instances
     values:
     - id: user_profile_delete
     - title: User profile: delete
-- role_ws_user_admins_1|entity_instance
+- relation_role_ws_user_admins_1|entity_instance
     entity|linker
-      npath: entities/user/role_ws_user
+      npath: entities/user/relation_role_ws_user
     values:
     - role_id: admins
     - user_id: 1

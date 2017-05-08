@@ -102,8 +102,8 @@ entities
         type: primary key
         fields
         - id: id
-- role_ws_user|entity
-    name: role_ws_user
+- relation_role_ws_user|entity
+    name: relation_role_ws_user
     storage_id: db_main
     charset: utf8
     fields

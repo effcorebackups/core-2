@@ -17,7 +17,7 @@ namespace effectivecore\modules\user {
       if ($user->get_value('id')) {
         static::$current = (object)($user->get_values());
         static::$current->roles = ['registered' => 'registered'];
-        foreach (entity_factory::get_entity('role_ws_user')->get_set(['user_id' => $id]) as $c_role) {
+        foreach (entity_factory::get_entity('relation_role_ws_user')->get_set(['user_id' => $id]) as $c_role) {
           static::$current->roles[$c_role->role_id] = $c_role->role_id;
         }
       }
