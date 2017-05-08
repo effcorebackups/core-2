@@ -6,9 +6,9 @@ namespace effectivecore {
   public $template = 'table_body_row';
 
   function add_child($child, $id = null) {
-    parent::add_child(
-      is_string($child) ? new table_body_row_cell([], $child) : $child, $id
-    );
+    if ($child instanceof table_body_row_cell) parent::add_child($child, $id);
+    if ($child instanceof markup)              parent::add_child(new table_body_row_cell([], $child), $id);
+    if (is_string($child))                     parent::add_child(new table_body_row_cell([], $child), $id);
   }
 
   function render() {

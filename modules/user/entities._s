@@ -21,7 +21,7 @@ entities
         type: timestamp
         not_null: true
         default: current_timestamp
-      is_locked
+      is_embed
         type: int
         size: 1
         not_null: true

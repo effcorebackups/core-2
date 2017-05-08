@@ -3,6 +3,7 @@
 namespace effectivecore\modules\user {
           use \effectivecore\factory;
           use \effectivecore\entity_instance;
+          use \effectivecore\settings_factory;
           use \effectivecore\entity_factory;
           use \effectivecore\markup;
           use \effectivecore\table;
@@ -26,25 +27,25 @@ namespace effectivecore\modules\user {
   }
 
   static function on_show_admin_users() {
-    $total_items = table_user::select_one(['count(id)'])['count(id)'];
-    $items_per_page = 50; // # @todo: settings::$data['admin_users']['constants']['items_per_page'];
+    $items_per_page = settings_factory::$data['pages']['user']['page_admin_users']->constants['items_per_page'];
     $pager = new pager();
     if ($pager->has_error) {
       factory::send_header_and_exit('not_found',
         'Page not found!'
       );
     } else {
-      $db_user = table_user::select(['id', 'email', 'created', 'is_locked'], [], ['id'], $items_per_page, ($pager->get_current_page_num() - 1) * $items_per_page);
-      $url_back = urlencode(urls::$current->get_full());
-      foreach ($db_user as &$c_row) {
-        $c_row['actions'] = new table_body_row_cell(['class' => 'actions']);
-        $c_row['actions']->add_child( new markup('a', ['href' => (new url('/user/'.$c_row['id']))->get_full()], 'view') );
-        $c_row['actions']->add_child( new markup('a', ['href' => (new url('/user/'.$c_row['id'].'/edit?back='.$url_back))->get_full()], 'edit') );
-        if (empty($c_row['is_locked'])) $c_row['actions']->add_child( new markup('a', ['href' => (new url('/admin/users/delete/'.$c_row['id'].'?back='.$url_back))->get_full()], 'delete') );
-        $c_row['is_locked'] = $c_row['is_locked'] ? 'Yes' : 'No';
+      $head = [['ID', 'EMail', 'Password hash', 'Created', 'Is embed', 'Actions']];
+      $body = entity_factory::get_entity('user')->select_set();
+      foreach ($body as $c_row) {
+        $c_actions = new markup('div', ['class' => 'actions']);
+        $c_actions->add_child( new markup('a', ['href' => (new url('/user/'.$c_row->id))->get_full()], 'view') );
+        $c_actions->add_child( new markup('a', ['href' => (new url('/user/'.$c_row->id.'/edit?'.urls::get_back_part()))->get_full()], 'edit') );
+        if ($c_row->is_embed != 1) $c_actions->add_child( new markup('a', ['href' => (new url('/admin/users/delete/'.$c_row->id.'?'.urls::get_back_part()))->get_full()], 'delete') );
+        $c_row->is_embed = $c_row->is_embed ? 'Yes' : 'No';
+        $c_row->password_hash = '*****';
+        $c_row->actions = $c_actions;
       }
-      $table = new table([], $db_user, [['ID', 'EMail', 'Created', 'Is embed', 'Actions']]);
-      page::add_element($table);
+      page::add_element(new table([], $body, $head));
       page::add_element($pager);
     }
   }
@@ -61,8 +62,8 @@ namespace effectivecore\modules\user {
       if ($user->get_value('id') == user::$current->id || # owner
           isset(user::$current->roles['admins'])) {       # admin
         $values = $user->get_values();
-        unset($values['password_hash']);
-        unset($values['is_locked']);
+        $values['password_hash'] = '*****';
+        $values['is_embed'] = $values['is_embed'] ? 'Yes' : 'No';
         $head = [['Parameter', 'Value']];
         $body = factory::array_rotate([array_keys($values), array_values($values)]);
         page::add_element(new table([], $body, $head));
