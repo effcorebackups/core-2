@@ -65,21 +65,21 @@ entities_instances
     values:
     - role_id: admins
     - user_id: 1
-- role_ws_permission_admins_user_profile_select|entity_instance
+- relation_role_ws_permission_admins_user_profile_select|entity_instance
     entity|linker
-      npath: entities/user/role_ws_permission
+      npath: entities/user/relation_role_ws_permission
     values:
     - role_id: admins
     - permission_id: user_profile_select
-- role_ws_permission_admins_user_profile_update|entity_instance
+- relation_role_ws_permission_admins_user_profile_update|entity_instance
     entity|linker
-      npath: entities/user/role_ws_permission
+      npath: entities/user/relation_role_ws_permission
     values:
     - role_id: admins
     - permission_id: user_profile_update
-- role_ws_permission_admins_user_profile_insert|entity_instance
+- relation_role_ws_permission_admins_user_profile_insert|entity_instance
     entity|linker
-      npath: entities/user/role_ws_permission
+      npath: entities/user/relation_role_ws_permission
     values:
     - role_id: admins
     - permission_id: user_profile_insert
