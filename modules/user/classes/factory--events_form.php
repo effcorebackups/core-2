@@ -53,7 +53,8 @@ namespace effectivecore\modules\user {
     switch ($post_args['button']) {
       case 'login':
         $user = (new entity_instance('entities/user/user', ['email' => $email]))->select(['email']);
-        if ($user->get_value('id') &&
+        if ($user &&
+            $user->get_value('id') &&
             $user->get_value('password_hash') === $password_hash) {
           session::init($user->get_value('id'));
           urls::go('/user/'.$user->get_value('id'));

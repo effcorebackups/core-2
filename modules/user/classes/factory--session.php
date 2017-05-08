@@ -10,19 +10,19 @@ namespace effectivecore\modules\user {
  /* renew session for user with selected id */
     if ($user_id != 0) {
       session_start();
-      $instance = new entity_instance('entities/user/session', [
+      (new entity_instance('entities/user/session', [
         'id'      => session_id(),
         'user_id' => $user_id,
         'created' => date(format_datetime, time())
-      ]);
-      $instance->insert();
+      ]))->insert();
     }
  /* restore session for authenticated user */
     if ($user_id == 0 && isset($_REQUEST[session_name()])) {
-      $instance = new entity_instance('entities/user/session', ['id' => $_REQUEST[session_name()]]);
-      $instance->select();
-      if ($instance->get_value('user_id')) {
-        $user_id = $instance->get_value('user_id');
+      $session = (new entity_instance('entities/user/session', [
+        'id' => $_REQUEST[session_name()]
+      ]))->select();
+      if ($session->get_value('user_id')) {
+        $user_id = $session->get_value('user_id');
         session_start();
       } else {
       # remove lost or substituted sid in browser
@@ -34,7 +34,10 @@ namespace effectivecore\modules\user {
   }
 
   static function destroy($user_id) {
-    table_session::delete(['id' => session_id(), 'user_id' => $user_id]);
+    (new entity_instance('entities/user/session', [
+      'id'      => session_id(),
+      'user_id' => $user_id
+    ]))->delete();
     setcookie(session_name(), '', 0, '/');
     session_destroy();
   }
