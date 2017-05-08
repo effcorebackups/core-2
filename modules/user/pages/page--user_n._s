@@ -1,6 +1,6 @@
 pages
 - page_user_n
-    title: %%_profile_title
+    title: %%_context_user_mail:2 profile
     url
       match: %^/user/[0-9]+$%
       args

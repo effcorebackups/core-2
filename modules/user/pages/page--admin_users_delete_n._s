@@ -1,6 +1,6 @@
 pages
 - page_admin_users_delete_n
-    title: Delete user "%%_user_email"?
+    title: Delete user %%_context_user_mail:4?
     url
       match: %^/admin/users/delete/[0-9]+$%
       args

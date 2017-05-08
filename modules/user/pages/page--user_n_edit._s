@@ -1,6 +1,6 @@
 pages
 - page_user_n_edit
-    title: %%_profile_edit_title
+    title: %%_context_user_mail:2 edit profile
     url
       match: %^/user/[0-9]+/edit$%
       args

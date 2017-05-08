@@ -15,14 +15,16 @@ namespace effectivecore {
   }
 
   static function replace($string) {
-    return preg_replace_callback('/%%_[a-z0-9_]+/s', '\\effectivecore\\token_factory::_replace_callback', $string);
+    return preg_replace_callback('/(%%_[a-z0-9_]+)(?:\:'.
+                                     '([a-z0-9_]+)|)/S', '\\effectivecore\\token_factory::_replace_callback', $string);
   }
 
   static protected function _replace_callback($found) {
-    $match = isset($found[0]) ? $found[0] : null;
+    $match = isset($found[1]) ? $found[1] : null;
+    $arg_1 = isset($found[2]) ? $found[2] : null;
     if ($match && isset(static::$data[$match])) {
       switch (static::$data[$match]->type) {
-        case 'code': return call_user_func(static::$data[$match]->handler, $match);
+        case 'code': return call_user_func(static::$data[$match]->handler, $match, $arg_1);
         case 'text': return static::$data[$match]->value;
       }
     } else {

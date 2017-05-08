@@ -6,30 +6,19 @@ namespace effectivecore\modules\user {
           use \effectivecore\modules\user\user_factory as user;
           abstract class events_token_factory extends \effectivecore\events_token_factory {
 
-  static function on_replace($match) {
+  static function on_replace($match, $arg_1_num = null) {
     if (!empty(user::$current->id)) {
       switch ($match) {
         case '%%_user_id'   : return user::$current->id;
         case '%%_user_email': return user::$current->email;
-
-        case '%%_profile_title':
-          if (user::$current->id ==
-              urls::$current->get_args(2)) return 'My profile';
-          else {
-            $user = (new entity_instance('entities/user/user', [
-              'id' => urls::$current->get_args(2)
-            ]))->select();
-            return 'Profile of '.($user ? $user->get_value('email') : '[UNKNOWN]');
-          }
-
-        case '%%_profile_edit_title':
-          if (user::$current->id ==
-              urls::$current->get_args(2)) return 'Edit my profile';
-          else {
-            $user = (new entity_instance('entities/user/user', [
-              'id' => urls::$current->get_args(2)
-            ]))->select();
-            return 'Edit profile of '.($user ? $user->get_value('email') : '[UNKNOWN]');
+        case '%%_context_user_mail':
+          $arg_1_value = urls::$current->get_args($arg_1_num);
+          if (user::$current->id == $arg_1_value) {
+            return 'Current';
+          } else {
+            return (new entity_instance('entities/user/user', [
+              'id' => $arg_1_value
+            ]))->select()->get_value('email');
           }
       }
     }
