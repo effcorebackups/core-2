@@ -51,9 +51,18 @@ namespace effectivecore\modules\user {
   }
 
   static function on_show_admin_users_delete_n($user_id) {
-    $db_user = table_user::select_one(['id', 'email', 'is_locked'], ['id' => $user_id]);
-    if (isset($db_user['id']) == false)                               factory::send_header_and_exit('not_found', 'User not found!');
-    if (isset($db_user['is_locked']) && $db_user['is_locked'] == '1') factory::send_header_and_exit('access_denided', 'This user is locked!');
+    $user = (new entity_instance('entities/user/user', ['id' => $user_id]))->select();
+    if ($user) {
+      if ($user->get_value('is_embed') == 1) {
+        factory::send_header_and_exit('access_denided',
+          'This user is embed!'
+        );
+      }
+    } else {
+      factory::send_header_and_exit('not_found',
+        'User not found!'
+      );
+    }
   }
 
   static function on_show_user_n($id) {
