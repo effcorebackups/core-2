@@ -5,9 +5,10 @@ translate
   - Administer: Администрирование
   - created: создано
   - Created: Создано
-  - delete: удалить
   - Description: Описание
-  - edit: ред.
+  - view: просмотреть
+  - edit: изменить
+  - delete: удалить
   - Front page: Главная страница
   - Generation time: Время генерации
   - Home: Дом
@@ -26,5 +27,4 @@ translate
   - Total: Всего
   - Value: Значение
   - Version: Версия
-  - view: смотреть
   - Yes: Да
