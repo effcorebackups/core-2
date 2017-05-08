@@ -3,6 +3,7 @@
 namespace effectivecore\modules\user {
           use \effectivecore\factory;
           use \effectivecore\entity_instance;
+          use \effectivecore\entity_factory;
           use \effectivecore\markup;
           use \effectivecore\table;
           use \effectivecore\table_body_row_cell;
@@ -14,10 +15,13 @@ namespace effectivecore\modules\user {
           abstract class events_page_factory extends \effectivecore\events_page_factory {
 
   static function on_show_admin_roles() {
-    $data = table_role::select(['id', 'title', 'is_embed'], [], ['is_embed!']);
-    foreach ($data as &$c_row) $c_row['is_embed'] = $c_row['is_embed'] ? 'Yes' : 'No';
+    $head = [['ID', 'Title', 'Is embed']];
+    $body = entity_factory::get_entity('role')->select_set();
+    foreach ($body as $c_row) {
+      $c_row->is_embed = $c_row->is_embed ? 'Yes' : 'No';
+    }
     page::add_element(
-      new table([], $data, [['ID', 'Title', 'Is embed']])
+      new table([], $body, $head)
     );
   }
 

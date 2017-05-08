@@ -58,15 +58,7 @@ namespace effectivecore {
       timer::get_period('query_'.count($this->queries), 0, 1).' sec.', $query, 'Queries'
     );
     switch (substr($query, 0, 6)) {
-      case 'SELECT':
-        $i = 0;
-        $return = [];
-        if ($result) {
-          while ($row = $result->fetch(\PDO::FETCH_OBJ)) {
-            $return[isset($row->id) ? $row->id : $i++] = $row;
-          }
-        }
-        return $return;
+      case 'SELECT': return $result->fetchAll(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE, '\effectivecore\entity_instance');
       case 'UPDATE': return $result->rowCount();
       case 'DELETE': return $result->rowCount();
       case 'INSERT': return $this->connection->lastInsertId();
@@ -106,7 +98,7 @@ namespace effectivecore {
 
   function select_instance_set($entity, $conditions = [], $order = [], $count = 0, $offset = 0) {
     $this->init();
-    return $this->query(
+    $result = $this->query(
       'SELECT `'.implode('`, `', $entity->get_fields()).'` '.
       'FROM `'.$entity->get_name().'`'.
       (count($conditions) ? ' WHERE '.factory::data_to_attr($conditions, ' and ', '`') : '').
@@ -114,6 +106,10 @@ namespace effectivecore {
       ($count             ? ' LIMIT ' .$count  : '').
       ($offset            ? ' OFFSET '.$offset : '').';'
     );
+    foreach ($result as $c_instance) {
+      $c_instance->set_npath('entities/user/'.$entity->name); # @todo: make universal
+    }
+    return $result;
   }
 
   function select_instance($instance, $custom_ids = []) {
@@ -125,9 +121,7 @@ namespace effectivecore {
       'LIMIT 1;'
     ));
     if ($result) {
-      foreach ($result as $name => $value) {
-        $instance->values[$name] = $value;
-      }
+      $instance->values = $result->values;
       return $instance;
     }
   }

@@ -10,8 +10,15 @@ namespace effectivecore {
   function __construct($npath = '', $values = []) {
     $this->values = $values;
     if ($npath) {
-      $this->entity = new linker($npath);
+      $this->set_npath($npath);
     }
+  }
+
+  function __get($name)         {return $this->values[$name];}
+  function __set($name, $value) {$this->values[$name] = $value;}
+
+  function set_npath($npath) {
+    $this->entity = new linker($npath);
   }
 
   function get_name()               {return $this->entity->get()->get_name();}

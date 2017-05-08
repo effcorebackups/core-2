@@ -13,7 +13,7 @@ namespace effectivecore {
   function get_ids()          {return array_keys((array)$this->indexes['primary']->fields);}
   function get_fields()       {return array_keys((array)$this->fields);}
 
-  function get_set($conditions = [], $order = [], $count = 0, $offset = 0) {
+  function select_set($conditions = [], $order = [], $count = 0, $offset = 0) {
     $storage = storage::get_instance($this->storage_id);
     return $storage->select_instance_set($this, $conditions, $order, $count, $offset);
   }
