@@ -36,7 +36,10 @@ namespace effectivecore\modules\user {
     $password_hash = sha1($post_args['password']);
     switch ($post_args['button']) {
       case 'save':
-        $result = table_user::update(['password_hash' => $password_hash], ['id' => $user_id]);
+        $result = (new entity_instance('entities/user/user', [
+          'id'            => $user_id,
+          'password_hash' => $password_hash,
+        ]))->update();
         if ($result) {
           messages::add_new('Parameters of user with id = '.$user_id.' was updated.');
           urls::go($back_url ?: '/user/'.$user_id);
