@@ -52,12 +52,16 @@ namespace effectivecore\modules\user {
   }
 
   static function on_show_user_n($id) {
-    $user = (new entity_instance('user', ['id' => $id]))->load();
+    $user = (new entity_instance('entities/user/user', ['id' => $id]))->select();
     if ($user) {
-      if ($user->fields->id == user::$current->id || isset(user::$current->roles['admins'])) {
-        unset($user->fields->password_hash);
-        unset($user->fields->is_locked);
-        page::add_element(new table([], factory::array_rotate([array_keys((array)$user->fields), array_values((array)$user->fields)]), [['Parameter', 'Value']]));
+      if ($user->get_value('id') == user::$current->id || # owner
+          isset(user::$current->roles['admins'])) {       # admin
+        $values = $user->get_values();
+        unset($values['password_hash']);
+        unset($values['is_locked']);
+        $head = [['Parameter', 'Value']];
+        $body = factory::array_rotate([array_keys($values), array_values($values)]);
+        page::add_element(new table([], $body, $head));
       } else {
         factory::send_header_and_exit('access_denided',
           'Access denided!'

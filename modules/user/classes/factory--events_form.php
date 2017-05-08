@@ -52,12 +52,11 @@ namespace effectivecore\modules\user {
     $password_hash = sha1($post_args['password']);
     switch ($post_args['button']) {
       case 'login':
-        $instance = new entity_instance('entities/user/user', ['email' => $email]);
-        $instance->select(['email']);
-        if ($instance->get_value('id') &&
-            $instance->get_value('password_hash') === $password_hash) {
-          session::init($instance->get_value('id'));
-          urls::go('/user/'.$instance->get_value('id'));
+        $user = (new entity_instance('entities/user/user', ['email' => $email]))->select(['email']);
+        if ($user->get_value('id') &&
+            $user->get_value('password_hash') === $password_hash) {
+          session::init($user->get_value('id'));
+          urls::go('/user/'.$user->get_value('id'));
         } else {
           messages::add_new('Incorrect email or password!', 'error');
         }

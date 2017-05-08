@@ -1,6 +1,7 @@
 <?php
 
 namespace effectivecore\modules\user {
+          use \effectivecore\entity_instance as entity_instance;
           use \effectivecore\urls_factory as urls;
           use \effectivecore\modules\user\user_factory as user;
           abstract class events_token_factory extends \effectivecore\events_token_factory {
@@ -14,8 +15,10 @@ namespace effectivecore\modules\user {
           if (user::$current->id == urls::$current->get_args(2)) {
             return 'My profile';
           } else {
-            $db_user = table_user::select_one(['email'], ['id' => urls::$current->get_args(2)]);
-            return 'Profile of '.$db_user['email'];
+            $user = (new entity_instance('entities/user/user', [
+              'id' => urls::$current->get_args(2)
+            ]))->select();
+            return 'Profile of '.($user ? $user->get_value('email') : '[UNKNOWN]');
           }
         case '%%_profile_edit_title':
           if (user::$current->id == urls::$current->get_args(2)) {
