@@ -21,8 +21,8 @@ namespace effectivecore\modules\user {
       $session = (new entity_instance('entities/user/session', [
         'id' => $_REQUEST[session_name()]
       ]))->select();
-      if ($session->get_value('user_id')) {
-        $user_id = $session->get_value('user_id');
+      if ($session) {
+        $user_id = $session->user_id;
         session_start();
       } else {
       # remove lost or substituted sid in browser

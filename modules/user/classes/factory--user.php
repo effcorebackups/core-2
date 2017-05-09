@@ -14,11 +14,11 @@ namespace effectivecore\modules\user {
  /* load user from db */
     if ($id) {
       $user = (new entity_instance('entities/user/user', ['id' => $id]))->select();
-      if ($user->get_value('id')) {
+      if ($user) {
         static::$current = (object)($user->get_values());
         static::$current->roles = ['registered' => 'registered'];
         foreach (entity_factory::get_entity('relation_role_ws_user')->select_set(['user_id' => $id]) as $c_role) {
-          static::$current->roles[$c_role->get_value('role_id')] = $c_role->get_value('role_id');
+          static::$current->roles[$c_role->role_id] = $c_role->role_id;
         }
       }
     }

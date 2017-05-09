@@ -52,7 +52,7 @@ namespace effectivecore\modules\user {
   static function on_show_admin_users_delete_n($user_id) {
     $user = (new entity_instance('entities/user/user', ['id' => $user_id]))->select();
     if ($user) {
-      if ($user->get_value('is_embed') == 1) {
+      if ($user->is_embed == 1) {
         factory::send_header_and_exit('access_denided',
           'This user is embed!'
         );
@@ -67,8 +67,8 @@ namespace effectivecore\modules\user {
   static function on_show_user_n($id) {
     $user = (new entity_instance('entities/user/user', ['id' => $id]))->select();
     if ($user) {
-      if ($user->get_value('id') == user::$current->id || # owner
-          isset(user::$current->roles['admins'])) {       # admin
+      if ($user->id == user::$current->id ||        # owner
+          isset(user::$current->roles['admins'])) { # admin
         $values = $user->get_values();
         $values['password_hash'] = '*****';
         $values['is_embed'] = $values['is_embed'] ? 'Yes' : 'No';
@@ -90,8 +90,8 @@ namespace effectivecore\modules\user {
   static function on_show_user_n_edit($user_id) {
     $user = (new entity_instance('entities/user/user', ['id' => $user_id]))->select();
     if ($user) {
-      if (!($user->get_value('id') == user::$current->id || # not owner or
-            isset(user::$current->roles['admins']))) {      # not admin
+      if (!($user->id == user::$current->id ||         # not owner or
+            isset(user::$current->roles['admins']))) { # not admin
         factory::send_header_and_exit('access_denided',
           'Access denided!'
         );
