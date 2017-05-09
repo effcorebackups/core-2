@@ -20,14 +20,18 @@ namespace effectivecore {
   function init() {
     if (empty($this->is_init)) {
       try {
+        timer::tap('init');
         $this->connection = new \PDO($this->driver.':host='.
           $this->host_name.';dbname='.
           $this->directory_name,
           $this->user_name,
           $this->password
         );
+        timer::tap('init');
         $this->is_init = true;
-        console::set_log('', 'The database was initialized on first request.', 'Queries');
+        console::set_log(timer::get_period('init', 0, 1).' sec.',
+          'The database was initialized on first request.', 'Queries'
+        );
       } catch (\PDOException $e) {
         factory::send_header_and_exit('access_denided',
           'Database is unavailable!'
