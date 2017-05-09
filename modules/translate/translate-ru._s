@@ -1,5 +1,8 @@
 translate
   ru
+  - User profile (%%_context_user_mail-2): Профиль пользователя (%%_context_user_mail-2)
+  - Edit profile (%%_context_user_mail-2): Редактировать профиль (%%_context_user_mail-2)
+  - Delete profile (%%_context_user_mail-4)?: Удалить профиль (%%_context_user_mail-4)?
   - always_enabled: всегда_вкл
   - enabled: вкл.
   - disabled: выкл.
@@ -42,13 +45,16 @@ translate
   - Module for working with user accounts and permissions.: Модуль работы с пользовательскими аккаунтами и разрешениями.
   - Module for translate interface and content.: Модуль перевода интерфейса и контента.
   - Modules: Модули
+  - my account: мой аккаунт
   - No: Нет
   - Parameter: Параметр
   - Password: Пароль
+  - Password hash: Хеш пароля
   - Path: Путь
-  - register: регистрация
-  - Register: Регистрация
+  - profile: профиль
+  - register: зарегистрировать
   - Registered: Зарегистрированные
+  - Registration: Регистрация
   - Roles: Роли
   - save: сохранить
   - State: Состояние

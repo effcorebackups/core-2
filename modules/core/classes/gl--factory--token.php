@@ -15,7 +15,7 @@ namespace effectivecore {
   }
 
   static function replace($string) {
-    return preg_replace_callback('/(%%_[a-z0-9_]+)(?:\:'.
+    return preg_replace_callback('/(%%_[a-z0-9_]+)(?:\-'.
                                      '([a-z0-9_]+)|)/S', '\\effectivecore\\token_factory::_replace_callback', $string);
   }
 

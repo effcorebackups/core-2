@@ -16,12 +16,12 @@ tree_items
     access
       roles
       - anonymous: anonymous
-- user_register|tree_item
+- user_registration|tree_item
     parent: tree_items/user/user_anonymous
-    title: Register
+    title: Registration
     weight: -60
     attributes
-      href: /user/register
+      href: /user/registration
     access
       roles
       - anonymous: anonymous

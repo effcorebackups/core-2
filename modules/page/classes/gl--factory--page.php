@@ -10,6 +10,7 @@ namespace effectivecore\modules\page {
           use \effectivecore\settings_factory as settings;
           use \effectivecore\timer_factory as timer;
           use \effectivecore\token_factory as token;
+          use \effectivecore\translate_factory as translate;
           use \effectivecore\console_factory as console;
           use \effectivecore\modules\user\user_factory as user;
           use \effectivecore\modules\user\access_factory as access;
@@ -41,7 +42,7 @@ namespace effectivecore\modules\page {
     foreach ($call_stack as $c_page) {
     # show title
       if (isset($c_page->title)) {
-        static::add_element(stripslashes(token::replace($c_page->title)), 'title');
+        static::add_element(stripslashes(token::replace(translate::t($c_page->title))), 'title');
       }
     # collect styles
       if (isset($c_page->styles)) {

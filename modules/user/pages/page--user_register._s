@@ -1,13 +1,13 @@
 pages
-- page_user_register
-    title: Register new user
+- page_user_registration
+    title: Registration
     url
-      match: %^/user/register$%
+      match: %^/user/registration$%
     access
       roles
       - anonymous: anonymous
     content
-    - form_user_register
+    - form_user_registration
         type: link
-        link: forms/user/form_user_register
+        link: forms/user/form_user_registration
         region: c_1_1
