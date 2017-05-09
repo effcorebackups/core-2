@@ -14,17 +14,21 @@ namespace effectivecore\modules\user {
     $user_id  = $page_args['user_id'];
     switch ($post_args['button']) {
       case 'delete':
-        $result = table_user::delete(['id' => $user_id]);
+        $result = (new entity_instance('entities/user/user', [
+          'id' => $user_id,
+        ]))->delete();
         if ($result) {
-          table_session::delete(['user_id' => $user_id]);
+          (new entity_instance('entities/user/session', [
+            'user_id' => $user_id,
+          ]))->delete();
           messages::add_new('User with id = '.$user_id.' was deleted.');
-          urls::go(urls::get_back_part() ?: '/admin/users');
+          urls::go(urls::get_back_url() ?: '/admin/users');
         } else {
-          messages::add_new('User is not deleted!', 'error');
+          messages::add_new('User was not deleted!', 'error');
         }
         break;
       case 'cancel':
-        urls::go(urls::get_back_part() ?: '/admin/users');
+        urls::go(urls::get_back_url() ?: '/admin/users');
         break;
     }
   }
@@ -40,7 +44,7 @@ namespace effectivecore\modules\user {
         ]))->update();
         if ($result) {
           messages::add_new('Parameters of user with id = '.$user_id.' was updated.');
-          urls::go(urls::get_back_part() ?: '/user/'.$user_id);
+          urls::go(urls::get_back_url() ?: '/user/'.$user_id);
         } else {
           messages::add_new('Parameters is not updated!', 'error');
         }

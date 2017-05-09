@@ -17,15 +17,13 @@ namespace effectivecore {
   function __get($name)         {return $this->values[$name];}
   function __set($name, $value) {$this->values[$name] = $value;}
 
-  function set_npath($npath) {
-    $this->entity = new linker($npath);
-  }
+  function set_npath($npath)   {$this->entity = new linker($npath);}
+  function set_values($values) {$this->values = $values;}
 
   function get_name()               {return $this->entity->get()->get_name();}
   function get_fields()             {return $this->entity->get()->get_fields();}
   function get_ids()                {return $this->entity->get()->get_ids();}
   function get_value($name)         {return isset($this->values[$name]) ? $this->values[$name] : null;}
-  function set_value($name, $value) {$this->values[$name] = $value;}
   function get_values($names = []) {
     if (count($names)) {
       $values = [];

@@ -16,9 +16,14 @@ namespace effectivecore\modules\user {
           if (user::$current->id == $arg_1_value) {
             return 'Current';
           } else {
-            return (new entity_instance('entities/user/user', [
+            $user = (new entity_instance('entities/user/user', [
               'id' => $arg_1_value
-            ]))->select()->get_value('email');
+            ]))->select();
+            if ($user) {
+              return $user->email;
+            } else {
+              return '[UNKNOWN UID]';
+            }
           }
       }
     }

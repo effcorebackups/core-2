@@ -150,10 +150,14 @@ namespace effectivecore {
 
   function delete_instance($instance) {
     $this->init();
-    return $this->query(
+    $result = $this->query(
       'DELETE FROM `'.$instance->get_name().'` '.
       'WHERE '.factory::data_to_attr($instance->get_values($instance->get_ids()), ' and ', '`').';'
     );
+    if ($result) {
+      $instance->set_values([]);
+      return $instance;
+    }
   }
 
 }}

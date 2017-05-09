@@ -38,8 +38,8 @@ namespace effectivecore\modules\user {
       foreach ($body as $c_row) {
         $c_actions = new markup('ul', ['class' => 'actions']);
         $c_actions->add_child( new markup('li', [], new markup('a', ['href' => (new url('/user/'.$c_row->id))->get_full()], 'view') ) );
-        $c_actions->add_child( new markup('li', [], new markup('a', ['href' => (new url('/user/'.$c_row->id.'/edit?'.urls::get_back_part()))->get_full()], 'edit') ) );
-        if ($c_row->is_embed != 1) $c_actions->add_child( new markup('li', [], new markup('a', ['href' => (new url('/admin/users/delete/'.$c_row->id.'?'.urls::get_back_part()))->get_full()], 'delete') ) );
+        $c_actions->add_child( new markup('li', [], new markup('a', ['href' => (new url('/user/'.$c_row->id.'/edit?'.urls::make_back_part()))->get_full()], 'edit') ) );
+        if ($c_row->is_embed != 1) $c_actions->add_child( new markup('li', [], new markup('a', ['href' => (new url('/admin/users/delete/'.$c_row->id.'?'.urls::make_back_part()))->get_full()], 'delete') ) );
         $c_row->is_embed = $c_row->is_embed ? 'Yes' : 'No';
         $c_row->password_hash = '*****';
         $c_row->actions = $c_actions;
