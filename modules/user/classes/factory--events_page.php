@@ -72,6 +72,12 @@ namespace effectivecore\modules\user {
         $values = $user->get_values();
         $values['password_hash'] = '*****';
         $values['is_embed'] = $values['is_embed'] ? 'Yes' : 'No';
+      # get roles
+        foreach (entity_factory::get_entity('relation_role_ws_user')->select_set(['user_id' => $id]) as $c_role) {
+          $values['roles'][] = $c_role->role_id;
+        }
+        $values['roles'] = implode(', ', $values['roles']);
+      # show table
         $head = [['Parameter', 'Value']];
         $body = factory::array_rotate([array_keys($values), array_values($values)]);
         page::add_element(new table([], $body, $head));
