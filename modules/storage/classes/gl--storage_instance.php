@@ -132,10 +132,10 @@ namespace effectivecore {
       'INSERT INTO `'.$instance->get_name().'` (`'.implode('`, `', array_keys($instance->get_values())).'`) '.
       'VALUES ("'.implode('", "', $instance->get_values()).'");'
     );
-    if (!empty($result) && count($instance->get_ids()) == 1) {
+    if (!empty($result) && count($instance->get_ids()) == 1) { # only for autoincrement field
       $id = reset($instance->get_ids());
       $instance->values[$id] = $result;
-      return true;
+      return $instance;
     }
   }
 

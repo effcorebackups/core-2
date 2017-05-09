@@ -53,12 +53,14 @@ namespace effectivecore\modules\user {
     $password_hash = sha1($post_args['password']);
     switch ($post_args['button']) {
       case 'login':
-        $user = (new entity_instance('entities/user/user', ['email' => $email]))->select(['email']);
+        $user = (new entity_instance('entities/user/user', [
+          'email' => $email
+        ]))->select(['email']);
         if ($user &&
-            $user->get_value('id') &&
-            $user->get_value('password_hash') === $password_hash) {
-          session::init($user->get_value('id'));
-          urls::go('/user/'.$user->get_value('id'));
+            $user->id &&
+            $user->password_hash === $password_hash) {
+          session::init($user->id);
+          urls::go('/user/'.$user->id);
         } else {
           messages::add_new('Incorrect email or password!', 'error');
         }
@@ -69,19 +71,24 @@ namespace effectivecore\modules\user {
   static function on_submit_user_register($page_args, $form_args, $post_args) {
     $email         = $post_args['email'];
     $password_hash = sha1($post_args['password']);
-    $created       = date(format_datetime, time());
     switch ($post_args['button']) {
       case 'register':
-        $is_exist = table_user::select_one(['id'], ['email' => $email]);
-        if ($is_exist) {
+        $user = (new entity_instance('entities/user/user', [
+          'email' => $email
+        ]))->select(['email']);
+        if ($user) {
           messages::add_new('User with this email is already exist!', 'error');
         } else {
-          $new_id = table_user::insert(['email' => $email, 'password_hash' => $password_hash, 'created' => $created]);
-          if ($new_id) {
-            session::init($new_id);
-            urls::go('/user/'.$new_id);
+          $user = (new entity_instance('entities/user/user', [
+            'email'         => $email,
+            'password_hash' => $password_hash,
+            'created'       => date(format_datetime, time())
+          ]))->insert();
+          if ($user->id) {
+            session::init($user->id);
+            urls::go('/user/'.$user->id);
           } else {
-            messages::add_new('User is not created!', 'error');
+            messages::add_new('User was not created!', 'error');
           }
         }
         break;
