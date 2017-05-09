@@ -7,7 +7,6 @@ namespace effectivecore\modules\user {
           use \effectivecore\messages_factory as messages;
           use \effectivecore\modules\user\session_factory as session;
           use \effectivecore\modules\user\user_factory as user;
-          use \effectivecore\modules\storage\db_factory as db;
           abstract class events_form_factory extends \effectivecore\events_form_factory {
 
   static function on_submit_user_n_delete($page_args, $form_args, $post_args) {
