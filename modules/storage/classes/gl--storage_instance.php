@@ -5,7 +5,7 @@ namespace effectivecore {
           use \effectivecore\timer_factory as timer;
           use \effectivecore\console_factory as console;
           use \effectivecore\modules\storage\storage_factory as storage;
-          class storage_instance {
+          class storage_pdo_instance {
 
   public $id;
   public $connection;

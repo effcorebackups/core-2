@@ -1,5 +1,5 @@
 storages
-- storage_db_main|storage_instance
+- storage_db_main|storage_pdo_instance
     id: db_main
     directory_name: effectivecore
     host_name: 127.0.0.1
