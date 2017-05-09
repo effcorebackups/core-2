@@ -1,0 +1,65 @@
+translate
+  ru
+  - always_enabled: всегда_вкл
+  - enabled: вкл.
+  - disabled: выкл.
+  - Page: Страница
+  - Core: Ядро
+  - Storage: Хранилище
+  - Translate: Перевод
+  - Tree: Дерево  
+  - Actions: Действия
+  - Administer: Администрирование
+  - Administrators: Администраторы
+  - Anonymous: Анонимы
+  - cancel: отмена
+  - Сancel: Отмена
+  - Core module.: Модуль Core.
+  - created: создано
+  - Created: Создано
+  - delete: удалить
+  - Description: Описание
+  - Edit profile: Редактировать профиль
+  - edit: изменить
+  - Front page: Главная страница
+  - Generation time: Время генерации
+  - Hello %%_user_email: Привет %%_user_email
+  - Home: Дом
+  - Init calls: Инициализирующие вызовы
+  - Installation: Установка
+  - Is always on: Всегда включен
+  - Is embed: Встроенный
+  - login: вход
+  - Login: Вход
+  - Logout from the system: Выйти из системы
+  - logout: выход
+  - Logout: Выход
+  - Main menu: Главное меню
+  - Moderators: Модераторы
+  - Module for storages support.: Модуль поддержки хранилищ данных.
+  - Module for working with pages.: Модуль работы со страницами.
+  - Module for working with trees (hierarchical structures).: Модуль работы с деревьями (иерархическими структурами).
+  - Module for working with user accounts and permissions.: Модуль работы с пользовательскими аккаунтами и разрешениями.
+  - Module for translate interface and content.: Модуль перевода интерфейса и контента.
+  - Modules: Модули
+  - No: Нет
+  - Parameter: Параметр
+  - Password: Пароль
+  - Path: Путь
+  - register: регистрация
+  - Register: Регистрация
+  - Registered: Зарегистрированные
+  - Roles: Роли
+  - save: сохранить
+  - State: Состояние
+  - Queries: Запросы
+  - Title: Заголовок
+  - Total: Всего
+  - User menu: Меню пользователя
+  - User roles: Роли пользователя
+  - User: Пользователь
+  - Users: Пользователи
+  - Value: Значение
+  - Version: Версия
+  - view: просмотреть
+  - Yes: Да

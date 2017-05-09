@@ -3,5 +3,4 @@ module
   title: User
   description: Module for working with user accounts and permissions.
   version: 1-0
-  is_embed: true
-  is_always_on: true
+  state: always_enabled

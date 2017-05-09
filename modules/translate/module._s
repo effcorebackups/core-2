@@ -1,0 +1,6 @@
+module
+  id: translate
+  title: Translate
+  description: Module for translate interface and content.
+  version: 1-0
+  state: enabled

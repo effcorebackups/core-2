@@ -18,8 +18,7 @@ namespace effectivecore {
       'Path',
       'Description',
       'Version',
-      'Is embed',
-      'Is always on'
+      'State',
     ];
     $data = [];
     foreach (settings::$data['module'] as $c_module) {
@@ -29,8 +28,7 @@ namespace effectivecore {
         $c_module->path,
         $c_module->description,
         $c_module->version,
-        $c_module->is_embed ? 'Yes' : 'No',
-        $c_module->is_always_on ? 'Yes' : 'No'
+        $c_module->state,
       ];
     }
     page::add_element(

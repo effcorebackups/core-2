@@ -3,5 +3,4 @@ module
   title: Core
   description: Core module.
   version: 1-0
-  is_embed: true
-  is_always_on: true
+  state: always_enabled
