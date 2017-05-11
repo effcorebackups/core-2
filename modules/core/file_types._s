@@ -2,9 +2,6 @@ file_types
 - php
     mime: text/html
     protected: 1
-- _s
-    mime: text/settings
-    protected: 1
 - css
     mime: text/css
     use_tokens: 1

@@ -6,3 +6,5 @@ storages
     user_name: root
     password: 123
     driver: mysql
+- storage_settings|storage_settings_instance
+    id: settings

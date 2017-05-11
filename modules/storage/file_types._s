@@ -1,0 +1,4 @@
+file_types
+- _s
+    mime: text/settings
+    protected: 1

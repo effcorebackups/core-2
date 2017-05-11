@@ -30,11 +30,11 @@ namespace effectivecore {
         timer::tap('init');
         $this->is_init = true;
         console::set_log(timer::get_period('init', 0, 1).' sec.',
-          'The database was initialized on first request.', 'Queries'
+          'The PDO database "'.$this->id.'" was initialized on first request.', 'Queries'
         );
       } catch (\PDOException $e) {
         factory::send_header_and_exit('access_denided',
-          'Database is unavailable!'
+          'The PDO database "'.$this->id.'" is unavailable!'
         );
       }
     }
