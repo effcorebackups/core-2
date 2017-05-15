@@ -1,6 +1,7 @@
 <?php
 
 namespace effectivecore {
+          use \effectivecore\timer_factory as timer;
           use \effectivecore\console_factory as console;
           abstract class events_module_factory extends events_factory {
 
@@ -10,6 +11,8 @@ namespace effectivecore {
     require_once('gl--factory--cache.php');
     require_once('gl--factory--files.php');
     spl_autoload_register('\effectivecore\factory::autoload');
+    timer::tap('total');
+    timer::tap('init_core');
     settings_factory::init();
     translate_factory::init();
     token_factory::init();
@@ -17,12 +20,19 @@ namespace effectivecore {
     events_factory::init();
     entity_factory::init();
     core_factory::init();
+    timer::tap('init_core');
+    console::set_log(
+      timer::get_period('init_core', 0, 1).' sec.', 'init_core | \effectivecore\events_module::on_init', 'Init calls'
+    );
   # init modules
     ob_start();
-    console::set_log('init_core', '\effectivecore\events_module::on_init', 'Init calls');
     foreach (static::$data->on_init as $c_id => $c_event) {
-      console::set_log($c_id, $c_event->handler, 'Init calls');
+      timer::tap('init_'.$c_id);
       call_user_func($c_event->handler);
+      timer::tap('init_'.$c_id);
+      console::set_log(
+        timer::get_period('init_'.$c_id, 0, 1).' sec.', $c_id.' | '.$c_event->handler, 'Init calls'
+      );
     }
   }
 
