@@ -12,26 +12,32 @@ namespace effectivecore {
     require_once('gl--factory--files.php');
     spl_autoload_register('\effectivecore\factory::autoload');
     timer::tap('total');
-    timer::tap('init_core');
-    settings_factory::init();
-    translate_factory::init();
-    token_factory::init();
-    urls_factory::init();
-    events_factory::init();
-    entity_factory::init();
-    core_factory::init();
-    timer::tap('init_core');
-    console::set_log(
-      timer::get_period('init_core', 0, 1).' sec.', 'init_core | \effectivecore\events_module::on_init', 'Init calls'
-    );
-  # init modules
-    ob_start();
-    foreach (static::$data->on_init as $c_id => $c_event) {
-      timer::tap('init_'.$c_id);
-      call_user_func($c_event->handler);
-      timer::tap('init_'.$c_id);
+  # init classes
+    $handlers = [
+      '\effectivecore\settings_factory::init',
+      '\effectivecore\translate_factory::init',
+      '\effectivecore\token_factory::init',
+      '\effectivecore\urls_factory::init',
+      '\effectivecore\events_factory::init',
+      '\effectivecore\entity_factory::init',
+      '\effectivecore\core_factory::init'
+    ];
+    foreach ($handlers as $c_handler) {
+      timer::tap($c_handler);
+      call_user_func($c_handler);
+      timer::tap($c_handler);
       console::set_log(
-        timer::get_period('init_'.$c_id, 0, 1).' sec.', $c_id.' | '.$c_event->handler, 'Init calls'
+        timer::get_period($c_handler, 0, 1).' sec.', $c_handler, 'Init calls'
+      );
+    }
+  # on_init modules
+    foreach (static::$data->on_init as $c_info) {
+      $c_handler = $c_info->handler;
+      timer::tap($c_handler);
+      call_user_func($c_handler);
+      timer::tap($c_handler);
+      console::set_log(
+        timer::get_period($c_handler, 0, 1).' sec.', $c_handler, 'Init calls'
       );
     }
   }
