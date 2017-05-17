@@ -19,14 +19,14 @@ namespace effectivecore {
   }
 
   static function render() {
-    $head = [['Group', 'Name', 'Values', 'Time']];
+    $head = [['Time', 'Group', 'Name', 'Values']];
     $body = [];
     foreach (static::get_all_logs() as $c_log) {
       $body[] = new table_body_row(['class' => factory::to_css_class($c_log['group'])], [
+        new table_body_row_cell(['class' => 'time'],   $c_log['time']),
         new table_body_row_cell(['class' => 'group'],  $c_log['group']),
         new table_body_row_cell(['class' => 'name'],   $c_log['name']),
-        new table_body_row_cell(['class' => 'values'], $c_log['values']),
-        new table_body_row_cell(['class' => 'time'],   $c_log['time'])
+        new table_body_row_cell(['class' => 'values'], $c_log['values'])
       ]);
     }
     return (
