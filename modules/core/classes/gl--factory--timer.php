@@ -10,7 +10,7 @@ namespace effectivecore {
   }
 
   static function get_period($name, $a, $b) {
-    $result = static::$data[$name][$b] - static::$data[$name][$a];
+    $result = abs(static::$data[$name][$b] - static::$data[$name][$a]);
     return number_format($result, 6);
   }
 

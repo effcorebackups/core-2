@@ -3,13 +3,21 @@
 namespace effectivecore {
           use \effectivecore\files_factory as files;
           use \effectivecore\cache_factory as cache;
+          use \effectivecore\timer_factory as timer;
+          use \effectivecore\console_factory as console;
           abstract class factory {
 
   static function autoload($name) {
-    $classes_map = static::get_classes_map();
-    foreach ($classes_map as $c_class_name => $c_class_info) {
+    timer::tap('autoload_'.$name);
+    foreach (static::get_classes_map() as $c_class_name => $c_class_info) {
       if ($c_class_name == $name) {
-        (new file($c_class_info->file))->insert();
+        $c_file = new file($c_class_info->file);
+        if ($c_file->insert()) {
+          timer::tap('autoload_'.$name);
+          console::add_log(
+            'Autoload', $c_class_info->file, 'ok', timer::get_period('autoload_'.$name, 0, 1)
+          );
+        }
       }
     }
   }

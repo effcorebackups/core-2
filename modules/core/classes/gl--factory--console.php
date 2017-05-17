@@ -5,8 +5,13 @@ namespace effectivecore {
 
   static $data = [];
 
-  static function set_log($key, $value, $group = 'Total') {
-    static::$data[$group][] = (object)['key' => $key, 'value' => $value];
+  static function add_log($group = 'System', $name, $values, $time = 0) {
+    static::$data[] = [
+      'group'  => $group,
+      'name'   => $name,
+      'values' => $values,
+      'time'   => $time,
+    ];
   }
 
   static function get_all_logs() {
@@ -14,20 +19,21 @@ namespace effectivecore {
   }
 
   static function render() {
-    $sections = [];
-    foreach (static::get_all_logs() as $c_section_title => $c_section) {
-      $c_data = [];
-      foreach ($c_section as $c_log) {
-        $c_data[] = new markup('dt', [], $c_log->key);
-        $c_data[] = new markup('dd', [], $c_log->value);
-      }
-      $sections[] = new markup('section', ['class' => factory::to_css_class($c_section_title)], [
-        new markup('h2', [], $c_section_title),
-        new markup('dl', [], $c_data),
+    $head = [['Group', 'Name', 'Values', 'Time']];
+    $body = [];
+    foreach (static::get_all_logs() as $c_log) {
+      $body[] = new table_body_row(['class' => factory::to_css_class($c_log['group'])], [
+        new table_body_row_cell(['class' => 'group'],  $c_log['group']),
+        new table_body_row_cell(['class' => 'name'],   $c_log['name']),
+        new table_body_row_cell(['class' => 'values'], $c_log['values']),
+        new table_body_row_cell(['class' => 'time'],   $c_log['time'])
       ]);
     }
     return (
-      new markup('console', [], $sections)
+      new markup('console', [], [
+        new markup('h2', [], 'Console'),
+        new table([], $body, $head)
+      ])
     )->render();
   }
 

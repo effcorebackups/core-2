@@ -8,6 +8,8 @@ translate
   - disabled: выкл.
   - Page: Страница
   - Core: Ядро
+  - Console: Консоль
+  - Group: Группа
   - Storage: Хранилище
   - Translate: Перевод
   - Tree: Дерево  
@@ -25,13 +27,14 @@ translate
   - Edit profile: Редактировать профиль
   - edit: изменить
   - Front page: Главная страница
-  - Total time: Всего времени
+  - Total build time: Общее время сборки
   - Hello %%_user_email: Привет %%_user_email
   - Home: Дом
-  - Init calls: Инициализирующие вызовы
+  - Call: Вызов
   - Installation: Установка
   - Is always on: Всегда включен
   - Is embed: Встроенный
+  - Autoload: Автозагрузка
   - login: вход
   - Login: Вход
   - Logout from the system: Выйти из системы
@@ -47,6 +50,7 @@ translate
   - Modules: Модули
   - my account: мой аккаунт
   - No: Нет
+  - Name: Имя
   - Parameter: Параметр
   - Password: Пароль
   - Password hash: Хеш пароля
@@ -59,13 +63,17 @@ translate
   - save: сохранить
   - State: Состояние
   - Queries: Запросы
+  - Query: Запрос
+  - System: Система
   - Title: Заголовок
+  - Time: Время
   - Total: Всего
   - User menu: Меню пользователя
   - User roles: Роли пользователя
   - User: Пользователь
   - Users: Пользователи
   - Value: Значение
+  - Values: Значения
   - Version: Версия
   - view: просмотреть
   - Yes: Да

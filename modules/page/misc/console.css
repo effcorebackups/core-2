@@ -1,10 +1,13 @@
 
   /* console */
   console {margin: 100px auto}
-  console section {display: block; margin: 30px 0}
-  console section h2 {margin: 0 0 5px 0; padding: .5em 0; border-bottom: 4px solid #000}
-  console section dl {margin: 0; padding: 0}
-  console section dl dt {margin: 0 10px 0 0; padding: 0; float: left; min-width: 150px}
-  console section dl dd {margin: 0 0 0 160px; padding: 0}
-  console section:empty {display: none}
-  console section.sql-queries dd {font-family: monospace; font-size: .8em}
+  console table {border-collapse: collapse; width: 100%; margin: 20px 0}
+  console table thead {border-bottom: 5px solid #000}
+  console table thead th {padding: 10px 5px; font-weight: normal; font-size: 1.2em; text-align: left}
+  console table td {padding: 3px 10px; vertical-align: top}
+
+  console table tr.autoload {background-color: #fff7da}
+  console table tr.call     {background-color: #dadaff}
+  console table tr.query    {background-color: #d3ffe4}
+  console table tr.system   {background-color: #d3f6ff}
+  console table tr.new      {background-color: #f0f5dc}

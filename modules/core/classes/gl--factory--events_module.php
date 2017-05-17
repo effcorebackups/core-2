@@ -10,6 +10,7 @@ namespace effectivecore {
     require_once('gl--factory.php');
     require_once('gl--factory--cache.php');
     require_once('gl--factory--files.php');
+    require_once('gl--factory--timer.php');
     spl_autoload_register('\effectivecore\factory::autoload');
     timer::tap('total');
   # init classes
@@ -26,8 +27,8 @@ namespace effectivecore {
       timer::tap($c_handler);
       call_user_func($c_handler);
       timer::tap($c_handler);
-      console::set_log(
-        timer::get_period($c_handler, 0, 1).' sec.', $c_handler, 'Init calls'
+      console::add_log(
+        'Call', $c_handler, '-', timer::get_period($c_handler, 0, 1)
       );
     }
   # on_init modules
@@ -36,8 +37,8 @@ namespace effectivecore {
       timer::tap($c_handler);
       call_user_func($c_handler);
       timer::tap($c_handler);
-      console::set_log(
-        timer::get_period($c_handler, 0, 1).' sec.', $c_handler, 'Init calls'
+      console::add_log(
+        'Call', $c_handler, '-', timer::get_period($c_handler, 0, 1)
       );
     }
   }

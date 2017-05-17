@@ -20,17 +20,17 @@ namespace effectivecore {
   function init() {
     if (empty($this->is_init)) {
       try {
-        timer::tap('init');
+        timer::tap('init_db');
         $this->connection = new \PDO($this->driver.':host='.
           $this->host_name.';dbname='.
           $this->directory_name,
           $this->user_name,
           $this->password
         );
-        timer::tap('init');
+        timer::tap('init_db');
         $this->is_init = true;
-        console::set_log(timer::get_period('init', 0, 1).' sec.',
-          'The PDO database "'.$this->id.'" was initialized on first request.', 'Queries'
+        console::add_log(
+          'Query', 'The PDO database "'.$this->id.'" was initialized on first request.', 'ok', timer::get_period('init_db', 0, 1)
         );
       } catch (\PDOException $e) {
         factory::send_header_and_exit('access_denided',
@@ -58,8 +58,8 @@ namespace effectivecore {
         'Driver error text: '.$errors[2], 'error'
       );
     }
-    console::set_log(
-      timer::get_period('query_'.count($this->queries), 0, 1).' sec.', $query, 'Queries'
+    console::add_log(
+      'Query', $query, $errors[0] == '00000' ? 'ok' : 'error', timer::get_period('query_'.count($this->queries), 0, 1)
     );
     switch (substr($query, 0, 6)) {
       case 'SELECT': return $result->fetchAll(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE, '\effectivecore\entity_instance');
