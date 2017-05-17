@@ -47,7 +47,7 @@ namespace effectivecore {
         $matches = [];
         preg_match('%namespace (?<namespace>[a-z0-9_\\\\]+) .*? '.
                         'class (?<classname>[a-z0-9_]+) (?:'.
-                      'extends (?<parent>[a-z0-9_\\\\]+)|)%s', $c_file->load(), $matches);
+                      'extends (?<parent>[a-z0-9_\\\\]+)|)%', $c_file->load(), $matches);
         if (!empty($matches['namespace']) &&
             !empty($matches['classname'])) {
           $classes_map[$matches['namespace'].'\\'.$matches['classname']] = (object)[

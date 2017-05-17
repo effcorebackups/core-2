@@ -6,7 +6,7 @@ namespace effectivecore {
   static $data = [];
 
   static function tap($name) {
-    static::$data[$name][] = microtime();
+    static::$data[$name][] = microtime(true);
   }
 
   static function get_period($name, $a, $b) {

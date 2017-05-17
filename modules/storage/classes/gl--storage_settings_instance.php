@@ -15,7 +15,7 @@ namespace effectivecore {
                   '(?<name>[^\:\|]+)'.
                   '(?<class>\\|[a-z0-9_\\\\]+|)'.
                   '(?<delimiter>\: |)'.
-                  '(?<value>.*|)%s', $c_line, $matches);
+                  '(?<value>.*|)%', $c_line, $matches);
       if ($matches['name']) {
         $depth = strlen($matches['indent'].$matches['prefix']) / 2;
         if ($matches['delimiter'] == ': ') {
