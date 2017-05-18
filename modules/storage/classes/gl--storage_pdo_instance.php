@@ -118,14 +118,14 @@ namespace effectivecore {
 
   function select_instance($instance, $custom_ids = []) {
     $this->init();
-    $result = reset($this->query(
+    $result = $this->query(
       'SELECT `'.implode('`, `', $instance->get_fields()).'` '.
       'FROM `'.$instance->get_name().'` '.
       'WHERE '.factory::data_to_attr($instance->get_values($custom_ids ?: $instance->get_ids()), ' and ', '`').' '.
       'LIMIT 1;'
-    ));
-    if ($result) {
-      $instance->values = $result->values;
+    );
+    if (isset($result[0])) {
+      $instance->values = $result[0]->values;
       return $instance;
     }
   }
