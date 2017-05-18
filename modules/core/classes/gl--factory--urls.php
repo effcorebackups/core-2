@@ -17,11 +17,11 @@ namespace effectivecore {
     return static::$current->get_full() == (new url($url))->get_full();
   }
 
-  function make_back_part() {
+  static function make_back_part() {
     return 'back='.urlencode(static::$current->get_full());
   }
 
-  function get_back_url() {
+  static function get_back_url() {
     $back_url = static::$current->get_args('back', 'query');
     return $back_url ? urldecode($back_url) : '';
   }

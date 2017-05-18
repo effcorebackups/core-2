@@ -11,3 +11,4 @@
   console table tr.query    {background-color: #d3ffe4}
   console table tr.system   {background-color: #d3f6ff}
   console table tr.new      {background-color: #f0f5dc}
+  console table tr.query td.name {font-size: .9em}

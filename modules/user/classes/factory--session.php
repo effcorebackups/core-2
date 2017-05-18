@@ -17,9 +17,9 @@ namespace effectivecore\modules\user {
       ]))->insert();
     }
  /* restore session for authenticated user */
-    if ($user_id == 0 && isset($_REQUEST[session_name()])) {
+    if ($user_id == 0 && isset($_COOKIE[session_name()])) {
       $session = (new entity_instance('entities/user/session', [
-        'id' => $_REQUEST[session_name()]
+        'id' => $_COOKIE[session_name()]
       ]))->select();
       if ($session) {
         $user_id = $session->user_id;

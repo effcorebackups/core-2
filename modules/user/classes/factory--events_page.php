@@ -69,14 +69,19 @@ namespace effectivecore\modules\user {
     if ($user) {
       if ($user->id == user::$current->id ||        # owner
           isset(user::$current->roles['admins'])) { # admin
+      # get roles
+        $roles = [];
+        $db_roles = entity_factory::get_entity('relation_role_ws_user')->select_set(['user_id' => $id]);
+        if ($db_roles) {
+          foreach ($db_roles as $c_role) {
+            $roles[] = $c_role->role_id;
+          }
+        }
+      # get values
         $values = $user->get_values();
+        $values['roles'] = count($roles) ? implode(', ', $roles) : '-';
         $values['password_hash'] = '*****';
         $values['is_embed'] = $values['is_embed'] ? 'Yes' : 'No';
-      # get roles
-        foreach (entity_factory::get_entity('relation_role_ws_user')->select_set(['user_id' => $id]) as $c_role) {
-          $values['roles'][] = $c_role->role_id;
-        }
-        $values['roles'] = implode(', ', $values['roles']);
       # show table
         $head = [['Parameter', 'Value']];
         $body = factory::array_rotate([array_keys($values), array_values($values)]);

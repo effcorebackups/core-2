@@ -3,6 +3,7 @@
 namespace effectivecore\modules\user {
           use const \effectivecore\format_datetime;
           use \effectivecore\urls_factory as urls;
+          use \effectivecore\entity_factory as entity_factory;
           use \effectivecore\entity_instance as entity_instance;
           use \effectivecore\messages_factory as messages;
           use \effectivecore\modules\user\session_factory as session;
@@ -17,9 +18,12 @@ namespace effectivecore\modules\user {
           'id' => $user_id,
         ]))->delete();
         if ($result) {
-          (new entity_instance('entities/user/session', [
-            'user_id' => $user_id,
-          ]))->delete();
+          $session_set = entity_factory::get_entity('session')->select_set(['user_id' => $user_id]);
+          if ($session_set) {
+            foreach ($session_set as $c_session) {
+              $c_session->delete();
+            }
+          }
           messages::add_new('User with id = '.$user_id.' was deleted.');
           urls::go(urls::get_back_url() ?: '/admin/users');
         } else {

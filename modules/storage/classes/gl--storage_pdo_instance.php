@@ -137,7 +137,7 @@ namespace effectivecore {
       'VALUES ("'.implode('", "', $instance->get_values()).'");'
     );
     if (!empty($result) && count($instance->get_ids()) == 1) { # only for autoincrement field
-      $id = reset($instance->get_ids());
+      $id = $instance->get_ids()[0];
       $instance->values[$id] = $result;
       return $instance;
     }
