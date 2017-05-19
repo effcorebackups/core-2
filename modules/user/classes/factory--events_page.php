@@ -67,8 +67,8 @@ namespace effectivecore\modules\user {
   static function on_show_user_n($id) {
     $user = (new entity_instance('entities/user/user', ['id' => $id]))->select();
     if ($user) {
-      if ($user->id == user::$current->id ||        # owner
-          isset(user::$current->roles['admins'])) { # admin
+      if ($user->id == user::get_current()->id ||               # owner
+                 isset(user::get_current()->roles['admins'])) { # admin
       # get roles
         $roles = [];
         $db_roles = entity_factory::get('relation_role_ws_user')->select_set(['user_id' => $id]);
@@ -101,8 +101,8 @@ namespace effectivecore\modules\user {
   static function on_show_user_n_edit($user_id) {
     $user = (new entity_instance('entities/user/user', ['id' => $user_id]))->select();
     if ($user) {
-      if (!($user->id == user::$current->id ||         # not owner or
-            isset(user::$current->roles['admins']))) { # not admin
+      if (!($user->id == user::get_current()->id ||                # not owner or
+                   isset(user::get_current()->roles['admins']))) { # not admin
         factory::send_header_and_exit('access_denided',
           'Access denided!'
         );

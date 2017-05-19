@@ -8,13 +8,13 @@ namespace effectivecore\modules\user {
           abstract class events_token_factory extends \effectivecore\events_token_factory {
 
   static function on_replace($match, $arg_1_num = null) {
-    if (!empty(user::$current->id)) {
+    if (!empty(user::get_current()->id)) {
       switch ($match) {
-        case '%%_user_id'   : return user::$current->id;
-        case '%%_user_email': return user::$current->email;
+        case '%%_user_id'   : return user::get_current()->id;
+        case '%%_user_email': return user::get_current()->email;
         case '%%_context_user_mail':
           $arg_1_value = urls::get_current()->get_args($arg_1_num);
-          if (user::$current->id == $arg_1_value) {
+          if (user::get_current()->id == $arg_1_value) {
             return translate::get('my account');
           } else {
             $user = (new entity_instance('entities/user/user', [

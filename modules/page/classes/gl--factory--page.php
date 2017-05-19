@@ -103,7 +103,7 @@ namespace effectivecore\modules\page {
   # render page
     timer::tap('total');
     console::add_log('System', 'Total build time', '-', timer::get_period('total', 0, 1));
-    console::add_log('System', 'User roles', implode(', ', user::$current->roles), '-');
+    console::add_log('System', 'User roles', implode(', ', user::get_current()->roles), '-');
     $template->set_var('console', console::render()); # @todo: show console only for admins
     print $template->render();
   }

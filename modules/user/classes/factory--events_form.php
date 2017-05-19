@@ -105,7 +105,7 @@ namespace effectivecore\modules\user {
   static function on_submit_user_logout($page_args, $form_args, $post_args) {
     switch ($post_args['button']) {
       case 'logout':
-        session::destroy(user::$current->id);
+        session::destroy(user::get_current()->id);
         urls::go('/');
     }
   }
