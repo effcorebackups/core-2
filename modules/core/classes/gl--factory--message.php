@@ -3,7 +3,7 @@
 namespace effectivecore {
           abstract class message_factory {
 
-  protected static $data;
+  protected static $data = [];
 
   static function init() {
     if (isset($_SESSION)) {

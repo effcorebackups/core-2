@@ -22,7 +22,7 @@ namespace effectivecore {
       "<?php \n\nnamespace effectivecore { # cache for ".$name."\n\n".
          factory::data_export($data, '  cache_factory::$data[\''.$name.'\']').
       "\n}");
-    return $file->save();
+    $file->save();
   }
 
 }}

@@ -25,6 +25,15 @@ namespace effectivecore {
   use \effectivecore\console_factory as console;
   use \effectivecore\events_factory as events;
 
+  # opcache (disabled)
+  if (false && extension_loaded('Zend OPcache')) {
+    opcache_reset();
+    $files = files_factory::get_all(dir_root, '%^.*\.php$%');
+    foreach ($files as $c_file) {
+      opcache_compile_file($c_file->get_path_full());
+    }
+  }
+
   # redirect from '/any_path/' to '/any_path'
   if (urls::get_current()->path != '/' && substr(urls::get_current()->path, -1) == '/') {
     urls::go(
