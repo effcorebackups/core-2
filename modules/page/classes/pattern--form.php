@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          use \effectivecore\messages_factory as messages;
+          use \effectivecore\message_factory as messages;
           use \effectivecore\modules\page\page_factory as page;
           class form extends markup {
 

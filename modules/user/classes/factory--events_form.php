@@ -5,7 +5,7 @@ namespace effectivecore\modules\user {
           use \effectivecore\urls_factory as urls;
           use \effectivecore\entity_factory as entity_factory;
           use \effectivecore\entity_instance as entity_instance;
-          use \effectivecore\messages_factory as messages;
+          use \effectivecore\message_factory as messages;
           use \effectivecore\modules\user\session_factory as session;
           use \effectivecore\modules\user\user_factory as user;
           abstract class events_form_factory extends \effectivecore\events_form_factory {

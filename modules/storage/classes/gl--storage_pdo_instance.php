@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          use \effectivecore\messages_factory as messages;
+          use \effectivecore\message_factory as messages;
           use \effectivecore\timer_factory as timer;
           use \effectivecore\console_factory as console;
           use \effectivecore\modules\storage\storage_factory as storage;
