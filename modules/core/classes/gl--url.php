@@ -57,7 +57,7 @@ namespace effectivecore {
                    '(?<domain>[^/]*)'.
                    '(?<path>[^\?\#]*)'.
               '(?:\?(?<query>[^\#]*)|)'.
-              '(?:\#(?<anchor>.*)|)%', filter_var($url, FILTER_SANITIZE_URL), $matches);
+              '(?:\#(?<anchor>.*)|)%S', filter_var($url, FILTER_SANITIZE_URL), $matches);
     $this->protocol = !empty($matches['protocol']) ? $matches['protocol'] : (!empty($matches['domain']) ? 'http' : ( /* case for local ulr */ !empty($_SERVER['HTTPS']) ? 'https' : 'http'));
     $this->domain   = !empty($matches['domain'])   ? $matches['domain']   :                                        ( /* case for local ulr */ $_SERVER['HTTP_HOST']);
     $this->path     = !empty($matches['path'])     ? $matches['path']     : '/';

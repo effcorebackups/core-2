@@ -45,9 +45,9 @@ namespace effectivecore {
       $files = files::get_all(dir_modules, '%^.*\.php$%');
       foreach ($files as $c_file) {
         $matches = [];
-        preg_match('%namespace (?<namespace>[a-z0-9_\\\\]+) .*? '.
+        preg_match('%namespace (?<namespace>[a-z0-9_\\\\]+).*?'.
                         'class (?<classname>[a-z0-9_]+) (?:'.
-                      'extends (?<parent>[a-z0-9_\\\\]+)|)%', $c_file->load(), $matches);
+                      'extends (?<parent>[a-z0-9_\\\\]+)|)%sS', $c_file->load(), $matches);
         if (!empty($matches['namespace']) &&
             !empty($matches['classname'])) {
           $classes_map[$matches['namespace'].'\\'.$matches['classname']] = (object)[
