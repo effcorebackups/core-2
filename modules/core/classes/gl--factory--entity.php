@@ -14,7 +14,8 @@ namespace effectivecore {
     }
   }
 
-  static function get_entity($name) {
+  static function get($name) {
+    if (!static::$data) static::init();
     return static::$data[$name];
   }
 

@@ -18,7 +18,7 @@ namespace effectivecore\modules\user {
           'id' => $user_id,
         ]))->delete();
         if ($result) {
-          $session_set = entity_factory::get_entity('session')->select_set(['user_id' => $user_id]);
+          $session_set = entity_factory::get('session')->select_set(['user_id' => $user_id]);
           if ($session_set) {
             foreach ($session_set as $c_session) {
               $c_session->delete();

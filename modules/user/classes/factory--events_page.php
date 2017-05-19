@@ -16,7 +16,7 @@ namespace effectivecore\modules\user {
 
   static function on_show_admin_roles() {
     $head = [['ID', 'Title', 'Is embed']];
-    $body = entity_factory::get_entity('role')->select_set();
+    $body = entity_factory::get('role')->select_set();
     foreach ($body as $c_row) {
       $c_row->is_embed = $c_row->is_embed ? 'Yes' : 'No';
     }
@@ -34,7 +34,7 @@ namespace effectivecore\modules\user {
       );
     } else {
       $head = [['ID', 'EMail', 'Password hash', 'Created', 'Is embed', 'Actions']];
-      $body = entity_factory::get_entity('user')->select_set();
+      $body = entity_factory::get('user')->select_set();
       foreach ($body as $c_row) {
         $c_actions = new markup('ul', ['class' => 'actions']);
         $c_actions->add_child( new markup('li', [], new markup('a', ['href' => (new url('/user/'.$c_row->id))->get_full()], 'view') ) );
@@ -71,7 +71,7 @@ namespace effectivecore\modules\user {
           isset(user::$current->roles['admins'])) { # admin
       # get roles
         $roles = [];
-        $db_roles = entity_factory::get_entity('relation_role_ws_user')->select_set(['user_id' => $id]);
+        $db_roles = entity_factory::get('relation_role_ws_user')->select_set(['user_id' => $id]);
         if ($db_roles) {
           foreach ($db_roles as $c_role) {
             $roles[] = $c_role->role_id;
