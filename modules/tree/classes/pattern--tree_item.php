@@ -41,7 +41,7 @@ namespace effectivecore {
     }
     return (new template('tree_item_self', [
       'attributes' => factory::data_to_attr($attr, ' '),
-      'title'      => token::replace(translate::t($this->title))
+      'title'      => token::replace(translate::get($this->title))
     ]))->render();
   }
 

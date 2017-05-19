@@ -6,23 +6,23 @@ namespace effectivecore {
           abstract class events_page_factory extends events_factory {
 
   static function on_show_install() {
-    foreach (static::$data->on_install as $c_event) {
+    foreach (static::get()->on_install as $c_event) {
       call_user_func($c_event->handler);
     }
   }
 
   static function on_show_modules() {
-    $head = [
+    $head = [[
       'Title',
       'ID',
       'Path',
       'Description',
       'Version',
       'State',
-    ];
-    $data = [];
-    foreach (settings::$data['module'] as $c_module) {
-      $data[] = [
+    ]];
+    $body = [];
+    foreach (settings::get('module') as $c_module) {
+      $body[] = [
         $c_module->title,
         $c_module->id,
         $c_module->path,
@@ -32,7 +32,7 @@ namespace effectivecore {
       ];
     }
     page::add_element(
-      new table([], $data, [$head])
+      new table([], $body, $head)
     );
   }
 

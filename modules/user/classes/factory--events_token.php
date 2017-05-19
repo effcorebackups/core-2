@@ -13,9 +13,9 @@ namespace effectivecore\modules\user {
         case '%%_user_id'   : return user::$current->id;
         case '%%_user_email': return user::$current->email;
         case '%%_context_user_mail':
-          $arg_1_value = urls::$current->get_args($arg_1_num);
+          $arg_1_value = urls::get_current()->get_args($arg_1_num);
           if (user::$current->id == $arg_1_value) {
-            return translate::t('my account');
+            return translate::get('my account');
           } else {
             $user = (new entity_instance('entities/user/user', [
               'id' => $arg_1_value

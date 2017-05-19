@@ -7,8 +7,8 @@ namespace effectivecore\modules\user {
           use \effectivecore\pager;
           use \effectivecore\entity_instance;
           use \effectivecore\factory;
-          use \effectivecore\settings_factory;
           use \effectivecore\entity_factory;
+          use \effectivecore\settings_factory as settings;
           use \effectivecore\urls_factory as urls;
           use \effectivecore\modules\page\page_factory as page;
           use \effectivecore\modules\user\user_factory as user;
@@ -26,7 +26,7 @@ namespace effectivecore\modules\user {
   }
 
   static function on_show_admin_users() {
-    $items_per_page = settings_factory::$data['pages']['user']['page_admin_users']->constants['items_per_page'];
+    $items_per_page = settings::get('pages')['user']['page_admin_users']->constants['items_per_page'];
     $pager = new pager();
     if ($pager->has_error) {
       factory::send_header_and_exit('not_found',

@@ -24,9 +24,9 @@ namespace effectivecore\modules\page {
     $matches = 0;
     $denided = false;
     $call_stack = [];
-    foreach (settings::$data['pages'] as $module_id => $c_pages) {
+    foreach (settings::get('pages') as $module_id => $c_pages) {
       foreach ($c_pages as $c_page) {
-        if (isset($c_page->url->match) && preg_match($c_page->url->match, urls::$current->path)) {
+        if (isset($c_page->url->match) && preg_match($c_page->url->match, urls::get_current()->path)) {
           if (!isset($c_page->access) ||
               (isset($c_page->access) && access::check($c_page->access))) {
             if ($c_page->url->match != '%.*%') $matches++;
@@ -41,7 +41,7 @@ namespace effectivecore\modules\page {
     foreach ($call_stack as $c_page) {
     # show title
       if (isset($c_page->title)) {
-        static::add_element(stripslashes(token::replace(translate::t($c_page->title))), 'title');
+        static::add_element(stripslashes(token::replace(translate::get($c_page->title))), 'title');
       }
     # collect styles
       if (isset($c_page->styles)) {
@@ -63,7 +63,7 @@ namespace effectivecore\modules\page {
     # collect arguments
       if (isset($c_page->url->args)) {
         foreach ($c_page->url->args as $c_arg_name => $c_arg_num) {
-          static::$args[$c_arg_name] = urls::$current->get_args($c_arg_num);
+          static::$args[$c_arg_name] = urls::get_current()->get_args($c_arg_num);
         }
       }
     # collect page content from settings
@@ -74,7 +74,7 @@ namespace effectivecore\modules\page {
             case 'text': static::add_element($c_content->content, $c_region); break;
             case 'code': static::add_element(call_user_func_array($c_content->handler, static::$args), $c_region); break;
             case 'file': static::add_element('[file] is under construction', $c_region); break; # @todo: create functionality
-            case 'link': static::add_element(factory::npath_get_object($c_content->link, settings::$data), $c_region); break;
+            case 'link': static::add_element(factory::npath_get_object($c_content->link, settings::get()), $c_region); break;
             default: static::add_element($c_content, $c_region);
           }
         }

@@ -13,6 +13,12 @@ namespace effectivecore {
     else static::_update();
   }
 
+  static function get($group = '') {
+    if (!static::$data) static::init();
+    if ($group)  return static::$data[$group];
+    else         return static::$data;
+  }
+
   static protected function _update() {
     $parse = [];
     $files = files::get_all(dir_modules, '%^.*\._s$%') +

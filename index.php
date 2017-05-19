@@ -12,8 +12,12 @@ namespace effectivecore {
   const nl              = "\n";
   const br              = "<br/>";
 
-  require_once('modules/core/classes/gl--factory--events.php');
-  require_once('modules/core/classes/gl--factory--events_module.php');
+  require_once('modules/core/classes/gl--file.php');
+  require_once('modules/core/classes/gl--factory.php');
+  require_once('modules/core/classes/gl--factory--timer.php');
+  require_once('modules/core/classes/gl--factory--cache.php');
+  require_once('modules/core/classes/gl--factory--files.php');
+  spl_autoload_register('\effectivecore\factory::autoload');
   events_module_factory::on_init();
 
 }

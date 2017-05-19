@@ -12,7 +12,7 @@ namespace effectivecore {
   }
 
   function get() {
-    return $this->p ?: ($this->p = factory::npath_get_object($this->npath, settings::$data));
+    return $this->p ?: ($this->p = factory::npath_get_object($this->npath, settings::get()));
   }
 
 }}

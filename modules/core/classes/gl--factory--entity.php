@@ -7,7 +7,7 @@ namespace effectivecore {
   static $data;
 
   static function init() {
-    foreach (settings::$data['entities'] as $c_entities) {
+    foreach (settings::get('entities') as $c_entities) {
       foreach ($c_entities as $c_entity) {
         static::$data[$c_entity->name] = $c_entity;
       }

@@ -3,7 +3,7 @@
 namespace effectivecore {
           abstract class timer_factory {
 
-  static $data = [];
+  protected static $data;
 
   static function tap($name) {
     static::$data[$name][] = microtime(true);

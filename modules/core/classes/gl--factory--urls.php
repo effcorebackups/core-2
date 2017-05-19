@@ -3,10 +3,24 @@
 namespace effectivecore {
           abstract class urls_factory {
 
-  static $current;
+  protected static $data;
 
   static function init() {
-    static::$current = new url($_SERVER['REQUEST_URI']);
+    static::$data = new url($_SERVER['REQUEST_URI']);
+  }
+
+  static function get_current() {
+    if (!static::$data) static::init();
+    return static::$data;
+  }
+
+  static function get_back_url() {
+    $back_url = static::get_current()->get_args('back', 'query');
+    return $back_url ? urldecode($back_url) : '';
+  }
+
+  static function make_back_part() {
+    return 'back='.urlencode(static::get_current()->get_full());
   }
 
   static function is_local($url) {
@@ -14,16 +28,7 @@ namespace effectivecore {
   }
 
   static function is_active($url) {
-    return static::$current->get_full() == (new url($url))->get_full();
-  }
-
-  static function make_back_part() {
-    return 'back='.urlencode(static::$current->get_full());
-  }
-
-  static function get_back_url() {
-    $back_url = static::$current->get_args('back', 'query');
-    return $back_url ? urldecode($back_url) : '';
+    return static::get_current()->get_full() == (new url($url))->get_full();
   }
 
   static function go($url) {
