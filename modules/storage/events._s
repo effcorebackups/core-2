@@ -1,5 +1,0 @@
-events
-  on_init
-  - init_storage
-      handler: \effectivecore\modules\storage\events_module_factory::on_init
-      weight: -90
