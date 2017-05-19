@@ -32,7 +32,10 @@ namespace effectivecore {
     );
   }
 
-  # single entry point
+  ##########################
+  ### single entry point ###
+  ##########################
+
   $file_types = [];
   foreach (settings::get('file_types') as $c_types) {
     foreach ($c_types as $c_name => $c_info) {
