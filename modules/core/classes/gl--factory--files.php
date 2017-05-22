@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          abstract class files_factory {
+          abstract class file_factory {
 
   # path parts:
   # ─────────────────────────────────────────────────────────────────────

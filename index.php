@@ -28,7 +28,7 @@ namespace effectivecore {
   # opcache (disabled)
   if (false && extension_loaded('Zend OPcache')) {
     opcache_reset();
-    $files = files_factory::get_all(dir_root, '%^.*\.php$%');
+    $files = file_factory::get_all(dir_root, '%^.*\.php$%');
     foreach ($files as $c_file) {
       opcache_compile_file($c_file->get_path_full());
     }

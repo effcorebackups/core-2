@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          use \effectivecore\files_factory as files;
+          use \effectivecore\file_factory as files;
           class file {
 
   public $file;

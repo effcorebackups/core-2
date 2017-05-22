@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          use \effectivecore\files_factory as files;
+          use \effectivecore\file_factory as files;
           use \effectivecore\storage_settings_instance as settings;
           abstract class settings_factory {
 

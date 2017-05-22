@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          use \effectivecore\files_factory as files;
+          use \effectivecore\file_factory as files;
           use \effectivecore\cache_factory as cache;
           use \effectivecore\timer_factory as timer;
           use \effectivecore\console_factory as console;
