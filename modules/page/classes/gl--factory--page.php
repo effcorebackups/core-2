@@ -6,7 +6,7 @@ namespace effectivecore\modules\page {
           use \effectivecore\markup;
           use \effectivecore\template;
           use \effectivecore\factory;
-          use \effectivecore\urls_factory as urls;
+          use \effectivecore\url_factory as urls;
           use \effectivecore\settings_factory as settings;
           use \effectivecore\timer_factory as timer;
           use \effectivecore\token_factory as token;

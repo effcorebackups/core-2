@@ -2,7 +2,7 @@
 
 namespace effectivecore\modules\user {
           use const \effectivecore\format_datetime;
-          use \effectivecore\urls_factory as urls;
+          use \effectivecore\url_factory as urls;
           use \effectivecore\entity_factory as entity_factory;
           use \effectivecore\entity_instance as entity_instance;
           use \effectivecore\message_factory as messages;

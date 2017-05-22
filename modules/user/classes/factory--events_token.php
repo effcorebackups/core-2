@@ -2,7 +2,7 @@
 
 namespace effectivecore\modules\user {
           use \effectivecore\entity_instance as entity_instance;
-          use \effectivecore\urls_factory as urls;
+          use \effectivecore\url_factory as urls;
           use \effectivecore\translate_factory as translate;
           use \effectivecore\modules\user\user_factory as user;
           abstract class events_token_factory extends \effectivecore\events_token_factory {

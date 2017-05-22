@@ -9,7 +9,7 @@ namespace effectivecore\modules\user {
           use \effectivecore\factory;
           use \effectivecore\entity_factory;
           use \effectivecore\settings_factory as settings;
-          use \effectivecore\urls_factory as urls;
+          use \effectivecore\url_factory as urls;
           use \effectivecore\modules\page\page_factory as page;
           use \effectivecore\modules\user\user_factory as user;
           abstract class events_page_factory extends \effectivecore\events_page_factory {

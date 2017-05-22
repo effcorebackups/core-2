@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          use \effectivecore\urls_factory as urls;
+          use \effectivecore\url_factory as urls;
           use \effectivecore\token_factory as token;          
           use \effectivecore\translate_factory as translate;
           use \effectivecore\modules\user\access_factory as access;
