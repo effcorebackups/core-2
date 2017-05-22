@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          use \effectivecore\translate_factory as translate;
+          use \effectivecore\translate_factory as translations;
           class text {
 
   public $text;
@@ -13,7 +13,7 @@ namespace effectivecore {
   }
 
   function render() {
-    return translate::get($this->text);
+    return translations::get($this->text);
   }
 
 }}

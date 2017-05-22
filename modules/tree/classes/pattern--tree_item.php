@@ -3,7 +3,7 @@
 namespace effectivecore {
           use \effectivecore\url_factory as urls;
           use \effectivecore\token_factory as token;          
-          use \effectivecore\translate_factory as translate;
+          use \effectivecore\translate_factory as translations;
           use \effectivecore\modules\user\access_factory as access;
           class tree_item extends \effectivecore\node {
 
@@ -41,7 +41,7 @@ namespace effectivecore {
     }
     return (new template('tree_item_self', [
       'attributes' => factory::data_to_attr($attr, ' '),
-      'title'      => token::replace(translate::get($this->title))
+      'title'      => token::replace(translations::get($this->title))
     ]))->render();
   }
 

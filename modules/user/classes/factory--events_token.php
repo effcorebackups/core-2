@@ -3,7 +3,7 @@
 namespace effectivecore\modules\user {
           use \effectivecore\entity_instance as entity_instance;
           use \effectivecore\url_factory as urls;
-          use \effectivecore\translate_factory as translate;
+          use \effectivecore\translate_factory as translations;
           use \effectivecore\modules\user\user_factory as user;
           abstract class events_token_factory extends \effectivecore\events_token_factory {
 
@@ -15,7 +15,7 @@ namespace effectivecore\modules\user {
         case '%%_context_user_mail':
           $arg_1_value = urls::get_current()->get_args($arg_1_num);
           if (user::get_current()->id == $arg_1_value) {
-            return translate::get('my account');
+            return translations::get('my account');
           } else {
             $user = (new entity_instance('entities/user/user', [
               'id' => $arg_1_value
