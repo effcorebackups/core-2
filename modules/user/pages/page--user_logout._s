@@ -1,5 +1,5 @@
 pages
-- page_user_logout
+- page_user_logout|page
     title: Logout from the system
     url
       match: %^/user/logout$%

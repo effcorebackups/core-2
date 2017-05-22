@@ -1,5 +1,5 @@
 pages
-- page_user_registration
+- page_user_registration|page
     title: Registration
     url
       match: %^/user/registration$%

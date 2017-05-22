@@ -55,4 +55,7 @@ namespace effectivecore {
     return $storage->delete_instance($this);
   }
 
+  function render() {
+  }
+
 }}

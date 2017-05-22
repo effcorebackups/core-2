@@ -1,5 +1,5 @@
 pages
-- page_admin_roles
+- page_admin_roles|page
     title: Roles
     url
       match: %^/admin/roles$%

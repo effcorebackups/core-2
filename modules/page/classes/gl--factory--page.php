@@ -17,7 +17,6 @@ namespace effectivecore\modules\page {
           use \effectivecore\modules\user\access_factory as access;
           abstract class page_factory {
 
-  static $args = [];
   static $data = [];
 
   static function render() {
@@ -42,7 +41,9 @@ namespace effectivecore\modules\page {
     foreach ($call_stack as $c_page) {
     # show title
       if (isset($c_page->title)) {
-        static::add_element(stripslashes(tokens::replace(translations::get($c_page->title))), 'title');
+        static::add_element(stripslashes(
+          tokens::replace(translations::get($c_page->title))), 'title'
+        );
       }
     # collect styles
       if (isset($c_page->styles)) {
@@ -58,13 +59,16 @@ namespace effectivecore\modules\page {
       if (isset($c_page->scripts)) {
         foreach ($c_page->scripts as $c_script) {
           $c_script_url = new url('/modules/'.$c_page->module_id.'/'.$c_script->file);
-          static::add_element(new markup('script', ['src' => $c_script_url->get_full()], ' '), 'script');
+          static::add_element(
+            new markup('script', ['src' => $c_script_url->get_full()], ' '), 'script'
+          );
         }
       }
     # collect arguments
+      $c_args = [];
       if (isset($c_page->url->args)) {
         foreach ($c_page->url->args as $c_arg_name => $c_arg_num) {
-          static::$args[$c_arg_name] = urls::get_current()->get_args($c_arg_num);
+          $c_args[$c_arg_name] = urls::get_current()->get_args($c_arg_num);
         }
       }
     # collect page content from settings
@@ -73,7 +77,7 @@ namespace effectivecore\modules\page {
           $c_region = isset($c_content->region) ? $c_content->region : 'c_1_1';
           switch ($c_content->type) {
             case 'text': static::add_element($c_content->content, $c_region); break;
-            case 'code': static::add_element(call_user_func_array($c_content->handler, static::$args), $c_region); break;
+            case 'code': static::add_element(call_user_func_array($c_content->handler, $c_args), $c_region); break;
             case 'file': static::add_element('[file] is under construction', $c_region); break; # @todo: create functionality
             case 'link': static::add_element(factory::npath_get_object($c_content->link, settings::get()), $c_region); break;
             default: static::add_element($c_content, $c_region);

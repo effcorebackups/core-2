@@ -1,5 +1,5 @@
 pages
-- page_install
+- page_install|page
     title: Installation
     url
       match: %^/install$%

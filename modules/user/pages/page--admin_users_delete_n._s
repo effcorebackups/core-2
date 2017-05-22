@@ -1,5 +1,5 @@
 pages
-- page_admin_users_delete_n
+- page_admin_users_delete_n|page
     title: Delete profile (%%_context_user_mail-4)?
     url
       match: %^/admin/users/delete/[0-9]+$%

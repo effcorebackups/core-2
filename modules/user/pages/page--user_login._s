@@ -1,5 +1,5 @@
 pages
-- page_user_login
+- page_user_login|page
     title: Login
     url
       match: %^/user/login$%

@@ -1,5 +1,5 @@
 pages
-- page_modules
+- page_modules|page
     title: Modules
     url
       match: %^/admin/modules$%

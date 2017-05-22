@@ -1,5 +1,5 @@
 pages
-- page_front
+- page_front|page
     title: Front page
     url
       match: %^/$%
