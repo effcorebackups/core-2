@@ -5,7 +5,7 @@ namespace effectivecore\modules\tree {
           use \effectivecore\settings_factory as settings;
           abstract class events_module extends \effectivecore\events_module {
 
-  static function on_init() {
+  static function on_start() {
   # link all parents for tree_items
     foreach (settings::get('tree_items') as $c_items) {
       foreach ($c_items as $item_id => $c_item) {

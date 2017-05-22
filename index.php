@@ -71,10 +71,13 @@ namespace effectivecore {
 
   # case for page (non file)
   timer::tap('total');
-  foreach (events::get()->on_init as $c_info) {
+  foreach (events::get()->on_start as $c_info) {
     $c_handler = $c_info->handler;
     timer::tap($c_handler);
-    call_user_func($c_handler);
+    $c_result = call_user_func($c_handler);
+    if ($c_result) {
+      print $c_result;
+    }
     timer::tap($c_handler);
     console::add_log(
       'Call', $c_handler, '-', timer::get_period($c_handler, 0, 1)

@@ -2,7 +2,7 @@
 
 namespace effectivecore {
           use \effectivecore\settings_factory as settings;
-          use \effectivecore\modules\page\page_factory as page;
+          use \effectivecore\modules\page\page_factory as pages;
           abstract class events_page extends events {
 
   static function on_show_install() {
@@ -31,7 +31,7 @@ namespace effectivecore {
         $c_module->state,
       ];
     }
-    page::add_element(
+    pages::add_element(
       new table([], $body, $head)
     );
   }

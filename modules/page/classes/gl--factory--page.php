@@ -20,7 +20,7 @@ namespace effectivecore\modules\page {
   static $args = [];
   static $data = [];
 
-  static function init() {
+  static function render() {
   # create call stack and call each page
     $matches = 0;
     $denided = false;
@@ -103,7 +103,7 @@ namespace effectivecore\modules\page {
     console::add_log('System', 'Total build time', '-', timers::get_period('total', 0, 1));
     console::add_log('System', 'User roles', implode(', ', users::get_current()->roles), '-');
     $template->set_var('console', console::render()); # @todo: show console only for admins
-    print $template->render();
+    return $template->render();
   }
 
   static function add_element($element, $region = 'c_1_1') {

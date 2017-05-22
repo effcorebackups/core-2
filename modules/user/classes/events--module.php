@@ -7,7 +7,7 @@ namespace effectivecore\modules\user {
           use \effectivecore\modules\user\session_factory as session;
           abstract class events_module extends \effectivecore\events_module {
 
-  static function on_init() {
+  static function on_start() {
     session::init();
   }
 
