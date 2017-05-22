@@ -1,5 +1,5 @@
 events
   on_init
   - init_tree
-      handler: \effectivecore\modules\tree\events_module_factory::on_init
+      handler: \effectivecore\modules\tree\events_module::on_init
       weight: -100

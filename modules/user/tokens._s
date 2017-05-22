@@ -2,12 +2,12 @@ tokens
 - user_id
     match: %%_user_id
     type: code
-    handler: \effectivecore\modules\user\events_token_factory::on_replace
+    handler: \effectivecore\modules\user\events_token::on_replace
 - user_email
     match: %%_user_email
     type: code
-    handler: \effectivecore\modules\user\events_token_factory::on_replace
+    handler: \effectivecore\modules\user\events_token::on_replace
 - context_user_mail
     match: %%_context_user_mail
     type: code
-    handler: \effectivecore\modules\user\events_token_factory::on_replace
+    handler: \effectivecore\modules\user\events_token::on_replace

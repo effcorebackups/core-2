@@ -5,7 +5,7 @@ namespace effectivecore\modules\user {
           use \effectivecore\settings_factory as settings;
           use \effectivecore\message_factory as messages;
           use \effectivecore\modules\user\session_factory as session;
-          abstract class events_module_factory extends \effectivecore\events_module_factory {
+          abstract class events_module extends \effectivecore\events_module {
 
   static function on_init() {
     session::init();

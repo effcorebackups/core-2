@@ -7,12 +7,12 @@ namespace effectivecore\modules\user {
           use \effectivecore\pager;
           use \effectivecore\entity_instance;
           use \effectivecore\factory;
+          use \effectivecore\url_factory as urls;
           use \effectivecore\entity_factory as entities;
           use \effectivecore\settings_factory as settings;
-          use \effectivecore\url_factory as urls;
-          use \effectivecore\modules\page\page_factory as page;
-          use \effectivecore\modules\user\user_factory as user;
-          abstract class events_page_factory extends \effectivecore\events_page_factory {
+          use \effectivecore\modules\page\page_factory as pages;
+          use \effectivecore\modules\user\user_factory as users;
+          abstract class events_page extends \effectivecore\events_page {
 
   static function on_show_admin_roles() {
     $head = [['ID', 'Title', 'Is embed']];
@@ -20,7 +20,7 @@ namespace effectivecore\modules\user {
     foreach ($body as $c_row) {
       $c_row->is_embed = $c_row->is_embed ? 'Yes' : 'No';
     }
-    page::add_element(
+    pages::add_element(
       new table([], $body, $head)
     );
   }
@@ -44,8 +44,8 @@ namespace effectivecore\modules\user {
         $c_row->password_hash = '*****';
         $c_row->actions = $c_actions;
       }
-      page::add_element(new table([], $body, $head));
-      page::add_element($pager);
+      pages::add_element(new table([], $body, $head));
+      pages::add_element($pager);
     }
   }
 
@@ -67,8 +67,8 @@ namespace effectivecore\modules\user {
   static function on_show_user_n($id) {
     $user = (new entity_instance('entities/user/user', ['id' => $id]))->select();
     if ($user) {
-      if ($user->id == user::get_current()->id ||               # owner
-                 isset(user::get_current()->roles['admins'])) { # admin
+      if ($user->id == users::get_current()->id ||               # owner
+                 isset(users::get_current()->roles['admins'])) { # admin
       # get roles
         $roles = [];
         $db_roles = entities::get('relation_role_ws_user')->select_set(['user_id' => $id]);
@@ -85,7 +85,7 @@ namespace effectivecore\modules\user {
       # show table
         $head = [['Parameter', 'Value']];
         $body = factory::array_rotate([array_keys($values), array_values($values)]);
-        page::add_element(new table([], $body, $head));
+        pages::add_element(new table([], $body, $head));
       } else {
         factory::send_header_and_exit('access_denided',
           'Access denided!'
@@ -101,8 +101,8 @@ namespace effectivecore\modules\user {
   static function on_show_user_n_edit($user_id) {
     $user = (new entity_instance('entities/user/user', ['id' => $user_id]))->select();
     if ($user) {
-      if (!($user->id == user::get_current()->id ||                # not owner or
-                   isset(user::get_current()->roles['admins']))) { # not admin
+      if (!($user->id == users::get_current()->id ||                # not owner or
+                   isset(users::get_current()->roles['admins']))) { # not admin
         factory::send_header_and_exit('access_denided',
           'Access denided!'
         );

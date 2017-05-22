@@ -2,9 +2,8 @@
 
 namespace effectivecore {
           use \effectivecore\message_factory as messages;
-          use \effectivecore\timer_factory as timer;
+          use \effectivecore\timer_factory as timers;
           use \effectivecore\console_factory as console;
-          use \effectivecore\modules\storage\storage_factory as storage;
           class storage_pdo_instance {
 
   public $id;
@@ -20,17 +19,17 @@ namespace effectivecore {
   function init() {
     if (empty($this->is_init)) {
       try {
-        timer::tap('init_db');
+        timers::tap('init_db');
         $this->connection = new \PDO($this->driver.':host='.
           $this->host_name.';dbname='.
           $this->directory_name,
           $this->user_name,
           $this->password
         );
-        timer::tap('init_db');
+        timers::tap('init_db');
         $this->is_init = true;
         console::add_log(
-          'Query', 'The PDO database "'.$this->id.'" was initialized on first request.', 'ok', timer::get_period('init_db', 0, 1)
+          'Query', 'The PDO database "'.$this->id.'" was initialized on first request.', 'ok', timers::get_period('init_db', 0, 1)
         );
       } catch (\PDOException $e) {
         factory::send_header_and_exit('access_denided',
@@ -46,10 +45,10 @@ namespace effectivecore {
 
   function query($query) {
     $this->queries[] = $query;
-    timer::tap('query_'.count($this->queries));
+    timers::tap('query_'.count($this->queries));
     $result = $this->connection->query($query);
     $errors = $this->connection->errorInfo();
-    timer::tap('query_'.count($this->queries));
+    timers::tap('query_'.count($this->queries));
     if ($errors[0] != '00000') {
       messages::add_new(
         'Query error! '.br.
@@ -59,7 +58,7 @@ namespace effectivecore {
       );
     }
     console::add_log(
-      'Query', $query, $errors[0] == '00000' ? 'ok' : 'error', timer::get_period('query_'.count($this->queries), 0, 1)
+      'Query', $query, $errors[0] == '00000' ? 'ok' : 'error', timers::get_period('query_'.count($this->queries), 0, 1)
     );
     switch (substr($query, 0, 6)) {
       case 'SELECT': return $result->fetchAll(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE, '\effectivecore\entity_instance');

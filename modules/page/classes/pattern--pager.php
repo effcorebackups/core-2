@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          class pager {
+          class pager extends node {
 
   public $id;
   public $has_error = false;

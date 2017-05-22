@@ -6,7 +6,7 @@ forms
       method: post
       class: form-user
     on_submit
-      handler: \effectivecore\modules\user\events_form_factory::on_submit_user_n_edit
+      handler: \effectivecore\modules\user\events_form::on_submit_user_n_edit
     children
     - field_password|markup
         type: input

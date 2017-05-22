@@ -2,20 +2,20 @@
 
 namespace effectivecore {
           use \effectivecore\file_factory as files;
-          use \effectivecore\cache_factory as cache;
-          use \effectivecore\timer_factory as timer;
+          use \effectivecore\cache_factory as caches;
+          use \effectivecore\timer_factory as timers;
           use \effectivecore\console_factory as console;
           abstract class factory {
 
   static function autoload($name) {
-    timer::tap('autoload_'.$name);
+    timers::tap('autoload_'.$name);
     foreach (static::get_classes_map() as $c_class_name => $c_class_info) {
       if ($c_class_name == $name) {
         $c_file = new file($c_class_info->file);
         if ($c_file->insert()) {
-          timer::tap('autoload_'.$name);
+          timers::tap('autoload_'.$name);
           console::add_log(
-            'Autoload', $c_class_info->file, 'ok', timer::get_period('autoload_'.$name, 0, 1)
+            'Autoload', $c_class_info->file, 'ok', timers::get_period('autoload_'.$name, 0, 1)
           );
         }
       }
@@ -37,7 +37,7 @@ namespace effectivecore {
   }
 
   static function get_classes_map() {
-    $cache = cache::get('classes_map');
+    $cache = caches::get('classes_map');
     if ($cache) {
       return $cache;
     } else {
@@ -58,7 +58,7 @@ namespace effectivecore {
           ];
         }
       }
-      cache::set('classes_map', $classes_map);
+      caches::set('classes_map', $classes_map);
       return $classes_map;
     }
   }

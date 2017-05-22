@@ -3,12 +3,12 @@
 namespace effectivecore\modules\user {
           use const \effectivecore\format_datetime;
           use \effectivecore\url_factory as urls;
-          use \effectivecore\entity_factory as entities;
           use \effectivecore\entity_instance as entity_instance;
+          use \effectivecore\entity_factory as entities;
           use \effectivecore\message_factory as messages;
+          use \effectivecore\modules\user\user_factory as users;
           use \effectivecore\modules\user\session_factory as session;
-          use \effectivecore\modules\user\user_factory as user;
-          abstract class events_form_factory extends \effectivecore\events_form_factory {
+          abstract class events_form extends \effectivecore\events_form {
 
   static function on_submit_user_n_delete($page_args, $form_args, $post_args) {
     $user_id  = $page_args['user_id'];
@@ -105,7 +105,7 @@ namespace effectivecore\modules\user {
   static function on_submit_user_logout($page_args, $form_args, $post_args) {
     switch ($post_args['button']) {
       case 'logout':
-        session::destroy(user::get_current()->id);
+        session::destroy(users::get_current()->id);
         urls::go('/');
     }
   }

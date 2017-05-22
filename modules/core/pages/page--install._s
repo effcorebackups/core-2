@@ -6,5 +6,5 @@ pages
     content
     - block_install
         type: code
-        handler: \effectivecore\events_page_factory::on_show_install
+        handler: \effectivecore\events_page::on_show_install
         region: content

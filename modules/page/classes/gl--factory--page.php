@@ -7,13 +7,13 @@ namespace effectivecore\modules\page {
           use \effectivecore\template;
           use \effectivecore\factory;
           use \effectivecore\url_factory as urls;
-          use \effectivecore\settings_factory as settings;
-          use \effectivecore\timer_factory as timer;
+          use \effectivecore\timer_factory as timers;
           use \effectivecore\token_factory as tokens;
           use \effectivecore\message_factory as messages;
+          use \effectivecore\modules\user\user_factory as users;
           use \effectivecore\translate_factory as translations;
+          use \effectivecore\settings_factory as settings;
           use \effectivecore\console_factory as console;
-          use \effectivecore\modules\user\user_factory as user;
           use \effectivecore\modules\user\access_factory as access;
           abstract class page_factory {
 
@@ -99,9 +99,9 @@ namespace effectivecore\modules\page {
       );
     }
   # render page
-    timer::tap('total');
-    console::add_log('System', 'Total build time', '-', timer::get_period('total', 0, 1));
-    console::add_log('System', 'User roles', implode(', ', user::get_current()->roles), '-');
+    timers::tap('total');
+    console::add_log('System', 'Total build time', '-', timers::get_period('total', 0, 1));
+    console::add_log('System', 'User roles', implode(', ', users::get_current()->roles), '-');
     $template->set_var('console', console::render()); # @todo: show console only for admins
     print $template->render();
   }

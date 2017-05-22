@@ -1,9 +1,9 @@
 events
   on_init
   - init_user
-      handler: \effectivecore\modules\user\events_module_factory::on_init
+      handler: \effectivecore\modules\user\events_module::on_init
       weight: -80
   on_install
   - install_user
-      handler: \effectivecore\modules\user\events_module_factory::on_install
+      handler: \effectivecore\modules\user\events_module::on_install
       weight: 0

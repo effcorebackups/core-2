@@ -11,5 +11,5 @@ pages
     content
     - block_roles
         type: code
-        handler: \effectivecore\modules\user\events_page_factory::on_show_admin_roles
+        handler: \effectivecore\modules\user\events_page::on_show_admin_roles
         region: c_1_1

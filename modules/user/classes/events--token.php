@@ -1,20 +1,20 @@
 <?php
 
 namespace effectivecore\modules\user {
-          use \effectivecore\entity_instance as entity_instance;
           use \effectivecore\url_factory as urls;
+          use \effectivecore\entity_instance as entity_instance;
           use \effectivecore\translate_factory as translations;
-          use \effectivecore\modules\user\user_factory as user;
-          abstract class events_token_factory extends \effectivecore\events_token_factory {
+          use \effectivecore\modules\user\user_factory as users;
+          abstract class events_token extends \effectivecore\events_token {
 
   static function on_replace($match, $arg_1_num = null) {
-    if (!empty(user::get_current()->id)) {
+    if (!empty(users::get_current()->id)) {
       switch ($match) {
-        case '%%_user_id'   : return user::get_current()->id;
-        case '%%_user_email': return user::get_current()->email;
+        case '%%_user_id'   : return users::get_current()->id;
+        case '%%_user_email': return users::get_current()->email;
         case '%%_context_user_mail':
           $arg_1_value = urls::get_current()->get_args($arg_1_num);
-          if (user::get_current()->id == $arg_1_value) {
+          if (users::get_current()->id == $arg_1_value) {
             return translations::get('my account');
           } else {
             $user = (new entity_instance('entities/user/user', [
