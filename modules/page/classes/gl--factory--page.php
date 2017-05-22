@@ -86,6 +86,7 @@ namespace effectivecore\modules\page {
     else if ($matches == 0)    factory::send_header_and_exit('not_found', 'Page not found!');
   # render page
     $template = new template('page');
+    $template->set_var('messages', messages::render());
     foreach (static::$data as $c_region_name => &$c_blocks) { # use '&' for dynamic static::$data
       $c_region_data = [];
       foreach ($c_blocks as $c_block) {
@@ -101,8 +102,6 @@ namespace effectivecore\modules\page {
     timer::tap('total');
     console::add_log('System', 'Total build time', '-', timer::get_period('total', 0, 1));
     console::add_log('System', 'User roles', implode(', ', user::get_current()->roles), '-');
-  # important content
-    $template->set_var('messages', messages::render());
     $template->set_var('console', console::render()); # @todo: show console only for admins
     print $template->render();
   }
