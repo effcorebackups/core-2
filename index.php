@@ -19,7 +19,7 @@ namespace effectivecore {
   require_once('modules/core/classes/gl--factory--file.php');
   spl_autoload_register('\effectivecore\factory::autoload');
   use \effectivecore\url_factory as urls;
-  use \effectivecore\token_factory as token;
+  use \effectivecore\token_factory as tokens;
   use \effectivecore\settings_factory as settings;
   use \effectivecore\timer_factory as timer;
   use \effectivecore\console_factory as console;
@@ -64,7 +64,7 @@ namespace effectivecore {
     if (is_file($path) && is_readable($path)) {
       $data = (new file($path))->load();
       if (isset($file_types[$extension]->mime)) header('Content-type: '.$file_types[$extension]->mime, true);
-      if (isset($file_types[$extension]->use_tokens)) $data = token::replace($data);
+      if (isset($file_types[$extension]->use_tokens)) $data = tokens::replace($data);
       print $data;
       exit();
     }

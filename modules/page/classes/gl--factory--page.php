@@ -9,7 +9,7 @@ namespace effectivecore\modules\page {
           use \effectivecore\url_factory as urls;
           use \effectivecore\settings_factory as settings;
           use \effectivecore\timer_factory as timer;
-          use \effectivecore\token_factory as token;
+          use \effectivecore\token_factory as tokens;
           use \effectivecore\message_factory as messages;
           use \effectivecore\translate_factory as translations;
           use \effectivecore\console_factory as console;
@@ -42,7 +42,7 @@ namespace effectivecore\modules\page {
     foreach ($call_stack as $c_page) {
     # show title
       if (isset($c_page->title)) {
-        static::add_element(stripslashes(token::replace(translations::get($c_page->title))), 'title');
+        static::add_element(stripslashes(tokens::replace(translations::get($c_page->title))), 'title');
       }
     # collect styles
       if (isset($c_page->styles)) {
