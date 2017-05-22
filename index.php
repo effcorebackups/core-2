@@ -23,7 +23,7 @@ namespace effectivecore {
   use \effectivecore\settings_factory as settings;
   use \effectivecore\timer_factory as timer;
   use \effectivecore\console_factory as console;
-  use \effectivecore\events_factory as events;
+  use \effectivecore\event_factory as events;
 
   # opcache (disabled)
   if (false && extension_loaded('Zend OPcache')) {

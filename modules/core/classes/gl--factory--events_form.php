@@ -1,6 +1,6 @@
 <?php
 
 namespace effectivecore {
-          abstract class events_form_factory extends events_factory {
+          abstract class events_form_factory extends event_factory {
 
 }}
