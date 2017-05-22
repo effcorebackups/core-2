@@ -7,7 +7,7 @@ namespace effectivecore\modules\user {
           use \effectivecore\pager;
           use \effectivecore\entity_instance;
           use \effectivecore\factory;
-          use \effectivecore\entity_factory;
+          use \effectivecore\entity_factory as entities;
           use \effectivecore\settings_factory as settings;
           use \effectivecore\url_factory as urls;
           use \effectivecore\modules\page\page_factory as page;
@@ -16,7 +16,7 @@ namespace effectivecore\modules\user {
 
   static function on_show_admin_roles() {
     $head = [['ID', 'Title', 'Is embed']];
-    $body = entity_factory::get('role')->select_set();
+    $body = entities::get('role')->select_set();
     foreach ($body as $c_row) {
       $c_row->is_embed = $c_row->is_embed ? 'Yes' : 'No';
     }
@@ -34,7 +34,7 @@ namespace effectivecore\modules\user {
       );
     } else {
       $head = [['ID', 'EMail', 'Password hash', 'Created', 'Is embed', 'Actions']];
-      $body = entity_factory::get('user')->select_set();
+      $body = entities::get('user')->select_set();
       foreach ($body as $c_row) {
         $c_actions = new markup('ul', ['class' => 'actions']);
         $c_actions->add_child( new markup('li', [], new markup('a', ['href' => (new url('/user/'.$c_row->id))->get_full()], 'view') ) );
@@ -71,7 +71,7 @@ namespace effectivecore\modules\user {
                  isset(user::get_current()->roles['admins'])) { # admin
       # get roles
         $roles = [];
-        $db_roles = entity_factory::get('relation_role_ws_user')->select_set(['user_id' => $id]);
+        $db_roles = entities::get('relation_role_ws_user')->select_set(['user_id' => $id]);
         if ($db_roles) {
           foreach ($db_roles as $c_role) {
             $roles[] = $c_role->role_id;

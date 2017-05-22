@@ -3,7 +3,7 @@
 namespace effectivecore\modules\user {
           use const \effectivecore\format_datetime;
           use \effectivecore\url_factory as urls;
-          use \effectivecore\entity_factory as entity_factory;
+          use \effectivecore\entity_factory as entities;
           use \effectivecore\entity_instance as entity_instance;
           use \effectivecore\message_factory as messages;
           use \effectivecore\modules\user\session_factory as session;
@@ -18,7 +18,7 @@ namespace effectivecore\modules\user {
           'id' => $user_id,
         ]))->delete();
         if ($result) {
-          $session_set = entity_factory::get('session')->select_set(['user_id' => $user_id]);
+          $session_set = entities::get('session')->select_set(['user_id' => $user_id]);
           if ($session_set) {
             foreach ($session_set as $c_session) {
               $c_session->delete();
