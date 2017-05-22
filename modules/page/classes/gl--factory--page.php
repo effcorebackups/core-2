@@ -10,6 +10,7 @@ namespace effectivecore\modules\page {
           use \effectivecore\settings_factory as settings;
           use \effectivecore\timer_factory as timer;
           use \effectivecore\token_factory as token;
+          use \effectivecore\message_factory as messages;
           use \effectivecore\translate_factory as translate;
           use \effectivecore\console_factory as console;
           use \effectivecore\modules\user\user_factory as user;
@@ -83,10 +84,6 @@ namespace effectivecore\modules\page {
   # special cases
     if      ($denided == true) factory::send_header_and_exit('access_denided', 'Access denided!');
     else if ($matches == 0)    factory::send_header_and_exit('not_found', 'Page not found!');
-  # move messages to last position
-    $messages = static::$data['messages'];
-    unset(static::$data['messages']);
-    static::$data['messages'] = $messages;
   # render page
     $template = new template('page');
     foreach (static::$data as $c_region_name => &$c_blocks) { # use '&' for dynamic static::$data
@@ -104,6 +101,8 @@ namespace effectivecore\modules\page {
     timer::tap('total');
     console::add_log('System', 'Total build time', '-', timer::get_period('total', 0, 1));
     console::add_log('System', 'User roles', implode(', ', user::get_current()->roles), '-');
+  # important content
+    $template->set_var('messages', messages::render());
     $template->set_var('console', console::render()); # @todo: show console only for admins
     print $template->render();
   }
