@@ -4,6 +4,6 @@ pages
       match: %.*%
     content
     - tree_user
+        region: nav
         type: link
         link: trees/user/user
-        region: nav

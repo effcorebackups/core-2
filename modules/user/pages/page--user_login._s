@@ -8,6 +8,6 @@ pages
       - anonymous: anonymous
     content
     - form_user_login
+        region: c_1_1
         type: link
         link: forms/user/form_user_login
-        region: c_1_1

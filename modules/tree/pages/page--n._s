@@ -8,6 +8,6 @@ pages
         media: all
     content
     - tree_main
+        region: nav
         type: link
         link: trees/core/main
-        region: nav
