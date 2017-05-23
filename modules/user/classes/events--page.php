@@ -10,7 +10,6 @@ namespace effectivecore\modules\user {
           use \effectivecore\url_factory as urls;
           use \effectivecore\entity_factory as entities;
           use \effectivecore\settings_factory as settings;
-          use \effectivecore\modules\page\page_factory as pages;
           use \effectivecore\modules\user\user_factory as users;
           abstract class events_page extends \effectivecore\events_page {
 
@@ -20,9 +19,7 @@ namespace effectivecore\modules\user {
     foreach ($body as $c_row) {
       $c_row->is_embed = $c_row->is_embed ? 'Yes' : 'No';
     }
-    pages::add_element(
-      new table([], $body, $head)
-    );
+    return new table([], $body, $head);
   }
 
   static function on_show_admin_users() {
@@ -44,8 +41,7 @@ namespace effectivecore\modules\user {
         $c_row->password_hash = '*****';
         $c_row->actions = $c_actions;
       }
-      pages::add_element(new table([], $body, $head));
-      pages::add_element($pager);
+      return new table([], $body, $head);
     }
   }
 
@@ -85,7 +81,7 @@ namespace effectivecore\modules\user {
       # show table
         $head = [['Parameter', 'Value']];
         $body = factory::array_rotate([array_keys($values), array_values($values)]);
-        pages::add_element(new table([], $body, $head));
+        return new table([], $body, $head);
       } else {
         factory::send_header_and_exit('access_denided',
           'Access denided!'

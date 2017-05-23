@@ -31,9 +31,7 @@ namespace effectivecore {
         $c_module->state,
       ];
     }
-    pages::add_element(
-      new table([], $body, $head)
-    );
+    return new table([], $body, $head);
   }
 
 }}
