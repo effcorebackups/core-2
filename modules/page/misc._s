@@ -1,5 +1,5 @@
-pages
-- page_n|page
+misc
+- misc_page_n
     url
       match: %.*%
     styles

@@ -9,6 +9,14 @@ pages
       roles
       - admins: admins
     content
+    - block_tree_main
+        region: nav
+        type: link
+        link: trees/core/main
+    - block_tree_user
+        region: nav
+        type: link
+        link: trees/user/user
     - code_user_n_delete
         region: c_1_1
         type: code

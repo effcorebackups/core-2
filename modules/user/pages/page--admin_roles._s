@@ -9,6 +9,14 @@ pages
     constants
     - items_per_page: 50
     content
+    - block_tree_main
+        region: nav
+        type: link
+        link: trees/core/main
+    - block_tree_user
+        region: nav
+        type: link
+        link: trees/user/user
     - block_roles
         region: c_1_1
         type: code

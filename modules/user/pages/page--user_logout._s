@@ -7,6 +7,14 @@ pages
       roles
       - registered: registered
     content
+    - block_tree_main
+        region: nav
+        type: link
+        link: trees/core/main
+    - block_tree_user
+        region: nav
+        type: link
+        link: trees/user/user
     - form_user_login
         region: c_1_1
         type: link

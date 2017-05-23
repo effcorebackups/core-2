@@ -1,0 +1,8 @@
+misc
+- misc_page_n
+    url
+      match: %.*%
+    styles
+    - style_tree
+        file: misc/tree.css
+        media: all

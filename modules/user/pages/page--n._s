@@ -1,9 +1,0 @@
-pages
-- page_n|page
-    url
-      match: %.*%
-    content
-    - tree_user
-        region: nav
-        type: link
-        link: trees/user/user
