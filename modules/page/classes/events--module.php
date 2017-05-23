@@ -5,7 +5,7 @@ namespace effectivecore\modules\page {
           abstract class events_module extends \effectivecore\events_module {
 
   static function on_start() {
-    return page::render();
+    return page::find_and_render();
   }
 
 }}

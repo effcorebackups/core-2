@@ -11,7 +11,7 @@ namespace effectivecore\modules\page {
   static $data = [];
   static $args = [];
 
-  static function render() {
+  static function find_and_render() {
     # render page
     foreach (settings::get('pages') as $c_pages) {
       foreach ($c_pages as $c_page) {
@@ -31,10 +31,6 @@ namespace effectivecore\modules\page {
     factory::send_header_and_exit('not_found',
       'Page not found!'
     );
-  }
-
-  static function add_element($element, $region = 'c_1_1') {
-    static::$data[$region][] = $element;
   }
 
 }}
