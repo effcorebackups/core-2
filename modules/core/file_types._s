@@ -5,10 +5,11 @@ file_types
 - css
     mime: text/css
     use_tokens: 1
-- js:
-    mime: text/javascript
 - svg:
     mime: image/svg+xml
+    use_tokens: 1
+- js:
+    mime: text/javascript
 - gif:
     mime: image/gif
 - jpg:
