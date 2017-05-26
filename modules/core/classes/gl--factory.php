@@ -22,20 +22,6 @@ namespace effectivecore {
     }
   }
 
-  static function send_header_and_exit($header, $message = '', $p = '') {
-    switch ($header) {
-      case 'redirect'      : header('Location: '.$p); break;
-      case 'page_refresh'  : header('Refresh: '.$p); break;
-      case 'access_denided': header('HTTP/1.1 403 Forbidden'); break;
-      case 'not_found'     : header('HTTP/1.0 404 Not Found'); break;
-    }
-    if ($message) {
-      print $message;
-      print '<style>body{padding:30px;font-family:Arial;font-size:24px;text-align:center}</style>';
-    }
-    exit();
-  }
-
   static function get_classes_map() {
     $cache = caches::get('classes_map');
     if ($cache) {
@@ -63,28 +49,6 @@ namespace effectivecore {
     }
   }
 
-
-
-  static function class_invoke_up($method_name, $class_name = null) {
-    $class_name = $class_name ?: get_called_class();
-    $call_stack = [$class_name];
-  # collect stack
-    foreach (static::get_classes_map() as $c_class_name => $c_class_info) {
-      if (isset($c_class_info->parents[$class_name])) {
-        $c_reflection = new \ReflectionMethod($c_class_name, $method_name);
-        if ($c_reflection->getDeclaringClass()->name == $c_class_name) {
-          $call_stack[] = $c_class_name;
-        }
-      }
-    }
-  # call stack
-    $return = [];
-    foreach ($call_stack as $c_class_name) {
-      $return[$c_class_name] = call_user_func($c_class_name.'::'.$method_name);
-    }
-    return $return;
-  }
-
   static function class_get_parts($class_name) {
     return explode('\\', $class_name);
   }
@@ -97,6 +61,22 @@ namespace effectivecore {
   static function class_get_short_name($class_name) {
     $parts = static::class_get_parts($class_name);
     return end($parts);
+  }
+
+
+
+  static function send_header_and_exit($header, $message = '', $p = '') {
+    switch ($header) {
+      case 'redirect'      : header('Location: '.$p); break;
+      case 'page_refresh'  : header('Refresh: '.$p); break;
+      case 'access_denided': header('HTTP/1.1 403 Forbidden'); break;
+      case 'not_found'     : header('HTTP/1.0 404 Not Found'); break;
+    }
+    if ($message) {
+      print $message;
+      print '<style>body{padding:30px;font-family:Arial;font-size:24px;text-align:center}</style>';
+    }
+    exit();
   }
 
 

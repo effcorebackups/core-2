@@ -99,11 +99,11 @@ namespace effectivecore {
       );
     }
 
-    $template->set_var('messages', messages::render());
     timers::tap('total');
     console::add_log('System', 'Total build time', '-', timers::get_period('total', 0, 1));
     console::add_log('System', 'User roles', implode(', ', users::get_current()->roles), '-');
     $template->set_var('console', console::render()); # @todo: show console only for admins
+    $template->set_var('messages', messages::render());
     return $template->render();
   }
 
