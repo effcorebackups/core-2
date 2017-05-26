@@ -2,7 +2,7 @@
 
 namespace effectivecore {
           use \effectivecore\file_factory as files;
-          use \effectivecore\storage_settings_instance as settings;
+          use \effectivecore\storage_instance_s as settings;
           abstract class settings_factory {
 
   static $data;

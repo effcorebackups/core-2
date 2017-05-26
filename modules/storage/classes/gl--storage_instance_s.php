@@ -2,7 +2,7 @@
 
 namespace effectivecore {
           use \effectivecore\file_factory as files;
-          class storage_settings_instance {
+          class storage_instance_s {
 
   static function parse($data) {
     $return = new \StdClass();
