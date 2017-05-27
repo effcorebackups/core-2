@@ -4,6 +4,7 @@ namespace effectivecore {
           abstract class console_factory {
 
   static $data = [];
+  static $information = [];
 
   static function add_log($group = 'System', $name, $values, $time = 0) {
     static::$data[] = [
@@ -14,11 +15,22 @@ namespace effectivecore {
     ];
   }
 
-  static function get_all_logs() {
-    return static::$data;
+  static function add_information($param, $value) {
+    static::$information[$param] = $value;
   }
 
+  static function get_all_logs()        {return static::$data;}
+  static function get_all_information() {return static::$information;}
+
   static function render() {
+    return (new markup('console', [], [
+      new markup('h2', [], 'Console'),
+      static::render_logs(),
+      static::render_information()
+    ]))->render();
+  }
+
+  static function render_logs() {
     $head = [['Time', 'Group', 'Name', 'Values']];
     $body = [];
     foreach (static::get_all_logs() as $c_log) {
@@ -30,11 +42,17 @@ namespace effectivecore {
       ]);
     }
     return (
-      new markup('console', [], [
-        new markup('h2', [], 'Console'),
-        new table([], $body, $head)
-      ])
+      new table(['class' => 'logs'], $body, $head)
     )->render();
+  }
+
+  static function render_information() {
+    $info = new markup('dl', ['class' => 'information'], []);
+    foreach (static::get_all_information() as $c_param => $c_value) {
+      $info->add_child(new markup('dt', [], $c_param));
+      $info->add_child(new markup('dd', [], $c_value));
+    }
+    return $info->render();
   }
 
 }}

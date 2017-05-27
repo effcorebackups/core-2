@@ -1,14 +1,18 @@
 
   /* console */
-  console {margin: 100px auto}
-  console table {border-collapse: collapse; width: 100%; margin: 20px 0}
-  console table thead {border-bottom: 5px solid #000}
-  console table thead th {padding: 12px 10px; font-weight: normal; font-size: 1.2em; text-align: left}
-  console table td {padding: 3px 10px; vertical-align: top}
+  console {display: block; max-width: 800px; margin: 100px auto 20px auto}
+  console table.logs {border-collapse: collapse; width: 100%; margin: 20px 0}
+  console table.logs thead {border-bottom: 5px solid #000}
+  console table.logs thead th {padding: 12px 10px; font-weight: normal; font-size: 1.2em; text-align: left}
+  console table.logs td {padding: 3px 10px; vertical-align: top}
 
-  console table tr.autoload {background-color: #fff7da}
-  console table tr.call     {background-color: #dadaff}
-  console table tr.query    {background-color: #d3ffe4}
-  console table tr.system   {background-color: #d3f6ff}
-  console table tr.new      {background-color: #f0f5dc}
-  console table tr.query td.name {font-size: .9em}
+  console table.logs tr.autoload {background-color: #fff7da}
+  console table.logs tr.call     {background-color: #dadaff}
+  console table.logs tr.query    {background-color: #d3ffe4}
+  console table.logs tr.system   {background-color: #d3f6ff}
+  console table.logs tr.new      {background-color: #f0f5dc}
+  console table.logs tr.query td.name {font-size: .9em}
+
+  console dl.information {margin: 0; padding: 0}
+  console dl.information dt {margin: 0 10px 0 0; padding: 0; float: left; min-width: 200px}
+  console dl.information dd {margin: 0 0 0 210px; padding: 0}

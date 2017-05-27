@@ -12,6 +12,9 @@ misc
     - style_console
         file: misc/console.css
         media: all
+    - style_diagram
+        file: misc/diagram.css
+        media: all
     script
     - script_page
         file: misc/script.js

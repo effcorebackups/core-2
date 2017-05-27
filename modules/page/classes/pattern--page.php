@@ -5,6 +5,7 @@ namespace effectivecore {
           use \effectivecore\timer_factory as timers;
           use \effectivecore\token_factory as tokens;
           use \effectivecore\console_factory as console;
+          use \effectivecore\diagram_factory as diagram;
           use \effectivecore\message_factory as messages;
           use \effectivecore\settings_factory as settings;
           use \effectivecore\translate_factory as translations;
@@ -98,12 +99,20 @@ namespace effectivecore {
         $rendered_c_region
       );
     }
-
     timers::tap('total');
-    console::add_log('System', 'Total build time', '-', timers::get_period('total', 0, 1));
-    console::add_log('System', 'User roles', implode(', ', users::get_current()->roles), '-');
-    $template->set_var('console', console::render()); # @todo: show console only for admins
-    $template->set_var('messages', messages::render());
+    console::add_information('Total build time', timers::get_period('total', 0, 1));
+    console::add_information('User roles', implode(', ', users::get_current()->roles));
+
+    $template->set_var('console', # @todo: only for admins
+      console::render()
+    );
+    $template->set_var('diagram', # @todo: only for admins
+      diagram::render()
+    );
+    $template->set_var('messages',
+      messages::render()
+    );
+
     return $template->render();
   }
 
