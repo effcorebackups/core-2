@@ -5,6 +5,7 @@ translate
   - Delete profile (%%_context_user_mail-4)?: Удалить профиль (%%_context_user_mail-4)?
   - always_enabled: всегда_вкл
   - enabled: вкл.
+  - Execute plan: План выполнения
   - disabled: выкл.
   - Page: Страница
   - Core: Ядро
@@ -12,7 +13,8 @@ translate
   - Group: Группа
   - Storage: Хранилище
   - Translate: Перевод
-  - Tree: Дерево  
+  - Tree: Дерево
+  - Total load: Общая загрука
   - Actions: Действия
   - Administer: Администрирование
   - Administrators: Администраторы
@@ -34,6 +36,7 @@ translate
   - Installation: Установка
   - Is always on: Всегда включен
   - Is embed: Встроенный
+  - Information: Информация
   - Autoload: Автозагрузка
   - login: вход
   - Login: Вход

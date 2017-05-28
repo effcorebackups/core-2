@@ -24,10 +24,9 @@ namespace effectivecore {
 
   static function render() {
     return (new markup('console', [], [
-      new markup('h2', [], 'Console'),
-      static::render_logs(),
-      static::render_information().
-      static::render_diagram()
+      new markup('h2', [], 'Execute plan'), static::render_logs(),
+      new markup('h2', [], 'Total load'),   static::render_diagram_load(),
+      new markup('h2', [], 'Information'),  static::render_information()
     ]))->render();
   }
 
@@ -47,16 +46,7 @@ namespace effectivecore {
     )->render();
   }
 
-  static function render_information() {
-    $info = new markup('dl', ['class' => 'information'], []);
-    foreach (static::get_all_information() as $c_param => $c_value) {
-      $info->add_child(new markup('dt', [], $c_param));
-      $info->add_child(new markup('dd', [], $c_value));
-    }
-    return $info->render();
-  }
-
-  static function render_diagram() {
+  static function render_diagram_load() {
     $statistics = [];
     $total = 0;
     foreach (static::$data as $c_log) {
@@ -66,7 +56,7 @@ namespace effectivecore {
         $total += floatval($c_log['time']);
       }
     }
-    $diagram = new markup('dl', ['class' => 'diagram'], []);
+    $diagram = new markup('dl', ['class' => 'diagram-load'], []);
     foreach ($statistics as $c_param => $c_value) {
       $diagram->add_child(new markup('dt', [], $c_param));
       $diagram->add_child(new markup('dd', [], [
@@ -79,6 +69,15 @@ namespace effectivecore {
       ]));
     }
     return $diagram->render();
+  }
+
+  static function render_information() {
+    $info = new markup('dl', ['class' => 'information'], []);
+    foreach (static::get_all_information() as $c_param => $c_value) {
+      $info->add_child(new markup('dt', [], $c_param));
+      $info->add_child(new markup('dd', [], $c_value));
+    }
+    return $info->render();
   }
 
 }}

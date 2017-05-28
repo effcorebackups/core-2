@@ -13,11 +13,11 @@
   console table.logs tr.new      {background-color: #f0f5dc}
   console table.logs tr.query td.name {font-size: .9em}
 
-  console dl.information {margin: 30px 0; padding: 0}
-  console dl.information dt {margin: 0 10px 0 0; padding: 0; float: left; min-width: 200px}
-  console dl.information dd {margin: 0 0 0 210px; padding: 0}
+  console dl.diagram-load {margin: 50px 0; padding: 30px; border: 1px solid #e9e9e9; border-top: 5px solid #000}
+  console dl.diagram-load dt {margin: 0 10px 0 0; padding: 0; float: left; min-width: 290px; font-size: 1.2em; line-height: 1.2em; text-align: right}
+  console dl.diagram-load dd {margin: 0 0 0 300px; padding: 0; font-size: .9em}
+  console dl.diagram-load .scale {height: 5px; background: %%_main_bg_color}
 
-  console dl.diagram {margin: 30px 0; padding: 30px; border: 1px solid #e9e9e9}
-  console dl.diagram dt {margin: 0 10px 0 0; padding: 0; float: left; min-width: 290px; font-size: 1.2em; line-height: 1.2em; text-align: right}
-  console dl.diagram dd {margin: 0 0 0 300px; padding: 0; font-size: .9em}
-  console dl.diagram .scale {height: 5px; background: %%_main_bg_color}
+  console dl.information {margin: 50px 0; padding: 5px 0; border: 1px solid #e9e9e9; border-top: 5px solid #000}
+  console dl.information dt {margin: 0 10px 0 0; padding: 3px 3px 3px 14px; float: left; min-width: 200px}
+  console dl.information dd {margin: 0 0 0 210px; padding: 3px}
