@@ -66,7 +66,7 @@ namespace effectivecore {
         $total += floatval($c_log['time']);
       }
     }
-    $diagram = new markup('dl', [], []);
+    $diagram = new markup('dl', ['class' => 'diagram'], []);
     foreach ($statistics as $c_param => $c_value) {
       $diagram->add_child(new markup('dt', [], $c_param));
       $diagram->add_child(new markup('dd', [], [
@@ -74,13 +74,11 @@ namespace effectivecore {
         number_format($c_value / $total * 100, 1).'%)',
         new markup('div', [
           'class' => 'scale scale-'.factory::to_css_class($c_param),
-          'style' => 'width:'.(int)($c_value / $total * 500).'px'
+          'style' => 'width:'.(int)($c_value / $total * 400).'px'
         ], '')
       ]));
     }
-    return (
-      new markup('diagram', [], $diagram)
-    )->render();
+    return $diagram->render();
   }
 
 }}
