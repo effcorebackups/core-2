@@ -106,9 +106,6 @@ namespace effectivecore {
     $template->set_var('console', # @todo: only for admins
       console::render()
     );
-    $template->set_var('diagram', # @todo: only for admins
-      diagram::render()
-    );
     $template->set_var('messages',
       messages::render()
     );

@@ -26,7 +26,8 @@ namespace effectivecore {
     return (new markup('console', [], [
       new markup('h2', [], 'Console'),
       static::render_logs(),
-      static::render_information()
+      static::render_information().
+      static::render_diagram()
     ]))->render();
   }
 
@@ -53,6 +54,33 @@ namespace effectivecore {
       $info->add_child(new markup('dd', [], $c_value));
     }
     return $info->render();
+  }
+
+  static function render_diagram() {
+    $statistics = [];
+    $total = 0;
+    foreach (static::$data as $c_log) {
+      if(floatval($c_log['time'])) {
+        if (!isset($statistics[$c_log['group']])) $statistics[$c_log['group']] = 0;
+        $statistics[$c_log['group']] += floatval($c_log['time']);
+        $total += floatval($c_log['time']);
+      }
+    }
+    $diagram = new markup('dl', [], []);
+    foreach ($statistics as $c_param => $c_value) {
+      $diagram->add_child(new markup('dt', [], $c_param));
+      $diagram->add_child(new markup('dd', [], [
+        number_format($c_value, 6).' sec. ('.
+        number_format($c_value / $total * 100, 1).'%)',
+        new markup('div', [
+          'class' => 'scale scale-'.factory::to_css_class($c_param),
+          'style' => 'width:'.(int)($c_value / $total * 500).'px'
+        ], '')
+      ]));
+    }
+    return (
+      new markup('diagram', [], $diagram)
+    )->render();
   }
 
 }}
