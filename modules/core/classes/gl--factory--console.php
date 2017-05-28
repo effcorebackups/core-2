@@ -64,7 +64,7 @@ namespace effectivecore {
         number_format($c_value / $total * 100, 1).'%)',
         new markup('div', [
           'class' => 'scale scale-'.factory::to_css_class($c_param),
-          'style' => 'width:'.(int)($c_value / $total * 400).'px'
+          'style' => 'width:'.(int)($c_value / $total * 100).'%'
         ], '')
       ]));
     }
