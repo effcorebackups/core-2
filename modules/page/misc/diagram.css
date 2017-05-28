@@ -1,8 +1,0 @@
-
-  /* diagram */
-  diagram {display: block; max-width: 800px; margin: 20px auto 100px auto}
-  diagram dl {margin: 0; padding: 0}
-  diagram dl dt {margin: 0 10px 0 0; padding: 0; float: left; min-width: 200px}
-  diagram dl dd {margin: 0 0 0 210px; padding: 0}
-
-  diagram .scale {height: 5px; background: %%_nav_bg_color}

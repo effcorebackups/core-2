@@ -5,7 +5,6 @@ namespace effectivecore {
           use \effectivecore\timer_factory as timers;
           use \effectivecore\token_factory as tokens;
           use \effectivecore\console_factory as console;
-          use \effectivecore\diagram_factory as diagram;
           use \effectivecore\message_factory as messages;
           use \effectivecore\settings_factory as settings;
           use \effectivecore\translate_factory as translations;

@@ -1,5 +1,5 @@
 tokens
-- nav_bg_color
-    match: %%_nav_bg_color
+- main_bg_color
+    match: %%_main_bg_color
     type: text
     value: #216ce4
