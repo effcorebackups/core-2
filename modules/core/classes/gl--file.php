@@ -6,6 +6,8 @@ namespace effectivecore {
           use \effectivecore\console_factory as console;
           class file {
 
+  static private $cache;
+
   public $file;
   public $dirs;
   public $original;
@@ -17,13 +19,16 @@ namespace effectivecore {
 
   function load() {
     $relative = $this->get_path_relative();
-    timers::tap('load_'.$relative);
-    $this->data = file_get_contents($this->get_path_full());
-    timers::tap('load_'.$relative);
-    console::add_log(
-      'Load', $relative, 'ok', timers::get_period('load_'.$relative, 0, 1)
-    );
-    return $this->data;
+    if (isset(static::$cache[$relative])) {
+      console::add_log('Load', $relative, 'ok', '0.000000');
+      return static::$cache[$relative];
+    } else {
+      timers::tap('load_'.$relative);
+      static::$cache[$relative] = file_get_contents($this->get_path_full());
+      timers::tap('load_'.$relative);
+      console::add_log('Load', $relative, 'ok', timers::get_period('load_'.$relative, 0, 1));
+      return static::$cache[$relative];
+    }
   }
 
   function save() {
@@ -32,12 +37,10 @@ namespace effectivecore {
 
   function insert($once = true) {
     $relative = $this->get_path_relative();
-    timers::tap('load_'.$relative);
+    timers::tap('insert_'.$relative);
     $return = $once ? require_once($this->get_path_full()) : require($this->get_path_full());
-    timers::tap('load_'.$relative);
-    console::add_log(
-      'Load', $relative, 'ok', timers::get_period('load_'.$relative, 0, 1)
-    );
+    timers::tap('insert_'.$relative);
+    console::add_log('Insert', $relative, 'ok', timers::get_period('insert_'.$relative, 0, 1));
     return $return;
   }
 
