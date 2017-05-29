@@ -65,6 +65,7 @@ namespace effectivecore {
   }
 
   # case for page (non file)
+  ob_start();
   timer::tap('total');
   foreach (events::get()->on_start as $c_info) {
     $c_handler = $c_info->handler;

@@ -2,9 +2,72 @@
 
 namespace effectivecore {
           use \effectivecore\file_factory as files;
+          use \effectivecore\message_factory as messages;
           class storage_instance_s {
 
-  static function parse($data) {
+  static $data;
+
+  static function init() {
+    $file = new file(dir_cache.'settings_new.php');
+    if ($file->is_exist()) {
+      $file->insert();
+    } else {
+      static::$data = static::load_all_and_parse();
+      if (is_writable(dir_cache)) {
+        $file->set_data(
+          "<?php \n\nnamespace effectivecore { # settings::\$data[type][scope]...\n\n  ".
+            "use \\effectivecore\\storage_instance_s as settings;\n\n".
+             factory::data_export(static::$data, '  settings::$data').
+          "\n}");
+        $file->save();
+      } else {
+        messages::add_new(
+          'Directory "cache" should be writable!', 'error'
+        );
+      }
+    }
+  }
+
+  function get($group = '') {
+    if (!static::$data) static::init();
+    if ($group)  return static::$data[$group];
+    else         return static::$data;
+  }
+
+  static function load_all_and_parse() {
+    $return = [];
+    $files = files::get_all(dir_modules, '%^.*\._s$%') +
+             files::get_all(dir_settings, '%^.*\._s$%');
+    $modules_path = [];
+    foreach ($files as $c_file) {
+      if ($c_file->get_file_full() == 'module._s') {
+        $modules_path[$c_file->get_dir_parent()] = $c_file->get_dirs_relative();
+      }
+    }
+    foreach ($files as $c_file) {
+      $c_scope = 'global';
+      foreach ($modules_path as $c_dir_parent => $c_dir_relative) {
+        if (strpos($c_file->get_dirs_relative(), $c_dir_relative) === 0) {
+          $c_scope = $c_dir_parent;
+          break;
+        }
+      }
+      $c_parsed = static::parse_data($c_file->load());
+      foreach ($c_parsed as $c_type => $c_data) {
+        if (is_object($c_data)) {
+          if ($c_type == 'module') $c_data->path = $modules_path[$c_scope];
+          $return[$c_type][$c_scope] = $c_data;
+        }
+        if (is_array($c_data)) {
+          if (!isset($return[$c_type][$c_scope])) $return[$c_type][$c_scope] = [];
+          $return[$c_type][$c_scope] += $c_data;
+        }
+      }
+    }
+    return $return;
+  }
+
+  static function parse_data($data) {
     $return = new \StdClass();
     $p = [-1 => &$return];
     foreach (explode(nl, $data) as $c_line) {
@@ -44,35 +107,5 @@ namespace effectivecore {
     }
     return $return;
   }
-
-  function select($name = '') {
-    $files = files::get_all(dir_modules, '%^.*\._s$%') +
-             files::get_all(dir_settings, '%^.*\._s$%');
-    $modules_path = [];
-    foreach ($files as $c_file) {
-      if ($c_file->get_file_full() == 'module._s') {
-        $modules_path[$c_file->get_dir_parent()] = $c_file->get_dirs_relative();
-      }
-    }
-    foreach ($files as $c_file) {
-      $c_scope = 'global';
-      foreach ($modules_path as $c_dir_parent => $c_path_relative) {
-        if (strpos($c_file->get_dirs_relative(), $c_path_relative) === 0) {
-          $c_scope = $c_dir_parent;
-          break;
-        }
-      }
-      $c_parsed = static::parse($c_file->load());
-      foreach ($c_parsed as $c_type => $c_data) {
-        if (is_object($c_data)) {
-          if ($c_type == 'module') {
-
-          }
-        }
-      }
-      
-    }
-  }
-
 
 }}
