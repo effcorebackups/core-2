@@ -16,17 +16,18 @@ namespace effectivecore {
   const nl              = "\n";
   const br              = "<br/>";
 
+  require_once('modules/core/classes/gl--factory--timer.php');
   require_once('modules/core/classes/gl--file.php');
   require_once('modules/core/classes/gl--factory.php');
-  require_once('modules/core/classes/gl--factory--timer.php');
   require_once('modules/core/classes/gl--factory--cache.php');
   require_once('modules/core/classes/gl--factory--file.php');
   spl_autoload_register('\effectivecore\factory::autoload');
   use \effectivecore\url_factory as urls;
   use \effectivecore\token_factory as tokens;
-  use \effectivecore\timer_factory as timer;
+  use \effectivecore\timer_factory as timers;
   use \effectivecore\console_factory as console;
-  use \effectivecore\modules\storage\storage_factory as storage;        
+  use \effectivecore\modules\storage\storage_factory as storage;
+  timers::tap('total');
 
   # redirect from '/any_path/' to '/any_path'
   if (urls::get_current()->path != '/' && substr(urls::get_current()->path, -1) == '/') {
@@ -66,17 +67,16 @@ namespace effectivecore {
 
   # case for page (non file)
   ob_start();
-  timer::tap('total');
   foreach (events::get()->on_start as $c_info) {
     $c_handler = $c_info->handler;
-    timer::tap($c_handler);
+    timers::tap($c_handler);
     $c_result = call_user_func($c_handler);
     if ($c_result) {
       print $c_result;
     }
-    timer::tap($c_handler);
+    timers::tap($c_handler);
     console::add_log(
-      'Call', $c_handler, '-', timer::get_period($c_handler, 0, 1)
+      'Call', $c_handler, '-', timers::get_period($c_handler, 0, 1)
     );
   }         
 

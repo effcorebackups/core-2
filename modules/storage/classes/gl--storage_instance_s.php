@@ -22,7 +22,7 @@ namespace effectivecore {
         $file->save();
       } else {
         messages::add_new(
-          'Directory "cache" should be writable!', 'error'
+          'Directory "cache" should be writable! System is working slowly at now.', 'error'
         );
       }
     }

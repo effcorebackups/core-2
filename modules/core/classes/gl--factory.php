@@ -8,16 +8,10 @@ namespace effectivecore {
           abstract class factory {
 
   static function autoload($name) {
-    timers::tap('autoload_'.$name);
     foreach (static::get_classes_map() as $c_class_name => $c_class_info) {
       if ($c_class_name == $name) {
         $c_file = new file($c_class_info->file);
-        if ($c_file->insert()) {
-          timers::tap('autoload_'.$name);
-          console::add_log(
-            'Autoload', $c_class_info->file, 'ok', timers::get_period('autoload_'.$name, 0, 1)
-          );
-        }
+        $c_file->insert();
       }
     }
   }

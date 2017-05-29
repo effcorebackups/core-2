@@ -2,6 +2,8 @@
 
 namespace effectivecore {
           use \effectivecore\file_factory as files;
+          use \effectivecore\timer_factory as timers;
+          use \effectivecore\console_factory as console;
           class file {
 
   public $file;
@@ -14,7 +16,13 @@ namespace effectivecore {
   }
 
   function load() {
+    $relative = $this->get_path_relative();
+    timers::tap('load_'.$relative);
     $this->data = file_get_contents($this->get_path_full());
+    timers::tap('load_'.$relative);
+    console::add_log(
+      'Load', $relative, 'ok', timers::get_period('load_'.$relative, 0, 1)
+    );
     return $this->data;
   }
 
@@ -23,8 +31,14 @@ namespace effectivecore {
   }
 
   function insert($once = true) {
-    return $once ? require_once($this->get_path_full()) : 
-                        require($this->get_path_full());
+    $relative = $this->get_path_relative();
+    timers::tap('load_'.$relative);
+    $return = $once ? require_once($this->get_path_full()) : require($this->get_path_full());
+    timers::tap('load_'.$relative);
+    console::add_log(
+      'Load', $relative, 'ok', timers::get_period('load_'.$relative, 0, 1)
+    );
+    return $return;
   }
 
   function is_exist() {

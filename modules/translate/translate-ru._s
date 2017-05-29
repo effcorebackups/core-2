@@ -37,7 +37,7 @@ translate
   - Is always on: Всегда включен
   - Is embed: Встроенный
   - Information: Информация
-  - Autoload: Автозагрузка
+  - Load: Загрузка
   - login: вход
   - Login: Вход
   - Logout from the system: Выйти из системы

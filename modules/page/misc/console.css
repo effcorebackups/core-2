@@ -6,11 +6,11 @@
   console table.logs thead th {padding: 12px 10px; font-weight: normal; font-size: 1.2em; text-align: left}
   console table.logs td {padding: 3px 10px; vertical-align: top}
 
-  console table.logs tr.autoload {background-color: #fff7da}
-  console table.logs tr.call     {background-color: #dadaff}
-  console table.logs tr.query    {background-color: #d3ffe4}
-  console table.logs tr.system   {background-color: #d3f6ff}
-  console table.logs tr.new      {background-color: #f0f5dc}
+  console table.logs tr.load   {background-color: #fff7da}
+  console table.logs tr.call   {background-color: #dadaff}
+  console table.logs tr.query  {background-color: #d3ffe4}
+  console table.logs tr.system {background-color: #d3f6ff}
+  console table.logs tr.new    {background-color: #f0f5dc}
   console table.logs tr.query td.name {font-size: .9em}
 
   console dl.diagram-load {margin: 50px 0; padding: 30px; border: 1px solid #e9e9e9; border-top: 5px solid #000}
