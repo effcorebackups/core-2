@@ -9,7 +9,6 @@ namespace effectivecore\modules\user {
           use \effectivecore\factory;
           use \effectivecore\url_factory as urls;
           use \effectivecore\entity_factory as entities;
-          use \effectivecore\settings_factory as settings;
           use \effectivecore\modules\user\user_factory as users;
           abstract class events_page extends \effectivecore\events_page {
 
@@ -23,7 +22,6 @@ namespace effectivecore\modules\user {
   }
 
   static function on_show_admin_users() {
-    $items_per_page = settings::get('pages')['user']['page_admin_users']->constants['items_per_page'];
     $pager = new pager();
     if ($pager->has_error) {
       factory::send_header_and_exit('not_found',

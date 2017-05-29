@@ -61,7 +61,7 @@ namespace effectivecore {
       'Query', $query, $errors[0] == '00000' ? 'ok' : 'error', timers::get_period('query_'.count($this->queries), 0, 1)
     );
     switch (substr($query, 0, 6)) {
-      case 'SELECT': return $result->fetchAll(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE, '\effectivecore\entity_instance');
+      case 'SELECT': return $result ? $result->fetchAll(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE, '\effectivecore\entity_instance') : null;
       case 'UPDATE': return $result->rowCount();
       case 'DELETE': return $result->rowCount();
       case 'INSERT': return $this->connection->lastInsertId();

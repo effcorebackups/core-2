@@ -1,8 +1,8 @@
 <?php
 
 namespace effectivecore {
-          use \effectivecore\settings_factory as settings;
           use \effectivecore\modules\page\page_factory as pages;
+          use \effectivecore\modules\storage\storage_factory as storage;
           abstract class events_page extends events {
 
   static function on_show_install() {
@@ -21,7 +21,7 @@ namespace effectivecore {
       'State',
     ]];
     $body = [];
-    foreach (settings::get('module') as $c_module) {
+    foreach (storage::get('settings')->select('module') as $c_module) {
       $body[] = [
         $c_module->title,
         $c_module->id,

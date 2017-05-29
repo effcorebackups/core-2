@@ -1,13 +1,13 @@
 <?php
 
 namespace effectivecore {
-          use \effectivecore\settings_factory as settings;
+          use \effectivecore\modules\storage\storage_factory as storage;
           abstract class token_factory {
 
   protected static $data;
 
   static function init() {
-    foreach (settings::get('tokens') as $c_tokens) {
+    foreach (storage::get('settings')->select('tokens') as $c_tokens) {
       foreach ($c_tokens as $c_token) {
         static::$data[$c_token->match] = $c_token;
       }

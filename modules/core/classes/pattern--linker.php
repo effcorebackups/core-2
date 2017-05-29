@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          use \effectivecore\settings_factory as settings;
+          use \effectivecore\modules\storage\storage_factory as storage;
           class linker {
 
   public $npath;
@@ -12,7 +12,7 @@ namespace effectivecore {
   }
 
   function get() {
-    return $this->p ?: ($this->p = factory::npath_get_object($this->npath, settings::get()));
+    return $this->p ?: ($this->p = factory::npath_get_object($this->npath, storage::get('settings')->select()));
   }
 
 }}

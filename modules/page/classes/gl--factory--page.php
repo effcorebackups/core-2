@@ -4,8 +4,8 @@ namespace effectivecore\modules\page {
           use const \effectivecore\br;
           use \effectivecore\factory;
           use \effectivecore\url_factory as urls;
-          use \effectivecore\settings_factory as settings;
           use \effectivecore\modules\user\access_factory as access;
+          use \effectivecore\modules\storage\storage_factory as storage;
           abstract class page_factory {
 
   static $data = [];
@@ -13,7 +13,7 @@ namespace effectivecore\modules\page {
 
   static function find_and_render() {
     # render page
-    foreach (settings::get('pages') as $c_pages) {
+    foreach (storage::get('settings')->select('pages') as $c_pages) {
       foreach ($c_pages as $c_page) {
         if (isset($c_page->url->match) && preg_match($c_page->url->match, urls::get_current()->path)) {
           if (!isset($c_page->access) ||

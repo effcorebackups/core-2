@@ -8,7 +8,7 @@ namespace effectivecore {
   static $data;
 
   static function init() {
-    $file = new file(dir_cache.'settings_new.php');
+    $file = new file(dir_cache.'settings.php');
     if ($file->is_exist()) {
       $file->insert();
     } else {
@@ -28,7 +28,7 @@ namespace effectivecore {
     }
   }
 
-  function get($group = '') {
+  function select($group = '') {
     if (!static::$data) static::init();
     if ($group)  return static::$data[$group];
     else         return static::$data;

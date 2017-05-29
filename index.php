@@ -24,9 +24,9 @@ namespace effectivecore {
   spl_autoload_register('\effectivecore\factory::autoload');
   use \effectivecore\url_factory as urls;
   use \effectivecore\token_factory as tokens;
-  use \effectivecore\settings_factory as settings;
   use \effectivecore\timer_factory as timer;
   use \effectivecore\console_factory as console;
+  use \effectivecore\modules\storage\storage_factory as storage;        
 
   # redirect from '/any_path/' to '/any_path'
   if (urls::get_current()->path != '/' && substr(urls::get_current()->path, -1) == '/') {
@@ -40,7 +40,7 @@ namespace effectivecore {
   ##########################
 
   $file_types = [];
-  foreach (settings::get('file_types') as $c_types) {
+  foreach (storage::get('settings')->select('file_types') as $c_types) {
     foreach ($c_types as $c_name => $c_info) {
       $file_types[$c_name] = $c_info;
     }
@@ -78,6 +78,6 @@ namespace effectivecore {
     console::add_log(
       'Call', $c_handler, '-', timer::get_period($c_handler, 0, 1)
     );
-  }
+  }         
 
 }
