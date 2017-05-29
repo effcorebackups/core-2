@@ -16,7 +16,3 @@ pages
         region: c_1_1
         type: text
         content: Wellcome to our site!
-    - block_copyright
-        region: f_1_1
-        type: text
-        content: Copyright © 2017 RysMax

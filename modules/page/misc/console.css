@@ -3,8 +3,10 @@
   console {display: block; max-width: 800px; margin: 100px auto 100px auto}
   console table.logs {border-collapse: collapse; width: 100%; margin: 20px 0}
   console table.logs thead {border-bottom: 5px solid black}
-  console table.logs thead th {padding: 12px 10px; font-weight: normal; font-size: 1.2em; text-align: left}
-  console table.logs td {padding: 3px 10px; vertical-align: top}
+  console table.logs thead th {padding: 12px 10px 12px 17px; font-weight: normal; font-size: 1.2em; text-align: left}
+  console table.logs td {padding: 3px 5px 3px 17px; vertical-align: top}
+  console table tr:first-child td {padding-top: 10px}
+  console table tr:last-child td {padding-bottom: 10px}
 
   console table.logs tr.load   {background-color: #fff7da}
   console table.logs tr.insert {background-color: #fff7da}
