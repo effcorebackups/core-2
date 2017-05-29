@@ -1,5 +1,0 @@
-tokens
-- main_bg_color
-    match: %%_main_bg_color
-    type: text
-    value: #216ce4

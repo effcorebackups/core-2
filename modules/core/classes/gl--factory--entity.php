@@ -1,13 +1,13 @@
 <?php
 
 namespace effectivecore {
-          use \effectivecore\modules\storage\storage_factory as storage;
+          use \effectivecore\modules\storage\storage_factory as storages;
           abstract class entity_factory {
 
   static $data;
 
   static function init() {
-    foreach (storage::get('settings')->select('entities') as $c_entities) {
+    foreach (storages::get('settings')->select('entities') as $c_entities) {
       foreach ($c_entities as $c_entity) {
         static::$data[$c_entity->name] = $c_entity;
       }

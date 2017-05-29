@@ -1,0 +1,25 @@
+tokens
+- border_color
+    match: %%_border_color
+    type: text
+    value: #e9e9e9
+- bg_color
+    match: %%_bg_color
+    type: text
+    value: #216ce4
+- hover_color
+    match: %%_hover_color
+    type: text
+    value: #81a5eb
+- hover_bg_color
+    match: %%_hover_bg_color
+    type: text
+    value: #28334a
+- error_color
+    match: %%_error_color
+    type: text
+    value: #e42013
+- error_bg_color
+    match: %%_error_bg_color
+    type: text
+    value: #fff5ee

@@ -9,7 +9,7 @@ namespace effectivecore {
           use \effectivecore\translate_factory as translations;
           use \effectivecore\modules\user\user_factory as users;
           use \effectivecore\modules\page\page_factory as pages;
-          use \effectivecore\modules\storage\storage_factory as storage;
+          use \effectivecore\modules\storage\storage_factory as storages;
           class page {
 
   public $title = '';
@@ -30,7 +30,7 @@ namespace effectivecore {
     # collect misc
     $rendered_styles = '';
     $rendered_script = '';
-    $miscs = storage::get('settings')->select('misc');
+    $miscs = storages::get('settings')->select('misc');
     foreach ($miscs as $module_id => $c_misc_group) {
       foreach ($c_misc_group as $c_misc) {
         if (isset($c_misc->url->match) && preg_match($c_misc->url->match, urls::get_current()->path)) {
@@ -81,7 +81,7 @@ namespace effectivecore {
       switch ($c_content->type) {
         case 'text': $contents[$c_region][] = $c_content->content; break;
         case 'code': $contents[$c_region][] = call_user_func_array($c_content->handler, pages::$args); break;
-        case 'link': $contents[$c_region][] = factory::npath_get_object($c_content->link, storage::get('settings')->select()); break;
+        case 'link': $contents[$c_region][] = factory::npath_get_object($c_content->link, storages::get('settings')->select()); break;
         default:     $contents[$c_region][] = $c_content;
       }
     }

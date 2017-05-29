@@ -1,6 +1,4 @@
 
-  nav {background: %%_main_bg_color}
-
   /* tree sizes and orientation */
   nav tree {margin: 0; padding: 0}
   nav tree > ul {margin: 0; padding: 0; list-style: none}
@@ -11,15 +9,15 @@
   nav tree.user > ul > li {float: right}
 
   /* tree colors */
-  nav tree > ul > li:hover {background: #28334a}
-  nav tree > ul > li > a {color: #fff}
+  nav tree > ul > li:hover {background: %%_hover_bg_color}
+  nav tree > ul > li > a {color: white}
   nav tree > ul > li > a.active,
-  nav tree > ul > li > a[href]:hover {color: #81a5eb}
-  nav tree > ul > li > a:hover {color: #fff}
-  nav tree > ul > li > ul a {color: #fff}
+  nav tree > ul > li > a[href]:hover {color: %%_hover_color}
+  nav tree > ul > li > a:hover {color: white}
+  nav tree > ul > li > ul a {color: white}
   nav tree > ul > li > ul a.active,
-  nav tree > ul > li > ul a:hover {color: #81a5eb}
-  nav tree > ul > li > ul {background: #28334a}
+  nav tree > ul > li > ul a:hover {color: %%_hover_color}
+  nav tree > ul > li > ul {background: %%_hover_bg_color}
 
   /* tree dynamic */
   nav tree > ul > li > ul {display: none}

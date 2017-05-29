@@ -1,42 +1,42 @@
 
 
-  body {margin: 0; padding: 0 40px; font-family: 'Arial'; font-size: 15px; line-height: 1.5em; color: #000; background: #fff}
+  body {margin: 0; padding: 0 40px; font-family: 'Arial'; font-size: 15px; line-height: 1.5em; color: black; background: white}
 
   /* page sizes */
-  nav {display: block; max-width: 800px; margin: 0 auto}
+  nav {display: block; max-width: 800px; margin: 0 auto; background: %%_bg_color}
   nav:after {content: ''; clear: both; display: block}
   h1 {max-width: 800px; margin: 50px auto}
   messages {display: block; max-width: 800px; margin: 50px auto}
   header {display: block; max-width: 800px; margin: 0 auto}
   content {display: block; max-width: 800px; margin: 0 auto; min-height: 200px}
-  footer {display: block; max-width: 800px; margin: 0 auto}
+  footer {display: block; max-width: 800px; margin: 0 auto; padding: 20px; color: white; background: %%_hover_bg_color}
 
   /* headers */
-  h1 {font-size: 2em; font-weight: normal}
-  h2 {margin: 1.5em 0; font-size: 1.5em; font-weight: normal}
-  h3 {margin: 1em 0; font-size: 1em}
+  h1 {margin: 4em auto 3em auto; font-size: 2em; font-weight: normal}
+  h2 {margin: 3em auto 2em auto; font-size: 1.5em; font-weight: normal}
+  h3 {margin: 2em auto 1em auto; font-size: 1em}
 
   /* links */
-  a {color: #216ce4}
-  a:hover {color: #000}
-  a.active {color: #000}
+  a {color: %%_bg_color}
+  a:hover {color: black}
+  a.active {color: black}
 
   /* universal classes */
   body .hidden {display: none}
 
   /* messages */
   messages ul {margin: 10px 0; padding: 15px 20px; font-size: 16px; border: 3px solid #66c048; background: #f4ffee}
-  messages ul.error {border-color: #e42013; background-color: #fff5ee}
+  messages ul.error {border-color: %%_error_color; background-color: %%_error_bg_color}
   messages ul li {margin: 0 0 0 15px; padding: 0}
   messages ul li:only-child {margin: 0; list-style: none}
 
   /* table */
   content table {border-collapse: collapse; width: 100%; margin: 20px 0}
-  content table thead {border-bottom: 5px solid #216ce4}
+  content table thead {border-bottom: 5px solid %%_bg_color}
   content table thead th {padding: 12px 15px; font-weight: normal; font-size: 1.2em; text-align: left}
-  content table td {padding: 12px 15px; border: 1px solid #e9e9e9; background-color: #f7f7f7}
+  content table td {padding: 12px 15px; border: 1px solid %%_border_color; background-color: #f7f7f7}
   content table td.no-items {color: #ddd}
-  content table tr:nth-child(odd) td {background-color: #fff}
+  content table tr:nth-child(odd) td {background-color: white}
 
   /* actions */
   ul.actions,

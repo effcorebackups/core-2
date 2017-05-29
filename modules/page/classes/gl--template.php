@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          use \effectivecore\modules\storage\storage_factory as storage;
+          use \effectivecore\modules\storage\storage_factory as storages;
           class template {
 
   public $name;
@@ -15,10 +15,10 @@ namespace effectivecore {
       static::set_var($c_var_name, $c_var_value);
     }
   # find template
-    foreach (storage::get('settings')->select('templates') as $c_module_id => $c_templates) {
+    foreach (storages::get('settings')->select('templates') as $c_module_id => $c_templates) {
       foreach ($c_templates as $c_name => $c_path) {
         if ($name == $c_name) {
-          $file = new file(storage::get('settings')->select('module')[$c_module_id]->path.'/'.$c_path);
+          $file = new file(storages::get('settings')->select('module')[$c_module_id]->path.'/'.$c_path);
           $this->markup = $file->load();
           return $this;
         }
