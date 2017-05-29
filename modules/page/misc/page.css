@@ -25,7 +25,7 @@
   body .hidden {display: none}
 
   /* messages */
-  messages ul {margin: 10px 0; padding: 15px 20px; font-size: 16px; border: 3px solid #66c048; background: #f4ffee}
+  messages ul {margin: 10px 0; padding: 15px 20px; font-size: 16px; border: 3px solid %%_ok_color; background: %%_ok_bg_color}
   messages ul.error {border-color: %%_error_color; background-color: %%_error_bg_color}
   messages ul li {margin: 0 0 0 15px; padding: 0}
   messages ul li:only-child {margin: 0; list-style: none}
@@ -34,16 +34,12 @@
   content table {border-collapse: collapse; width: 100%; margin: 20px 0}
   content table thead {border-bottom: 5px solid %%_bg_color}
   content table thead th {padding: 12px 15px; font-weight: normal; font-size: 1.2em; text-align: left}
-  content table td {padding: 12px 15px; border: 1px solid %%_border_color; background-color: #f7f7f7}
-  content table td.no-items {color: #ddd}
+  content table td {padding: 12px 15px; border: 1px solid %%_border_color; background-color: %%_table_bg_color}
+  content table td.no-items {color: %%_table_noitems_color}
   content table tr:nth-child(odd) td {background-color: white}
 
   /* actions */
   ul.actions,
   ul.actions li {margin: 0; padding: 0; list-style: none}
   ul.actions li {font-size: .9em}
-
-  /* pager */
-  pager {display: block; margin: 30px 0; text-align: center}
-  pager a {display: inline-block; margin: 2px 0; padding: 7px 5px; min-width: 32px; border: 1px solid #ddd; border-radius: 15px; font-size: 14px}
 

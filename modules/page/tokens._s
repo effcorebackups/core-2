@@ -7,6 +7,14 @@ tokens
     match: %%_bg_color
     type: text
     value: #216ce4
+- table_noitems_color
+    match: %%_table_noitems_color
+    type: text
+    value: #ddd
+- table_bg_color
+    match: %%_table_bg_color
+    type: text
+    value: #f7f7f7
 - hover_color
     match: %%_hover_color
     type: text
@@ -23,3 +31,11 @@ tokens
     match: %%_error_bg_color
     type: text
     value: #fff5ee
+- ok_color
+    match: %%_ok_color
+    type: text
+    value: #66c048
+- ok_bg_color
+    match: %%_ok_bg_color
+    type: text
+    value: #f4ffee
