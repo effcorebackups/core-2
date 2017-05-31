@@ -3,14 +3,15 @@
   body {margin: 0; padding: 0 40px; font-family: 'Arial'; font-size: 15px; line-height: 1.5em; color: black; background: white}
 
   /* page sizes */
-  nav {display: block; max-width: 800px; margin: 0 auto; background: %%_bg_color}
-  nav:after {content: ''; clear: both; display: block}
-  h1 {max-width: 800px; margin: 50px auto}
-  messages {display: block; max-width: 800px; margin: 50px auto}
-  header {display: block; max-width: 800px; margin: 0 auto}
-  content {display: block; max-width: 800px; margin: 0 auto; min-height: 200px}
-  footer {display: block; max-width: 800px; margin: 0 auto}
+  nav       {display: block; max-width: 800px; margin: 0 auto; background: %%_bg_color}
+  h1        {display: block; max-width: 800px}
+  messages  {display: block; max-width: 800px; margin: 50px auto}
+  header    {display: block; max-width: 800px; margin: 0 auto}
+  content   {display: block; max-width: 800px; margin: 0 auto; min-height: 200px}
+  footer    {display: block; max-width: 800px; margin: 0 auto}
   copyright {display: block; max-width: 800px; margin: 0 auto; padding: 20px; font-size: .8em; color: white; text-align: right; background: %%_hover_bg_color}
+
+  nav:after {content: ''; clear: both; display: block}
 
   /* headers */
   h1 {margin: 4em auto 3em auto; font-size: 2em; font-weight: normal}
@@ -26,8 +27,10 @@
   body .hidden {display: none}
 
   /* messages */
-  messages ul {margin: 10px 0; padding: 15px 20px; font-size: 16px; border: 3px solid %%_ok_color; background: %%_ok_bg_color}
-  messages ul.error {border-color: %%_error_color; background-color: %%_error_bg_color}
+  messages ul {margin: 10px 0; padding: 15px 20px; font-size: 16px; border: 3px solid black}
+  messages ul.notice  {border-color: %%_ok_color;      background-color: %%_ok_bg_color}
+  messages ul.error   {border-color: %%_error_color;   background-color: %%_error_bg_color}
+  messages ul.warning {border-color: %%_warning_color; background-color: %%_warning_bg_color}
   messages ul li {margin: 0 0 0 15px; padding: 0}
   messages ul li:only-child {margin: 0; list-style: none}
 

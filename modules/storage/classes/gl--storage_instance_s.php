@@ -34,6 +34,9 @@ namespace effectivecore {
     else         return static::$data;
   }
 
+  function get_diff($a, $b) {
+  }
+
   static function load_all_and_parse() {
     $return = [];
     $files = files::get_all(dir_modules, '%^.*\._s$%') +

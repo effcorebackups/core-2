@@ -23,19 +23,27 @@ tokens
     match: %%_hover_bg_color
     type: text
     value: #28334a
-- error_color
-    match: %%_error_color
-    type: text
-    value: #e42013
-- error_bg_color
-    match: %%_error_bg_color
-    type: text
-    value: #fff5ee
 - ok_color
     match: %%_ok_color
     type: text
-    value: #66c048
+    value: LimeGreen
 - ok_bg_color
     match: %%_ok_bg_color
     type: text
-    value: #f4ffee
+    value: HoneyDew
+- error_color
+    match: %%_error_color
+    type: text
+    value: Crimson
+- error_bg_color
+    match: %%_error_bg_color
+    type: text
+    value: MistyRose
+- warning_color
+    match: %%_warning_color
+    type: text
+    value: Gold
+- warning_bg_color
+    match: %%_warning_bg_color
+    type: text
+    value: Cornsilk

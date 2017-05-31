@@ -24,9 +24,8 @@ namespace effectivecore {
         ]))->render();
       }
       return (new template('tree_item', [
-        'attributes' => factory::data_to_attr($this->attributes, ' '),
-        'self'       => $this->render_self(),
-        'children'   => $rendered_children
+        'self'     => $this->render_self(),
+        'children' => $rendered_children
       ]))->render();
     }
   }
