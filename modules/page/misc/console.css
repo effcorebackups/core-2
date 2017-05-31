@@ -6,10 +6,10 @@
   console table.logs thead th {padding: 12px 10px 12px 17px; font-weight: normal; font-size: 1.2em; text-align: left}
   console table.logs td {padding: 3px 5px 3px 17px; vertical-align: top}
 
-  console table.logs tr.load   {background-color: PapayaWhip}
-  console table.logs tr.insert {background-color: OldLace}
-  console table.logs tr.call   {background-color: Lavender}
-  console table.logs tr.query  {background-color: HoneyDew}
+  console table.logs tr.load   {background-color: oldlace}
+  console table.logs tr.insert {background-color: aliceblue}
+  console table.logs tr.call   {background-color: lavender}
+  console table.logs tr.query  {background-color: honeydew}
   console table.logs tr.query td.name {font-size: .9em}
 
   console dl.diagram-load {margin: 50px 0; padding: 30px; border: 1px solid %%_border_color; border-top: 5px solid black}
