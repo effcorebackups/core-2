@@ -26,24 +26,12 @@ tokens
 - ok_color
     match: %%_ok_color
     type: text
-    value: LimeGreen
-- ok_bg_color
-    match: %%_ok_bg_color
-    type: text
-    value: HoneyDew
+    value: limegreen
 - error_color
     match: %%_error_color
     type: text
-    value: Crimson
-- error_bg_color
-    match: %%_error_bg_color
-    type: text
-    value: MistyRose
+    value: tomato
 - warning_color
     match: %%_warning_color
     type: text
-    value: Gold
-- warning_bg_color
-    match: %%_warning_bg_color
-    type: text
-    value: Cornsilk
+    value: orange

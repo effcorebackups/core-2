@@ -14,7 +14,7 @@
   nav:after {content: ''; clear: both; display: block}
 
   /* headers */
-  h1 {margin: 4em auto 3em auto; font-size: 2em; font-weight: normal}
+  h1 {margin: 4em auto 3em auto; font-size: 2em;   font-weight: normal}
   h2 {margin: 3em auto 2em auto; font-size: 1.5em; font-weight: normal}
   h3 {margin: 2em auto 1em auto; font-size: 1em}
 
@@ -27,10 +27,10 @@
   body .hidden {display: none}
 
   /* messages */
-  messages ul {margin: 10px 0; padding: 15px 20px; font-size: 16px; border: 3px solid black}
-  messages ul.notice  {border-color: %%_ok_color;      background-color: %%_ok_bg_color}
-  messages ul.error   {border-color: %%_error_color;   background-color: %%_error_bg_color}
-  messages ul.warning {border-color: %%_warning_color; background-color: %%_warning_bg_color}
+  messages ul {margin: 10px 0; padding: 15px 20px; font-size: 16px; background-color: gray; color: white}
+  messages ul.notice  {background-color: %%_ok_color}
+  messages ul.error   {background-color: %%_error_color}
+  messages ul.warning {background-color: %%_warning_color}
   messages ul li {margin: 0 0 0 15px; padding: 0}
   messages ul li:only-child {margin: 0; list-style: none}
 
