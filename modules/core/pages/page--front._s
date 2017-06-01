@@ -13,6 +13,6 @@ pages
         type: link
         link: trees/user/user
     - block_wellcome
-        region: c_1_1
+        region: content_1_1
         type: text
         content: Wellcome to our site!

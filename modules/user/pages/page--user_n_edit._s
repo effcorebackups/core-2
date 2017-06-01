@@ -19,10 +19,10 @@ pages
         type: link
         link: trees/user/user
     - code_on_page_user_n_edit
-        region: c_1_1
+        region: content_1_1
         type: code
         handler: \effectivecore\modules\user\events_page::on_show_user_n_edit
     - form_user_n_edit
-        region: c_1_1
+        region: content_1_1
         type: link
         link: forms/user/form_user_n_edit

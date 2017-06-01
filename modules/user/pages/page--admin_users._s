@@ -18,6 +18,6 @@ pages
         type: link
         link: trees/user/user
     - block_users
-        region: c_1_1
+        region: content_1_1
         type: code
         handler: \effectivecore\modules\user\events_page::on_show_admin_users

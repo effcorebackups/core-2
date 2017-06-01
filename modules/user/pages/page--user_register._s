@@ -16,6 +16,6 @@ pages
         type: link
         link: trees/user/user
     - form_user_registration
-        region: c_1_1
+        region: content_1_1
         type: link
         link: forms/user/form_user_registration
