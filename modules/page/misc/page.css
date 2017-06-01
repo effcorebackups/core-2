@@ -6,8 +6,8 @@
   nav          {display: block; max-width: 800px; margin: 0 auto; background: %%_bg_color}
   h1           {display: block; max-width: 800px}
   main         {display: block; max-width: 800px; margin: 0 auto; min-height: 200px}
-  messages-el  {display: block; max-width: 800px; margin: 50px auto}
-  copyright-el {display: block; max-width: 800px; margin: 0 auto; padding: 20px; font-size: .8em; color: white; text-align: right; background: %%_hover_bg_color}
+  x-messages   {display: block; max-width: 800px; margin: 50px auto}
+  x-copyright  {display: block; max-width: 800px; margin: 0 auto; padding: 20px; font-size: .8em; color: white; text-align: right; background: %%_hover_bg_color}
 
   nav:after {content: ''; clear: both; display: block}
 
@@ -25,12 +25,12 @@
   .hidden {display: none}
 
   /* messages */
-  messages-el ul {margin: 10px 0; padding: 15px 20px; font-size: 16px; background-color: gray; color: white}
-  messages-el ul.notice  {background-color: %%_ok_color}
-  messages-el ul.error   {background-color: %%_error_color}
-  messages-el ul.warning {background-color: %%_warning_color}
-  messages-el ul li {margin: 0 0 0 15px; padding: 0}
-  messages-el ul li:only-child {margin: 0; list-style: none}
+  x-messages ul {margin: 10px 0; padding: 15px 20px; font-size: 16px; background-color: gray; color: white}
+  x-messages ul.notice  {background-color: %%_ok_color}
+  x-messages ul.error   {background-color: %%_error_color}
+  x-messages ul.warning {background-color: %%_warning_color}
+  x-messages ul li {margin: 0 0 0 15px; padding: 0}
+  x-messages ul li:only-child {margin: 0; list-style: none}
 
   /* table */
   main table {border-collapse: collapse; width: 100%; margin: 20px 0}

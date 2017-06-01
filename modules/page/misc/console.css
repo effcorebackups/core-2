@@ -1,22 +1,22 @@
 
   /* console */
-  console-el {display: block; max-width: 800px; margin: 100px auto 100px auto}
-  console-el table.logs {border-collapse: collapse; width: 100%; margin: 20px 0}
-  console-el table.logs thead {border-bottom: 5px solid black}
-  console-el table.logs thead th {padding: 12px 10px 12px 17px; font-weight: normal; font-size: 1.2em; text-align: left}
-  console-el table.logs td {padding: 3px 5px 3px 17px; vertical-align: top}
+  x-console {display: block; max-width: 800px; margin: 100px auto 100px auto}
+  x-console table.logs {border-collapse: collapse; width: 100%; margin: 20px 0}
+  x-console table.logs thead {border-bottom: 5px solid black}
+  x-console table.logs thead th {padding: 12px 10px 12px 17px; font-weight: normal; font-size: 1.2em; text-align: left}
+  x-console table.logs td {padding: 3px 5px 3px 17px; vertical-align: top}
 
-  console-el table.logs tr.load   {background-color: oldlace}
-  console-el table.logs tr.insert {background-color: aliceblue}
-  console-el table.logs tr.call   {background-color: lavender}
-  console-el table.logs tr.query  {background-color: honeydew}
-  console-el table.logs tr.query td.name {font-size: .9em}
+  x-console table.logs tr.load   {background-color: oldlace}
+  x-console table.logs tr.insert {background-color: aliceblue}
+  x-console table.logs tr.call   {background-color: lavender}
+  x-console table.logs tr.query  {background-color: honeydew}
+  x-console table.logs tr.query td.name {font-size: .9em}
 
-  console-el dl.diagram-load {margin: 50px 0; padding: 30px; border: 1px solid %%_border_color; border-top: 5px solid black}
-  console-el dl.diagram-load dt {margin: 0 10px 0 0; padding: 0; float: left; min-width: 290px; font-size: 1.2em; line-height: 1.2em; text-align: right}
-  console-el dl.diagram-load dd {margin: 0 0 0 300px; padding: 0; font-size: .9em}
-  console-el dl.diagram-load .scale {height: 5px; background: %%_bg_color}
+  x-console dl.diagram-load {margin: 50px 0; padding: 30px; border: 1px solid %%_border_color; border-top: 5px solid black}
+  x-console dl.diagram-load dt {margin: 0 10px 0 0; padding: 0; float: left; min-width: 290px; font-size: 1.2em; line-height: 1.2em; text-align: right}
+  x-console dl.diagram-load dd {margin: 0 0 0 300px; padding: 0; font-size: .9em}
+  x-console dl.diagram-load .scale {height: 5px; background: %%_bg_color}
 
-  console-el dl.information {margin: 50px 0; padding: 5px 0; border: 1px solid %%_border_color; border-top: 5px solid black}
-  console-el dl.information dt {margin: 0 10px 0 0; padding: 3px 3px 3px 14px; float: left; min-width: 200px}
-  console-el dl.information dd {margin: 0 0 0 210px; padding: 3px}
+  x-console dl.information {margin: 50px 0; padding: 5px 0; border: 1px solid %%_border_color; border-top: 5px solid black}
+  x-console dl.information dt {margin: 0 10px 0 0; padding: 3px 3px 3px 14px; float: left; min-width: 200px}
+  x-console dl.information dd {margin: 0 0 0 210px; padding: 3px}
