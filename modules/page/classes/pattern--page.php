@@ -36,26 +36,29 @@ namespace effectivecore {
         if (isset($c_misc->url->match) && preg_match($c_misc->url->match, urls::get_current()->path)) {
 
         # set meta
-          $template->set_var('meta',
-            (new markup('link', [
-              'rel'  => 'icon',
-              'type' => 'image/png',
-              'href' => '/favicon.png'
-            ]))->render()
-          );
+          if (isset($c_misc->favicon)) {
+            $c_url = new url('/modules/'.$module_id.'/'.$c_misc->favicon->file);
+            $template->set_var('meta',
+              (new markup('link', [
+                'rel'  => 'icon',
+                'type' => 'image/png',
+                'href' => $c_url->get_full()
+              ]))->render()
+            );
+          }
 
         # collect styles
           if (isset($c_misc->styles)) {
             foreach ($c_misc->styles as $c_style) {
               $c_url = new url('/modules/'.$module_id.'/'.$c_style->file);
-              $rendered_styles.= (new markup('link', [
+              $rendered_styles[] = (new markup('link', [
                 'rel'   => 'stylesheet',
                 'media' => $c_style->media,
                 'href'  => $c_url->get_full()
               ]))->render();
             }
             $template->set_var('styles',
-              $rendered_styles
+              implode(nl, $rendered_styles)
             );
           }
 
@@ -63,11 +66,11 @@ namespace effectivecore {
           if (isset($c_misc->script)) {
             foreach ($c_misc->script as $c_script) {
               $c_url = new url('/modules/'.$module_id.'/'.$c_script->file);
-              $rendered_script.= (new markup('script', [
+              $rendered_script[] = (new markup('script', [
                 'src' => $c_url->get_full()
               ], ' '))->render();
               $template->set_var('script',
-                $rendered_script
+                implode(nl, $rendered_script)
               );
             }
           }
