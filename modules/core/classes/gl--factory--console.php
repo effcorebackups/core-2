@@ -23,7 +23,7 @@ namespace effectivecore {
   static function get_all_information() {return static::$information;}
 
   static function render() {
-    return (new markup('console', [], [
+    return (new markup('console-el', [], [
       new markup('h2', [], 'Execute plan'), static::render_logs(),
       new markup('h2', [], 'Total load'),   static::render_diagram_load(),
       new markup('h2', [], 'Information'),  static::render_information()
@@ -65,7 +65,7 @@ namespace effectivecore {
         new markup('div', [
           'class' => 'scale scale-'.factory::to_css_class($c_param),
           'style' => 'width:'.(int)($c_value / $total * 100).'%'
-        ], '')
+        ], ' ')
       ]));
     }
     return $diagram->render();

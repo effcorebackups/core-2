@@ -1,7 +1,7 @@
 
   /* forms */
   form {margin: 70px 0}
-  form .error {background-color: %%_error_color; color: white}
+  form .error {border-color: %%_error_color}
   form input, form button {outline: none; margin: 0 5px 10px 0; padding: 10px; border: 3px solid %%_bg_color; font-family: 'Arial'; font-size: 16px}
   form button {padding-left: 30px; padding-right: 30px; min-width: 150px; cursor: pointer; color: white; background: %%_bg_color}
   form button:hover {border-color: %%_hover_bg_color; background: %%_hover_bg_color}

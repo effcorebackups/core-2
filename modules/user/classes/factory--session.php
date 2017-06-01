@@ -7,7 +7,7 @@ namespace effectivecore\modules\user {
           abstract class session_factory {
 
   static function init($user_id = 0) {
- /* renew session for user with selected id */
+  # renew session for user with selected id
     if ($user_id != 0) {
       session_start();
       (new entity_instance('entities/user/session', [
@@ -16,7 +16,7 @@ namespace effectivecore\modules\user {
         'created' => date(format_datetime, time())
       ]))->insert();
     }
- /* restore session for authenticated user */
+  # restore session for authenticated user
     if ($user_id == 0 && isset($_COOKIE[session_name()])) {
       $session = (new entity_instance('entities/user/session', [
         'id' => $_COOKIE[session_name()]
@@ -29,7 +29,7 @@ namespace effectivecore\modules\user {
         setcookie(session_name(), '', 0, '/');
       }
     }
- /* init user */
+  # init user
     users::init($user_id);
   }
 

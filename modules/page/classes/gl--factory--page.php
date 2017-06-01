@@ -12,7 +12,7 @@ namespace effectivecore\modules\page {
   static $args = [];
 
   static function find_and_render() {
-    # render page
+  # render page
     foreach (storages::get('settings')->select('pages') as $c_pages) {
       foreach ($c_pages as $c_page) {
         if (   isset($c_page->url->match) &&
@@ -28,7 +28,7 @@ namespace effectivecore\modules\page {
         }
       }
     }
-    # no matches case
+  # no matches case
     factory::send_header_and_exit('not_found',
       'Page not found!'
     );

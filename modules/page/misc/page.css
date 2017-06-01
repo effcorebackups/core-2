@@ -3,11 +3,11 @@
   body {margin: 0; padding: 0 40px; font-family: 'Arial'; font-size: 15px; line-height: 1.5em; color: black; background: white}
 
   /* page sizes */
-  nav       {display: block; max-width: 800px; margin: 0 auto; background: %%_bg_color}
-  h1        {display: block; max-width: 800px}
-  messages  {display: block; max-width: 800px; margin: 50px auto}
-  content   {display: block; max-width: 800px; margin: 0 auto; min-height: 200px}
-  copyright {display: block; max-width: 800px; margin: 0 auto; padding: 20px; font-size: .8em; color: white; text-align: right; background: %%_hover_bg_color}
+  nav          {display: block; max-width: 800px; margin: 0 auto; background: %%_bg_color}
+  h1           {display: block; max-width: 800px}
+  main         {display: block; max-width: 800px; margin: 0 auto; min-height: 200px}
+  messages-el  {display: block; max-width: 800px; margin: 50px auto}
+  copyright-el {display: block; max-width: 800px; margin: 0 auto; padding: 20px; font-size: .8em; color: white; text-align: right; background: %%_hover_bg_color}
 
   nav:after {content: ''; clear: both; display: block}
 
@@ -17,28 +17,28 @@
   h3 {margin: 2em auto 1em auto; font-size: 1em}
 
   /* links */
-  a {color: %%_bg_color}
-  a:hover {color: black}
+  a        {color: %%_bg_color}
+  a:hover  {color: black}
   a.active {color: black}
 
   /* universal classes */
-  body .hidden {display: none}
+  .hidden {display: none}
 
   /* messages */
-  messages ul {margin: 10px 0; padding: 15px 20px; font-size: 16px; background-color: gray; color: white}
-  messages ul.notice  {background-color: %%_ok_color}
-  messages ul.error   {background-color: %%_error_color}
-  messages ul.warning {background-color: %%_warning_color}
-  messages ul li {margin: 0 0 0 15px; padding: 0}
-  messages ul li:only-child {margin: 0; list-style: none}
+  messages-el ul {margin: 10px 0; padding: 15px 20px; font-size: 16px; background-color: gray; color: white}
+  messages-el ul.notice  {background-color: %%_ok_color}
+  messages-el ul.error   {background-color: %%_error_color}
+  messages-el ul.warning {background-color: %%_warning_color}
+  messages-el ul li {margin: 0 0 0 15px; padding: 0}
+  messages-el ul li:only-child {margin: 0; list-style: none}
 
   /* table */
-  content table {border-collapse: collapse; width: 100%; margin: 20px 0}
-  content table thead {border-bottom: 5px solid %%_bg_color}
-  content table thead th {padding: 12px 15px; font-weight: normal; font-size: 1.2em; text-align: left}
-  content table td {padding: 12px 15px; border: 1px solid %%_border_color; background-color: %%_table_bg_color}
-  content table td.no-items {color: %%_table_noitems_color}
-  content table tr:nth-child(odd) td {background-color: white}
+  main table {border-collapse: collapse; width: 100%; margin: 20px 0}
+  main table thead {border-bottom: 5px solid %%_bg_color}
+  main table thead th {padding: 12px 15px; font-weight: normal; font-size: 1.2em; text-align: left}
+  main table td {padding: 12px 15px; border: 1px solid %%_border_color; background-color: %%_table_bg_color}
+  main table td.no-items {color: %%_table_noitems_color}
+  main table tr:nth-child(odd) td {background-color: white}
 
   /* actions */
   ul.actions,

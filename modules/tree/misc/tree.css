@@ -1,29 +1,29 @@
 
   /* tree sizes and orientation */
-  nav tree {margin: 0; padding: 0}
-  nav tree > ul {margin: 0; padding: 0; list-style: none}
-  nav tree > ul > li {float: left; cursor: default; margin: 0; padding: 0; list-style: none}
-  nav tree > ul > li > a {display: block; padding: 20px}
-  nav tree > ul > li > ul {position: absolute; padding: 20px}
-  nav tree > ul > li > ul > li {list-style: none}
-  nav tree.user > ul > li {float: right}
+  nav tree-el {margin: 0; padding: 0}
+  nav tree-el > ul {margin: 0; padding: 0; list-style: none}
+  nav tree-el > ul > li {float: left; cursor: default; margin: 0; padding: 0; list-style: none}
+  nav tree-el > ul > li > a {display: block; padding: 20px}
+  nav tree-el > ul > li > ul {position: absolute; padding: 20px}
+  nav tree-el > ul > li > ul > li {list-style: none}
+  nav tree-el.user > ul > li {float: right}
 
   /* tree colors */
-  nav tree > ul > li:hover {background: %%_hover_bg_color}
-  nav tree > ul > li > a {color: white}
-  nav tree > ul > li > a.active,
-  nav tree > ul > li > a[href]:hover {color: %%_hover_color}
-  nav tree > ul > li > a:hover {color: white}
-  nav tree > ul > li > ul a {color: white}
-  nav tree > ul > li > ul a.active,
-  nav tree > ul > li > ul a:hover {color: %%_hover_color}
-  nav tree > ul > li > ul {background: %%_hover_bg_color}
+  nav tree-el > ul > li:hover {background: %%_hover_bg_color}
+  nav tree-el > ul > li > a {color: white}
+  nav tree-el > ul > li > a.active,
+  nav tree-el > ul > li > a[href]:hover {color: %%_hover_color}
+  nav tree-el > ul > li > a:hover {color: white}
+  nav tree-el > ul > li > ul a {color: white}
+  nav tree-el > ul > li > ul a.active,
+  nav tree-el > ul > li > ul a:hover {color: %%_hover_color}
+  nav tree-el > ul > li > ul {background: %%_hover_bg_color}
 
   /* tree dynamic */
-  nav tree > ul > li > ul {display: none}
-  nav tree > ul > li:hover > ul {display: block}
+  nav tree-el > ul > li > ul {display: none}
+  nav tree-el > ul > li:hover > ul {display: block}
 
   /* icons */
-  nav tree.main a.logo  {padding-left: 52px; background: url('tree-icons.svg') no-repeat}
-  nav tree.main a.admin {padding-left: 52px; background: url('tree-icons.svg') no-repeat 0 -62px}
-  nav tree.user a.user  {padding-left: 52px; background: url('tree-icons.svg') no-repeat 0 -124px}
+  nav tree-el.main a.logo  {padding-left: 52px; background: url('tree-icons.svg') no-repeat}
+  nav tree-el.main a.admin {padding-left: 52px; background: url('tree-icons.svg') no-repeat 0 -62px}
+  nav tree-el.user a.user  {padding-left: 52px; background: url('tree-icons.svg') no-repeat 0 -124px}

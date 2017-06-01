@@ -7,9 +7,10 @@ namespace effectivecore {
 
   public $form_args = [];
   public $post_args = [];
-  public $on_submit = null;
-  public $on_validate = null;
   public $errors = [];
+  public $on_init = null;
+  public $on_validate = null;
+  public $on_submit = null;
 
   function __construct($attributes = null, $children = null, $weight = 0) {
     parent::__construct('form', $attributes, $children, $weight);
@@ -21,6 +22,10 @@ namespace effectivecore {
   }
 
   function build() {
+  # call init handler
+    if (isset($this->on_init->handler)) {
+      call_user_func($this->on_init->handler, $this);
+    }
   # set and validate new values after submit
     if (isset($_POST['form_id']) &&
               $_POST['form_id'] == $this->attributes->id) {
@@ -100,8 +105,8 @@ namespace effectivecore {
     }
   # add form id to form markup
     $this->children['hidden_form_id'] = new markup('input', [
-      'type' => 'hidden',
-      'name' => 'form_id',
+      'type'  => 'hidden',
+      'name'  => 'form_id',
       'value' => $this->attributes->id,
     ]);
   }

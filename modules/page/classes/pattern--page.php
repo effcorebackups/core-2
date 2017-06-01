@@ -27,7 +27,7 @@ namespace effectivecore {
       tokens::replace(translations::get($this->title))
     );
 
-    # collect misc
+  # collect misc
     $rendered_styles = '';
     $rendered_script = '';
     $miscs = storages::get('settings')->select('misc');
@@ -35,7 +35,16 @@ namespace effectivecore {
       foreach ($c_misc_group as $c_misc) {
         if (isset($c_misc->url->match) && preg_match($c_misc->url->match, urls::get_current()->path)) {
 
-          # collect styles
+        # set meta
+          $template->set_var('meta',
+            (new markup('link', [
+              'rel'  => 'icon',
+              'type' => 'image/png',
+              'href' => '/favicon.png'
+            ]))->render()
+          );
+
+        # collect styles
           if (isset($c_misc->styles)) {
             foreach ($c_misc->styles as $c_style) {
               $c_url = new url('/modules/'.$module_id.'/'.$c_style->file);
@@ -50,7 +59,7 @@ namespace effectivecore {
             );
           }
 
-          # collect script
+        # collect script
           if (isset($c_misc->script)) {
             foreach ($c_misc->script as $c_script) {
               $c_url = new url('/modules/'.$module_id.'/'.$c_script->file);
@@ -67,14 +76,14 @@ namespace effectivecore {
       }
     }
 
-    # collect page arguments
+  # collect page arguments
     if (isset($this->url->args)) {
       foreach ($this->url->args as $c_name => $c_num) {
         pages::$args[$c_name] = urls::get_current()->get_args($c_num);
       }
     }
 
-    # collect page content
+  # collect page content
     $contents = [];
     foreach ($this->content as $c_content) {
       $c_region = isset($c_content->region) ? $c_content->region : 'c_1_1';
@@ -86,7 +95,7 @@ namespace effectivecore {
       }
     }
 
-    # render each block
+  # render each block
     foreach ($contents as $c_region_name => $c_blocks) {
       $rendered_c_region = '';
       foreach ($c_blocks as $c_block) {

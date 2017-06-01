@@ -11,7 +11,7 @@ namespace effectivecore\modules\user {
     static::$data = new \StdClass();
     static::$data->id = 0;
     static::$data->roles = ['anonymous' => 'anonymous'];
- /* load user from db */
+  # load user from db
     if ($id) {
       $user = (new entity_instance('entities/user/user', ['id' => $id]))->select();
       if ($user) {
