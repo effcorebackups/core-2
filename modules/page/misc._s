@@ -2,8 +2,10 @@ misc
 - misc_page_n
     url
       match: %.*%
-    favicon
-      file: misc/favicon.png
+    favicons
+    - favicon_classic
+        file: misc/favicon.png
+        sizes: 32x32
     styles
     - style_page
         file: misc/page.css

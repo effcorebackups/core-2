@@ -36,14 +36,18 @@ namespace effectivecore {
         if (isset($c_misc->url->match) && preg_match($c_misc->url->match, urls::get_current()->path)) {
 
         # set meta
-          if (isset($c_misc->favicon)) {
-            $c_url = new url('/modules/'.$module_id.'/'.$c_misc->favicon->file);
+          if (isset($c_misc->favicons)) {
+            foreach ($c_misc->favicons as $c_icon) {
+              $c_url = new url('/modules/'.$module_id.'/'.$c_icon->file);
+              $rendered_icons[] = (new markup('link', [
+                'rel'   => 'icon',
+                'type'  => 'image/png',
+                'sizes' => $c_icon->sizes,
+                'href'  => $c_url->get_full()
+              ]))->render();
+            }
             $template->set_var('meta',
-              (new markup('link', [
-                'rel'  => 'icon',
-                'type' => 'image/png',
-                'href' => $c_url->get_full()
-              ]))->render()
+              implode(nl, $rendered_icons)
             );
           }
 
