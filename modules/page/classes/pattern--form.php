@@ -27,8 +27,18 @@ namespace effectivecore {
     if (isset($_POST['form_id']) &&
               $_POST['form_id'] === $this->attributes->id && isset($_POST['button'])) {
       $elements = factory::collect_children($this->children);
+      $c_button = null;
+    # get more info about clicked button
+      foreach ($elements as $c_element) {
+        if (isset($c_element->attributes->type) &&
+                  $c_element->attributes->type == 'submit' &&
+                  $c_element->attributes->value == $_POST['button']) {
+          $c_button = $c_element;
+          break;
+        }
+      }
     # call validate handlers
-      if ($_POST['button'] != 'cancel') {
+      if (empty($c_button->novalidate)) {
         if (is_array($this->on_validate)) {
           foreach (factory::array_sort_by_weight($this->on_validate) as $c_validate) {
             call_user_func($c_validate->handler, $this, $elements);

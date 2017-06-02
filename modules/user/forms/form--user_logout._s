@@ -2,6 +2,7 @@ forms
 - form_user_logout|form
     attributes
       id: user_logout
+      novalidate: novalidate
       method: post
       class: form-user
     on_validate
@@ -15,6 +16,7 @@ forms
     children
     - button_cancel|markup
         type: button
+        novalidate: true
         attributes
           type: submit
           name: button

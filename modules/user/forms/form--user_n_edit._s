@@ -2,7 +2,7 @@ forms
 - form_user_n_edit|form
     attributes
       id: user_n_edit
-      novalidate: 1
+      novalidate: novalidate
       method: post
       class: form-user
     on_validate
@@ -27,6 +27,7 @@ forms
           maxlength: 255
     - button_cancel|markup
         type: button
+        novalidate: true
         attributes
           type: submit
           name: button

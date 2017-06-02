@@ -2,7 +2,7 @@ forms
 - form_user_registration|form
     attributes
       id: user_registration
-      novalidate: 1
+      novalidate: novalidate
       method: post
       class: form-user
     on_validate
