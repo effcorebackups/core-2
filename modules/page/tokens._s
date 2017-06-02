@@ -35,3 +35,7 @@ tokens
     match: %%_warning_color
     type: text
     value: orange
+- delete_button_color
+    match: %%_delete_button_color
+    type: text
+    value: tomato

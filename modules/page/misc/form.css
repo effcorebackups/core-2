@@ -4,9 +4,12 @@
   form .error {border-color: %%_error_color}
   form input, form button {outline: none; margin: 0 5px 10px 0; padding: 10px; border: 3px solid %%_bg_color; font-family: 'Arial'; font-size: 16px}
   form button {padding-left: 30px; padding-right: 30px; min-width: 150px; cursor: pointer; color: white; background: %%_bg_color}
-  form button:hover {border-color: %%_hover_bg_color; background: %%_hover_bg_color}
+  form button:hover {border-color: %%_hover_bg_color; background-color: %%_hover_bg_color}
 
   form.form-user input,
   form.form-user button {display: block; margin-left: auto; margin-right: auto}
   form.form-user input {width: 200px}
   form.form-user button {width: 226px}
+
+  form button[value="delete"] {border-color: %%_delete_button_color; background-color: %%_delete_button_color}
+  form button[value="delete"]:hover {border-color: %%_hover_bg_color; background-color: %%_hover_bg_color}
