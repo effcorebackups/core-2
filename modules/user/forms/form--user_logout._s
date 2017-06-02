@@ -4,9 +4,24 @@ forms
       id: user_logout
       method: post
       class: form-user
+    on_validate
+    - on_validate_default
+        handler: \effectivecore\events_form::on_validate
+        weight: 0
     on_submit
-      handler: \effectivecore\modules\user\events_form::on_submit_user_logout
+    - on_submit_default
+        handler: \effectivecore\modules\user\events_form::on_submit_user_logout
+        weight: 0
     children
+    - button_cancel|markup
+        type: button
+        attributes
+          type: submit
+          name: button
+          value: cancel
+        children
+        - label|text
+            text: cancel
     - button_logout|markup
         type: button
         attributes

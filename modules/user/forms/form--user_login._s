@@ -5,11 +5,18 @@ forms
       novalidate: 1
       method: post
       class: form-user
+    on_validate
+    - on_validate_default
+        handler: \effectivecore\events_form::on_validate
+        weight: 0
     on_submit
-      handler: \effectivecore\modules\user\events_form::on_submit_user_login
+    - on_submit_default
+        handler: \effectivecore\modules\user\events_form::on_submit_user_login
+        weight: 0
     children
     - field_email|markup
         type: input
+        title: Email
         attributes
           type: email
           name: email
@@ -19,6 +26,7 @@ forms
           maxlength: 255
     - field_password|markup
         type: input
+        title: Password
         attributes
           type: password
           name: password

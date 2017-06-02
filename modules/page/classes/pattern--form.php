@@ -5,12 +5,10 @@ namespace effectivecore {
           use \effectivecore\modules\page\page_factory as pages;
           class form extends markup {
 
-  public $form_args = [];
-  public $post_args = [];
-  public $errors = [];
-  public $on_init = null;
+  public $on_init     = null;
   public $on_validate = null;
-  public $on_submit = null;
+  public $on_submit   = null;
+  public $errors = [];
 
   function __construct($attributes = null, $children = null, $weight = 0) {
     parent::__construct('form', $attributes, $children, $weight);
@@ -21,89 +19,41 @@ namespace effectivecore {
     return parent::render();
   }
 
+  function add_error($element_id, $data) {
+    $this->errors[$element_id][] = $data;
+  }
+
   function build() {
-  # call init handler
-    if (isset($this->on_init->handler)) {
-      call_user_func($this->on_init->handler, $this);
-    }
-  # set and validate new values after submit
     if (isset($_POST['form_id']) &&
-              $_POST['form_id'] == $this->attributes->id) {
-    # get all form elements as flat array
-      $children = factory::collect_children($this->children);
-    # check each form field
-      foreach ($children as $element_id => $c_element) {
-        $c_name = isset($c_element->attributes->name) ? $c_element->attributes->name : '';
-        $c_type = isset($c_element->attributes->type) ? $c_element->attributes->type : '';
-        $c_form_value = isset($c_element->attributes->value) ? $c_element->attributes->value : '';
-        $c_post_value = isset($_POST[$c_name]) ? $_POST[$c_name] : ''; # @todo: check security risks
-      # define form_args and post_args
-        if ($c_name) {
-          $this->form_args[$c_name] = $c_form_value;
-          $this->post_args[$c_name] = $c_post_value;
-        }
-      # check all post args
-        if ($c_name &&
-            $c_type != 'hidden' &&
-            $c_type != 'submit') {
-          $c_element->attributes->value = $c_post_value;
-        # check email field
-          switch ($c_type) {
-            case 'email':
-              if ($c_post_value && !filter_var($c_post_value, FILTER_VALIDATE_EMAIL)) {
-                $this->errors[$element_id][] = 'Field '.$c_name.' contains an invalid email address!';
-              }
-              break;
-          }
-        # check required fields
-          if (isset($c_element->attributes->required)) {
-            if ($c_post_value == '') {
-              $this->errors[$element_id][] = 'Field '.$c_name.' can not be blank!';
-            }
-          }
-        # check max length
-          if (isset($c_element->attributes->maxlength)) {
-            if ($c_post_value && strlen($c_post_value) > $c_element->attributes->maxlength) {
-              $this->errors[$element_id][] = 'Field '.$c_name.' contain too much symbols! Maximum '.$c_element->attributes->maxlength.' symbols.';
-            }
-          }
-        # check min length
-          if (isset($c_element->attributes->minlength)) {
-            if ($c_post_value && strlen($c_post_value) < $c_element->attributes->minlength) {
-              $this->errors[$element_id][] = 'Field '.$c_name.' contain too few symbols! Minimum '.$c_element->attributes->minlength.' symbols.';
-            }
+              $_POST['form_id'] === $this->attributes->id && isset($_POST['button'])) {
+      $elements = factory::collect_children($this->children);
+    # call validate handlers
+      if ($_POST['button'] != 'cancel') {
+        if (is_array($this->on_validate)) {
+          foreach (factory::array_sort_by_weight($this->on_validate) as $c_validate) {
+            call_user_func($c_validate->handler, $this, $elements);
           }
         }
       }
     # show errors and set error class
-      foreach ($this->errors as $element_id => $c_errors) {
-        if (!isset($children[$element_id]->attributes->class)) $children[$element_id]->attributes->class = '';
-        $children[$element_id]->attributes->class.= ' error';
+      foreach ($this->errors as $c_id => $c_errors) {
         foreach ($c_errors as $c_error) {
+          if (!isset($elements[$c_id]->attributes->class)) $elements[$c_id]->attributes->class = '';
+          $elements[$c_id]->attributes->class.= ' error';
           messages::add_new($c_error, 'error');
         }
       }
-    # call validate handler
-      if (isset($_POST['button']) &&
-          isset($this->on_validate->handler)) {
-        call_user_func(
-          $this->on_validate->handler, pages::$args,
-          $this->form_args,
-          $this->post_args
-        );
-      }
-    # call submit handler
-      if (isset($_POST['button']) &&
-          isset($this->on_submit->handler) &&
-          count($this->errors) == 0) {
-        call_user_func(
-          $this->on_submit->handler, pages::$args,
-          $this->form_args,
-          $this->post_args
-        );
+    # call submit handler (if no errors)
+      if (count($this->errors) == 0) {
+        if (is_array($this->on_submit)) {
+          foreach (factory::array_sort_by_weight($this->on_submit) as $c_submit) {
+            call_user_func($c_submit->handler, $this, $elements);
+          }
+        }
       }
     }
-  # add form id to form markup
+
+  # add form_id to the form markup
     $this->children['hidden_form_id'] = new markup('input', [
       'type'  => 'hidden',
       'name'  => 'form_id',
