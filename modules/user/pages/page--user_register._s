@@ -1,6 +1,7 @@
 pages
 - page_user_registration|page
     title: Registration
+    https: true
     url
       match: %^/user/registration$%
     access

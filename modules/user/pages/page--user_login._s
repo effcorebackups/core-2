@@ -1,6 +1,7 @@
 pages
 - page_user_login|page
     title: Login
+    https: true
     url
       match: %^/user/login$%
     access

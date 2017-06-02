@@ -65,15 +65,16 @@ namespace effectivecore {
     $this->anchor   = !empty($matches['anchor'])   ? $matches['anchor']   : '';
   }
 
+  function get_protocol()  {return $this->protocol;}
+  function get_domain()    {return $this->domain;}
+  function get_anchor()    {return $this->anchor;}
+  function get_extension() {return ltrim(strtolower(strrchr($this->path, '.')), '.');}
+
   function get_full() {
     return $this->protocol.'://'.$this->domain.
           ($this->path == '/' && !$this->query && !$this->anchor ? '' : $this->path).
           ($this->query  ? '?'.$this->query  : '').
           ($this->anchor ? '#'.$this->anchor : '');
-  }
-
-  function get_extension() {
-    return ltrim(strtolower(strrchr($this->path, '.')), '.');
   }
 
   function get_args($arg_id, $scope = 'path') {
