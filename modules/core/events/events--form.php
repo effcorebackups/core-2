@@ -1,7 +1,6 @@
 <?php
 
 namespace effectivecore {
-          use \effectivecore\message_factory as messages;
           abstract class events_form extends events {
 
   static function on_init($page_args, $form_args, $post_args) {}

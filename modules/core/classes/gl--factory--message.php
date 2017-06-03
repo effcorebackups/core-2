@@ -26,24 +26,24 @@ namespace effectivecore {
 
   static function add_new($message, $type = 'notice') {
     if (!static::$data) static::init();
-    static::$data[$type][] = new message($message, $type);
+    static::$data[$type][] = $message;
   }
 
   static function render() {
-    $rendered = [];
+    $groups = [];
     foreach (static::get_all() as $c_type => $c_messages) {
-      foreach ($c_messages as $c_message) $rendered[$c_type][] = $c_message->render();
-      $rendered[$c_type] = (new template('message_group', [
-        'class'    => $c_type,
-        'messages' => implode('', $rendered[$c_type]),
-      ]))->render();
+      $c_grpoup = new markup('ul', ['class' => $c_type]);
+      foreach ($c_messages as $c_message) {
+        $c_grpoup->add_child(
+          new markup('li', [], $c_message)
+        );
+      }
       static::del_grp($c_type);
+      $groups[] = $c_grpoup;
     }
-    if (count($rendered)) {
-      return (new template('messages', [
-        'message_groups' => implode('', $rendered),
-      ]))->render();
-    }
+    return count($groups) ? (
+      new markup('x-messages', [], $groups)
+    )->render() : '';
   }
 
 }}
