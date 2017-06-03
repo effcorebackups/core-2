@@ -21,6 +21,7 @@ namespace effectivecore {
   require_once('modules/core/classes/gl--factory.php');
   require_once('modules/core/classes/gl--factory--cache.php');
   require_once('modules/core/classes/gl--factory--file.php');
+  require_once('modules/core/classes/gl--factory--console.php');
   spl_autoload_register('\effectivecore\factory::autoload');
   use \effectivecore\url_factory as urls;
   use \effectivecore\token_factory as tokens;
