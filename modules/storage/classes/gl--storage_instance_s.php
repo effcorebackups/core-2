@@ -8,7 +8,7 @@ namespace effectivecore {
   static $data;
 
   static function init() {
-    $file = new file(dir_cache.'settings.php');
+    $file = new file(dir_cache.'cache--settings.php');
     if ($file->is_exist()) {
       $file->insert();
     } else {
@@ -22,7 +22,9 @@ namespace effectivecore {
         $file->save();
       } else {
         messages::add_new(
-          'Directory "cache" should be writable! System is working slowly at now.', 'error'
+          'Can not write "cache-settings.php" to the directory "dynamic"!'.br.
+          'Directory "dynamic" should be writable.'.br.
+          'System is working slowly at now.', 'warning'
         );
       }
     }

@@ -10,7 +10,7 @@ namespace effectivecore {
   const format_time     = 'H:i:s';
   const format_datetime = 'Y-m-d H:i:s';
   const dir_root        = __DIR__.'/';
-  const dir_cache       = __DIR__.'/dynamic/cache/';
+  const dir_cache       = __DIR__.'/dynamic/';
   const dir_modules     = __DIR__.'/modules/';
   const dir_settings    = __DIR__.'/settings/';
   const nl              = "\n";
@@ -22,6 +22,7 @@ namespace effectivecore {
   require_once('modules/core/classes/gl--factory--cache.php');
   require_once('modules/core/classes/gl--factory--file.php');
   require_once('modules/core/classes/gl--factory--console.php');
+  require_once('modules/core/classes/gl--factory--message.php');
   spl_autoload_register('\effectivecore\factory::autoload');
   use \effectivecore\url_factory as urls;
   use \effectivecore\token_factory as tokens;

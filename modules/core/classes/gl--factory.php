@@ -33,7 +33,7 @@ namespace effectivecore {
           $classes_map[$matches['namespace'].'\\'.$matches['classname']] = (object)[
             'namespace' => $matches['namespace'],
             'classname' => $matches['classname'],
-            'parent'    => isset($matches['parent']) ? [ltrim($matches['parent'], '\\') => ltrim($matches['parent'], '\\')] : [],
+            'parent'    => isset($matches['parent']) ? ltrim($matches['parent'], '\\') : '',
             'file'      => $c_file->get_path_relative()
           ];
         }
