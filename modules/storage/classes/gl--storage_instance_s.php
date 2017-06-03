@@ -8,12 +8,12 @@ namespace effectivecore {
   static $data;
 
   static function init() {
-    $file = new file(dir_cache.'cache--settings.php');
+    $file = new file(dir_dynamic.'cache--settings.php');
     if ($file->is_exist()) {
       $file->insert();
     } else {
       static::$data = static::load_all_and_parse();
-      if (is_writable(dir_cache)) {
+      if (is_writable(dir_dynamic)) {
         $file->set_data(
           "<?php \n\nnamespace effectivecore { # settings::\$data[type][scope]...\n\n  ".
             "use \\effectivecore\\storage_instance_s as settings;\n\n".
@@ -41,8 +41,7 @@ namespace effectivecore {
 
   static function load_all_and_parse() {
     $return = [];
-    $files = files::get_all(dir_modules, '%^.*\._s$%') +
-             files::get_all(dir_settings, '%^.*\._s$%');
+    $files = files::get_all(dir_modules, '%^.*\._s$%');
     $modules_path = [];
     foreach ($files as $c_file) {
       if ($c_file->get_file_full() == 'module._s') {
