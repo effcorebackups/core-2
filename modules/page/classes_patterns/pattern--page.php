@@ -27,8 +27,8 @@ namespace effectivecore {
       tokens::replace(translations::get($this->title))
     );
 
-  # check https
-    if (!empty($this->https) && urls::get_current()->get_protocol() != 'https') {
+  # check https (@todo: enable this message)
+    if (false && !empty($this->https) && urls::get_current()->get_protocol() != 'https') {
       messages::add_new('This page should be use HTTPS protocol!', 'warning');
     }
 
