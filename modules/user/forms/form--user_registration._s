@@ -15,7 +15,7 @@ forms
         weight: 0
     children
     - field_email|markup
-        type: input
+        tag_name: input
         title: Email
         attributes
           type: email
@@ -25,7 +25,7 @@ forms
           required: 1
           maxlength: 255
     - field_password|markup
-        type: input
+        tag_name: input
         title: Password
         attributes
           type: password
@@ -36,7 +36,7 @@ forms
           minlength: 5
           maxlength: 255
     - button_register|markup
-        type: button
+        tag_name: button
         attributes
           type: submit
           name: button

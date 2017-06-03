@@ -15,7 +15,7 @@ forms
         weight: 0
     children
     - field_password|markup
-        type: input
+        tag_name: input
         title: Password
         attributes
           type: password
@@ -26,7 +26,7 @@ forms
           minlength: 5
           maxlength: 255
     - button_cancel|markup
-        type: button
+        tag_name: button
         novalidate: true
         attributes
           type: submit
@@ -36,7 +36,7 @@ forms
         - label|text
             text: cancel
     - button_save|markup
-        type: button
+        tag_name: button
         attributes
           type: submit
           name: button

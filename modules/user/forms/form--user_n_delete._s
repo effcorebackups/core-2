@@ -15,7 +15,7 @@ forms
         weight: 0
     children
     - button_delete|markup
-        type: button
+        tag_name: button
         attributes
           type: submit
           name: button
@@ -24,7 +24,7 @@ forms
         - label|text
             text: delete
     - button_cancel|markup
-        type: button
+        tag_name: button
         novalidate: true
         attributes
           type: submit
