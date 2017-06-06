@@ -41,10 +41,11 @@ namespace effectivecore {
         if (isset($c_misc->url->match) && preg_match($c_misc->url->match, urls::get_current()->path)) {
 
         # set meta
+          $meta_items = [(new markup('meta', ['charset' => 'utf-8']))->render()];
           if (isset($c_misc->favicons)) {
             foreach ($c_misc->favicons as $c_icon) {
               $c_url = new url('/modules/'.$module_id.'/'.$c_icon->file);
-              $rendered_icons[] = (new markup('link', [
+              $meta_items[] = (new markup('link', [
                 'rel'   => 'icon',
                 'type'  => 'image/png',
                 'sizes' => $c_icon->sizes,
@@ -52,7 +53,7 @@ namespace effectivecore {
               ]))->render();
             }
             $template->set_var('meta',
-              implode(nl, $rendered_icons)
+              implode(nl, $meta_items)
             );
           }
 
