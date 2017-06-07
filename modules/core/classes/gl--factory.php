@@ -168,27 +168,17 @@ namespace effectivecore {
   static $npath_cache;
 
   static function npath_get_object($npath, $data) {
-    if (isset(static::$npath_cache[$npath]))
-       return static::$npath_cache[$npath];
-    $path_parts = explode('/', $npath);
-    $p = null;
-    foreach ($path_parts as $c_part) {
-      if ($p == null) { if (isset($data[$c_part])) {$p = $data[$c_part]; continue;} else {$p = null; break;} } # iteration 1
-      if ($p != null) { if (isset(   $p[$c_part])) {$p =    $p[$c_part]; continue;} else {$p = null; break;} } # iteration 2, 3, 4 ...
-    }
-    static::$npath_cache[$npath] = $p;
-    return $p;
+    return static::npath_get_pointer($npath, $data);
   }
 
-  static function npath_collect_objects($npath, $data) {
-    $result = [];
-    foreach ($data as $c_key => $c_item) {
-      $c_result = static::npath_get_object($npath, [$c_key => $c_item]);
-      if ($c_result) {
-        $result[] = $c_result;
-      }
+  static function &npath_get_pointer($npath, &$p) {
+    if (isset(static::$npath_cache[$npath]))
+       return static::$npath_cache[$npath];
+    foreach (explode('/', $npath) as $c_part) {
+      $p = &$p[$c_part];
     }
-    return $result;
+    static::$npath_cache[$npath] = &$p;
+    return $p;
   }
 
 
