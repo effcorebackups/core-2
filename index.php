@@ -79,6 +79,6 @@ namespace effectivecore {
     console::add_log(
       'Call', $c_handler, '-', timers::get_period($c_handler, 0, 1)
     );
-  }         
+  }
 
 }

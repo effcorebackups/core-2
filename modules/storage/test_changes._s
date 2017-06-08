@@ -1,0 +1,9 @@
+test_changes
+  test_arr
+  - item_1: a1
+  - item_2: a2
+  - item_3: a3
+  test_obj
+    prop_1: p1
+    prop_2: p2
+    prop_3: p3

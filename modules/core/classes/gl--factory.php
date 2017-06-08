@@ -7,6 +7,8 @@ namespace effectivecore {
           use \effectivecore\console_factory as console;
           abstract class factory {
 
+  static $cache;
+
   static function autoload($name) {
     foreach (static::get_classes_map() as $c_class_name => $c_class_info) {
       if ($c_class_name == $name) {
@@ -165,19 +167,29 @@ namespace effectivecore {
 
 
 
-  static $npath_cache;
-
-  static function npath_get_object($npath, $data) {
-    return static::npath_get_pointer($npath, $data);
+  static function &npath_get_pointer($npath, &$p) {
+    if (isset(static::$cache[__FUNCTION__][$npath]))
+       return static::$cache[__FUNCTION__][$npath];
+    foreach (explode('/', $npath) as $c_part) {
+      switch (gettype($p)) {
+        case 'array' : $p = &$p[$c_part];   break;
+        case 'object': $p = &$p->{$c_part}; break;
+      }
+    }
+    static::$cache[__FUNCTION__][$npath] = &$p;
+    return $p;
   }
 
-  static function &npath_get_pointer($npath, &$p) {
-    if (isset(static::$npath_cache[$npath]))
-       return static::$npath_cache[$npath];
-    foreach (explode('/', $npath) as $c_part) {
-      $p = &$p[$c_part];
+  static function npath_get_object($npath, $data) {
+    if (isset(static::$cache[__FUNCTION__][$npath]))
+       return static::$cache[__FUNCTION__][$npath];
+    $path_parts = explode('/', $npath);
+    $p = null;
+    foreach ($path_parts as $c_part) {
+      if ($p == null) { if (isset($data[$c_part])) {$p = $data[$c_part]; continue;} else {$p = null; break;} } # iteration 1
+      if ($p != null) { if (isset(   $p[$c_part])) {$p =    $p[$c_part]; continue;} else {$p = null; break;} } # iteration 2, 3, 4 ...
     }
-    static::$npath_cache[$npath] = &$p;
+    static::$cache[__FUNCTION__][$npath] = $p;
     return $p;
   }
 
