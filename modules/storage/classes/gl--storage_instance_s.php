@@ -3,27 +3,31 @@
 namespace effectivecore {
           use \effectivecore\file_factory as files;
           use \effectivecore\message_factory as messages;
+          const settings_cache_file_name          = 'cache--settings.php';
+          const settings_original_cache_file_name = 'cache--settings--original.php';
           class storage_instance_s {
 
   static $data_original;
   static $data;
 
   static function init() {
-    $file = new file(dir_dynamic.'cache--settings.php');
+    $file = new file(dir_dynamic.settings_cache_file_name);
     if ($file->is_exist()) {
       $file->insert();
     } else {
+      $data_orig = $data = static::settings_get_all();
+      $changes_static    = static::changes_get_static($data_orig);
+      $changes_dynamic   = static::changes_get_dynamic();
+      static::changes_apply_to_settings($changes_static, $data);
+      static::changes_apply_to_settings($changes_dynamic, $data);
+   # ...
+
       static::$data = static::settings_get_all();
       if (is_writable(dir_dynamic)) {
-        $file->set_data(
-          "<?php \n\nnamespace effectivecore { # settings::\$data[type][scope]...\n\n  ".
-            "use \\effectivecore\\storage_instance_s as settings;\n\n".
-             factory::data_export(static::$data, '  settings::$data').
-          "\n}");
-        $file->save();
+        static::settings_save_cache(static::$data);
       } else {
         messages::add_new(
-          'Can not write "cache-settings.php" to the directory "dynamic"!'.br.
+          'Can not save data to the directory "dynamic"!'.br.
           'Directory "dynamic" should be writable.'.br.
           'System is working slowly at now.', 'warning'
         );
@@ -31,75 +35,34 @@ namespace effectivecore {
     }
   }
 
+  ########################
+  ### shared functions ###
+  ########################
+
   function select($group = '') {
     if (!static::$data) static::init();
     if ($group)  return static::$data[$group];
     else         return static::$data;
   }
 
-  function insert_changes() {
+  function changes_insert_dynamic() {
     if (!static::$data) static::init();
   # ...
   }
 
-  function update_changes() {
+  function changes_update_dynamic() {
     if (!static::$data) static::init();
   # ...
   }
 
-  function delete_changes() {
+  function changes_delete_dynamic() {
     if (!static::$data) static::init();
   # ...
   }
 
-  function changes_rebuild() {
-    foreach (static::changes_get_all() as $changes_by_action) {
-      foreach ($changes_by_action as $c_change) {
-        $path_parts = explode('/', $c_change->npath);
-        $child_name = array_pop($path_parts);
-        $source_obj = static::$data; # pseudo clone
-        $parent_obj = &factory::npath_get_pointer(implode('/', $path_parts), $source_obj);
-        switch ($c_change->action) {
-          case 'insert':
-            switch (gettype($parent_obj)) {
-              case 'array' : $destination_obj = &$parent_obj[$child_name];   break;
-              case 'object': $destination_obj = &$parent_obj->{$child_name}; break;
-            }
-            switch (gettype($destination_obj)) {
-              case 'array' : foreach ($c_change->value as $key => $value) $destination_obj[$key]   = $value; break;
-              case 'object': foreach ($c_change->value as $key => $value) $destination_obj->{$key} = $value; break;
-            }
-            break;
-          case 'update':
-            switch (gettype($parent_obj)) {
-              case 'array' : $parent_obj[$child_name]   = $c_change->value; break;
-              case 'object': $parent_obj->{$child_name} = $c_change->value; break;
-            }
-            break;
-          case 'delete':
-            switch (gettype($parent_obj)) {
-              case 'array' : unset($parent_obj[$child_name]);   break;
-              case 'object': unset($parent_obj->{$child_name}); break;
-            }
-            break;
-        }
-      }
-    }
-  }
-
-  static function changes_get_all() {
-    $return = [];
-    $files = files::get_all(dir_dynamic, '%^.*\/changes(--.+|)\._s$%');
-    foreach ($files as $c_file) {
-      $c_parsed = static::_parse($c_file->load());
-      if (!empty($c_parsed->changes)) {
-        foreach ($c_parsed->changes as $c_id => $c_change) {
-          $return[$c_change->action][$c_id] = $c_change;
-        }
-      }
-    }
-    return $return;
-  }
+  ################
+  ### settings ###
+  ################
 
   static function settings_get_all() {
     $return = [];
@@ -132,6 +95,85 @@ namespace effectivecore {
     }
     return $return;
   }
+
+  static function settings_save_cache($data) {
+    $file = new file(dir_dynamic.settings_cache_file_name);
+    $file->set_data(
+      "<?php \n\nnamespace effectivecore { # array[type][scope]...\n\n  ".
+        "use \\effectivecore\\storage_instance_s as settings;\n\n".
+          factory::data_export($data, '  settings::$data').
+      "\n}");
+    return $file->save();
+  }
+
+  ###############
+  ### changes ###
+  ###############
+
+  static function changes_get_static($data) {
+    $return = [];
+    if (!empty($data['changes'])) {
+      foreach ($data['changes'] as $c_module_id => $c_changes) {
+        foreach ($c_changes as $c_id => $c_change) {
+          $return[$c_change->action][$c_id] = $c_change;
+          $return[$c_change->action][$c_id]->module_id = $c_module_id;
+        }
+      }
+    }
+    return $return;
+  }
+
+  static function changes_get_dynamic() {
+    $return = [];
+    $files = files::get_all(dir_dynamic, '%^.*\/changes(--.+|)\._s$%');
+    foreach ($files as $c_file) {
+      $c_parsed = static::_parse($c_file->load());
+      if (!empty($c_parsed->changes)) {
+        foreach ($c_parsed->changes as $c_id => $c_change) {
+          $return[$c_change->action][$c_id] = $c_change;
+        }
+      }
+    }
+    return $return;
+  }
+
+  static function changes_apply_to_settings($changes, &$data) {
+    foreach ($changes as $changes_by_action) {
+      foreach ($changes_by_action as $c_change) {
+        $path_parts = explode('/', $c_change->npath);
+        $child_name = array_pop($path_parts);
+        $parent_obj = &factory::npath_get_pointer(implode('/', $path_parts), $data);
+        switch ($c_change->action) {
+          case 'insert':
+            switch (gettype($parent_obj)) {
+              case 'array' : $destination_obj = &$parent_obj[$child_name];   break;
+              case 'object': $destination_obj = &$parent_obj->{$child_name}; break;
+            }
+            switch (gettype($destination_obj)) {
+              case 'array' : foreach ($c_change->value as $key => $value) $destination_obj[$key]   = $value; break;
+              case 'object': foreach ($c_change->value as $key => $value) $destination_obj->{$key} = $value; break;
+            }
+            break;
+          case 'update':
+            switch (gettype($parent_obj)) {
+              case 'array' : $parent_obj[$child_name]   = $c_change->value; break;
+              case 'object': $parent_obj->{$child_name} = $c_change->value; break;
+            }
+            break;
+          case 'delete':
+            switch (gettype($parent_obj)) {
+              case 'array' : unset($parent_obj[$child_name]);   break;
+              case 'object': unset($parent_obj->{$child_name}); break;
+            }
+            break;
+        }
+      }
+    }
+  }
+
+  ##############
+  ### parser ###
+  ##############
 
   static function _parse($data) {
     $return = new \StdClass();

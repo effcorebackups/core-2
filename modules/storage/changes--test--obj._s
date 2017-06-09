@@ -1,0 +1,15 @@
+changes
+- test_insert_obj
+    action: insert
+    npath: test_changes/storage/test_obj
+    value
+      prop_4: p4
+      prop_5: p5
+      prop_6: p6
+- test_update_obj
+    action: update
+    npath: test_changes/storage/test_obj/prop_1
+    value: p1 modified
+- test_delete_obj
+    action: delete
+    npath: test_changes/storage/test_obj/prop_2
