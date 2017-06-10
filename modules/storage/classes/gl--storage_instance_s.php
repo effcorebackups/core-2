@@ -3,11 +3,11 @@
 namespace effectivecore {
           use \effectivecore\file_factory as files;
           use \effectivecore\message_factory as messages;
-          const settings_cache_file_name          = 'cache--settings.php';
-          const settings_original_cache_file_name = 'cache--settings--original.php';
+          const settings_cache_file_name      = 'cache--settings.php';
+          const settings_cache_file_name_orig = 'cache--settings--original.php';
           class storage_instance_s {
 
-  static $data_original;
+  static $data_orig;
   static $data;
 
   static function init() {
@@ -16,16 +16,16 @@ namespace effectivecore {
       $file->insert();
     } else {
       $data_orig       = static::settings_get_all();
-      $data            = $data_orig;
+      $data            = unserialize(serialize($data_orig)); # deep array clone
       $changes_static  = static::changes_get_static($data_orig);
       $changes_dynamic = static::changes_get_dynamic();
       static::changes_apply_to_settings($changes_static,  $data);
       static::changes_apply_to_settings($changes_dynamic, $data);
-   # ...
-
-      static::$data = static::settings_get_all();
+      static::$data = $data;
+    # save cache
       if (is_writable(dir_dynamic)) {
-        static::settings_save_cache(static::$data);
+        static::settings_save_cache($data_orig, settings_cache_file_name_orig, '  settings::$data_orig');
+        static::settings_save_cache($data,      settings_cache_file_name,      '  settings::$data');
       } else {
         messages::add_new(
           'Can not save data to the directory "dynamic"!'.br.
@@ -97,12 +97,12 @@ namespace effectivecore {
     return $return;
   }
 
-  static function settings_save_cache($data) {
-    $file = new file(dir_dynamic.settings_cache_file_name);
+  static function settings_save_cache($data, $file_name, $prefix) {
+    $file = new file(dir_dynamic.$file_name);
     $file->set_data(
-      "<?php \n\nnamespace effectivecore { # array[type][scope]...\n\n  ".
+      "<?php \n\nnamespace effectivecore { # ARRAY[type][scope]...\n\n  ".
         "use \\effectivecore\\storage_instance_s as settings;\n\n".
-          factory::data_export($data, '  settings::$data').
+          factory::data_export($data, $prefix).
       "\n}");
     return $file->save();
   }
