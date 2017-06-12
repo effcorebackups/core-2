@@ -33,8 +33,8 @@ namespace effectivecore {
           'System is working slowly at now.', 'warning'
         );
       } else {
-        static::settings_save_cache($data_orig, settings_cache_file_name_orig, '  settings::$data_orig');
-        static::settings_save_cache($data,      settings_cache_file_name,      '  settings::$data');
+        static::settings_save_to_file($data_orig, settings_cache_file_name_orig, '  settings::$data_orig');
+        static::settings_save_to_file($data,      settings_cache_file_name,      '  settings::$data');
       }
     }
   }
@@ -49,18 +49,10 @@ namespace effectivecore {
     else         return static::$data;
   }
 
-  function changes_insert_dynamic() {
-    if (!static::$data) static::init();
-  # ...
-  }
-
-  function changes_update_dynamic() {
-    if (!static::$data) static::init();
-  # ...
-  }
-
-  function changes_delete_dynamic() {
-    if (!static::$data) static::init();
+  function changes_register_action($module_id, $data) {
+    $changes = static::changes_get_dynamic();
+    $changes[$module_id][$data->action.'_'.str_replace('/', '_', $data->npath)] = $data;
+    static::settings_save_to_file($changes, changes_file_name, '  settings::$data_orig');
   # ...
   }
 
@@ -100,7 +92,7 @@ namespace effectivecore {
     return $return;
   }
 
-  static function settings_save_cache($data, $file_name, $prefix) {
+  static function settings_save_to_file($data, $file_name, $prefix) {
     $file = new file(dir_dynamic.$file_name);
     $file->set_data(
       "<?php \n\nnamespace effectivecore { # ARRAY[type][scope]...\n\n  ".
