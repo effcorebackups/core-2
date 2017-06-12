@@ -17,8 +17,7 @@ namespace effectivecore {
     if ($s_file->is_exist()) {
       $s_file->insert();
     } else {
-      $data_orig = static::settings_get_all();
-      $data_orig['_created'] = date(format_datetime, time());
+      $data_orig = ['_created' => date(format_datetime, time())] + static::settings_get_all();
       $data = unserialize(serialize($data_orig)); # deep array clone
       static::changes_apply_to_settings($data['changes'], $data);
       static::changes_apply_to_settings(static::changes_get_dynamic(), $data);
