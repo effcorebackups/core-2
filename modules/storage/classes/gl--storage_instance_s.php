@@ -17,9 +17,10 @@ namespace effectivecore {
       $file->insert();
     } else {
       $data_orig = static::settings_get_all();
-      $data      = unserialize(serialize($data_orig)); # deep array clone
-      static::changes_apply_to_settings(static::changes_get_static(),  $data);
+      $data = unserialize(serialize($data_orig)); # deep array clone
+      static::changes_apply_to_settings($data['changes'], $data);
       static::changes_apply_to_settings(static::changes_get_dynamic(), $data);
+      unset($data['changes']);
       static::$data = $data;
     # save cache
       if (is_writable(dir_dynamic)) {
