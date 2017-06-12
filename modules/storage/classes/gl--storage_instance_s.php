@@ -125,17 +125,12 @@ namespace effectivecore {
   }
 
   static function changes_get_dynamic() {
-    $return = [];
-    $files = files::get_all(dir_dynamic, '%^.*\/changes(--.+|)\._s$%');
-    foreach ($files as $c_file) {
-      $c_parsed = static::settings_to_code($c_file->load());
-      if (!empty($c_parsed->changes)) {
-        foreach ($c_parsed->changes as $c_id => $c_change) {
-          $return[$c_change->action][$c_id] = $c_change;
-        }
-      }
+    $file = new file(dir_dynamic.'changes.php');
+    if ($file->is_exist()) {
+      $file->insert();
     }
-    return $return;
+    return isset(static::$data['changes_dynamic']) ?
+                 static::$data['changes_dynamic'] : [];
   }
 
   static function changes_apply_to_settings($changes, &$data) {
@@ -176,7 +171,22 @@ namespace effectivecore {
   ### parser ###
   ##############
 
-  static function code_to_settings($data) {
+  static function code_to_settings($data, $entity_name = '', $entity_prefix = '  ', $depth = 0) {
+    $return = [];
+    if ($entity_name) {
+      $return[] = str_repeat('  ', $depth-1).($depth ? $entity_prefix : '').$entity_name;
+    }
+    foreach ($data as $key => $value) {
+      if (is_array($value)  && !count($value))           continue;
+      if (is_object($value) && !get_object_vars($value)) continue;
+      if (is_array($value))       $return[] = static::code_to_settings($value, $key, is_array($data) ? '- ' : '  ', $depth + 1);
+      else if (is_object($value)) $return[] = static::code_to_settings($value, $key, is_array($data) ? '- ' : '  ', $depth + 1);
+      else if ($value === null)   $return[] = str_repeat('  ', $depth).(is_array($data) ? '- ' : '  ').$key.': null';
+      else if ($value === false)  $return[] = str_repeat('  ', $depth).(is_array($data) ? '- ' : '  ').$key.': false';
+      else if ($value === true)   $return[] = str_repeat('  ', $depth).(is_array($data) ? '- ' : '  ').$key.': true';
+      else                        $return[] = str_repeat('  ', $depth).(is_array($data) ? '- ' : '  ').$key.': '.$value;
+    }
+    return implode(nl, $return);
   }
 
   static function settings_to_code($data) {
