@@ -30,7 +30,7 @@ namespace effectivecore {
           ($s_file_orig->is_exist() && !$s_file_orig->is_writable())) {
         messages::add_new(
           'Can not save data to the directory "dynamic"!'.br.
-          'Directory "dynamic" and the files inside should be writable.'.br.
+          'Directory "dynamic" and files inside should be writable.'.br.
           'System is working slowly at now.', 'warning'
         );
       } else {
