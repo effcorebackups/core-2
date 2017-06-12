@@ -12,26 +12,30 @@ namespace effectivecore {
   static $data;
 
   static function init() {
-    $file = new file(dir_dynamic.settings_cache_file_name);
-    if ($file->is_exist()) {
-      $file->insert();
+    $s_file      = new file(dir_dynamic.settings_cache_file_name);
+    $s_file_orig = new file(dir_dynamic.settings_cache_file_name_orig);
+    if ($s_file->is_exist()) {
+      $s_file->insert();
     } else {
       $data_orig = static::settings_get_all();
+      $data_orig['_created'] = date(format_datetime, time());
       $data = unserialize(serialize($data_orig)); # deep array clone
       static::changes_apply_to_settings($data['changes'], $data);
       static::changes_apply_to_settings(static::changes_get_dynamic(), $data);
       unset($data['changes']);
       static::$data = $data;
     # save cache
-      if (is_writable(dir_dynamic)) {
-        static::settings_save_cache($data_orig, settings_cache_file_name_orig, '  settings::$data_orig');
-        static::settings_save_cache($data,      settings_cache_file_name,      '  settings::$data');
-      } else {
+      if (!is_writable(dir_dynamic) ||
+          ($s_file->is_exist()      && !$s_file->is_writable()) ||
+          ($s_file_orig->is_exist() && !$s_file_orig->is_writable())) {
         messages::add_new(
           'Can not save data to the directory "dynamic"!'.br.
-          'Directory "dynamic" should be writable.'.br.
+          'Directory "dynamic" and the files inside should be writable.'.br.
           'System is working slowly at now.', 'warning'
         );
+      } else {
+        static::settings_save_cache($data_orig, settings_cache_file_name_orig, '  settings::$data_orig');
+        static::settings_save_cache($data,      settings_cache_file_name,      '  settings::$data');
       }
     }
   }
