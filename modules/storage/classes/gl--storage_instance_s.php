@@ -5,6 +5,7 @@ namespace effectivecore {
           use \effectivecore\message_factory as messages;
           const settings_cache_file_name      = 'cache--settings.php';
           const settings_cache_file_name_orig = 'cache--settings--original.php';
+          const changes_file_name             = 'changes.php';
           class storage_instance_s {
 
   static $data_orig;
@@ -15,12 +16,10 @@ namespace effectivecore {
     if ($file->is_exist()) {
       $file->insert();
     } else {
-      $data_orig       = static::settings_get_all();
-      $data            = unserialize(serialize($data_orig)); # deep array clone
-      $changes_static  = static::changes_get_static($data_orig);
-      $changes_dynamic = static::changes_get_dynamic();
-      static::changes_apply_to_settings($changes_static,  $data);
-      static::changes_apply_to_settings($changes_dynamic, $data);
+      $data_orig = static::settings_get_all();
+      $data      = unserialize(serialize($data_orig)); # deep array clone
+      static::changes_apply_to_settings(static::changes_get_static(),  $data);
+      static::changes_apply_to_settings(static::changes_get_dynamic(), $data);
       static::$data = $data;
     # save cache
       if (is_writable(dir_dynamic)) {
@@ -111,26 +110,22 @@ namespace effectivecore {
   ### changes ###
   ###############
 
-  static function changes_get_static($data) {
-    $return = [];
-    if (!empty($data['changes'])) {
-      foreach ($data['changes'] as $c_module_id => $c_changes) {
-        foreach ($c_changes as $c_id => $c_change) {
-          $return[$c_change->action][$c_id] = $c_change;
-          $return[$c_change->action][$c_id]->module_id = $c_module_id;
-        }
-      }
-    }
-    return $return;
-  }
-
-  static function changes_get_dynamic() {
-    $file = new file(dir_dynamic.'changes.php');
+  static function changes_get_static() {
+    $file = new file(dir_dynamic.settings_cache_file_name_orig);
     if ($file->is_exist()) {
       $file->insert();
     }
-    return isset(static::$data['changes_dynamic']) ?
-                 static::$data['changes_dynamic'] : [];
+    return isset(static::$data_orig['changes']) ?
+                 static::$data_orig['changes'] : [];
+  }
+
+  static function changes_get_dynamic() {
+    $file = new file(dir_dynamic.changes_file_name);
+    if ($file->is_exist()) {
+      $file->insert();
+    }
+    return isset(static::$data_orig['changes_dynamic']) ?
+                 static::$data_orig['changes_dynamic'] : [];
   }
 
   static function changes_apply_to_settings($changes, &$data) {
