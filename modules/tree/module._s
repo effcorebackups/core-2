@@ -2,5 +2,5 @@ module
   id: tree
   title: Tree
   description: Module for working with trees (hierarchical structures).
-  version: 1-0
+  version: 1.1
   state: always_enabled

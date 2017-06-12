@@ -2,5 +2,5 @@ module
   id: user
   title: User
   description: Module for working with user accounts and permissions.
-  version: 1-0
+  version: 1.1
   state: always_enabled

@@ -2,5 +2,5 @@ module
   id: core
   title: Core
   description: Core module.
-  version: 1-0
+  version: 1.1
   state: always_enabled
