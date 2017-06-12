@@ -17,7 +17,7 @@ namespace effectivecore {
     if ($s_file->is_exist()) {
       $s_file->insert();
     } else {
-      $data_orig = ['_created' => date(format_datetime, time())] + static::settings_get_all();
+      $data_orig = ['_created' => date(format_datetime, time())] + static::settings_find_static();
       $data = unserialize(serialize($data_orig)); # deep array clone
       static::changes_apply_to_settings($data['changes'], $data);
       static::changes_apply_to_settings(static::changes_get_dynamic(), $data);
@@ -49,18 +49,47 @@ namespace effectivecore {
     else         return static::$data;
   }
 
-  function changes_register_action($module_id, $data) {
-    $changes = static::changes_get_dynamic();
-    $changes[$module_id][$data->action.'_'.str_replace('/', '_', $data->npath)] = $data;
-    static::settings_save_to_file($changes, changes_file_name, '  settings::$data_orig');
-  # ...
+  function changes_register_action($module_id, $c_change) {
+    $s_file      = new file(dir_dynamic.settings_cache_file_name);
+    $s_file_orig = new file(dir_dynamic.settings_cache_file_name_orig);
+    $dynamic = static::changes_get_dynamic();
+    $dynamic[$module_id][$c_change->action.'_'.str_replace('/', '_', $c_change->npath)] = $c_change;
+    static::settings_save_to_file($dynamic, changes_file_name, '  settings::$data_orig[\'changes_dynamic\']');
+  # rebuild files
+    $data_orig = static::settings_get_original();
+    $data = unserialize(serialize($data_orig)); # deep array clone
+    static::changes_apply_to_settings($data['changes'], $data);
+    static::changes_apply_to_settings($dynamic, $data);
+    unset($data['changes']);
+    unset($data['changes_dynamic']);
+    static::$data = $data;
+  # save state
+    if (!is_writable(dir_dynamic) ||
+        ($s_file->is_exist()      && !$s_file->is_writable()) ||
+        ($s_file_orig->is_exist() && !$s_file_orig->is_writable())) {
+      messages::add_new(
+        'Can not save data to the directory "dynamic"!'.br.
+        'Directory "dynamic" and files inside should be writable.'.br.
+        'System is working slowly at now.', 'warning'
+      );
+    } else {
+      static::settings_save_to_file($data, settings_cache_file_name, '  settings::$data');
+    }
   }
 
   ################
   ### settings ###
   ################
 
-  static function settings_get_all() {
+  static function settings_get_original() {
+    $file = new file(dir_dynamic.settings_cache_file_name_orig);
+    if ($file->is_exist()) {
+      $file->insert();
+    }
+    return static::$data_orig;
+  }
+
+  static function settings_find_static() {
     $return = [];
     $files = files::get_all(dir_modules, '%^.*\._s$%');
     $modules_path = [];
