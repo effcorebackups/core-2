@@ -20,7 +20,7 @@ namespace effectivecore {
       $data_orig = ['_created' => date(format_datetime, time())] + static::settings_find_static();
       $data = unserialize(serialize($data_orig)); # deep array clone
       static::changes_apply_to_settings($data['changes'], $data);
-      static::changes_apply_to_settings(static::changes_get_dynamic(), $data);
+      static::changes_apply_to_settings(static::changes_load_dynamic(), $data);
       unset($data['changes']);
       static::$data = $data;
     # save cache
@@ -52,11 +52,11 @@ namespace effectivecore {
   function changes_register_action($module_id, $c_change) {
     $s_file      = new file(dir_dynamic.settings_cache_file_name);
     $s_file_orig = new file(dir_dynamic.settings_cache_file_name_orig);
-    $dynamic = static::changes_get_dynamic();
+    $dynamic = static::changes_load_dynamic();
     $dynamic[$module_id][$c_change->action.'_'.str_replace('/', '_', $c_change->npath)] = $c_change;
     static::settings_save_to_file($dynamic, changes_file_name, '  settings::$data_orig[\'changes_dynamic\']');
   # rebuild files
-    $data_orig = static::settings_get_original();
+    $data_orig = static::settings_load_original();
     $data = unserialize(serialize($data_orig)); # deep array clone
     static::changes_apply_to_settings($data['changes'], $data);
     static::changes_apply_to_settings($dynamic, $data);
@@ -81,12 +81,30 @@ namespace effectivecore {
   ### settings ###
   ################
 
-  static function settings_get_original() {
+  static function settings_load() {
+    $file = new file(dir_dynamic.settings_cache_file_name);
+    if ($file->is_exist()) {
+      $file->insert();
+    }
+    return static::$data;
+  }
+
+  static function settings_load_original() {
     $file = new file(dir_dynamic.settings_cache_file_name_orig);
     if ($file->is_exist()) {
       $file->insert();
     }
     return static::$data_orig;
+  }
+
+  static function settings_save_to_file($data, $file_name, $prefix) {
+    $file = new file(dir_dynamic.$file_name);
+    $file->set_data(
+      "<?php \n\nnamespace effectivecore { # ARRAY[type][scope]...\n\n  ".
+        "use \\effectivecore\\storage_instance_s as settings;\n\n".
+          factory::data_export($data, $prefix).
+      "\n}");
+    return $file->save();
   }
 
   static function settings_find_static() {
@@ -121,21 +139,11 @@ namespace effectivecore {
     return $return;
   }
 
-  static function settings_save_to_file($data, $file_name, $prefix) {
-    $file = new file(dir_dynamic.$file_name);
-    $file->set_data(
-      "<?php \n\nnamespace effectivecore { # ARRAY[type][scope]...\n\n  ".
-        "use \\effectivecore\\storage_instance_s as settings;\n\n".
-          factory::data_export($data, $prefix).
-      "\n}");
-    return $file->save();
-  }
-
   ###############
   ### changes ###
   ###############
 
-  static function changes_get_static() {
+  static function changes_load_static() {
     $file = new file(dir_dynamic.settings_cache_file_name_orig);
     if ($file->is_exist()) {
       $file->insert();
@@ -144,7 +152,7 @@ namespace effectivecore {
                  static::$data_orig['changes'] : [];
   }
 
-  static function changes_get_dynamic() {
+  static function changes_load_dynamic() {
     $file = new file(dir_dynamic.changes_file_name);
     if ($file->is_exist()) {
       $file->insert();
