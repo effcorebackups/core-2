@@ -10,6 +10,7 @@ namespace effectivecore {
 
   static $data_orig;
   static $data;
+  static $changes_dynamic;
 
   static function init() {
     $f_settings = new file(dir_dynamic.settings_cache_file_name);
@@ -33,8 +34,8 @@ namespace effectivecore {
   function changes_register_action($module_id, $c_change) {
     $f_changes = new file(dir_dynamic.changes_file_name);
     if ($f_changes->is_exist()) $f_changes->insert();
-    $settings_d = isset(static::$data_orig['changes_dynamic']) ?
-                        static::$data_orig['changes_dynamic'] : [];
+    $settings_d = isset(static::$changes_dynamic['changes']) ?
+                        static::$changes_dynamic['changes'] : [];
     $settings_d[$module_id][$c_change->action.'_'.str_replace('/', '_', $c_change->npath)] = $c_change;
   # save data
     if (!is_writable(dir_dynamic) ||
@@ -46,7 +47,7 @@ namespace effectivecore {
         'Setting is not saved.', 'error'
       );
     } else {
-      static::settings_save_to_file($settings_d, changes_file_name, '  settings::$data_orig[\'changes_dynamic\']');
+      static::settings_save_to_file($settings_d, changes_file_name, '  settings::$changes_dynamic[\'changes\']');
       static::settings_rebuild();
     }
   }
@@ -69,8 +70,8 @@ namespace effectivecore {
     }
   # load all changes
     if ($f_changes->is_exist()) $f_changes->insert();
-    $settings_d = isset(static::$data_orig['changes_dynamic']) ?
-                        static::$data_orig['changes_dynamic'] : [];
+    $settings_d = isset(static::$changes_dynamic['changes']) ?
+                        static::$changes_dynamic['changes'] : [];
     $settings_s = isset(static::$data_orig['changes']) ?
                         static::$data_orig['changes'] : [];
   # apply all changes to original settings and get final settings
@@ -79,8 +80,6 @@ namespace effectivecore {
     static::changes_apply_to_settings($settings_s, $data_new);
     static::$data = $data_new;
     unset(static::$data['changes']);
-    unset(static::$data['changes_dynamic']);
-    unset(static::$data_orig['changes_dynamic']);
   # save cache
     if (!is_writable(dir_dynamic) ||
         ($f_settings->is_exist() &&
@@ -88,7 +87,8 @@ namespace effectivecore {
         ($f_settings_orig->is_exist() &&
         !$f_settings_orig->is_writable())) {
       messages::add_new(
-        'Can not save files "'.settings_cache_file_name.'" and "'.settings_cache_file_name_orig.'" to the directory "dynamic"!'.br.
+        'Can not save file "'.settings_cache_file_name.     '" to the directory "dynamic"!'.br.
+        'Can not save file "'.settings_cache_file_name_orig.'" to the directory "dynamic"!'.br.
         'Directory "dynamic" and this files should be writable.'.br.
         'System is working slowly at now.', 'warning'
       );
