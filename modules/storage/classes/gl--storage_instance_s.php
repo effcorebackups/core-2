@@ -56,6 +56,7 @@ namespace effectivecore {
         'Setting is not saved.', 'error'
       );
     } else {
+      static::$changes_dynamic['changes'] = $settings_d; # prevent opcache work
       static::settings_save_to_file($settings_d, changes_file_name, '  settings::$changes_dynamic[\'changes\']');
       static::settings_rebuild();
     }

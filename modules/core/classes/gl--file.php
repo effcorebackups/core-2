@@ -38,7 +38,8 @@ namespace effectivecore {
   function insert($once = true) {
     $relative = $this->get_path_relative();
     timers::tap('insert_'.$relative);
-    $return = $once ? require_once($this->get_path_full()) : require($this->get_path_full());
+    $return = $once ? require_once($this->get_path_full()) :
+                      require     ($this->get_path_full());
     timers::tap('insert_'.$relative);
     console::add_log('Insert', $relative, 'ok', timers::get_period('insert_'.$relative, 0, 1));
     return $return;
