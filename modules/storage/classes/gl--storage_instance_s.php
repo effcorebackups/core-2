@@ -49,7 +49,9 @@ namespace effectivecore {
         !$f_settings_orig->is_writable())) {
       messages::add_new(
         'Can not save file "'.changes_file_name.'" to the directory "dynamic"!'.br.
-        'File "'.changes_file_name.'" should be writable.'.br.
+        'File "'.changes_file_name.            '" should be writable.'.br.
+        'File "'.settings_cache_file_name.     '" should be writable.'.br.
+        'File "'.settings_cache_file_name_orig.'" should be writable.'.br.
         'Directory "dynamic" should be writable.'.br.
         'Setting is not saved.', 'error'
       );
