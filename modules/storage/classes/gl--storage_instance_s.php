@@ -32,7 +32,9 @@ namespace effectivecore {
   }
 
   function changes_register_action($module_id, $c_change) {
-    $f_changes = new file(dir_dynamic.changes_file_name);
+    $f_settings      = new file(dir_dynamic.settings_cache_file_name);
+    $f_settings_orig = new file(dir_dynamic.settings_cache_file_name_orig);
+    $f_changes       = new file(dir_dynamic.changes_file_name);
     if ($f_changes->is_exist()) $f_changes->insert();
     $settings_d = isset(static::$changes_dynamic['changes']) ?
                         static::$changes_dynamic['changes'] : [];
@@ -40,10 +42,15 @@ namespace effectivecore {
   # save data
     if (!is_writable(dir_dynamic) ||
         ($f_changes->is_exist() &&
-        !$f_changes->is_writable())) {
+        !$f_changes->is_writable()) ||
+        ($f_settings->is_exist() &&
+        !$f_settings->is_writable()) ||
+        ($f_settings_orig->is_exist() &&
+        !$f_settings_orig->is_writable())) {
       messages::add_new(
         'Can not save file "'.changes_file_name.'" to the directory "dynamic"!'.br.
-        'Directory "dynamic" and this file should be writable.'.br.
+        'File "'.changes_file_name.'" should be writable.'.br.
+        'Directory "dynamic" should be writable.'.br.
         'Setting is not saved.', 'error'
       );
     } else {
@@ -89,7 +96,9 @@ namespace effectivecore {
       messages::add_new(
         'Can not save file "'.settings_cache_file_name.     '" to the directory "dynamic"!'.br.
         'Can not save file "'.settings_cache_file_name_orig.'" to the directory "dynamic"!'.br.
-        'Directory "dynamic" and this files should be writable.'.br.
+        'File "'.settings_cache_file_name.     '" should be writable.'.br.
+        'File "'.settings_cache_file_name_orig.'" should be writable.'.br.
+        'Directory "dynamic" should be writable.'.br.
         'System is working slowly at now.', 'warning'
       );
     } else {
