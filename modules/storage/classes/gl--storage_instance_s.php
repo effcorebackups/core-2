@@ -163,7 +163,7 @@ namespace effectivecore {
         $child_name = array_pop($path_parts);
         $parent_obj = &factory::npath_get_pointer(implode('/', $path_parts), $data);
         switch ($c_change->action) {
-          case 'insert':
+          case 'insert': # only structured types support (array|object)
             switch (gettype($parent_obj)) {
               case 'array' : $destination_obj = &$parent_obj[$child_name];   break;
               case 'object': $destination_obj = &$parent_obj->{$child_name}; break;
@@ -173,7 +173,7 @@ namespace effectivecore {
               case 'object': foreach ($c_change->value as $key => $value) $destination_obj->{$key} = $value; break;
             }
             break;
-          case 'update':
+          case 'update': # only scalar types support (string|numeric) @todo: test bool|null
             switch (gettype($parent_obj)) {
               case 'array' : $parent_obj[$child_name]   = $c_change->value; break;
               case 'object': $parent_obj->{$child_name} = $c_change->value; break;
