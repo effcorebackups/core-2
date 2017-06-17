@@ -1,0 +1,49 @@
+palette
+- color_lavender
+    value: lavender
+    is_dark: false
+- color_thistle
+    value: thistle
+    is_dark: false
+- color_lightcoral
+    value: lightcoral
+    is_dark: false
+- color_salmon
+    value: salmon
+    is_dark: false
+- color_tomato
+    value: tomato
+    is_dark: false
+- color_crimson
+    value: crimson
+    is_dark: false
+- color_orange
+    value: orange
+    is_dark: false
+- color_gold
+    value: gold
+    is_dark: false
+- color_yellowgreen
+    value: yellowgreen
+    is_dark: false
+- color_limegreen
+    value: limegreen
+    is_dark: false
+- color_springgreen
+    value: springgreen
+    is_dark: false
+- color_paleturquoise
+    value: paleturquoise
+    is_dark: false
+- color_lightseagreen
+    value: lightseagreen
+    is_dark: false
+- color_darkcyan
+    value: darkcyan
+    is_dark: false
+- color_original_blue
+    value: #216ce4
+    is_dark: false
+- color_original_darkblue
+    value: #28334a
+    is_dark: false

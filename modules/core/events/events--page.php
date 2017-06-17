@@ -6,7 +6,7 @@ namespace effectivecore {
           abstract class events_page extends events {
 
   static function on_show_install() {
-    foreach (static::get()->on_install as $c_event) {
+    foreach (static::get()->on_module_install as $c_event) {
       call_user_func($c_event->handler);
     }
   }

@@ -68,7 +68,7 @@ namespace effectivecore {
 
   # case for page (non file)
   ob_start();
-  foreach (events::get()->on_start as $c_info) {
+  foreach (events::get()->on_module_start as $c_info) {
     $c_handler = $c_info->handler;
     timers::tap($c_handler);
     $c_result = call_user_func($c_handler);
