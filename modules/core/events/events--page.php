@@ -11,7 +11,7 @@ namespace effectivecore {
     }
   }
 
-  static function on_show_modules() {
+  static function on_show_admin_modules() {
     $head = [[
       'Title',
       'ID',

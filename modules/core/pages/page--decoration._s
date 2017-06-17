@@ -1,8 +1,8 @@
 pages
-- page_modules|page
-    title: Modules
+- page_decoration|page
+    title: Decoration
     url
-      match: %^/admin/modules$%
+      match: %^/admin/decoration$%
     access
       roles
       - admins: admins
@@ -15,7 +15,7 @@ pages
         region: nav
         type: link
         link: trees/user/user
-    - block_admin_modules
+    - form_admin_decoration
         region: content_1_1
-        type: code
-        handler: \effectivecore\events_page::on_show_admin_modules
+        type: link
+        link: forms/core/form_admin_decoration

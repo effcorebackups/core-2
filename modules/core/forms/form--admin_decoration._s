@@ -1,0 +1,46 @@
+forms
+- form_admin_decoration|form
+    attributes
+      id: user_admin_decoration
+      novalidate: novalidate
+      method: post
+      class: form-user
+    on_validate
+    - on_validate_default
+        handler: \effectivecore\events_form::on_validate
+        weight: 0
+    on_submit
+    - on_submit_default
+        handler: \effectivecore\modules\core\events_form::on_submit_admin_decoration
+        weight: 0
+    children
+    - field_bg_color|markup
+        tag_name: select
+        title: Background color
+        attributes
+          name: bg_color
+          placeholder|text
+            text: Background color
+          required: 1
+        children
+        - option_color_noselected|markup
+            tag_name: option
+            children: -
+        - option_color_1|markup
+            tag_name: option
+            children: 1
+        - option_color_2|markup
+            tag_name: option
+            children: 2
+        - option_color_3|markup
+            tag_name: option
+            children: 3
+    - button_save|markup
+        tag_name: button
+        attributes
+          type: submit
+          name: button
+          value: save
+        children
+        - label|text
+            text: save
