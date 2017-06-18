@@ -40,11 +40,7 @@ namespace effectivecore {
       }
     # call validate handlers
       if (empty($c_button->novalidate)) {
-        if (is_array($this->on_validate)) {
-          foreach (factory::array_sort_by_weight($this->on_validate) as $c_validate) {
-            call_user_func($c_validate->handler, $this, $elements);
-          }
-        }
+        events::start('on_form_validate', $this->attributes->id, [$this, $elements]);
       }
     # show errors and set error class
       foreach ($this->errors as $c_id => $c_errors) {
@@ -56,11 +52,7 @@ namespace effectivecore {
       }
     # call submit handler (if no errors)
       if (count($this->errors) == 0) {
-        if (is_array($this->on_submit)) {
-          foreach (factory::array_sort_by_weight($this->on_submit) as $c_submit) {
-            call_user_func($c_submit->handler, $this, $elements);
-          }
-        }
+        events::start('on_form_submit', $this->attributes->id, [$this, $elements]);
       }
     }
 

@@ -49,10 +49,10 @@ namespace effectivecore {
         !$f_settings_orig->is_writable())) {
       messages::add_new(
         'Can not save file "'.changes_file_name.'" to the directory "dynamic"!'.br.
-        'File "'.changes_file_name.            '" should be writable.'.br.
-        'File "'.settings_cache_file_name.     '" should be writable.'.br.
-        'File "'.settings_cache_file_name_orig.'" should be writable.'.br.
-        'Directory "dynamic" should be writable.'.br.
+        'Check if file "'.changes_file_name.            '" is writable.'.br.
+        'Check if file "'.settings_cache_file_name.     '" is writable.'.br.
+        'Check if file "'.settings_cache_file_name_orig.'" is writable.'.br.
+        'Check if directory "dynamic" is writable.'.br.
         'Setting is not saved.', 'error'
       );
     } else {
@@ -99,9 +99,9 @@ namespace effectivecore {
       messages::add_new(
         'Can not save file "'.settings_cache_file_name.     '" to the directory "dynamic"!'.br.
         'Can not save file "'.settings_cache_file_name_orig.'" to the directory "dynamic"!'.br.
-        'File "'.settings_cache_file_name.     '" should be writable.'.br.
-        'File "'.settings_cache_file_name_orig.'" should be writable.'.br.
-        'Directory "dynamic" should be writable.'.br.
+        'Check if file "'.settings_cache_file_name.     '" is writable.'.br.
+        'Check if file "'.settings_cache_file_name_orig.'" is writable.'.br.
+        'Check if directory "dynamic" is writable.'.br.
         'System is working slowly at now.', 'warning'
       );
     } else {

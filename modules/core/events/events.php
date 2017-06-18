@@ -10,7 +10,7 @@ namespace effectivecore {
     foreach (storages::get('settings')->select('events') as $module_id => $c_events) {
       foreach ($c_events as $c_type => $c_events) {
         foreach ($c_events as $c_id => $c_event) {
-          static::$data->{$c_type}[$module_id.'_'.$c_id] = $c_event;
+          static::$data->{$c_type}[$c_id] = $c_event;
         }
       }
     }
@@ -22,6 +22,14 @@ namespace effectivecore {
   static function get() {
     if (!static::$data) static::init();
     return static::$data;
+  }
+
+  static function start($type, $id = null, $args = []) {
+    foreach (events::get()->{$type} as $c_id => $c_info) {
+      if ($id == null || $id == $c_id) {
+        call_user_func_array($c_info->handler, $args);
+      }
+    }
   }
 
 }}

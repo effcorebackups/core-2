@@ -1,11 +1,9 @@
 events
   on_form_validate
-  - on_form_validate_admin_decoration
-      form_id: admin_decoration
+  - admin_decoration
       handler: \effectivecore\events_form::on_validate
       weight: 0
   on_form_submit
-  - on_form_submit_admin_decoration
-      form_id: admin_decoration
+  - admin_decoration
       handler: \effectivecore\modules\core\events_form::on_submit_admin_decoration
       weight: 0

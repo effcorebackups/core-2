@@ -54,26 +54,7 @@ namespace effectivecore {
   }
 
   static function on_submit_admin_decoration($form, $elements) {
-    /*
-    $email         = isset($_POST['email'])    ? $_POST['email']          : '';
-    $password_hash = isset($_POST['password']) ? sha1($_POST['password']) : '';
-    $button        = isset($_POST['button'])   ? $_POST['button']         : '';
-    switch ($button) {
-      case 'login':
-        $user = (new entity_instance('entities/user/user', [
-          'email' => $email
-        ]))->select(['email']);
-        if ($user &&
-            $user->id &&
-            $user->password_hash === $password_hash) {
-          session::init($user->id);
-          urls::go('/user/'.$user->id);
-        } else {
-          messages::add_new('Incorrect email or password!', 'error');
-        }
-        break;
-    }
-    */
+
   }
 
 }}
