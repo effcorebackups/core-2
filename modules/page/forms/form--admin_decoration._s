@@ -1,7 +1,7 @@
 forms
 - form_admin_decoration|form
     attributes
-      id: user_admin_decoration
+      id: admin_decoration
       novalidate: novalidate
       method: post
       class: form-user
@@ -17,16 +17,9 @@ forms
         children
         - option_color_noselected|markup
             tag_name: option
-            children: -
-        - option_color_1|markup
-            tag_name: option
-            children: 1
-        - option_color_2|markup
-            tag_name: option
-            children: 2
-        - option_color_3|markup
-            tag_name: option
-            children: 3
+            children:
+            - label|text
+                text: -
     - button_save|markup
         tag_name: button
         attributes

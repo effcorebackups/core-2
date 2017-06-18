@@ -18,4 +18,4 @@ pages
     - form_admin_decoration
         region: content_1_1
         type: link
-        link: forms/core/form_admin_decoration
+        link: forms/page/form_admin_decoration

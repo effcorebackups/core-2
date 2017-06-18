@@ -1,0 +1,10 @@
+tree_items
+- main_admin_decoration|tree_item
+    parent: tree_items/core/main_admin
+    title: Decoration
+    attributes
+      class: modules
+      href: /admin/decoration
+    access
+      roles
+      - admins: admins

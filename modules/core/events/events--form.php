@@ -53,8 +53,4 @@ namespace effectivecore {
     }
   }
 
-  static function on_submit_admin_decoration($form, $elements) {
-
-  }
-
 }}

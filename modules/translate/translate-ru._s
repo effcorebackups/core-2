@@ -6,6 +6,7 @@ translate
   - always_enabled: всегда_вкл
   - enabled: вкл.
   - Execute plan: План выполнения
+  - Decoration: Оформление
   - disabled: выкл.
   - Page: Страница
   - Core: Ядро
