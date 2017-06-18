@@ -3,6 +3,10 @@ events
   - page
       handler: \effectivecore\modules\page\events_module::on_start
       weight: 0
+  on_form_init
+  - admin_decoration
+      handler: \effectivecore\modules\page\events_form::on_init_admin_decoration
+      weight: 0
   on_form_validate
   - admin_decoration
       handler: \effectivecore\events_form::on_validate

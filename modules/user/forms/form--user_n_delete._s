@@ -6,6 +6,15 @@ forms
       method: post
       class: form-user
     children
+    - button_delete|markup
+        tag_name: button
+        attributes
+          type: submit
+          name: button
+          value: delete
+        children
+        - label|text
+            text: delete
     - button_cancel|markup
         tag_name: button
         novalidate: true
@@ -16,12 +25,3 @@ forms
         children
         - label|text
             text: cancel
-    - button_delete|markup
-        tag_name: button
-        attributes
-          type: submit
-          name: button
-          value: delete
-        children
-        - label|text
-            text: delete

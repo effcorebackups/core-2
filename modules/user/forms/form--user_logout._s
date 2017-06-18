@@ -6,6 +6,15 @@ forms
       method: post
       class: form-user
     children
+    - button_logout|markup
+        tag_name: button
+        attributes
+          type: submit
+          name: button
+          value: logout
+        children
+        - label|text
+            text: logout
     - button_cancel|markup
         tag_name: button
         novalidate: true
@@ -16,12 +25,3 @@ forms
         children
         - label|text
             text: cancel
-    - button_logout|markup
-        tag_name: button
-        attributes
-          type: submit
-          name: button
-          value: logout
-        children
-        - label|text
-            text: logout

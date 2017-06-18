@@ -25,9 +25,12 @@ namespace effectivecore {
   }
 
   function build() {
+    $elements = factory::collect_children($this->children);
+  # call init handlers
+    events::start('on_form_init', $this->attributes->id, [$this, $elements]);
+  # if current user click the button
     if (isset($_POST['form_id']) &&
               $_POST['form_id'] === $this->attributes->id && isset($_POST['button'])) {
-      $elements = factory::collect_children($this->children);
       $c_button = null;
     # get more info about clicked button
       foreach ($elements as $c_element) {
