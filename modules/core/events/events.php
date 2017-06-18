@@ -7,11 +7,15 @@ namespace effectivecore {
   protected static $data;
 
   static function init() {
-    foreach (storages::get('settings')->select('events') as $c_module_events) {
-      foreach ($c_module_events as $c_type => $c_events) {
-        foreach ($c_events as $c_id => $c_event) static::$data->{$c_type}[$c_id] = $c_event;
-        factory::array_sort_by_weight(static::$data->{$c_type});
+    foreach (storages::get('settings')->select('events') as $module_id => $c_events) {
+      foreach ($c_events as $c_type => $c_events) {
+        foreach ($c_events as $c_id => $c_event) {
+          static::$data->{$c_type}[$module_id.'_'.$c_id] = $c_event;
+        }
       }
+    }
+    foreach (static::$data as &$c_type) {
+      factory::array_sort_by_weight($c_type);
     }
   }
 

@@ -134,7 +134,7 @@ namespace effectivecore {
     $c_weight = 0;
     foreach ($array as $c_item) {
       if ($c_item->weight == 0) {
-        $c_item->weight = ($c_weight += .0001);
+        $c_item->weight = ($c_weight += .0002);
       }
     }
   # sorting

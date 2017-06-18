@@ -3,6 +3,7 @@
 namespace effectivecore {
           use \effectivecore\message_factory as messages;
           use \effectivecore\modules\page\page_factory as pages;
+          use \effectivecore\modules\storage\storage_factory as storages;
           class form extends markup {
 
   public $on_init     = null;
