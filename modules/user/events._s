@@ -7,3 +7,45 @@ events
   - install_user
       handler: \effectivecore\modules\user\events_module::on_install
       weight: 0
+  on_form_validate
+  - on_form_validate_user_login
+      form_id: user_login
+      handler: \effectivecore\events_form::on_validate
+      weight: 0
+  - on_form_validate_user_logout
+      form_id: user_logout
+      handler: \effectivecore\events_form::on_validate
+      weight: 0
+  - on_form_validate_user_n_delete
+      form_id: user_n_delete
+      handler: \effectivecore\events_form::on_validate
+      weight: 0
+  - on_form_validate_user_n_edit
+      form_id: user_n_edit
+      handler: \effectivecore\events_form::on_validate
+      weight: 0
+  - on_form_validate_user_registration
+      form_id: user_registration
+      handler: \effectivecore\events_form::on_validate
+      weight: 0
+  on_form_submit
+  - on_form_submit_user_login
+      form_id: user_login
+      handler: \effectivecore\modules\user\events_form::on_submit_user_login
+      weight: 0
+  - on_form_submit_user_logout
+      form_id: user_logout
+      handler: \effectivecore\modules\user\events_form::on_submit_user_logout
+      weight: 0
+  - on_form_submit_user_n_delete
+      form_id: user_n_delete
+      handler: \effectivecore\modules\user\events_form::on_submit_user_n_delete
+      weight: 0
+  - on_form_submit_user_n_edit
+      form_id: user_n_edit
+      handler: \effectivecore\modules\user\events_form::on_submit_user_n_edit
+      weight: 0
+  - on_form_submit_user_registration
+      form_id: user_registration
+      handler: \effectivecore\modules\user\events_form::on_submit_user_register
+      weight: 0

@@ -5,14 +5,6 @@ forms
       novalidate: novalidate
       method: post
       class: form-user
-    on_validate
-    - on_validate_default
-        handler: \effectivecore\events_form::on_validate
-        weight: 0
-    on_submit
-    - on_submit_default
-        handler: \effectivecore\modules\user\events_form::on_submit_user_n_delete
-        weight: 0
     children
     - button_delete|markup
         tag_name: button

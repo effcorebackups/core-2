@@ -10,25 +10,25 @@ palette
     is_dark: false
 - color_salmon
     value: salmon
-    is_dark: false
+    is_dark: true
 - color_tomato
     value: tomato
-    is_dark: false
+    is_dark: true
 - color_crimson
     value: crimson
-    is_dark: false
+    is_dark: true
 - color_orange
     value: orange
-    is_dark: false
+    is_dark: true
 - color_gold
     value: gold
     is_dark: false
 - color_yellowgreen
     value: yellowgreen
-    is_dark: false
+    is_dark: true
 - color_limegreen
     value: limegreen
-    is_dark: false
+    is_dark: true
 - color_springgreen
     value: springgreen
     is_dark: false
@@ -37,13 +37,13 @@ palette
     is_dark: false
 - color_lightseagreen
     value: lightseagreen
-    is_dark: false
+    is_dark: true
 - color_darkcyan
     value: darkcyan
-    is_dark: false
+    is_dark: true
 - color_original_blue
     value: #216ce4
-    is_dark: false
+    is_dark: true
 - color_original_darkblue
     value: #28334a
-    is_dark: false
+    is_dark: true

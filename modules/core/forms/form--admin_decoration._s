@@ -5,14 +5,6 @@ forms
       novalidate: novalidate
       method: post
       class: form-user
-    on_validate
-    - on_validate_default
-        handler: \effectivecore\events_form::on_validate
-        weight: 0
-    on_submit
-    - on_submit_default
-        handler: \effectivecore\modules\core\events_form::on_submit_admin_decoration
-        weight: 0
     children
     - field_bg_color|markup
         tag_name: select
