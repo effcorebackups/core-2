@@ -39,6 +39,7 @@
   form button:hover {border-color: %%_hover_bg_color; background-color: %%_hover_bg_color}
   form button[value="delete"] {border-color: %%_delete_button_color; background-color: %%_delete_button_color}
   form button[value="delete"]:hover {border-color: %%_hover_bg_color; background-color: %%_hover_bg_color}
+  form button:active {border-color: black; background: %%_hover_bg_color; text-shadow: 0 0 2px black; box-shadow: inset 0 0 12px 2px rgba(0, 0, 0, 0.6)}
 
   /* form-user */
   form.form-user {margin-left: 30%}
