@@ -45,5 +45,6 @@
   form.form-user input {min-width: 283px}
 
   /* form-admin_decoration */
-  form.form-admin_decoration div#field_bg_color input[type="radio"] {display: inline-block; border-color: white}
+  form.form-admin_decoration div#field_bg_color {margin: 5px 0}
+  form.form-admin_decoration div#field_bg_color input[type="radio"] {display: inline-block; margin: 0; border-color: white}
   form.form-admin_decoration div#field_bg_color input[type="radio"]:checked {border-color: black}
