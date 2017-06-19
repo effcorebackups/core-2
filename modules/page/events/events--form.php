@@ -10,9 +10,11 @@ namespace effectivecore\modules\page {
     foreach (storages::get('settings')->select('palette') as $module_id => $c_palette) {
       foreach ($c_palette as $c_color) {
         $elements['field_bg_color']->add_child(
-          new markup('option', [
+          new markup('input', [
+            'type'  => 'radio',
+            'name'  => 'bg_color',
             'value' => $c_color->value,
-            'style' => 'background-color:'.$c_color->value], $c_color->value)
+            'style' => 'background-color:'.$c_color->value])
         );
       }
     }

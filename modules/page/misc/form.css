@@ -19,7 +19,11 @@
     border-radius: 0;
     font-family: 'Arial';
     font-size: 16px}
-  form select {cursor: pointer}
+  form select,
+  form input[type="checkbox"],
+  form input[type="radio"] {cursor: pointer}
+  form input[type="checkbox"]:checked,
+  form input[type="radio"]:checked {border-color: black}
 
   /* buttons */
   form button {
@@ -39,3 +43,7 @@
   /* form-user */
   form.form-user {margin-left: 30%}
   form.form-user input {min-width: 283px}
+
+  /* form-admin_decoration */
+  form.form-admin_decoration div#field_bg_color input[type="radio"] {display: inline-block; border-color: white}
+  form.form-admin_decoration div#field_bg_color input[type="radio"]:checked {border-color: black}
