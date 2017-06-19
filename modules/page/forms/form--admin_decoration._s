@@ -5,13 +5,16 @@ forms
       novalidate: novalidate
       method: post
     children
+    - field_bg_color_label|markup
+        tag_name: label
+        children:
+        - label|text
+            text: Background color
     - field_bg_color|markup
         tag_name: select
         title: Background color
         attributes
           name: bg_color
-          placeholder|text
-            text: Background color
           required: 1
         children
         - option_color_noselected|markup

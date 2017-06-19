@@ -6,14 +6,17 @@ forms
       method: post
       class: form-user
     children
+    - field_password_label|markup
+        tag_name: label
+        children:
+        - label|text
+            text: Password
     - field_password|markup
         tag_name: input
         title: Password
         attributes
           type: password
           name: password
-          placeholder|text
-            text: Password
           required: 1
           minlength: 5
           maxlength: 255
