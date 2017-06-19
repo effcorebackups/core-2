@@ -14,6 +14,7 @@ namespace effectivecore\modules\page {
             'type'  => 'radio',
             'name'  => 'bg_color',
             'value' => $c_color->value,
+            'title' => $c_color->value,
             'style' => 'background-color:'.$c_color->value])
         );
       }
