@@ -11,7 +11,7 @@ namespace effectivecore {
   }
 
   function add_child($child, $id = null) {
-    parent::add_child(
+    return parent::add_child(
       is_string($child) ? new text($child) : $child, $id
     );
   }

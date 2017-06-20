@@ -7,16 +7,20 @@ namespace effectivecore\modules\page {
           abstract class events_form extends \effectivecore\events_form {
 
   static function on_init_admin_decoration($form, $elements) {
-    foreach (storages::get('settings')->select('palette') as $module_id => $c_palette) {
-      foreach ($c_palette as $c_color) {
-        $elements['field_bg_color']->add_child(
+    $decoration = storages::get('settings')->select('decoration');
+    foreach (storages::get('settings')->select('colors') as $module_id => $c_colors) {
+      foreach ($c_colors as $c_color_id => $c_color_info) {
+        $c_element_id = $elements['field_bg_color']->add_child(
           new markup('input', [
             'type'  => 'radio',
             'name'  => 'bg_color',
-            'value' => $c_color->value,
-            'title' => $c_color->value,
-            'style' => 'background-color:'.$c_color->value])
+            'value' => $c_color_id,
+            'title' => $c_color_info->value.' (id: '.$c_color_id.')',
+            'style' => 'background-color:'.$c_color_info->value])
         );
+        if ($c_color_id == $decoration['page']->background_color) {
+          $elements['field_bg_color']->get_child($c_element_id)->add_attribute('checked', 'checked');
+        }
       }
     }
   }

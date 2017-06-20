@@ -25,9 +25,10 @@ namespace effectivecore {
     }
   }
 
-  function add_child($child, $id = null) {
-    $this->children[$id ?: count($this->children)] = $child;
-  }
+  function add_child($child, $id = null) {$id = ($id !== null ? $id : count($this->children)); $this->children[$id] = $child; return $id;}
+  function get_child($id)                {return $this->children[$id];}
+  function add_attribute($key, $value)   {$this->attributes[$key] = $value;}
+  function get_attribute($key)           {return $this->attributes[$key];}
 
   function render() {
     return $this->render_self().
