@@ -6,9 +6,11 @@ namespace effectivecore {
           use \effectivecore\modules\storage\storage_factory as storages;
           class form extends markup {
 
-  public $on_init     = null;
-  public $on_validate = null;
-  public $on_submit   = null;
+  public $on_init             = null;
+  public $on_validate         = null;
+  public $on_submit           = null;
+  public $clicked_button      = null;
+  public $clicked_button_name = null;
   public $errors = [];
 
   function __construct($attributes = null, $children = null, $weight = 0) {
@@ -31,18 +33,18 @@ namespace effectivecore {
   # if current user click the button
     if (isset($_POST['form_id']) &&
               $_POST['form_id'] === $this->attributes->id && isset($_POST['button'])) {
-      $c_button = null;
     # get more info about clicked button
       foreach ($elements as $c_element) {
         if (isset($c_element->attributes->type) &&
                   $c_element->attributes->type == 'submit' &&
                   $c_element->attributes->value == $_POST['button']) {
-          $c_button = $c_element;
+          $this->clicked_button      = $c_element;
+          $this->clicked_button_name = $c_element->attributes->value;
           break;
         }
       }
     # call validate handlers
-      if (empty($c_button->novalidate)) {
+      if (empty($this->clicked_button->novalidate)) {
         events::start('on_form_validate', $this->attributes->id, [$this, $elements]);
       }
     # show errors and set error class

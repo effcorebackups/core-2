@@ -13,8 +13,7 @@ namespace effectivecore\modules\user {
 
   static function on_submit_user_n_delete($form, $elements) {
     $user_id = pages::$args['user_id'];
-    $button  = isset($_POST['button']) ? $_POST['button'] : '';
-    switch ($button) {
+    switch ($form->clicked_button_name) {
       case 'delete':
         $result = (new entity_instance('entities/user/user', [
           'id' => $user_id,
@@ -41,8 +40,7 @@ namespace effectivecore\modules\user {
   static function on_submit_user_n_edit($form, $elements) {
     $user_id       = pages::$args['user_id'];
     $password_hash = isset($_POST['password']) ? sha1($_POST['password']) : '';
-    $button        = isset($_POST['button'])   ? $_POST['button']         : '';
-    switch ($button) {
+    switch ($form->clicked_button_name) {
       case 'save':
         $result = (new entity_instance('entities/user/user', [
           'id'            => $user_id,
@@ -64,8 +62,7 @@ namespace effectivecore\modules\user {
   static function on_submit_user_login($form, $elements) {
     $email         = isset($_POST['email'])    ? $_POST['email']          : '';
     $password_hash = isset($_POST['password']) ? sha1($_POST['password']) : '';
-    $button        = isset($_POST['button'])   ? $_POST['button']         : '';
-    switch ($button) {
+    switch ($form->clicked_button_name) {
       case 'login':
         $user = (new entity_instance('entities/user/user', [
           'email' => $email
@@ -85,8 +82,7 @@ namespace effectivecore\modules\user {
   static function on_submit_user_register($form, $elements) {
     $email         = isset($_POST['email'])    ? $_POST['email']          : '';
     $password_hash = isset($_POST['password']) ? sha1($_POST['password']) : '';
-    $button        = isset($_POST['button'])   ? $_POST['button']         : '';
-    switch ($button) {
+    switch ($form->clicked_button_name) {
       case 'register':
         $user = (new entity_instance('entities/user/user', [
           'email' => $email
@@ -111,8 +107,7 @@ namespace effectivecore\modules\user {
   }
 
   static function on_submit_user_logout($form, $elements) {
-    $button = isset($_POST['button']) ? $_POST['button'] : '';
-    switch ($button) {
+    switch ($form->clicked_button_name) {
       case 'logout':
         session::destroy(users::get_current()->id);
         urls::go('/');

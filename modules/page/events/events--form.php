@@ -15,7 +15,7 @@ namespace effectivecore\modules\page {
             'type'  => 'radio',
             'name'  => 'bg_color',
             'value' => $c_color_id,
-            'title' => $c_color_info->value.' (id: '.$c_color_id.')',
+            'title' => $c_color_id.' ('.$c_color_info->value.')',
             'style' => 'background-color:'.$c_color_info->value])
         );
         if ($c_color_id == $decoration['page']->background_color) {
@@ -26,7 +26,11 @@ namespace effectivecore\modules\page {
   }
 
   static function on_submit_admin_decoration($form, $elements) {
-    messages::add_new('Test');
+    storages::get('settings')->changes_register_action('page', (object)[
+      'action' => 'update',
+      'npath'  => 'decoration/page/background_color',
+      'value'  => $_POST['bg_color']
+    ]);
   }
 
 }}
