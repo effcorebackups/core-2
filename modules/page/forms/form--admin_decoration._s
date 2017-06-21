@@ -6,15 +6,23 @@ forms
       method: post
       class: form-admin_decoration
     children
-    - field_bg_color_label|markup
-        tag_name: label
-        children:
-        - content|text
-            text: Background color
-    - field_bg_color|markup
-        tag_name: div
-        attributes
-          id: field_bg_color
+    - fieldset_main|markup
+        tag_name: fieldset
+        children
+        - fieldset_main_legend|markup
+            tag_name: legend
+            children
+            - content|text
+                text: Colors
+        - field_bg_color_label|markup
+            tag_name: label
+            children:
+            - content|text
+                text: Background color
+        - field_bg_color|markup
+            tag_name: div
+            attributes
+              id: field_bg_color
     - button_save|markup
         tag_name: button
         attributes
