@@ -11,3 +11,7 @@ tokens
     match: %%_context_user_mail
     type: code
     handler: \effectivecore\modules\user\events_token::on_replace
+- text_no_items
+    match: %%_text_no_items
+    type: translated_text
+    value: no items

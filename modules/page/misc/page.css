@@ -39,9 +39,11 @@
   main table {border-collapse: collapse; width: 100%; margin: 20px 0}
   main table thead {border-bottom: 5px solid %%_bg_color}
   main table thead th {padding: 12px 15px; font-weight: normal; font-size: 1.2em; text-align: left}
+  main table tbody {background: white}
   main table td {padding: 12px 15px; border: 1px solid %%_border_color}
-  main table td.no-items {color: %%_table_noitems_color}
   main table tr:nth-child(even) td {background-color: %%_table_even_bg_color}
+  main table tr td:empty {color: %%_table_noitems_color}
+  main table tr td:empty:after {content: "%%_text_no_items"}
 
   /* actions */
   ul.actions,

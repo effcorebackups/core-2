@@ -1,6 +1,7 @@
 <?php
 
 namespace effectivecore {
+          use \effectivecore\translate_factory as translations;
           use \effectivecore\modules\storage\storage_factory as storages;
           abstract class token_factory {
 
@@ -27,6 +28,7 @@ namespace effectivecore {
       switch (static::$data[$match]->type) {
         case 'code': return call_user_func(static::$data[$match]->handler, $match, $arg_1);
         case 'text': return static::$data[$match]->value;
+        case 'translated_text': return translations::get(static::$data[$match]->value);
       }
     } else {
       return '';

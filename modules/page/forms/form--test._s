@@ -142,6 +142,94 @@ forms
             children
             - content|text
                 text: text in textarea
+        - field_table|markup
+            tag_name: table
+            children
+            - thead|markup
+                tag_name: thead
+                children
+                - thead_tr|markup
+                    tag_name: tr
+                    children
+                    - thead_tr_th_1|markup
+                        tag_name: th
+                        children
+                        - content|text
+                            text: th 1
+                    - thead_tr_th_2|markup
+                        tag_name: th
+                        children
+                        - content|text
+                            text: th 2
+                    - thead_tr_th_3|markup
+                        tag_name: th
+                        children
+                        - content|text
+                            text: th 3
+            - tbody|markup
+                tag_name: tbody
+                children
+                - tbody_tr_1|markup
+                    tag_name: tr
+                    children
+                    - tbody_tr_1_td_1|markup
+                        tag_name: td
+                        children
+                        - content|text
+                            text: td 1
+                    - tbody_tr_1_td_2|markup
+                        tag_name: td
+                        children
+                        - content|text
+                            text: td 2
+                    - tbody_tr_1_td_3|markup
+                        tag_name: td
+                        children
+                        - content|text
+                            text: td 3
+                - tbody_tr_2|markup
+                    tag_name: tr
+                    children
+                    - tbody_tr_2_td_1|markup
+                        tag_name: td
+                        children
+                        - content|text
+                            text: td 4
+                    - tbody_tr_2_td_2|markup
+                        tag_name: td
+                        children
+                        - content|text
+                            text: td 5
+                    - tbody_tr_2_td_3|markup
+                        tag_name: td
+                        children
+                        - content|text
+                            text: td 6
+                - tbody_tr_3|markup
+                    tag_name: tr
+                    children
+                    - tbody_tr_3_td_1|markup
+                        tag_name: td
+                        children
+                        - content|text
+                            text: td 5
+                    - tbody_tr_3_td_2|markup
+                        tag_name: td
+                        children
+                        - content|text
+                            text: td 6
+                    - tbody_tr_3_td_3|markup
+                        tag_name: td
+                        children
+                        - content|text
+                            text: td 7
+                - tbody_tr_no_items|markup
+                    tag_name: tr
+                    children
+                    - tbody_tr_4_td_1|markup
+                        tag_name: td
+                        attributes
+                          colspan: 3
 ###############################################################
     - button_save|markup
         tag_name: button
