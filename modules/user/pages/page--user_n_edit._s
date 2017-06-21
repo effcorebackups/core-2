@@ -1,6 +1,6 @@
 pages
 - page_user_n_edit|page
-    title: Edit profile (%%_context_user_mail-2)
+    title: Edit profile (%%_user_email_context-2)
     https: true
     url
       match: %^/user/[0-9]+/edit$%

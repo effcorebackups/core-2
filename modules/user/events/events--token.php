@@ -12,7 +12,7 @@ namespace effectivecore\modules\user {
       switch ($match) {
         case '%%_user_id'   : return users::get_current()->id;
         case '%%_user_email': return users::get_current()->email;
-        case '%%_context_user_mail':
+        case '%%_user_email_context':
           $arg_1_value = urls::get_current()->get_args($arg_1_num);
           if (users::get_current()->id == $arg_1_value) {
             return translations::get('my account');
