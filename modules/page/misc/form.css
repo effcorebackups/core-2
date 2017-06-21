@@ -16,15 +16,19 @@
   form textarea {
     -webkit-appearance: none;
     display: block;
-    margin: 5px 5px 5px 0;
+    margin: 10px 10px 10px 0;
     padding: 10px;
     border: 3px solid %%_bg_color;
     border-radius: 0;
     font-family: 'Arial';
     font-size: 16px}
+  form input[type="checkbox"],
+  form input[type="radio"] {display: inline-block; vertical-align: middle; cursor: pointer}
+  form input[type="checkbox"]:checked,
+  form input[type="radio"]:checked {border-color: black}
+  form label input {margin: 0 2px 2px 0}
   form select {cursor: pointer}
-  form input[type="checkbox"],         form input[type="radio"]         {display: inline-block; cursor: pointer}
-  form input[type="checkbox"]:checked, form input[type="radio"]:checked {border-color: black}
+  form textarea {width: 70%; min-width: 100px}
 
   /* buttons */
   form button {
