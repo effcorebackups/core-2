@@ -1,7 +1,7 @@
 
   /* form */
   form {margin: 70px 0}
-  form .error {border-color: %%_error_color}
+  form .error {border-color: %%_color_error}
 
   form fieldset {margin: 100px 0 30px 0; padding: 10px 16px; border: 1px solid gainsboro; border-top: 5px solid black; background: whitesmoke}
   form fieldset legend {position: absolute; margin: -60px 0 0 -20px; font-size: 1.5em}
@@ -18,7 +18,7 @@
     display: block;
     margin: 10px 10px 10px 0;
     padding: 10px;
-    border: 3px solid %%_bg_color;
+    border: 3px solid %%_color_bg;
     border-radius: 0;
     font-family: 'Arial';
     font-size: 16px}
@@ -36,15 +36,15 @@
     margin: 5px 5px 5px 17px;
     padding: 10px 30px;
     cursor: pointer;
-    border: 3px solid %%_bg_color;
+    border: 3px solid %%_color_bg;
     font-family: 'Arial';
     font-size: 16px;
     color: white;
-    background: %%_bg_color}
-  form button:hover {border-color: %%_hover_bg_color; background-color: %%_hover_bg_color}
-  form button:active {border-color: black; background: %%_hover_bg_color; text-shadow: 0 0 2px black; box-shadow: inset 0 0 12px 2px rgba(0, 0, 0, 0.6)}
-  form button[value="delete"] {border-color: %%_warning_color; background-color: %%_warning_color}
-  form button[value="delete"]:hover {border-color: %%_hover_bg_color; background-color: %%_hover_bg_color}
+    background: %%_color_bg}
+  form button:hover {border-color: %%_color_hover_bg; background-color: %%_color_hover_bg}
+  form button:active {border-color: black; background: %%_color_hover_bg; text-shadow: 0 0 2px black; box-shadow: inset 0 0 12px 2px rgba(0, 0, 0, 0.6)}
+  form button[value="delete"] {border-color: %%_color_warning; background-color: %%_color_warning}
+  form button[value="delete"]:hover {border-color: %%_color_hover_bg; background-color: %%_color_hover_bg}
 
   /* form-user */
   form.form-user button {width: 202px}

@@ -3,42 +3,42 @@ tokens
     match: %%_color
     type: text
     value: black
-- bg_color
-    match: %%_bg_color
+- color_bg
+    match: %%_color_bg
     type: text
     value: #216ce4
-- hover_color
-    match: %%_hover_color
+- color_hover
+    match: %%_color_hover
     type: text
     value: #81a5eb
-- hover_bg_color
-    match: %%_hover_bg_color
+- color_hover_bg
+    match: %%_color_hover_bg
     type: text
     value: #28334a
 ###############################################################
-- border_color
-    match: %%_border_color
+- color_border
+    match: %%_color_border
     type: text
     value: gainsboro
 ###############################################################
-- table_noitems_color
-    match: %%_table_noitems_color
+- color_table_noitems
+    match: %%_color_table_noitems
     type: text
     value: gainsboro
-- table_even_bg_color
-    match: %%_table_even_bg_color
+- color_table_even_bg
+    match: %%_color_table_even_bg
     type: text
     value: whitesmoke
 ###############################################################
-- ok_color
-    match: %%_ok_color
+- color_ok
+    match: %%_color_ok
     type: text
     value: limegreen
-- error_color
-    match: %%_error_color
+- color_error
+    match: %%_color_error
     type: text
     value: tomato
-- warning_color
-    match: %%_warning_color
+- color_warning
+    match: %%_color_warning
     type: text
     value: orange

@@ -9,15 +9,15 @@
   nav x-tree.user > ul > li {float: right}
 
   /* tree colors */
-  nav x-tree > ul > li:hover {background: %%_hover_bg_color}
+  nav x-tree > ul > li:hover {background: %%_color_hover_bg}
   nav x-tree > ul > li > a {color: white}
   nav x-tree > ul > li > a.active,
-  nav x-tree > ul > li > a[href]:hover {color: %%_hover_color}
+  nav x-tree > ul > li > a[href]:hover {color: %%_color_hover}
   nav x-tree > ul > li > a:hover {color: white}
   nav x-tree > ul > li > ul a {color: white}
   nav x-tree > ul > li > ul a.active,
-  nav x-tree > ul > li > ul a:hover {color: %%_hover_color}
-  nav x-tree > ul > li > ul {background: %%_hover_bg_color}
+  nav x-tree > ul > li > ul a:hover {color: %%_color_hover}
+  nav x-tree > ul > li > ul {background: %%_color_hover_bg}
 
   /* tree dynamic */
   nav x-tree > ul > li > ul {display: none}
