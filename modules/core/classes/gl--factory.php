@@ -9,6 +9,10 @@ namespace effectivecore {
 
   static $cache;
 
+  #############################
+  ### classes manipulations ###
+  #############################
+
   static function autoload($name) {
     foreach (static::get_classes_map() as $c_class_name => $c_class_info) {
       if ($c_class_name == $name) {
@@ -59,23 +63,9 @@ namespace effectivecore {
     return end($parts);
   }
 
-
-
-  static function send_header_and_exit($header, $message = '', $p = '') {
-    switch ($header) {
-      case 'redirect'      : header('Location: '.$p); break;
-      case 'page_refresh'  : header('Refresh: '.$p); break;
-      case 'access_denided': header('HTTP/1.1 403 Forbidden'); break;
-      case 'not_found'     : header('HTTP/1.0 404 Not Found'); break;
-    }
-    if ($message) {
-      print $message;
-      print '<style>body{padding:30px;font-family:Arial;font-size:24px;text-align:center}</style>';
-    }
-    exit();
-  }
-
-
+  ##########################
+  ### data manipulations ###
+  ##########################
 
   static function data_to_attr($data, $join_part = null, $key_wrapper = '', $value_wrapper = '"') {
     $return = [];
@@ -109,15 +99,17 @@ namespace effectivecore {
           $return.= static::data_export($c_value, $prefix.'->'.$c_key);
         }
         break;
-      case 'boolean': $return.= $prefix.' = '.($data ? 'true' : 'false').';'.nl; break;
-      case 'string' : $return.= $prefix.' = \''.addslashes($data).'\';'.nl;      break;
-      case 'NULL'   : $return.= $prefix.' = null;'.nl;                           break;
+      case 'boolean': $return.= $prefix.' = '.($data ? 'true' : 'false').';'.nl;                    break;
+      case 'NULL'   : $return.= $prefix.' = null;'.nl;                                              break;
+      case 'string' : $return.= $prefix.' = \''.str_replace('\"', '"', addslashes($data)).'\';'.nl; break;
       default       : $return.= $prefix.' = '.$data.';'.nl;
     }
     return $return;
   }
 
-
+  ###########################
+  ### array manipulations ###
+  ###########################
 
   static function array_rotate($data) {
     $return = [];
@@ -142,8 +134,6 @@ namespace effectivecore {
     return $array;
   }
 
-
-
   static function collect_by_property($data, $prop_name, $prop_for_id = null) {
     $return = [];
     foreach ($data as $c_item) {
@@ -165,7 +155,9 @@ namespace effectivecore {
     return $return;
   }
 
-
+  #######################
+  ### npath functions ###
+  #######################
 
   static function &npath_get_pointer($npath, &$p) {
     if (isset(static::$cache[__FUNCTION__][$npath]))
@@ -193,13 +185,29 @@ namespace effectivecore {
     return $p;
   }
 
+  ########################
+  ### shared functions ###
+  ########################
 
+  static function send_header_and_exit($header, $message = '', $p = '') {
+    switch ($header) {
+      case 'redirect'      : header('Location: '.$p);          break;
+      case 'page_refresh'  : header('Refresh: ' .$p);          break;
+      case 'access_denided': header('HTTP/1.1 403 Forbidden'); break;
+      case 'not_found'     : header('HTTP/1.0 404 Not Found'); break;
+    }
+    if ($message) {
+      print $message;
+      print '<style>'.
+              'body {padding: 30px; font-family: Arial; font-size: 24px; text-align: center}'.
+            '</style>';
+    }
+    exit();
+  }
 
   static function _compare_by_weight($a, $b) {
     return $a->weight == $b->weight ? 0 : ($a->weight < $b->weight ? -1 : 1);
   }
-
-
 
   static function to_css_class($string) {
     return str_replace(['/', ' '], '-', strtolower($string));

@@ -15,23 +15,6 @@ forms
         tag_name: div
         attributes
           id: field_bg_color
-    - field_test_textarea|markup
-        tag_name: textarea
-        title: Textarea
-        attributes
-          name: field_test_textarea
-        children
-        - content|text
-            text: text in textarea
-    - field_test_input|markup
-        tag_name: input
-        title: Input
-        attributes
-          type: text
-          name: field_test_input
-          value: text in input
-          required: 1
-          maxlength: 255
     - button_save|markup
         tag_name: button
         attributes

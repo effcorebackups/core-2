@@ -1,0 +1,46 @@
+forms
+- form_test|form
+    attributes
+      id: form_test
+      novalidate: novalidate
+      method: post
+      class: form-test
+    children
+    - field_textarea_label|markup
+        tag_name: label
+        children
+        - content|text
+            text: Element &lt;textarea&gt;&lt;/textarea&gt;
+    - field_textarea|markup
+        tag_name: textarea
+        title: Textarea
+        attributes
+          name: field_textarea
+        children
+        - content|text
+            text: text in textarea
+    - field_input_text_label|markup
+        tag_name: label
+        children
+        - content|text
+            text: Element &lt;input type="text"&gt;
+    - field_input_text|markup
+        tag_name: input
+        title: Input (type=text)
+        attributes
+          type: text
+          name: field_input_text
+          value|text
+            text: text in input
+          required: 1
+          minlength: 5
+          maxlength: 255
+    - button_save|markup
+        tag_name: button
+        attributes
+          type: submit
+          name: button
+          value: save
+        children
+        - label|text
+            text: save

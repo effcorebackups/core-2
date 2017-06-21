@@ -19,3 +19,7 @@ pages
         region: content_1_1
         type: link
         link: forms/page/form_admin_decoration
+    - form_test
+        region: content_1_1
+        type: link
+        link: forms/page/form_test

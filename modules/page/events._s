@@ -11,6 +11,9 @@ events
   - admin_decoration
       handler: \effectivecore\events_form::on_validate
       weight: 0
+  - form_test
+      handler: \effectivecore\events_form::on_validate
+      weight: 0
   on_form_submit
   - admin_decoration
       handler: \effectivecore\modules\page\events_form::on_submit_admin_decoration
