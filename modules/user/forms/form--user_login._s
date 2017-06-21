@@ -6,33 +6,36 @@ forms
       method: post
       class: form-user
     children
-    - field_email_label|markup
-        tag_name: label
-        children:
-        - label|text
-            text: Email
-    - field_email|markup
-        tag_name: input
-        title: Email
-        attributes
-          type: email
-          name: email
-          required: required
-          maxlength: 255
-    - field_password_label|markup
-        tag_name: label
-        children:
-        - label|text
-            text: Password
-    - field_password|markup
-        tag_name: input
-        title: Password
-        attributes
-          type: password
-          name: password
-          required: required
-          minlength: 5
-          maxlength: 255
+    - fieldset_main|markup
+        tag_name: fieldset
+        children
+        - field_email_label|markup
+            tag_name: label
+            children:
+            - label|text
+                text: Email
+        - field_email|markup
+            tag_name: input
+            title: Email
+            attributes
+              type: email
+              name: email
+              required: required
+              maxlength: 255
+        - field_password_label|markup
+            tag_name: label
+            children:
+            - label|text
+                text: Password
+        - field_password|markup
+            tag_name: input
+            title: Password
+            attributes
+              type: password
+              name: password
+              required: required
+              minlength: 5
+              maxlength: 255
     - button_login|markup
         tag_name: button
         attributes
