@@ -6,35 +6,70 @@ forms
       method: post
       class: form-test
     children
-    - field_textarea_label|markup
-        tag_name: label
+    - fieldset_main|markup
+        tag_name: fieldset
         children
-        - content|text
-            text: Element &lt;textarea&gt;&lt;/textarea&gt;
-    - field_textarea|markup
-        tag_name: textarea
-        title: Textarea
-        attributes
-          name: field_textarea
-        children
-        - content|text
-            text: text in textarea
-    - field_input_text_label|markup
-        tag_name: label
-        children
-        - content|text
-            text: Element &lt;input type="text"&gt;
-    - field_input_text|markup
-        tag_name: input
-        title: Input (type=text)
-        attributes
-          type: text
-          name: field_input_text
-          value|text
-            text: text in input
-          required: 1
-          minlength: 5
-          maxlength: 255
+        - fieldset_main_legend|markup
+            tag_name: legend
+            children
+            - content|text
+                text: Element &lt;legend&gt;&lt;/legend&gt;
+        - field_textarea_label|markup
+            tag_name: label
+            children
+            - content|text
+                text: Element &lt;textarea&gt;&lt;/textarea&gt;
+        - field_textarea|markup
+            tag_name: textarea
+            title: Textarea
+            attributes
+              name: field_textarea
+            children
+            - content|text
+                text: text in textarea
+        - field_input_text_label|markup
+            tag_name: label
+            children
+            - content|text
+                text: Element &lt;input type="text"&gt;
+        - field_input_text|markup
+            tag_name: input
+            title: Input (type=text)
+            attributes
+              type: text
+              name: field_input_text
+              value|text
+                text: text in input
+              required: 1
+              minlength: 5
+              maxlength: 255
+        - field_input_password_label|markup
+            tag_name: label
+            children
+            - content|text
+                text: Element &lt;input type="password"&gt;
+        - field_input_password|markup
+            tag_name: input
+            title: Input (type=password)
+            attributes
+              type: password
+              name: field_input_password
+              value|text
+                text: text in password
+              required: 1
+              minlength: 5
+              maxlength: 255
+        - field_input_file_label|markup
+            tag_name: label
+            children
+            - content|text
+                text: Element &lt;input type="file"&gt;
+        - field_input_file|markup
+            tag_name: input
+            title: Input (type=file)
+            attributes
+              type: file
+              name: field_input_file
     - button_save|markup
         tag_name: button
         attributes
