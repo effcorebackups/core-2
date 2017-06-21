@@ -1,6 +1,6 @@
 
 
-  body {margin: 0; padding: 0 40px; font-family: 'Arial'; font-size: 15px; line-height: 1.5em; color: black; background: white}
+  body {margin: 0; padding: 0 40px; font-family: 'Arial'; font-size: 15px; line-height: 1.5em; color: %%_color; background: white}
 
   /* page sizes */
   nav          {display: block; max-width: 800px; margin: 0 auto; background: %%_bg_color}
@@ -39,9 +39,9 @@
   main table {border-collapse: collapse; width: 100%; margin: 20px 0}
   main table thead {border-bottom: 5px solid %%_bg_color}
   main table thead th {padding: 12px 15px; font-weight: normal; font-size: 1.2em; text-align: left}
-  main table td {padding: 12px 15px; border: 1px solid %%_border_color; background-color: %%_table_bg_color}
+  main table td {padding: 12px 15px; border: 1px solid %%_border_color}
   main table td.no-items {color: %%_table_noitems_color}
-  main table tr:nth-child(odd) td {background-color: white}
+  main table tr:nth-child(even) td {background-color: %%_table_even_bg_color}
 
   /* actions */
   ul.actions,

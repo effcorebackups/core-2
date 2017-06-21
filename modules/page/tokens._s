@@ -1,20 +1,12 @@
 tokens
-- border_color
-    match: %%_border_color
+- color
+    match: %%_color
     type: text
-    value: gainsboro
+    value: black
 - bg_color
     match: %%_bg_color
     type: text
     value: #216ce4
-- table_noitems_color
-    match: %%_table_noitems_color
-    type: text
-    value: gainsboro
-- table_bg_color
-    match: %%_table_bg_color
-    type: text
-    value: whitesmoke
 - hover_color
     match: %%_hover_color
     type: text
@@ -23,6 +15,21 @@ tokens
     match: %%_hover_bg_color
     type: text
     value: #28334a
+###############################################################
+- border_color
+    match: %%_border_color
+    type: text
+    value: gainsboro
+###############################################################
+- table_noitems_color
+    match: %%_table_noitems_color
+    type: text
+    value: gainsboro
+- table_even_bg_color
+    match: %%_table_even_bg_color
+    type: text
+    value: whitesmoke
+###############################################################
 - ok_color
     match: %%_ok_color
     type: text
@@ -35,7 +42,3 @@ tokens
     match: %%_warning_color
     type: text
     value: orange
-- delete_button_color
-    match: %%_delete_button_color
-    type: text
-    value: tomato
