@@ -7,7 +7,10 @@
   h1           {display: block; max-width: 800px}
   main         {display: block; max-width: 800px; margin: 0 auto; min-height: 200px}
   x-messages   {display: block; max-width: 800px; margin: 50px auto}
-  x-copyright  {display: block; max-width: 800px; margin: 0 auto; padding: 20px; font-size: .8em; color: white; text-align: right; background: %%_hover_bg_color}
+  x-copyright  {display: block; max-width: 800px; margin: 0 auto}
+
+  /* copyright */
+  x-copyright x-text {display: block; padding: 10px 20px; text-align: right; font-size: .8em; color: white; background: %%_hover_bg_color}
 
   nav:after {content: ''; clear: both; display: block}
 

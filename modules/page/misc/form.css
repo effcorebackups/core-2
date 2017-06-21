@@ -22,11 +22,9 @@
     border-radius: 0;
     font-family: 'Arial';
     font-size: 16px}
-  form select,
-  form input[type="checkbox"],
-  form input[type="radio"] {cursor: pointer}
-  form input[type="checkbox"]:checked,
-  form input[type="radio"]:checked {border-color: black}
+  form select {cursor: pointer}
+  form input[type="checkbox"],         form input[type="radio"]         {display: inline-block; cursor: pointer}
+  form input[type="checkbox"]:checked, form input[type="radio"]:checked {border-color: black}
 
   /* buttons */
   form button {

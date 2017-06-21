@@ -14,19 +14,6 @@ forms
             children
             - content|text
                 text: Element &lt;legend&gt;&lt;/legend&gt;
-        - field_textarea_label|markup
-            tag_name: label
-            children
-            - content|text
-                text: Element &lt;textarea&gt;&lt;/textarea&gt;
-        - field_textarea|markup
-            tag_name: textarea
-            title: Textarea
-            attributes
-              name: field_textarea
-            children
-            - content|text
-                text: text in textarea
         - field_input_text_label|markup
             tag_name: label
             children
@@ -70,6 +57,84 @@ forms
             attributes
               type: file
               name: field_input_file
+        - field_select_label|markup
+            tag_name: label
+            children
+            - content|text
+                text: Element &lt;select&gt;
+        - field_select|markup
+            tag_name: select
+            title: Select
+            attributes
+              name: field_select
+            children
+            - option_1|markup
+                tag_name: option
+                attributes
+                  name: option_1
+                children
+                - content|text
+                    text: Option 1
+            - option_2|markup
+                tag_name: option
+                attributes
+                  name: option_2
+                children
+                - content|text
+                    text: Option 2
+            - option_3|markup
+                tag_name: option
+                attributes
+                  name: option_3
+                children
+                - content|text
+                    text: Option 3
+        - field_input_checkbox_1|markup
+            tag_name: input
+            title: Input 1 (type=checkbox)
+            attributes
+              type: checkbox
+              name: field_input_checkbox_1
+        - field_input_checkbox_1_label|markup
+            tag_name: label
+            children
+            - content|text
+                text: Element 1 &lt;input type="checkbox"&gt;
+        - field_input_checkbox_2|markup
+            tag_name: input
+            title: Input 2 (type=checkbox)
+            attributes
+              type: checkbox
+              name: field_input_checkbox_2
+        - field_input_checkbox_2_label|markup
+            tag_name: label
+            children
+            - content|text
+                text: Element 2 &lt;input type="checkbox"&gt;
+        - field_input_checkbox_3|markup
+            tag_name: input
+            title: Input 3 (type=checkbox)
+            attributes
+              type: checkbox
+              name: field_input_checkbox_3
+        - field_input_checkbox_3_label|markup
+            tag_name: label
+            children
+            - content|text
+                text: Element 3 &lt;input type="checkbox"&gt;
+        - field_textarea_label|markup
+            tag_name: label
+            children
+            - content|text
+                text: Element &lt;textarea&gt;&lt;/textarea&gt;
+        - field_textarea|markup
+            tag_name: textarea
+            title: Textarea
+            attributes
+              name: field_textarea
+            children
+            - content|text
+                text: text in textarea
     - button_save|markup
         tag_name: button
         attributes
