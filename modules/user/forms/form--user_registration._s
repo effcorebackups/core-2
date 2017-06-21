@@ -17,7 +17,7 @@ forms
         attributes
           type: email
           name: email
-          required: 1
+          required: required
           maxlength: 255
     - field_password_label|markup
         tag_name: label
@@ -30,7 +30,7 @@ forms
         attributes
           type: password
           name: password
-          required: 1
+          required: required
           minlength: 5
           maxlength: 255
     - button_register|markup

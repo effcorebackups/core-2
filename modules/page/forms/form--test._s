@@ -28,7 +28,7 @@ forms
               name: field_input_text
               value|text
                 text: text in input
-              required: 1
+              required: required
               minlength: 5
               maxlength: 255
 ###############################################################
@@ -45,7 +45,7 @@ forms
               name: field_input_password
               value|text
                 text: text in password
-              required: 1
+              required: required
               minlength: 5
               maxlength: 255
 ###############################################################
@@ -76,21 +76,21 @@ forms
             - option_1|markup
                 tag_name: option
                 attributes
-                  name: option_1
+                  value: option_1
                 children
                 - content|text
                     text: Option 1
             - option_2|markup
                 tag_name: option
                 attributes
-                  name: option_2
+                  value: option_2
                 children
                 - content|text
                     text: Option 2
             - option_3|markup
                 tag_name: option
                 attributes
-                  name: option_3
+                  value: option_3
                 children
                 - content|text
                     text: Option 3
