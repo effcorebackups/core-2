@@ -59,8 +59,12 @@ namespace effectivecore {
     $path = dir_root.ltrim(urls::get_current()->path, '/');
     if (is_file($path) && is_readable($path)) {
       $data = (new file($path))->load();
-      header('Cache-Control: max-age=604800');
-      if (isset($file_types[$extension]->mime)) header('Content-type: '.$file_types[$extension]->mime, true);
+    # send headers
+      if (is_array($file_types[$extension]->headers)) {
+        foreach ($file_types[$extension]->headers as $c_header_key => $c_header_value) {
+          header($c_header_key.': '.$c_header_value, true);
+        }
+      }
       if (isset($file_types[$extension]->use_tokens)) $data = tokens::replace($data);
       print $data;
       exit();

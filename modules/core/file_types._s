@@ -1,18 +1,31 @@
 file_types
 - php
-    mime: text/html
     protected: 1
+    headers
+    - Content-type: text/html
 - css
-    mime: text/css
     use_tokens: 1
-- svg:
-    mime: image/svg+xml
+    headers
+    - Content-type: text/css
+    - Cache-Control: max-age=604800
+- svg
     use_tokens: 1
-- js:
-    mime: text/javascript
-- gif:
-    mime: image/gif
-- jpg:
-    mime: image/jpeg
-- png:
-    mime: image/png
+    headers
+    - Content-type: image/svg+xml
+    - Cache-Control: max-age=604800
+- js
+    headers
+    - Content-type: application/javascript
+    - Cache-Control: max-age=604800
+- gif
+    headers
+    - Content-type: image/gif
+    - Cache-Control: max-age=604800
+- jpg
+    headers
+    - Content-type: image/jpeg
+    - Cache-Control: max-age=604800
+- png
+    headers
+    - Content-type: image/png
+    - Cache-Control: max-age=604800
