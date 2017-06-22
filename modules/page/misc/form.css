@@ -33,7 +33,7 @@
   /* buttons */
   form button {
     min-width: 150px;
-    margin: 5px 5px 5px 17px;
+    margin: 5px 5px 5px 0;
     padding: 10px 30px;
     cursor: pointer;
     border: 3px solid %%_color_bg;
@@ -47,9 +47,9 @@
   form button[value="delete"]:hover {border-color: %%_color_hover_bg; background-color: %%_color_hover_bg}
 
   /* form-user */
-  form.form-user button {width: 202px}
+  form.form-user button {}
   form#user_n_delete,
-  form#user_logout {width: 463px; margin: 100px auto}
+  form#user_logout {width: 320px; margin: 100px auto}
 
   /* form-admin_decoration */
   form.form-admin_decoration div#field_bg_color {margin: 5px 0}

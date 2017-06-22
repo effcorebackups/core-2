@@ -7,10 +7,7 @@
   h1           {display: block; max-width: 800px}
   main         {display: block; max-width: 800px; margin: 0 auto; min-height: 200px}
   x-messages   {display: block; max-width: 800px; margin: 50px auto}
-  x-copyright  {display: block; max-width: 800px; margin: 0 auto}
-
-  /* copyright */
-  x-copyright x-text {display: block; padding: 10px 20px; text-align: right; font-size: .8em; color: white; background: %%_color_hover_bg}
+  x-copyright  {display: block; max-width: 800px; margin: 0 auto; padding: 50px 0; text-align: center; font-size: .8em}
 
   nav:after {content: ''; clear: both; display: block}
 
@@ -20,9 +17,11 @@
   h3 {margin: 2em auto 1em auto; font-size: 1em}
 
   /* links */
-  a        {color: %%_color_bg}
-  a:hover  {color: black}
-  a.active {color: black}
+  a             {color: %%_color_bg}
+  a:hover       {color: black}
+  a.active      {color: black}
+  x-copyright a {color: black}
+  x-copyright a:hover {color: %%_color_bg}
 
   /* universal classes */
   .hidden {display: none}
