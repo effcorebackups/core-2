@@ -14,7 +14,7 @@ forms
             children
             - content|text
                 text: Element &lt;legend&gt;&lt;/legend&gt;
-###############################################################
+      # field_input_text
         - field_input_text_label|markup
             tag_name: label
             children
@@ -31,7 +31,7 @@ forms
               required: required
               minlength: 5
               maxlength: 255
-###############################################################
+      # field_input_password
         - field_input_password_label|markup
             tag_name: label
             children
@@ -48,7 +48,7 @@ forms
               required: required
               minlength: 5
               maxlength: 255
-###############################################################
+      # field_input_file
         - field_input_file_label|markup
             tag_name: label
             children
@@ -60,13 +60,12 @@ forms
             attributes
               type: file
               name: field_input_file
-###############################################################
+      # field_select
         - field_select_label|markup
             tag_name: label
             children
             - content|text
                 text: Element &lt;select&gt;
-###############################################################
         - field_select|markup
             tag_name: select
             title: Select
@@ -94,7 +93,7 @@ forms
                 children
                 - content|text
                     text: Option 3
-###############################################################
+      # field_input_checkbox
         - field_input_checkbox_1_label|markup
             tag_name: label
             children
@@ -128,7 +127,7 @@ forms
                   name: field_input_checkbox_3
             - content|text
                 text: Element 3 &lt;input type="checkbox"&gt;
-###############################################################
+      # field_textarea
         - field_textarea_label|markup
             tag_name: label
             children
@@ -230,7 +229,6 @@ forms
                         tag_name: td
                         attributes
                           colspan: 3
-###############################################################
     - button_save|markup
         tag_name: button
         attributes

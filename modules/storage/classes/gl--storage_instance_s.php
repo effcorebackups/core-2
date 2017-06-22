@@ -217,7 +217,7 @@ namespace effectivecore {
     $p = [-1 => &$return];
     foreach (explode(nl, $data) as $c_line) {
     # skip comments
-      if ($c_line[0] == '#') continue;
+      if (substr(ltrim($c_line, ' '), 0, 1) === '#') continue;
     # p.s. performance ~ 1'000'000 strings per second.
       $matches = [];
       preg_match('%(?<indent>[ ]*)'.
