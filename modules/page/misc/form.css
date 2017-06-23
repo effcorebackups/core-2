@@ -8,9 +8,10 @@
 
   /* label */
   form label {display: block; margin: 5px 0 0 0; font-size: 1.1em}
-  form label:after {content: ":"}
 
   /* inputs */
+  form select {cursor: pointer}
+  form textarea {width: 70%; min-width: 100px}
   form input,
   form select,
   form textarea {
@@ -22,13 +23,13 @@
     border-radius: 0;
     font-family: 'Arial';
     font-size: 16px}
+  /* checkboxes and radios */
   form input[type="checkbox"],
-  form input[type="radio"] {display: inline-block; vertical-align: middle; cursor: pointer}
+  form input[type="radio"] {display: inline-block; vertical-align: middle; cursor: pointer; background-color: white}
   form input[type="checkbox"]:checked,
-  form input[type="radio"]:checked {border-color: black}
+  form input[type="radio"]:checked {background-color: silver}
+  form input[type="radio"] {border-radius: 13px}
   form label input {margin: 0 2px 2px 0}
-  form select {cursor: pointer}
-  form textarea {width: 70%; min-width: 100px}
 
   /* buttons */
   form button {
@@ -47,7 +48,6 @@
   form button[value="delete"]:hover {border-color: %%_color_hover_bg; background-color: %%_color_hover_bg}
 
   /* form-user */
-  form.form-user button {}
   form#user_n_delete,
   form#user_logout {width: 320px; margin: 100px auto}
 

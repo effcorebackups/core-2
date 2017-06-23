@@ -94,39 +94,83 @@ forms
                 - content|text
                     text: Option 3
       # field_input_checkbox
+        - field_checkbox_label|markup
+            tag_name: label
+            children
+            - content|text
+                text: Element &lt;input type="checkbox"&gt;
         - field_input_checkbox_1_label|markup
             tag_name: label
             children
             - field_input_checkbox_1|markup
                 tag_name: input
-                title: Input 1 (type=checkbox)
+                title: Checkbox 1
                 attributes
                   type: checkbox
                   name: field_input_checkbox_1
             - content|text
-                text: Element 1 &lt;input type="checkbox"&gt;
+                text: Checkbox 1
         - field_input_checkbox_2_label|markup
             tag_name: label
             children
             - field_input_checkbox_2|markup
                 tag_name: input
-                title: Input 2 (type=checkbox)
+                title: Checkbox 2
                 attributes
                   type: checkbox
                   name: field_input_checkbox_2
             - content|text
-                text: Element 2 &lt;input type="checkbox"&gt;
+                text: Checkbox 2
         - field_input_checkbox_3_label|markup
             tag_name: label
             children
             - field_input_checkbox_3|markup
                 tag_name: input
-                title: Input 3 (type=checkbox)
+                title: Checkbox 3
                 attributes
                   type: checkbox
                   name: field_input_checkbox_3
             - content|text
-                text: Element 3 &lt;input type="checkbox"&gt;
+                text: Checkbox 3
+      # field_input_radio
+        - field_radio_label|markup
+            tag_name: label
+            children
+            - content|text
+                text: Element &lt;input type="radio"&gt;
+        - field_input_radio_1_label|markup
+            tag_name: label
+            children
+            - field_input_radio_1|markup
+                tag_name: input
+                title: Radio 1
+                attributes
+                  type: radio
+                  name: field_input_radio
+            - content|text
+                text: Radio 1
+        - field_input_radio_2_label|markup
+            tag_name: label
+            children
+            - field_input_radio_2|markup
+                tag_name: input
+                title: Radio 2
+                attributes
+                  type: radio
+                  name: field_input_radio
+            - content|text
+                text: Radio 2
+        - field_input_radio_3_label|markup
+            tag_name: label
+            children
+            - field_input_radio_3|markup
+                tag_name: input
+                title: Radio 3
+                attributes
+                  type: radio
+                  name: field_input_radio
+            - content|text
+                text: Radio 3
       # field_textarea
         - field_textarea_label|markup
             tag_name: label
