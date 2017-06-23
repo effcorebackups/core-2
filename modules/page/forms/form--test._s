@@ -15,14 +15,9 @@ forms
             - content|text
                 text: Element &lt;legend&gt;&lt;/legend&gt;
       # field_input_text
-        - field_input_text_label|markup
-            tag_name: label
-            children
-            - content|text
-                text: Element &lt;input type="text"&gt;
         - field_input_text|markup
             tag_name: input
-            title: Input (type=text)
+            title: Element &lt;input type="text"&gt;
             attributes
               type: text
               name: field_input_text
@@ -32,14 +27,9 @@ forms
               minlength: 5
               maxlength: 255
       # field_input_password
-        - field_input_password_label|markup
-            tag_name: label
-            children
-            - content|text
-                text: Element &lt;input type="password"&gt;
         - field_input_password|markup
             tag_name: input
-            title: Input (type=password)
+            title: Element &lt;input type="password"&gt;
             attributes
               type: password
               name: field_input_password
@@ -49,26 +39,16 @@ forms
               minlength: 5
               maxlength: 255
       # field_input_file
-        - field_input_file_label|markup
-            tag_name: label
-            children
-            - content|text
-                text: Element &lt;input type="file"&gt;
         - field_input_file|markup
             tag_name: input
-            title: Input (type=file)
+            title: Element &lt;input type="file"&gt;
             attributes
               type: file
               name: field_input_file
       # field_select
-        - field_select_label|markup
-            tag_name: label
-            children
-            - content|text
-                text: Element &lt;select&gt;
         - field_select|markup
             tag_name: select
-            title: Select
+            title: Element &lt;select&gt;
             attributes
               name: field_select
             children
@@ -99,92 +79,58 @@ forms
             children
             - content|text
                 text: Element &lt;input type="checkbox"&gt;
-        - field_input_checkbox_1_label|markup
-            tag_name: label
-            children
-            - field_input_checkbox_1|markup
-                tag_name: input
-                title: Checkbox 1
-                attributes
-                  type: checkbox
-                  name: field_input_checkbox_1
-            - content|text
-                text: Checkbox 1
-        - field_input_checkbox_2_label|markup
-            tag_name: label
-            children
-            - field_input_checkbox_2|markup
-                tag_name: input
-                title: Checkbox 2
-                attributes
-                  type: checkbox
-                  name: field_input_checkbox_2
-            - content|text
-                text: Checkbox 2
-        - field_input_checkbox_3_label|markup
-            tag_name: label
-            children
-            - field_input_checkbox_3|markup
-                tag_name: input
-                title: Checkbox 3
-                attributes
-                  type: checkbox
-                  name: field_input_checkbox_3
-            - content|text
-                text: Checkbox 3
+        - field_input_checkbox_1|markup
+            tag_name: input
+            title: Checkbox 1
+            attributes
+              type: checkbox
+              name: field_input_checkbox_1
+        - field_input_checkbox_2|markup
+            tag_name: input
+            title: Checkbox 2
+            attributes
+              type: checkbox
+              name: field_input_checkbox_2
+        - field_input_checkbox_3|markup
+            tag_name: input
+            title: Checkbox 3
+            attributes
+              type: checkbox
+              name: field_input_checkbox_3
       # field_input_radio
         - field_radio_label|markup
             tag_name: label
             children
             - content|text
                 text: Element &lt;input type="radio"&gt;
-        - field_input_radio_1_label|markup
-            tag_name: label
-            children
-            - field_input_radio_1|markup
-                tag_name: input
-                title: Radio 1
-                attributes
-                  type: radio
-                  name: field_input_radio
-            - content|text
-                text: Radio 1
-        - field_input_radio_2_label|markup
-            tag_name: label
-            children
-            - field_input_radio_2|markup
-                tag_name: input
-                title: Radio 2
-                attributes
-                  type: radio
-                  name: field_input_radio
-            - content|text
-                text: Radio 2
-        - field_input_radio_3_label|markup
-            tag_name: label
-            children
-            - field_input_radio_3|markup
-                tag_name: input
-                title: Radio 3
-                attributes
-                  type: radio
-                  name: field_input_radio
-            - content|text
-                text: Radio 3
+        - field_input_radio_1|markup
+            tag_name: input
+            title: Radio 1
+            attributes
+              type: radio
+              name: field_input_radio
+        - field_input_radio_2|markup
+            tag_name: input
+            title: Radio 2
+            attributes
+              type: radio
+              name: field_input_radio
+        - field_input_radio_3|markup
+            tag_name: input
+            title: Radio 3
+            attributes
+              type: radio
+              name: field_input_radio
       # field_textarea
-        - field_textarea_label|markup
-            tag_name: label
-            children
-            - content|text
-                text: Element &lt;textarea&gt;&lt;/textarea&gt;
         - field_textarea|markup
             tag_name: textarea
-            title: Textarea
+            title: Element &lt;textarea&gt;&lt;/textarea&gt;
             attributes
               name: field_textarea
             children
             - content|text
                 text: text in textarea
+      # table
         - field_table|markup
             tag_name: table
             children
@@ -219,17 +165,17 @@ forms
                         tag_name: td
                         children
                         - content|text
-                            text: td 1
+                            text: td 1.1
                     - tbody_tr_1_td_2|markup
                         tag_name: td
                         children
                         - content|text
-                            text: td 2
+                            text: td 1.2
                     - tbody_tr_1_td_3|markup
                         tag_name: td
                         children
                         - content|text
-                            text: td 3
+                            text: td 1.3
                 - tbody_tr_2|markup
                     tag_name: tr
                     children
@@ -237,17 +183,17 @@ forms
                         tag_name: td
                         children
                         - content|text
-                            text: td 4
+                            text: td 2.1
                     - tbody_tr_2_td_2|markup
                         tag_name: td
                         children
                         - content|text
-                            text: td 5
+                            text: td 2.2
                     - tbody_tr_2_td_3|markup
                         tag_name: td
                         children
                         - content|text
-                            text: td 6
+                            text: td 2.3
                 - tbody_tr_3|markup
                     tag_name: tr
                     children
@@ -255,18 +201,18 @@ forms
                         tag_name: td
                         children
                         - content|text
-                            text: td 5
+                            text: td 3.1
                     - tbody_tr_3_td_2|markup
                         tag_name: td
                         children
                         - content|text
-                            text: td 6
+                            text: td 3.2
                     - tbody_tr_3_td_3|markup
                         tag_name: td
                         children
                         - content|text
-                            text: td 7
-                - tbody_tr_no_items|markup
+                            text: td 3.3
+                - tbody_tr_4|markup
                     tag_name: tr
                     children
                     - tbody_tr_4_td_1|markup

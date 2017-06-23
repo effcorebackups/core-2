@@ -134,27 +134,6 @@ namespace effectivecore {
     return $array;
   }
 
-  static function collect_by_property($data, $prop_name, $prop_for_id = null) {
-    $return = [];
-    foreach ($data as $c_item) {
-      if (isset($c_item->{$prop_name})) {
-        $return[$prop_for_id ? $c_item->{$prop_for_id} : count($return)] = $c_item->{$prop_name};
-      }
-    }
-    return $return;
-  }
-
-  static function collect_children($data) {
-    $return = [];
-    foreach ($data as $c_key => $c_item) {
-      $return[$c_key] = $c_item;
-      if (isset($c_item->children)) {
-        $return += static::collect_children($c_item->children);
-      }
-    }
-    return $return;
-  }
-
   #######################
   ### npath functions ###
   #######################
