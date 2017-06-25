@@ -4,10 +4,9 @@ namespace effectivecore {
           use \effectivecore\message_factory as messages;
           use \effectivecore\modules\page\page_factory as pages;
           use \effectivecore\modules\storage\storage_factory as storages;
-          class form extends markup {
+          class form extends node {
 
   public $template            = 'form';
-  public $template_child      = 'form_field';
   public $on_init             = null;
   public $on_validate         = null;
   public $on_submit           = null;
@@ -15,13 +14,13 @@ namespace effectivecore {
   public $clicked_button_name = null;
   public $errors = [];
 
-  function __construct($attributes = null, $children = null, $weight = 0) {
-    parent::__construct('form', $attributes, $children, $weight);
-  }
-
   function render() {
     $this->build();
-    return parent::render();
+    $rendered_children = $this->render_children($this->children);
+    return (new template($this->template, [
+      'attributes' => factory::data_to_attr($this->attributes, ' '),
+      'content'    => $rendered_children
+    ]))->render();
   }
 
   function add_error($element_id, $data) {
