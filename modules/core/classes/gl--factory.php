@@ -166,7 +166,7 @@ namespace effectivecore {
     $p = null;
     foreach ($path_parts as $c_part) {
       if ($p == null) { if (isset($data[$c_part])) {$p = $data[$c_part]; continue;} else {$p = null; break;} } # iteration 1
-      if ($p != null) { if (isset(   $p[$c_part])) {$p =    $p[$c_part]; continue;} else {$p = null; break;} } # iteration 2, 3, 4 ...
+      if ($p != null) { if (isset(   $p[$c_part])) {$p =    $p[$c_part]; continue;} else {$p = null; break;} } # iteration 2, 3, 4 …
     }
     static::$cache[__FUNCTION__][$npath] = $p;
     return $p;

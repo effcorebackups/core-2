@@ -18,7 +18,7 @@ namespace effectivecore {
             case 'textarea':
               $content = $c_element->child_select('content');
               $content->text = $c_post;
-            # ...
+            # …
               break;
 
             case 'input':

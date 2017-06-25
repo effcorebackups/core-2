@@ -6,11 +6,7 @@ namespace effectivecore {
   public $attributes;
   public $weight;
   public $children;
-
-  public $template;          # @todo: make working
-  public $template_self;     # @todo: make working
-  public $template_child;    # @todo: make working
-  public $template_children; # @todo: make working
+  public $template;
 
   function __construct($attributes = null, $children = null, $weight = 0) {
     $this->attributes = $attributes;
@@ -25,6 +21,10 @@ namespace effectivecore {
       }
     }
   }
+
+  ################
+  ### children ###
+  ################
 
   function child_select($id) {return $this->children[$id];}
   function child_delete($id) {unset($this->children[$id]);}
@@ -49,16 +49,33 @@ namespace effectivecore {
     return $id;
   }
 
+  ##################
+  ### attributes ###
+  ##################
+
   function attribute_select($key)         {return $this->attributes[$key];}
   function attribute_insert($key, $value) {$this->attributes[$key] = $value;}
 
+  ##############
+  ### render ###
+  ##############
+
   function render() {
-    return $this->render_self().
-           $this->render_children($this->children);
+    if ($this->template) {
+      return (new template($this->template, [
+        'attributes' => factory::data_to_attr($this->attributes, ' '),
+        'self'       => $this->render_self(),
+        'children'   => $this->render_children($this->children)
+      ]))->render();
+    } else {
+      return $this->render_self().
+             $this->render_children($this->children);
+    }
   }
 
   function render_self() {
-    return '';
+    return isset($this->title) ?
+                 $this->title : '';
   }
 
   function render_children($children, $join = true) {
