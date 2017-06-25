@@ -32,7 +32,9 @@ namespace effectivecore {
 
   function render($clear = true) {
     $rendered = $this->markup;
-  # replace variables. p.s.: '[^a-z0-9_]+|\z' - means that $c_name === '%%_$c_name' and $c_name !== '%%_$c_name_some_suffix'
+  # replace variables. p.s.: '[^a-z0-9_]+|\z' - means that
+  # $c_name === '%%_$c_name' and
+  # $c_name !== '%%_$c_name_some_suffix'
     foreach ($this->vars as $c_name => $c_value) {
       $rendered = preg_replace('/%%_'.$c_name.'([^a-z0-9_]+|\z)/s', $c_value.'$1', $rendered);
     }

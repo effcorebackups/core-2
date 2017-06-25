@@ -11,12 +11,4 @@ namespace effectivecore {
     $this->title = $title;
   }
 
-  function render() {
-    return (new template($this->template, [
-      'attributes' => factory::data_to_attr($this->attributes, ' '),
-      'self'       => $this->render_self(),
-      'children'   => $this->render_children($this->children)
-    ]))->render();
-  }
-
 }}

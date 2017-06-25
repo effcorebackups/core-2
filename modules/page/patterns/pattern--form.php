@@ -6,21 +6,17 @@ namespace effectivecore {
           use \effectivecore\modules\storage\storage_factory as storages;
           class form extends node {
 
-  public $template            = 'form';
-  public $on_init             = null;
-  public $on_validate         = null;
-  public $on_submit           = null;
-  public $clicked_button      = null;
-  public $clicked_button_name = null;
+  public $template = 'form';
+  public $on_init;
+  public $on_validate;
+  public $on_submit;
+  public $clicked_button;
+  public $clicked_button_name;
   public $errors = [];
 
   function render() {
     $this->build();
-    $rendered_children = $this->render_children($this->children);
-    return (new template($this->template, [
-      'attributes' => factory::data_to_attr($this->attributes, ' '),
-      'children'   => $rendered_children
-    ]))->render();
+    return parent::render();
   }
 
   function add_error($element_id, $data) {
