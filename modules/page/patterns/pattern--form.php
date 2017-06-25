@@ -6,6 +6,7 @@ namespace effectivecore {
           use \effectivecore\modules\storage\storage_factory as storages;
           class form extends markup {
 
+  public $template            = 'form';
   public $on_init             = null;
   public $on_validate         = null;
   public $on_submit           = null;
