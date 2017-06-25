@@ -16,7 +16,7 @@ namespace effectivecore {
           switch ($c_element->tag_name) {
 
             case 'textarea':
-              $content = $c_element->get_child('content');
+              $content = $c_element->child_select('content');
               $content->text = $c_post;
             # ...
               break;

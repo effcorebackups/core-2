@@ -10,7 +10,7 @@ namespace effectivecore\modules\page {
     $decoration = storages::get('settings')->select('decoration');
     foreach (storages::get('settings')->select('colors') as $module_id => $c_colors) {
       foreach ($c_colors as $c_color_id => $c_color_info) {
-        $c_element_id = $elements['field_bg_color']->add_child(
+        $c_element_id = $elements['field_bg_color']->child_insert(
           new markup('input', [
             'type'  => 'radio',
             'name'  => 'bg_color',
@@ -19,7 +19,7 @@ namespace effectivecore\modules\page {
             'style' => 'background-color:'.$c_color_info->value])
         );
         if ($c_color_id == $decoration['page']->background_color) {
-          $elements['field_bg_color']->get_child($c_element_id)->add_attribute('checked', 'checked');
+          $elements['field_bg_color']->child_select($c_element_id)->attribute_insert('checked', 'checked');
         }
       }
     }

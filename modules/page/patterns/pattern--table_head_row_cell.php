@@ -5,8 +5,8 @@ namespace effectivecore {
 
   public $template = 'table_head_row_cell';
 
-  function add_child($child, $id = null) {
-    return parent::add_child(
+  function child_insert($child, $id = null) {
+    return parent::child_insert(
       is_string($child) ? new text($child) : $child, $id
     );
   }

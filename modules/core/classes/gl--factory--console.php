@@ -58,8 +58,8 @@ namespace effectivecore {
     }
     $diagram = new markup('dl', ['class' => 'diagram-load'], []);
     foreach ($statistics as $c_param => $c_value) {
-      $diagram->add_child(new markup('dt', [], $c_param));
-      $diagram->add_child(new markup('dd', [], [
+      $diagram->child_insert(new markup('dt', [], $c_param));
+      $diagram->child_insert(new markup('dd', [], [
         number_format($c_value, 6).' sec. ('.
         number_format($c_value / $total * 100, 1).'%)',
         new markup('div', [
@@ -74,8 +74,8 @@ namespace effectivecore {
   static function render_information() {
     $info = new markup('dl', ['class' => 'information'], []);
     foreach (static::get_all_information() as $c_param => $c_value) {
-      $info->add_child(new markup('dt', [], $c_param));
-      $info->add_child(new markup('dd', [], $c_value));
+      $info->child_insert(new markup('dt', [], $c_param));
+      $info->child_insert(new markup('dd', [], $c_value));
     }
     return $info->render();
   }

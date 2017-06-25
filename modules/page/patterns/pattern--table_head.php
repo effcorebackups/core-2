@@ -5,10 +5,10 @@ namespace effectivecore {
 
   public $template = 'table_head';
 
-  function add_child($child, $id = null) {
-    if ($child instanceof table_body_row)  return parent::add_child($child, $id);
-    if ($child instanceof entity_instance) return parent::add_child(new table_head_row([], $child->get_values()), $id);
-    if (is_array($child))                  return parent::add_child(new table_head_row([], $child), $id);
+  function child_insert($child, $id = null) {
+    if ($child instanceof table_body_row)  return parent::child_insert($child, $id);
+    if ($child instanceof entity_instance) return parent::child_insert(new table_head_row([], $child->get_values()), $id);
+    if (is_array($child))                  return parent::child_insert(new table_head_row([], $child), $id);
   }
 
   function render() {

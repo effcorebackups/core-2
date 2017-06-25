@@ -17,18 +17,39 @@ namespace effectivecore {
     if ($children) {
       if (is_array($children)) {
         foreach ($children as $id => $c_child) {
-          $this->add_child($c_child, $id);
+          $this->child_insert($c_child, $id);
         }
       } else {
-        $this->add_child($children);
+        $this->child_insert($children);
       }
     }
   }
 
-  function add_child($child, $id = null) {$id = ($id !== null ? $id : count($this->children)); $this->children[$id] = $child; return $id;}
-  function get_child($id)                {return $this->children[$id];}
-  function add_attribute($key, $value)   {$this->attributes[$key] = $value;}
-  function get_attribute($key)           {return $this->attributes[$key];}
+  function child_select($id) {return $this->children[$id];}
+  function child_delete($id) {unset($this->children[$id]);}
+  function child_change($id, $new_child) {$this->children[$id] = $new_child;}
+  function child_insert($child, $new_id = null) {
+    $id = ($new_id !== null ?
+           $new_id : count($this->children));
+    $this->children[$id] = $child;
+    return $id;
+  }
+  function child_insert_after($child, $after_id, $new_id = null) {
+    $id = ($new_id !== null ?
+           $new_id : count($this->children));
+    $children = [];
+    foreach ($this->children as $c_id => $c_child) {
+      $children[$c_id] = $c_child;
+      if ($c_id === $after_id) {
+        $children[$id] = $child;
+      }
+    }
+    $this->children = $children;
+    return $id;
+  }
+
+  function attribute_select($key)         {return $this->attributes[$key];}
+  function attribute_insert($key, $value) {$this->attributes[$key] = $value;}
 
   function render() {
     return $this->render_self().
