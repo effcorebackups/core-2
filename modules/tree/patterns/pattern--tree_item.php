@@ -43,7 +43,7 @@ namespace effectivecore {
     }
     return (new template($this->template_self, [
       'attributes' => factory::data_to_attr($attr, ' '),
-      'title'      => tokens::replace(translations::get($this->title))
+      'self'       => tokens::replace(translations::get($this->title))
     ]))->render();
   }
 

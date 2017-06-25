@@ -15,7 +15,7 @@ namespace effectivecore {
     if (count($this->children)) {
       return (new template($this->template, [
         'attributes' => factory::data_to_attr($this->attributes, ' '),
-        'data'       => $this->render_children($this->children),
+        'children'   => $this->render_children($this->children),
       ]))->render();
     }
   }

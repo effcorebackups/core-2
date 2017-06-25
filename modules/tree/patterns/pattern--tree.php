@@ -26,7 +26,7 @@ namespace effectivecore {
 
   function render_self() {
     return (new template($this->template_self, [
-      'title' => $this->title
+      'self' => $this->title
     ]))->render();
   }
 
