@@ -72,6 +72,7 @@ translate
   - State: Состояние
   - Queries: Запросы
   - Query: Запрос
+  - Status: Статус
   - System: Система
   - Title: Заголовок
   - Time: Время

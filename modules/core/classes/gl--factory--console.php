@@ -31,7 +31,7 @@ namespace effectivecore {
   }
 
   static function render_logs() {
-    $head = [['Time', 'Group', 'Name', 'Values']];
+    $head = [['Time', 'Group', 'Name', 'Status']];
     $body = [];
     foreach (static::get_all_logs() as $c_log) {
       $body[] = new table_body_row(['class' => factory::to_css_class($c_log['group'])], [
