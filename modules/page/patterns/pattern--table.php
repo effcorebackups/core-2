@@ -14,8 +14,8 @@ namespace effectivecore {
   function render() {
     return (new template($this->template, [
       'attributes' => factory::data_to_attr($this->attributes, ' '),
-      'head'       => $this->children['head']->render(),
-      'body'       => $this->children['body']->render(),
+      'head'       => isset($this->children['head']) ? $this->children['head']->render() : '',
+      'body'       => isset($this->children['body']) ? $this->children['body']->render() : '',
     ]))->render();
   }
 

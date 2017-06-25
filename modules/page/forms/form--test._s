@@ -131,92 +131,71 @@ forms
             - content|text
                 text: text in textarea
       # table
-        - field_table|markup
-            tag_name: table
+        - field_table|table
             children
-            - thead|markup
-                tag_name: thead
+            - head|table_head
                 children
-                - thead_tr|markup
-                    tag_name: tr
+                - thead_tr|table_head_row
                     children
-                    - thead_tr_th_1|markup
-                        tag_name: th
+                    - thead_tr_th_1|table_head_row_cell
                         children
                         - content|text
                             text: th 1
-                    - thead_tr_th_2|markup
-                        tag_name: th
+                    - thead_tr_th_2|table_head_row_cell
                         children
                         - content|text
                             text: th 2
-                    - thead_tr_th_3|markup
-                        tag_name: th
+                    - thead_tr_th_3|table_head_row_cell
                         children
                         - content|text
                             text: th 3
-            - tbody|markup
-                tag_name: tbody
+            - body|table_body
                 children
-                - tbody_tr_1|markup
-                    tag_name: tr
+                - tbody_tr_1|table_body_row
                     children
-                    - tbody_tr_1_td_1|markup
-                        tag_name: td
+                    - tbody_tr_1_td_1|table_body_row_cell
                         children
                         - content|text
                             text: td 1.1
-                    - tbody_tr_1_td_2|markup
-                        tag_name: td
+                    - tbody_tr_1_td_2|table_body_row_cell
                         children
                         - content|text
                             text: td 1.2
-                    - tbody_tr_1_td_3|markup
-                        tag_name: td
+                    - tbody_tr_1_td_3|table_body_row_cell
                         children
                         - content|text
                             text: td 1.3
-                - tbody_tr_2|markup
-                    tag_name: tr
+                - tbody_tr_2|table_body_row
                     children
-                    - tbody_tr_2_td_1|markup
-                        tag_name: td
+                    - tbody_tr_2_td_1|table_body_row_cell
                         children
                         - content|text
                             text: td 2.1
-                    - tbody_tr_2_td_2|markup
-                        tag_name: td
+                    - tbody_tr_2_td_2|table_body_row_cell
                         children
                         - content|text
                             text: td 2.2
-                    - tbody_tr_2_td_3|markup
-                        tag_name: td
+                    - tbody_tr_2_td_3|table_body_row_cell
                         children
                         - content|text
                             text: td 2.3
-                - tbody_tr_3|markup
-                    tag_name: tr
+                - tbody_tr_3|table_body_row
                     children
-                    - tbody_tr_3_td_1|markup
-                        tag_name: td
+                    - tbody_tr_3_td_1|table_body_row_cell
                         children
                         - content|text
                             text: td 3.1
-                    - tbody_tr_3_td_2|markup
-                        tag_name: td
+                    - tbody_tr_3_td_2|table_body_row_cell
                         children
                         - content|text
                             text: td 3.2
-                    - tbody_tr_3_td_3|markup
-                        tag_name: td
+                    - tbody_tr_3_td_3|table_body_row_cell
                         children
                         - content|text
                             text: td 3.3
-                - tbody_tr_4|markup
-                    tag_name: tr
+                - tbody_tr_4|table_body_row
                     children
-                    - tbody_tr_4_td_1|markup
-                        tag_name: td
+                    - tbody_tr_4_td_1|table_body_row_cell
                         attributes
                           colspan: 3
     - button_save|markup
