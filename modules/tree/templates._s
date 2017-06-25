@@ -1,5 +1,3 @@
 templates
 - tree: templates/template--tree.html
 - tree_item: templates/template--tree_item.html
-- tree_item_self: templates/template--tree_item_self.html
-- tree_item_children: templates/template--tree_item_children.html

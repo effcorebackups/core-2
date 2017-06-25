@@ -8,9 +8,7 @@ namespace effectivecore {
           class tree_item extends \effectivecore\node {
 
   public $title;
-  public $template          = 'tree_item';
-  public $template_self     = 'tree_item_self';
-  public $template_children = 'tree_item_children';
+  public $template = 'tree_item';
 
   function __construct($title = '', $attributes = null, $children = null, $weight = 0) {
     parent::__construct($attributes, $children, $weight);
@@ -20,15 +18,9 @@ namespace effectivecore {
   function render() {
     if (!isset($this->access) ||
         (isset($this->access) && access::check($this->access))) {
-      $rendered_children = '';
-      if (count($this->children)) {
-        $rendered_children = (new template($this->template_children, [
-          'children' => $this->render_children($this->children)
-        ]))->render();
-      }
       return (new template($this->template, [
         'self'     => $this->render_self(),
-        'children' => $rendered_children
+        'children' => $this->render_children($this->children)
       ]))->render();
     }
   }
@@ -41,10 +33,9 @@ namespace effectivecore {
         $attr->class = isset($attr->class) ? $attr->class.' active' : 'active';
       }
     }
-    return (new template($this->template_self, [
-      'attributes' => factory::data_to_attr($attr, ' '),
-      'self'       => tokens::replace(translations::get($this->title))
-    ]))->render();
+    return (new markup('a', $attr,
+      tokens::replace(translations::get($this->title))
+    ))->render();
   }
 
 }}
