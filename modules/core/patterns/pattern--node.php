@@ -9,6 +9,7 @@ namespace effectivecore {
 
   public $template;          # @todo: make working
   public $template_self;     # @todo: make working
+  public $template_child;    # @todo: make working
   public $template_children; # @todo: make working
 
   function __construct($attributes = null, $children = null, $weight = 0) {

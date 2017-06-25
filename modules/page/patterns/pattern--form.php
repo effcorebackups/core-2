@@ -7,6 +7,7 @@ namespace effectivecore {
           class form extends markup {
 
   public $template            = 'form';
+  public $template_child      = 'form_field';
   public $on_init             = null;
   public $on_validate         = null;
   public $on_submit           = null;
