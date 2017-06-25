@@ -11,13 +11,4 @@ namespace effectivecore {
     if (is_string($child) || is_numeric($child)) return parent::child_insert(new table_head_row_cell([], $child), $id);
   }
 
-  function render() {
-    if (count($this->children)) {
-      return (new template($this->template, [
-        'attributes' => factory::data_to_attr($this->attributes, ' '),
-        'children'   => $this->render_children($this->children),
-      ]))->render();
-    }
-  }
-
 }}
