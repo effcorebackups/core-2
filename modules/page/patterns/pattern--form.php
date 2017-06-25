@@ -29,28 +29,28 @@ namespace effectivecore {
   function build() {
     $elements = static::collect_elements($this->children);
   # add labels
-    foreach ($elements as $c_id => $c_element) {
+    foreach ($elements as $c_npath => $c_element) {
       if (!empty($c_element->title) && isset($c_element->tag_name)) {
         if ($c_element->tag_name == 'textarea' ||
             $c_element->tag_name == 'select'   ||
-           ($c_element->tag_name == 'input'    &&
-            $c_element->attributes->type != 'checkbox' &&
-            $c_element->attributes->type != 'radio')) {
-          $c_element->{'__parent'}->children[$c_id] = new markup('label', [], [
-            $c_element->title,
-            $c_element
-          ]);
-        }
-        if ($c_element->tag_name == 'input' &&
-           ($c_element->attributes->type == 'checkbox' ||
-            $c_element->attributes->type == 'radio')) {
-          $c_element->{'__parent'}->children[$c_id] = new markup('label', ['class' => 'has-box'], [
-            $c_element,
-            $c_element->title
-          ]);
+            $c_element->tag_name == 'input') {
+          $npath_info = factory::npath_get_info($c_npath);
+          $parent_obj = &factory::npath_get_pointer($npath_info->parent_npath, $this->children);
+          $element_id = $npath_info->id;
+          $is_has_box = $c_element->tag_name == 'input' && (
+                        $c_element->attributes->type == 'checkbox' ||
+                        $c_element->attributes->type == 'radio') ? true : false;
+          $parent_obj->child_insert_after(
+            new markup('label', $is_has_box ? ['class' => 'has-box'] : [], [
+              'label'     => new text($c_element->title, $is_has_box ? 100 : 0),
+              $element_id => $c_element
+          ]), $element_id, $element_id.'_wrapper');
+          $parent_obj->child_delete($element_id);
         }
       }
     }
+  # new collect of elements
+    $elements = static::collect_elements($this->children);
   # call init handlers
     events::start('on_form_init', $this->attributes->id, [$this, $elements]);
   # if current user click the button
@@ -92,13 +92,13 @@ namespace effectivecore {
     ]);
   }
 
-  static function collect_elements($data, $parent = null) {
+  static function collect_elements($data, $npath = '') {
     $return = [];
-    foreach ($data as $c_key => $c_item) {
-      $return[$c_key] = $c_item;
-      $return[$c_key]->{'__parent'} = &$parent;
+    foreach ($data as $c_id => $c_item) {
+      $c_npath = ltrim($npath.'/'.$c_id, '/');
+      $return[$c_npath] = $c_item;
       if (isset($c_item->children)) {
-        $return += static::collect_elements($c_item->children, $c_item);
+        $return += static::collect_elements($c_item->children, $c_npath);
       }
     }
     return $return;

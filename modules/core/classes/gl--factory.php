@@ -138,6 +138,14 @@ namespace effectivecore {
   ### npath functions ###
   #######################
 
+  static function npath_get_info($npath) {
+    $npath_parts = explode('/', $npath);
+    return (object)[
+      'id'           => array_pop($npath_parts),
+      'parent_npath' => implode('/', $npath_parts),
+    ];
+  }
+
   static function &npath_get_pointer($npath, &$p) {
     if (isset(static::$cache[__FUNCTION__][$npath]))
        return static::$cache[__FUNCTION__][$npath];
