@@ -9,7 +9,7 @@ forms
     - fieldset_main|markup
         tag_name: fieldset
         children
-        - field_password|markup
+        - field_password|form_field
             tag_name: input
             title: Password
             attributes

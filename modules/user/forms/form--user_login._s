@@ -9,7 +9,7 @@ forms
     - fieldset_main|markup
         tag_name: fieldset
         children
-        - field_email|markup
+        - field_email|form_field
             tag_name: input
             title: Email
             attributes
@@ -17,7 +17,7 @@ forms
               name: email
               required: required
               maxlength: 255
-        - field_password|markup
+        - field_password|form_field
             tag_name: input
             title: Password
             attributes
