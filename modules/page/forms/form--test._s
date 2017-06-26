@@ -15,40 +15,42 @@ forms
             - content|text
                 text: Element &lt;legend&gt;&lt;/legend&gt;
       # field_input_text
-        - field_input_text|markup
+        - field_input_text|form_field
             tag_name: input
             title: Element &lt;input type="text"&gt;
+            description: Simple text field.
             attributes
               type: text
               name: field_input_text
-              value|text
-                text: text in input
+              value: text in input
               required: required
               minlength: 5
               maxlength: 255
       # field_input_password
-        - field_input_password|markup
+        - field_input_password|form_field
             tag_name: input
             title: Element &lt;input type="password"&gt;
+            description: Simple password field.
             attributes
               type: password
               name: field_input_password
-              value|text
-                text: text in password
+              value: text in password
               required: required
               minlength: 5
               maxlength: 255
       # field_input_file
-        - field_input_file|markup
+        - field_input_file|form_field
             tag_name: input
             title: Element &lt;input type="file"&gt;
+            description: Simple file field.
             attributes
               type: file
               name: field_input_file
       # field_select
-        - field_select|markup
+        - field_select|form_field
             tag_name: select
             title: Element &lt;select&gt;
+            description: Simple select field.
             attributes
               name: field_select
             children
@@ -74,57 +76,56 @@ forms
                 - content|text
                     text: Option 3
       # field_input_checkbox
-        - field_checkbox_label|markup
-            tag_name: label
+        - field_checkbox_label|form_container
+            title: Element &lt;input type="checkbox"&gt;
+            description: Simple checkboxes.
             children
-            - content|text
-                text: Element &lt;input type="checkbox"&gt;
-        - field_input_checkbox_1|markup
-            tag_name: input
-            title: Checkbox 1
-            attributes
-              type: checkbox
-              name: field_input_checkbox_1
-        - field_input_checkbox_2|markup
-            tag_name: input
-            title: Checkbox 2
-            attributes
-              type: checkbox
-              name: field_input_checkbox_2
-        - field_input_checkbox_3|markup
-            tag_name: input
-            title: Checkbox 3
-            attributes
-              type: checkbox
-              name: field_input_checkbox_3
+            - field_input_checkbox_1|form_field
+                tag_name: input
+                title: Checkbox 1
+                attributes
+                  type: checkbox
+                  name: field_input_checkbox_1
+            - field_input_checkbox_2|form_field
+                tag_name: input
+                title: Checkbox 2
+                attributes
+                  type: checkbox
+                  name: field_input_checkbox_2
+            - field_input_checkbox_3|form_field
+                tag_name: input
+                title: Checkbox 3
+                attributes
+                  type: checkbox
+                  name: field_input_checkbox_3
       # field_input_radio
-        - field_radio_label|markup
-            tag_name: label
+        - field_radio_label|form_container
+            title: Element &lt;input type="radio"&gt;
+            description: Simple radios.
             children
-            - content|text
-                text: Element &lt;input type="radio"&gt;
-        - field_input_radio_1|markup
-            tag_name: input
-            title: Radio 1
-            attributes
-              type: radio
-              name: field_input_radio
-        - field_input_radio_2|markup
-            tag_name: input
-            title: Radio 2
-            attributes
-              type: radio
-              name: field_input_radio
-        - field_input_radio_3|markup
-            tag_name: input
-            title: Radio 3
-            attributes
-              type: radio
-              name: field_input_radio
+            - field_input_radio_1|form_field
+                tag_name: input
+                title: Radio 1
+                attributes
+                  type: radio
+                  name: field_input_radio
+            - field_input_radio_2|form_field
+                tag_name: input
+                title: Radio 2
+                attributes
+                  type: radio
+                  name: field_input_radio
+            - field_input_radio_3|form_field
+                tag_name: input
+                title: Radio 3
+                attributes
+                  type: radio
+                  name: field_input_radio
       # field_textarea
-        - field_textarea|markup
+        - field_textarea|form_field
             tag_name: textarea
             title: Element &lt;textarea&gt;&lt;/textarea&gt;
+            description: Simple textarea field.
             attributes
               name: field_textarea
             children

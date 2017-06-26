@@ -14,15 +14,10 @@ forms
             children
             - content|text
                 text: Colors
-        - field_bg_color_label|markup
-            tag_name: label
-            children:
-            - content|text
-                text: Background color
-        - field_bg_color|markup
-            tag_name: div
+        - field_bg_color|form_container
+            title: Background color
             attributes
-              id: field_bg_color
+              id: bg_color
     - button_save|markup
         tag_name: button
         attributes
