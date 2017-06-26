@@ -32,8 +32,7 @@ namespace effectivecore {
 
   function render($clear = true) {
     $rendered = $this->markup;
-    $rendered = preg_replace_callback('/(?<marker>%%_)'.
-                                       '(?<token>[a-z0-9_]+)/', function($matches){
+    $rendered = preg_replace_callback('/(?<marker>%%_)(?<token>[a-z0-9_]+)/', function($matches){
       return isset($matches['marker']) &&
              isset($matches['token']) &&
              isset($this->vars[$matches['token']]) ?
