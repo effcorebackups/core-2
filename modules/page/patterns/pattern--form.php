@@ -36,6 +36,7 @@ namespace effectivecore {
   # - <input type="submit">
   # - <input type="reset">
   # - <input type="image">
+  # - <input type="button">
   # ─────────────────────────────────────────────────────────────────────
 
   public $template = 'form';
