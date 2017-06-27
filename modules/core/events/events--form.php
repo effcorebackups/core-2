@@ -9,7 +9,7 @@ namespace effectivecore {
 
   static function on_validate($form, $elements) {
     foreach ($elements as $c_id => $c_element) {
-      if ($c_element instanceof markup) {
+      if ($c_element instanceof form_field) {
         $c_name = isset($c_element->attributes->name) ? $c_element->attributes->name : '';
         $c_post = isset($_POST[$c_name]) ? $_POST[$c_name] : ''; # @todo: may be add a filter
         if ($c_name) {
