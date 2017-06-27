@@ -6,6 +6,38 @@ namespace effectivecore {
           use \effectivecore\modules\storage\storage_factory as storages;
           class form extends node {
 
+  # support FORM elements:
+  # ─────────────────────────────────────────────────────────────────────
+  # HTML4 elements:
+  # - <input type="text">
+  # - <input type="password">
+  # - <input type="file">
+  # - <input type="checkbox">
+  # - <input type="radio">
+  # - <input type="hidden">
+  # - <select></select>
+  # - <textarea></textarea>
+  # - <button type="button">
+  # - <button type="reset">
+  # - <button type="submit">
+  #
+  # HTML5 elements (restricted support on the browser side):
+  # - <input type="search">
+  # - <input type="email">
+  # - <input type="url">
+  # - <input type="tel">
+  # - <input type="number">
+  # - <input type="range">
+  # - <input type="date">  p.s. you will get а warning on html validation
+  # - <input type="time">  p.s. you will get а warning on html validation
+  # - <input type="color"> p.s. you will get а warning on html validation
+  #
+  # Not supported types (in this project):
+  # - <input type="submit">
+  # - <input type="reset">
+  # - <input type="image">
+  # ─────────────────────────────────────────────────────────────────────
+
   public $template = 'form';
   public $on_init;
   public $on_validate;
@@ -24,7 +56,6 @@ namespace effectivecore {
   }
 
   function build() {
-  # new collect of elements
     $elements = static::collect_elements($this->children);
   # call init handlers
     events::start('on_form_init', $this->attributes->id, [$this, $elements]);

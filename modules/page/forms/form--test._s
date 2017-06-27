@@ -46,35 +46,6 @@ forms
             attributes
               type: file
               name: field_input_file
-      # field_select
-        - field_select|form_field
-            tag_name: select
-            title: Element &lt;select&gt;
-            description: Simple select field.
-            attributes
-              name: field_select
-            children
-            - option_1|markup
-                tag_name: option
-                attributes
-                  value: option_1
-                children
-                - content|text
-                    text: Option 1
-            - option_2|markup
-                tag_name: option
-                attributes
-                  value: option_2
-                children
-                - content|text
-                    text: Option 2
-            - option_3|markup
-                tag_name: option
-                attributes
-                  value: option_3
-                children
-                - content|text
-                    text: Option 3
       # field_input_checkbox
         - field_checkbox_label|form_container
             title: Element &lt;input type="checkbox"&gt;
@@ -121,6 +92,35 @@ forms
                 attributes
                   type: radio
                   name: field_input_radio
+      # field_select
+        - field_select|form_field
+            tag_name: select
+            title: Element &lt;select&gt;
+            description: Simple select field.
+            attributes
+              name: field_select
+            children
+            - option_1|markup
+                tag_name: option
+                attributes
+                  value: option_1
+                children
+                - content|text
+                    text: Option 1
+            - option_2|markup
+                tag_name: option
+                attributes
+                  value: option_2
+                children
+                - content|text
+                    text: Option 2
+            - option_3|markup
+                tag_name: option
+                attributes
+                  value: option_3
+                children
+                - content|text
+                    text: Option 3
       # field_textarea
         - field_textarea|form_field
             tag_name: textarea
@@ -202,12 +202,30 @@ forms
                         children
                         - content|text
                             text: 
-    - button_save|markup
+    - button_submit|markup
         tag_name: button
         attributes
           type: submit
           name: button
-          value: save
+          value: submit
         children
         - label|text
-            text: save
+            text: submit
+    - button_button|markup
+        tag_name: button
+        attributes
+          type: button
+          name: button
+          value: button
+        children
+        - label|text
+            text: button
+    - button_reset|markup
+        tag_name: button
+        attributes
+          type: reset
+          name: button
+          value: reset
+        children
+        - label|text
+            text: reset
