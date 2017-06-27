@@ -30,6 +30,18 @@ namespace effectivecore {
             case 'input':
               $c_type = isset($c_element->attributes->type) ?
                               $c_element->attributes->type : '';
+
+            # not processed elements
+              if ($c_type && (
+                  $c_type == 'submit' || # <input type="submit">
+                  $c_type == 'reset'  || # <input type="reset">
+                  $c_type == 'image'  || # <input type="image">
+                  $c_type == 'button' || # <input type="button">
+                  $c_type == 'hidden')   # <input type="hidden">
+              ) {
+                continue;
+              }
+
             # file
               if ($c_type &&
                   $c_type == 'file') {
@@ -48,16 +60,20 @@ namespace effectivecore {
             # ... @todo: make functionality
               }
 
-            # text|password|search|email|url|tel|number|range|date|time|color
-              if ($c_type &&
-                  $c_type != 'submit'   && # <input type="submit">
-                  $c_type != 'reset'    && # <input type="reset">
-                  $c_type != 'image'    && # <input type="image">
-                  $c_type != 'button'   && # <input type="button">
-                  $c_type != 'hidden'   && # <input type="hidden">
-                  $c_type != 'file'     && # <input type="file">
-                  $c_type != 'checkbox' && # <input type="checkbox">
-                  $c_type != 'radio'       # <input type="radio">
+            # html4 elements: text|password
+            # html5 elements: search|email|url|tel|number|range|date|time|color
+              if ($c_type && (
+                  $c_type == 'text'     || # <input type="text">
+                  $c_type == 'password' || # <input type="password">
+                  $c_type == 'search'   || # <input type="search">
+                  $c_type == 'email'    || # <input type="email">
+                  $c_type == 'url'      || # <input type="url">
+                  $c_type == 'tel'      || # <input type="tel">
+                  $c_type == 'number'   || # <input type="number">
+                  $c_type == 'range'    || # <input type="range">
+                  $c_type == 'date'     || # <input type="date">
+                  $c_type == 'time'     || # <input type="time">
+                  $c_type == 'color')      # <input type="color">
               ) {
 
               # set post value

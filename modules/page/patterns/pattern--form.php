@@ -8,7 +8,7 @@ namespace effectivecore {
 
   # support FORM elements:
   # ─────────────────────────────────────────────────────────────────────
-  # HTML4 elements:
+  # html4 elements:
   # - <input type="text">
   # - <input type="password">
   # - <input type="file">
@@ -21,7 +21,7 @@ namespace effectivecore {
   # - <button type="reset">
   # - <button type="submit">
   #
-  # HTML5 elements (restricted support on the browser side):
+  # html5 elements (restricted support on the browser side):
   # - <input type="search">
   # - <input type="email">
   # - <input type="url">
@@ -32,7 +32,7 @@ namespace effectivecore {
   # - <input type="time">  p.s. you will get а warning on html validation
   # - <input type="color"> p.s. you will get а warning on html validation
   #
-  # Not supported types (in this project):
+  # not supported types (in this project):
   # - <input type="submit">
   # - <input type="reset">
   # - <input type="image">
