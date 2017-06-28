@@ -18,8 +18,8 @@ forms
       # field_input_text
         - field_input_text|form_field
             tag_name: input
-            title: Element &lt;input type="text"&gt;
-            description: Simple text field.
+            title: Text
+            description: Element &lt;input type="text"&gt;.
             attributes
               type: text
               name: field_input_text
@@ -30,8 +30,8 @@ forms
       # field_input_password
         - field_input_password|form_field
             tag_name: input
-            title: Element &lt;input type="password"&gt;
-            description: Simple password field.
+            title: Password
+            description: Element &lt;input type="password"&gt;.
             attributes
               type: password
               name: field_input_password
@@ -39,18 +39,42 @@ forms
               required: required
               minlength: 5
               maxlength: 255
+      # field_input_email
+        - field_input_email|form_field
+            tag_name: input
+            title: EMail
+            description: Element &lt;input type="email"&gt;.
+            attributes
+              type: email
+              name: field_input_email
+              value: test@example.com
+              required: required
+              minlength: 5
+              maxlength: 255
+      # field_input_search
+        - field_input_search|form_field
+            tag_name: input
+            title: Search
+            description: Element &lt;input type="search"&gt;.
+            attributes
+              type: search
+              name: field_input_search
+              value: text in search
+              required: required
+              minlength: 5
+              maxlength: 255
       # field_input_file
         - field_input_file|form_field
             tag_name: input
-            title: Element &lt;input type="file"&gt;
-            description: Simple file field.
+            title: File
+            description: Element &lt;input type="file"&gt;.
             attributes
               type: file
               name: field_input_file
       # field_input_checkbox
         - field_checkbox_label|form_container
-            title: Element &lt;input type="checkbox"&gt;
-            description: Simple checkboxes.
+            title: Checkboxes
+            description: Element &lt;input type="checkbox"&gt;.
             children
             - field_input_checkbox_1|form_field
                 tag_name: input
@@ -72,8 +96,8 @@ forms
                   name: field_input_checkbox_3
       # field_input_radio
         - field_radio_label|form_container
-            title: Element &lt;input type="radio"&gt;
-            description: Simple radios.
+            title: Radios
+            description: Element &lt;input type="radio"&gt;.
             children
             - field_input_radio_1|form_field
                 tag_name: input
@@ -96,8 +120,8 @@ forms
       # field_select
         - field_select|form_field
             tag_name: select
-            title: Element &lt;select&gt;
-            description: Simple select field.
+            title: Select
+            description: Element &lt;select&gt;.
             attributes
               name: field_select
             children
@@ -125,8 +149,8 @@ forms
       # field_textarea
         - field_textarea|form_field
             tag_name: textarea
-            title: Element &lt;textarea&gt;&lt;/textarea&gt;
-            description: Simple textarea field.
+            title: Textarea
+            description: Element &lt;textarea&gt;&lt;/textarea&gt;.
             attributes
               name: field_textarea
             children

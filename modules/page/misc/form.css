@@ -10,7 +10,7 @@
   form x-container {display: block; margin: 20px 0}
   form x-title {display: block}
   form x-title, form label {font-size: 1.2em}
-  form label .required {position: absolute; font-size: 1.1em; color: %%_color_error}
+  form label .required {position: absolute; margin-left: .2em; font-size: 1.1em; color: %%_color_error}
   form x-field {display: block; margin: 20px 0}
   form x-field.has-box {margin: 5px 0}
   form x-field.has-box label {font-size: 1em}

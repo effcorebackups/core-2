@@ -5,6 +5,7 @@ translate
   - Delete profile (%%_user_email_context-4)?: Удалить профиль (%%_user_email_context-4)?
   - always_enabled: всегда_вкл
   - enabled: вкл.
+  - EMail: Электронная почта
   - Execute plan: План выполнения
   - Background color: Цвет фона
   - Decoration: Оформление
@@ -13,9 +14,11 @@ translate
   - Core: Ядро
   - Colors: Цвета
   - Console: Консоль
+  - Checkboxes: Флажки
   - Group: Группа
   - Storage: Хранилище
   - Translate: Перевод
+  - Text: Текст
   - Tree: Дерево
   - Total load: Общая загрука
   - Actions: Действия
@@ -31,6 +34,7 @@ translate
   - Description: Описание
   - Edit profile: Редактировать профиль
   - edit: изменить
+  - File: Файл
   - Front page: Главная страница
   - Total build time: Общее время сборки
   - Hello %%_user_email: Привет %%_user_email
@@ -65,6 +69,7 @@ translate
   - Path: Путь
   - profile: профиль
   - register: зарегистрировать
+  - Radios: Переключатели
   - Registered: Зарегистрированные
   - Registration: Регистрация
   - Roles: Роли
@@ -72,8 +77,11 @@ translate
   - State: Состояние
   - Queries: Запросы
   - Query: Запрос
+  - Select: Список
+  - Search: Поиск
   - Status: Статус
   - System: Система
+  - Textarea: Текстовая область
   - Title: Заголовок
   - Time: Время
   - Total: Всего
