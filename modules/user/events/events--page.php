@@ -31,7 +31,7 @@ namespace effectivecore\modules\user {
       $head = [['ID', 'EMail', 'Password hash', 'Created', 'Is embed', 'Actions']];
       $body = entities::get('user')->select_set();
       foreach ($body as $c_row) {
-        $c_actions = new markup('ul', ['class' => 'actions']);
+        $c_actions = new markup('ul', ['class' => ['actions']]);
         $c_actions->child_insert( new markup('li', [], new markup('a', ['href' => (new url('/user/'.$c_row->id))->get_full()], 'view') ) );
         $c_actions->child_insert( new markup('li', [], new markup('a', ['href' => (new url('/user/'.$c_row->id.'/edit?'.urls::make_back_part()))->get_full()], 'edit') ) );
         if ($c_row->is_embed != 1) $c_actions->child_insert( new markup('li', [], new markup('a', ['href' => (new url('/admin/users/delete/'.$c_row->id.'?'.urls::make_back_part()))->get_full()], 'delete') ) );

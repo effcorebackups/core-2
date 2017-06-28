@@ -30,7 +30,7 @@ namespace effectivecore {
     if (isset($attr->href)) {
       $attr->href = tokens::replace($attr->href);
       if (urls::is_active($attr->href)) {
-        $attr->class = isset($attr->class) ? $attr->class.' active' : 'active';
+        $attr->class[] = 'active';
       }
     }
     return (new markup('a', $attr,

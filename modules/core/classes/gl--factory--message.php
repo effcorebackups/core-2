@@ -32,7 +32,7 @@ namespace effectivecore {
   static function render() {
     $groups = [];
     foreach (static::get_all() as $c_type => $c_messages) {
-      $c_grpoup = new markup('ul', ['class' => $c_type]);
+      $c_grpoup = new markup('ul', ['class' => [$c_type]]);
       foreach ($c_messages as $c_message) {
         $c_grpoup->child_insert(
           new markup('li', [], $c_message)

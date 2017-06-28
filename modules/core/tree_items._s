@@ -4,12 +4,14 @@ tree_items
     title: Home
     attributes
       href: /
-      class: logo
+      class
+      - logo: logo
 - main_admin|tree_item
     parent: trees/core/main
     title: Administer
     attributes
-      class: admin
+      class
+      - admin: admin
     access
       roles
       - admins: admins
@@ -17,7 +19,8 @@ tree_items
     parent: tree_items/core/main_admin
     title: Modules
     attributes
-      class: modules
+      class
+      - modules: modules
       href: /admin/modules
     access
       roles

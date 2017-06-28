@@ -4,7 +4,8 @@ forms
       id: user_n_delete
       novalidate: novalidate
       method: post
-      class: form-user
+      class
+      - form-user: form-user
     children
     - button_delete|markup
         tag_name: button

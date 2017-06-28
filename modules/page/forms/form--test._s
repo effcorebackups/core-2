@@ -4,7 +4,8 @@ forms
       id: form_test
       novalidate: novalidate
       method: post
-      class: form-test
+      class
+      - form-test: form-test
     children
     - fieldset_main|markup
         tag_name: fieldset

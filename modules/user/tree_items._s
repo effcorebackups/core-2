@@ -3,7 +3,8 @@ tree_items
     parent: trees/user/user
     title: User
     attributes
-      class: user
+      class
+      - user: user
     access
       roles
       - anonymous: anonymous
@@ -30,7 +31,8 @@ tree_items
     title: Hello %%_user_email
     attributes
       href: /user/%%_user_id
-      class: user
+      class
+      - user: user
     access
       roles
       - admins: admins

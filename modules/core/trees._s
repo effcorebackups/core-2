@@ -3,4 +3,5 @@ trees
     title: Main menu
     weight: 2
     attributes
-      class: main
+      class
+      - main: main

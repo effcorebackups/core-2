@@ -4,7 +4,8 @@ forms
       id: admin_decoration
       novalidate: novalidate
       method: post
-      class: form-admin_decoration
+      class
+      - form-admin_decoration: form-admin_decoration
     children
     - fieldset_main|markup
         tag_name: fieldset

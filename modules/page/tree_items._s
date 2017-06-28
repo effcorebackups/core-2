@@ -3,7 +3,8 @@ tree_items
     parent: tree_items/core/main_admin
     title: Decoration
     attributes
-      class: modules
+      class
+      - modules: modules
       href: /admin/decoration
     access
       roles

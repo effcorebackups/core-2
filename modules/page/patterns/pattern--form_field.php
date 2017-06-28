@@ -14,7 +14,7 @@ namespace effectivecore {
                   $this->attributes->type == 'checkbox' ||
                   $this->attributes->type == 'radio') ? true : false;
     if ($is_has_box) {
-      $this->wr_attributes['class'] = 'has-box';
+      $this->wr_attributes['class'][] = 'has-box';
     }
     return (new template($this->template, [
       'wr_tag_name'   => $this->wr_tag_name,

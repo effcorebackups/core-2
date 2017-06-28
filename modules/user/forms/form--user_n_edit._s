@@ -4,7 +4,8 @@ forms
       id: user_n_edit
       novalidate: novalidate
       method: post
-      class: form-user
+      class
+      - form-user: form-user
     children
     - fieldset_main|markup
         tag_name: fieldset
