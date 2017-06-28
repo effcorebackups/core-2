@@ -8,7 +8,8 @@ namespace effectivecore {
           class tree_item extends \effectivecore\node {
 
   public $title;
-  public $template = 'tree_item';
+  public $template          = 'tree_item';
+  public $template_children = 'tree_item_children';
 
   function __construct($title = '', $attributes = null, $children = null, $weight = 0) {
     parent::__construct($attributes, $children, $weight);
@@ -18,9 +19,12 @@ namespace effectivecore {
   function render() {
     if (!isset($this->access) ||
         (isset($this->access) && access::check($this->access))) {
+      $rendered_children = count($this->children) ? (new template($this->template_children, [
+        'children' => $this->render_children($this->children)]
+      ))->render() : '';
       return (new template($this->template, [
         'self'     => $this->render_self(),
-        'children' => $this->render_children($this->children)
+        'children' => $rendered_children
       ]))->render();
     }
   }
@@ -30,7 +34,7 @@ namespace effectivecore {
     if (isset($attr->href)) {
       $attr->href = tokens::replace($attr->href);
       if (urls::is_active($attr->href)) {
-        $attr->class[] = 'active';
+        $attr->class['active'] = 'active';
       }
     }
     return (new markup('a', $attr,
