@@ -20,7 +20,7 @@ namespace effectivecore {
     if (!empty($this->description))           $description[] = (new markup('p', ['class' => ['default']], $this->description))->render();
     if (!empty($this->attributes->minlength)) $description[] = (new markup('p', ['class' => ['minlength']], 'Field should contain minimum '.$this->attributes->minlength.' symbols.'))->render();
     if (!empty($this->attributes->maxlength)) $description[] = (new markup('p', ['class' => ['maxlength']], 'Field should contain maximum '.$this->attributes->maxlength.' symbols.'))->render();
-    $is_required_mark = !empty($this->attributes->required) ? new markup('spam', ['class' => 'required'], '*') : '';
+    $is_required_mark = !empty($this->attributes->required) ? new markup('b', ['class' => 'required'], '*') : '';
     return (new template($this->template, [
       'wr_tag_name'   => $this->wr_tag_name,
       'wr_attributes' => factory::data_to_attr($this->wr_attributes, ' '),
