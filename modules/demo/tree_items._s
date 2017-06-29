@@ -1,11 +1,11 @@
 tree_items
-- main_admin_decoration|tree_item
+- main_admin_demo|tree_item
     parent: tree_items/core/main_admin
-    title: Decoration
+    title: Demo
     attributes
       class
-      - default: modules
-      href: /admin/decoration
+      - default: demo
+      href: /admin/demo
     access
       roles
       - admins: admins

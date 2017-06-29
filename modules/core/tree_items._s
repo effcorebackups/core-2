@@ -5,13 +5,13 @@ tree_items
     attributes
       href: /
       class
-      - logo: logo
+      - default: logo
 - main_admin|tree_item
     parent: trees/core/main
     title: Administer
     attributes
       class
-      - admin: admin
+      - default: admin
     access
       roles
       - admins: admins
@@ -20,7 +20,7 @@ tree_items
     title: Modules
     attributes
       class
-      - modules: modules
+      - default: modules
       href: /admin/modules
     access
       roles

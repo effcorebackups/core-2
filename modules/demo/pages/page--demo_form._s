@@ -1,8 +1,8 @@
 pages
-- page_decoration|page
-    title: Decoration
+- page_demo|page
+    title: Demo
     url
-      match: %^/admin/decoration$%
+      match: %^/admin/demo$%
     access
       roles
       - admins: admins
@@ -15,7 +15,7 @@ pages
         region: nav
         type: link
         link: trees/user/user
-    - form_admin_decoration
+    - form_demo
         region: content_1_1
         type: link
-        link: forms/page/form_admin_decoration
+        link: forms/demo/form_demo

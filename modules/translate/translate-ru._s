@@ -1,50 +1,43 @@
 translate
   ru
-  - User profile (%%_user_email_context-2): Профиль пользователя (%%_user_email_context-2)
-  - Edit profile (%%_user_email_context-2): Редактировать профиль (%%_user_email_context-2)
-  - Delete profile (%%_user_email_context-4)?: Удалить профиль (%%_user_email_context-4)?
-  - always_enabled: всегда_вкл
-  - enabled: вкл.
-  - EMail: Электронная почта
-  - Execute plan: План выполнения
-  - Background color: Цвет фона
-  - Decoration: Оформление
-  - disabled: выкл.
-  - Page: Страница
-  - Core: Ядро
-  - Colors: Цвета
-  - Console: Консоль
-  - Checkboxes: Флажки
-  - Group: Группа
-  - Storage: Хранилище
-  - Translate: Перевод
-  - Text: Текст
-  - Tree: Дерево
-  - Total load: Общая загрука
   - Actions: Действия
   - Administer: Администрирование
   - Administrators: Администраторы
+  - always_enabled: всегда_вкл
   - Anonymous: Анонимы
+  - Background color: Цвет фона
+  - Call: Вызов
+  - Cancel: Отмена
   - cancel: отмена
-  - Сancel: Отмена
+  - Checkboxes: Флажки
+  - Colors: Цвета
+  - Console: Консоль
   - Core module.: Модуль Core.
+  - Core: Ядро
   - created: создано
   - Created: Создано
+  - Decoration: Оформление
+  - Delete profile (%%_user_email_context-4)?: Удалить профиль (%%_user_email_context-4)?
   - delete: удалить
+  - Demo: Демо
   - Description: Описание
+  - disabled: выкл.
+  - Edit profile (%%_user_email_context-2): Редактировать профиль (%%_user_email_context-2)
   - Edit profile: Редактировать профиль
   - edit: изменить
+  - EMail: Электронная почта
+  - enabled: вкл.
+  - Execute plan: План выполнения
   - File: Файл
   - Front page: Главная страница
-  - Total build time: Общее время сборки
+  - Group: Группа
   - Hello %%_user_email: Привет %%_user_email
   - Home: Дом
-  - Call: Вызов
+  - Information: Информация
+  - Insert: Вставка
   - Installation: Установка
   - Is always on: Всегда включен
   - Is embed: Встроенный
-  - Information: Информация
-  - Insert: Вставка
   - Load: Загрузка
   - login: вход
   - Login: Вход
@@ -54,38 +47,46 @@ translate
   - Main menu: Главное меню
   - Moderators: Модераторы
   - Module for storages support.: Модуль поддержки хранилищ данных.
+  - Module for translate interface and content.: Модуль перевода интерфейса и контента.
   - Module for working with pages.: Модуль работы со страницами.
   - Module for working with trees (hierarchical structures).: Модуль работы с деревьями (иерархическими структурами).
   - Module for working with user accounts and permissions.: Модуль работы с пользовательскими аккаунтами и разрешениями.
-  - Module for translate interface and content.: Модуль перевода интерфейса и контента.
   - Modules: Модули
   - my account: мой аккаунт
-  - No: Нет
-  - no items: нет элементов
   - Name: Имя
+  - no items: нет элементов
+  - No: Нет
+  - Page: Страница
   - Parameter: Параметр
-  - Password: Пароль
   - Password hash: Хеш пароля
+  - Password: Пароль
   - Path: Путь
   - profile: профиль
-  - register: зарегистрировать
+  - Queries: Запросы
+  - Query: Запрос
   - Radios: Переключатели
+  - register: зарегистрировать
   - Registered: Зарегистрированные
   - Registration: Регистрация
   - Roles: Роли
   - save: сохранить
-  - State: Состояние
-  - Queries: Запросы
-  - Query: Запрос
-  - Select: Список
   - Search: Поиск
+  - Select: Список
+  - State: Состояние
   - Status: Статус
+  - Storage: Хранилище
   - System: Система
+  - Text: Текст
   - Textarea: Текстовая область
-  - Title: Заголовок
   - Time: Время
+  - Title: Заголовок
+  - Total build time: Общее время сборки
+  - Total load: Общая загрука
   - Total: Всего
+  - Translate: Перевод
+  - Tree: Дерево
   - User menu: Меню пользователя
+  - User profile (%%_user_email_context-2): Профиль пользователя (%%_user_email_context-2)
   - User roles: Роли пользователя
   - User: Пользователь
   - Users: Пользователи

@@ -4,4 +4,4 @@ trees
     weight: 1
     attributes
       class
-      - user: user
+      - default: user

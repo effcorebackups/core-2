@@ -4,7 +4,7 @@ tree_items
     title: User
     attributes
       class
-      - user: user
+      - default: user
     access
       roles
       - anonymous: anonymous
@@ -32,7 +32,7 @@ tree_items
     attributes
       href: /user/%%_user_id
       class
-      - user: user
+      - default: user
     access
       roles
       - admins: admins

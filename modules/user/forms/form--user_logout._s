@@ -5,7 +5,7 @@ forms
       novalidate: novalidate
       method: post
       class
-      - form-user: form-user
+      - default: form-user
     children
     - button_logout|markup
         tag_name: button
