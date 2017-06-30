@@ -81,6 +81,8 @@ translate
   - save: сохранить
   - Search: Поиск
   - Select: Список
+  - Select (with optgroup): Список (с optgroup)
+  - Select (multiple choice): Список (множественный выбор)
   - State: Состояние
   - Status: Статус
   - Storage: Хранилище

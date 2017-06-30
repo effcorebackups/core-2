@@ -126,6 +126,71 @@ forms
                 children
                 - content|text
                     text: Option 3
+      # field_select_ws_groups
+        - field_select_ws_groups|form_field
+            tag_name: select
+            title: Select (with optgroup)
+            description: Element &lt;select&gt;.
+            attributes
+              name: field_select_ws_groups
+            children
+            - group_default|markup
+                tag_name: optgroup
+                attributes
+                  label: default group
+                children
+                - option_4|markup
+                    tag_name: option
+                    attributes
+                      value: option_4
+                    children
+                    - content|text
+                        text: Option 4
+                - option_5|markup
+                    tag_name: option
+                    attributes
+                      value: option_5
+                    children
+                    - content|text
+                        text: Option 5
+                - option_6|markup
+                    tag_name: option
+                    attributes
+                      value: option_6
+                    children
+                    - content|text
+                        text: Option 6
+      # field_select_multiple
+        - field_select_multiple|form_field
+            tag_name: select
+            title: Select (multiple choice)
+            description: Element &lt;select&gt;.
+            attributes
+              name: field_select_multiple
+              multiple: multiple
+              size: 5
+            children
+            - option_7|markup
+                tag_name: option
+                attributes
+                  value: option_7
+                children
+                - content|text
+                    text: Option 7
+            - option_8|markup
+                tag_name: option
+                attributes
+                  value: option_8
+                children
+                - content|text
+                    text: Option 8
+            - option_9|markup
+                tag_name: option
+                attributes
+                  value: option_9
+                children
+                - content|text
+                    text: Option 9
       # field_textarea
         - field_textarea|form_field
             tag_name: textarea
@@ -301,6 +366,7 @@ forms
               type: date
               name: field_input_date
               required: required
+              value: 2017-12-31
               min: 2000-12-31
               max: 2020-12-31
       # field_input_time
@@ -312,6 +378,7 @@ forms
               type: time
               name: field_input_time
               required: required
+              value: 00:00:00
       # field_input_color
         - field_input_color|form_field
             tag_name: input
