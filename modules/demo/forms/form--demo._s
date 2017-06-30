@@ -62,18 +62,21 @@ forms
                 attributes
                   type: checkbox
                   name: field_input_checkbox_1
+                  value: checkbox_1
             - field_input_checkbox_2|form_field
                 tag_name: input
                 title: Checkbox 2
                 attributes
                   type: checkbox
                   name: field_input_checkbox_2
+                  value: checkbox_2
             - field_input_checkbox_3|form_field
                 tag_name: input
                 title: Checkbox 3
                 attributes
                   type: checkbox
                   name: field_input_checkbox_3
+                  value: checkbox_3
       # field_input_radio
         - field_radio_label|form_container
             title: Radios

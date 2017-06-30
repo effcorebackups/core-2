@@ -54,7 +54,7 @@ namespace effectivecore {
   ##################
 
   function attribute_select($key)         {return $this->attributes[$key];}
-  function attribute_insert($key, $value) {$this->attributes[$key] = $value;}
+  function attribute_insert($key, $value) {$this->attributes->{$key} = $value;}
 
   ##############
   ### render ###

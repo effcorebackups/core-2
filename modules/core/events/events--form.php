@@ -49,7 +49,9 @@ namespace effectivecore {
   
               # checkbox
                 if ($c_type == 'checkbox') {
-              # ... @todo: make functionality
+                  if ($c_post) {
+                    $c_element->attribute_insert('checked', 'checked');
+                  }
                 }
   
               # radio
