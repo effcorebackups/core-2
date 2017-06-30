@@ -7,14 +7,14 @@ forms
       class
       - form_demo: form-demo
     children
-    - fieldset_main|markup
+    - fieldset_html4|markup
         tag_name: fieldset
         children
-        - fieldset_main_legend|markup
+        - fieldset_html4_legend|markup
             tag_name: legend
             children
             - content|text
-                text: Element &lt;legend&gt;&lt;/legend&gt;
+                text: Html 4 elements
       # field_input_text
         - field_input_text|form_field
             tag_name: input
@@ -23,10 +23,11 @@ forms
             attributes
               type: text
               name: field_input_text
-              value: text in input
               required: required
+              value: text in input
               minlength: 5
               maxlength: 255
+              pattern: [a-zA-Z0-9]+
       # field_input_password
         - field_input_password|form_field
             tag_name: input
@@ -35,34 +36,11 @@ forms
             attributes
               type: password
               name: field_input_password
+              required: required
               value: text in password
-              required: required
               minlength: 5
               maxlength: 255
-      # field_input_email
-        - field_input_email|form_field
-            tag_name: input
-            title: EMail
-            description: Element &lt;input type="email"&gt;.
-            attributes
-              type: email
-              name: field_input_email
-              value: test@example.com
-              required: required
-              minlength: 5
-              maxlength: 255
-      # field_input_search
-        - field_input_search|form_field
-            tag_name: input
-            title: Search
-            description: Element &lt;input type="search"&gt;.
-            attributes
-              type: search
-              name: field_input_search
-              value: text in search
-              required: required
-              minlength: 5
-              maxlength: 255
+              autocomplete: off
       # field_input_file
         - field_input_file|form_field
             tag_name: input
@@ -71,6 +49,8 @@ forms
             attributes
               type: file
               name: field_input_file
+              accept: image/*,audio/*,video/*
+              multiple: multiple
       # field_input_checkbox
         - field_checkbox_label|form_container
             title: Checkboxes
@@ -153,6 +133,9 @@ forms
             description: Element &lt;textarea&gt;&lt;/textarea&gt;.
             attributes
               name: field_textarea
+              rows: 5
+              minlength: 5
+              maxlength: 255
             children
             - content|text
                 text: text in textarea
@@ -227,6 +210,116 @@ forms
                         children
                         - content|text
                             text: 
+    - fieldset_html5|markup
+        tag_name: fieldset
+        children
+        - fieldset_html5_legend|markup
+            tag_name: legend
+            children
+            - content|text
+                text: Html 5 elements
+      # field_input_search
+        - field_input_search|form_field
+            tag_name: input
+            title: Search
+            description: Element &lt;input type="search"&gt;.
+            attributes
+              type: search
+              name: field_input_search
+              required: required
+              value: text in search
+              minlength: 5
+              maxlength: 255
+      # field_input_email
+        - field_input_email|form_field
+            tag_name: input
+            title: EMail
+            description: Element &lt;input type="email"&gt;.
+            attributes
+              type: email
+              name: field_input_email
+              required: required
+              value: test@example.com
+              minlength: 5
+              maxlength: 255
+              multiple: multiple
+      # field_input_url
+        - field_input_url|form_field
+            tag_name: input
+            title: URL
+            description: Element &lt;input type="url"&gt;.
+            attributes
+              type: url
+              name: field_input_url
+              required: required
+              value: http://example.com
+              minlength: 5
+              maxlength: 255
+      # field_input_tel
+        - field_input_tel|form_field
+            tag_name: input
+            title: Telephone
+            description: Element &lt;input type="tel"&gt;.
+            attributes
+              type: tel
+              name: field_input_tel
+              required: required
+              value: 000123456789
+              minlength: 5
+              maxlength: 15
+      # field_input_number
+        - field_input_number|form_field
+            tag_name: input
+            title: Number
+            description: Element &lt;input type="number"&gt;.
+            attributes
+              type: number
+              name: field_input_number
+              required: required
+              value: 0
+              min: -10
+              max: 10
+              step: 1
+      # field_input_range
+        - field_input_range|form_field
+            tag_name: input
+            title: Range
+            description: Element &lt;input type="range"&gt;.
+            attributes
+              type: range
+              name: field_input_range
+              value: 0
+              min: -10
+              max: 10
+              step: 1
+      # field_input_date
+        - field_input_date|form_field
+            tag_name: input
+            title: Date
+            description: Element &lt;input type="date"&gt;.
+            attributes
+              type: date
+              name: field_input_date
+              required: required
+              min: 2000-12-31
+              max: 2020-12-31
+      # field_input_time
+        - field_input_time|form_field
+            tag_name: input
+            title: Time
+            description: Element &lt;input type="time"&gt;.
+            attributes
+              type: time
+              name: field_input_time
+              required: required
+      # field_input_color
+        - field_input_color|form_field
+            tag_name: input
+            title: Color
+            description: Element &lt;input type="color"&gt;.
+            attributes
+              type: color
+              name: field_input_color
     - button_submit|markup
         tag_name: button
         attributes

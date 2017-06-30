@@ -7,7 +7,7 @@ forms
       class
       - default: form-user
     children
-    - fieldset_main|markup
+    - fieldset_default|markup
         tag_name: fieldset
         children
         - field_password|form_field
@@ -19,6 +19,7 @@ forms
               required: required
               minlength: 5
               maxlength: 255
+              autocomplete: off
     - button_save|markup
         tag_name: button
         attributes

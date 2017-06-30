@@ -7,10 +7,10 @@ forms
       class
       - default: form-admin_decoration
     children
-    - fieldset_main|markup
+    - fieldset_default|markup
         tag_name: fieldset
         children
-        - fieldset_main_legend|markup
+        - fieldset_default_legend|markup
             tag_name: legend
             children
             - content|text
