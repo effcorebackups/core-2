@@ -9,10 +9,9 @@ namespace effectivecore {
 
   static function on_validate($form, $elements) {
     foreach ($elements as $c_id => $c_element) {
-      if ($c_element instanceof form_field ||
-          $c_element instanceof markup) {
-        $c_name = isset($c_element->attributes->name) ? $c_element->attributes->name : '';
-        $c_post = isset($_POST[$c_name])              ? $_POST[$c_name]              : ''; # @todo: may be add a filter
+      if ($c_element instanceof node) {
+        $c_name = $c_element->attribute_select('name');
+        $c_post = isset($_POST[$c_name]) ? $_POST[$c_name] : ''; # @todo: may be add a filter
         if ($c_name) {
           switch ($c_element->tag_name) {
 
@@ -28,8 +27,7 @@ namespace effectivecore {
               break;
 
             case 'input':
-              $c_type = isset($c_element->attributes->type) ?
-                              $c_element->attributes->type : '';
+              $c_type = $c_element->attribute_select('type');
               if ($c_type) {
 
               # not processed elements
@@ -75,28 +73,29 @@ namespace effectivecore {
                 ) {
   
                 # set post value
-                  $c_element->attributes->value = $c_post;
-  
+                  $c_element->attribute_insert('value', $c_post);
+
                 # check required fields
-                  if ($c_post == '' && isset($c_element->attributes->required)) {
+                  if ($c_post == '' && $c_element->attribute_select('required')) {
                     $form->add_error($c_id,
                       $c_element->title.' field can not be blank!'
                     );
+                    continue;
                   }
   
                 # check min length
-                  if ($c_post != '' && isset($c_element->attributes->minlength) &&
-                           strlen($c_post) < $c_element->attributes->minlength) {
+                  if ($c_element->attribute_select('minlength') &&
+                      $c_element->attribute_select('minlength') > strlen($c_post)) {
                     $form->add_error($c_id,
-                      $c_element->title.' field contain too few symbols! Minimum '.$c_element->attributes->minlength.' symbols.'
+                      $c_element->title.' field contain too few symbols! Minimum '.$c_element->attribute_select('minlength').' symbols.'
                     );
                   }
   
                 # check max length
-                  if ($c_post != '' && isset($c_element->attributes->maxlength) &&
-                           strlen($c_post) > $c_element->attributes->maxlength) {
+                  if ($c_element->attribute_select('maxlength') &&
+                      $c_element->attribute_select('maxlength') < strlen($c_post)) {
                     $form->add_error($c_id,
-                      $c_element->title.' field contain too much symbols! Maximum '.$c_element->attributes->maxlength.' symbols.'
+                      $c_element->title.' field contain too much symbols! Maximum '.$c_element->attribute_select('maxlength').' symbols.'
                     );
                   }
   
