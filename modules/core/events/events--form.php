@@ -89,6 +89,7 @@ namespace effectivecore {
                     $form->add_error($c_id,
                       $c_element->title.' field contain too few symbols! Minimum '.$c_element->attribute_select('minlength').' symbols.'
                     );
+                    continue;
                   }
   
                 # check max length
@@ -97,6 +98,7 @@ namespace effectivecore {
                     $form->add_error($c_id,
                       $c_element->title.' field contain too much symbols! Maximum '.$c_element->attribute_select('maxlength').' symbols.'
                     );
+                    continue;
                   }
   
                 # check email field
