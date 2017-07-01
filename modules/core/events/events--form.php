@@ -11,7 +11,7 @@ namespace effectivecore {
     foreach ($elements as $c_id => $c_element) {
       if ($c_element instanceof node) {
         $c_name = $c_element->attribute_select('name');
-        $c_post = isset($_POST[$c_name]) ? $_POST[$c_name] : ''; # @todo: may be add a filter
+        $c_post = isset($_POST[$c_name]) ? $_POST[$c_name] : ''; # @todo: may be will add an additional filter
         if ($c_name) {
           switch ($c_element->tag_name) {
 
@@ -20,10 +20,9 @@ namespace effectivecore {
               break;
 
             case 'textarea':
-            # set post value
+              static::_validate_field($form, $c_element, $c_id, $c_post);
               $content = $c_element->child_select('content');
               $content->text = $c_post;
-            # ... @todo: make functionality
               break;
 
             case 'input':
@@ -71,50 +70,62 @@ namespace effectivecore {
                     $c_type == 'time'     || # <input type="time">
                     $c_type == 'color'       # <input type="color">
                 ) {
-  
-                # set post value
+                  static::_validate_field($form, $c_element, $c_id, $c_post);
                   $c_element->attribute_insert('value', $c_post);
-
-                # check required fields
-                  if ($c_post == '' && $c_element->attribute_select('required')) {
-                    $form->add_error($c_id,
-                      $c_element->title.' field can not be blank!'
-                    );
-                    continue;
-                  }
-  
-                # check min length
-                  if ($c_element->attribute_select('minlength') &&
-                      $c_element->attribute_select('minlength') > strlen($c_post)) {
-                    $form->add_error($c_id,
-                      $c_element->title.' field contain too few symbols! Minimum '.$c_element->attribute_select('minlength').' symbols.'
-                    );
-                    continue;
-                  }
-  
-                # check max length
-                  if ($c_element->attribute_select('maxlength') &&
-                      $c_element->attribute_select('maxlength') < strlen($c_post)) {
-                    $form->add_error($c_id,
-                      $c_element->title.' field contain too much symbols! Maximum '.$c_element->attribute_select('maxlength').' symbols.'
-                    );
-                    continue;
-                  }
-  
-                # check email field
-                  if ($c_type == 'email' &&
-                      $c_post && !filter_var($c_post, FILTER_VALIDATE_EMAIL)) {
-                    $form->add_error($c_id,
-                      $c_element->title.' field contains an invalid email address!'
-                    );
-                  }
                 }
+
               }
               break;
           }
         }
       }
     }
+  }
+
+  static function _validate_field($form, $element, $id, &$value) {
+  # check required fields
+    if ($element->attribute_select('required') && $value == '') {
+      $form->add_error($id,
+        $element->title.' field can not be blank!'
+      );
+      return false;
+    }
+
+  # check minimum length
+    if ($element->attribute_select('minlength') &&
+        $element->attribute_select('minlength') > strlen($value)) {
+      $form->add_error($id,
+        $element->title.' field contain too few symbols!'.br.
+        'Minimum '.$element->attribute_select('minlength').' symbols.'
+      );
+      return false;
+    }
+
+  # check maximum length
+    if ($element->attribute_select('maxlength') &&
+        $element->attribute_select('maxlength') < strlen($value)) {
+      $form->add_error($id,
+        $element->title.' field contain too much symbols!'.br.
+        'Maximum '.$element->attribute_select('maxlength').' symbols.'.br.
+        'The value was trimmed to the required length!'.br.
+        'Check field again before submit.'
+      );
+    # trim value to maximum lenght
+      $value = substr($value, 0, $element->attribute_select('maxlength'));
+      return false;
+    }
+
+  # check email field
+    if ($element->attribute_select('type') == 'email' &&
+        filter_var($value, FILTER_VALIDATE_EMAIL) == false) {
+      $form->add_error($id,
+        $element->title.' field contains an invalid email address!'
+      );
+      return false;
+    }
+
+  # if no errors
+    return true;
   }
 
 }}
