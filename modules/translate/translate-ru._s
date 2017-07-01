@@ -1,5 +1,13 @@
 translate
   ru
+  - Field "%%_title" can not be blank!: Поле "%%_title" не может быть пустым!
+  - Field "%%_title" contain too few symbols!: Поле "%%_title" содержит слишком мало символов!
+  - Field "%%_title" contain too much symbols!: Поле "%%_title" содержит слишком много символов!
+  - Field "%%_title" contains an invalid email address!: Поле "%%_title" содержит неверный адрес электронной почты!
+  - Minimum %%_value symbols.: Минимум %%_value символов.
+  - Maximum %%_value symbols.: Максимум %%_value символов.
+  - The value was trimmed to the required length!: Значение было обрезано до требуемой длинны!
+  - Check field again before submit.: Проверьте поле снова перед отправкой.
   - Actions: Действия
   - Administer: Администрирование
   - Administrators: Администраторы
@@ -28,7 +36,7 @@ translate
   - Edit profile (%%_user_email_context-2): Редактировать профиль (%%_user_email_context-2)
   - Edit profile: Редактировать профиль
   - edit: изменить
-  - EMail: Электронная почта
+  - EMail: Адрес электронной почты
   - enabled: вкл.
   - Execute plan: План выполнения
   - File: Файл

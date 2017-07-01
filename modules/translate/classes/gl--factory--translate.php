@@ -17,10 +17,14 @@ namespace effectivecore {
     }
   }
 
-  static function get($string, $lang = '') {
+  static function get($string, $args = [], $lang = '') {
     if (!static::$data) static::init();
-    return isset(static::$data[$lang ?: static::$lang_current][$string]) ?
-                 static::$data[$lang ?: static::$lang_current][$string] : $string;
+    $string = isset(static::$data[$lang ?: static::$lang_current][$string]) ?
+                    static::$data[$lang ?: static::$lang_current][$string] : $string;
+    foreach ($args as $c_key => $c_value) {
+      $string = str_replace('%%_'.$c_key, $c_value, $string);
+    }
+    return $string;
   }
 
 }}

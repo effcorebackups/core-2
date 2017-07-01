@@ -2,6 +2,7 @@
 
 namespace effectivecore {
           use \effectivecore\markup;
+          use \effectivecore\translate_factory as translations;
           abstract class events_form extends events {
 
   static function on_init($page_args, $form_args, $post_args) {}
@@ -83,10 +84,14 @@ namespace effectivecore {
   }
 
   static function _validate_field($form, $element, $id, &$value) {
+    $title = translations::get(
+      $element->title
+    );
+
   # check required fields
     if ($element->attribute_select('required') && $value == '') {
       $form->add_error($id,
-        $element->title.' field can not be blank!'
+        translations::get('Field "%%_title" can not be blank!', ['title' => $title])
       );
       return false;
     }
@@ -95,8 +100,8 @@ namespace effectivecore {
     if ($element->attribute_select('minlength') &&
         $element->attribute_select('minlength') > strlen($value)) {
       $form->add_error($id,
-        $element->title.' field contain too few symbols!'.br.
-        'Minimum '.$element->attribute_select('minlength').' symbols.'
+        translations::get('Field "%%_title" contain too few symbols!', ['title' => $title]).br.
+        translations::get('Minimum %%_value symbols.', ['value' => $element->attribute_select('minlength')])
       );
       return false;
     }
@@ -105,10 +110,10 @@ namespace effectivecore {
     if ($element->attribute_select('maxlength') &&
         $element->attribute_select('maxlength') < strlen($value)) {
       $form->add_error($id,
-        $element->title.' field contain too much symbols!'.br.
-        'Maximum '.$element->attribute_select('maxlength').' symbols.'.br.
-        'The value was trimmed to the required length!'.br.
-        'Check field again before submit.'
+        translations::get('Field "%%_title" contain too much symbols!', ['title' => $title]).br.
+        translations::get('Maximum %%_value symbols.', ['value' => $element->attribute_select('maxlength')]).br.
+        translations::get('The value was trimmed to the required length!').br.
+        translations::get('Check field again before submit.')
       );
     # trim value to maximum lenght
       $value = substr($value, 0, $element->attribute_select('maxlength'));
@@ -119,7 +124,7 @@ namespace effectivecore {
     if ($element->attribute_select('type') == 'email' &&
         filter_var($value, FILTER_VALIDATE_EMAIL) == false) {
       $form->add_error($id,
-        $element->title.' field contains an invalid email address!'
+        translations::get('Field "%%_title" contains an invalid email address!', ['title' => $title])
       );
       return false;
     }
