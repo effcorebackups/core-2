@@ -1,18 +1,18 @@
 forms
 - form_user_n_delete|form
     attributes
-      id: user_n_delete
-      novalidate: novalidate
-      method: post
-      class
+    - id: user_n_delete
+    - novalidate: novalidate
+    - method: post
+    - class
       - default: form-user
     children
     - button_delete|markup
         tag_name: button
         attributes
-          type: submit
-          name: button
-          value: delete
+        - type: submit
+        - name: button
+        - value: delete
         children
         - label|text
             text: delete
@@ -20,9 +20,9 @@ forms
         tag_name: button
         novalidate: true
         attributes
-          type: submit
-          name: button
-          value: cancel
+        - type: submit
+        - name: button
+        - value: cancel
         children
         - label|text
             text: cancel

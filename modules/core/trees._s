@@ -3,5 +3,5 @@ trees
     title: Main menu
     weight: 2
     attributes
-      class
+    - class
       - default: main

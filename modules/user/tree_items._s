@@ -3,7 +3,7 @@ tree_items
     parent: trees/user/user
     title: User
     attributes
-      class
+    - class
       - default: user
     access
       roles
@@ -13,7 +13,7 @@ tree_items
     title: Login
     weight: -80
     attributes
-      href: /user/login
+    - href: /user/login
     access
       roles
       - anonymous: anonymous
@@ -22,7 +22,7 @@ tree_items
     title: Registration
     weight: -60
     attributes
-      href: /user/registration
+    - href: /user/registration
     access
       roles
       - anonymous: anonymous
@@ -30,8 +30,8 @@ tree_items
     parent: trees/user/user
     title: Hello %%_user_email
     attributes
-      href: /user/%%_user_id
-      class
+    - href: /user/%%_user_id
+    - class
       - default: user
     access
       roles
@@ -42,7 +42,7 @@ tree_items
     title: Edit profile
     weight: -100
     attributes
-      href: /user/%%_user_id/edit
+    - href: /user/%%_user_id/edit
     access
       roles
       - admins: admins
@@ -52,7 +52,7 @@ tree_items
     title: Logout
     weight: -40
     attributes
-      href: /user/logout
+    - href: /user/logout
     access
       roles
       - registered: registered
@@ -60,7 +60,7 @@ tree_items
     parent: tree_items/core/main_admin
     title: Roles
     attributes
-      href: /admin/roles
+    - href: /admin/roles
     access
       roles
       - admins: admins

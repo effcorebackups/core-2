@@ -1,10 +1,10 @@
 forms
 - form_user_login|form
     attributes
-      id: user_login
-      novalidate: novalidate
-      method: post
-      class
+    - id: user_login
+    - novalidate: novalidate
+    - method: post
+    - class
       - default: form-user
     children
     - fieldset_default|markup
@@ -14,26 +14,26 @@ forms
             tag_name: input
             title: Email
             attributes
-              type: email
-              name: email
-              required: required
-              maxlength: 255
+            - type: email
+            - name: email
+            - required: required
+            - maxlength: 255
         - field_password|form_field
             tag_name: input
             title: Password
             attributes
-              type: password
-              name: password
-              required: required
-              minlength: 5
-              maxlength: 255
-              autocomplete: off
+            - type: password
+            - name: password
+            - required: required
+            - minlength: 5
+            - maxlength: 255
+            - autocomplete: off
     - button_login|markup
         tag_name: button
         attributes
-          type: submit
-          name: button
-          value: login
+        - type: submit
+        - name: button
+        - value: login
         children
         - label|text
             text: login

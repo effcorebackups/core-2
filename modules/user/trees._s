@@ -3,5 +3,5 @@ trees
     title: User menu
     weight: 1
     attributes
-      class
+    - class
       - default: user

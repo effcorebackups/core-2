@@ -3,9 +3,9 @@ tree_items
     parent: tree_items/core/main_admin
     title: Demo
     attributes
-      class
+    - href: /admin/demo
+    - class
       - default: demo
-      href: /admin/demo
     access
       roles
       - admins: admins

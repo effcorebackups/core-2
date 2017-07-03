@@ -1,10 +1,10 @@
 forms
 - form_demo|form
     attributes
-      id: form_demo
-      novalidate: novalidate
-      method: post
-      class
+    - id: form_demo
+    - novalidate: novalidate
+    - method: post
+    - class
       - form_demo: form-demo
     children
     - fieldset_html4|markup
@@ -21,36 +21,36 @@ forms
             title: Text
             description: Element &lt;input type="text"&gt;.
             attributes
-              type: text
-              name: field_input_text
-              required: required
-              value: text in input
-              minlength: 5
-              maxlength: 255
-              pattern: [a-zA-Z0-9]+
+            - type: text
+            - name: field_input_text
+            - required: required
+            - value: text in input
+            - minlength: 5
+            - maxlength: 255
+            - pattern: [a-zA-Z0-9]+
       # field_input_password
         - field_input_password|form_field
             tag_name: input
             title: Password
             description: Element &lt;input type="password"&gt;.
             attributes
-              type: password
-              name: field_input_password
-              required: required
-              value: text in password
-              minlength: 5
-              maxlength: 255
-              autocomplete: off
+            - type: password
+            - name: field_input_password
+            - required: required
+            - value: text in password
+            - minlength: 5
+            - maxlength: 255
+            - autocomplete: off
       # field_input_file
         - field_input_file|form_field
             tag_name: input
             title: File
             description: Element &lt;input type="file"&gt;.
             attributes
-              type: file
-              name: field_input_file
-              accept: image/*,audio/*,video/*
-              multiple: multiple
+            - type: file
+            - name: field_input_file
+            - accept: image/*,audio/*,video/*
+            - multiple: multiple
       # field_input_checkbox
         - field_checkbox_label|form_container
             title: Checkboxes
@@ -60,23 +60,23 @@ forms
                 tag_name: input
                 title: Checkbox 1
                 attributes
-                  type: checkbox
-                  name: field_input_checkbox_1
-                  value: checkbox_1
+                - type: checkbox
+                - name: field_input_checkbox_1
+                - value: checkbox_1
             - field_input_checkbox_2|form_field
                 tag_name: input
                 title: Checkbox 2
                 attributes
-                  type: checkbox
-                  name: field_input_checkbox_2
-                  value: checkbox_2
+                - type: checkbox
+                - name: field_input_checkbox_2
+                - value: checkbox_2
             - field_input_checkbox_3|form_field
                 tag_name: input
                 title: Checkbox 3
                 attributes
-                  type: checkbox
-                  name: field_input_checkbox_3
-                  value: checkbox_3
+                - type: checkbox
+                - name: field_input_checkbox_3
+                - value: checkbox_3
       # field_input_radio
         - field_radio_label|form_container
             title: Radios
@@ -86,49 +86,49 @@ forms
                 tag_name: input
                 title: Radio 1
                 attributes
-                  type: radio
-                  name: field_input_radio
-                  value: radio_1
+                - type: radio
+                - name: field_input_radio
+                - value: radio_1
             - field_input_radio_2|form_field
                 tag_name: input
                 title: Radio 2
                 attributes
-                  type: radio
-                  name: field_input_radio
-                  value: radio_2
+                - type: radio
+                - name: field_input_radio
+                - value: radio_2
             - field_input_radio_3|form_field
                 tag_name: input
                 title: Radio 3
                 attributes
-                  type: radio
-                  name: field_input_radio
-                  value: radio_3
+                - type: radio
+                - name: field_input_radio
+                - value: radio_3
       # field_select
         - field_select|form_field
             tag_name: select
             title: Select
             description: Element &lt;select&gt;.
             attributes
-              name: field_select
+            - name: field_select
             children
             - option_1|markup
                 tag_name: option
                 attributes
-                  value: option_1
+                - value: option_1
                 children
                 - content|text
                     text: Option 1
             - option_2|markup
                 tag_name: option
                 attributes
-                  value: option_2
+                - value: option_2
                 children
                 - content|text
                     text: Option 2
             - option_3|markup
                 tag_name: option
                 attributes
-                  value: option_3
+                - value: option_3
                 children
                 - content|text
                     text: Option 3
@@ -138,31 +138,31 @@ forms
             title: Select (with optgroup)
             description: Element &lt;select&gt;.
             attributes
-              name: field_select_ws_groups
+            - name: field_select_ws_groups
             children
             - group_default|markup
                 tag_name: optgroup
                 attributes
-                  label: default group
+                - label: default group
                 children
                 - option_4|markup
                     tag_name: option
                     attributes
-                      value: option_4
+                    - value: option_4
                     children
                     - content|text
                         text: Option 4
                 - option_5|markup
                     tag_name: option
                     attributes
-                      value: option_5
+                    - value: option_5
                     children
                     - content|text
                         text: Option 5
                 - option_6|markup
                     tag_name: option
                     attributes
-                      value: option_6
+                    - value: option_6
                     children
                     - content|text
                         text: Option 6
@@ -172,28 +172,28 @@ forms
             title: Select (multiple choice)
             description: Element &lt;select&gt;.
             attributes
-              name: field_select_multiple
-              multiple: multiple
-              size: 5
+            - name: field_select_multiple
+            - multiple: multiple
+            - size: 5
             children
             - option_7|markup
                 tag_name: option
                 attributes
-                  value: option_7
+                - value: option_7
                 children
                 - content|text
                     text: Option 7
             - option_8|markup
                 tag_name: option
                 attributes
-                  value: option_8
+                - value: option_8
                 children
                 - content|text
                     text: Option 8
             - option_9|markup
                 tag_name: option
                 attributes
-                  value: option_9
+                - value: option_9
                 children
                 - content|text
                     text: Option 9
@@ -203,10 +203,10 @@ forms
             title: Textarea
             description: Element &lt;textarea&gt;&lt;/textarea&gt;.
             attributes
-              name: field_textarea
-              rows: 5
-              minlength: 5
-              maxlength: 255
+            - name: field_textarea
+            - rows: 5
+            - minlength: 5
+            - maxlength: 255
             children
             - content|text
                 text: text in textarea
@@ -277,7 +277,7 @@ forms
                     children
                     - tbody_tr_4_td_1|table_body_row_cell
                         attributes
-                          colspan: 3
+                        - colspan: 3
                         children
                         - content|text
                             text: 
@@ -295,128 +295,128 @@ forms
             title: Search
             description: Element &lt;input type="search"&gt;.
             attributes
-              type: search
-              name: field_input_search
-              required: required
-              value: text in search
-              minlength: 5
-              maxlength: 255
+            - type: search
+            - name: field_input_search
+            - required: required
+            - value: text in search
+            - minlength: 5
+            - maxlength: 255
       # field_input_email
         - field_input_email|form_field
             tag_name: input
             title: EMail
             description: Element &lt;input type="email"&gt;.
             attributes
-              type: email
-              name: field_input_email
-              required: required
-              value: test@example.com
-              minlength: 5
-              maxlength: 255
-              multiple: multiple
+            - type: email
+            - name: field_input_email
+            - required: required
+            - value: test@example.com
+            - minlength: 5
+            - maxlength: 255
+            - multiple: multiple
       # field_input_url
         - field_input_url|form_field
             tag_name: input
             title: URL
             description: Element &lt;input type="url"&gt;.
             attributes
-              type: url
-              name: field_input_url
-              required: required
-              value: http://example.com
-              minlength: 5
-              maxlength: 255
+            - type: url
+            - name: field_input_url
+            - required: required
+            - value: http://example.com
+            - minlength: 5
+            - maxlength: 255
       # field_input_tel
         - field_input_tel|form_field
             tag_name: input
             title: Telephone
             description: Element &lt;input type="tel"&gt;.
             attributes
-              type: tel
-              name: field_input_tel
-              required: required
-              value: 000123456789
-              minlength: 5
-              maxlength: 15
+            - type: tel
+            - name: field_input_tel
+            - required: required
+            - value: 000123456789
+            - minlength: 5
+            - maxlength: 15
       # field_input_number
         - field_input_number|form_field
             tag_name: input
             title: Number
             description: Element &lt;input type="number"&gt;.
             attributes
-              type: number
-              name: field_input_number
-              required: required
-              value: 0
-              min: -10
-              max: 10
-              step: 1
+            - type: number
+            - name: field_input_number
+            - required: required
+            - value: 0
+            - min: -10
+            - max: 10
+            - step: 1
       # field_input_range
         - field_input_range|form_field
             tag_name: input
             title: Range
             description: Element &lt;input type="range"&gt;.
             attributes
-              type: range
-              name: field_input_range
-              value: 0
-              min: -10
-              max: 10
-              step: 1
+            - type: range
+            - name: field_input_range
+            - value: 0
+            - min: -10
+            - max: 10
+            - step: 1
       # field_input_date
         - field_input_date|form_field
             tag_name: input
             title: Date
             description: Element &lt;input type="date"&gt;.
             attributes
-              type: date
-              name: field_input_date
-              required: required
-              value: 2017-12-31
-              min: 2000-12-31
-              max: 2020-12-31
+            - type: date
+            - name: field_input_date
+            - required: required
+            - value: 2017-12-31
+            - min: 2000-12-31
+            - max: 2020-12-31
       # field_input_time
         - field_input_time|form_field
             tag_name: input
             title: Time
             description: Element &lt;input type="time"&gt;.
             attributes
-              type: time
-              name: field_input_time
-              required: required
-              value: 00:00:00
+            - type: time
+            - name: field_input_time
+            - required: required
+            - value: 00:00:00
       # field_input_color
         - field_input_color|form_field
             tag_name: input
             title: Color
             description: Element &lt;input type="color"&gt;.
             attributes
-              type: color
-              name: field_input_color
+            - type: color
+            - name: field_input_color
     - button_submit|markup
         tag_name: button
         attributes
-          type: submit
-          name: button
-          value: submit
+        - type: submit
+        - name: button
+        - value: submit
         children
         - label|text
             text: submit
     - button_button|markup
         tag_name: button
         attributes
-          type: button
-          name: button
-          value: button
+        - type: button
+        - name: button
+        - value: button
         children
         - label|text
             text: button
     - button_reset|markup
         tag_name: button
         attributes
-          type: reset
-          name: button
-          value: reset
+        - type: reset
+        - name: button
+        - value: reset
         children
         - label|text
             text: reset

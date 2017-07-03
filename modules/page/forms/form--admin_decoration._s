@@ -1,10 +1,10 @@
 forms
 - form_admin_decoration|form
     attributes
-      id: admin_decoration
-      novalidate: novalidate
-      method: post
-      class
+    - id: admin_decoration
+    - novalidate: novalidate
+    - method: post
+    - class
       - default: form-admin_decoration
     children
     - fieldset_default|markup
@@ -18,13 +18,13 @@ forms
         - field_bg_color|form_container
             title: Background color
             attributes
-              id: bg_color
+            - id: bg_color
     - button_save|markup
         tag_name: button
         attributes
-          type: submit
-          name: button
-          value: save
+        - type: submit
+        - name: button
+        - value: save
         children
         - label|text
             text: save
