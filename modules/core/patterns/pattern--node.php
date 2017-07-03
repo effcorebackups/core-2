@@ -3,12 +3,12 @@
 namespace effectivecore {
           class node {
 
-  public $attributes;
   public $weight;
+  public $attributes = [];
   public $children;
   public $template;
 
-  function __construct($attributes = null, $children = null, $weight = 0) {
+  function __construct($attributes = [], $children = null, $weight = 0) {
     $this->weight = $weight;
     if ($attributes) {
       foreach ($attributes as $id => $c_attribute) {
@@ -59,16 +59,15 @@ namespace effectivecore {
 
   function attribute_select($key = '') {
     if ($key) {
-      return isset($this->attributes->{$key}) ?
-                   $this->attributes->{$key} : null;
+      return isset($this->attributes[$key]) ?
+                   $this->attributes[$key] : null;
     } else {
       return $this->attributes;
     }
   }
 
   function attribute_insert($key, $value) {
-    if ($this->attributes === null) $this->attributes = new \StdClass();
-    $this->attributes->{$key} = $value;
+    $this->attributes[$key] = $value;
   }
 
   ##############

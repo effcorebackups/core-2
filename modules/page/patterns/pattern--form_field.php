@@ -14,7 +14,7 @@ namespace effectivecore {
                   $this->attribute_select('type') == 'checkbox' ||
                   $this->attribute_select('type') == 'radio') ? true : false;
     if ($is_has_box) {
-      $this->wr_attributes['class'][] = 'has-box'; # @todo: use attribute_insert
+      $this->wr_attributes['class']['has_box'] = 'has-box'; # @todo: use attribute_insert
     }
     $description = [];
     if (!empty($this->description))                   $description[] = (new markup('p', ['class' => ['default']], $this->description))->render();

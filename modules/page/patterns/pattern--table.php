@@ -5,7 +5,7 @@ namespace effectivecore {
 
   public $template = 'table';
 
-  function __construct($attributes = null, $body = [], $head = [], $weight = 0) {
+  function __construct($attributes = [], $body = [], $head = [], $weight = 0) {
     parent::__construct($attributes, null, $weight);
     $this->child_insert(new table_head(null, $head), 'head');
     $this->child_insert(new table_body(null, $body), 'body');

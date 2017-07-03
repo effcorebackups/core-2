@@ -68,7 +68,7 @@ tree_items
     parent: tree_items/core/main_admin
     title: Users
     attributes
-      href: /admin/users
+    - href: /admin/users
     access
       roles
       - admins: admins

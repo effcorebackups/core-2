@@ -11,7 +11,7 @@ namespace effectivecore {
   public $template          = 'tree_item';
   public $template_children = 'tree_item_children';
 
-  function __construct($title = '', $attributes = null, $children = null, $weight = 0) {
+  function __construct($title = '', $attributes = [], $children = null, $weight = 0) {
     parent::__construct($attributes, $children, $weight);
     $this->title = $title;
   }
@@ -30,7 +30,7 @@ namespace effectivecore {
   }
 
   function render_self() {
-    $attr = clone $this->attributes;
+    $attr = $this->attributes;
     if (isset($attr->href)) {
       $attr->href = tokens::replace($attr->href);
       if (urls::is_active($attr->href)) {

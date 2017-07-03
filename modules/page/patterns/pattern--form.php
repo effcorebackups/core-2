@@ -81,7 +81,7 @@ namespace effectivecore {
     # show errors and set error class
       foreach ($this->errors as $c_id => $c_errors) {
         foreach ($c_errors as $c_error) {
-          $elements[$c_id]->attributes->class[] = 'error'; # @todo: use attribute_insert
+          $elements[$c_id]->attributes['class']['error'] = 'error'; # @todo: use attribute_insert
           messages::add_new($c_error, 'error');
         }
       }
