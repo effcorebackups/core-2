@@ -88,18 +88,21 @@ forms
                 attributes
                   type: radio
                   name: field_input_radio
+                  value: radio_1
             - field_input_radio_2|form_field
                 tag_name: input
                 title: Radio 2
                 attributes
                   type: radio
                   name: field_input_radio
+                  value: radio_2
             - field_input_radio_3|form_field
                 tag_name: input
                 title: Radio 3
                 attributes
                   type: radio
                   name: field_input_radio
+                  value: radio_3
       # field_select
         - field_select|form_field
             tag_name: select

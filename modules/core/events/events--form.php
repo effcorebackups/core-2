@@ -30,7 +30,7 @@ namespace effectivecore {
               $c_type = $c_element->attribute_select('type');
               if ($c_type) {
 
-              # not processed elements
+              # not supported elements
                 if ($c_type == 'submit' || # <input type="submit">
                     $c_type == 'reset'  || # <input type="reset">
                     $c_type == 'image'  || # <input type="image">
@@ -54,7 +54,9 @@ namespace effectivecore {
   
               # radio
                 if ($c_type == 'radio') {
-              # ... @todo: make functionality
+                  if ($c_element->attribute_select('value') == $c_post) {
+                    $c_element->attribute_insert('checked', 'checked');
+                  }
                 }
   
               # html4 elements: text|password

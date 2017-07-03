@@ -18,9 +18,6 @@ namespace effectivecore\modules\page {
             'title' => $c_color_id.' ('.$c_color_info->value.')',
             'style' => ['background-color: '.$c_color_info->value]])
         );
-        if ($c_color_id == $decoration['page']->background_color) {
-          $elements['fieldset_default/field_bg_color']->child_select($c_element_id)->attribute_insert('checked', 'checked');
-        }
       }
     }
   }
