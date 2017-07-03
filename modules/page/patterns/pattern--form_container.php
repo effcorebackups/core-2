@@ -10,7 +10,7 @@ namespace effectivecore {
 
   function render() {
     return (new template($this->template, [
-      'attributes'  => factory::data_to_attr($this->attributes, ' '),
+      'attributes'  => factory::data_to_attr($this->attribute_select(), ' '),
       'tag_name'    => $this->tag_name,
       'title'       => $this->title ? (new markup('x-title', [], $this->title))->render() : '',
       'description' => $this->description ? (new markup('x-description', [], $this->description))->render() : '',
