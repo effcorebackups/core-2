@@ -5,14 +5,15 @@ namespace effectivecore {
           use \effectivecore\translate_factory as translations;
           abstract class events_form extends events {
 
-  static function on_init($page_args, $form_args, $post_args) {}
-  static function on_submit($page_args, $form_args, $post_args) {}
+  static function on_init($page_args, $form_args, $values) {}
+  static function on_submit($page_args, $form_args, $values) {}
 
-  static function on_validate($form, $elements) {
+  static function on_validate($form, $elements, $values) {
     foreach ($elements as $c_id => $c_element) {
       if ($c_element instanceof node) {
         $c_name = $c_element->attribute_select('name');
-        $c_post = isset($_POST[$c_name]) ? $_POST[$c_name] : ''; # @todo: may be will add an additional filter
+        $c_value = isset($values[$c_name]) ?
+                         $values[$c_name] : '';
         if ($c_name) {
           switch ($c_element->tag_name) {
 
@@ -21,9 +22,9 @@ namespace effectivecore {
               break;
 
             case 'textarea':
-              static::_validate_field($form, $c_element, $c_id, $c_post);
+              static::_validate_field($form, $c_element, $c_id, $c_value);
               $content = $c_element->child_select('content');
-              $content->text = $c_post;
+              $content->text = $c_value;
               break;
 
             case 'input':
@@ -47,14 +48,14 @@ namespace effectivecore {
   
               # checkbox
                 if ($c_type == 'checkbox') {
-                  if ($c_post) {
+                  if ($c_value) {
                     $c_element->attribute_insert('checked', 'checked');
                   }
                 }
   
               # radio
                 if ($c_type == 'radio') {
-                  if ($c_element->attribute_select('value') == $c_post) {
+                  if ($c_element->attribute_select('value') == $c_value) {
                     $c_element->attribute_insert('checked', 'checked');
                   }
                 }
@@ -73,8 +74,8 @@ namespace effectivecore {
                     $c_type == 'time'     || # <input type="time">
                     $c_type == 'color'       # <input type="color">
                 ) {
-                  static::_validate_field($form, $c_element, $c_id, $c_post);
-                  $c_element->attribute_insert('value', $c_post);
+                  static::_validate_field($form, $c_element, $c_id, $c_value);
+                  $c_element->attribute_insert('value', $c_value);
                 }
 
               }

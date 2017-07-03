@@ -2,8 +2,6 @@
 
 namespace effectivecore {
           use \effectivecore\message_factory as messages;
-          use \effectivecore\modules\page\page_factory as pages;
-          use \effectivecore\modules\storage\storage_factory as storages;
           class form extends node {
 
   # support FORM elements:
@@ -58,17 +56,19 @@ namespace effectivecore {
 
   function build() {
     $id = $this->attribute_select('id');
-    $elements = static::collect_elements($this->children);
   # call init handlers
+    $elements = static::collect_elements($this->children);
     events::start('on_form_init', $id, [$this, $elements]);
+    $elements = static::collect_elements($this->children);
   # if current user click the button
     if (isset($_POST['form_id']) &&
               $_POST['form_id'] === $id && isset($_POST['button'])) {
     # get more info about clicked button
       foreach ($elements as $c_element) {
-        if ($c_element instanceof node &&
+        if ($c_element instanceof markup &&
+            $c_element->tag_name == 'button' &&
             $c_element->attribute_select('type') == 'submit' &&
-            $c_element->attribute_select('value') == $_POST['button']) {
+            $c_element->attribute_select('value') === $_POST['button']) {
           $this->clicked_button      = $c_element;
           $this->clicked_button_name = $c_element->attribute_select('value');
           break;
@@ -76,7 +76,7 @@ namespace effectivecore {
       }
     # call validate handlers
       if (empty($this->clicked_button->novalidate)) {
-        events::start('on_form_validate', $id, [$this, $elements]);
+        events::start('on_form_validate', $id, [$this, $elements, $_POST]);
       }
     # show errors and set error class
       foreach ($this->errors as $c_id => $c_errors) {
@@ -87,7 +87,7 @@ namespace effectivecore {
       }
     # call submit handler (if no errors)
       if (count($this->errors) == 0) {
-        events::start('on_form_submit', $id, [$this, $elements]);
+        events::start('on_form_submit', $id, [$this, $elements, $_POST]);
       }
     }
 
