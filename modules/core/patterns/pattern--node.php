@@ -9,8 +9,12 @@ namespace effectivecore {
   public $template;
 
   function __construct($attributes = null, $children = null, $weight = 0) {
-    $this->attributes = $attributes;
     $this->weight = $weight;
+    if ($attributes) {
+      foreach ($attributes as $id => $c_attribute) {
+        $this->attribute_insert($id, $c_attribute);
+      }
+    }
     if ($children) {
       if (is_array($children)) {
         foreach ($children as $id => $c_child) {
@@ -63,6 +67,7 @@ namespace effectivecore {
   }
 
   function attribute_insert($key, $value) {
+    if ($this->attributes === null) $this->attributes = new \StdClass();
     $this->attributes->{$key} = $value;
   }
 
@@ -73,7 +78,7 @@ namespace effectivecore {
   function render() {
     if ($this->template) {
       return (new template($this->template, [
-        'attributes' => factory::data_to_attr($this->attributes, ' '),
+        'attributes' => factory::data_to_attr($this->attribute_select(), ' '),
         'self'       => $this->render_self(),
         'children'   => $this->render_children($this->children)
       ]))->render();
