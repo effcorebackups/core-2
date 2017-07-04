@@ -12,7 +12,7 @@ forms
         children
         - field_email|form_field
             tag_name: input
-            title: Email
+            title: EMail
             attributes
             - type: email
             - name: email
