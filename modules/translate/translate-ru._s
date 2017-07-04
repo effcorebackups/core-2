@@ -15,6 +15,8 @@ translate
   - User was not deleted!: Пользователь не был удален!
   - User with this email was already registered!: Пользователь с таким адресом электронной почты уже был зарегистрирован!
   - User was not registered!: Пользователь не был зарегистрирован!
+  - Field should contain minimum %%_lenght symbols.: Поле должно содержать минимум %%_lenght символов.
+  - Field should contain maximum %%_lenght symbols.: Поле должно содержать максимум %%_lenght символов.
   - Actions: Действия
   - Administer: Администрирование
   - Administrators: Администраторы
