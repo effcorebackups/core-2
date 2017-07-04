@@ -8,6 +8,13 @@ translate
   - Maximum %%_value symbols.: Максимум %%_value символов.
   - The value was trimmed to the required length!: Значение было обрезано до требуемой длинны!
   - Check field again before submit.: Проверьте поле снова перед отправкой.
+  - Incorrect email or password!: Неверный адрес электронной почты или пароль!
+  - Data was not updated!: Данные не были обновлены!
+  - Data of user with ID = %%_id was updated.: Данные пользователя с ID = %%_id были обновлены.
+  - User with ID = %%_id was deleted.: Пользователь с ID = %%_id был удален.
+  - User was not deleted!: Пользователь не был удален!
+  - User with this email was already registered!: Пользователь с таким адресом электронной почты уже был зарегистрирован!
+  - User was not registered!: Пользователь не был зарегистрирован!
   - Actions: Действия
   - Administer: Администрирование
   - Administrators: Администраторы

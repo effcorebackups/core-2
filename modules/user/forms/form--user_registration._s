@@ -17,6 +17,7 @@ forms
             - type: email
             - name: email
             - required: required
+            - minlength: 5
             - maxlength: 255
         - field_password|form_field
             tag_name: input
