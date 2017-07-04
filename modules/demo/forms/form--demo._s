@@ -19,7 +19,10 @@ forms
         - field_input_text|form_field
             tag_name: input
             title: Text
-            description: Element &lt;input type="text"&gt;.
+            description|text
+              text: Element %%_description.
+              args
+              - description: &lt;input type="text"&gt;
             attributes
             - type: text
             - name: field_input_text
@@ -32,7 +35,10 @@ forms
         - field_input_password|form_field
             tag_name: input
             title: Password
-            description: Element &lt;input type="password"&gt;.
+            description|text
+              text: Element %%_description.
+              args
+              - description: &lt;input type="password"&gt;
             attributes
             - type: password
             - name: field_input_password
@@ -45,7 +51,10 @@ forms
         - field_input_file|form_field
             tag_name: input
             title: File
-            description: Element &lt;input type="file"&gt;.
+            description|text
+              text: Element %%_description.
+              args
+              - description: &lt;input type="file"&gt;
             attributes
             - type: file
             - name: field_input_file
@@ -54,7 +63,10 @@ forms
       # field_input_checkbox
         - field_checkbox_label|form_container
             title: Checkboxes
-            description: Element &lt;input type="checkbox"&gt;.
+            description|text
+              text: Element %%_description.
+              args
+              - description: &lt;input type="checkbox"&gt;
             children
             - field_input_checkbox_1|form_field
                 tag_name: input
@@ -80,7 +92,10 @@ forms
       # field_input_radio
         - field_radio_label|form_container
             title: Radios
-            description: Element &lt;input type="radio"&gt;.
+            description|text
+              text: Element %%_description.
+              args
+              - description: &lt;input type="radio"&gt;
             children
             - field_input_radio_1|form_field
                 tag_name: input
@@ -107,7 +122,10 @@ forms
         - field_select|form_field
             tag_name: select
             title: Select
-            description: Element &lt;select&gt;.
+            description|text
+              text: Element %%_description.
+              args
+              - description: &lt;select&gt;
             attributes
             - name: field_select
             children
@@ -136,7 +154,10 @@ forms
         - field_select_ws_groups|form_field
             tag_name: select
             title: Select (with optgroup)
-            description: Element &lt;select&gt;.
+            description|text
+              text: Element %%_description.
+              args
+              - description: &lt;select&gt;
             attributes
             - name: field_select_ws_groups
             children
@@ -170,7 +191,10 @@ forms
         - field_select_multiple|form_field
             tag_name: select
             title: Select (multiple choice)
-            description: Element &lt;select&gt;.
+            description|text
+              text: Element %%_description.
+              args
+              - description: &lt;select&gt;
             attributes
             - name: field_select_multiple
             - multiple: multiple
@@ -201,7 +225,10 @@ forms
         - field_textarea|form_field
             tag_name: textarea
             title: Textarea
-            description: Element &lt;textarea&gt;&lt;/textarea&gt;.
+            description|text
+              text: Element %%_description.
+              args
+              - description: &lt;textarea&gt;&lt;/textarea&gt;
             attributes
             - name: field_textarea
             - rows: 5
@@ -293,7 +320,10 @@ forms
         - field_input_search|form_field
             tag_name: input
             title: Search
-            description: Element &lt;input type="search"&gt;.
+            description|text
+              text: Element %%_description.
+              args
+              - description: &lt;input type="search"&gt;
             attributes
             - type: search
             - name: field_input_search
@@ -305,7 +335,10 @@ forms
         - field_input_email|form_field
             tag_name: input
             title: EMail
-            description: Element &lt;input type="email"&gt;.
+            description|text
+              text: Element %%_description.
+              args
+              - description: &lt;input type="email"&gt;
             attributes
             - type: email
             - name: field_input_email
@@ -318,7 +351,10 @@ forms
         - field_input_url|form_field
             tag_name: input
             title: URL
-            description: Element &lt;input type="url"&gt;.
+            description|text
+              text: Element %%_description.
+              args
+              - description: &lt;input type="url"&gt;
             attributes
             - type: url
             - name: field_input_url
@@ -330,7 +366,10 @@ forms
         - field_input_tel|form_field
             tag_name: input
             title: Telephone
-            description: Element &lt;input type="tel"&gt;.
+            description|text
+              text: Element %%_description.
+              args
+              - description: &lt;input type="tel"&gt;
             attributes
             - type: tel
             - name: field_input_tel
@@ -342,7 +381,10 @@ forms
         - field_input_number|form_field
             tag_name: input
             title: Number
-            description: Element &lt;input type="number"&gt;.
+            description|text
+              text: Element %%_description.
+              args
+              - description: &lt;input type="number"&gt;
             attributes
             - type: number
             - name: field_input_number
@@ -355,7 +397,10 @@ forms
         - field_input_range|form_field
             tag_name: input
             title: Range
-            description: Element &lt;input type="range"&gt;.
+            description|text
+              text: Element %%_description.
+              args
+              - description: &lt;input type="range"&gt;
             attributes
             - type: range
             - name: field_input_range
@@ -367,7 +412,10 @@ forms
         - field_input_date|form_field
             tag_name: input
             title: Date
-            description: Element &lt;input type="date"&gt;.
+            description|text
+              text: Element %%_description.
+              args
+              - description: &lt;input type="date"&gt;
             attributes
             - type: date
             - name: field_input_date
@@ -379,7 +427,10 @@ forms
         - field_input_time|form_field
             tag_name: input
             title: Time
-            description: Element &lt;input type="time"&gt;.
+            description|text
+              text: Element %%_description.
+              args
+              - description: &lt;input type="time"&gt;
             attributes
             - type: time
             - name: field_input_time
@@ -389,7 +440,10 @@ forms
         - field_input_color|form_field
             tag_name: input
             title: Color
-            description: Element &lt;input type="color"&gt;.
+            description|text
+              text: Element %%_description.
+              args
+              - description: &lt;input type="color"&gt;
             attributes
             - type: color
             - name: field_input_color

@@ -5,15 +5,17 @@ namespace effectivecore {
           class text {
 
   public $text;
+  public $args = [];
   public $weight;
 
-  function __construct($text = '', $weight = 0) {
+  function __construct($text = '', $args = [], $weight = 0) {
     $this->text = $text;
+    $this->args = $args;
     $this->weight = $weight;
   }
 
   function render() {
-    return translations::get($this->text);
+    return translations::get($this->text, $this->args);
   }
 
 }}

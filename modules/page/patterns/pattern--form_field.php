@@ -18,7 +18,7 @@ namespace effectivecore {
       $this->wr_attributes['class']['has_box'] = 'has-box'; # @todo: use attribute_insert
     }
     $description = [];
-    if (!empty($this->description))                   $description[] = (new markup('p', ['class' => ['default']],   translations::get($this->description)))->render();
+    if (!empty($this->description))                   $description[] = (new markup('p', ['class' => ['default']],   is_string($this->description) ? translations::get($this->description) : $this->description))->render();
     if (!empty($this->attribute_select('minlength'))) $description[] = (new markup('p', ['class' => ['minlength']], translations::get('Field should contain minimum %%_lenght symbols.', ['lenght' => $this->attribute_select('minlength')])))->render();
     if (!empty($this->attribute_select('maxlength'))) $description[] = (new markup('p', ['class' => ['maxlength']], translations::get('Field should contain maximum %%_lenght symbols.', ['lenght' => $this->attribute_select('maxlength')])))->render();
     $is_required_mark = !empty($this->attribute_select('required')) ? new markup('b', ['class' => 'required'], '*') : '';
