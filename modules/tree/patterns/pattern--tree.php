@@ -6,7 +6,7 @@ namespace effectivecore {
   public $title;
   public $template = 'tree';
 
-  function __construct($title = '', $attributes = [], $children = null, $weight = 0) {
+  function __construct($title = '', $attributes = [], $children = [], $weight = 0) {
     parent::__construct($attributes, $children, $weight);
     $this->title = $title;
   }

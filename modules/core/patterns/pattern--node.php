@@ -5,10 +5,10 @@ namespace effectivecore {
 
   public $weight;
   public $attributes = [];
-  public $children;
+  public $children = [];
   public $template;
 
-  function __construct($attributes = [], $children = null, $weight = 0) {
+  function __construct($attributes = [], $children = [], $weight = 0) {
     $this->weight = $weight;
     if ($attributes) {
       foreach ($attributes as $id => $c_attribute) {
