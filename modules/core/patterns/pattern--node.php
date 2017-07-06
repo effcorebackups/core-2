@@ -70,6 +70,10 @@ namespace effectivecore {
     $this->attributes[$key] = $value;
   }
 
+  function attribute_delete($key) {
+    unset($this->attributes[$key]);
+  }
+
   ##############
   ### render ###
   ##############

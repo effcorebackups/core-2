@@ -56,6 +56,15 @@ namespace effectivecore {
               # radio
                 if ($c_type == 'radio') {
                   if ($c_element->attribute_select('value') == $c_value) {
+                  # delete the "checked" attribute which set on form init
+                    foreach ($elements as $c_el) {
+                      if ($c_el instanceof node &&
+                          $c_el->attribute_select('type') == 'radio' &&
+                          $c_el->attribute_select('name') == $c_name) {
+                        $c_el->attribute_delete('checked');
+                      }
+                    }
+                  # insert the "checked" attribute
                     $c_element->attribute_insert('checked', 'checked');
                   }
                 }

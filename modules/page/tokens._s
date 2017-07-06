@@ -2,12 +2,12 @@ tokens
 # colors for page
 - color
     match: %%_color
-    type: text
-    value: black
+    type: code
+    handler: \effectivecore\modules\page\events_token::on_color_get
 - color_bg
     match: %%_color_bg
-    type: text
-    value: #216ce4
+    type: code
+    handler: \effectivecore\modules\page\events_token::on_color_get
 - color_hover
     match: %%_color_hover
     type: text

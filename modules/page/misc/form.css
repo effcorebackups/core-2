@@ -61,7 +61,7 @@
   form#user_logout {width: 320px; margin: 100px auto}
 
   /* form-admin_decoration */
-  form.form-admin_decoration #bg_color {margin: 5px 0}
-  form.form-admin_decoration #bg_color x-title {margin-bottom: 5px}
-  form.form-admin_decoration #bg_color input[type="radio"] {display: inline-block; margin: 0; border-color: white}
-  form.form-admin_decoration #bg_color input[type="radio"]:checked {border-color: black}
+  form.form-admin_decoration .palette {margin: 5px 0}
+  form.form-admin_decoration .palette x-title {margin-bottom: 5px}
+  form.form-admin_decoration .palette input[type="radio"] {display: inline-block; margin: 0; border-color: white}
+  form.form-admin_decoration .palette input[type="radio"]:checked {border-color: black}

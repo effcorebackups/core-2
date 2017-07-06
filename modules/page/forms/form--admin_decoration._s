@@ -15,10 +15,16 @@ forms
             children
             - content|text
                 text: Colors
-        - field_bg_color|form_container
+        - field_color|form_container
+            title: Color
+            attributes
+            - class
+              - default: palette
+        - field_color_bg|form_container
             title: Background color
             attributes
-            - id: bg_color
+            - class
+              - default: palette
     - button_save|markup
         tag_name: button
         attributes

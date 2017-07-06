@@ -47,3 +47,6 @@ colors
 - color_original_darkblue
     value: #28334a
     is_dark: true
+- color_black
+    value: black
+    is_dark: true

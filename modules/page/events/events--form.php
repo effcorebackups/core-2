@@ -12,15 +12,22 @@ namespace effectivecore\modules\page {
       foreach ($c_colors as $c_color_id => $c_color_info) {
         $c_color = new markup('input', [
           'type'  => 'radio',
-          'name'  => 'bg_color',
+          'name'  => 'color',
           'value' => $c_color_id,
           'title' => $c_color_id.' ('.$c_color_info->value.')',
           'style' => ['background-color: '.$c_color_info->value]
         ]);
-        if ($c_color_id == $decoration['page']->background_color) {
-          $c_color->attribute_insert('checked', 'checked');
-        }
-        $elements['fieldset_default/field_bg_color']->child_insert($c_color);
+        $c_color_bg = new markup('input', [
+          'type'  => 'radio',
+          'name'  => 'color_bg',
+          'value' => $c_color_id,
+          'title' => $c_color_id.' ('.$c_color_info->value.')',
+          'style' => ['background-color: '.$c_color_info->value]
+        ]);
+        if ($c_color_id == $decoration['page']->color)    $c_color->attribute_insert('checked', 'checked');
+        if ($c_color_id == $decoration['page']->color_bg) $c_color_bg->attribute_insert('checked', 'checked');
+        $elements['fieldset_default/field_color']->child_insert($c_color);
+        $elements['fieldset_default/field_color_bg']->child_insert($c_color_bg);
       }
     }
   }
@@ -28,8 +35,13 @@ namespace effectivecore\modules\page {
   static function on_submit_admin_decoration($form, $elements, $values) {
     storages::get('settings')->changes_register_action('page', (object)[
       'action' => 'update',
-      'npath'  => 'decoration/page/background_color',
-      'value'  => $values['bg_color']
+      'npath'  => 'decoration/page/color',
+      'value'  => $values['color']
+    ]);
+    storages::get('settings')->changes_register_action('page', (object)[
+      'action' => 'update',
+      'npath'  => 'decoration/page/color_bg',
+      'value'  => $values['color_bg']
     ]);
   }
 
