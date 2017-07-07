@@ -146,9 +146,12 @@ namespace effectivecore {
     ];
   }
 
-  static function &npath_get_pointer($npath, &$p) {
-    if (isset(static::$cache[__FUNCTION__][$npath]))
-       return static::$cache[__FUNCTION__][$npath];
+  static function &npath_get_pointer($npath, &$p, $reset = false) {
+    if (!$reset) {
+      if (isset(static::$cache[__FUNCTION__][$npath])) {
+         return static::$cache[__FUNCTION__][$npath];
+      }
+    }
     foreach (explode('/', $npath) as $c_part) {
       switch (gettype($p)) {
         case 'array' : $p = &$p[$c_part];   break;
