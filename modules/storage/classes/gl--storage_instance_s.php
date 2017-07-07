@@ -39,7 +39,9 @@ namespace effectivecore {
   # init changes
     $settings_d = isset(static::$changes_dynamic['changes']) ?
                         static::$changes_dynamic['changes'] : [];
-    $settings_d[$module_id][$c_change->action.'_'.str_replace('/', '_', $c_change->npath)] = $c_change;
+  # add new action
+    $action_id = $c_change->action.'_'.str_replace('/', '_', $c_change->npath);
+    $settings_d[$module_id][$action_id] = $c_change;
   # save data
     if (!is_writable(dir_dynamic) ||
         ($f_changes->is_exist() &&
