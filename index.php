@@ -58,14 +58,20 @@ namespace effectivecore {
     # case for media files
     $path = dir_root.ltrim(urls::get_current()->path, '/');
     if (is_file($path) && is_readable($path)) {
-      $data = (new file($path))->load();
+      $file = new file($path);
+      $data = $file->load();
+    # apply tokens
+      if (isset($file_types[$extension]->use_tokens)) {
+        $data = tokens::replace($data);
+      }
     # send headers
       if (is_array($file_types[$extension]->headers)) {
-        foreach ($file_types[$extension]->headers as $c_header_key => $c_header_value) {
-          header($c_header_key.': '.$c_header_value, true);
+        foreach ($file_types[$extension]->headers as $c_key => $c_value) {
+          header($c_key.': '.$c_value, true);
+          header('Content-Length: '.strlen($data), true);
+          header('Content-MD5: '.base64_encode(md5($data, true)), true);
         }
       }
-      if (isset($file_types[$extension]->use_tokens)) $data = tokens::replace($data);
       print $data;
       exit();
     }

@@ -61,6 +61,7 @@ namespace effectivecore {
   function get_path_full()     {return $this->dirs->full.'/'.$this->file->full;}
   function get_path_relative() {return $this->dirs->relative.'/'.$this->file->full;}
   function get_dir_parent()    {return ltrim(strrchr($this->dirs->full, '/'), '/');}
+  function get_hash()          {return md5_file($this->get_path_relative());}
   function set_data($data)     {$this->data = $data;}
 
 }}
