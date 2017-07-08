@@ -49,13 +49,13 @@ namespace effectivecore {
   }
   $extension = urls::get_current()->get_extension();
   if ($extension) {
-    # case for protected files
+  # case for protected files
     if (!empty($file_types[$extension]->protected)) {
       factory::send_header_and_exit('access_denided',
         'Any file with this extension is protected by settings in file_types!'
       );
     }
-    # case for media files
+  # case for media files
     $path = dir_root.ltrim(urls::get_current()->path, '/');
     if (is_file($path) && is_readable($path)) {
       $file = new file($path);
@@ -64,12 +64,19 @@ namespace effectivecore {
       if (isset($file_types[$extension]->use_tokens)) {
         $data = tokens::replace($data);
       }
+    # if get header HTTP_IF_NONE_MATCH
+      $etag = base64_encode(md5($data, true));
+      if (isset($_SERVER['HTTP_IF_NONE_MATCH']) &&
+                $_SERVER['HTTP_IF_NONE_MATCH'] === $etag) {
+        header('HTTP/1.1 304 Not Modified');
+        exit();
+      }
     # send headers
+      header('Cache-Control: must-revalidate, private', true);
+      header('Etag: '.$etag, true);
       if (is_array($file_types[$extension]->headers)) {
         foreach ($file_types[$extension]->headers as $c_key => $c_value) {
           header($c_key.': '.$c_value, true);
-          header('Content-Length: '.strlen($data), true);
-          header('Content-MD5: '.base64_encode(md5($data, true)), true);
         }
       }
       print $data;

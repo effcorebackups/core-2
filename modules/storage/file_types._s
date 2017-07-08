@@ -3,4 +3,3 @@ file_types
     protected: 1
     headers
     - Content-type: text/settings
-    - Cache-Control: max-age=604800
