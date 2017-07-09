@@ -162,9 +162,11 @@ namespace effectivecore {
     return $p;
   }
 
-  static function npath_get_object($npath, $data) {
-    if (isset(static::$cache[__FUNCTION__][$npath]))
-       return static::$cache[__FUNCTION__][$npath];
+  static function npath_get_object($npath, $data, $reset = false) {
+    if (!$reset) {
+      if (isset(static::$cache[__FUNCTION__][$npath]))
+         return static::$cache[__FUNCTION__][$npath];
+    }
     $path_parts = explode('/', $npath);
     $p = null;
     foreach ($path_parts as $c_part) {
