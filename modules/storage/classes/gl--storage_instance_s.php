@@ -89,7 +89,7 @@ namespace effectivecore {
     $data_new = unserialize(serialize(static::$data_orig)); # deep array clone
     static::changes_apply_to_settings($settings_d, $data_new);
     static::changes_apply_to_settings($settings_s, $data_new);
-    static::$data = $data_new;
+    static::$data = $data_new; # prevent opcache work
     unset(static::$data['changes']);
   # save cache
     if (!is_writable(dir_dynamic) ||
@@ -118,7 +118,8 @@ namespace effectivecore {
         "use \\effectivecore\\storage_instance_s as settings;\n\n".
           factory::data_export($data, $prefix).
       "\n}");
-    return $file->save();
+    $file->save();
+    opcache_invalidate($file->get_path_full());
   }
 
   static function settings_find_static() {

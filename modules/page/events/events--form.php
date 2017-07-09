@@ -43,6 +43,7 @@ namespace effectivecore\modules\page {
       'npath'  => 'decoration/page/color_bg',
       'value'  => $values['color_bg']
     ]);
+    messages::add_new('Changes was saved.');
   }
 
 }}
