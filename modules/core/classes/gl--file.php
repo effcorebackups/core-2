@@ -24,7 +24,7 @@ namespace effectivecore {
          $this->data = static::$cache[$relative];
     else $this->data = static::$cache[$relative] = file_get_contents($this->get_path_full());
     timers::tap('load_'.$relative);
-    console::add_log('Load', $relative, 'ok', timers::get_period('load_'.$relative, 0, 1));
+    console::add_log('Load', $relative, 'ok', timers::get_period('load_'.$relative, -1, -2));
     return $this->data;
   }
 
