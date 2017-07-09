@@ -40,7 +40,7 @@ namespace effectivecore {
     $settings_d = isset(static::$changes_dynamic['changes']) ?
                         static::$changes_dynamic['changes'] : [];
   # add new action
-    $settings_d[$module_id][$action][$npath] = $value;
+    $settings_d[$module_id]->{$action}[$npath] = $value;
   # save data
     if (!is_writable(dir_dynamic) ||
         ($f_settings_orig->is_exist() &&
