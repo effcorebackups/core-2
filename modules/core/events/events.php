@@ -25,9 +25,11 @@ namespace effectivecore {
   }
 
   static function start($type, $id = null, $args = []) {
-    foreach (events::get()->{$type} as $c_id => $c_info) {
-      if ($id == null || $id == $c_id) {
-        call_user_func_array($c_info->handler, $args);
+    if (!empty(events::get()->{$type})) {
+      foreach (events::get()->{$type} as $c_id => $c_info) {
+        if ($id == null || $id == $c_id) {
+          call_user_func_array($c_info->handler, $args);
+        }
       }
     }
   }

@@ -17,18 +17,15 @@ namespace effectivecore {
     files::parse_path($path, $this);
   }
 
-  function load() {
+  function load($reset = false) {
     $relative = $this->get_path_relative();
-    if (isset(static::$cache[$relative])) {
-      console::add_log('Load', $relative, 'ok', '0.000000');
-      return static::$cache[$relative];
-    } else {
-      timers::tap('load_'.$relative);
-      static::$cache[$relative] = file_get_contents($this->get_path_full());
-      timers::tap('load_'.$relative);
-      console::add_log('Load', $relative, 'ok', timers::get_period('load_'.$relative, 0, 1));
-      return static::$cache[$relative];
-    }
+    timers::tap('load_'.$relative);
+    if (!$reset && isset(static::$cache[$relative]))
+         $this->data = static::$cache[$relative];
+    else $this->data = static::$cache[$relative] = file_get_contents($this->get_path_full());
+    timers::tap('load_'.$relative);
+    console::add_log('Load', $relative, 'ok', timers::get_period('load_'.$relative, 0, 1));
+    return $this->data;
   }
 
   function save() {
@@ -45,13 +42,8 @@ namespace effectivecore {
     return $return;
   }
 
-  function is_exist() {
-    return file_exists($this->get_path_full());
-  }
-
-  function is_writable() {
-    return is_writable($this->get_path_full());
-  }
+  function is_exist()    {return file_exists($this->get_path_full());}
+  function is_writable() {return is_writable($this->get_path_full());}
 
   function get_dirs_info()     {return $this->dirs;}
   function get_file_info()     {return $this->file;}
@@ -62,6 +54,7 @@ namespace effectivecore {
   function get_path_relative() {return $this->dirs->relative.'/'.$this->file->full;}
   function get_dir_parent()    {return ltrim(strrchr($this->dirs->full, '/'), '/');}
   function get_hash()          {return md5_file($this->get_path_relative());}
+  function get_data()          {if (empty($this->data)) $this->load(true); return $this->data;}
   function set_data($data)     {$this->data = $data;}
 
 }}
