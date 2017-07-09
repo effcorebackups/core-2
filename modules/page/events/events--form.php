@@ -33,16 +33,8 @@ namespace effectivecore\modules\page {
   }
 
   static function on_submit_admin_decoration($form, $elements, $values) {
-    storages::get('settings')->changes_register_action('page', (object)[
-      'action' => 'update',
-      'npath'  => 'decoration/page/color',
-      'value'  => $values['color']
-    ]);
-    storages::get('settings')->changes_register_action('page', (object)[
-      'action' => 'update',
-      'npath'  => 'decoration/page/color_bg',
-      'value'  => $values['color_bg']
-    ]);
+    storages::get('settings')->changes_register_action('page', 'update', 'decoration/page/color',    $values['color']);
+    storages::get('settings')->changes_register_action('page', 'update', 'decoration/page/color_bg', $values['color_bg']);
     messages::add_new('Changes was saved.');
   }
 
