@@ -42,19 +42,26 @@ namespace effectivecore {
     return $return;
   }
 
-  function is_exist()    {return file_exists($this->get_path_full());}
-  function is_writable() {return is_writable($this->get_path_full());}
+  function get_data() {
+    if (empty($this->data)) $this->load(true);
+    return $this->data;
+  }
+
+  function set_data($data) {
+    $this->data = $data;
+  }
+
+  function is_exist()          {return file_exists($this->get_path_full());}
+  function is_writable()       {return is_writable($this->get_path_full());}
 
   function get_dirs_info()     {return $this->dirs;}
   function get_file_info()     {return $this->file;}
   function get_dirs_full()     {return $this->dirs->full;}
   function get_file_full()     {return $this->file->full;}
-  function get_dirs_relative() {return $this->dirs->relative;}
   function get_path_full()     {return $this->dirs->full.'/'.$this->file->full;}
+  function get_dirs_relative() {return $this->dirs->relative;}
   function get_path_relative() {return $this->dirs->relative.'/'.$this->file->full;}
   function get_dir_parent()    {return ltrim(strrchr($this->dirs->full, '/'), '/');}
   function get_hash()          {return md5_file($this->get_path_relative());}
-  function get_data()          {if (empty($this->data)) $this->load(true); return $this->data;}
-  function set_data($data)     {$this->data = $data;}
 
 }}
