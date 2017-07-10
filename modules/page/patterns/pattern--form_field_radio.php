@@ -2,9 +2,9 @@
 
 namespace effectivecore {
           use \effectivecore\translate_factory as translations;
-          class form_field_radio extends form_field {
+          class form_field_radios extends form_field {
 
-  public $template = 'form_field_radio';
+  public $template = 'form_field';
   public $wr_tag_name = 'x-field';
   public $wr_attributes = [];
   public $tag_name = 'input';

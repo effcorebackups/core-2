@@ -90,47 +90,36 @@ forms
                 - name: field_input_checkbox_3
                 - value: checkbox_3
       # field_input_radio
-        - field_radio_label|form_container
+        - field_radios|form_field_radios
             title: Radios
+            attributes
+            - name: field_input_radio
             description|text
               text: Element %%_info.
               args
               - info: &lt;input type="radio"&gt;
             children
-            - field_input_radio_1|form_field
+            - radio_1|markup
                 tag_name: input
                 title: Radio 1
                 attributes
                 - type: radio
                 - name: field_input_radio
                 - value: radio_1
-            - field_input_radio_2|form_field
+            - radio_2|markup
                 tag_name: input
                 title: Radio 2
                 attributes
                 - type: radio
                 - name: field_input_radio
                 - value: radio_2
-            - field_input_radio_3|form_field
+            - radio_3|markup
                 tag_name: input
                 title: Radio 3
                 attributes
                 - type: radio
                 - name: field_input_radio
                 - value: radio_3
-      # field_input_radio_macro
-        - field_radio_macro|form_field_radio
-            title: Radios (macro)
-            attributes
-            - name: field_input_radio_macro
-            description|text
-              text: Element %%_info.
-              args
-              - info: &lt;input type="radio"&gt;
-            children
-            - value_1: radio_1
-            - value_2: radio_1
-            - value_3: radio_1
       # field_select
         - field_select|form_field
             tag_name: select
