@@ -18,9 +18,15 @@ namespace effectivecore {
       'wr_attributes' => factory::data_to_attr($this->attribute_select('', 'wr_attributes'), ' '),
       'attributes'    => factory::data_to_attr($this->attribute_select(), ' '),
       'title'         => $this->render_self(),
-      'children'      => $this->render_children($this->children),
+      'content'       => $this->render_children($this->children),
       'description'   => $this->render_description()
     ]))->render();
+  }
+
+  function render_children($children, $join = true) {
+    return node::render_children(
+      $children, $join
+    );
   }
 
 }}

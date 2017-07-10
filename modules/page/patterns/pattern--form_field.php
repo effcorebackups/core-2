@@ -15,9 +15,9 @@ namespace effectivecore {
       'wr_tag_name'   => $this->wr_tag_name,
       'wr_attributes' => factory::data_to_attr($this->attribute_select('', 'wr_attributes'), ' '),
       'attributes'    => factory::data_to_attr($this->attribute_select(), ' '),
-      'children'      => (new markup($this->tag_name, $this->attribute_select(), $this->children))->render(),
-      'description'   => $this->render_description(),
-      'title'         => $this->render_self()
+      'title'         => $this->render_self(),
+      'content'       => $this->render_children($this->children),
+      'description'   => $this->render_description()
     ]))->render();
   }
 
@@ -32,6 +32,12 @@ namespace effectivecore {
     return !empty($this->attribute_select('required')) ? (
       new markup('b', ['class' => ['required' => 'required']], '*')
     )->render() : '';
+  }
+
+  function render_children($children, $join = true) {
+    return parent::render_children(
+      new markup('input', $this->attribute_select(), $children), $join
+    );
   }
 
   function render_description() {
