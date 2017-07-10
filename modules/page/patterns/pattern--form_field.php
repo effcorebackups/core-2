@@ -36,7 +36,7 @@ namespace effectivecore {
 
   function render_children($children, $join = true) {
     return parent::render_children(
-      new markup('input', $this->attribute_select(), $children), $join
+      new markup($this->tag_name, $this->attribute_select(), $children), $join
     );
   }
 
