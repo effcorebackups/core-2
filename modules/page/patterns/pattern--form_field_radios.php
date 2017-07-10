@@ -22,10 +22,8 @@ namespace effectivecore {
     ]))->render();
   }
 
-  function render_children($children, $join = true) {
-    return node::render_children(
-      $children, $join
-    );
+  function render_child($child) {
+    return parent::render_child($child);
   }
 
 }}
