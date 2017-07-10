@@ -92,8 +92,6 @@ forms
       # field_input_radio
         - field_radios|form_field_radios
             title: Radios
-            attributes
-            - name: field_input_radio
             description|text
               text: Element %%_info.
               args

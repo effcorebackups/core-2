@@ -17,9 +17,9 @@ namespace effectivecore {
       'wr_tag_name'   => $this->wr_tag_name,
       'wr_attributes' => factory::data_to_attr($this->attribute_select('', 'wr_attributes'), ' '),
       'attributes'    => factory::data_to_attr($this->attribute_select(), ' '),
-      'title'         => (new markup('label', [], [$this->title, $this->_render_required_mark()]))->render(),
-      'children'      => (new markup($this->tag_name, $this->attribute_select(), $this->children))->render(),
-      'description'   => $this->_render_description()
+      'title'         => $this->render_self(),
+      'children'      => $this->render_children($this->children),
+      'description'   => $this->render_description()
     ]))->render();
   }
 
