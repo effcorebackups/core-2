@@ -4,4 +4,4 @@ trees
     weight: 2
     attributes
     - class
-      - default: main
+      - main: main

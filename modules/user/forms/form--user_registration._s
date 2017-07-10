@@ -5,7 +5,7 @@ forms
     - novalidate: novalidate
     - method: post
     - class
-      - default: form-user
+      - form-user: form-user
     children
     - fieldset_default|markup
         tag_name: fieldset

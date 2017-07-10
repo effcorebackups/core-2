@@ -5,7 +5,7 @@ forms
     - novalidate: novalidate
     - method: post
     - class
-      - default: form-admin_decoration
+      - form-decoration: form-decoration
     children
     - fieldset_default|markup
         tag_name: fieldset
@@ -19,12 +19,12 @@ forms
             title: Color
             attributes
             - class
-              - default: palette
+              - palette: palette
         - field_color_bg|form_container
             title: Background color
             attributes
             - class
-              - default: palette
+              - palette: palette
     - button_save|markup
         tag_name: button
         attributes

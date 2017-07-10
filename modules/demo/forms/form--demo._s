@@ -5,7 +5,7 @@ forms
     - novalidate: novalidate
     - method: post
     - class
-      - form_demo: form-demo
+      - form-demo: form-demo
     children
     - fieldset_html4|markup
         tag_name: fieldset
@@ -118,6 +118,19 @@ forms
                 - type: radio
                 - name: field_input_radio
                 - value: radio_3
+      # field_input_radio_macro
+        - field_radio_macro|form_field_radio
+            title: Radios (macro)
+            attributes
+            - name: field_input_radio_macro
+            description|text
+              text: Element %%_info.
+              args
+              - info: &lt;input type="radio"&gt;
+            children
+            - value_1: radio_1
+            - value_2: radio_1
+            - value_3: radio_1
       # field_select
         - field_select|form_field
             tag_name: select
