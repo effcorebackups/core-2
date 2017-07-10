@@ -7,7 +7,6 @@ namespace effectivecore {
   public $template = 'form_field';
   public $wr_tag_name = 'x-field';
   public $wr_attributes = [];
-  public $tag_name = 'input';
   public $title;
   public $description;
 
