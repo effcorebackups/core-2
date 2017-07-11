@@ -32,9 +32,13 @@ namespace effectivecore {
     )->render() : '';
   }
 
-  function render_description($description, $attributes) {
+  function render_description($descriptions = [], $attributes = []) {
     $return = [];
-    if (!empty($description))             $return[] = (new markup('p', [], is_string($description) ? translations::get($description) : $description))->render();
+    foreach ($descriptions as $c_description) {
+      $return[] = (new markup('p', [], is_string($c_description) ?
+                               translations::get($c_description) : $c_description)
+      )->render();
+    }
     if (!empty($attributes['minlength'])) $return[] = (new markup('p', ['class' => ['minlength' => 'minlength']], translations::get('Field should contain minimum %%_lenght symbols.', ['lenght' => $attributes['minlength']])))->render();
     if (!empty($attributes['maxlength'])) $return[] = (new markup('p', ['class' => ['maxlength' => 'maxlength']], translations::get('Field should contain maximum %%_lenght symbols.', ['lenght' => $attributes['maxlength']])))->render();
     return count($return) ? (new markup('x-description', [], implode($return)))->render() : '';
