@@ -57,21 +57,21 @@ namespace effectivecore {
   ### attributes ###
   ##################
 
-  function attribute_select($key = '', $context = 'attributes') {
+  function attribute_select($key = '') {
     if ($key) {
-      return isset($this->{$context}[$key]) ?
-                   $this->{$context}[$key] : null;
+      return isset($this->attributes[$key]) ?
+                   $this->attributes[$key] : null;
     } else {
-      return $this->{$context};
+      return $this->attributes;
     }
   }
 
-  function attribute_insert($key, $value, $context = 'attributes') {
-    $this->{$context}[$key] = $value;
+  function attribute_insert($key, $value) {
+    $this->attributes[$key] = $value;
   }
 
-  function attribute_delete($key, $context = 'attributes') {
-    unset($this->{$context}[$key]);
+  function attribute_delete($key) {
+    unset($this->attributes[$key]);
   }
 
   ##############

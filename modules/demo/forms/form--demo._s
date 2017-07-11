@@ -16,7 +16,7 @@ forms
             - content|text
                 text: Html 4 elements
       # input_text
-        - input_text|form_container
+        - input_text|form_field
             title: Text
             description|text
               text: Element %%_info.
@@ -34,7 +34,7 @@ forms
                 - maxlength: 255
                 - pattern: [a-zA-Z0-9]+
       # input_password
-        - input_password|form_container
+        - input_password|form_field
             title: Password
             description|text
               text: Element %%_info.
@@ -52,7 +52,7 @@ forms
                 - maxlength: 255
                 - autocomplete: off
       # input_file
-        - input_file|form_container
+        - input_file|form_field
             title: File
             description|text
               text: Element %%_info.
@@ -67,7 +67,7 @@ forms
                 - accept: image/*,audio/*,video/*
                 - multiple: multiple
       # checkboxes
-        - checkboxes|form_container
+        - checkboxes|form_field_checkboxes
             title: Checkboxes
             attributes
             - required: required
@@ -81,45 +81,45 @@ forms
                 title: Checkbox 1
                 attributes
                 - type: checkbox
-                - name: checkbox_1
+                - name: input_checkbox_1
                 - value: checkbox_1
             - input_checkbox_2|markup
                 tag_name: input
                 title: Checkbox 2
                 attributes
                 - type: checkbox
-                - name: checkbox_2
+                - name: input_checkbox_2
                 - value: checkbox_2
             - input_checkbox_3|markup
                 tag_name: input
                 title: Checkbox 3
                 attributes
                 - type: checkbox
-                - name: checkbox_3
+                - name: input_checkbox_3
                 - value: checkbox_3
       # radios
-        - radios|form_container
+        - radios|form_field_radios
             title: Radios
             description|text
               text: Element %%_info.
               args
               - info: &lt;input type="radio"&gt;
             children
-            - radio_1|markup
+            - input_radio_1|markup
                 tag_name: input
                 title: Radio 1
                 attributes
                 - type: radio
                 - name: input_radio
                 - value: radio_1
-            - radio_2|markup
+            - input_radio_2|markup
                 tag_name: input
                 title: Radio 2
                 attributes
                 - type: radio
                 - name: input_radio
                 - value: radio_2
-            - radio_3|markup
+            - input_radio_3|markup
                 tag_name: input
                 title: Radio 3
                 attributes
@@ -127,7 +127,7 @@ forms
                 - name: input_radio
                 - value: radio_3
       # select
-        - select|form_container
+        - select|form_field
             title: Select
             description|text
               text: Element %%_info.
@@ -139,21 +139,21 @@ forms
                 attributes
                 - name: select
                 children
-                - option_1|markup
+                - select_option_1|markup
                     tag_name: option
                     attributes
                     - value: option_1
                     children
                     - content|text
                         text: Option 1
-                - option_2|markup
+                - select_option_2|markup
                     tag_name: option
                     attributes
                     - value: option_2
                     children
                     - content|text
                         text: Option 2
-                - option_3|markup
+                - select_option_3|markup
                     tag_name: option
                     attributes
                     - value: option_3
@@ -161,7 +161,7 @@ forms
                     - content|text
                         text: Option 3
       # select_ws_groups
-        - select_ws_groups|form_container
+        - select_ws_groups|form_field
             title: Select (with optgroup)
             description|text
               text: Element %%_info.
@@ -178,21 +178,21 @@ forms
                     attributes
                     - label: default group
                     children
-                    - option_4|markup
+                    - select_option_4|markup
                         tag_name: option
                         attributes
                         - value: option_4
                         children
                         - content|text
                             text: Option 4
-                    - option_5|markup
+                    - select_option_5|markup
                         tag_name: option
                         attributes
                         - value: option_5
                         children
                         - content|text
                             text: Option 5
-                    - option_6|markup
+                    - select_option_6|markup
                         tag_name: option
                         attributes
                         - value: option_6
@@ -200,7 +200,7 @@ forms
                         - content|text
                             text: Option 6
       # select_multiple
-        - select_multiple|form_container
+        - select_multiple|form_field
             title: Select (multiple choice)
             description|text
               text: Element %%_info.
@@ -214,21 +214,21 @@ forms
                 - multiple: multiple
                 - size: 5
                 children
-                - option_7|markup
+                - select_option_7|markup
                     tag_name: option
                     attributes
                     - value: option_7
                     children
                     - content|text
                         text: Option 7
-                - option_8|markup
+                - select_option_8|markup
                     tag_name: option
                     attributes
                     - value: option_8
                     children
                     - content|text
                         text: Option 8
-                - option_9|markup
+                - select_option_9|markup
                     tag_name: option
                     attributes
                     - value: option_9
@@ -236,7 +236,7 @@ forms
                     - content|text
                         text: Option 9
       # textarea
-        - textarea|form_container
+        - textarea|form_field
             title: Textarea
             description|text
               text: Element %%_info.
