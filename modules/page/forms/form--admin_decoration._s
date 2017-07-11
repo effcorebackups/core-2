@@ -15,12 +15,12 @@ forms
             children
             - content|text
                 text: Colors
-        - field_color|form_container
+        - field_color|form_field
             title: Color
             attributes
             - class
               - palette: palette
-        - field_color_bg|form_container
+        - field_color_bg|form_field
             title: Background color
             attributes
             - class
