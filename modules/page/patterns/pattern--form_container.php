@@ -22,12 +22,12 @@ namespace effectivecore {
   function render_self() {
     return (new markup('label', [], [
       $this->title,
-      $this->render_required_mark()
+      $this->render_required_mark($this->attribute_select('required'))
     ]))->render();
   }
 
-  function render_required_mark() {
-    return !empty($this->attribute_select('required')) ? (
+  function render_required_mark($is_required = true) {
+    return $is_required ? (
       new markup('b', ['class' => ['required' => 'required']], '*')
     )->render() : '';
   }
