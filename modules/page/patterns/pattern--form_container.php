@@ -13,23 +13,21 @@ namespace effectivecore {
     return (new template($this->template, [
       'attributes'  => factory::data_to_attr($this->attribute_select(), ' '),
       'tag_name'    => $this->tag_name,
-      'title'       => $this->render_self(),
+      'title'       => $this->render_self($this->attribute_select('required')),
       'content'     => $this->render_children($this->children),
       'description' => $this->render_description($this->description, $this->attribute_select())
     ]))->render();
   }
 
-  function render_self() {
+  function render_self($is_required = false) {
     return (new markup('label', [], [
       $this->title,
-      $this->render_required_mark($this->attribute_select('required'))
+      $is_required ? $this->render_required_mark() : ''
     ]))->render();
   }
 
-  function render_required_mark($is_required = true) {
-    return $is_required ? (
-      new markup('b', ['class' => ['required' => 'required']], '*')
-    )->render() : '';
+  function render_required_mark() {
+    return (new markup('b', ['class' => ['required' => 'required']], '*'))->render();
   }
 
   function render_description($descriptions = [], $attributes = []) {

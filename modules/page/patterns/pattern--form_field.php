@@ -14,14 +14,13 @@ namespace effectivecore {
     $descriptions = $this->description ? [$this->description] : [];
     $default      = $this->child_select('default');
     if ($default instanceof markup) {
-      if ($default->attribute_select('required')) $this->attribute_insert('required', 'required');
-      if (!empty($default->description))          $descriptions[] = $default->description;
-      if (!empty($default->attribute_select()))   $attributes += $default->attribute_select();
+      if (!empty($default->description))        $descriptions[] = $default->description;
+      if (!empty($default->attribute_select())) $attributes += $default->attribute_select();
     }
     return (new template($this->template, [
       'attributes'  => factory::data_to_attr($this->attribute_select(), ' '),
       'tag_name'    => $this->tag_name,
-      'title'       => $this->render_self(),
+      'title'       => $this->render_self($this->attribute_select('required') || $default && $default->attribute_select('required')),
       'content'     => $this->render_children($this->children),
       'description' => $this->render_description($descriptions, $attributes)
     ]))->render();
