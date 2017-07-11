@@ -30,15 +30,26 @@ namespace effectivecore {
   ### children ###
   ################
 
-  function child_select($id) {return $this->children[$id];}
-  function child_delete($id) {unset($this->children[$id]);}
-  function child_change($id, $new_child) {$this->children[$id] = $new_child;}
+  function child_select($id) {
+    return isset($this->children[$id]) ?
+                 $this->children[$id] : null;
+  }
+
+  function child_delete($id) {
+    unset($this->children[$id]);
+  }
+
+  function child_change($id, $new_child) {
+    $this->children[$id] = $new_child;
+  }
+
   function child_insert($child, $new_id = null) {
     $id = ($new_id !== null ?
            $new_id : count($this->children));
     $this->children[$id] = $child;
     return $id;
   }
+
   function child_insert_after($child, $after_id, $new_id = null) {
     $id = ($new_id !== null ?
            $new_id : count($this->children));

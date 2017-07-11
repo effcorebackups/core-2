@@ -13,7 +13,7 @@ forms
         - field_password|form_field
             title: Password
             children
-            - input_password|markup
+            - default|markup
                 tag_name: input
                 attributes
                 - type: password

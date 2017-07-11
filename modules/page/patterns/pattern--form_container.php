@@ -15,7 +15,7 @@ namespace effectivecore {
       'tag_name'    => $this->tag_name,
       'title'       => $this->render_self(),
       'content'     => $this->render_children($this->children),
-      'description' => $this->render_description()
+      'description' => $this->render_description($this->description, $this->attribute_select())
     ]))->render();
   }
 
@@ -32,12 +32,12 @@ namespace effectivecore {
     )->render() : '';
   }
 
-  function render_description() {
-    $descriptions = [];
-    if (!empty($this->description))                   $descriptions[] = (new markup('p', [], is_string($this->description) ? translations::get($this->description) : $this->description))->render();
-    if (!empty($this->attribute_select('minlength'))) $descriptions[] = (new markup('p', ['class' => ['minlength' => 'minlength']], translations::get('Field should contain minimum %%_lenght symbols.', ['lenght' => $this->attribute_select('minlength')])))->render();
-    if (!empty($this->attribute_select('maxlength'))) $descriptions[] = (new markup('p', ['class' => ['maxlength' => 'maxlength']], translations::get('Field should contain maximum %%_lenght symbols.', ['lenght' => $this->attribute_select('maxlength')])))->render();
-    return count($descriptions) ? (new markup('x-description', [], implode($descriptions)))->render() : '';
+  function render_description($description, $attributes) {
+    $return = [];
+    if (!empty($description))             $return[] = (new markup('p', [], is_string($description) ? translations::get($description) : $description))->render();
+    if (!empty($attributes['minlength'])) $return[] = (new markup('p', ['class' => ['minlength' => 'minlength']], translations::get('Field should contain minimum %%_lenght symbols.', ['lenght' => $attributes['minlength']])))->render();
+    if (!empty($attributes['maxlength'])) $return[] = (new markup('p', ['class' => ['maxlength' => 'maxlength']], translations::get('Field should contain maximum %%_lenght symbols.', ['lenght' => $attributes['maxlength']])))->render();
+    return count($return) ? (new markup('x-description', [], implode($return)))->render() : '';
   }
 
 }}

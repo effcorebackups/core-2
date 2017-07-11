@@ -23,7 +23,7 @@ forms
               args
               - info: &lt;input type="text"&gt;
             children
-            - input_text|markup
+            - default|markup
                 tag_name: input
                 attributes
                 - type: text
@@ -41,7 +41,7 @@ forms
               args
               - info: &lt;input type="password"&gt;
             children
-            - input_password|markup
+            - default|markup
                 tag_name: input
                 attributes
                 - type: password
@@ -59,7 +59,7 @@ forms
               args
               - info: &lt;input type="file"&gt;
             children
-            - input_file|markup
+            - default|markup
                 tag_name: input
                 attributes
                 - type: file
@@ -134,7 +134,7 @@ forms
               args
               - info: &lt;select&gt;
             children
-            - select|markup
+            - default|markup
                 tag_name: select
                 attributes
                 - name: select
@@ -168,12 +168,12 @@ forms
               args
               - info: &lt;select&gt;
             children
-            - select|markup
+            - default|markup
                 tag_name: select
                 attributes
                 - name: select_ws_groups
                 children
-                - group_default|markup
+                - default|markup
                     tag_name: optgroup
                     attributes
                     - label: default group
@@ -207,7 +207,7 @@ forms
               args
               - info: &lt;select&gt;
             children
-            - select|markup
+            - default|markup
                 tag_name: select
                 attributes
                 - name: select_multiple
@@ -243,7 +243,7 @@ forms
               args
               - info: &lt;textarea&gt;&lt;/textarea&gt;
             children
-            - textarea|markup
+            - default|markup
                 tag_name: textarea
                 attributes
                 - name: textarea
@@ -340,7 +340,7 @@ forms
               args
               - info: &lt;input type="search"&gt;
             children
-            - input_search|markup
+            - default|markup
                 tag_name: input
                 attributes
                 - type: search
@@ -357,7 +357,7 @@ forms
               args
               - info: &lt;input type="email"&gt;
             children
-            - input_email|markup
+            - default|markup
                 tag_name: input
                 attributes
                 - type: email
@@ -375,7 +375,7 @@ forms
               args
               - info: &lt;input type="url"&gt;
             children
-            - input_url|markup
+            - default|markup
                 tag_name: input
                 attributes
                 - type: url
@@ -392,7 +392,7 @@ forms
               args
               - info: &lt;input type="tel"&gt;
             children
-            - input_tel|markup
+            - default|markup
                 tag_name: input
                 attributes
                 - type: tel
@@ -409,7 +409,7 @@ forms
               args
               - info: &lt;input type="number"&gt;
             children
-            - input_number|markup
+            - default|markup
                 tag_name: input
                 attributes
                 - type: number
@@ -427,7 +427,7 @@ forms
               args
               - info: &lt;input type="range"&gt;
             children
-            - input_range|markup
+            - default|markup
                 tag_name: input
                 attributes
                 - type: range
@@ -444,7 +444,7 @@ forms
               args
               - info: &lt;input type="date"&gt;
             children
-            - input_date|markup
+            - default|markup
                 tag_name: input
                 attributes
                 - type: date
@@ -461,7 +461,7 @@ forms
               args
               - info: &lt;input type="time"&gt;
             children
-            - input_time|markup
+            - default|markup
                 tag_name: input
                 attributes
                 - type: time
@@ -476,7 +476,7 @@ forms
               args
               - info: &lt;input type="color"&gt;
             children
-            - input_color|markup
+            - default|markup
                 tag_name: input
                 attributes
                 - type: color
