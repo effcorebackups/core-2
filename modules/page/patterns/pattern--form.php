@@ -38,9 +38,6 @@ namespace effectivecore {
   # ─────────────────────────────────────────────────────────────────────
 
   public $template = 'form';
-  public $on_init;
-  public $on_validate;
-  public $on_submit;
   public $clicked_button;
   public $clicked_button_name;
   public $errors = [];
