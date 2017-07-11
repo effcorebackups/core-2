@@ -10,7 +10,7 @@ namespace effectivecore {
   public $description;
 
   function render() {
-    $this->attributes['class']['has-box'] = 'has-box'; # @todo: use attribute_insert
+    $this->attributes['class']['is-box'] = 'is-box'; # @todo: use attribute_insert
     return parent::render();
   }
 
