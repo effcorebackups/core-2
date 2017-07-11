@@ -16,7 +16,7 @@ forms
             - content|text
                 text: Html 4 elements
       # input_text
-        - input_text|form_field
+        - field_text|form_field
             title: Text
             description|text
               text: Element %%_info.
@@ -34,7 +34,7 @@ forms
                 - maxlength: 255
                 - pattern: [a-zA-Z0-9]+
       # input_password
-        - input_password|form_field
+        - field_password|form_field
             title: Password
             description|text
               text: Element %%_info.
@@ -52,7 +52,7 @@ forms
                 - maxlength: 255
                 - autocomplete: off
       # input_file
-        - input_file|form_field
+        - field_file|form_field
             title: File
             description|text
               text: Element %%_info.
@@ -67,7 +67,7 @@ forms
                 - accept: image/*,audio/*,video/*
                 - multiple: multiple
       # checkboxes
-        - checkboxes|form_field_checkboxes
+        - field_checkboxes|form_field_checkboxes
             title: Checkboxes
             attributes
             - required: required
@@ -98,7 +98,7 @@ forms
                 - name: input_checkbox_3
                 - value: checkbox_3
       # radios
-        - radios|form_field_radios
+        - field_radios|form_field_radios
             title: Radios
             description|text
               text: Element %%_info.
@@ -127,7 +127,7 @@ forms
                 - name: input_radio
                 - value: radio_3
       # select
-        - select|form_field
+        - field_select|form_field
             title: Select
             description|text
               text: Element %%_info.
@@ -161,7 +161,7 @@ forms
                     - content|text
                         text: Option 3
       # select_ws_groups
-        - select_ws_groups|form_field
+        - field_select_ws_groups|form_field
             title: Select (with optgroup)
             description|text
               text: Element %%_info.
@@ -200,7 +200,7 @@ forms
                         - content|text
                             text: Option 6
       # select_multiple
-        - select_multiple|form_field
+        - field_select_multiple|form_field
             title: Select (multiple choice)
             description|text
               text: Element %%_info.
@@ -236,7 +236,7 @@ forms
                     - content|text
                         text: Option 9
       # textarea
-        - textarea|form_field
+        - field_textarea|form_field
             title: Textarea
             description|text
               text: Element %%_info.
@@ -333,136 +333,154 @@ forms
             - content|text
                 text: Html 5 elements
       # input_search
-        - input_search|markup
-            tag_name: input
+        - field_search|form_field
             title: Search
             description|text
               text: Element %%_info.
               args
               - info: &lt;input type="search"&gt;
-            attributes
-            - type: search
-            - name: input_search
-            - required: required
-            - value: text in search
-            - minlength: 5
-            - maxlength: 255
+            children
+            - input_search|markup
+                tag_name: input
+                attributes
+                - type: search
+                - name: input_search
+                - required: required
+                - value: text in search
+                - minlength: 5
+                - maxlength: 255
       # input_email
-        - input_email|markup
-            tag_name: input
+        - field_email|form_field
             title: EMail
             description|text
               text: Element %%_info.
               args
               - info: &lt;input type="email"&gt;
-            attributes
-            - type: email
-            - name: input_email
-            - required: required
-            - value: test@example.com
-            - minlength: 5
-            - maxlength: 255
-            - multiple: multiple
+            children
+            - input_email|markup
+                tag_name: input
+                attributes
+                - type: email
+                - name: input_email
+                - required: required
+                - value: test@example.com
+                - minlength: 5
+                - maxlength: 255
+                - multiple: multiple
       # input_url
-        - input_url|markup
-            tag_name: input
+        - field_url|form_field
             title: URL
             description|text
               text: Element %%_info.
               args
               - info: &lt;input type="url"&gt;
-            attributes
-            - type: url
-            - name: input_url
-            - required: required
-            - value: http://example.com
-            - minlength: 5
-            - maxlength: 255
+            children
+            - input_url|markup
+                tag_name: input
+                attributes
+                - type: url
+                - name: input_url
+                - required: required
+                - value: http://example.com
+                - minlength: 5
+                - maxlength: 255
       # input_tel
-        - input_tel|markup
-            tag_name: input
+        - field_tel|form_field
             title: Telephone
             description|text
               text: Element %%_info.
               args
               - info: &lt;input type="tel"&gt;
-            attributes
-            - type: tel
-            - name: input_tel
-            - required: required
-            - value: 000123456789
-            - minlength: 5
-            - maxlength: 15
+            children
+            - input_tel|markup
+                tag_name: input
+                attributes
+                - type: tel
+                - name: input_tel
+                - required: required
+                - value: 000123456789
+                - minlength: 5
+                - maxlength: 15
       # input_number
-        - input_number|markup
-            tag_name: input
+        - field_number|form_field
             title: Number
             description|text
               text: Element %%_info.
               args
               - info: &lt;input type="number"&gt;
-            attributes
-            - type: number
-            - name: input_number
-            - required: required
-            - value: 0
-            - min: -10
-            - max: 10
-            - step: 1
+            children
+            - input_number|markup
+                tag_name: input
+                attributes
+                - type: number
+                - name: input_number
+                - required: required
+                - value: 0
+                - min: -10
+                - max: 10
+                - step: 1
       # input_range
-        - input_range|markup
-            tag_name: input
+        - field_range|form_field
             title: Range
             description|text
               text: Element %%_info.
               args
               - info: &lt;input type="range"&gt;
-            attributes
-            - type: range
-            - name: input_range
-            - value: 0
-            - min: -10
-            - max: 10
-            - step: 1
+            children
+            - input_range|markup
+                tag_name: input
+                attributes
+                - type: range
+                - name: input_range
+                - value: 0
+                - min: -10
+                - max: 10
+                - step: 1
       # input_date
-        - input_date|markup
-            tag_name: input
+        - field_date|form_field
             title: Date
             description|text
               text: Element %%_info.
               args
               - info: &lt;input type="date"&gt;
-            attributes
-            - type: date
-            - name: input_date
-            - required: required
-            - value: 2017-12-31
-            - min: 2000-12-31
-            - max: 2020-12-31
+            children
+            - input_date|markup
+                tag_name: input
+                attributes
+                - type: date
+                - name: input_date
+                - required: required
+                - value: 2017-12-31
+                - min: 2000-12-31
+                - max: 2020-12-31
       # input_time
-        - input_time|markup
-            tag_name: input
+        - field_time|form_field
             title: Time
             description|text
               text: Element %%_info.
               args
               - info: &lt;input type="time"&gt;
-            attributes
-            - type: time
-            - name: input_time
-            - required: required
-            - value: 00:00:00
+            children
+            - input_time|markup
+                tag_name: input
+                attributes
+                - type: time
+                - name: input_time
+                - required: required
+                - value: 00:00:00
       # input_color
-        - input_color|markup
-            tag_name: input
+        - field_color|form_field
             title: Color
             description|text
               text: Element %%_info.
               args
               - info: &lt;input type="color"&gt;
-            attributes
-            - type: color
-            - name: input_color
+            children
+            - input_color|markup
+                tag_name: input
+                attributes
+                - type: color
+                - name: input_color
     - button_submit|markup
         tag_name: button
         attributes
