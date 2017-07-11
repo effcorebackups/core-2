@@ -67,7 +67,7 @@ namespace effectivecore {
   ### data manipulations ###
   ##########################
 
-  static function data_to_attr($data, $join_part = null, $key_wrapper = '', $value_wrapper = '"') {
+  static function data_to_attr($data, $join_part = ' ', $key_wrapper = '', $value_wrapper = '"') {
     $return = [];
     foreach ((array)$data as $c_name => $c_value) {
       switch (gettype($c_value)) {

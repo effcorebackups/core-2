@@ -11,7 +11,7 @@ namespace effectivecore {
 
   function render() {
     return (new template($this->template, [
-      'attributes'  => factory::data_to_attr($this->attribute_select(), ' '),
+      'attributes'  => factory::data_to_attr($this->attribute_select()),
       'tag_name'    => $this->tag_name,
       'title'       => $this->render_self($this->attribute_select('required')),
       'content'     => $this->render_children($this->children),

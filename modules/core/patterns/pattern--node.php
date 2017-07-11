@@ -92,7 +92,7 @@ namespace effectivecore {
   function render() {
     if ($this->template) {
       return (new template($this->template, [
-        'attributes' => factory::data_to_attr($this->attribute_select(), ' '),
+        'attributes' => factory::data_to_attr($this->attribute_select()),
         'self'       => $this->render_self(),
         'children'   => $this->render_children($this->children)
       ]))->render();

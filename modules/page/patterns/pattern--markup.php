@@ -20,7 +20,7 @@ namespace effectivecore {
     $template = $this->template ?: (count($this->children) ? 'html_element' : 'html_element_simple');
     return (new template($template, [
       'tag_name'   => $this->tag_name,
-      'attributes' => factory::data_to_attr($this->attribute_select(), ' '),
+      'attributes' => factory::data_to_attr($this->attribute_select()),
       'content'    => $this->render_children($this->children)
     ]))->render();
   }
