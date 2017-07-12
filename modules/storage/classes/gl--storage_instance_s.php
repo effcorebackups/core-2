@@ -118,7 +118,9 @@ namespace effectivecore {
           factory::data_export($data, $prefix).
       "\n}");
     $file->save();
-    opcache_invalidate($file->get_path_full());
+    if (function_exists('opcache_invalidate')) {
+      opcache_invalidate($file->get_path_full());
+    }
   }
 
   static function settings_find_static() {
