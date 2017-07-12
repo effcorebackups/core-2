@@ -128,14 +128,14 @@ forms
                 - value: radio_3
       # select
         - field_select|form_field
-            title: Select
-            description|text
-              text: Element %%_info.
-              args
-              - info: &lt;select&gt;
             children
-            - default|markup
+            - default|form_element
                 tag_name: select
+                title: Select
+                description|text
+                  text: Element %%_info.
+                  args
+                  - info: &lt;select&gt;
                 attributes
                 - name: select
                 children
@@ -162,14 +162,14 @@ forms
                         text: Option 3
       # select_ws_groups
         - field_select_ws_groups|form_field
-            title: Select (with optgroup)
-            description|text
-              text: Element %%_info.
-              args
-              - info: &lt;select&gt;
             children
-            - default|markup
+            - default|form_element
                 tag_name: select
+                title: Select (with optgroup)
+                description|text
+                  text: Element %%_info.
+                  args
+                  - info: &lt;select&gt;
                 attributes
                 - name: select_ws_groups
                 children
@@ -201,14 +201,14 @@ forms
                             text: Option 6
       # select_multiple
         - field_select_multiple|form_field
-            title: Select (multiple choice)
-            description|text
-              text: Element %%_info.
-              args
-              - info: &lt;select&gt;
             children
-            - default|markup
+            - default|form_element
                 tag_name: select
+                title: Select (multiple choice)
+                description|text
+                  text: Element %%_info.
+                  args
+                  - info: &lt;select&gt;
                 attributes
                 - name: select_multiple
                 - multiple: multiple
@@ -237,14 +237,14 @@ forms
                         text: Option 9
       # textarea
         - field_textarea|form_field
-            title: Textarea
-            description|text
-              text: Element %%_info.
-              args
-              - info: &lt;textarea&gt;&lt;/textarea&gt;
             children
-            - default|markup
+            - default|form_element
                 tag_name: textarea
+                title: Textarea
+                description|text
+                  text: Element %%_info.
+                  args
+                  - info: &lt;textarea&gt;&lt;/textarea&gt;
                 attributes
                 - name: textarea
                 - rows: 5
@@ -334,14 +334,14 @@ forms
                 text: Html 5 elements
       # input_search
         - field_search|form_field
-            title: Search
-            description|text
-              text: Element %%_info.
-              args
-              - info: &lt;input type="search"&gt;
             children
-            - default|markup
+            - default|form_element
                 tag_name: input
+                title: Search
+                description|text
+                  text: Element %%_info.
+                  args
+                  - info: &lt;input type="search"&gt;
                 attributes
                 - type: search
                 - name: input_search
@@ -351,14 +351,14 @@ forms
                 - maxlength: 255
       # input_email
         - field_email|form_field
-            title: EMail
-            description|text
-              text: Element %%_info.
-              args
-              - info: &lt;input type="email"&gt;
             children
-            - default|markup
+            - default|form_element
                 tag_name: input
+                title: EMail
+                description|text
+                  text: Element %%_info.
+                  args
+                  - info: &lt;input type="email"&gt;
                 attributes
                 - type: email
                 - name: input_email
@@ -369,14 +369,14 @@ forms
                 - multiple: multiple
       # input_url
         - field_url|form_field
-            title: URL
-            description|text
-              text: Element %%_info.
-              args
-              - info: &lt;input type="url"&gt;
             children
-            - default|markup
+            - default|form_element
                 tag_name: input
+                title: URL
+                description|text
+                  text: Element %%_info.
+                  args
+                  - info: &lt;input type="url"&gt;
                 attributes
                 - type: url
                 - name: input_url
@@ -386,14 +386,14 @@ forms
                 - maxlength: 255
       # input_tel
         - field_tel|form_field
-            title: Telephone
-            description|text
-              text: Element %%_info.
-              args
-              - info: &lt;input type="tel"&gt;
             children
-            - default|markup
+            - default|form_element
                 tag_name: input
+                title: Telephone
+                description|text
+                  text: Element %%_info.
+                  args
+                  - info: &lt;input type="tel"&gt;
                 attributes
                 - type: tel
                 - name: input_tel
@@ -403,14 +403,14 @@ forms
                 - maxlength: 15
       # input_number
         - field_number|form_field
-            title: Number
-            description|text
-              text: Element %%_info.
-              args
-              - info: &lt;input type="number"&gt;
             children
-            - default|markup
+            - default|form_element
                 tag_name: input
+                title: Number
+                description|text
+                  text: Element %%_info.
+                  args
+                  - info: &lt;input type="number"&gt;
                 attributes
                 - type: number
                 - name: input_number
@@ -421,14 +421,14 @@ forms
                 - step: 1
       # input_range
         - field_range|form_field
-            title: Range
-            description|text
-              text: Element %%_info.
-              args
-              - info: &lt;input type="range"&gt;
             children
-            - default|markup
+            - default|form_element
                 tag_name: input
+                title: Range
+                description|text
+                  text: Element %%_info.
+                  args
+                  - info: &lt;input type="range"&gt;
                 attributes
                 - type: range
                 - name: input_range
@@ -438,14 +438,14 @@ forms
                 - step: 1
       # input_date
         - field_date|form_field
-            title: Date
-            description|text
-              text: Element %%_info.
-              args
-              - info: &lt;input type="date"&gt;
             children
-            - default|markup
+            - default|form_element
                 tag_name: input
+                title: Date
+                description|text
+                  text: Element %%_info.
+                  args
+                  - info: &lt;input type="date"&gt;
                 attributes
                 - type: date
                 - name: input_date
@@ -455,14 +455,14 @@ forms
                 - max: 2020-12-31
       # input_time
         - field_time|form_field
-            title: Time
-            description|text
-              text: Element %%_info.
-              args
-              - info: &lt;input type="time"&gt;
             children
-            - default|markup
+            - default|form_element
                 tag_name: input
+                title: Time
+                description|text
+                  text: Element %%_info.
+                  args
+                  - info: &lt;input type="time"&gt;
                 attributes
                 - type: time
                 - name: input_time
@@ -470,14 +470,14 @@ forms
                 - value: 00:00:00
       # input_color
         - field_color|form_field
-            title: Color
-            description|text
-              text: Element %%_info.
-              args
-              - info: &lt;input type="color"&gt;
             children
-            - default|markup
+            - default|form_element
                 tag_name: input
+                title: Color
+                description|text
+                  text: Element %%_info.
+                  args
+                  - info: &lt;input type="color"&gt;
                 attributes
                 - type: color
                 - name: input_color
