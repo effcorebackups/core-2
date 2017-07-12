@@ -63,7 +63,7 @@ forms
                 - accept: image/*,audio/*,video/*
                 - multiple: multiple
       # checkboxes
-        - field_checkboxes|form_field_checkboxes
+        - field_checkboxes|form_container
             title: Checkboxes
             attributes
             - required: required
@@ -72,56 +72,68 @@ forms
               args
               - info: &lt;input type="checkbox"&gt;
             children
-            - input_checkbox_1|form_element
-                tag_name: input
-                title: Checkbox 1
-                attributes
-                - type: checkbox
-                - name: input_checkbox_1
-                - value: checkbox_1
-            - input_checkbox_2|form_element
-                tag_name: input
-                title: Checkbox 2
-                attributes
-                - type: checkbox
-                - name: input_checkbox_2
-                - value: checkbox_2
-            - input_checkbox_3|form_element
-                tag_name: input
-                title: Checkbox 3
-                attributes
-                - type: checkbox
-                - name: input_checkbox_3
-                - value: checkbox_3
+            - field_checkbox_1|form_field
+                children
+                - input_checkbox_1|form_element
+                    tag_name: input
+                    title: Checkbox 1
+                    attributes
+                    - type: checkbox
+                    - name: input_checkbox_1
+                    - value: checkbox_1
+            - field_checkbox_2|form_field
+                children
+                - input_checkbox_2|form_element
+                    tag_name: input
+                    title: Checkbox 2
+                    attributes
+                    - type: checkbox
+                    - name: input_checkbox_2
+                    - value: checkbox_2
+            - field_checkbox_3|form_field
+                children
+                - input_checkbox_3|form_element
+                    tag_name: input
+                    title: Checkbox 3
+                    attributes
+                    - type: checkbox
+                    - name: input_checkbox_3
+                    - value: checkbox_3
       # radios
-        - field_radios|form_field_radios
+        - field_radios|form_container
             title: Radios
             description|text
               text: Element %%_info.
               args
               - info: &lt;input type="radio"&gt;
             children
-            - input_radio_1|form_element
-                tag_name: input
-                title: Radio 1
-                attributes
-                - type: radio
-                - name: input_radio
-                - value: radio_1
-            - input_radio_2|form_element
-                tag_name: input
-                title: Radio 2
-                attributes
-                - type: radio
-                - name: input_radio
-                - value: radio_2
-            - input_radio_3|form_element
-                tag_name: input
-                title: Radio 3
-                attributes
-                - type: radio
-                - name: input_radio
-                - value: radio_3
+            - field_radio_1|form_field
+                children
+                - input_radio_1|form_element
+                    tag_name: input
+                    title: Radio 1
+                    attributes
+                    - type: radio
+                    - name: input_radio
+                    - value: radio_1
+            - field_radio_2|form_field
+                children
+                - input_radio_2|form_element
+                    tag_name: input
+                    title: Radio 2
+                    attributes
+                    - type: radio
+                    - name: input_radio
+                    - value: radio_2
+            - field_radio_3|form_field
+                children
+                - input_radio_3|form_element
+                    tag_name: input
+                    title: Radio 3
+                    attributes
+                    - type: radio
+                    - name: input_radio
+                    - value: radio_3
       # select
         - field_select|form_field
             children
