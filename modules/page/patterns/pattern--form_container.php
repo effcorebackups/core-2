@@ -13,16 +13,16 @@ namespace effectivecore {
     return (new template($this->template, [
       'attributes'  => factory::data_to_attr($this->attribute_select()),
       'tag_name'    => $this->tag_name,
-      'title'       => $this->render_self($this->attribute_select('required')),
-      'content'     => $this->render_children($this->children),
-      'description' => $this->render_description($this->description, $this->attribute_select())
+      'title'       => $this->render_self(),
+      'children'    => $this->render_children($this->children),
+      'description' => $this->render_description()
     ]))->render();
   }
 
-  function render_self($is_required = false) {
-    return (new markup('label', [], [
+  function render_self() {
+    return empty($this->title) ? '' : (new markup('label', [], [
       $this->title,
-      $is_required ? $this->render_required_mark() : ''
+      $this->attribute_select('required') ? $this->render_required_mark() : ''
     ]))->render();
   }
 
@@ -30,16 +30,12 @@ namespace effectivecore {
     return (new markup('b', ['class' => ['required' => 'required']], '*'))->render();
   }
 
-  function render_description($descriptions = [], $attributes = []) {
-    $return = [];
-    foreach ($descriptions as $c_description) {
-      $return[] = (new markup('p', [], is_string($c_description) ?
-                               translations::get($c_description) : $c_description)
-      )->render();
-    }
-    if (!empty($attributes['minlength'])) $return[] = (new markup('p', ['class' => ['minlength' => 'minlength']], translations::get('Field should contain minimum %%_lenght symbols.', ['lenght' => $attributes['minlength']])))->render();
-    if (!empty($attributes['maxlength'])) $return[] = (new markup('p', ['class' => ['maxlength' => 'maxlength']], translations::get('Field should contain maximum %%_lenght symbols.', ['lenght' => $attributes['maxlength']])))->render();
-    return count($return) ? (new markup('x-description', [], implode($return)))->render() : '';
+  function render_description() {
+    return empty($this->description) ? '' : (
+      new markup('x-description', [],
+        new markup('p', [], is_string($this->description) ?
+                    translations::get($this->description) :
+                                      $this->description)))->render();
   }
 
 }}

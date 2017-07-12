@@ -6,8 +6,8 @@ namespace effectivecore {
   public $tag_name;
 
   function __construct($tag_name = 'div', $attributes = [], $children = [], $weight = 0) {
-    parent::__construct($attributes, $children, $weight);
     $this->tag_name = $tag_name;
+    parent::__construct($attributes, $children, $weight);
   }
 
   function child_insert($child, $id = null) {

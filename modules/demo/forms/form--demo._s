@@ -17,14 +17,14 @@ forms
                 text: Html 4 elements
       # input_text
         - field_text|form_field
-            title: Text
-            description|text
-              text: Element %%_info.
-              args
-              - info: &lt;input type="text"&gt;
             children
-            - default|markup
+            - default|form_element
                 tag_name: input
+                title: Text
+                description|text
+                  text: Element %%_info.
+                  args
+                  - info: &lt;input type="text"&gt;
                 attributes
                 - type: text
                 - name: input_text

@@ -10,5 +10,4 @@ templates
 - table_body_row: templates/template--table_body_row.html
 - table_body_row_cell: templates/template--table_body_row_cell.html
 - form: templates/template--form.html
-- form_field: templates/template--form_field.html
 - form_container: templates/template--form_container.html
