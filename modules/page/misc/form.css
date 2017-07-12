@@ -10,9 +10,8 @@
   form x-container {display: block; margin: 20px 0}
   form x-title {display: block}
   form x-title, form label {font-size: 1.2em}
-  form label .required {position: absolute; margin-left: .2em; font-size: 1.1em; color: %%_color_error}
+  form b.required {position: absolute; margin-left: .2em; font-size: 1.1em; color: %%_color_error}
   form x-field {display: block; margin: 20px 0}
-  form x-field.is-box {margin: 5px 0}
   form x-field.is-box label {font-size: 1em}
   form x-field.is-box input[type="checkbox"],
   form x-field.is-box input[type="radio"] {margin: 0 5px 2px 0; cursor: pointer}
