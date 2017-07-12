@@ -7,14 +7,14 @@ forms
     - class
       - form-user: form-user
     children
-    - fieldset_default|markup
+    - fieldset_default|form_container
         tag_name: fieldset
         children
         - field_password|form_field
-            title: Password
             children
-            - default|markup
+            - default|form_element
                 tag_name: input
+                title: Password
                 attributes
                 - type: password
                 - name: password
