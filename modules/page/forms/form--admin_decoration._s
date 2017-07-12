@@ -7,14 +7,10 @@ forms
     - class
       - form-decoration: form-decoration
     children
-    - fieldset_default|markup
+    - fieldset_default|form_container
         tag_name: fieldset
+        title: Colors
         children
-        - fieldset_default_legend|markup
-            tag_name: legend
-            children
-            - content|text
-                text: Colors
         - field_color|form_field
             title: Color
             attributes
