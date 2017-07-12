@@ -67,6 +67,9 @@ forms
             title: Checkboxes
             attributes
             - required: required
+            - class
+              - boxes: boxes
+              - checkboxes: checkboxes
             description|text
               text: Element %%_info.
               args
@@ -105,6 +108,11 @@ forms
       # radios
         - field_radios|form_container
             title: Radios
+            attributes
+            - required: required
+            - class
+              - boxes: boxes
+              - radios: radios
             description|text
               text: Element %%_info.
               args
