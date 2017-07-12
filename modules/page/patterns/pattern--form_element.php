@@ -16,9 +16,16 @@ namespace effectivecore {
   }
 
   function render() {
-    return $this->render_self().
-           parent::render().
-           $this->render_description();
+    $parent_render = parent::render();
+    if (!empty($this->title_position) && $this->title_position == 'right') {
+      return $parent_render.
+             $this->render_self().
+             $this->render_description();
+    } else {
+      return $this->render_self().
+             $parent_render.
+             $this->render_description();
+    }
   }
 
   function render_self() {

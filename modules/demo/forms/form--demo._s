@@ -77,6 +77,7 @@ forms
                 - input_checkbox_1|form_element
                     tag_name: input
                     title: Checkbox 1
+                    title_position: right
                     attributes
                     - type: checkbox
                     - name: input_checkbox_1
@@ -86,6 +87,7 @@ forms
                 - input_checkbox_2|form_element
                     tag_name: input
                     title: Checkbox 2
+                    title_position: right
                     attributes
                     - type: checkbox
                     - name: input_checkbox_2
@@ -95,6 +97,7 @@ forms
                 - input_checkbox_3|form_element
                     tag_name: input
                     title: Checkbox 3
+                    title_position: right
                     attributes
                     - type: checkbox
                     - name: input_checkbox_3
@@ -112,6 +115,7 @@ forms
                 - input_radio_1|form_element
                     tag_name: input
                     title: Radio 1
+                    title_position: right
                     attributes
                     - type: radio
                     - name: input_radio
@@ -121,6 +125,7 @@ forms
                 - input_radio_2|form_element
                     tag_name: input
                     title: Radio 2
+                    title_position: right
                     attributes
                     - type: radio
                     - name: input_radio
@@ -130,6 +135,7 @@ forms
                 - input_radio_3|form_element
                     tag_name: input
                     title: Radio 3
+                    title_position: right
                     attributes
                     - type: radio
                     - name: input_radio
