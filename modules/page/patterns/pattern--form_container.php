@@ -20,7 +20,7 @@ namespace effectivecore {
   }
 
   function render_self() {
-    return empty($this->title) ? '' : (new markup('label', [], [
+    return empty($this->title) ? '' : (new markup('x-title', [], [
       $this->title,
       $this->attribute_select('required') ? $this->render_required_mark() : ''
     ]))->render();

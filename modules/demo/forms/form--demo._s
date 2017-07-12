@@ -35,14 +35,14 @@ forms
                 - pattern: [a-zA-Z0-9]+
       # input_password
         - field_password|form_field
-            title: Password
-            description|text
-              text: Element %%_info.
-              args
-              - info: &lt;input type="password"&gt;
             children
-            - default|markup
+            - default|form_element
                 tag_name: input
+                title: Password
+                description|text
+                  text: Element %%_info.
+                  args
+                  - info: &lt;input type="password"&gt;
                 attributes
                 - type: password
                 - name: input_password
@@ -53,14 +53,14 @@ forms
                 - autocomplete: off
       # input_file
         - field_file|form_field
-            title: File
-            description|text
-              text: Element %%_info.
-              args
-              - info: &lt;input type="file"&gt;
             children
-            - default|markup
+            - default|form_element
                 tag_name: input
+                title: File
+                description|text
+                  text: Element %%_info.
+                  args
+                  - info: &lt;input type="file"&gt;
                 attributes
                 - type: file
                 - name: input_file
@@ -76,21 +76,21 @@ forms
               args
               - info: &lt;input type="checkbox"&gt;
             children
-            - input_checkbox_1|markup
+            - input_checkbox_1|form_element
                 tag_name: input
                 title: Checkbox 1
                 attributes
                 - type: checkbox
                 - name: input_checkbox_1
                 - value: checkbox_1
-            - input_checkbox_2|markup
+            - input_checkbox_2|form_element
                 tag_name: input
                 title: Checkbox 2
                 attributes
                 - type: checkbox
                 - name: input_checkbox_2
                 - value: checkbox_2
-            - input_checkbox_3|markup
+            - input_checkbox_3|form_element
                 tag_name: input
                 title: Checkbox 3
                 attributes
@@ -105,21 +105,21 @@ forms
               args
               - info: &lt;input type="radio"&gt;
             children
-            - input_radio_1|markup
+            - input_radio_1|form_element
                 tag_name: input
                 title: Radio 1
                 attributes
                 - type: radio
                 - name: input_radio
                 - value: radio_1
-            - input_radio_2|markup
+            - input_radio_2|form_element
                 tag_name: input
                 title: Radio 2
                 attributes
                 - type: radio
                 - name: input_radio
                 - value: radio_2
-            - input_radio_3|markup
+            - input_radio_3|form_element
                 tag_name: input
                 title: Radio 3
                 attributes
