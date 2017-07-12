@@ -20,7 +20,8 @@ namespace effectivecore {
   }
 
   function render_self() {
-    return empty($this->title) ? '' : (new markup('x-title', [], [
+    $title_tag_name = $this->tag_name == 'fieldset' ? 'legend' : 'x-title';
+    return empty($this->title) ? '' : (new markup($title_tag_name, [], [
       $this->title,
       $this->attribute_select('required') ? $this->render_required_mark() : ''
     ]))->render();

@@ -7,14 +7,10 @@ forms
     - class
       - form-demo: form-demo
     children
-    - fieldset_html4|markup
+    - fieldset_html4|form_container
         tag_name: fieldset
+        title: Html 4 elements
         children
-        - fieldset_html4_legend|markup
-            tag_name: legend
-            children
-            - content|text
-                text: Html 4 elements
       # input_text
         - field_text|form_field
             children
@@ -324,14 +320,10 @@ forms
                         children
                         - content|text
                             text: 
-    - fieldset_html5|markup
+    - fieldset_html5|form_container
         tag_name: fieldset
+        title: Html 5 elements
         children
-        - fieldset_html5_legend|markup
-            tag_name: legend
-            children
-            - content|text
-                text: Html 5 elements
       # input_search
         - field_search|form_field
             children
