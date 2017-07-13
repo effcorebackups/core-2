@@ -4,10 +4,11 @@ namespace effectivecore {
           use \effectivecore\translate_factory as translations;
           class form_container extends markup {
 
-  public $template    = 'form_container';
-  public $tag_name    = 'x-container';
-  public $title       = '';
-  public $description = '';
+  public $template_title = 'form_title';
+  public $template       = 'form_container';
+  public $tag_name       = 'x-container';
+  public $title          = '';
+  public $description    = '';
 
   function __construct($tag_name = '', $title = '', $description = '', $attributes = [], $children = [], $weight = 0) {
     if ($title)       $this->title       = $title;
@@ -26,7 +27,7 @@ namespace effectivecore {
   }
 
   function render_self() {
-    return empty($this->title) ? '' : (new template('form_title', [
+    return empty($this->title) ? '' : (new template($this->template_title, [
       'tag_name'      => $this->tag_name == 'fieldset' ? 'legend' : 'x-title',
       'title'         => translations::get($this->title),
       'required_mark' => $this->attribute_select('required') ? $this->render_required_mark() : ''
