@@ -1,6 +1,7 @@
 <?php
 
 namespace effectivecore {
+          use \effectivecore\translate_factory as translations;
           class form_container extends markup {
 
   public $template    = 'form_container';
@@ -27,7 +28,7 @@ namespace effectivecore {
   function render_self() {
     return empty($this->title) ? '' : (new template('form_label', [
       'tag_name'      => $this->tag_name == 'fieldset' ? 'legend' : 'x-title',
-      'label'         => $this->title,
+      'label'         => translations::get($this->title),
       'required_mark' => $this->attribute_select('required') ? $this->render_required_mark() : ''
     ]))->render();
   }
