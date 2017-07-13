@@ -409,14 +409,12 @@ forms
                 tag_name: input
                 title: Telephone
                 description|text
-                  text: Element %%_info.
-                  args
-                  - info: &lt;input type="tel"&gt;
+                  text: Use international format of mobile phone numbers.
                 attributes
                 - type: tel
                 - name: input_tel
                 - required: required
-                - value: 000123456789
+                - value: &#43;0123456789
                 - minlength: 5
                 - maxlength: 15
       # input_number
