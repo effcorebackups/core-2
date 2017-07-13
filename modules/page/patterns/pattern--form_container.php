@@ -1,7 +1,6 @@
 <?php
 
 namespace effectivecore {
-          use \effectivecore\translate_factory as translations;
           class form_container extends markup {
 
   public $template    = 'form_container';
@@ -31,18 +30,6 @@ namespace effectivecore {
       $this->title,
       $this->attribute_select('required') ? $this->render_required_mark() : ''
     ]))->render();
-  }
-
-  function render_required_mark() {
-    return (new markup('b', ['class' => ['required' => 'required']], '*'))->render();
-  }
-
-  function render_description() {
-    return empty($this->description) ? '' : (
-      new markup('x-description', [],
-        new markup('p', [], is_string($this->description) ?
-                    translations::get($this->description) :
-                                      $this->description)))->render();
   }
 
 }}
