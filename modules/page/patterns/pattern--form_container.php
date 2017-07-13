@@ -2,7 +2,7 @@
 
 namespace effectivecore {
           use \effectivecore\translate_factory as translations;
-          class form_container extends node {
+          class form_container extends markup {
 
   public $template    = 'form_container';
   public $tag_name    = 'x-container';
