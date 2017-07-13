@@ -8,7 +8,7 @@ namespace effectivecore {
   public $title       = '';
   public $description = '';
 
-  function __construct($tag_name = '', $attributes = [], $children = [], $weight = 0, $title = '', $description = '') {
+  function __construct($tag_name = '', $title = '', $description = '', $attributes = [], $children = [], $weight = 0) {
     if ($title)       $this->title       = $title;
     if ($description) $this->description = $description;
     parent::__construct($tag_name, $attributes, $children, $weight);
