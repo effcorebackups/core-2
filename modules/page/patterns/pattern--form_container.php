@@ -9,6 +9,12 @@ namespace effectivecore {
   public $title       = '';
   public $description = '';
 
+  function __construct($tag_name = '', $attributes = [], $children = [], $weight = 0, $title = '', $description = '') {
+    if ($title)       $this->title       = $title;
+    if ($description) $this->description = $description;
+    parent::__construct($tag_name, $attributes, $children, $weight);
+  }
+
   function render() {
     return (new template($this->template, [
       'attributes'  => factory::data_to_attr($this->attribute_select()),
