@@ -26,6 +26,10 @@ namespace effectivecore {
     ]))->render();
   }
 
+  ###########################################
+  ### functionality for inherited classes ###
+  ###########################################
+
   function render_required_mark() {
     return (new markup('b', ['class' => ['required' => 'required']], '*'))->render();
   }
