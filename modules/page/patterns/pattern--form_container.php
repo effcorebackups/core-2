@@ -26,9 +26,9 @@ namespace effectivecore {
   }
 
   function render_self() {
-    return empty($this->title) ? '' : (new template('form_label', [
+    return empty($this->title) ? '' : (new template('form_title', [
       'tag_name'      => $this->tag_name == 'fieldset' ? 'legend' : 'x-title',
-      'label'         => translations::get($this->title),
+      'title'         => translations::get($this->title),
       'required_mark' => $this->attribute_select('required') ? $this->render_required_mark() : ''
     ]))->render();
   }
