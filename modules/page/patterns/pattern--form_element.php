@@ -26,9 +26,10 @@ namespace effectivecore {
   }
 
   function render_self() {
-    return empty($this->title) ? '' : (new markup('label', [], [
-      $this->title,
-      $this->attribute_select('required') ? $this->render_required_mark() : ''
+    return empty($this->title) ? '' : (new template('form_label', [
+      'tag_name'      => 'label',
+      'label'         => $this->title,
+      'required_mark' => $this->attribute_select('required') ? $this->render_required_mark() : ''
     ]))->render();
   }
 
