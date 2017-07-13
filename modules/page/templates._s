@@ -11,4 +11,5 @@ templates
 - table_body_row_cell: templates/template--table_body_row_cell.html
 - form: templates/template--form.html
 - form_title: templates/template--form_title.html
+- form_element: templates/template--form_element.html
 - form_container: templates/template--form_container.html

@@ -4,7 +4,6 @@ namespace effectivecore {
           use \effectivecore\translate_factory as translations;
           class form_element extends markup {
 
-  public $tag_name    = 'div';
   public $title       = '';
   public $description = '';
 
@@ -15,15 +14,13 @@ namespace effectivecore {
   }
 
   function render() {
-    if (!empty($this->title_position) && $this->title_position == 'right') {
-      return parent::render().
-             $this->render_self().
-             $this->render_description();
-    } else {
-      return $this->render_self().
-             parent::render().
-             $this->render_description();
-    }
+    $is_right = !empty($this->title_position) && $this->title_position == 'right';
+    return (new template('form_element', [
+      'title_t'     => $is_right ? '' : $this->render_self(),
+      'title_b'     => $is_right ?      $this->render_self() : '',
+      'element'     => parent::render(),
+      'description' => $this->render_description()
+    ]))->render();
   }
 
   function render_self() {
