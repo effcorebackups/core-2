@@ -4,14 +4,14 @@ namespace effectivecore {
           use \effectivecore\translate_factory as translations;
           class form_element extends markup {
 
-  public $tag_name;
-  public $title;
-  public $description;
+  public $tag_name    = 'div';
+  public $title       = '';
+  public $description = '';
 
-  function __construct($tag_name = 'div', $attributes = [], $children = [], $weight = 0, $title = '', $description = '') {
-    $this->tag_name = $tag_name;
-    $this->title = $title;
-    $this->description = $description;
+  function __construct($tag_name = '', $attributes = [], $children = [], $weight = 0, $title = '', $description = '') {
+    if ($tag_name)    $this->tag_name    = $tag_name;
+    if ($title)       $this->title       = $title;
+    if ($description) $this->description = $description;
     parent::__construct($attributes, $children, $weight);
   }
 

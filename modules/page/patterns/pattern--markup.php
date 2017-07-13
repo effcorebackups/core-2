@@ -3,10 +3,10 @@
 namespace effectivecore {
           class markup extends node {
 
-  public $tag_name;
+  public $tag_name = 'div';
 
-  function __construct($tag_name = 'div', $attributes = [], $children = [], $weight = 0) {
-    $this->tag_name = $tag_name;
+  function __construct($tag_name = '', $attributes = [], $children = [], $weight = 0) {
+    if ($tag_name) $this->tag_name = $tag_name;
     parent::__construct($attributes, $children, $weight);
   }
 

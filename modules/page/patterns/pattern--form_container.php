@@ -4,10 +4,10 @@ namespace effectivecore {
           use \effectivecore\translate_factory as translations;
           class form_container extends node {
 
-  public $template = 'form_container';
-  public $tag_name = 'x-container';
-  public $title;
-  public $description;
+  public $template    = 'form_container';
+  public $tag_name    = 'x-container';
+  public $title       = '';
+  public $description = '';
 
   function render() {
     return (new template($this->template, [
