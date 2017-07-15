@@ -7,12 +7,12 @@ namespace effectivecore {
           use \effectivecore\modules\user\access_factory as access;
           class tree_item extends \effectivecore\node {
 
-  public $title;
+  public $title             = '';
   public $template          = 'tree_item';
   public $template_children = 'tree_item_children';
 
   function __construct($title = '', $attributes = [], $children = [], $weight = 0) {
-    $this->title = $title;
+    if ($title) $this->title = $title;
     parent::__construct($attributes, $children, $weight);
   }
 

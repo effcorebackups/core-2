@@ -8,7 +8,7 @@ namespace effectivecore {
   private $p;
 
   function __construct($npath = '') {
-    $this->npath = $npath;
+    if ($npath) $this->npath = $npath;
   }
 
   function get() {
