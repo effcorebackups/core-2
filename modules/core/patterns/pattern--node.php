@@ -3,7 +3,7 @@
 namespace effectivecore {
           class node {
 
-  public $weight;
+  public $weight = 0;
   public $attributes = [];
   public $children = [];
   public $template;
