@@ -15,7 +15,7 @@ namespace effectivecore {
   public $title = '';
   public $url;
   public $access;
-  public $constants;
+  public $constants = [];
   public $content = [];
 
   function __construct() {
