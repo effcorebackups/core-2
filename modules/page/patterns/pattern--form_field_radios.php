@@ -6,9 +6,9 @@ namespace effectivecore {
   function render() {
     $this->attribute_insert('class', ['boxes', 'radios']);
     foreach ($this->values as $value => $title) {
-      $c_element = new form_element('input', $title, '', ['type' => 'radio', 'name' => $value]);
-      $c_element->title_position = 'right';
-      $this->child_insert(new form_field('', '', '', [], ['default' => $c_element]), $value);
+      $this->child_insert(new form_field(), $value);
+      $this->child_select($value)->child_insert(new form_element('input', $title, '', ['type' => 'radio', 'name' => $value]), 'default');
+      $this->child_select($value)->child_select('default')->title_position = 'right';
     }
     return parent::render();
   }

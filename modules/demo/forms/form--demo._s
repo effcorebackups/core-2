@@ -151,7 +151,6 @@ forms
       # radios
         - field_radios_dynamic|form_field_radios
             title: Radios (dynamic)
-            name: input_radio_dynamic
             values
             - radio_4: Radio 4
             - radio_5: Radio 5
