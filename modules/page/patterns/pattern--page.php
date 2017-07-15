@@ -13,8 +13,8 @@ namespace effectivecore {
           class page {
 
   public $title = '';
-  public $url;
-  public $access;
+  public $url = null;
+  public $access = null;
   public $constants = [];
   public $content = [];
 

@@ -4,7 +4,7 @@ namespace effectivecore {
           use \effectivecore\translate_factory as translations;
           class text {
 
-  public $text;
+  public $text = '';
   public $args = [];
   public $weight = 0;
 

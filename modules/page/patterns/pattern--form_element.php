@@ -5,9 +5,9 @@ namespace effectivecore {
           class form_element extends markup {
 
   public $template_element = 'form_element';
-  public $template_title   = 'form_title';
-  public $title            = '';
-  public $description      = '';
+  public $template_title = 'form_title';
+  public $title = '';
+  public $description = '';
 
   function __construct($tag_name = '', $title = '', $description = '', $attributes = [], $children = [], $weight = 0) {
     if ($title)       $this->title       = $title;

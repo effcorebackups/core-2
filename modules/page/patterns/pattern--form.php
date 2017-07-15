@@ -38,8 +38,8 @@ namespace effectivecore {
   # ─────────────────────────────────────────────────────────────────────
 
   public $template = 'form';
-  public $clicked_button;
-  public $clicked_button_name;
+  public $clicked_button = null;
+  public $clicked_button_name = null;
   public $errors = [];
 
   function render() {

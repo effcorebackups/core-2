@@ -6,7 +6,7 @@ namespace effectivecore {
   public $weight = 0;
   public $attributes = [];
   public $children = [];
-  public $template;
+  public $template = null;
 
   function __construct($attributes = [], $children = [], $weight = 0) {
     $this->weight = $weight;
