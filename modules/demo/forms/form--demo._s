@@ -148,6 +148,14 @@ forms
                     - type: radio
                     - name: input_radio
                     - value: radio_3
+      # radios
+        - field_radios_dynamic|form_field_radios
+            title: Radios (dynamic)
+            name: input_radio_dynamic
+            values
+            - radio_4: Radio 4
+            - radio_5: Radio 5
+            - radio_6: Radio 6
       # select
         - field_select|form_field
             children
