@@ -223,16 +223,26 @@ namespace effectivecore {
     foreach (explode(nl, $data) as $c_line) {
     # skip comments
       if (substr(ltrim($c_line, ' '), 0, 1) === '#') continue;
-    # p.s. performance ~ 1'000'000 strings per second.
+    # available variants:
+    # -------------------
+    # - name
+    #   name
+    # - name|class_name
+    #   name|class_name
+    # - name¦class_name
+    #   name¦class_name
+    # - name: value
+    #   name: value
+    # -------------------
       $matches = [];
       preg_match('%(?<indent>[ ]*)'.
-                  '(?<prefix>\- |)'.
-                  '(?<name>[^\:\|]+)'.
-                  '(?<class>\\|[a-z0-9_\\\\]+|)'.
-                  '(?<delimiter>\: |)'.
-                  '(?<value>.*|)%sS', $c_line, $matches);
+                  '(?<prefix>- |)'.
+                  '(?<name>[^:¦|]+)'.
+                  '(?<class>[¦|][a-z0-9_\\\\]+|)'.
+                  '(?<delimiter>: |)'.
+                  '(?<value>.*)%sS', $c_line, $matches);
       if ($matches['name']) {
-        $depth = strlen($matches['indent'].$matches['prefix']) / 2;
+        $depth = intval(strlen($matches['indent'].$matches['prefix']) / 2);
         if ($matches['delimiter'] == ': ') {
           $value = $matches['value'];
           if (is_numeric($value)) $value += 0;
@@ -240,7 +250,7 @@ namespace effectivecore {
           if ($value === 'false') $value = false;
           if ($value === 'null')  $value = null;
         } else {
-          $class = !empty($matches['class']) ? str_replace('|', '\\effectivecore\\', $matches['class']) : '\StdClass';
+          $class = !empty($matches['class']) ? '\\effectivecore\\'.substr($matches['class'], 1) : '\\StdClass';
           $value = new $class;
         }
       # add new item to tree
