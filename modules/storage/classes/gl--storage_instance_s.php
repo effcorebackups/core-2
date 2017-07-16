@@ -105,17 +105,17 @@ namespace effectivecore {
         'System is working slowly at now.', 'warning'
       );
     } else {
-      static::settings_save_to_file(static::$data_orig, settings_cache_file_name_orig, '  settings::$data_orig');
-      static::settings_save_to_file(static::$data,      settings_cache_file_name,      '  settings::$data');
+      static::settings_save_to_file(static::$data_orig, settings_cache_file_name_orig, '  settings::$data_orig', 'factory');
+      static::settings_save_to_file(static::$data,      settings_cache_file_name,      '  settings::$data',      'factory');
     }
   }
 
-  static function settings_save_to_file($data, $file_name, $prefix) {
+  static function settings_save_to_file($data, $file_name, $prefix, $creator = 'new') {
     $file = new file(dir_dynamic.$file_name);
     $file->set_data(
       "<?php \n\nnamespace effectivecore { # ARRAY[type][scope]...\n\n  ".
         "use \\effectivecore\\storage_instance_s as settings;\n\n".
-          factory::data_export($data, $prefix).
+          factory::data_export($data, $prefix, $creator).
       "\n}");
     $file->save();
     if (function_exists('opcache_invalidate')) {

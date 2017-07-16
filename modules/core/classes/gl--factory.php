@@ -63,6 +63,12 @@ namespace effectivecore {
     return end($parts);
   }
 
+  static function class_get_new_instance($class_name, $args = null) {
+    $reflection = new \ReflectionClass($class_name);
+    return $args == null ? $reflection->newInstanceWithoutConstructor() :
+                           $reflection->newInstanceArgs($args);
+  }
+
   ##########################
   ### data manipulations ###
   ##########################
@@ -81,25 +87,27 @@ namespace effectivecore {
                                             $return;
   }
 
-  static function data_export($data, $prefix = '') {
+  static function data_export($data, $prefix = '', $creator = 'new') {
     $return = '';
     switch (gettype($data)) {
       case 'array':
         if (count($data)) {
           foreach ($data as $c_key => $c_value) {
-            $return.= static::data_export($c_value, $prefix.(is_int($c_key) ? '['.$c_key.']' : '[\''.$c_key.'\']'));
+            $return.= static::data_export($c_value, $prefix.(is_int($c_key) ? '['.$c_key.']' : '[\''.$c_key.'\']'), $creator);
           }
         } else {
           $return.= $prefix.' = [];'.nl;
         }
         break;
       case 'object':
-        $reflection = new \ReflectionClass(get_class($data));
-        $defs = $reflection->getDefaultProperties();
-        $return = $prefix.' = new \\'.get_class($data).'();'.nl;
+        $c_class_name = get_class($data);
+        $c_reflection = new \ReflectionClass($c_class_name);
+        $c_defs = $c_reflection->getDefaultProperties();
+        if ($c_class_name == 'stdClass' || $creator == 'new')     $return = $prefix.' = new \\'.$c_class_name.'();'.nl;
+        if ($c_class_name != 'stdClass' && $creator == 'factory') $return = $prefix.' = factory::class_get_new_instance(\''.addslashes('\\'.$c_class_name).'\');'.nl;
         foreach ($data as $c_prop => $c_value) {
-          if (array_key_exists($c_prop, $defs) && $defs[$c_prop] === $c_value) continue;
-          $return.= static::data_export($c_value, $prefix.'->'.$c_prop);
+          if (array_key_exists($c_prop, $c_defs) && $c_defs[$c_prop] === $c_value) continue;
+          $return.= static::data_export($c_value, $prefix.'->'.$c_prop, $creator);
         }
         break;
       case 'boolean': $return.= $prefix.' = '.($data ? 'true' : 'false').';'.nl;                    break;
