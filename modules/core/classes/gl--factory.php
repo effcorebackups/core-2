@@ -95,12 +95,11 @@ namespace effectivecore {
         break;
       case 'object':
         $reflection = new \ReflectionClass(get_class($data));
-        $def = $reflection->getDefaultProperties();
+        $defs = $reflection->getDefaultProperties();
         $return = $prefix.' = new \\'.get_class($data).'();'.nl;
-        foreach ($data as $c_key => $c_value) {
-          if (isset($def[$c_key]) &&
-                    $def[$c_key] === $c_value) continue;
-          $return.= static::data_export($c_value, $prefix.'->'.$c_key);
+        foreach ($data as $c_prop => $c_value) {
+          if (array_key_exists($c_prop, $defs) && $defs[$c_prop] === $c_value) continue;
+          $return.= static::data_export($c_value, $prefix.'->'.$c_prop);
         }
         break;
       case 'boolean': $return.= $prefix.' = '.($data ? 'true' : 'false').';'.nl;                    break;
