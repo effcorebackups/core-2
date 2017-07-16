@@ -10,7 +10,7 @@ namespace effectivecore {
           use \effectivecore\modules\user\user_factory as users;
           use \effectivecore\modules\page\page_factory as pages;
           use \effectivecore\modules\storage\storage_factory as storages;
-          class page extends pattern {
+          class page {
 
   public $title = '';
   public $url = null;

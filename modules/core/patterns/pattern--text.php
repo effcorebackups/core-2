@@ -2,7 +2,7 @@
 
 namespace effectivecore {
           use \effectivecore\translate_factory as translations;
-          class text extends pattern {
+          class text {
 
   public $text = '';
   public $args = [];

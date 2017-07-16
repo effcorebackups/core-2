@@ -2,7 +2,7 @@
 
 namespace effectivecore {
           use \effectivecore\modules\storage\storage_factory as storages;
-          class linker extends pattern {
+          class linker {
 
   public $npath;
   private $p;

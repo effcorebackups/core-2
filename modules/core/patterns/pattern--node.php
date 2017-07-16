@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          class node extends pattern {
+          class node {
 
   public $weight = 0;
   public $attributes = [];
