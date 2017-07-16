@@ -2,7 +2,7 @@
 
 namespace effectivecore {
           use \effectivecore\modules\storage\storage_factory as storages;
-          class entity {
+          class entity extends pattern {
 
   public $name;
   public $fields;
