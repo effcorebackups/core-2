@@ -8,7 +8,7 @@ namespace effectivecore\modules\user {
   static $data;
 
   static function init($id = 0) {
-    static::$data = new \StdClass();
+    static::$data = new \stdClass();
     static::$data->id = 0;
     static::$data->roles = ['anonymous' => 'anonymous'];
   # load user from db

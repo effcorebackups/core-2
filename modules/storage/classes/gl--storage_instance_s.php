@@ -218,7 +218,7 @@ namespace effectivecore {
   }
 
   static function settings_to_code($data) {
-    $return = new \StdClass();
+    $return = new \stdClass();
     $p = [-1 => &$return];
     foreach (explode(nl, $data) as $c_line) {
     # skip comments
@@ -250,7 +250,7 @@ namespace effectivecore {
           if ($value === 'false') $value = false;
           if ($value === 'null')  $value = null;
         } else {
-          $class = !empty($matches['class']) ? '\\effectivecore\\'.substr($matches['class'], 1) : '\\StdClass';
+          $class = !empty($matches['class']) ? '\\effectivecore\\'.substr($matches['class'], 1) : '\\stdClass';
           $value = new $class;
         }
       # add new item to tree

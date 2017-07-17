@@ -27,8 +27,8 @@ namespace effectivecore {
   static function parse_path($path, &$obj = null) {
     if (!$obj) $obj = new \stdClass();
     $obj->original = $path;
-    $obj->file = new \StdClass;
-    $obj->dirs = new \StdClass;
+    $obj->file = new \stdClass;
+    $obj->dirs = new \stdClass;
     $obj->file->full = '';
     $obj->file->name = '';
     $obj->file->type = '';
