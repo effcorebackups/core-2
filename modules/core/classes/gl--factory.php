@@ -43,7 +43,7 @@ namespace effectivecore {
           $c_info->namespace = $matches['namespace'];
           $c_info->name      = $matches['name'];
           if (!empty($matches['extends']))    $c_info->extends    = trim($matches['extends']);
-          if (!empty($matches['implements'])) $c_info->implements = trim($matches['implements']);
+          if (!empty($matches['implements'])) $c_info->implements = static::array_map_assoc(explode(', ', trim($matches['implements'])));
           $c_info->file = $c_file->get_path_relative();
           $classes_map[$matches['namespace'].'\\'.
                        $matches['name']] = $c_info;
@@ -148,6 +148,10 @@ namespace effectivecore {
   # sorting
     uasort($array, '\\effectivecore\\factory::_compare_by_weight');
     return $array;
+  }
+
+  static function array_map_assoc($array) {
+    return array_combine($array, $array);
   }
 
   #######################
