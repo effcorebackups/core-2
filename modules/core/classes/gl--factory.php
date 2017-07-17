@@ -32,16 +32,21 @@ namespace effectivecore {
       foreach ($files as $c_file) {
         $matches = [];
         preg_match('%namespace (?<namespace>[a-z0-9_\\\\]+).*?'.
-                        'class (?<classname>[a-z0-9_]+) (?:'.
-                      'extends (?<parent>[a-z0-9_\\\\]+)|)%sS', $c_file->load(), $matches);
+                              '(?<type>class|trait|interface)\\s*'.
+                              '(?<name>[a-z0-9_]+)\\s*'.
+                   '(?:extends (?<extends>[a-z0-9_\\\\]+)|)\\s*'.
+                '(?:implements (?<implements>[a-z0-9_,\\\\ ]+)|)%sS', $c_file->load(), $matches);
         if (!empty($matches['namespace']) &&
-            !empty($matches['classname'])) {
-          $classes_map[$matches['namespace'].'\\'.$matches['classname']] = (object)[
-            'namespace' => $matches['namespace'],
-            'classname' => $matches['classname'],
-            'parent'    => isset($matches['parent']) ? ltrim($matches['parent'], '\\') : '',
-            'file'      => $c_file->get_path_relative()
-          ];
+            !empty($matches['name'])) {
+          $c_info = new \stdClass();
+          $c_info->type      = $matches['type'];
+          $c_info->namespace = $matches['namespace'];
+          $c_info->name      = $matches['name'];
+          if (!empty($matches['extends']))    $c_info->extends    = trim($matches['extends']);
+          if (!empty($matches['implements'])) $c_info->implements = trim($matches['implements']);
+          $c_info->file = $c_file->get_path_relative();
+          $classes_map[$matches['namespace'].'\\'.
+                       $matches['name']] = $c_info;
         }
       }
       caches::set('classes_map', $classes_map);
