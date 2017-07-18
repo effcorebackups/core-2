@@ -149,8 +149,10 @@ forms
                     - name: input_radio
                     - value: radio_3
       # radios
-        - field_radios_dynamic|form_field_radios
-            title: Radios (dynamic)
+        - field_radios_macro|form_field_radios
+            title: Radios (macro)
+            attributes
+            - name: input_radio_macro
             values
             - radio_4: Radio 4
             - radio_5: Radio 5
