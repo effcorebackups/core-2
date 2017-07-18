@@ -2,7 +2,7 @@
 
 namespace effectivecore {
           class form_field_radios extends form_container
-          implements call_construct {
+          implements late_constructor {
 
   public $values = [];
 

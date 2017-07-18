@@ -43,7 +43,7 @@ namespace effectivecore {
           $c_info->namespace = $matches['namespace'];
           $c_info->name      = $matches['name'];
           if (!empty($matches['extends']))    $c_info->extends    = trim($matches['extends']);
-          if (!empty($matches['implements'])) $c_info->implements = static::array_keys_as_values(explode(', ', trim($matches['implements'])));
+          if (!empty($matches['implements'])) $c_info->implements = static::array_values_map_to_keys(explode(', ', trim($matches['implements'])));
           $c_info->file = $c_file->get_path_relative();
           $classes_map[$matches['namespace'].'\\'.
                        $matches['name']] = $c_info;
@@ -68,10 +68,10 @@ namespace effectivecore {
     return end($parts);
   }
 
-  static function class_get_new_instance($class_name, $args = null) {
+  static function class_get_new_instance($class_name, $args = [], $use_constructor = false) {
     $reflection = new \ReflectionClass($class_name);
-    return $args == null ? $reflection->newInstanceWithoutConstructor() :
-                           $reflection->newInstanceArgs($args);
+    return $use_constructor ? $reflection->newInstanceArgs($args) :
+                              $reflection->newInstanceWithoutConstructor();
   }
 
   ##########################
@@ -92,13 +92,13 @@ namespace effectivecore {
                                             $return;
   }
 
-  static function data_export($data, $prefix = '', $creator = 'new') {
+  static function data_export($data, $prefix = '') {
     $return = '';
     switch (gettype($data)) {
       case 'array':
         if (count($data)) {
           foreach ($data as $c_key => $c_value) {
-            $return.= static::data_export($c_value, $prefix.(is_int($c_key) ? '['.$c_key.']' : '[\''.$c_key.'\']'), $creator);
+            $return.= static::data_export($c_value, $prefix.(is_int($c_key) ? '['.$c_key.']' : '[\''.$c_key.'\']'));
           }
         } else {
           $return.= $prefix.' = [];'.nl;
@@ -108,13 +108,13 @@ namespace effectivecore {
         $c_class_name = get_class($data);
         $c_reflection = new \ReflectionClass($c_class_name);
         $c_defs = $c_reflection->getDefaultProperties();
-        if ($c_class_name == 'stdClass' || $creator == 'new')     $return = $prefix.' = new \\'.$c_class_name.'();'.nl;
-        if ($c_class_name != 'stdClass' && $creator == 'factory') $return = $prefix.' = factory::class_get_new_instance(\''.addslashes('\\'.$c_class_name).'\');'.nl;
+        if ($c_class_name == 'stdClass') $return = $prefix.' = new \\'.$c_class_name.'();'.nl;
+        if ($c_class_name != 'stdClass') $return = $prefix.' = factory::class_get_new_instance(\''.addslashes('\\'.$c_class_name).'\');'.nl;
         foreach ($data as $c_prop => $c_value) {
           if (array_key_exists($c_prop, $c_defs) && $c_defs[$c_prop] === $c_value) continue;
-          $return.= static::data_export($c_value, $prefix.'->'.$c_prop, $creator);
+          $return.= static::data_export($c_value, $prefix.'->'.$c_prop);
         }
-        if ($c_reflection->implementsInterface('\\effectivecore\\call_construct')) {
+        if ($c_reflection->implementsInterface('\\effectivecore\\late_constructor')) {
           $return.= $prefix.'->__construct();'.nl;
         }
         break;
@@ -153,7 +153,7 @@ namespace effectivecore {
     return $array;
   }
 
-  static function array_keys_as_values($array) {
+  static function array_values_map_to_keys($array) {
     return array_combine($array, $array);
   }
 

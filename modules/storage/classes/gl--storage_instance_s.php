@@ -105,17 +105,17 @@ namespace effectivecore {
         'System is working slowly at now.', 'warning'
       );
     } else {
-      static::settings_save_to_file(static::$data_orig, settings_cache_file_name_orig, '  settings::$data_orig', 'factory');
-      static::settings_save_to_file(static::$data,      settings_cache_file_name,      '  settings::$data',      'factory');
+      static::settings_save_to_file(static::$data_orig, settings_cache_file_name_orig, '  settings::$data_orig');
+      static::settings_save_to_file(static::$data,      settings_cache_file_name,      '  settings::$data');
     }
   }
 
-  static function settings_save_to_file($data, $file_name, $prefix, $creator = 'new') {
+  static function settings_save_to_file($data, $file_name, $prefix) {
     $file = new file(dir_dynamic.$file_name);
     $file->set_data(
       "<?php \n\nnamespace effectivecore { # ARRAY[type][scope]...\n\n  ".
         "use \\effectivecore\\storage_instance_s as settings;\n\n".
-          factory::data_export($data, $prefix, $creator).
+          factory::data_export($data, $prefix).
       "\n}");
     $file->save();
     if (function_exists('opcache_invalidate')) {
@@ -271,7 +271,7 @@ namespace effectivecore {
     foreach ($not_std_objects as $c_obj) {
       $c_class_name = get_class($c_obj);
       $c_reflection = new \ReflectionClass($c_class_name);
-      if ($c_reflection->implementsInterface('\\effectivecore\\call_construct')) {
+      if ($c_reflection->implementsInterface('\\effectivecore\\late_constructor')) {
         $c_obj->__construct();
       }
     }
