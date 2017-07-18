@@ -53,8 +53,14 @@ namespace effectivecore {
 
   function build() {
     $id = $this->attribute_select('id');
-  # call init handlers
+  # init form elements
     $elements = static::collect_elements($this->children);
+    foreach ($elements as $c_element) {
+      if (method_exists($c_element, 'init')) {
+        $c_element->init();
+      }
+    }
+  # call init handlers
     events::start('on_form_init', $id, [$this, $elements]);
     $elements = static::collect_elements($this->children);
   # if current user click the button
