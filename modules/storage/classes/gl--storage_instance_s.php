@@ -220,6 +220,7 @@ namespace effectivecore {
   static function settings_to_code($data) {
     $return = new \stdClass();
     $p = [-1 => &$return];
+    $not_std_objects = [];
     foreach (explode(nl, $data) as $c_line) {
     # skip comments
       if (substr(ltrim($c_line, ' '), 0, 1) === '#') continue;
@@ -240,29 +241,38 @@ namespace effectivecore {
                   '(?<delimiter>: |)'.
                   '(?<value>.*)%sS', $c_line, $matches);
       if ($matches['name']) {
-        $depth = intval(strlen($matches['indent'].$matches['prefix']) / 2);
+        $c_depth = intval(strlen($matches['indent'].$matches['prefix']) / 2);
+      # define current value
         if ($matches['delimiter'] == ': ') {
-          $value = $matches['value'];
-          if (is_numeric($value)) $value += 0;
-          if ($value === 'true')  $value = true;
-          if ($value === 'false') $value = false;
-          if ($value === 'null')  $value = null;
+          $c_value = $matches['value'];
+          if (is_numeric($c_value)) $c_value += 0;
+          if ($c_value === 'true')  $c_value = true;
+          if ($c_value === 'false') $c_value = false;
+          if ($c_value === 'null')  $c_value = null;
         } else {
-          $class = !empty($matches['class']) ? '\\effectivecore\\'.substr($matches['class'], 1) : '\\stdClass';
-          $value = new $class;
+          $c_class_name = !empty($matches['class']) ? '\\effectivecore\\'.substr($matches['class'], 1) : 'stdClass';
+          if ($c_class_name == 'stdClass')                      $c_value = new \stdClass;
+          if ($c_class_name != 'stdClass') $not_std_objects[] = $c_value = factory::class_get_new_instance($c_class_name);
         }
       # add new item to tree
-        if (is_array($p[$depth-1])) {
-          $p[$depth-1][$matches['name']] = $value;
-          $p[$depth] = &$p[$depth-1][$matches['name']];
+        if (is_array($p[$c_depth-1])) {
+          $p[$c_depth-1][$matches['name']] = $c_value;
+          $p[$c_depth] = &$p[$c_depth-1][$matches['name']];
         } else {
-          $p[$depth-1]->{$matches['name']} = $value;
-          $p[$depth] = &$p[$depth-1]->{$matches['name']};
+          $p[$c_depth-1]->{$matches['name']} = $c_value;
+          $p[$c_depth] = &$p[$c_depth-1]->{$matches['name']};
         }
       # convert parent item to array
-        if ($matches['prefix'] == '- ' && !is_array($p[$depth-1])) {
-          $p[$depth-1] = (array)$p[$depth-1];
+        if ($matches['prefix'] == '- ' && !is_array($p[$c_depth-1])) {
+          $p[$c_depth-1] = (array)$p[$c_depth-1];
         }
+      }
+    }
+    foreach ($not_std_objects as $c_obj) {
+      $c_class_name = get_class($c_obj);
+      $c_reflection = new \ReflectionClass($c_class_name);
+      if ($c_reflection->implementsInterface('\\effectivecore\\call_construct')) {
+        $c_obj->__construct();
       }
     }
     return $return;
