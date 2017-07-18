@@ -4,6 +4,8 @@ namespace effectivecore {
           class form_field_radios extends form_container
           implements call_construct {
 
+  public $values = [];
+
   function __construct($tag_name = '', $title = '', $description = '', $attributes = [], $children = [], $weight = 0) {
     parent::__construct($tag_name, $title, $description, $attributes, $children, $weight);
     $this->attribute_insert('class', ['boxes' => 'boxes', 'radios' => 'radios']);
