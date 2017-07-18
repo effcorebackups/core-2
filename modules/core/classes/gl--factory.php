@@ -43,7 +43,7 @@ namespace effectivecore {
           $c_info->namespace = $matches['namespace'];
           $c_info->name      = $matches['name'];
           if (!empty($matches['extends']))    $c_info->extends    = trim($matches['extends']);
-          if (!empty($matches['implements'])) $c_info->implements = static::array_map_assoc(explode(', ', trim($matches['implements'])));
+          if (!empty($matches['implements'])) $c_info->implements = static::array_keys_as_values(explode(', ', trim($matches['implements'])));
           $c_info->file = $c_file->get_path_relative();
           $classes_map[$matches['namespace'].'\\'.
                        $matches['name']] = $c_info;
@@ -114,6 +114,9 @@ namespace effectivecore {
           if (array_key_exists($c_prop, $c_defs) && $c_defs[$c_prop] === $c_value) continue;
           $return.= static::data_export($c_value, $prefix.'->'.$c_prop, $creator);
         }
+        if ($c_reflection->implementsInterface('\\effectivecore\\call_construct')) {
+          $return.= $prefix.'->__construct();'.nl;
+        }
         break;
       case 'boolean': $return.= $prefix.' = '.($data ? 'true' : 'false').';'.nl;                    break;
       case 'NULL'   : $return.= $prefix.' = null;'.nl;                                              break;
@@ -150,7 +153,7 @@ namespace effectivecore {
     return $array;
   }
 
-  static function array_map_assoc($array) {
+  static function array_keys_as_values($array) {
     return array_combine($array, $array);
   }
 
@@ -187,9 +190,8 @@ namespace effectivecore {
       if (isset(static::$cache[__FUNCTION__][$npath]))
          return static::$cache[__FUNCTION__][$npath];
     }
-    $path_parts = explode('/', $npath);
     $p = null;
-    foreach ($path_parts as $c_part) {
+    foreach (explode('/', $npath) as $c_part) {
       if ($p == null) { if (isset($data[$c_part])) {$p = $data[$c_part]; continue;} else {$p = null; break;} } # iteration 1
       if ($p != null) { if (isset(   $p[$c_part])) {$p =    $p[$c_part]; continue;} else {$p = null; break;} } # iteration 2, 3, 4 …
     }
