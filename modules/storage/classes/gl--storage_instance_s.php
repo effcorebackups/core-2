@@ -220,7 +220,7 @@ namespace effectivecore {
   static function settings_to_code($data) {
     $return = new \stdClass();
     $p = [-1 => &$return];
-    $not_std_objects = [];
+    $l_objects = [];
     foreach (explode(nl, $data) as $c_line) {
     # skip comments
       if (substr(ltrim($c_line, ' '), 0, 1) === '#') continue;
@@ -251,8 +251,10 @@ namespace effectivecore {
           if ($c_value === 'null')  $c_value = null;
         } else {
           $c_class_name = !empty($matches['class']) ? '\\effectivecore\\'.substr($matches['class'], 1) : 'stdClass';
-          if ($c_class_name == 'stdClass')                      $c_value = new \stdClass;
-          if ($c_class_name != 'stdClass') $not_std_objects[] = $c_value = factory::class_get_new_instance($c_class_name);
+          $c_reflection = new \ReflectionClass($c_class_name);
+          $c_is_late_constructor = $c_reflection->implementsInterface('\\effectivecore\\late_constructor');
+          if ($c_is_late_constructor) $l_objects[] = $c_value = factory::class_get_new_instance($c_class_name);
+          else                                       $c_value = new $c_class_name;
         }
       # add new item to tree
         if (is_array($p[$c_depth-1])) {
@@ -268,12 +270,9 @@ namespace effectivecore {
         }
       }
     }
-    foreach ($not_std_objects as $c_obj) {
-      $c_class_name = get_class($c_obj);
-      $c_reflection = new \ReflectionClass($c_class_name);
-      if ($c_reflection->implementsInterface('\\effectivecore\\late_constructor')) {
-        $c_obj->__construct();
-      }
+  # call constructor
+    foreach ($l_objects as $c_object) {
+      $c_object->__construct();
     }
     return $return;
   }
