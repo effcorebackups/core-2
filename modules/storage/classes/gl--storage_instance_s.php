@@ -229,16 +229,14 @@ namespace effectivecore {
     #   name
     # - name|class_name
     #   name|class_name
-    # - name¦class_name
-    #   name¦class_name
     # - name: value
     #   name: value
     # -------------------
       $matches = [];
       preg_match('%(?<indent>[ ]*)'.
                   '(?<prefix>- |)'.
-                  '(?<name>[^:¦|]+)'.
-                  '(?<class>[¦|][a-z0-9_\\\\]+|)'.
+                  '(?<name>[^:|]+)'.
+                  '(?<class>[|][a-z0-9_\\\\]+|)'.
                   '(?<delimiter>: |)'.
                   '(?<value>.*)%sS', $c_line, $matches);
       if ($matches['name']) {
