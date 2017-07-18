@@ -5,8 +5,16 @@ namespace effectivecore {
           use \effectivecore\translate_factory as translations;
           abstract class events_form extends events {
 
-  static function on_init($page_args, $form_args, $values) {}
-  static function on_submit($page_args, $form_args, $values) {}
+  ###############
+  ### on_init ###
+  ###############
+
+  static function on_init($page_args, $form_args, $values) {
+  }
+
+  ###################
+  ### on_validate ###
+  ###################
 
   static function on_validate($form, $elements, $values) {
     foreach ($elements as $c_id => $c_element) {
@@ -143,6 +151,13 @@ namespace effectivecore {
 
   # if no errors
     return true;
+  }
+
+  #################
+  ### on_submit ###
+  #################
+
+  static function on_submit($page_args, $form_args, $values) {
   }
 
 }}
