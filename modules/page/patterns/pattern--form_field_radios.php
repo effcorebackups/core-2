@@ -9,12 +9,10 @@ namespace effectivecore {
   function __construct($tag_name = '', $title = '', $description = '', $attributes = [], $children = [], $weight = 0) {
     parent::__construct($tag_name, $title, $description, $attributes, $children, $weight);
     $this->attribute_insert('class', ['boxes' => 'boxes', 'radios' => 'radios']);
-    if (!empty($this->values)) {
-      foreach ($this->values as $value => $title) {
-        $this->child_insert(new form_field(), $value);
-        $this->child_select($value)->child_insert(new form_element('input', $title, '', ['type' => 'radio', 'name' => $this->attribute_select('name'), 'value' => $value]), 'default');
-        $this->child_select($value)->child_select('default')->title_position = 'right';
-      }
+    foreach ($this->values as $value => $title) {
+      $this->child_insert(new form_field(), $value);
+      $this->child_select($value)->child_insert(new form_element('input', $title, '', ['type' => 'radio', 'name' => $this->attribute_select('name'), 'value' => $value]), 'default');
+      $this->child_select($value)->child_select('default')->title_position = 'right';
     }
   }
 
