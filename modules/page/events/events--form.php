@@ -7,29 +7,23 @@ namespace effectivecore\modules\page {
           abstract class events_form extends \effectivecore\events_form {
 
   static function on_init_admin_decoration($form, $elements) {
-    $decoration = storages::get('settings')->select('decoration');
+    $decoration = storages::get('settings')->select('decoration');    
     foreach (storages::get('settings')->select('colors') as $module_id => $c_colors) {
       foreach ($c_colors as $c_color_id => $c_color_info) {
-        $c_color = new markup('input', [
-          'type'  => 'radio',
-          'name'  => 'color',
+        $elements['fieldset_default/field_color']->item_insert('', [
           'value' => $c_color_id,
           'title' => $c_color_id.' ('.$c_color_info->value.')',
           'style' => ['background-color: '.$c_color_info->value]
         ]);
-        $c_color_bg = new markup('input', [
-          'type'  => 'radio',
-          'name'  => 'color_bg',
+        $elements['fieldset_default/field_color_bg']->item_insert('', [
           'value' => $c_color_id,
           'title' => $c_color_id.' ('.$c_color_info->value.')',
           'style' => ['background-color: '.$c_color_info->value]
         ]);
-        if ($c_color_id == $decoration['page']->color)    $c_color->attribute_insert('checked', 'checked');
-        if ($c_color_id == $decoration['page']->color_bg) $c_color_bg->attribute_insert('checked', 'checked');
-        $elements['fieldset_default/field_color']->child_insert($c_color);
-        $elements['fieldset_default/field_color_bg']->child_insert($c_color_bg);
       }
     }
+    $elements['fieldset_default/field_color'   ]->set_default($decoration['page']->color);
+    $elements['fieldset_default/field_color_bg']->set_default($decoration['page']->color_bg);
   }
 
   static function on_submit_admin_decoration($form, $elements, $values) {

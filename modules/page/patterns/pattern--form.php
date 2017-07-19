@@ -53,11 +53,11 @@ namespace effectivecore {
 
   function build() {
     $id = $this->attribute_select('id');
-  # init form elements
+  # build form elements
     $elements = static::collect_elements($this->children);
     foreach ($elements as $c_element) {
-      if (method_exists($c_element, 'init')) {
-        $c_element->init();
+      if (method_exists($c_element, 'build')) {
+        $c_element->build();
       }
     }
   # call init handlers

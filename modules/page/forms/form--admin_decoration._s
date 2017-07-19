@@ -11,14 +11,16 @@ forms
         tag_name: fieldset
         title: Colors
         children
-        - field_color|form_field
+        - field_color|form_field_radios
             title: Color
             attributes
+            - name: color
             - class
               - palette: palette
-        - field_color_bg|form_field
+        - field_color_bg|form_field_radios
             title: Background color
             attributes
+            - name: color_bg
             - class
               - palette: palette
     - button_save|markup

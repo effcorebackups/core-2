@@ -1,7 +1,6 @@
 <?php
 
 namespace effectivecore\modules\page {
-          use const \effectivecore\br;
           use \effectivecore\factory;
           use \effectivecore\url_factory as urls;
           use \effectivecore\modules\user\access_factory as access;
