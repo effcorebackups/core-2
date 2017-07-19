@@ -22,8 +22,8 @@ namespace effectivecore\modules\page {
         ]);
       }
     }
-    $elements['fieldset_default/field_color'   ]->set_default($decoration['page']->color);
-    $elements['fieldset_default/field_color_bg']->set_default($decoration['page']->color_bg);
+    $elements['fieldset_default/field_color'   ]->default_set($decoration['page']->color);
+    $elements['fieldset_default/field_color_bg']->default_set($decoration['page']->color_bg);
   }
 
   static function on_submit_admin_decoration($form, $elements, $values) {

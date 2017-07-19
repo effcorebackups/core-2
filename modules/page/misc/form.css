@@ -58,10 +58,11 @@
   form button[value="delete"]:hover {border-color: %%_color_hover_bg; background-color: %%_color_hover_bg}
 
   /* palette */
-  form .palette {margin: 5px 0}
-  form .palette x-title {margin-bottom: 5px}
-  form .palette input[type="radio"] {display: inline-block; margin: 0; border-color: white}
-  form .palette input[type="radio"]:checked {border-color: black}
+  form x-container.palette {margin: 5px 0}
+  form x-container.palette x-title {margin-bottom: 5px}
+  form x-container.palette x-field {display: inline-block; margin: 0}
+  form x-container.palette x-field input[type="radio"] {display: inline-block; margin: 0; border-color: white}
+  form x-container.palette x-field input[type="radio"]:checked {border-color: black}
 
   /* particular cases */
   form#user_n_delete,

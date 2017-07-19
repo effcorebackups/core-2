@@ -8,7 +8,7 @@ namespace effectivecore {
   function build() {
     $this->attribute_insert('class', ['boxes' => 'boxes', 'radios' => 'radios']);
     foreach ($this->values as $value => $title) {
-      $this->item_insert($title, $value);
+      $this->item_insert($title, ['value' => $value]);
     }
   }
 
@@ -21,7 +21,7 @@ namespace effectivecore {
     $this->child_select($attr['value'])->child_insert($element, 'default');
   }
 
-  function set_default($value) {
+  function default_set($value) {
     foreach ($this->children as $c_child) {
       $c_radio = $c_child->child_select('default');
       if ($c_radio->attribute_select('value') == $value) {

@@ -77,8 +77,14 @@ namespace effectivecore {
     }
   }
 
-  function attribute_insert($key, $value) {
-    $this->attributes[$key] = $value;
+  function attribute_insert($key, $data) {
+    if (is_array($data)) {
+      foreach ($data as $c_key => $c_value) {
+        $this->attributes[$key][$c_key] = $c_value;
+      }
+    } else {
+      $this->attributes[$key] = $data;
+    }
   }
 
   function attribute_delete($key) {
