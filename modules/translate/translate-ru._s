@@ -19,6 +19,7 @@ translate
   - Field should contain maximum %%_lenght symbols.: Поле должно содержать максимум %%_lenght символов.
   - Use international format of mobile phone numbers.: Используйте международный формат номеров мобильных телефонов.
   - Element %%_info.: Элемент %%_info.
+  - Color ID = %%_id (value = %%_value): ID цвета = %%_id (значение = %%_value)
   - Actions: Действия
   - Administer: Администрирование
   - Administrators: Администраторы

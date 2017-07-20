@@ -7,21 +7,7 @@ namespace effectivecore\modules\page {
           abstract class events_form extends \effectivecore\events_form {
 
   static function on_init_admin_decoration($form, $elements) {
-    $decoration = storages::get('settings')->select('decoration');    
-    foreach (storages::get('settings')->select('colors') as $module_id => $c_colors) {
-      foreach ($c_colors as $c_color_id => $c_color_info) {
-        $elements['fieldset_default/field_color']->item_insert('', [
-          'value' => $c_color_id,
-          'title' => $c_color_id.' ('.$c_color_info->value.')',
-          'style' => ['background-color: '.$c_color_info->value]
-        ]);
-        $elements['fieldset_default/field_color_bg']->item_insert('', [
-          'value' => $c_color_id,
-          'title' => $c_color_id.' ('.$c_color_info->value.')',
-          'style' => ['background-color: '.$c_color_info->value]
-        ]);
-      }
-    }
+    $decoration = storages::get('settings')->select('decoration');
     $elements['fieldset_default/field_color'   ]->default_set($decoration['page']->color);
     $elements['fieldset_default/field_color_bg']->default_set($decoration['page']->color_bg);
   }

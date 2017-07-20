@@ -13,9 +13,7 @@ namespace effectivecore {
   }
 
   function item_insert($title = '', $attr = []) {
-    $element = new form_element('input', $title, '', $attr + [
-      'type' => 'radio',
-      'name' => $this->attribute_select('name')]);
+    $element = new form_element('input', $title, '', $attr + ['type' => 'radio', 'name' => $this->attribute_select('name')]);
     $element->title_position = 'right';
     $this->child_insert(new form_field(), $attr['value']);
     $this->child_select($attr['value'])->child_insert($element, 'default');
