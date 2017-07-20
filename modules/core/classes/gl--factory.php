@@ -108,16 +108,16 @@ namespace effectivecore {
         $c_class_name = get_class($data);
         $c_reflection = new \ReflectionClass($c_class_name);
         $c_defs                = $c_reflection->getDefaultProperties();
-        $c_is_late_constructor = $c_reflection->implementsInterface('\\effectivecore\\late_constructor');
-        $c_is_late_init        = $c_reflection->implementsInterface('\\effectivecore\\late_init');
-        if ($c_is_late_constructor) $return = $prefix.' = factory::class_get_new_instance(\''.addslashes('\\'.$c_class_name).'\');'.nl;
+        $c_is_post_constructor = $c_reflection->implementsInterface('\\effectivecore\\post_constructor');
+        $c_is_post_init        = $c_reflection->implementsInterface('\\effectivecore\\post_init');
+        if ($c_is_post_constructor) $return = $prefix.' = factory::class_get_new_instance(\''.addslashes('\\'.$c_class_name).'\');'.nl;
         else                        $return = $prefix.' = new \\'.$c_class_name.'();'.nl;
         foreach ($data as $c_prop => $c_value) {
           if (array_key_exists($c_prop, $c_defs) && $c_defs[$c_prop] === $c_value) continue;
           $return.= static::data_export($c_value, $prefix.'->'.$c_prop);
         }
-        if ($c_is_late_constructor) $return.= $prefix.'->__construct();'.nl;
-        if ($c_is_late_init)        $return.= $prefix.'->init();'.nl;
+        if ($c_is_post_constructor) $return.= $prefix.'->__construct();'.nl;
+        if ($c_is_post_init)        $return.= $prefix.'->init();'.nl;
         break;
       case 'boolean': $return.= $prefix.' = '.($data ? 'true' : 'false').';'.nl;                    break;
       case 'NULL'   : $return.= $prefix.' = null;'.nl;                                              break;
