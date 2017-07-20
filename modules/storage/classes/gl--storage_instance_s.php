@@ -31,7 +31,7 @@ namespace effectivecore {
     else         return static::$data;
   }
 
-  function changes_register_action($module_id, $action, $npath, $value = null) {
+  function changes_register_action($module_id, $action, $npath, $value = null, $rebuild = true) {
     $f_settings      = new file(dir_dynamic.settings_cache_file_name);
     $f_settings_orig = new file(dir_dynamic.settings_cache_file_name_orig);
     $f_changes       = new file(dir_dynamic.changes_file_name);
@@ -60,7 +60,7 @@ namespace effectivecore {
     } else {
       static::$changes_dynamic['changes'] = $settings_d; # prevent opcache work
       static::settings_save_to_file($settings_d, changes_file_name, '  settings::$changes_dynamic[\'changes\']');
-      static::settings_rebuild();
+      if ($rebuild) static::settings_rebuild();
     }
   }
 
