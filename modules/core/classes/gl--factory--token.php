@@ -21,9 +21,9 @@ namespace effectivecore {
                                      '([a-z0-9_]+)|)/S', '\\effectivecore\\token_factory::_replace_callback', $string);
   }
 
-  protected static function _replace_callback($found) {
-    $match = isset($found[1]) ? $found[1] : null;
-    $arg_1 = isset($found[2]) ? $found[2] : null;
+  protected static function _replace_callback($matches) {
+    $match = isset($matches[1]) ? $matches[1] : null;
+    $arg_1 = isset($matches[2]) ? $matches[2] : null;
     if ($match && isset(static::$data[$match])) {
       switch (static::$data[$match]->type) {
         case 'code': return call_user_func(static::$data[$match]->handler, $match, $arg_1);

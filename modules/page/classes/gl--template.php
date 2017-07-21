@@ -30,13 +30,16 @@ namespace effectivecore {
     $this->vars[$name] = $value;
   }
 
-  function render($clear = true) {
+  function render() {
     $rendered = $this->markup;
-    $rendered = preg_replace_callback('/(?<marker>%%_)(?<token>[a-z0-9_]+)/', function($matches){
-      return isset($matches['marker']) &&
-             isset($matches['token']) &&
-             isset($this->vars[$matches['token']]) ?
-                   $this->vars[$matches['token']] : '';
+    $rendered = preg_replace_callback('%(?<spacer>[ ]*)'.
+                                       '(?<prefix>\\%\\%_)'.
+                                       '(?<name>[a-z0-9_]+)'.
+                                       '(?<args>\\{[a-z0-9_,]+\\}|)%sS', function($matches) {
+      return isset($matches['prefix']) &&
+             isset($matches['name']) &&
+             isset($this->vars[$matches['name']]) ? $matches['spacer'].
+                   $this->vars[$matches['name']] : '';
     }, $rendered);
     return $rendered;
   }
