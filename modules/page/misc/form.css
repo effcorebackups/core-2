@@ -61,7 +61,7 @@
   form x-container.palette {margin: 5px 0}
   form x-container.palette x-title {margin-bottom: 5px}
   form x-container.palette x-field {display: inline-block; margin: 0}
-  form x-container.palette x-field input[type="radio"] {display: inline-block; margin: 0; border-color: white}
+  form x-container.palette x-field input[type="radio"] {margin: 0; border-color: white}
   form x-container.palette x-field input[type="radio"]:checked {border-color: black}
 
   /* particular cases */
