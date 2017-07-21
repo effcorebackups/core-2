@@ -81,11 +81,13 @@ namespace effectivecore {
     switch ($scope) {
       case 'path':
         $args = explode('/', $this->path);
-        return isset($args[$arg_id]) ? $args[$arg_id] : null;
+        return isset($args[$arg_id]) ?
+                     $args[$arg_id] : null;
       case 'query':
         $args = [];
         parse_str($this->query, $args);
-        return isset($args[$arg_id]) ? $args[$arg_id] : null;
+        return isset($args[$arg_id]) ?
+                     $args[$arg_id] : null;
     }
   }
 

@@ -140,7 +140,7 @@ namespace effectivecore {
           break;
         }
       }
-      $c_parsed = static::settings_to_code($c_file->load());
+      $c_parsed = static::settings_to_code($c_file->load(), $c_file->get_path_relative());
       foreach ($c_parsed as $c_type => $c_data) {
         if (is_object($c_data)) {
           if ($c_type == 'module') $c_data->path = $modules_path[$c_scope];
@@ -217,12 +217,14 @@ namespace effectivecore {
     return implode(nl, $return);
   }
 
-  static function settings_to_code($data) {
+  static function settings_to_code($data, $file_name = '') {
     $return = new \stdClass();
     $p = [-1 => &$return];
     $pc_objects = [];
     $pi_objects = [];
+    $line_num = 0;
     foreach (explode(nl, $data) as $c_line) {
+      $line_num++;
     # skip comments
       if (substr(ltrim($c_line, ' '), 0, 1) === '#') continue;
     # available variants:
@@ -238,10 +240,10 @@ namespace effectivecore {
       preg_match('%(?<indent>[ ]*)'.
                   '(?<prefix>- |)'.
                   '(?<name>[^:|]+)'.
-                  '(?<class>[|][a-z0-9_\\\\]+|)'.
+                  '(?<class>\\|[a-z0-9_\\\\]+|)'.
                   '(?<delimiter>: |)'.
                   '(?<value>.*)%sS', $c_line, $matches);
-      if ($matches['name']) {
+      if (!empty($matches['name'])) {
         $c_depth = intval(strlen($matches['indent'].$matches['prefix']) / 2);
       # define current value
         if ($matches['delimiter'] == ': ') {
@@ -272,6 +274,10 @@ namespace effectivecore {
         if ($matches['prefix'] == '- ' && !is_array($p[$c_depth-1])) {
           $p[$c_depth-1] = (array)$p[$c_depth-1];
         }
+      } else {
+        $messages = ['Function: settings_to_code', 'Wrong syntax in settings data at line: '.$line_num];
+        if ($file_name) $messages[] = 'File name: '.$file_name;
+        messages::add_new(implode(br, $messages), 'error');
       }
     }
   # call required functions
