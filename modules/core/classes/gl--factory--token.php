@@ -19,8 +19,8 @@ namespace effectivecore {
     if (!static::$data) static::init();
     return preg_replace_callback('%(?<name>\\%\\%_[a-z0-9_]+)'.
                                   '(?<args>\\{[a-z0-9_,]+\\}|)%sS', function($matches) {
-      $name = isset($matches['name']) ? $matches['name'] : null;
-      $args = isset($matches['args']) ? array_filter(explode(',', substr($matches['args'], 1, -1))) : [];
+      $name = !empty($matches['name']) ? $matches['name'] : null;
+      $args = !empty($matches['args']) ? explode(',', substr($matches['args'], 1, -1)) : [];
       if ($name && isset(static::$data[$name])) {
         switch (static::$data[$name]->type) {
           case 'code': return call_user_func(static::$data[$name]->handler, $name, $args);
