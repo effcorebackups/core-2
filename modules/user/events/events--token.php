@@ -7,24 +7,21 @@ namespace effectivecore\modules\user {
           use \effectivecore\modules\user\user_factory as users;
           abstract class events_token extends \effectivecore\events_token {
 
-  static function on_replace($match, $arg_1_num = null) {
+  static function on_replace($match, $args = []) {
     if (!empty(users::get_current()->id)) {
       switch ($match) {
         case '%%_user_id'   : return users::get_current()->id;
         case '%%_user_email': return users::get_current()->email;
         case '%%_user_email_context':
-          $arg_1_value = urls::get_current()->get_args($arg_1_num);
-          if (users::get_current()->id == $arg_1_value) {
+          $url_arg = urls::get_current()->get_args($args[0]);
+          if (users::get_current()->id == $url_arg) {
             return translations::get('my account');
           } else {
             $user = (new entity_instance('entities/user/user', [
-              'id' => $arg_1_value
+              'id' => $url_arg
             ]))->select();
-            if ($user) {
-              return $user->email;
-            } else {
-              return '[UNKNOWN UID]';
-            }
+            return $user ?
+                   $user->email : '[unknown uid]';
           }
       }
     }

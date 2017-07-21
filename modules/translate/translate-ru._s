@@ -41,12 +41,12 @@ translate
   - Created: Создано
   - Date: Дата
   - Decoration: Оформление
-  - Delete profile (%%_user_email_context-4)?: Удалить профиль (%%_user_email_context-4)?
+  - Delete profile (%%_user_email_context{4})?: Удалить профиль (%%_user_email_context{4})?
   - delete: удалить
   - Demo: Демо
   - Description: Описание
   - disabled: выкл.
-  - Edit profile (%%_user_email_context-2): Редактировать профиль (%%_user_email_context-2)
+  - Edit profile (%%_user_email_context{2}): Редактировать профиль (%%_user_email_context{2})
   - Edit profile: Редактировать профиль
   - edit: изменить
   - EMail: Адрес электронной почты
@@ -120,7 +120,7 @@ translate
   - Translate: Перевод
   - Tree: Дерево
   - User menu: Меню пользователя
-  - User profile (%%_user_email_context-2): Профиль пользователя (%%_user_email_context-2)
+  - User profile (%%_user_email_context{2}): Профиль пользователя (%%_user_email_context{2})
   - User roles: Роли пользователя
   - User: Пользователь
   - Users: Пользователи

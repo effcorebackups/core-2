@@ -1,6 +1,6 @@
 pages
 - page_user_n|page
-    title: User profile (%%_user_email_context-2)
+    title: User profile (%%_user_email_context{2})
     https: true
     url
       match: %^/user/[0-9]+$%

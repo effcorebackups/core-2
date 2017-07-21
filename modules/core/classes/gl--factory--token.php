@@ -17,22 +17,20 @@ namespace effectivecore {
 
   static function replace($string) {
     if (!static::$data) static::init();
-    return preg_replace_callback('/(%%_[a-z0-9_]+)(?:\-'.
-                                     '([a-z0-9_]+)|)/S', '\\effectivecore\\token_factory::_replace_callback', $string);
-  }
-
-  protected static function _replace_callback($matches) {
-    $match = isset($matches[1]) ? $matches[1] : null;
-    $arg_1 = isset($matches[2]) ? $matches[2] : null;
-    if ($match && isset(static::$data[$match])) {
-      switch (static::$data[$match]->type) {
-        case 'code': return call_user_func(static::$data[$match]->handler, $match, $arg_1);
-        case 'text': return static::$data[$match]->value;
-        case 'translated_text': return translations::get(static::$data[$match]->value);
+    return preg_replace_callback('%(?<name>\\%\\%_[a-z0-9_]+)'.
+                                  '(?<args>\\{[a-z0-9_,]+\\}|)%sS', function($matches) {
+      $name = isset($matches['name']) ? $matches['name'] : null;
+      $args = isset($matches['args']) ? array_filter(explode(',', substr($matches['args'], 1, -1))) : [];
+      if ($name && isset(static::$data[$name])) {
+        switch (static::$data[$name]->type) {
+          case 'code': return call_user_func(static::$data[$name]->handler, $name, $args);
+          case 'text': return static::$data[$name]->value;
+          case 'translated_text': return translations::get(static::$data[$name]->value);
+        }
+      } else {
+        return '';
       }
-    } else {
-      return '';
-    }
+    }, $string);
   }
 
 }}
