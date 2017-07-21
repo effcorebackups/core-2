@@ -4,8 +4,8 @@ namespace effectivecore {
           use \effectivecore\modules\storage\storage_factory as storages;
           abstract class translate_factory {
 
-  protected static $lang_current = 'ru';
-  protected static $data;
+  static $lang_current = 'ru';
+  static $data;
 
   static function init() {
     foreach (storages::get('settings')->select('translate') as $c_module) {
