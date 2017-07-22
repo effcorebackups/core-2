@@ -1,7 +1,7 @@
 <?php
 
 namespace effectivecore {
-          class form_field_radios extends form_container {
+          class form_radios extends form_container {
 
   public $values = [];
 

@@ -149,7 +149,7 @@ forms
                     - name: input_radio
                     - value: radio_3
       # radios macro
-        - field_radios_macro|form_field_radios
+        - field_radios_macro|form_radios
             title: Radios (macro)
             attributes
             - name: input_radio_macro

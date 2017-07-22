@@ -91,7 +91,7 @@ namespace effectivecore {
     timers::tap($c_handler);
     $c_result = call_user_func($c_handler);
     if ($c_result) {
-      print $c_result;
+      print str_replace("\n\n", '', $c_result);
     }
     timers::tap($c_handler);
     console::add_log(
