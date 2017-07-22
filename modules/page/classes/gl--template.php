@@ -11,8 +11,8 @@ namespace effectivecore {
   function __construct($name, $vars = []) {
     $this->name = $name;
   # save vars
-    foreach ($vars as $c_var_name => $c_var_value) {
-      static::set_var($c_var_name, $c_var_value);
+    foreach ($vars as $c_name => $c_value) {
+      static::set_var($c_name, $c_value);
     }
   # find template
     foreach (storages::get('settings')->select('templates') as $c_module_id => $c_templates) {
@@ -36,10 +36,10 @@ namespace effectivecore {
                                        '(?<prefix>\\%\\%_)'.
                                        '(?<name>[a-z0-9_]+)'.
                                        '(?<args>\\{[a-z0-9_,]+\\}|)%sS', function($matches) {
-      return isset($matches['prefix']) &&
-             isset($matches['name']) &&
-             isset($this->vars[$matches['name']]) ? $matches['spacer'].
-                   $this->vars[$matches['name']] : '';
+      return !empty($matches['prefix']) &&
+             !empty($matches['name']) &&
+             !empty($this->vars[$matches['name']]) ? $matches['spacer'].
+                    $this->vars[$matches['name']] : '';
     }, $rendered);
     return $rendered;
   }
