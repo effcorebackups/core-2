@@ -11,7 +11,7 @@ forms
         tag_name: fieldset
         title: Html 4 elements
         children
-      # input_text
+      # input text
         - field_text|form_field
             children
             - default|form_element
@@ -29,7 +29,7 @@ forms
                 - minlength: 5
                 - maxlength: 255
                 - pattern: [a-zA-Z0-9]+
-      # input_password
+      # input password
         - field_password|form_field
             children
             - default|form_element
@@ -47,7 +47,7 @@ forms
                 - minlength: 5
                 - maxlength: 255
                 - autocomplete: off
-      # input_file
+      # input file
         - field_file|form_field
             children
             - default|form_element
@@ -148,7 +148,7 @@ forms
                     - type: radio
                     - name: input_radio
                     - value: radio_3
-      # radios
+      # radios macro
         - field_radios_macro|form_field_radios
             title: Radios (macro)
             attributes
@@ -157,6 +157,10 @@ forms
             - radio_4: Radio 4
             - radio_5: Radio 5
             - radio_6: Radio 6
+      # radios color macro
+        - field_color_macro|form_field_palette
+            title: Color
+            name: color
       # select
         - field_select|form_field
             children
@@ -191,7 +195,7 @@ forms
                     children
                     - content|text
                         text: Option 3
-      # select_ws_groups
+      # select with groups
         - field_select_ws_groups|form_field
             children
             - default|form_element
@@ -230,7 +234,7 @@ forms
                         children
                         - content|text
                             text: Option 6
-      # select_multiple
+      # select multiple
         - field_select_multiple|form_field
             children
             - default|form_element
@@ -287,69 +291,69 @@ forms
       # table
         - table|table
             children
-            - head|table_head
+            - thead|table_head
                 children
-                - thead_tr|table_head_row
+                - tr|table_head_row
                     children
-                    - thead_tr_th_1|table_head_row_cell
+                    - th_1|table_head_row_cell
                         children
                         - content|text
                             text: th 1
-                    - thead_tr_th_2|table_head_row_cell
+                    - th_2|table_head_row_cell
                         children
                         - content|text
                             text: th 2
-                    - thead_tr_th_3|table_head_row_cell
+                    - th_3|table_head_row_cell
                         children
                         - content|text
                             text: th 3
-            - body|table_body
+            - tbody|table_body
                 children
-                - tbody_tr_1|table_body_row
+                - tr_1|table_body_row
                     children
-                    - tbody_tr_1_td_1|table_body_row_cell
+                    - td_1|table_body_row_cell
                         children
                         - content|text
                             text: td 1.1
-                    - tbody_tr_1_td_2|table_body_row_cell
+                    - td_2|table_body_row_cell
                         children
                         - content|text
                             text: td 1.2
-                    - tbody_tr_1_td_3|table_body_row_cell
+                    - td_3|table_body_row_cell
                         children
                         - content|text
                             text: td 1.3
-                - tbody_tr_2|table_body_row
+                - tr_2|table_body_row
                     children
-                    - tbody_tr_2_td_1|table_body_row_cell
+                    - td_1|table_body_row_cell
                         children
                         - content|text
                             text: td 2.1
-                    - tbody_tr_2_td_2|table_body_row_cell
+                    - td_2|table_body_row_cell
                         children
                         - content|text
                             text: td 2.2
-                    - tbody_tr_2_td_3|table_body_row_cell
+                    - td_3|table_body_row_cell
                         children
                         - content|text
                             text: td 2.3
-                - tbody_tr_3|table_body_row
+                - tr_3|table_body_row
                     children
-                    - tbody_tr_3_td_1|table_body_row_cell
+                    - td_1|table_body_row_cell
                         children
                         - content|text
                             text: td 3.1
-                    - tbody_tr_3_td_2|table_body_row_cell
+                    - td_2|table_body_row_cell
                         children
                         - content|text
                             text: td 3.2
-                    - tbody_tr_3_td_3|table_body_row_cell
+                    - td_3|table_body_row_cell
                         children
                         - content|text
                             text: td 3.3
-                - tbody_tr_4|table_body_row
+                - tr_4|table_body_row
                     children
-                    - tbody_tr_4_td_1|table_body_row_cell
+                    - td_1|table_body_row_cell
                         attributes
                         - colspan: 3
                         children
@@ -359,7 +363,7 @@ forms
         tag_name: fieldset
         title: Html 5 elements
         children
-      # input_search
+      # input search
         - field_search|form_field
             children
             - default|form_element
@@ -376,7 +380,7 @@ forms
                 - value: text in search
                 - minlength: 5
                 - maxlength: 255
-      # input_email
+      # input email
         - field_email|form_field
             children
             - default|form_element
@@ -394,7 +398,7 @@ forms
                 - minlength: 5
                 - maxlength: 255
                 - multiple: multiple
-      # input_url
+      # input url
         - field_url|form_field
             children
             - default|form_element
@@ -411,7 +415,7 @@ forms
                 - value: http://example.com
                 - minlength: 5
                 - maxlength: 255
-      # input_tel
+      # input telephone
         - field_tel|form_field
             children
             - default|form_element
@@ -426,7 +430,7 @@ forms
                 - value: &#43;0123456789
                 - minlength: 5
                 - maxlength: 15
-      # input_number
+      # input number
         - field_number|form_field
             children
             - default|form_element
@@ -444,7 +448,7 @@ forms
                 - min: -10
                 - max: 10
                 - step: 1
-      # input_range
+      # input range
         - field_range|form_field
             children
             - default|form_element
@@ -461,7 +465,7 @@ forms
                 - min: -10
                 - max: 10
                 - step: 1
-      # input_date
+      # input date
         - field_date|form_field
             children
             - default|form_element
@@ -478,7 +482,7 @@ forms
                 - value: 2017-12-31
                 - min: 2000-12-31
                 - max: 2020-12-31
-      # input_time
+      # input time
         - field_time|form_field
             children
             - default|form_element
@@ -493,7 +497,7 @@ forms
                 - name: input_time
                 - required: required
                 - value: 00:00:00
-      # input_color
+      # input color
         - field_color|form_field
             children
             - default|form_element
