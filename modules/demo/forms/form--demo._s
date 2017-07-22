@@ -270,6 +270,15 @@ forms
                     children
                     - content|text
                         text: Option 9
+      # radios macro
+        - field_select_macro|form_field_select
+            title: Select (macro)
+            attributes
+            - name: select_macro
+            values
+            - option_10: Option 10
+            - option_11: Option 11
+            - option_12: Option 12
       # textarea
         - field_textarea|form_field
             children
