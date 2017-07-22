@@ -11,10 +11,10 @@ forms
         tag_name: fieldset
         title: Colors
         children
-        - field_color|form_field_palette
+        - field_color|form_palette
             title: Color
             name: color
-        - field_color_bg|form_field_palette
+        - field_color_bg|form_palette
             title: Background color
             name: color_bg
     - button_save|markup

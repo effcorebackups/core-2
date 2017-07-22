@@ -158,7 +158,7 @@ forms
             - radio_5: Radio 5
             - radio_6: Radio 6
       # radios color macro
-        - field_color_macro|form_field_palette
+        - field_color_macro|form_palette
             title: Color
             name: color
       # select

@@ -3,7 +3,7 @@
 namespace effectivecore {
           use \effectivecore\translate_factory as translations;
           use \effectivecore\modules\storage\storage_factory as storages;
-          class form_field_palette extends form_container_radios {
+          class form_palette extends form_container_radios {
 
   function build() {
     $this->attribute_insert('class', ['palette' => 'palette']);
