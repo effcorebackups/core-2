@@ -13,10 +13,12 @@ namespace effectivecore {
   }
 
   function item_insert($title = '', $attr = []) {
-    $element = new form_element('input', $title, '', $attr + ['type' => 'radio', 'name' => $this->attribute_select('name')]);
-    $element->title_position = 'right';
+    $item = new form_element('input', $title, '', $attr + [
+      'type' => 'radio',
+      'name' => $this->attribute_select('name')]);
+    $item->title_position = 'right';
     $this->child_insert(new form_field(), $attr['value']);
-    $this->child_select($attr['value'])->child_insert($element, 'default');
+    $this->child_select($attr['value'])->child_insert($item, 'default');
   }
 
   function default_set($value) {
@@ -24,6 +26,15 @@ namespace effectivecore {
       $c_radio = $c_child->child_select('default');
       if ($c_radio->attribute_select('value') == $value) {
         return $c_radio->attribute_insert('checked', 'checked');
+      }
+    }
+  }
+
+  function default_get() {
+    foreach ($this->children as $c_child) {
+      $c_radio = $c_child->child_select('default');
+      if ($c_radio->attribute_select('checked') == 'checked') {
+        return $c_radio->attribute_select('value');
       }
     }
   }
