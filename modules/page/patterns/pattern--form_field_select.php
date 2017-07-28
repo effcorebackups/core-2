@@ -14,4 +14,7 @@ namespace effectivecore {
     }
   }
 
+  function value_insert() {
+  }
+
 }}
