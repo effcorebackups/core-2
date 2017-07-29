@@ -20,6 +20,7 @@ translate
   - Use international format of mobile phone numbers.: Используйте международный формат номеров мобильных телефонов.
   - Element %%_info.: Элемент %%_info.
   - Color ID = %%_id (value = %%_value): ID цвета = %%_id (значение = %%_value)
+  - - select -: - выбрать -
   - Actions: Действия
   - Administer: Администрирование
   - Administrators: Администраторы

@@ -20,13 +20,23 @@ namespace effectivecore {
     foreach ($elements as $c_id => $c_element) {
       if ($c_element instanceof node) {
         $c_name = $c_element->attribute_select('name');
-        $c_value = isset($values[$c_name]) ?
-                         $values[$c_name] : '';
         if ($c_name) {
+          $c_value = isset($values[$c_name]) ?
+                           $values[$c_name] : '';
           switch ($c_element->tag_name) {
 
             case 'select':
-            # ... @todo: make functionality
+              static::_validate_field($form, $c_element, $c_id, $c_value);
+              if ($c_value) {
+                foreach ($c_element->child_select_all() as $c_option) {
+                  if ($c_option instanceof node       &&
+                      $c_option->tag_name == 'option' &&
+                      $c_option->attribute_select('value') == $c_value) {
+                    $c_option->attribute_insert('selected', 'selected');
+                    break;
+                  }
+                }
+              }
               break;
 
             case 'textarea':

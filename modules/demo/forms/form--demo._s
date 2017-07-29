@@ -152,6 +152,10 @@ forms
       # radios macro
         - field_radios_macro|form_container_radios
             title: Radios (macro)
+            description|text
+              text: Element %%_info.
+              args
+              - info: &lt;input type="radio"&gt;
             attributes
             - name: input_radio_macro
             values
@@ -174,9 +178,15 @@ forms
                   - info: &lt;select&gt;
                 attributes
                 - name: select
+                - required: required
                 - multiple: multiple
-                - size: 7
+                - size: 8
                 children
+                - not_selected|markup
+                    tag_name: option
+                    children
+                    - content|text
+                        text: - select -
                 - option_1|markup
                     tag_name: option
                     attributes
@@ -227,11 +237,17 @@ forms
       # radios macro
         - field_select_macro|form_field_select
             title: Select (macro)
+            description|text
+              text: Element %%_info.
+              args
+              - info: &lt;select&gt;
             attributes
             - name: select_macro
+            - required: required
             - multiple: multiple
-            - size: 7
+            - size: 8
             values
+            - not_selected: - select -
             - option_7: Option 7
             - option_8: Option 8
             - option_9: Option 9

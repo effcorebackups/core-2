@@ -7,6 +7,7 @@ namespace effectivecore {
 
   function build() {
     $this->child_insert(new markup('select', $this->attribute_select()), 'default');
+    $this->child_select('default')->title = $this->title;
     foreach ($this->values as $c_id => $c_data) {
       if (is_object($c_data) &&
              !empty($c_data->title) &&
@@ -35,8 +36,9 @@ namespace effectivecore {
   function value_insert($title, $value, $attr = [], $grp_id = null) {
     $parent_el = $grp_id ? $this->child_select('default')->child_select($grp_id) :
                            $this->child_select('default');
+    if ($value != 'not_selected') $attr += ['value' => $value];
     $parent_el->child_insert(
-      new markup('option', $attr + ['value' => $value], ['content' => $title]), $value
+      new markup('option', $attr, ['content' => $title]), $value
     );
   }
 
