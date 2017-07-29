@@ -26,9 +26,9 @@ namespace effectivecore {
     return $this->child_select('default')->child_select($id);
   }
 
-  function group_insert($id, $title) {
+  function group_insert($id, $title, $attr = []) {
     $this->child_select('default')->child_insert(
-      new markup('optgroup', ['label' => $title]), $id
+      new markup('optgroup', $attr + ['label' => $title]), $id
     );
   }
 

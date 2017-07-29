@@ -39,7 +39,7 @@ namespace effectivecore {
               $c_type = $c_element->attribute_select('type');
               if ($c_type) {
 
-              # not supported elements
+              # not processed elements
                 if ($c_type == 'submit' || # <input type="submit">
                     $c_type == 'reset'  || # <input type="reset">
                     $c_type == 'image'  || # <input type="image">
@@ -63,18 +63,9 @@ namespace effectivecore {
   
               # radio
                 if ($c_type == 'radio') {
-                  if ($c_element->attribute_select('value') == $c_value) {
-                  # delete the "checked" attribute from form_init
-                    foreach ($elements as $c_el) {
-                      if ($c_el instanceof node &&
-                          $c_el->attribute_select('type') == 'radio' &&
-                          $c_el->attribute_select('name') == $c_name) {
-                        $c_el->attribute_delete('checked');
-                      }
-                    }
-                  # insert the "checked" attribute
-                    $c_element->attribute_insert('checked', 'checked');
-                  }
+                  if  ($c_element->attribute_select('value') == $c_value)
+                       $c_element->attribute_insert('checked', 'checked');
+                  else $c_element->attribute_delete('checked');
                 }
   
               # html4 elements: text|password
