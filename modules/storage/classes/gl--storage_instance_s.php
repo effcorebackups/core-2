@@ -60,7 +60,10 @@ namespace effectivecore {
     } else {
       static::$changes_dynamic['changes'] = $settings_d; # prevent opcache work
       static::settings_save_to_file($settings_d, changes_file_name, '  settings::$changes_dynamic[\'changes\']');
-      if ($rebuild) static::settings_rebuild();
+      if ($rebuild) {
+        static::$data_orig = ['_changed' => date(format_datetime, time())];
+        static::settings_rebuild();
+      }
     }
   }
 
