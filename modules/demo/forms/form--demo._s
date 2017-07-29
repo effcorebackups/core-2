@@ -77,7 +77,7 @@ forms
             children
             - field_checkbox_1|form_field
                 children
-                - checkbox_1|form_element
+                - default|form_element
                     tag_name: input
                     title: Checkbox 1
                     title_position: right
@@ -87,7 +87,7 @@ forms
                     - value: checkbox_1
             - field_checkbox_2|form_field
                 children
-                - checkbox_2|form_element
+                - default|form_element
                     tag_name: input
                     title: Checkbox 2
                     title_position: right
@@ -97,7 +97,7 @@ forms
                     - value: checkbox_2
             - field_checkbox_3|form_field
                 children
-                - checkbox_3|form_element
+                - default|form_element
                     tag_name: input
                     title: Checkbox 3
                     title_position: right
@@ -120,17 +120,18 @@ forms
             children
             - field_radio_1|form_field
                 children
-                - radio_1|form_element
+                - default|form_element
                     tag_name: input
-                    title: Radio 1
+                    title: Radio 1 (disabled)
                     title_position: right
                     attributes
                     - type: radio
                     - name: input_radio
                     - value: radio_1
+                    - disabled: disabled
             - field_radio_2|form_field
                 children
-                - radio_2|form_element
+                - default|form_element
                     tag_name: input
                     title: Radio 2
                     title_position: right
@@ -140,7 +141,7 @@ forms
                     - value: radio_2
             - field_radio_3|form_field
                 children
-                - radio_3|form_element
+                - default|form_element
                     tag_name: input
                     title: Radio 3
                     title_position: right
