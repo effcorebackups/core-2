@@ -77,7 +77,7 @@ forms
             children
             - field_checkbox_1|form_field
                 children
-                - input_checkbox_1|form_element
+                - checkbox_1|form_element
                     tag_name: input
                     title: Checkbox 1
                     title_position: right
@@ -87,7 +87,7 @@ forms
                     - value: checkbox_1
             - field_checkbox_2|form_field
                 children
-                - input_checkbox_2|form_element
+                - checkbox_2|form_element
                     tag_name: input
                     title: Checkbox 2
                     title_position: right
@@ -97,7 +97,7 @@ forms
                     - value: checkbox_2
             - field_checkbox_3|form_field
                 children
-                - input_checkbox_3|form_element
+                - checkbox_3|form_element
                     tag_name: input
                     title: Checkbox 3
                     title_position: right
@@ -120,7 +120,7 @@ forms
             children
             - field_radio_1|form_field
                 children
-                - input_radio_1|form_element
+                - radio_1|form_element
                     tag_name: input
                     title: Radio 1
                     title_position: right
@@ -130,7 +130,7 @@ forms
                     - value: radio_1
             - field_radio_2|form_field
                 children
-                - input_radio_2|form_element
+                - radio_2|form_element
                     tag_name: input
                     title: Radio 2
                     title_position: right
@@ -140,7 +140,7 @@ forms
                     - value: radio_2
             - field_radio_3|form_field
                 children
-                - input_radio_3|form_element
+                - radio_3|form_element
                     tag_name: input
                     title: Radio 3
                     title_position: right
@@ -173,112 +173,73 @@ forms
                   - info: &lt;select&gt;
                 attributes
                 - name: select
+                - multiple: multiple
+                - size: 7
                 children
-                - select_option_1|markup
+                - option_1|markup
                     tag_name: option
                     attributes
                     - value: option_1
                     children
                     - content|text
                         text: Option 1
-                - select_option_2|markup
+                - option_2|markup
                     tag_name: option
                     attributes
                     - value: option_2
                     children
                     - content|text
                         text: Option 2
-                - select_option_3|markup
+                - option_3|markup
                     tag_name: option
                     attributes
                     - value: option_3
                     children
                     - content|text
                         text: Option 3
-      # select with groups
-        - field_select_ws_groups|form_field
-            children
-            - default|form_element
-                tag_name: select
-                title: Select (with optgroup)
-                description|text
-                  text: Element %%_info.
-                  args
-                  - info: &lt;select&gt;
-                attributes
-                - name: select_ws_groups
-                children
-                - default|markup
+                - optgroup_1|markup
                     tag_name: optgroup
                     attributes
-                    - label: default group
+                    - label: Group 1
                     children
-                    - select_option_4|markup
+                    - option_4|markup
                         tag_name: option
                         attributes
                         - value: option_4
                         children
                         - content|text
                             text: Option 4
-                    - select_option_5|markup
+                    - option_5|markup
                         tag_name: option
                         attributes
                         - value: option_5
                         children
                         - content|text
                             text: Option 5
-                    - select_option_6|markup
+                    - option_6|markup
                         tag_name: option
                         attributes
                         - value: option_6
                         children
                         - content|text
                             text: Option 6
-      # select multiple
-        - field_select_multiple|form_field
-            children
-            - default|form_element
-                tag_name: select
-                title: Select (multiple choice)
-                description|text
-                  text: Element %%_info.
-                  args
-                  - info: &lt;select&gt;
-                attributes
-                - name: select_multiple
-                - multiple: multiple
-                - size: 5
-                children
-                - select_option_7|markup
-                    tag_name: option
-                    attributes
-                    - value: option_7
-                    children
-                    - content|text
-                        text: Option 7
-                - select_option_8|markup
-                    tag_name: option
-                    attributes
-                    - value: option_8
-                    children
-                    - content|text
-                        text: Option 8
-                - select_option_9|markup
-                    tag_name: option
-                    attributes
-                    - value: option_9
-                    children
-                    - content|text
-                        text: Option 9
       # radios macro
         - field_select_macro|form_field_select
             title: Select (macro)
             attributes
             - name: select_macro
+            - multiple: multiple
+            - size: 7
             values
-            - option_10: Option 10
-            - option_11: Option 11
-            - option_12: Option 12
+            - option_7: Option 7
+            - option_8: Option 8
+            - option_9: Option 9
+            - group_2
+                title: Group 2
+                values
+                - option_10: Option 10
+                - option_11: Option 11
+                - option_12: Option 12
       # textarea
         - field_textarea|form_field
             children

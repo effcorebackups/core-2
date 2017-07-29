@@ -6,15 +6,38 @@ namespace effectivecore {
   public $values = [];
 
   function build() {
-    $this->child_insert(new markup('select'), 'default');
-    foreach ($this->values as $value => $title) {
-      $this->child_select('default')->child_insert(
-        new markup('option', ['value' => $value], $title), $value
-      );
+    $this->child_insert(new markup('select', $this->attribute_select()), 'default');
+    foreach ($this->values as $c_id => $c_data) {
+      if (is_object($c_data) &&
+             !empty($c_data->title) &&
+             !empty($c_data->values)) {
+        if (!$this->group_select($c_id))
+             $this->group_insert($c_id, $c_data->title);
+        foreach ($c_data->values as $g_id => $g_data) {
+          $this->value_insert($g_data, $g_id, [], $c_id);
+        }
+      } else {
+        $this->value_insert($c_data, $c_id);
+      }
     }
   }
 
-  function value_insert() {
+  function group_select($id) {
+    return $this->child_select('default')->child_select($id);
+  }
+
+  function group_insert($id, $title) {
+    $this->child_select('default')->child_insert(
+      new markup('optgroup', ['label' => $title]), $id
+    );
+  }
+
+  function value_insert($title, $value, $attr = [], $grp_id = null) {
+    $parent_el = $grp_id ? $this->child_select('default')->child_select($grp_id) :
+                           $this->child_select('default');
+    $parent_el->child_insert(
+      new markup('option', $attr + ['value' => $value], ['content' => $title]), $value
+    );
   }
 
 }}
