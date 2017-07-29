@@ -261,7 +261,7 @@ forms
       # table
         - table|table
             children
-            - thead|table_head
+            - head|table_head
                 children
                 - tr|table_head_row
                     children
@@ -277,7 +277,7 @@ forms
                         children
                         - content|text
                             text: th 3
-            - tbody|table_body
+            - body|table_body
                 children
                 - tr_1|table_body_row
                     children
