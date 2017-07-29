@@ -35,6 +35,18 @@ namespace effectivecore {
                  $this->children[$id] : null;
   }
 
+  function child_select_all($children = null, $npath = '') {
+    $return = [];
+    foreach ($children ?: $this->children as $c_id => $c_child) {
+      $c_npath = ltrim($npath.'/'.$c_id, '/');
+      $return[$c_npath] = $c_child;
+      if (!empty($c_child->children)) {
+        $return += $this->child_select_all($c_child->children, $c_npath);
+      }
+    }
+    return $return;
+  }
+
   function child_delete($id) {
     unset($this->children[$id]);
   }

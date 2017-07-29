@@ -54,7 +54,7 @@ namespace effectivecore {
   function build() {
     $id = $this->attribute_select('id');
   # build form elements
-    $elements = static::collect_elements($this->children);
+    $elements = $this->child_select_all();
     foreach ($elements as $c_element) {
       if (method_exists($c_element, 'build')) {
         $c_element->build();
@@ -62,7 +62,7 @@ namespace effectivecore {
     }
   # call init handlers
     events::start('on_form_init', $id, [$this, $elements]);
-    $elements = static::collect_elements($this->children);
+    $elements = $this->child_select_all();
   # if current user click the button
     if (isset($_POST['form_id']) &&
               $_POST['form_id'] === $id && isset($_POST['button'])) {
@@ -100,18 +100,6 @@ namespace effectivecore {
       'name'  => 'form_id',
       'value' => $id,
     ]), 'hidden_form_id');
-  }
-
-  static function collect_elements($data, $npath = '') {
-    $return = [];
-    foreach ($data as $c_id => $c_item) {
-      $c_npath = ltrim($npath.'/'.$c_id, '/');
-      $return[$c_npath] = $c_item;
-      if (isset($c_item->children)) {
-        $return += static::collect_elements($c_item->children, $c_npath);
-      }
-    }
-    return $return;
   }
 
 }}
