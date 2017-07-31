@@ -1,5 +1,9 @@
 <?php
 
+  #############################################################
+  ### Copyright © 2017 Maxim Rysevets. All rights reserved. ###
+  #############################################################
+
 namespace effectivecore {
           use \effectivecore\message_factory as messages;
           abstract class cache_factory {
@@ -22,7 +26,7 @@ namespace effectivecore {
     if (is_writable(dir_dynamic)) {
       $file = new file(dir_dynamic.'cache--'.$name.'.php');
       $file->set_data(
-        "<?php \n\nnamespace effectivecore { # cache for ".$name."\n\n".
+        "<?php\n\nnamespace effectivecore { # cache for ".$name."\n\n".
            factory::data_export($data, '  cache_factory::$data[\''.$name.'\']').
         "\n}");
       $file->save();

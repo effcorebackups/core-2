@@ -1,5 +1,9 @@
 <?php
 
+  #############################################################
+  ### Copyright © 2017 Maxim Rysevets. All rights reserved. ###
+  #############################################################
+
 namespace effectivecore {
           use \effectivecore\file_factory as files;
           use \effectivecore\message_factory as messages;
@@ -116,7 +120,7 @@ namespace effectivecore {
   static function settings_save_to_file($data, $file_name, $prefix) {
     $file = new file(dir_dynamic.$file_name);
     $file->set_data(
-      "<?php \n\nnamespace effectivecore { # ARRAY[type][scope]...\n\n  ".
+      "<?php\n\nnamespace effectivecore { # ARRAY[type][scope]...\n\n  ".
         "use \\effectivecore\\storage_instance_s as settings;\n\n".
           factory::data_export($data, $prefix).
       "\n}");

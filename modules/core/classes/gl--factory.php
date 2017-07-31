@@ -1,5 +1,9 @@
 <?php
 
+  #############################################################
+  ### Copyright © 2017 Maxim Rysevets. All rights reserved. ###
+  #############################################################
+
 namespace effectivecore {
           use \effectivecore\file_factory as files;
           use \effectivecore\cache_factory as caches;

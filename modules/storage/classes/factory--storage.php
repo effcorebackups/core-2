@@ -1,5 +1,9 @@
 <?php
 
+  #############################################################
+  ### Copyright © 2017 Maxim Rysevets. All rights reserved. ###
+  #############################################################
+
 namespace effectivecore\modules\storage {
           use \effectivecore\storage_instance_s as settings;
           abstract class storage_factory {

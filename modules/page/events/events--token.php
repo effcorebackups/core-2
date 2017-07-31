@@ -1,5 +1,9 @@
 <?php
 
+  #############################################################
+  ### Copyright © 2017 Maxim Rysevets. All rights reserved. ###
+  #############################################################
+
 namespace effectivecore\modules\page {
           use \effectivecore\modules\storage\storage_factory as storages;
           abstract class events_token extends \effectivecore\events_token {

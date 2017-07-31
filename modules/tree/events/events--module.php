@@ -1,5 +1,9 @@
 <?php
 
+  #############################################################
+  ### Copyright © 2017 Maxim Rysevets. All rights reserved. ###
+  #############################################################
+
 namespace effectivecore\modules\tree {
           use \effectivecore\factory;
           use \effectivecore\modules\storage\storage_factory as storages;

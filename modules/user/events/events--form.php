@@ -1,5 +1,9 @@
 <?php
 
+  #############################################################
+  ### Copyright © 2017 Maxim Rysevets. All rights reserved. ###
+  #############################################################
+
 namespace effectivecore\modules\user {
           use const \effectivecore\format_datetime;
           use \effectivecore\url_factory as urls;

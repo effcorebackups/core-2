@@ -1,5 +1,9 @@
 <?php
 
+  #############################################################
+  ### Copyright © 2017 Maxim Rysevets. All rights reserved. ###
+  #############################################################
+
 namespace effectivecore\modules\user {
           use \effectivecore\entity_factory as entities;
           use \effectivecore\entity_instance as entity_instance;
