@@ -127,6 +127,8 @@ namespace effectivecore {
     timers::tap('total');
     console::add_information('Total build time', timers::get_period('total', 0, 1));
     console::add_information('User roles', implode(', ', users::get_current()->roles));
+    console::add_information('Server load (sys_getloadavg)', number_format(sys_getloadavg()[0], 6));
+    console::add_information('Memory for php (bytes)', number_format(memory_get_usage(true), 0, '.', ' '));
 
     $template->set_var('html_attributes', factory::data_to_attr(['lang' => translations::$lang_current]));
     $template->set_var('console', console::render()); # @todo: only for admins
