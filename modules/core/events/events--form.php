@@ -20,6 +20,21 @@ namespace effectivecore {
   ### on_validate ###
   ###################
 
+  # attributes validation:
+  # ---------------------------------------------------------------------------------
+  # input[type=text|password|search|email|url|tel], textarea : value >= MINLENGTH
+  # input[type=text|password|search|email|url|tel], textarea : value <= MAXLENGTH
+  # input[type=text|password|search|email|url|tel], textarea : value matches the PATTERN (p.s. replaces default checking for url|tel)
+  # input[type=*], select, textarea                          : REQUIRED (value must be present)
+  # input[type=*], select, textarea                          : DISABLED (value must not be present)
+  # input[type=file|email], select                           : MULTIPLE (check if value is multiple when only singular allowed)
+  # input[type=number]                                       : value >= MIN, value <= MAX, value in valid STEP range
+  # input[type=range]                                        : value >= MIN, value <= MAX, value in valid STEP range
+  # input[type=date]                                         : value >= MIN, value <= MAX, value matches the pattern YYYY-MM-DD
+  # input[type=time]                                         : value matches the pattern HH:MM:SS|HH:MM
+  # input[type=color]                                        : value matches the pattern #dddddd
+  # ---------------------------------------------------------------------------------
+
   static function on_validate($form, $elements, $values) {
     foreach ($elements as $c_id => $c_element) {
       if ($c_element instanceof node) {

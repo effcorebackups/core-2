@@ -191,6 +191,7 @@ forms
                     tag_name: option
                     attributes
                     - value: option_1
+                    - selected: selected
                     children
                     - content|text
                         text: Option 1
@@ -451,7 +452,7 @@ forms
                 - value: 0
                 - min: -10
                 - max: 10
-                - step: 1
+                - step: 0.3
       # input date
         - field_date|form_field
             children
