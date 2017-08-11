@@ -30,15 +30,21 @@ namespace effectivecore {
   # - input[type=tel]
   # - input[type=number]
   # - input[type=range]
-  # - input[type=date]  p.s. you will get а warning on html validation
-  # - input[type=time]  p.s. you will get а warning on html validation
-  # - input[type=color] p.s. you will get а warning on html validation
+  # - input[type=date]
+  # - input[type=time]
+  # - input[type=color]
   #
-  # not supported types (in this project):
-  # - input[type=submit]
-  # - input[type=reset]
-  # - input[type=image]
-  # - input[type=button]
+  # not supported html4 types (in this project):
+  # - input[type=image]          p.s use img
+  # - input[type=button]         p.s use button[type=button] instead
+  # - input[type=reset]          p.s use button[type=reset] instead
+  # - input[type=submit]         p.s use button[type=submit] instead
+  #
+  # not supported html5 types (in this project):
+  # - input[type=week]           p.s use week_macro
+  # - input[type=month]          p.s use month_macro
+  # - input[type=datetime]       p.s use date + time elements instead
+  # - input[type=datetime-local] p.s use date + time elements instead
   # ─────────────────────────────────────────────────────────────────────
 
   public $template = 'form';

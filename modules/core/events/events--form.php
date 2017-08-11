@@ -20,7 +20,7 @@ namespace effectivecore {
   ### on_validate ###
   ###################
 
-  # attributes validation:
+  # attributes validation plan:
   # ─────────────────────────────────────────────────────────────────────
   # input[type=text|password|search|email|url|tel], textarea : value >= MINLENGTH
   # input[type=text|password|search|email|url|tel], textarea : value <= MAXLENGTH
@@ -33,13 +33,6 @@ namespace effectivecore {
   # input[type=date]                                         : value >= MIN, value <= MAX, value matches the pattern YYYY-MM-DD
   # input[type=time]                                         : value matches the pattern HH:MM:SS|HH:MM
   # input[type=color]                                        : value matches the pattern #dddddd
-  # ─────────────────────────────────────────────────────────────────────
-
-  # note:
-  # ─────────────────────────────────────────────────────────────────────
-  # 1. attribute READONLY is not allowed and not checking in validation!
-  #    the substitution from the user's side is not checked!
-  #    use attribute DISABLED instead
   # ─────────────────────────────────────────────────────────────────────
 
   static function on_validate($form, $elements, $values) {
