@@ -35,6 +35,13 @@ namespace effectivecore {
   # input[type=color]                                        : value matches the pattern #dddddd
   # ─────────────────────────────────────────────────────────────────────
 
+  # note:
+  # ─────────────────────────────────────────────────────────────────────
+  # 1. attribute READONLY is not allowed and not checking in validation!
+  #    the substitution from the user's side is not checked!
+  #    use attribute DISABLED instead
+  # ─────────────────────────────────────────────────────────────────────
+
   static function on_validate($form, $elements, $values) {
     foreach ($elements as $c_id => $c_element) {
       if ($c_element instanceof node) {
