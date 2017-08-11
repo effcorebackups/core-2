@@ -11,34 +11,34 @@ namespace effectivecore {
   # support FORM elements:
   # ─────────────────────────────────────────────────────────────────────
   # html4 elements:
-  # - <input type="text">
-  # - <input type="password">
-  # - <input type="file">
-  # - <input type="checkbox">
-  # - <input type="radio">
-  # - <input type="hidden">
-  # - <select></select>
-  # - <textarea></textarea>
-  # - <button type="button">
-  # - <button type="reset">
-  # - <button type="submit">
+  # - input[type=text]
+  # - input[type=password]
+  # - input[type=file]
+  # - input[type=checkbox]
+  # - input[type=radio]
+  # - input[type=hidden]
+  # - select
+  # - textarea
+  # - button[type=button]
+  # - button[type=reset]
+  # - button[type=submit]
   #
   # html5 elements (restricted support on the browser side):
-  # - <input type="search">
-  # - <input type="email">
-  # - <input type="url">
-  # - <input type="tel">
-  # - <input type="number">
-  # - <input type="range">
-  # - <input type="date">  p.s. you will get а warning on html validation
-  # - <input type="time">  p.s. you will get а warning on html validation
-  # - <input type="color"> p.s. you will get а warning on html validation
+  # - input[type=search]
+  # - input[type=email]
+  # - input[type=url]
+  # - input[type=tel]
+  # - input[type=number]
+  # - input[type=range]
+  # - input[type=date]  p.s. you will get а warning on html validation
+  # - input[type=time]  p.s. you will get а warning on html validation
+  # - input[type=color] p.s. you will get а warning on html validation
   #
   # not supported types (in this project):
-  # - <input type="submit">
-  # - <input type="reset">
-  # - <input type="image">
-  # - <input type="button">
+  # - input[type=submit]
+  # - input[type=reset]
+  # - input[type=image]
+  # - input[type=button]
   # ─────────────────────────────────────────────────────────────────────
 
   public $template = 'form';
