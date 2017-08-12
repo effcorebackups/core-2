@@ -62,7 +62,7 @@ namespace effectivecore {
   static function on_validate($form, $elements, $values) {
     foreach ($elements as $c_id => $c_element) {
       if ($c_element instanceof node) {
-        $c_name = $c_element->attribute_select('name');
+        $c_name = rtrim($c_element->attribute_select('name'), '[]');
         if ($c_name) {
 
         # disable processing if element disabled or readonly
@@ -77,13 +77,25 @@ namespace effectivecore {
           switch ($c_element->tag_name) {
 
             case 'select':
-              static::_validate_field($form, $c_element, $c_id, $c_new_value);
               if ($c_new_value) {
-                foreach ($c_element->child_select_all() as $c_option) {
-                  if ($c_option->tag_name == 'option' &&
-                      $c_option->attribute_select('value') == $c_new_value) {
+                $c_options = [];
+              # collect all options from select element
+                foreach ($c_element->child_select_all() as $c_opt) {
+                  if ($c_opt instanceof node &&
+                      $c_opt->tag_name == 'option') {
+                    $c_options[$c_opt->attribute_select('value')] = $c_opt;
+                  }
+                }
+              # delete default (from init) and set new (from post) SELECTED state
+              # we walk by option elements - not by post values!
+                $c_new_values = factory::array_values_map_to_keys(
+                  is_array($c_new_value) ?
+                           $c_new_value :
+                          [$c_new_value]);
+                foreach ($c_options as $c_opt_value => $c_option) {
+                  $c_option->attribute_delete('selected');
+                  if (isset($c_new_values[$c_opt_value])) {
                     $c_option->attribute_insert('selected', 'selected');
-                    break;
                   }
                 }
               }
@@ -123,6 +135,7 @@ namespace effectivecore {
                 }
   
               # input[type=radio]
+              # delete default (from init) and set new (from post) CHECKED state
                 if ($c_type == 'radio') {
                   if  ($c_element->attribute_select('value') == $c_new_value)
                        $c_element->attribute_insert('checked', 'checked');
