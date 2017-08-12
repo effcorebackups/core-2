@@ -20,19 +20,42 @@ namespace effectivecore {
   ### on_validate ###
   ###################
 
+  # аttributes which controlled:
+  # ─────────────────────────────────────────────────────────────────────
+  # textarea             : disabled, required, minlength, maxlength, pattern
+  # input[type=text]     : disabled, required, minlength, maxlength, pattern
+  # input[type=password] : disabled, required, minlength, maxlength, pattern
+  # input[type=search]   : disabled, required, minlength, maxlength, pattern
+  # input[type=url]      : disabled, required, minlength, maxlength, pattern
+  # input[type=tel]      : disabled, required, minlength, maxlength, pattern
+  # input[type=email]    : disabled, required, minlength, maxlength, pattern, multiple
+  # select               : disabled, required, multiple
+  # input[type=file]     : disabled, required, multiple
+  # input[type=checkbox] : disabled, required, checked
+  # input[type=radio]    : disabled, required, checked
+  # input[type=number]   : disabled, required, min, max, step
+  # input[type=range]    : disabled, required, min, max, step
+  # input[type=date]     : disabled, required, min, max
+  # input[type=time]     : disabled, required, min, max
+  # input[type=color]    : disabled, required
+  # ─────────────────────────────────────────────────────────────────────
+
   # attributes validation plan:
   # ─────────────────────────────────────────────────────────────────────
-  # input[type=text|password|search|email|url|tel], textarea : value >= MINLENGTH
-  # input[type=text|password|search|email|url|tel], textarea : value <= MAXLENGTH
-  # input[type=text|password|search|email|url|tel], textarea : value matches the PATTERN (p.s. replaces default checking for url|tel)
-  # input[type=*], select, textarea                          : REQUIRED (value must be present)
-  # input[type=*], select, textarea                          : DISABLED (value must not be present)
-  # input[type=file|email], select                           : MULTIPLE (check if value is multiple when only singular allowed)
-  # input[type=number]                                       : value >= MIN, value <= MAX, value in valid STEP range
-  # input[type=range]                                        : value >= MIN, value <= MAX, value in valid STEP range
-  # input[type=date]                                         : value >= MIN, value <= MAX, value matches the pattern YYYY-MM-DD
-  # input[type=time]                                         : value matches the pattern HH:MM:SS|HH:MM
-  # input[type=color]                                        : value matches the pattern #dddddd
+  # DISABLED             : disable any processing of element
+  # REQUIRED             : VALUE != '' (value must be present in $_POST)
+  # MINLENGTH            : VALUE >= MINLENGTH
+  # MAXLENGTH            : VALUE <= MAXLENGTH
+  # MIN                  : VALUE >= MIN
+  # MAX                  : VALUE <= MAX
+  # STEP                 : VALUE + STEP should filtered via FILTER_VALIDATE_INT
+  # PATTERN              : VALUE should match the PATTERN (used FILTER_VALIDATE_REGEXP)
+  # MULTIPLE             : VALUE must be singular if MULTIPLE attribute is not present
+  # input[type=email]    : VALUE should filtered via FILTER_VALIDATE_EMAIL
+  # input[type=url]      : VALUE should filtered via FILTER_VALIDATE_URL
+  # input[type=date]     : VALUE should match the pattern YYYY-MM-DD
+  # input[type=time]     : VALUE should match the pattern HH:MM:SS|HH:MM
+  # input[type=color]    : VALUE should match the pattern #dddddd
   # ─────────────────────────────────────────────────────────────────────
 
   # note:
