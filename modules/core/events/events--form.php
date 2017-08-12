@@ -22,22 +22,22 @@ namespace effectivecore {
 
   # аttributes which controlled:
   # ─────────────────────────────────────────────────────────────────────
-  # textarea             : disabled, readonly, required, minlength, maxlength, pattern
-  # input[type=text]     : disabled, readonly, required, minlength, maxlength, pattern
-  # input[type=password] : disabled, readonly, required, minlength, maxlength, pattern
-  # input[type=search]   : disabled, readonly, required, minlength, maxlength, pattern
-  # input[type=url]      : disabled, readonly, required, minlength, maxlength, pattern
-  # input[type=tel]      : disabled, readonly, required, minlength, maxlength, pattern
-  # input[type=email]    : disabled, readonly, required, minlength, maxlength, pattern, multiple
-  # select               : disabled, readonly, required, multiple
-  # input[type=file]     : disabled, readonly, required, multiple
-  # input[type=checkbox] : disabled, readonly, required, checked
-  # input[type=radio]    : disabled, readonly, required, checked
-  # input[type=number]   : disabled, readonly, required, min, max, step
-  # input[type=range]    : disabled, readonly, required, min, max, step
-  # input[type=date]     : disabled, readonly, required, min, max
-  # input[type=time]     : disabled, readonly, required, min, max
-  # input[type=color]    : disabled, readonly, required
+  # textarea             : +disabled, readonly, required, minlength, maxlength, pattern
+  # input[type=text]     : +disabled, readonly, required, minlength, maxlength, pattern
+  # input[type=password] : +disabled, readonly, required, minlength, maxlength, pattern
+  # input[type=search]   : +disabled, readonly, required, minlength, maxlength, pattern
+  # input[type=url]      : +disabled, readonly, required, minlength, maxlength, pattern
+  # input[type=tel]      : +disabled, readonly, required, minlength, maxlength, pattern
+  # input[type=email]    : +disabled, readonly, required, minlength, maxlength, pattern, multiple
+  # select               :  disabled, readonly, required, multiple
+  # input[type=file]     :  disabled, readonly, required, multiple
+  # input[type=checkbox] :  disabled, readonly, required, checked
+  # input[type=radio]    :  disabled, readonly, required, checked
+  # input[type=number]   :  disabled, readonly, required, min, max, step
+  # input[type=range]    :  disabled, readonly, required, min, max, step
+  # input[type=date]     :  disabled, readonly, required, min, max
+  # input[type=time]     :  disabled, readonly, required, min, max
+  # input[type=color]    :  disabled, readonly, required
   # ─────────────────────────────────────────────────────────────────────
 
   # attributes validation plan:
@@ -64,6 +64,14 @@ namespace effectivecore {
       if ($c_element instanceof node) {
         $c_name = $c_element->attribute_select('name');
         if ($c_name) {
+
+        # disable processing if element disabled or readonly
+          if ($c_element->attribute_select('disabled') ||
+              $c_element->attribute_select('readonly')) {
+            continue;
+          }
+
+        # check new value
           $c_new_value = isset($values[$c_name]) ?
                                $values[$c_name] : '';
           switch ($c_element->tag_name) {
