@@ -143,10 +143,10 @@ forms
                 - type: number
                 - name: input_number
                 - required: required
-                - value: 0
-                - min: -10
-                - max: 10
-                - step: 1
+                - value: -2.5
+                - min: -5
+                - max: 5
+                - step: 0.5
       # input range
         - field_range|form_field
             children
@@ -160,10 +160,10 @@ forms
                 attributes
                 - type: range
                 - name: input_range
-                - value: 0
-                - min: -10
-                - max: 10
-                - step: 0.3
+                - value: -2.5
+                - min: -5
+                - max: 5
+                - step: 0.5
       # input date
         - field_date|form_field
             children
@@ -209,6 +209,7 @@ forms
                 attributes
                 - type: color
                 - name: input_color
+                - value: #ffffff
       # textarea
         - field_textarea|form_field
             children
@@ -238,7 +239,7 @@ forms
                   args
                   - info: &lt;select&gt;
                 attributes
-                - name: select
+                - name: select[]
                 - required: required
                 - multiple: multiple
                 - size: 8
@@ -306,7 +307,7 @@ forms
               args
               - info: &lt;select&gt;
             attributes
-            - name: select_macro
+            - name: select_macro[]
             - required: required
             - multiple: multiple
             - size: 8

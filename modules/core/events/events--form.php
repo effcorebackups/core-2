@@ -80,8 +80,7 @@ namespace effectivecore {
               static::_validate_field($form, $c_element, $c_id, $c_new_value);
               if ($c_new_value) {
                 foreach ($c_element->child_select_all() as $c_option) {
-                  if ($c_option instanceof node       &&
-                      $c_option->tag_name == 'option' &&
+                  if ($c_option->tag_name == 'option' &&
                       $c_option->attribute_select('value') == $c_new_value) {
                     $c_option->attribute_insert('selected', 'selected');
                     break;
