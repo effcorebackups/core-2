@@ -7,9 +7,9 @@ forms
     - class
       - form-demo: form-demo
     children
-    - fieldset_html4|form_container
+    - fieldset_default|form_container
         tag_name: fieldset
-        title: Html 4 elements
+        title: Form elements
         children
       # input text
         - field_text|form_field
@@ -47,6 +47,73 @@ forms
                 - minlength: 5
                 - maxlength: 255
                 - autocomplete: off
+      # input search
+        - field_search|form_field
+            children
+            - default|form_element
+                tag_name: input
+                title: Search
+                description|text
+                  text: Element %%_info.
+                  args
+                  - info: &lt;input type="search"&gt;
+                attributes
+                - type: search
+                - name: input_search
+                - required: required
+                - value: text in search
+                - minlength: 5
+                - maxlength: 255
+      # input url
+        - field_url|form_field
+            children
+            - default|form_element
+                tag_name: input
+                title: URL
+                description|text
+                  text: Element %%_info.
+                  args
+                  - info: &lt;input type="url"&gt;
+                attributes
+                - type: url
+                - name: input_url
+                - required: required
+                - value: http://example.com
+                - minlength: 5
+                - maxlength: 255
+      # input telephone
+        - field_tel|form_field
+            children
+            - default|form_element
+                tag_name: input
+                title: Telephone
+                description|text
+                  text: Use international format of mobile phone numbers.
+                attributes
+                - type: tel
+                - name: input_tel
+                - required: required
+                - value: &#43;0123456789
+                - minlength: 5
+                - maxlength: 15
+      # input email
+        - field_email|form_field
+            children
+            - default|form_element
+                tag_name: input
+                title: EMail
+                description|text
+                  text: Element %%_info.
+                  args
+                  - info: &lt;input type="email"&gt;
+                attributes
+                - type: email
+                - name: input_email
+                - required: required
+                - value: test@example.com
+                - minlength: 5
+                - maxlength: 255
+                - multiple: multiple
       # input file
         - field_file|form_field
             children
@@ -62,6 +129,196 @@ forms
                 - name: input_file
                 - accept: image/*,audio/*,video/*
                 - multiple: multiple
+      # input number
+        - field_number|form_field
+            children
+            - default|form_element
+                tag_name: input
+                title: Number
+                description|text
+                  text: Element %%_info.
+                  args
+                  - info: &lt;input type="number"&gt;
+                attributes
+                - type: number
+                - name: input_number
+                - required: required
+                - value: 0
+                - min: -10
+                - max: 10
+                - step: 1
+      # input range
+        - field_range|form_field
+            children
+            - default|form_element
+                tag_name: input
+                title: Range
+                description|text
+                  text: Element %%_info.
+                  args
+                  - info: &lt;input type="range"&gt;
+                attributes
+                - type: range
+                - name: input_range
+                - value: 0
+                - min: -10
+                - max: 10
+                - step: 0.3
+      # input date
+        - field_date|form_field
+            children
+            - default|form_element
+                tag_name: input
+                title: Date
+                description|text
+                  text: Element %%_info.
+                  args
+                  - info: &lt;input type="date"&gt;
+                attributes
+                - type: date
+                - name: input_date
+                - required: required
+                - value: 2017-12-31
+                - min: 2000-12-31
+                - max: 2020-12-31
+      # input time
+        - field_time|form_field
+            children
+            - default|form_element
+                tag_name: input
+                title: Time
+                description|text
+                  text: Element %%_info.
+                  args
+                  - info: &lt;input type="time"&gt;
+                attributes
+                - type: time
+                - name: input_time
+                - required: required
+                - value: 00:00:00
+      # input color
+        - field_color|form_field
+            children
+            - default|form_element
+                tag_name: input
+                title: Color
+                description|text
+                  text: Element %%_info.
+                  args
+                  - info: &lt;input type="color"&gt;
+                attributes
+                - type: color
+                - name: input_color
+      # textarea
+        - field_textarea|form_field
+            children
+            - default|form_element
+                tag_name: textarea
+                title: Textarea
+                description|text
+                  text: Element %%_info.
+                  args
+                  - info: &lt;textarea&gt;&lt;/textarea&gt;
+                attributes
+                - name: textarea
+                - rows: 5
+                - minlength: 5
+                - maxlength: 255
+                children
+                - content|text
+                    text: text in textarea
+      # select
+        - field_select|form_field
+            children
+            - default|form_element
+                tag_name: select
+                title: Select
+                description|text
+                  text: Element %%_info.
+                  args
+                  - info: &lt;select&gt;
+                attributes
+                - name: select
+                - required: required
+                - multiple: multiple
+                - size: 8
+                children
+                - not_selected|markup
+                    tag_name: option
+                    children
+                    - content|text
+                        text: - select -
+                - option_1|markup
+                    tag_name: option
+                    attributes
+                    - value: option_1
+                    - selected: selected
+                    children
+                    - content|text
+                        text: Option 1
+                - option_2|markup
+                    tag_name: option
+                    attributes
+                    - value: option_2
+                    children
+                    - content|text
+                        text: Option 2
+                - option_3|markup
+                    tag_name: option
+                    attributes
+                    - value: option_3
+                    children
+                    - content|text
+                        text: Option 3
+                - optgroup_1|markup
+                    tag_name: optgroup
+                    attributes
+                    - label: Group 1
+                    children
+                    - option_4|markup
+                        tag_name: option
+                        attributes
+                        - value: option_4
+                        children
+                        - content|text
+                            text: Option 4
+                    - option_5|markup
+                        tag_name: option
+                        attributes
+                        - value: option_5
+                        children
+                        - content|text
+                            text: Option 5
+                    - option_6|markup
+                        tag_name: option
+                        attributes
+                        - value: option_6
+                        children
+                        - content|text
+                            text: Option 6
+      # select macro
+        - field_select_macro|form_field_select
+            title: Select (macro)
+            description|text
+              text: Element %%_info.
+              args
+              - info: &lt;select&gt;
+            attributes
+            - name: select_macro
+            - required: required
+            - multiple: multiple
+            - size: 8
+            values
+            - not_selected: - select -
+            - option_7: Option 7
+            - option_8: Option 8
+            - option_9: Option 9
+            - group_2
+                title: Group 2
+                values
+                - option_10: Option 10
+                - option_11: Option 11
+                - option_12: Option 12
       # checkboxes
         - field_checkboxes|form_container
             title: Checkboxes
@@ -166,116 +423,6 @@ forms
         - field_color_macro|form_palette
             title: Color
             name: color
-      # select
-        - field_select|form_field
-            children
-            - default|form_element
-                tag_name: select
-                title: Select
-                description|text
-                  text: Element %%_info.
-                  args
-                  - info: &lt;select&gt;
-                attributes
-                - name: select
-                - required: required
-                - multiple: multiple
-                - size: 8
-                children
-                - not_selected|markup
-                    tag_name: option
-                    children
-                    - content|text
-                        text: - select -
-                - option_1|markup
-                    tag_name: option
-                    attributes
-                    - value: option_1
-                    - selected: selected
-                    children
-                    - content|text
-                        text: Option 1
-                - option_2|markup
-                    tag_name: option
-                    attributes
-                    - value: option_2
-                    children
-                    - content|text
-                        text: Option 2
-                - option_3|markup
-                    tag_name: option
-                    attributes
-                    - value: option_3
-                    children
-                    - content|text
-                        text: Option 3
-                - optgroup_1|markup
-                    tag_name: optgroup
-                    attributes
-                    - label: Group 1
-                    children
-                    - option_4|markup
-                        tag_name: option
-                        attributes
-                        - value: option_4
-                        children
-                        - content|text
-                            text: Option 4
-                    - option_5|markup
-                        tag_name: option
-                        attributes
-                        - value: option_5
-                        children
-                        - content|text
-                            text: Option 5
-                    - option_6|markup
-                        tag_name: option
-                        attributes
-                        - value: option_6
-                        children
-                        - content|text
-                            text: Option 6
-      # radios macro
-        - field_select_macro|form_field_select
-            title: Select (macro)
-            description|text
-              text: Element %%_info.
-              args
-              - info: &lt;select&gt;
-            attributes
-            - name: select_macro
-            - required: required
-            - multiple: multiple
-            - size: 8
-            values
-            - not_selected: - select -
-            - option_7: Option 7
-            - option_8: Option 8
-            - option_9: Option 9
-            - group_2
-                title: Group 2
-                values
-                - option_10: Option 10
-                - option_11: Option 11
-                - option_12: Option 12
-      # textarea
-        - field_textarea|form_field
-            children
-            - default|form_element
-                tag_name: textarea
-                title: Textarea
-                description|text
-                  text: Element %%_info.
-                  args
-                  - info: &lt;textarea&gt;&lt;/textarea&gt;
-                attributes
-                - name: textarea
-                - rows: 5
-                - minlength: 5
-                - maxlength: 255
-                children
-                - content|text
-                    text: text in textarea
       # table
         - table|table
             children
@@ -347,157 +494,6 @@ forms
                         children
                         - content|text
                             text: 
-    - fieldset_html5|form_container
-        tag_name: fieldset
-        title: Html 5 elements
-        children
-      # input search
-        - field_search|form_field
-            children
-            - default|form_element
-                tag_name: input
-                title: Search
-                description|text
-                  text: Element %%_info.
-                  args
-                  - info: &lt;input type="search"&gt;
-                attributes
-                - type: search
-                - name: input_search
-                - required: required
-                - value: text in search
-                - minlength: 5
-                - maxlength: 255
-      # input email
-        - field_email|form_field
-            children
-            - default|form_element
-                tag_name: input
-                title: EMail
-                description|text
-                  text: Element %%_info.
-                  args
-                  - info: &lt;input type="email"&gt;
-                attributes
-                - type: email
-                - name: input_email
-                - required: required
-                - value: test@example.com
-                - minlength: 5
-                - maxlength: 255
-                - multiple: multiple
-      # input url
-        - field_url|form_field
-            children
-            - default|form_element
-                tag_name: input
-                title: URL
-                description|text
-                  text: Element %%_info.
-                  args
-                  - info: &lt;input type="url"&gt;
-                attributes
-                - type: url
-                - name: input_url
-                - required: required
-                - value: http://example.com
-                - minlength: 5
-                - maxlength: 255
-      # input telephone
-        - field_tel|form_field
-            children
-            - default|form_element
-                tag_name: input
-                title: Telephone
-                description|text
-                  text: Use international format of mobile phone numbers.
-                attributes
-                - type: tel
-                - name: input_tel
-                - required: required
-                - value: &#43;0123456789
-                - minlength: 5
-                - maxlength: 15
-      # input number
-        - field_number|form_field
-            children
-            - default|form_element
-                tag_name: input
-                title: Number
-                description|text
-                  text: Element %%_info.
-                  args
-                  - info: &lt;input type="number"&gt;
-                attributes
-                - type: number
-                - name: input_number
-                - required: required
-                - value: 0
-                - min: -10
-                - max: 10
-                - step: 1
-      # input range
-        - field_range|form_field
-            children
-            - default|form_element
-                tag_name: input
-                title: Range
-                description|text
-                  text: Element %%_info.
-                  args
-                  - info: &lt;input type="range"&gt;
-                attributes
-                - type: range
-                - name: input_range
-                - value: 0
-                - min: -10
-                - max: 10
-                - step: 0.3
-      # input date
-        - field_date|form_field
-            children
-            - default|form_element
-                tag_name: input
-                title: Date
-                description|text
-                  text: Element %%_info.
-                  args
-                  - info: &lt;input type="date"&gt;
-                attributes
-                - type: date
-                - name: input_date
-                - required: required
-                - value: 2017-12-31
-                - min: 2000-12-31
-                - max: 2020-12-31
-      # input time
-        - field_time|form_field
-            children
-            - default|form_element
-                tag_name: input
-                title: Time
-                description|text
-                  text: Element %%_info.
-                  args
-                  - info: &lt;input type="time"&gt;
-                attributes
-                - type: time
-                - name: input_time
-                - required: required
-                - value: 00:00:00
-      # input color
-        - field_color|form_field
-            children
-            - default|form_element
-                tag_name: input
-                title: Color
-                description|text
-                  text: Element %%_info.
-                  args
-                  - info: &lt;input type="color"&gt;
-                attributes
-                - type: color
-                - name: input_color
     - button_submit|markup
         tag_name: button
         attributes
