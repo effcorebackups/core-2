@@ -40,7 +40,7 @@ namespace effectivecore {
   function value_insert($title, $value, $attr = [], $grp_id = null) {
     $parent_el = $grp_id ? $this->child_select('default')->child_select($grp_id) :
                            $this->child_select('default');
-    if ($value != 'not_selected') $attr += ['value' => $value];
+    $attr += $value != 'not_selected' ? ['value' => $value] : ['value' => null];
     $parent_el->child_insert(
       new markup('option', $attr, ['content' => $title]), $value
     );
