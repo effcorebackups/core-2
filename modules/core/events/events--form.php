@@ -22,27 +22,28 @@ namespace effectivecore {
 
   # аttributes which controlled:
   # ─────────────────────────────────────────────────────────────────────
-  # textarea             : disabled, required, minlength, maxlength, pattern
-  # input[type=text]     : disabled, required, minlength, maxlength, pattern
-  # input[type=password] : disabled, required, minlength, maxlength, pattern
-  # input[type=search]   : disabled, required, minlength, maxlength, pattern
-  # input[type=url]      : disabled, required, minlength, maxlength, pattern
-  # input[type=tel]      : disabled, required, minlength, maxlength, pattern
-  # input[type=email]    : disabled, required, minlength, maxlength, pattern, multiple
-  # select               : disabled, required, multiple
-  # input[type=file]     : disabled, required, multiple
-  # input[type=checkbox] : disabled, required, checked
-  # input[type=radio]    : disabled, required, checked
-  # input[type=number]   : disabled, required, min, max, step
-  # input[type=range]    : disabled, required, min, max, step
-  # input[type=date]     : disabled, required, min, max
-  # input[type=time]     : disabled, required, min, max
-  # input[type=color]    : disabled, required
+  # textarea             : disabled, readonly, required, minlength, maxlength, pattern
+  # input[type=text]     : disabled, readonly, required, minlength, maxlength, pattern
+  # input[type=password] : disabled, readonly, required, minlength, maxlength, pattern
+  # input[type=search]   : disabled, readonly, required, minlength, maxlength, pattern
+  # input[type=url]      : disabled, readonly, required, minlength, maxlength, pattern
+  # input[type=tel]      : disabled, readonly, required, minlength, maxlength, pattern
+  # input[type=email]    : disabled, readonly, required, minlength, maxlength, pattern, multiple
+  # select               : disabled, readonly, required, multiple
+  # input[type=file]     : disabled, readonly, required, multiple
+  # input[type=checkbox] : disabled, readonly, required, checked
+  # input[type=radio]    : disabled, readonly, required, checked
+  # input[type=number]   : disabled, readonly, required, min, max, step
+  # input[type=range]    : disabled, readonly, required, min, max, step
+  # input[type=date]     : disabled, readonly, required, min, max
+  # input[type=time]     : disabled, readonly, required, min, max
+  # input[type=color]    : disabled, readonly, required
   # ─────────────────────────────────────────────────────────────────────
 
   # attributes validation plan:
   # ─────────────────────────────────────────────────────────────────────
   # DISABLED             : disable any processing of element
+  # READONLY             : disable any processing of element
   # REQUIRED             : VALUE != '' (value must be present in $_POST)
   # MINLENGTH            : VALUE >= MINLENGTH
   # MAXLENGTH            : VALUE <= MAXLENGTH
@@ -58,13 +59,6 @@ namespace effectivecore {
   # input[type=color]    : VALUE should match the pattern #dddddd
   # ─────────────────────────────────────────────────────────────────────
 
-  # note:
-  # ─────────────────────────────────────────────────────────────────────
-  # 1. attribute READONLY is not allowed and not checking in validation!
-  #    the substitution from the user's side is not checked!
-  #    use attribute DISABLED instead
-  # ─────────────────────────────────────────────────────────────────────
-
   static function on_validate($form, $elements, $values) {
     foreach ($elements as $c_id => $c_element) {
       if ($c_element instanceof node) {
@@ -72,6 +66,9 @@ namespace effectivecore {
         if ($c_name) {
           $c_value = isset($values[$c_name]) ?
                            $values[$c_name] : '';
+          if ($c_element->attribute_select('disabled')) {
+            print 1;
+          }
           switch ($c_element->tag_name) {
 
             case 'select':

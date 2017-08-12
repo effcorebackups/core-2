@@ -385,7 +385,6 @@ forms
                     - type: radio
                     - name: input_radio
                     - value: radio_1
-                    - disabled: disabled
             - field_radio_2|form_field
                 children
                 - default|form_element
