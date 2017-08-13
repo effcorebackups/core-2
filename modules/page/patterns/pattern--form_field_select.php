@@ -41,11 +41,11 @@ namespace effectivecore {
   function value_insert($title, $value, $attr = [], $grp_id = null) {
     $parent_el = $grp_id ? $this->child_select('default')->child_select($grp_id) :
                            $this->child_select('default');
-    $attr += $value != 'not_selected'       ? ['value' => $value] : ['value' => null];
-    $attr += isset($this->selected[$value]) ? ['selected' => 'selected'] : [];
-    $parent_el->child_insert(
-      new markup('option', $attr, ['content' => $title]), $value
-    );
+    $new_option = new markup('option', $attr, ['content' => $title]);
+    if (isset($this->selected[$value]))
+      $new_option->attribute_insert('selected', 'selected');
+      $new_option->attribute_insert('value', $value != 'not_selected' ? $value : null);
+    $parent_el->child_insert($new_option, $value);
   }
 
 }}
