@@ -249,6 +249,8 @@ forms
                 - option_4: Option 4
                 - option_5: Option 5
                 - option_6: Option 6
+            selected
+            - option_2: option_2
       # select multiple macro
         - field_select_multiple_macro|form_field_select
             title: Select multiple (macro)
@@ -272,6 +274,8 @@ forms
                 - option_10: Option 10
                 - option_11: Option 11
                 - option_12: Option 12
+            selected
+            - option_8: option_8
       # checkboxes
         - field_checkboxes|form_container
             title: Checkboxes

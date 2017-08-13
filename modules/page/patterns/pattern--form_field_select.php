@@ -8,6 +8,7 @@ namespace effectivecore {
           class form_field_select extends form_field {
 
   public $values = [];
+  public $selected = [];
 
   function build() {
     $this->child_insert(new markup('select', $this->attribute_select()), 'default');
@@ -40,7 +41,8 @@ namespace effectivecore {
   function value_insert($title, $value, $attr = [], $grp_id = null) {
     $parent_el = $grp_id ? $this->child_select('default')->child_select($grp_id) :
                            $this->child_select('default');
-    $attr += $value != 'not_selected' ? ['value' => $value] : ['value' => null];
+    $attr += $value != 'not_selected'       ? ['value' => $value] : ['value' => null];
+    $attr += isset($this->selected[$value]) ? ['selected' => 'selected'] : [];
     $parent_el->child_insert(
       new markup('option', $attr, ['content' => $title]), $value
     );
