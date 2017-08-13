@@ -78,24 +78,15 @@ namespace effectivecore {
 
             case 'select':
               if ($c_new_value) {
-                $c_options = [];
-              # collect all options from select element
-                foreach ($c_element->child_select_all() as $c_opt) {
-                  if ($c_opt instanceof node &&
-                      $c_opt->tag_name == 'option') {
-                    $c_options[$c_opt->attribute_select('value')] = $c_opt;
-                  }
-                }
               # delete default (from init) and set new (from post) SELECTED state
-              # we walk by option elements - not by post values!
-                $c_new_values = factory::array_values_map_to_keys(
-                  is_array($c_new_value) ?
-                           $c_new_value :
-                          [$c_new_value]);
-                foreach ($c_options as $c_opt_value => $c_option) {
-                  $c_option->attribute_delete('selected');
-                  if (isset($c_new_values[$c_opt_value])) {
-                    $c_option->attribute_insert('selected', 'selected');
+                foreach ($c_element->child_select_all() as $c_option) {
+                  if ($c_option instanceof node && $c_option->tag_name == 'option') {
+                    $c_option->attribute_delete('selected');
+                    $c_option_value = $c_option->attribute_select('value');
+                    $c_new_values = factory::array_values_map_to_keys(is_array($c_new_value) ? $c_new_value : [$c_new_value]);
+                    if (isset($c_new_values[$c_option_value])) {
+                      $c_option->attribute_insert('selected', 'selected');
+                    }
                   }
                 }
               }
