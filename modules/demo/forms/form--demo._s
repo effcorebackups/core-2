@@ -228,80 +228,30 @@ forms
                 children
                 - content|text
                     text: text in textarea
-      # select
-        - field_select|form_field
-            children
-            - default|form_element
-                tag_name: select
-                title: Select
-                description|text
-                  text: Element %%_info.
-                  args
-                  - info: &lt;select&gt;
-                attributes
-                - name: select[]
-                - required: required
-                - multiple: multiple
-                - size: 8
-                children
-                - not_selected|markup
-                    tag_name: option
-                    attributes
-                    - value: null
-                    children
-                    - content|text
-                        text: - select -
-                - option_1|markup
-                    tag_name: option
-                    attributes
-                    - value: option_1
-                    - selected: selected
-                    children
-                    - content|text
-                        text: Option 1
-                - option_2|markup
-                    tag_name: option
-                    attributes
-                    - value: option_2
-                    children
-                    - content|text
-                        text: Option 2
-                - option_3|markup
-                    tag_name: option
-                    attributes
-                    - value: option_3
-                    children
-                    - content|text
-                        text: Option 3
-                - optgroup_1|markup
-                    tag_name: optgroup
-                    attributes
-                    - label: Group 1
-                    children
-                    - option_4|markup
-                        tag_name: option
-                        attributes
-                        - value: option_4
-                        children
-                        - content|text
-                            text: Option 4
-                    - option_5|markup
-                        tag_name: option
-                        attributes
-                        - value: option_5
-                        children
-                        - content|text
-                            text: Option 5
-                    - option_6|markup
-                        tag_name: option
-                        attributes
-                        - value: option_6
-                        children
-                        - content|text
-                            text: Option 6
       # select macro
         - field_select_macro|form_field_select
             title: Select (macro)
+            description|text
+              text: Element %%_info.
+              args
+              - info: &lt;select&gt;
+            attributes
+            - name: select_macro
+            - required: required
+            values
+            - not_selected: - select -
+            - option_1: Option 1
+            - option_2: Option 2
+            - option_3: Option 3
+            - group_1
+                title: Group 1
+                values
+                - option_4: Option 4
+                - option_5: Option 5
+                - option_6: Option 6
+      # select multiple macro
+        - field_select_multiple_macro|form_field_select
+            title: Select multiple (macro)
             description|text
               text: Element %%_info.
               args
