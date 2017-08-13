@@ -77,16 +77,14 @@ namespace effectivecore {
           switch ($c_element->tag_name) {
 
             case 'select':
-              if ($c_new_value) {
-              # delete default (from init) and set new (from post) SELECTED state
-                foreach ($c_element->child_select_all() as $c_option) {
-                  if ($c_option instanceof node && $c_option->tag_name == 'option') {
-                    $c_option->attribute_delete('selected');
-                    $c_option_value = $c_option->attribute_select('value');
-                    $c_new_values = factory::array_values_map_to_keys(is_array($c_new_value) ? $c_new_value : [$c_new_value]);
-                    if (isset($c_new_values[$c_option_value])) {
-                      $c_option->attribute_insert('selected', 'selected');
-                    }
+            # delete default (from init) and set new (from post) SELECTED state
+              foreach ($c_element->child_select_all() as $c_option) {
+                if ($c_option instanceof node && $c_option->tag_name == 'option') {
+                  $c_option->attribute_delete('selected');
+                  $c_option_value = $c_option->attribute_select('value');
+                  $c_new_values = factory::array_values_map_to_keys(is_array($c_new_value) ? $c_new_value : [$c_new_value]);
+                  if (isset($c_new_values[$c_option_value])) {
+                    $c_option->attribute_insert('selected', 'selected');
                   }
                 }
               }

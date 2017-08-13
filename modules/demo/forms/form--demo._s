@@ -259,7 +259,7 @@ forms
               args
               - info: &lt;select&gt;
             attributes
-            - name: select_macro[]
+            - name: select_multiple_macro[]
             - required: required
             - multiple: multiple
             - size: 8
