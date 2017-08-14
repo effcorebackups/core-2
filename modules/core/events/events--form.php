@@ -13,7 +13,7 @@ namespace effectivecore {
   ### on_init ###
   ###############
 
-  static function on_init($page_args, $form_args, $values) {
+  static function on_init($form, $elements) {
   }
 
   ###################
@@ -86,7 +86,7 @@ namespace effectivecore {
               if ($c_new_value === '')          $c_new_values = [];
               else if (is_string($c_new_value)) $c_new_values = [$c_new_value => $c_new_value];
               else if (is_array($c_new_value))  $c_new_values = factory::array_values_map_to_keys($c_new_value);
-            # check values
+            # check values. convert [''] to [] and ['', 'value1' ...] to ['value1' ...]
               $c_chk_values = array_filter($c_new_values, 'strlen');
               static::_validate_field($form, $c_element, $c_id, $c_chk_values);
             # delete default (from init) and set new (from post) SELECTED state
@@ -221,7 +221,7 @@ namespace effectivecore {
   ### on_submit ###
   #################
 
-  static function on_submit($page_args, $form_args, $values) {
+  static function on_submit($form, $elements, $values) {
   }
 
 }}
