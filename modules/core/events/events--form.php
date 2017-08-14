@@ -83,12 +83,11 @@ namespace effectivecore {
             # expected values for singular select: '' | 'value'
             # expected values for multiple select: '' | [''] | ['', 'value1' ...] | ['value1', 'value2' ...]
             # --------------------------------------------------
-              $c_new_values = factory::array_values_map_to_keys(
-                is_array($c_new_value) ?
-                         $c_new_value :
-                        [$c_new_value]);
-              $c_chk_values = array_filter($c_new_values, 'strlen');
+              if ($c_new_value === '')          $c_new_values = [];
+              else if (is_string($c_new_value)) $c_new_values = [$c_new_value => $c_new_value];
+              else if (is_array($c_new_value))  $c_new_values = factory::array_values_map_to_keys($c_new_value);
             # check values
+              $c_chk_values = array_filter($c_new_values, 'strlen');
               static::_validate_field($form, $c_element, $c_id, $c_chk_values);
             # delete default (from init) and set new (from post) SELECTED state
               foreach ($c_element->child_select_all() as $c_option) {
