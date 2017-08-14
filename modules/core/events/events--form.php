@@ -22,22 +22,23 @@ namespace effectivecore {
 
   # аttributes which controlled:
   # ─────────────────────────────────────────────────────────────────────
-  # textarea             : +disabled, +readonly, required, minlength, maxlength, pattern
-  # input[type=text]     : +disabled, +readonly, required, minlength, maxlength, pattern
-  # input[type=password] : +disabled, +readonly, required, minlength, maxlength, pattern
-  # input[type=search]   : +disabled, +readonly, required, minlength, maxlength, pattern
-  # input[type=url]      : +disabled, +readonly, required, minlength, maxlength, pattern
-  # input[type=tel]      : +disabled, +readonly, required, minlength, maxlength, pattern
-  # input[type=email]    : +disabled, +readonly, required, minlength, maxlength, pattern, multiple
-  # select               :  disabled,  readonly, required, multiple
-  # input[type=file]     :  disabled,  readonly, required, multiple
-  # input[type=checkbox] :  disabled,  readonly, required, checked
-  # input[type=radio]    :  disabled,  readonly, required, checked
-  # input[type=number]   :  disabled,  readonly, required, min, max, step
-  # input[type=range]    :  disabled,  readonly, required, min, max, step
-  # input[type=date]     :  disabled,  readonly, required, min, max
-  # input[type=time]     :  disabled,  readonly, required, min, max
-  # input[type=color]    :  disabled,  readonly, required
+  # textarea             : DISABLED, READONLY, required, minlength, maxlength, pattern
+  # input[type=text]     : DISABLED, READONLY, required, minlength, maxlength, pattern
+  # input[type=password] : DISABLED, READONLY, required, minlength, maxlength, pattern
+  # input[type=search]   : DISABLED, READONLY, required, minlength, maxlength, pattern
+  # input[type=url]      : DISABLED, READONLY, required, minlength, maxlength, pattern
+  # input[type=tel]      : DISABLED, READONLY, required, minlength, maxlength, pattern
+  # input[type=email]    : DISABLED, READONLY, required, minlength, maxlength, pattern, multiple
+  # select               : disabled,           required, multiple
+  # option               : disabled
+  # input[type=file]     : disabled, readonly, required, multiple
+  # input[type=checkbox] : disabled, readonly, required, checked
+  # input[type=radio]    : disabled, readonly, required, checked
+  # input[type=number]   : disabled, readonly, required, min, max, step
+  # input[type=range]    : disabled, readonly, required, min, max, step
+  # input[type=date]     : disabled, readonly, required, min, max
+  # input[type=time]     : disabled, readonly, required, min, max
+  # input[type=color]    : disabled, readonly, required
   # ─────────────────────────────────────────────────────────────────────
 
   # attributes validation plan:
