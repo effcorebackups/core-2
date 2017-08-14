@@ -6,10 +6,6 @@
 
 namespace effectivecore {
 
-  # minimal PHP: 5.6.0
-  # tested on PHP: 5.6.0
-  # tested on PHP: 7.1.0
-
   const format_date     = 'Y-m-d';
   const format_time     = 'H:i:s';
   const format_datetime = 'Y-m-d H:i:s';
