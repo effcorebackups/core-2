@@ -331,32 +331,32 @@ forms
                 children
                 - default|form_element
                     tag_name: input
-                    title: Radio 1 (disabled)
+                    title: Radio 1.1
                     title_position: right
                     attributes
                     - type: radio
                     - name: input_radio
-                    - value: radio_1
+                    - value: radio_1_1
             - field_radio_2|form_field
                 children
                 - default|form_element
                     tag_name: input
-                    title: Radio 2
+                    title: Radio 1.2
                     title_position: right
                     attributes
                     - type: radio
                     - name: input_radio
-                    - value: radio_2
+                    - value: radio_1_2
             - field_radio_3|form_field
                 children
                 - default|form_element
                     tag_name: input
-                    title: Radio 3
+                    title: Radio 1.3
                     title_position: right
                     attributes
                     - type: radio
                     - name: input_radio
-                    - value: radio_3
+                    - value: radio_1_3
       # radios macro
         - field_radios_macro|form_container_radios
             title: Radios (macro)
@@ -367,9 +367,9 @@ forms
             attributes
             - name: input_radio_macro
             values
-            - radio_4: Radio 4
-            - radio_5: Radio 5
-            - radio_6: Radio 6
+            - radio_2_1: Radio 2.1
+            - radio_2_2: Radio 2.2
+            - radio_2_3: Radio 2.3
       # radios color macro
         - field_color_macro|form_palette
             title: Color
