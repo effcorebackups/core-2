@@ -6,7 +6,7 @@
 
 namespace effectivecore {
           use \effectivecore\message_factory as messages;
-          abstract class cache_factory {
+          abstract class caches_factory {
 
   static $data = [];
 
@@ -27,7 +27,7 @@ namespace effectivecore {
       $file = new file(dir_dynamic.'cache--'.$name.'.php');
       $file->set_data(
         "<?php\n\nnamespace effectivecore { # cache for ".$name."\n\n".
-           factory::data_export($data, '  cache_factory::$data[\''.$name.'\']').
+           factory::data_export($data, '  caches_factory::$data[\''.$name.'\']').
         "\n}");
       $file->save();
     } else {
