@@ -6,7 +6,7 @@
 
 namespace effectivecore\modules\page {
           use \effectivecore\factory;
-          use \effectivecore\url_factory as urls;
+          use \effectivecore\urls_factory as urls;
           use \effectivecore\modules\user\access_factory as access;
           use \effectivecore\modules\storage\storage_factory as storages;
           abstract class page_factory {

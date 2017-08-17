@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore\modules\user {
-          use \effectivecore\url_factory as urls;
+          use \effectivecore\urls_factory as urls;
           use \effectivecore\entity_instance as entity_instance;
           use \effectivecore\translate_factory as translations;
           use \effectivecore\modules\user\user_factory as users;

@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\url_factory as urls;
+          use \effectivecore\urls_factory as urls;
           use \effectivecore\tokens_factory as tokens;
           use \effectivecore\translate_factory as translations;
           use \effectivecore\modules\user\access_factory as access;
