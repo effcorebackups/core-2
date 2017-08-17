@@ -9,7 +9,7 @@ namespace effectivecore\modules\user {
           use \effectivecore\url_factory as urls;
           use \effectivecore\translate_factory as translations;
           use \effectivecore\entity_instance as entity_instance;
-          use \effectivecore\entity_factory as entities;
+          use \effectivecore\entities_factory as entities;
           use \effectivecore\message_factory as messages;
           use \effectivecore\modules\page\page_factory as pages;
           use \effectivecore\modules\user\user_factory as users;
