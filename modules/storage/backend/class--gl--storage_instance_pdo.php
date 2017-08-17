@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\message_factory as messages;
+          use \effectivecore\messages_factory as messages;
           use \effectivecore\timer_factory as timers;
           use \effectivecore\console_factory as console;
           class storage_instance_pdo {

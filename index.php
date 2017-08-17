@@ -21,7 +21,7 @@ namespace effectivecore {
   require_once('modules/core/backend/factory--gl--caches.php');
   require_once('modules/core/backend/factory--gl--files.php');
   require_once('modules/core/backend/factory--gl--console.php');
-  require_once('modules/core/backend/factory--gl--message.php');
+  require_once('modules/core/backend/factory--gl--messages.php');
   spl_autoload_register('\effectivecore\factory::autoload');
   use \effectivecore\url_factory as urls;
   use \effectivecore\token_factory as tokens;

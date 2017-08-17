@@ -6,7 +6,7 @@
 
 namespace effectivecore {
           use \effectivecore\files_factory as files;
-          use \effectivecore\message_factory as messages;
+          use \effectivecore\messages_factory as messages;
           const settings_cache_file_name      = 'cache--settings.php';
           const settings_cache_file_name_orig = 'cache--settings--original.php';
           const changes_file_name             = 'changes.php';

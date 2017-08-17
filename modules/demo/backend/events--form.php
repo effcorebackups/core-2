@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore\modules\demo {
-          use \effectivecore\message_factory as messages;
+          use \effectivecore\messages_factory as messages;
           abstract class events_form extends \effectivecore\events_form {
 
   static function on_init_demo($form, $elements) {

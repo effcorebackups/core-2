@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          abstract class message_factory {
+          abstract class messages_factory {
 
   protected static $data = [];
 

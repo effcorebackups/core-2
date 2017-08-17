@@ -9,7 +9,7 @@ namespace effectivecore {
           use \effectivecore\timer_factory as timers;
           use \effectivecore\token_factory as tokens;
           use \effectivecore\console_factory as console;
-          use \effectivecore\message_factory as messages;
+          use \effectivecore\messages_factory as messages;
           use \effectivecore\translate_factory as translations;
           use \effectivecore\modules\user\user_factory as users;
           use \effectivecore\modules\page\page_factory as pages;

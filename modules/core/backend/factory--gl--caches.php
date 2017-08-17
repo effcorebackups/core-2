@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\message_factory as messages;
+          use \effectivecore\messages_factory as messages;
           abstract class caches_factory {
 
   static $data = [];

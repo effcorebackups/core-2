@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\message_factory as messages;
+          use \effectivecore\messages_factory as messages;
           class form extends node {
 
   # support FORM elements:
