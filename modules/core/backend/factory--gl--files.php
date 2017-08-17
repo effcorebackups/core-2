@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          abstract class file_factory {
+          abstract class files_factory {
 
   # path parts:
   # ─────────────────────────────────────────────────────────────────────

@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\file_factory as files;
+          use \effectivecore\files_factory as files;
           use \effectivecore\message_factory as messages;
           const settings_cache_file_name      = 'cache--settings.php';
           const settings_cache_file_name_orig = 'cache--settings--original.php';
