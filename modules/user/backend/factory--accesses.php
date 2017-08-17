@@ -6,7 +6,7 @@
 
 namespace effectivecore\modules\user {
           use \effectivecore\modules\user\user_factory as users;
-          abstract class access_factory {
+          abstract class accesses_factory {
 
   static function check($access) {
     foreach (users::get_current()->roles as $c_role) {

@@ -8,7 +8,7 @@ namespace effectivecore {
           use \effectivecore\urls_factory as urls;
           use \effectivecore\tokens_factory as tokens;
           use \effectivecore\translations_factory as translations;
-          use \effectivecore\modules\user\access_factory as access;
+          use \effectivecore\modules\user\accesses_factory as access;
           class tree_item extends \effectivecore\node {
 
   public $title = '';
