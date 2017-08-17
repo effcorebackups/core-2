@@ -15,13 +15,13 @@ namespace effectivecore {
   const nl              = "\n";
   const br              = "<br/>";
 
-  require_once('modules/core/code/class--gl--file.php');
-  require_once('modules/core/code/factory--gl--timer.php');
-  require_once('modules/core/code/factory--gl.php');
-  require_once('modules/core/code/factory--gl--cache.php');
-  require_once('modules/core/code/factory--gl--file.php');
-  require_once('modules/core/code/factory--gl--console.php');
-  require_once('modules/core/code/factory--gl--message.php');
+  require_once('modules/core/backend/class--gl--file.php');
+  require_once('modules/core/backend/factory--gl--timer.php');
+  require_once('modules/core/backend/factory--gl.php');
+  require_once('modules/core/backend/factory--gl--cache.php');
+  require_once('modules/core/backend/factory--gl--file.php');
+  require_once('modules/core/backend/factory--gl--console.php');
+  require_once('modules/core/backend/factory--gl--message.php');
   spl_autoload_register('\effectivecore\factory::autoload');
   use \effectivecore\url_factory as urls;
   use \effectivecore\token_factory as tokens;
