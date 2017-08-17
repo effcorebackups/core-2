@@ -24,7 +24,7 @@ namespace effectivecore {
   require_once('modules/core/backend/factory--gl--messages.php');
   spl_autoload_register('\effectivecore\factory::autoload');
   use \effectivecore\url_factory as urls;
-  use \effectivecore\token_factory as tokens;
+  use \effectivecore\tokens_factory as tokens;
   use \effectivecore\timers_factory as timers;
   use \effectivecore\console_factory as console;
   use \effectivecore\modules\storage\storage_factory as storages;
