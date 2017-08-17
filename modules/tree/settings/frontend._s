@@ -1,8 +1,8 @@
-misc
-- misc_page_n
+frontend
+- frontend_page_n
     url
       match: %.*%
     styles
     - style_tree
-        file: misc/tree.css
+        file: frontend/tree.css
         media: all

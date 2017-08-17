@@ -36,18 +36,18 @@ namespace effectivecore {
       messages::add_new('This page should be use HTTPS protocol!', 'warning');
     }
 
-  # collect misc
+  # collect frontend
     $rendered_styles = '';
     $rendered_script = '';
-    $miscs = storages::get('settings')->select('misc');
-    foreach ($miscs as $module_id => $c_misc_group) {
-      foreach ($c_misc_group as $c_misc) {
-        if (isset($c_misc->url->match) && preg_match($c_misc->url->match, urls::get_current()->path)) {
+    $parts = storages::get('settings')->select('frontend');
+    foreach ($parts as $module_id => $c_part_group) {
+      foreach ($c_part_group as $c_part) {
+        if (isset($c_part->url->match) && preg_match($c_part->url->match, urls::get_current()->path)) {
 
         # set meta
           $meta_items = [(new markup('meta', ['charset' => 'utf-8']))->render()];
-          if (isset($c_misc->favicons)) {
-            foreach ($c_misc->favicons as $c_icon) {
+          if (isset($c_part->favicons)) {
+            foreach ($c_part->favicons as $c_icon) {
               $c_url = new url('/modules/'.$module_id.'/'.$c_icon->file);
               $meta_items[] = (new markup('link', [
                 'rel'   => 'icon',
@@ -62,8 +62,8 @@ namespace effectivecore {
           }
 
         # collect styles
-          if (isset($c_misc->styles)) {
-            foreach ($c_misc->styles as $c_style) {
+          if (isset($c_part->styles)) {
+            foreach ($c_part->styles as $c_style) {
               $c_url = new url('/modules/'.$module_id.'/'.$c_style->file);
               $rendered_styles[] = (new markup('link', [
                 'rel'   => 'stylesheet',
@@ -77,8 +77,8 @@ namespace effectivecore {
           }
 
         # collect script
-          if (isset($c_misc->script)) {
-            foreach ($c_misc->script as $c_script) {
+          if (isset($c_part->script)) {
+            foreach ($c_part->script as $c_script) {
               $c_url = new url('/modules/'.$module_id.'/'.$c_script->file);
               $rendered_script[] = (new markup('script', [
                 'src' => $c_url->get_full()
