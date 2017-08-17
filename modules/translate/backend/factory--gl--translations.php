@@ -6,7 +6,7 @@
 
 namespace effectivecore {
           use \effectivecore\modules\storage\storages_factory as storages;
-          abstract class translate_factory {
+          abstract class translations_factory {
 
   static $lang_current = 'ru';
   static $data;

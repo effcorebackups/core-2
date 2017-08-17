@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\translate_factory as translations;
+          use \effectivecore\translations_factory as translations;
           class markup extends node {
 
   public $tag_name = 'div';

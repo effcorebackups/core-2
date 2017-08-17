@@ -6,7 +6,7 @@
 
 namespace effectivecore {
           use \effectivecore\markup;
-          use \effectivecore\translate_factory as translations;
+          use \effectivecore\translations_factory as translations;
           abstract class events_form extends events {
 
   ###############

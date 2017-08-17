@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\translate_factory as translations;
+          use \effectivecore\translations_factory as translations;
           class form_container extends markup {
 
   public $template_title = 'form_title';
