@@ -13,7 +13,7 @@ namespace effectivecore {
           use \effectivecore\translate_factory as translations;
           use \effectivecore\modules\user\user_factory as users;
           use \effectivecore\modules\page\pages_factory as pages;
-          use \effectivecore\modules\storage\storage_factory as storages;
+          use \effectivecore\modules\storage\storages_factory as storages;
           class page {
 
   public $title = '';

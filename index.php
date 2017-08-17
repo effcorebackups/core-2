@@ -27,7 +27,7 @@ namespace effectivecore {
   use \effectivecore\tokens_factory as tokens;
   use \effectivecore\timers_factory as timers;
   use \effectivecore\console_factory as console;
-  use \effectivecore\modules\storage\storage_factory as storages;
+  use \effectivecore\modules\storage\storages_factory as storages;
   timers::tap('total');
 
   # redirect from '/any_path/' to '/any_path'

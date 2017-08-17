@@ -6,7 +6,7 @@
 
 namespace effectivecore\modules\tree {
           use \effectivecore\factory;
-          use \effectivecore\modules\storage\storage_factory as storages;
+          use \effectivecore\modules\storage\storages_factory as storages;
           abstract class events_module extends \effectivecore\events_module {
 
   static function on_start() {

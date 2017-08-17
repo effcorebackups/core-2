@@ -8,7 +8,7 @@ namespace effectivecore\modules\user {
           use \effectivecore\url;
           use \effectivecore\messages_factory as messages;
           use \effectivecore\modules\user\session_factory as session;
-          use \effectivecore\modules\storage\storage_factory as storages;
+          use \effectivecore\modules\storage\storages_factory as storages;
           abstract class events_module extends \effectivecore\events_module {
 
   static function on_start() {

@@ -6,7 +6,7 @@
 
 namespace effectivecore {
           use \effectivecore\translate_factory as translations;
-          use \effectivecore\modules\storage\storage_factory as storages;
+          use \effectivecore\modules\storage\storages_factory as storages;
           abstract class tokens_factory {
 
   protected static $data;

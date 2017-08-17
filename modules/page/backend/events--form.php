@@ -7,7 +7,7 @@
 namespace effectivecore\modules\page {
           use \effectivecore\markup;
           use \effectivecore\messages_factory as messages;
-          use \effectivecore\modules\storage\storage_factory as storages;
+          use \effectivecore\modules\storage\storages_factory as storages;
           abstract class events_form extends \effectivecore\events_form {
 
   static function on_init_admin_decoration($form, $elements) {
