@@ -6,7 +6,7 @@
 
 namespace effectivecore {
           use \effectivecore\url_factory as urls;
-          use \effectivecore\timer_factory as timers;
+          use \effectivecore\timers_factory as timers;
           use \effectivecore\token_factory as tokens;
           use \effectivecore\console_factory as console;
           use \effectivecore\messages_factory as messages;

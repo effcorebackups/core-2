@@ -16,7 +16,7 @@ namespace effectivecore {
   const br              = "<br/>";
 
   require_once('modules/core/backend/class--gl--file.php');
-  require_once('modules/core/backend/factory--gl--timer.php');
+  require_once('modules/core/backend/factory--gl--timers.php');
   require_once('modules/core/backend/factory--gl.php');
   require_once('modules/core/backend/factory--gl--caches.php');
   require_once('modules/core/backend/factory--gl--files.php');
@@ -25,7 +25,7 @@ namespace effectivecore {
   spl_autoload_register('\effectivecore\factory::autoload');
   use \effectivecore\url_factory as urls;
   use \effectivecore\token_factory as tokens;
-  use \effectivecore\timer_factory as timers;
+  use \effectivecore\timers_factory as timers;
   use \effectivecore\console_factory as console;
   use \effectivecore\modules\storage\storage_factory as storages;
   timers::tap('total');

@@ -6,7 +6,7 @@
 
 namespace effectivecore {
           use \effectivecore\files_factory as files;
-          use \effectivecore\timer_factory as timers;
+          use \effectivecore\timers_factory as timers;
           use \effectivecore\console_factory as console;
           class file {
 
