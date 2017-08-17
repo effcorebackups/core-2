@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\modules\page\page_factory as pages;
+          use \effectivecore\modules\page\pages_factory as pages;
           use \effectivecore\modules\storage\storage_factory as storages;
           abstract class events_page extends events {
 

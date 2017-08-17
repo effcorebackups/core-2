@@ -9,7 +9,7 @@ namespace effectivecore\modules\page {
           use \effectivecore\urls_factory as urls;
           use \effectivecore\modules\user\access_factory as access;
           use \effectivecore\modules\storage\storage_factory as storages;
-          abstract class page_factory {
+          abstract class pages_factory {
 
   static $data = [];
   static $args = [];

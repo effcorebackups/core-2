@@ -12,7 +12,7 @@ namespace effectivecore {
           use \effectivecore\messages_factory as messages;
           use \effectivecore\translate_factory as translations;
           use \effectivecore\modules\user\user_factory as users;
-          use \effectivecore\modules\page\page_factory as pages;
+          use \effectivecore\modules\page\pages_factory as pages;
           use \effectivecore\modules\storage\storage_factory as storages;
           class page {
 
