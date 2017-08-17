@@ -6,11 +6,11 @@
 
 namespace effectivecore\modules\user {
           use const \effectivecore\format_datetime;
-          use \effectivecore\urls_factory as urls;
-          use \effectivecore\translations_factory as translations;
           use \effectivecore\entity_instance as entity_instance;
+          use \effectivecore\urls_factory as urls;
           use \effectivecore\entities_factory as entities;
           use \effectivecore\messages_factory as messages;
+          use \effectivecore\translations_factory as translations;
           use \effectivecore\modules\page\pages_factory as pages;
           use \effectivecore\modules\user\users_factory as users;
           use \effectivecore\modules\user\session_factory as session;
