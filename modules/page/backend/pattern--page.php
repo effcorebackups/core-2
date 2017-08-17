@@ -11,7 +11,7 @@ namespace effectivecore {
           use \effectivecore\console_factory as console;
           use \effectivecore\messages_factory as messages;
           use \effectivecore\translations_factory as translations;
-          use \effectivecore\modules\user\user_factory as users;
+          use \effectivecore\modules\user\users_factory as users;
           use \effectivecore\modules\page\pages_factory as pages;
           use \effectivecore\modules\storage\storages_factory as storages;
           class page {

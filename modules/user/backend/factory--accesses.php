@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore\modules\user {
-          use \effectivecore\modules\user\user_factory as users;
+          use \effectivecore\modules\user\users_factory as users;
           abstract class accesses_factory {
 
   static function check($access) {

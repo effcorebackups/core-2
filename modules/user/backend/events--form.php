@@ -12,7 +12,7 @@ namespace effectivecore\modules\user {
           use \effectivecore\entities_factory as entities;
           use \effectivecore\messages_factory as messages;
           use \effectivecore\modules\page\pages_factory as pages;
-          use \effectivecore\modules\user\user_factory as users;
+          use \effectivecore\modules\user\users_factory as users;
           use \effectivecore\modules\user\session_factory as session;
           abstract class events_form extends \effectivecore\events_form {
 

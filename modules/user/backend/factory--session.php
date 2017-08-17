@@ -7,7 +7,7 @@
 namespace effectivecore\modules\user {
           use const \effectivecore\format_datetime;
           use \effectivecore\entity_instance as entity_instance;
-          use \effectivecore\modules\user\user_factory as users;
+          use \effectivecore\modules\user\users_factory as users;
           abstract class session_factory {
 
   static function init($user_id = 0) {

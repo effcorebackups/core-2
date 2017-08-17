@@ -13,7 +13,7 @@ namespace effectivecore\modules\user {
           use \effectivecore\factory;
           use \effectivecore\urls_factory as urls;
           use \effectivecore\entities_factory as entities;
-          use \effectivecore\modules\user\user_factory as users;
+          use \effectivecore\modules\user\users_factory as users;
           abstract class events_page extends \effectivecore\events_page {
 
   static function on_show_admin_roles() {
