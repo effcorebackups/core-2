@@ -22,7 +22,7 @@ namespace effectivecore {
 
   # аttributes which controlled:
   # ─────────────────────────────────────────────────────────────────────
-  # textarea             : DISABLED, READONLY, required, minlength, maxlength, pattern
+  # textarea             : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
   # input[type=text]     : DISABLED, READONLY, required, minlength, maxlength, pattern
   # input[type=password] : DISABLED, READONLY, required, minlength, maxlength, pattern
   # input[type=search]   : DISABLED, READONLY, required, minlength, maxlength, pattern
@@ -185,8 +185,8 @@ namespace effectivecore {
     if ($element->attribute_select('minlength') &&
         $element->attribute_select('minlength') > strlen($new_value)) {
       $form->add_error($id,
-        translations::get('Field "%%_title" contain too few symbols!', ['title' => $title]).br.
-        translations::get('Minimum %%_value symbols.', ['value' => $element->attribute_select('minlength')])
+        translations::get('Field "%%_title" contain too few characters!', ['title' => $title]).br.
+        translations::get('Must be at least %%_value characters long.', ['value' => $element->attribute_select('minlength')])
       );
       return false;
     }
@@ -195,8 +195,8 @@ namespace effectivecore {
     if ($element->attribute_select('maxlength') &&
         $element->attribute_select('maxlength') < strlen($new_value)) {
       $form->add_error($id,
-        translations::get('Field "%%_title" contain too much symbols!', ['title' => $title]).br.
-        translations::get('Maximum %%_value symbols.', ['value' => $element->attribute_select('maxlength')]).br.
+        translations::get('Field "%%_title" contain too much characters!', ['title' => $title]).br.
+        translations::get('Must be no more than %%_value characters.', ['value' => $element->attribute_select('maxlength')]).br.
         translations::get('The value was trimmed to the required length!').br.
         translations::get('Check field again before submit.')
       );

@@ -1,11 +1,11 @@
 translate
   ru
   - Field "%%_title" can not be blank!: Поле "%%_title" не может быть пустым!
-  - Field "%%_title" contain too few symbols!: Поле "%%_title" содержит слишком мало символов!
-  - Field "%%_title" contain too much symbols!: Поле "%%_title" содержит слишком много символов!
+  - Field "%%_title" contain too few characters!: Поле "%%_title" содержит слишком мало символов!
+  - Field "%%_title" contain too much characters!: Поле "%%_title" содержит слишком много символов!
   - Field "%%_title" contains an invalid email address!: Поле "%%_title" содержит неверный адрес электронной почты!
-  - Minimum %%_value symbols.: Минимум %%_value символов.
-  - Maximum %%_value symbols.: Максимум %%_value символов.
+  - Must be at least %%_value characters long.: Должно быть не менее %%_value символов.
+  - Must be no more than %%_value characters.: Должно быть не более %%_value символов.
   - The value was trimmed to the required length!: Значение было обрезано до требуемой длинны!
   - Check field again before submit.: Проверьте поле снова перед отправкой.
   - Incorrect email or password!: Неверный адрес электронной почты или пароль!
@@ -15,8 +15,8 @@ translate
   - User was not deleted!: Пользователь не был удален!
   - User with this email was already registered!: Пользователь с таким адресом электронной почты уже был зарегистрирован!
   - User was not registered!: Пользователь не был зарегистрирован!
-  - Field should contain minimum %%_lenght symbols.: Поле должно содержать минимум %%_lenght символов.
-  - Field should contain maximum %%_lenght symbols.: Поле должно содержать максимум %%_lenght символов.
+  - Field must contain a minimum of %%_lenght characters.: Поле должно содержать минимум %%_lenght символов.
+  - Field must contain a maximum of %%_lenght characters.: Поле должно содержать максимум %%_lenght символов.
   - Use international format of mobile phone numbers.: Используйте международный формат номеров мобильных телефонов.
   - Element %%_info.: Элемент %%_info.
   - Color ID = %%_id (value = %%_value): ID цвета = %%_id (значение = %%_value)

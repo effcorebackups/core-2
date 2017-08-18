@@ -225,6 +225,7 @@ forms
                 - rows: 5
                 - minlength: 5
                 - maxlength: 255
+                - required: required
                 children
                 - content|text
                     text: text in textarea
