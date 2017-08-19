@@ -73,6 +73,10 @@ namespace effectivecore {
           }
 
         # check new value (string|array)
+        # --------------------------------------------------
+        # expected values for singular select: '' | 'value'
+        # expected values for multiple select: '' | [''] | ['', 'value1' ...] | ['value1', 'value2' ...]
+        # --------------------------------------------------
           $c_new_value = isset($values[$c_name]) ?
                                $values[$c_name] : '';
 
@@ -80,10 +84,6 @@ namespace effectivecore {
           switch ($c_element->tag_name) {
 
             case 'select':
-            # --------------------------------------------------
-            # expected values for singular select: '' | 'value'
-            # expected values for multiple select: '' | [''] | ['', 'value1' ...] | ['value1', 'value2' ...]
-            # --------------------------------------------------
               if ($c_new_value === '')          $c_new_values = [];
               else if (is_string($c_new_value)) $c_new_values = [$c_new_value => $c_new_value];
               else if (is_array($c_new_value))  $c_new_values = factory::array_values_map_to_keys($c_new_value);
