@@ -23,12 +23,12 @@ namespace effectivecore {
   # аttributes which controlled:
   # ─────────────────────────────────────────────────────────────────────
   # textarea             : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
-  # input[type=text]     : DISABLED, READONLY, required, minlength, maxlength, pattern
-  # input[type=password] : DISABLED, READONLY, required, minlength, maxlength, pattern
-  # input[type=search]   : DISABLED, READONLY, required, minlength, maxlength, pattern
-  # input[type=url]      : DISABLED, READONLY, required, minlength, maxlength, pattern
-  # input[type=tel]      : DISABLED, READONLY, required, minlength, maxlength, pattern
-  # input[type=email]    : DISABLED, READONLY, required, minlength, maxlength, pattern, multiple
+  # input[type=text]     : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
+  # input[type=password] : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
+  # input[type=search]   : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
+  # input[type=url]      : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
+  # input[type=tel]      : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
+  # input[type=email]    : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern, multiple
   # select               : disabled,           required, multiple
   # option               : disabled
   # input[type=file]     : disabled, readonly, required, multiple
@@ -48,11 +48,12 @@ namespace effectivecore {
   # REQUIRED             : VALUE != '' (value must be present in $_POST)
   # MINLENGTH            : VALUE >= MINLENGTH
   # MAXLENGTH            : VALUE <= MAXLENGTH
-  # MIN                  : VALUE >= MIN
-  # MAX                  : VALUE <= MAX
-  # STEP                 : VALUE + STEP should filtered via FILTER_VALIDATE_INT
+  # MIN                  : VALUE >= MIN (for date|time should compare timestamps)
+  # MAX                  : VALUE <= MAX (for date|time should compare timestamps)
+  # STEP                 : VALUE should be in valid step range: MIN + STEP * N, where N = [0, 1, 2 ...]
   # PATTERN              : VALUE should match the PATTERN (used FILTER_VALIDATE_REGEXP)
   # MULTIPLE             : VALUE must be singular if MULTIPLE attribute is not present
+  # ─────────────────────────────────────────────────────────────────────
   # input[type=email]    : VALUE should filtered via FILTER_VALIDATE_EMAIL
   # input[type=url]      : VALUE should filtered via FILTER_VALIDATE_URL
   # input[type=date]     : VALUE should match the pattern YYYY-MM-DD
