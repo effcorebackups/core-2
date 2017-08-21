@@ -30,7 +30,7 @@ namespace effectivecore {
   # input[type=tel]      : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
   # input[type=email]    : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern, multiple
   # select               : DISABLED,           REQUIRED, multiple
-  # option               : disabled
+  # option               : DISABLED
   # input[type=file]     : disabled, readonly, required, multiple
   # input[type=checkbox] : disabled, readonly, required, checked
   # input[type=radio]    : disabled, readonly, required, checked
@@ -95,9 +95,10 @@ namespace effectivecore {
               foreach ($c_element->child_select_all() as $c_option) {
                 if ($c_option instanceof node && $c_option->tag_name == 'option') {
                   $c_option->attribute_delete('selected');
-                  $c_option_value = $c_option->attribute_select('value');
-                  if (isset($c_new_values[$c_option_value])) {
-                    $c_option->attribute_insert('selected', 'selected');
+                  if (!$c_option->attribute_select('disabled')) {
+                    if (isset($c_new_values[$c_option->attribute_select('value')])) {
+                      $c_option->attribute_insert('selected', 'selected');
+                    }
                   }
                 }
               }
