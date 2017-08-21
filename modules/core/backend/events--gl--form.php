@@ -29,7 +29,7 @@ namespace effectivecore {
   # input[type=url]      : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
   # input[type=tel]      : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
   # input[type=email]    : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern, multiple
-  # select               : disabled,           required, multiple
+  # select               : DISABLED,           REQUIRED, multiple
   # option               : disabled
   # input[type=file]     : disabled, readonly, required, multiple
   # input[type=checkbox] : disabled, readonly, required, checked
@@ -177,7 +177,7 @@ namespace effectivecore {
   # check required fields
     if ($element->attribute_select('required') && empty($new_value)) {
       $form->add_error($id,
-        translations::get('Field "%%_title" can not be blank!', ['title' => $title])
+        translations::get('Field "%%_title" is required and can not be without the entered or selected value!', ['title' => $title])
       );
       return false;
     }

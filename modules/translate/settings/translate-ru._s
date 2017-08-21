@@ -1,6 +1,6 @@
 translate
   ru
-  - Field "%%_title" can not be blank!: Поле "%%_title" не может быть пустым!
+  - Field "%%_title" is required and can not be without the entered or selected value!: Поле "%%_title" является обязательным и не может быть без введенного или выбранного значения!
   - Field "%%_title" contain too few characters!: Поле "%%_title" содержит слишком мало символов!
   - Field "%%_title" contain too much characters!: Поле "%%_title" содержит слишком много символов!
   - Field "%%_title" contains an invalid email address!: Поле "%%_title" содержит неверный адрес электронной почты!
