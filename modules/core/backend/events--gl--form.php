@@ -88,24 +88,27 @@ namespace effectivecore {
               if ($c_new_value === '')          $c_new_values = [];
               else if (is_string($c_new_value)) $c_new_values = [$c_new_value => $c_new_value];
               else if (is_array($c_new_value))  $c_new_values = factory::array_values_map_to_keys($c_new_value);
-            # check values. convert [''] to [] and ['', 'value1' ...] to ['value1' ...]
-              $c_chk_values = array_filter($c_new_values, 'strlen');
-              static::_validate_field($form, $c_element, $c_id, $c_chk_values);
             # delete default (from init) and set new (from post) SELECTED state
+              $c_check_values = [];
               foreach ($c_element->child_select_all() as $c_option) {
                 if ($c_option instanceof node && $c_option->tag_name == 'option') {
                   $c_option->attribute_delete('selected');
+                  $c_option_value = $c_option->attribute_select('value');
                   if (!$c_option->attribute_select('disabled')) {
-                    if (isset($c_new_values[$c_option->attribute_select('value')])) {
+                    if (isset($c_new_values[$c_option_value])) {
                       $c_option->attribute_insert('selected', 'selected');
+                      $c_check_values[$c_option_value] = $c_option_value;
                     }
                   }
                 }
               }
+            # check values. convert [''] to [] and ['', 'value1' ...] to ['value1' ...]
+              $c_check_values = array_filter($c_check_values, 'strlen');
+              static::_validate_field_selector($form, $c_element, $c_id, $c_check_values);
               break;
 
             case 'textarea':
-              static::_validate_field($form, $c_element, $c_id, $c_new_value);
+              static::_validate_field_text($form, $c_element, $c_id, $c_new_value);
               $content = $c_element->child_select('content');
               $content->text = $c_new_value;
               break;
@@ -158,7 +161,7 @@ namespace effectivecore {
                     $c_type == 'time'     ||
                     $c_type == 'color'
                 ) {
-                  static::_validate_field($form, $c_element, $c_id, $c_new_value);
+                  static::_validate_field_text($form, $c_element, $c_id, $c_new_value);
                   $c_element->attribute_insert('value', $c_new_value);
                 }
 
@@ -170,7 +173,9 @@ namespace effectivecore {
     }
   }
 
-  static function _validate_field($form, $element, $id, &$new_value) {
+
+
+  static function _validate_field_selector($form, $element, $id, &$new_value) {
     $title = translations::get(
       $element->title
     );
@@ -178,7 +183,23 @@ namespace effectivecore {
   # check required fields
     if ($element->attribute_select('required') && empty($new_value)) {
       $form->add_error($id,
-        translations::get('Field "%%_title" is required and can not be without the entered or selected value!', ['title' => $title])
+        translations::get('Field "%%_title" must be selected!', ['title' => $title])
+      );
+      return false;
+    }
+  }
+
+
+
+  static function _validate_field_text($form, $element, $id, &$new_value) {
+    $title = translations::get(
+      $element->title
+    );
+
+  # check required fields
+    if ($element->attribute_select('required') && empty($new_value)) {
+      $form->add_error($id,
+        translations::get('Field "%%_title" can not be blank!', ['title' => $title])
       );
       return false;
     }
