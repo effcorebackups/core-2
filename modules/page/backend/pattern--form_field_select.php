@@ -9,6 +9,7 @@ namespace effectivecore {
 
   public $values = [];
   public $selected = [];
+  public $disabled = [];
 
   function build() {
     $this->child_insert(new markup('select', $this->attribute_select()), 'default');
@@ -42,9 +43,9 @@ namespace effectivecore {
     $parent_el = $grp_id ? $this->child_select('default')->child_select($grp_id) :
                            $this->child_select('default');
     $new_option = new markup('option', $attr, ['content' => $title]);
-    if (isset($this->selected[$value]))
-      $new_option->attribute_insert('selected', 'selected');
-      $new_option->attribute_insert('value', $value != 'not_selected' ? $value : null);
+    if (isset($this->selected[$value])) $new_option->attribute_insert('selected', 'selected');
+    if (isset($this->disabled[$value])) $new_option->attribute_insert('disabled', 'disabled');
+                                        $new_option->attribute_insert('value', $value != 'not_selected' ? $value : null);
     $parent_el->child_insert($new_option, $value);
   }
 
