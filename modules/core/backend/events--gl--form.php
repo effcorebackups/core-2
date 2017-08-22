@@ -74,7 +74,7 @@ namespace effectivecore {
           }
 
         # ─────────────────────────────────────────────────────────────────────
-        # correct text value (expected: undefined|string):
+        # conversion matrix for value from text field (expected: undefined|string):
         # ─────────────────────────────────────────────────────────────────────
         # - unset($_POST[name])                 -> ''
         # - $_POST[name] == ''                  -> ''
@@ -84,13 +84,13 @@ namespace effectivecore {
                                     $values[$c_name] : '';
 
         # ─────────────────────────────────────────────────────────────────────
-        # correct value for singular select (expected: undefined|string):
+        # conversion matrix for value from singular select (expected: undefined|string):
         # ─────────────────────────────────────────────────────────────────────
         # - unset($_POST[name])                 -> []
         # - $_POST[name] == ''                  -> ['' => '']
         # - $_POST[name] == 'value'             -> ['value' => 'value']
         # ─────────────────────────────────────────────────────────────────────
-        # correct values for multiple select (expected: undefined|array):
+        # conversion matrix for values from multiple select (expected: undefined|array):
         # ─────────────────────────────────────────────────────────────────────
         # - unset($_POST[name])                 -> []
         # - $_POST[name] == [0 => '']           -> ['' => '']
@@ -202,7 +202,7 @@ namespace effectivecore {
   ### _validate_field_selector ###
   ################################
 
-  static function _validate_field_selector($form, $element, $id, &$new_values, $c_allowed_values) {
+  static function _validate_field_selector($form, $element, $id, &$new_values, $allowed_values) {
     $title = translations::get(
       $element->title
     );
@@ -230,6 +230,10 @@ namespace effectivecore {
   # ─────────────────────────────────────────────────────────────────────
     if (isset($new_values['']) &&
         count($new_values) > 1) unset($new_values['']);
+
+  # deleting fake values from the user's side
+  # deleting DISABLED values
+    $new_values = array_intersect($new_values, $allowed_values);
   }
 
   ############################
