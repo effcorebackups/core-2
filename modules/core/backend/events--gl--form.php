@@ -73,44 +73,70 @@ namespace effectivecore {
             continue;
           }
 
-        # check new value (string|array)
-        # --------------------------------------------------
-        # expected values for singular select: '' | 'value'
-        # expected values for multiple select: '' | [''] | ['', 'value1' ...] | ['value1', 'value2' ...]
-        # --------------------------------------------------
-          $c_new_value = isset($values[$c_name]) ?
-                               $values[$c_name] : '';
+        # ─────────────────────────────────────────────────────────────────────
+        # convert value for singular select (expected: undefined|string):
+        # ─────────────────────────────────────────────────────────────────────
+        # - unset($_POST[name])                 -> ''
+        # - $_POST[name] == ''                  -> ''
+        # - $_POST[name] == 'value'             -> 'value'
+        # ─────────────────────────────────────────────────────────────────────
+        # convert values for multiple select (expected: undefined|array):
+        # ─────────────────────────────────────────────────────────────────────
+        # - unset($_POST[name])                 -> ''
+        # - $_POST[name] == [0 => '']           -> [0 => '']
+        # - $_POST[name] == [0 => '', ...]      -> [0 => '', ...]
+        # - $_POST[name] == [0 => 'value']      -> [0 => 'value']
+        # - $_POST[name] == [0 => 'value', ...] -> [0 => 'value', ...]
+        # ─────────────────────────────────────────────────────────────────────
+          $c_new_text_value = isset($values[$c_name]) ?
+                                    $values[$c_name] : '';
 
         # elements validation
           switch ($c_element->tag_name) {
 
             case 'select':
-              if ($c_new_value === '')          $c_new_values = [];
-              else if (is_string($c_new_value)) $c_new_values = [$c_new_value => $c_new_value];
-              else if (is_array($c_new_value))  $c_new_values = factory::array_values_map_to_keys($c_new_value);
-            # delete default (from init) and set new (from post) SELECTED state
-              $c_check_values = [];
+            # collect allowed values
+              $c_allowed_values = [];
               foreach ($c_element->child_select_all() as $c_option) {
                 if ($c_option instanceof node && $c_option->tag_name == 'option') {
-                  $c_option->attribute_delete('selected');
-                  $c_option_value = $c_option->attribute_select('value');
                   if (!$c_option->attribute_select('disabled')) {
-                    if (isset($c_new_values[$c_option_value])) {
-                      $c_option->attribute_insert('selected', 'selected');
-                      $c_check_values[$c_option_value] = $c_option_value;
-                    }
+                    $c_allowed_values[$c_option->attribute_select('value')] =
+                                      $c_option->attribute_select('value');
                   }
                 }
               }
-            # check values. convert [''] to [] and ['', 'value1' ...] to ['value1' ...]
-              $c_check_values = array_filter($c_check_values, 'strlen');
-              static::_validate_field_selector($form, $c_element, $c_id, $c_check_values);
+            # ─────────────────────────────────────────────────────────────────
+            # convert all values to mapped array and validate it (expected: string|array):
+            # ─────────────────────────────────────────────────────────────────
+            # - ''                  -> ['' => '']
+            # - 'value'             -> ['value' => 'value']
+            # - [0 => '']           -> ['' => '']
+            # - [0 => '', ...]      -> ['' => '', ...]
+            # - [0 => 'value']      -> ['value' => 'value']
+            # - [0 => 'value', ...] -> ['value' => 'value', ...]
+            # ─────────────────────────────────────────────────────────────────
+              $c_new_select_values = factory::array_values_map_to_keys(
+                is_array($c_new_text_value) ?
+                         $c_new_text_value :
+                        [$c_new_text_value]);
+              static::_validate_field_selector($form, $c_element, $c_id,
+                $c_new_select_values, $c_allowed_values
+              );
+            # set new values after validation
+              foreach ($c_element->child_select_all() as $c_option) {
+                if ($c_option instanceof node && $c_option->tag_name == 'option') {
+                  $c_option->attribute_delete('selected');
+                  if (isset($c_new_select_values[$c_option->attribute_select('value')])) {
+                    $c_option->attribute_insert('selected', 'selected');
+                  }
+                }
+              }
               break;
 
             case 'textarea':
-              static::_validate_field_text($form, $c_element, $c_id, $c_new_value);
+              static::_validate_field_text($form, $c_element, $c_id, $c_new_text_value);
               $content = $c_element->child_select('content');
-              $content->text = $c_new_value;
+              $content->text = $c_new_text_value;
               break;
 
             case 'input':
@@ -135,7 +161,7 @@ namespace effectivecore {
   
               # input[type=checkbox]
                 if ($c_type == 'checkbox') {
-                  if ($c_new_value) {
+                  if ($c_new_text_value) {
                     $c_element->attribute_insert('checked', 'checked');
                   }
                 }
@@ -143,7 +169,7 @@ namespace effectivecore {
               # input[type=radio]
               # delete default (from init) and set new (from post) CHECKED state
                 if ($c_type == 'radio') {
-                  if  ($c_element->attribute_select('value') == $c_new_value)
+                  if  ($c_element->attribute_select('value') == $c_new_text_value)
                        $c_element->attribute_insert('checked', 'checked');
                   else $c_element->attribute_delete('checked');
                 }
@@ -161,8 +187,8 @@ namespace effectivecore {
                     $c_type == 'time'     ||
                     $c_type == 'color'
                 ) {
-                  static::_validate_field_text($form, $c_element, $c_id, $c_new_value);
-                  $c_element->attribute_insert('value', $c_new_value);
+                  static::_validate_field_text($form, $c_element, $c_id, $c_new_text_value);
+                  $c_element->attribute_insert('value', $c_new_text_value);
                 }
 
               }
@@ -175,13 +201,20 @@ namespace effectivecore {
 
 
 
-  static function _validate_field_selector($form, $element, $id, &$new_value) {
+  static function _validate_field_selector($form, $element, $id, &$new_values, $c_allowed_values) {
     $title = translations::get(
       $element->title
     );
 
-  # check required fields
-    if ($element->attribute_select('required') && empty($new_value)) {
+  # ─────────────────────────────────────────────────────────────────────
+  # convert array with empty strings to array without empty strings
+  # ─────────────────────────────────────────────────────────────────────
+  # - ['' => '']                -> []
+  # - ['' => '', ...]           -> [...]
+  # - ['value' => 'value']      -> ['value' => 'value']
+  # - ['value' => 'value', ...] -> ['value' => 'value', ...]
+  # ─────────────────────────────────────────────────────────────────────
+    if ($element->attribute_select('required') && empty(array_filter($new_values, 'strlen'))) {
       $form->add_error($id,
         translations::get('Field "%%_title" must be selected!', ['title' => $title])
       );
@@ -197,7 +230,7 @@ namespace effectivecore {
     );
 
   # check required fields
-    if ($element->attribute_select('required') && empty($new_value)) {
+    if ($element->attribute_select('required') && strlen($new_value) == 0) {
       $form->add_error($id,
         translations::get('Field "%%_title" can not be blank!', ['title' => $title])
       );

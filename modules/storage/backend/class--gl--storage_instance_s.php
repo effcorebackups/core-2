@@ -234,15 +234,16 @@ namespace effectivecore {
       $line_num++;
     # skip comments
       if (substr(ltrim($c_line, ' '), 0, 1) === '#') continue;
+    # ───────────────────
     # available variants:
-    # -------------------
+    # ───────────────────
     # - name
     #   name
     # - name|class_name
     #   name|class_name
     # - name: value
     #   name: value
-    # -------------------
+    # ───────────────────
       $matches = [];
       preg_match('%(?<indent>[ ]*)'.
                   '(?<prefix>- |)'.
