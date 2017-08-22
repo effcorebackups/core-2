@@ -74,22 +74,35 @@ namespace effectivecore {
           }
 
         # ─────────────────────────────────────────────────────────────────────
-        # convert value for singular select (expected: undefined|string):
+        # correct text value (expected: undefined|string):
         # ─────────────────────────────────────────────────────────────────────
         # - unset($_POST[name])                 -> ''
         # - $_POST[name] == ''                  -> ''
         # - $_POST[name] == 'value'             -> 'value'
         # ─────────────────────────────────────────────────────────────────────
-        # convert values for multiple select (expected: undefined|array):
-        # ─────────────────────────────────────────────────────────────────────
-        # - unset($_POST[name])                 -> ''
-        # - $_POST[name] == [0 => '']           -> [0 => '']
-        # - $_POST[name] == [0 => '', ...]      -> [0 => '', ...]
-        # - $_POST[name] == [0 => 'value']      -> [0 => 'value']
-        # - $_POST[name] == [0 => 'value', ...] -> [0 => 'value', ...]
-        # ─────────────────────────────────────────────────────────────────────
           $c_new_text_value = isset($values[$c_name]) ?
                                     $values[$c_name] : '';
+
+        # ─────────────────────────────────────────────────────────────────────
+        # correct value for singular select (expected: undefined|string):
+        # ─────────────────────────────────────────────────────────────────────
+        # - unset($_POST[name])                 -> []
+        # - $_POST[name] == ''                  -> ['' => '']
+        # - $_POST[name] == 'value'             -> ['value' => 'value']
+        # ─────────────────────────────────────────────────────────────────────
+        # correct values for multiple select (expected: undefined|array):
+        # ─────────────────────────────────────────────────────────────────────
+        # - unset($_POST[name])                 -> []
+        # - $_POST[name] == [0 => '']           -> ['' => '']
+        # - $_POST[name] == [0 => '', ...]      -> ['' => '', ...]
+        # - $_POST[name] == [0 => 'value']      -> ['value' => 'value']
+        # - $_POST[name] == [0 => 'value', ...] -> ['value' => 'value', ...]
+        # ─────────────────────────────────────────────────────────────────────
+          $c_new_select_values = factory::array_values_map_to_keys(
+                !isset($values[$c_name]) ? [] :
+             (is_array($values[$c_name]) ?
+                       $values[$c_name]  :
+                      [$values[$c_name]]));
 
         # elements validation
           switch ($c_element->tag_name) {
@@ -105,20 +118,6 @@ namespace effectivecore {
                   }
                 }
               }
-            # ─────────────────────────────────────────────────────────────────
-            # convert all values to mapped array and validate it (expected: string|array):
-            # ─────────────────────────────────────────────────────────────────
-            # - ''                  -> ['' => '']
-            # - 'value'             -> ['value' => 'value']
-            # - [0 => '']           -> ['' => '']
-            # - [0 => '', ...]      -> ['' => '', ...]
-            # - [0 => 'value']      -> ['value' => 'value']
-            # - [0 => 'value', ...] -> ['value' => 'value', ...]
-            # ─────────────────────────────────────────────────────────────────
-              $c_new_select_values = factory::array_values_map_to_keys(
-                is_array($c_new_text_value) ?
-                         $c_new_text_value :
-                        [$c_new_text_value]);
               static::_validate_field_selector($form, $c_element, $c_id,
                 $c_new_select_values, $c_allowed_values
               );
@@ -199,7 +198,9 @@ namespace effectivecore {
     }
   }
 
-
+  ################################
+  ### _validate_field_selector ###
+  ################################
 
   static function _validate_field_selector($form, $element, $id, &$new_values, $c_allowed_values) {
     $title = translations::get(
@@ -209,6 +210,7 @@ namespace effectivecore {
   # ─────────────────────────────────────────────────────────────────────
   # convert array with empty strings to array without empty strings
   # ─────────────────────────────────────────────────────────────────────
+  # - []                        -> []
   # - ['' => '']                -> []
   # - ['' => '', ...]           -> [...]
   # - ['value' => 'value']      -> ['value' => 'value']
@@ -220,9 +222,19 @@ namespace effectivecore {
       );
       return false;
     }
+
+  # ─────────────────────────────────────────────────────────────────────
+  # normalize not empty array
+  # ─────────────────────────────────────────────────────────────────────
+  # - ['' => '', ...]           -> [...]
+  # ─────────────────────────────────────────────────────────────────────
+    if (isset($new_values['']) &&
+        count($new_values) > 1) unset($new_values['']);
   }
 
-
+  ############################
+  ### _validate_field_text ###
+  ############################
 
   static function _validate_field_text($form, $element, $id, &$new_value) {
     $title = translations::get(
