@@ -220,7 +220,7 @@ namespace effectivecore {
       $form->add_error($id,
         translations::get('Field "%%_title" must be selected!', ['title' => $title])
       );
-      return false;
+      return;
     }
 
   # ─────────────────────────────────────────────────────────────────────
@@ -229,11 +229,20 @@ namespace effectivecore {
   # - ['' => '', ...]           -> [...]
   # ─────────────────────────────────────────────────────────────────────
     if (isset($new_values['']) &&
-        count($new_values) > 1) unset($new_values['']);
+        count($new_values) > 1)
+        unset($new_values['']);
 
   # deleting fake values from the user's side
   # deleting DISABLED values
     $new_values = array_intersect($new_values, $allowed_values);
+
+  # check if field is multiple or singular
+    if (!$element->attribute_select('multiple') && count($new_values) > 1) {
+      $new_values = array_slice($new_values, 0, 1);
+      $form->add_error($id,
+        translations::get('Field "%%_title" is not support multiple select!', ['title' => $title])
+      );
+    }
   }
 
   ############################
@@ -250,7 +259,7 @@ namespace effectivecore {
       $form->add_error($id,
         translations::get('Field "%%_title" can not be blank!', ['title' => $title])
       );
-      return false;
+      return;
     }
 
   # check minimum length
@@ -260,7 +269,7 @@ namespace effectivecore {
         translations::get('Field "%%_title" contain too few characters!', ['title' => $title]).br.
         translations::get('Must be at least %%_value characters long.', ['value' => $element->attribute_select('minlength')])
       );
-      return false;
+      return;
     }
 
   # check maximum length
@@ -274,7 +283,7 @@ namespace effectivecore {
       );
     # trim value to maximum lenght
       $new_value = substr($new_value, 0, $element->attribute_select('maxlength'));
-      return false;
+      return;
     }
 
   # check email field
@@ -283,11 +292,8 @@ namespace effectivecore {
       $form->add_error($id,
         translations::get('Field "%%_title" contains an invalid email address!', ['title' => $title])
       );
-      return false;
+      return;
     }
-
-  # if no errors
-    return true;
   }
 
   #################
