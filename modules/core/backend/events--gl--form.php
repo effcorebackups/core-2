@@ -29,7 +29,7 @@ namespace effectivecore {
   # input[type=url]      : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
   # input[type=tel]      : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
   # input[type=email]    : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern, multiple
-  # select               : DISABLED,           REQUIRED, multiple
+  # select               : DISABLED,           REQUIRED, MULTIPLE
   # option               : DISABLED
   # input[type=file]     : disabled, readonly, required, multiple
   # input[type=checkbox] : disabled, readonly, required, checked
