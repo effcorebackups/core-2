@@ -12,6 +12,7 @@ file_types
     headers
     - Content-type: image/svg+xml
 - js
+    use_tokens: 1
     headers
     - Content-type: application/javascript
 - gif
