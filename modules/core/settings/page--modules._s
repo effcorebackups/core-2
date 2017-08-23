@@ -1,8 +1,8 @@
 pages
 - page_modules|page
     title: Modules
-    url
-      match: %^/admin/modules$%
+    match
+      url: %^/admin/modules$%
     access
       roles
       - admins: admins
@@ -10,11 +10,11 @@ pages
     - block_tree_main
         region: nav
         type: link
-        link: trees/core/main
+        npath: trees/core/main
     - block_tree_user
         region: nav
         type: link
-        link: trees/user/user
+        npath: trees/user/user
     - block_admin_modules
         region: content_1_1
         type: code

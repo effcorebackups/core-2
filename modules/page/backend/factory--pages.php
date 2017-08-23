@@ -18,8 +18,8 @@ namespace effectivecore\modules\page {
   # render page
     foreach (storages::get('settings')->select('pages') as $c_pages) {
       foreach ($c_pages as $c_page) {
-        if (   isset($c_page->url->match) &&
-          preg_match($c_page->url->match, urls::get_current()->path)) {
+        if (   isset($c_page->match->url) &&
+          preg_match($c_page->match->url, urls::get_current()->path)) {
           if (!isset($c_page->access) ||
               (isset($c_page->access) && access::check($c_page->access))) {
             return $c_page->render();

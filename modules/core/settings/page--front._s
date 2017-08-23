@@ -1,17 +1,17 @@
 pages
 - page_front|page
     title: Front page
-    url
-      match: %^/$%
+    match
+      url: %^/$%
     content
     - block_tree_main
         region: nav
         type: link
-        link: trees/core/main
+        npath: trees/core/main
     - block_tree_user
         region: nav
         type: link
-        link: trees/user/user
+        npath: trees/user/user
     - block_wellcome
         region: content_1_1
         type: text

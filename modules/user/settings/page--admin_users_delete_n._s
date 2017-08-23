@@ -1,8 +1,8 @@
 pages
 - page_admin_users_delete_n|page
     title: Delete profile (%%_user_email_context{4})?
-    url
-      match: %^/admin/users/delete/[0-9]+$%
+    match
+      url: %^/admin/users/delete/[0-9]+$%
       args
       - user_id: 4
     access
@@ -12,11 +12,11 @@ pages
     - block_tree_main
         region: nav
         type: link
-        link: trees/core/main
+        npath: trees/core/main
     - block_tree_user
         region: nav
         type: link
-        link: trees/user/user
+        npath: trees/user/user
     - code_user_n_delete
         region: content_1_1
         type: code
@@ -24,4 +24,4 @@ pages
     - form_user_n_delete
         region: content_1_1
         type: link
-        link: forms/user/form_user_n_delete
+        npath: forms/user/form_user_n_delete

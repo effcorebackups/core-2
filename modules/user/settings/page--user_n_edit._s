@@ -2,8 +2,8 @@ pages
 - page_user_n_edit|page
     title: Edit profile (%%_user_email_context{2})
     https: true
-    url
-      match: %^/user/[0-9]+/edit$%
+    match
+      url: %^/user/[0-9]+/edit$%
       args
       - user_id: 2
     access
@@ -14,11 +14,11 @@ pages
     - block_tree_main
         region: nav
         type: link
-        link: trees/core/main
+        npath: trees/core/main
     - block_tree_user
         region: nav
         type: link
-        link: trees/user/user
+        npath: trees/user/user
     - code_on_page_user_n_edit
         region: content_1_1
         type: code
@@ -26,4 +26,4 @@ pages
     - form_user_n_edit
         region: content_1_1
         type: link
-        link: forms/user/form_user_n_edit
+        npath: forms/user/form_user_n_edit

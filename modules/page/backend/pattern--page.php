@@ -42,14 +42,15 @@ namespace effectivecore {
     $parts = storages::get('settings')->select('frontend');
     foreach ($parts as $module_id => $c_part_group) {
       foreach ($c_part_group as $c_part) {
-        if (isset($c_part->url->match) && preg_match($c_part->url->match, urls::get_current()->path)) {
+        if (isset($c_part->match->url) && preg_match(
+                  $c_part->match->url, urls::get_current()->path)) {
 
         # set meta
-          $meta_items = [(new markup('meta', ['charset' => 'utf-8']))->render()];
+          $rendered_meta = [(new markup('meta', ['charset' => 'utf-8']))->render()];
           if (isset($c_part->favicons)) {
             foreach ($c_part->favicons as $c_icon) {
               $c_url = new url('/modules/'.$module_id.'/'.$c_icon->file);
-              $meta_items[] = (new markup('link', [
+              $rendered_meta[] = (new markup('link', [
                 'rel'   => 'icon',
                 'type'  => 'image/png',
                 'sizes' => $c_icon->sizes,
@@ -57,7 +58,7 @@ namespace effectivecore {
               ]))->render();
             }
             $template->set_var('meta',
-              implode(nl, $meta_items)
+              implode(nl, $rendered_meta)
             );
           }
 
@@ -94,8 +95,8 @@ namespace effectivecore {
     }
 
   # collect page arguments
-    if (isset($this->url->args)) {
-      foreach ($this->url->args as $c_name => $c_num) {
+    if (isset($this->match->args)) {
+      foreach ($this->match->args as $c_name => $c_num) {
         pages::$args[$c_name] = urls::get_current()->get_args($c_num);
       }
     }
@@ -103,11 +104,12 @@ namespace effectivecore {
   # collect page content
     $contents = [];
     foreach ($this->content as $c_content) {
-      $c_region = isset($c_content->region) ? $c_content->region : 'c_1_1';
+      $c_region = isset($c_content->region) ?
+                        $c_content->region : 'c_1_1';
       switch ($c_content->type) {
         case 'text': $contents[$c_region][] = $c_content->content; break;
         case 'code': $contents[$c_region][] = call_user_func_array($c_content->handler, pages::$args); break;
-        case 'link': $contents[$c_region][] = factory::npath_get_object($c_content->link, storages::get('settings')->select()); break;
+        case 'link': $contents[$c_region][] = factory::npath_get_object($c_content->npath, storages::get('settings')->select()); break;
         default:     $contents[$c_region][] = $c_content;
       }
     }

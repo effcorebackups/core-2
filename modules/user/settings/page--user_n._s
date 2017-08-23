@@ -2,8 +2,8 @@ pages
 - page_user_n|page
     title: User profile (%%_user_email_context{2})
     https: true
-    url
-      match: %^/user/[0-9]+$%
+    match
+      url: %^/user/[0-9]+$%
       args
       - user_id: 2
     access
@@ -14,11 +14,11 @@ pages
     - block_tree_main
         region: nav
         type: link
-        link: trees/core/main
+        npath: trees/core/main
     - block_tree_user
         region: nav
         type: link
-        link: trees/user/user
+        npath: trees/user/user
     - block_user_n
         region: content_1_1
         type: code
