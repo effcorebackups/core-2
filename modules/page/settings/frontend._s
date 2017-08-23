@@ -20,4 +20,12 @@ frontend
         media: all
     script
     - script_page
-        file: frontend/script.js
+        file: frontend/page.js
+- frontend_form_n
+    display
+      npath
+        match: %^forms/.*$%
+        where: block
+    script
+    - script_form
+        file: frontend/form.js
