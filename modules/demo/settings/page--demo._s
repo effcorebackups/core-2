@@ -1,8 +1,9 @@
 pages
 - page_demo|page
     title: Demo
-    match
-      url: %^/admin/demo$%
+    display
+      url
+        match: %^/admin/demo$%
     access
       roles
       - admins: admins

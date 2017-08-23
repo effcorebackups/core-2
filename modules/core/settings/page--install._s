@@ -1,8 +1,9 @@
 pages
 - page_install|page
     title: Installation
-    match
-      url: %^/install$%
+    display
+      url
+        match: %^/install$%
     content
     - block_tree_main
         region: nav

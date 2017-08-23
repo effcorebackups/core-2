@@ -42,8 +42,8 @@ namespace effectivecore {
     $parts = storages::get('settings')->select('frontend');
     foreach ($parts as $module_id => $c_part_group) {
       foreach ($c_part_group as $c_part) {
-        if (isset($c_part->match->url) && preg_match(
-                  $c_part->match->url, urls::get_current()->path)) {
+        if (isset($c_part->display->url->match) && preg_match(
+                  $c_part->display->url->match, urls::get_current()->path)) {
 
         # set meta
           $rendered_meta = [(new markup('meta', ['charset' => 'utf-8']))->render()];
@@ -95,8 +95,8 @@ namespace effectivecore {
     }
 
   # collect page arguments
-    if (isset($this->match->args)) {
-      foreach ($this->match->args as $c_name => $c_num) {
+    if (isset($this->display->url->args)) {
+      foreach ($this->display->url->args as $c_name => $c_num) {
         pages::$args[$c_name] = urls::get_current()->get_args($c_num);
       }
     }

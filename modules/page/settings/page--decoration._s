@@ -1,8 +1,9 @@
 pages
 - page_decoration|page
     title: Decoration
-    match
-      url: %^/admin/decoration$%
+    display
+      url
+        match: %^/admin/decoration$%
     access
       roles
       - admins: admins

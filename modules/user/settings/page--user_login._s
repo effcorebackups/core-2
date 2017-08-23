@@ -2,8 +2,9 @@ pages
 - page_user_login|page
     title: Login
     https: true
-    match
-      url: %^/user/login$%
+    display
+      url
+        match: %^/user/login$%
     access
       roles
       - anonymous: anonymous

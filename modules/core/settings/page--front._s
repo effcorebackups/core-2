@@ -1,8 +1,9 @@
 pages
 - page_front|page
     title: Front page
-    match
-      url: %^/$%
+    display
+      url
+        match: %^/$%
     content
     - block_tree_main
         region: nav

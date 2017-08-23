@@ -1,8 +1,9 @@
 pages
 - page_user_logout|page
     title: Logout from the system
-    match
-      url: %^/user/logout$%
+    display
+      url
+        match: %^/user/logout$%
     access
       roles
       - registered: registered

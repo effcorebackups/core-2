@@ -2,10 +2,11 @@ pages
 - page_user_n|page
     title: User profile (%%_user_email_context{2})
     https: true
-    match
-      url: %^/user/[0-9]+$%
-      args
-      - user_id: 2
+    display
+      url
+        match: %^/user/[0-9]+$%
+        args
+        - user_id: 2
     access
       roles
       - admins: admins

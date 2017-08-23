@@ -2,8 +2,9 @@ pages
 - page_user_registration|page
     title: Registration
     https: true
-    match
-      url: %^/user/registration$%
+    display
+      url
+        match: %^/user/registration$%
     access
       roles
       - anonymous: anonymous

@@ -1,8 +1,9 @@
 pages
 - page_admin_users|page
     title: Users
-    match
-      url: %^/admin/users$%
+    display
+      url
+        match: %^/admin/users$%
     access
       roles
       - admins: admins

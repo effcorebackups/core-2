@@ -1,7 +1,8 @@
 frontend
 - frontend_page_n
-    match
-      url: %.*%
+    display
+      url
+        match: %.*%
     favicons
     - favicon_classic
         file: frontend/favicon.png

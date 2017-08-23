@@ -1,8 +1,9 @@
 pages
 - page_modules|page
     title: Modules
-    match
-      url: %^/admin/modules$%
+    display
+      url
+        match: %^/admin/modules$%
     access
       roles
       - admins: admins
