@@ -1,8 +1,9 @@
 frontend
 - frontend_page_n
     display
-      url
-        match: %.*%
+      npath
+        match: %^trees/.*$%
+        where: block
     favicons
     - favicon_classic
         file: frontend/favicon.png

@@ -1,8 +1,9 @@
 frontend
-- frontend_page_n
+- frontend_block_tree
     display
-      url
-        match: %.*%
+      npath
+        match: %^trees/.*$%
+        where: block
     styles
     - style_tree
         file: frontend/tree.css

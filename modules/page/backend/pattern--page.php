@@ -36,19 +36,26 @@ namespace effectivecore {
       messages::add_new('This page should be use HTTPS protocol!', 'warning');
     }
 
-  # collect frontend
+  # render frontend items: icons, styles, script
+    $rendered_meta = [(new markup('meta', ['charset' => 'utf-8']))->render()];
     $rendered_styles = '';
     $rendered_script = '';
-    $parts = storages::get('settings')->select('frontend');
-    foreach ($parts as $module_id => $c_part_group) {
-      foreach ($c_part_group as $c_part) {
-        if (isset($c_part->display->url->match) && preg_match(
-                  $c_part->display->url->match, urls::get_current()->path)) {
+    $used_links = [];
+    foreach ($this->content as $c_block) {
+      if ($c_block->type == 'link') {
+        $used_links[] = $c_block->npath;
+      }
+    }
+    foreach (storages::get('settings')->select('frontend') as $module_id => $c_frontend_items) {
+      foreach ($c_frontend_items as $c_item) {
+        if (    (isset($c_item->display->url->match) &&
+            preg_match($c_item->display->url->match, urls::get_current()->path)) ||
+                (isset($c_item->display->npath->match) &&
+            preg_match($c_item->display->npath->match.'m', implode(nl, $used_links)))) {
 
-        # set meta
-          $rendered_meta = [(new markup('meta', ['charset' => 'utf-8']))->render()];
-          if (isset($c_part->favicons)) {
-            foreach ($c_part->favicons as $c_icon) {
+        # render meta
+          if (isset($c_item->favicons)) {
+            foreach ($c_item->favicons as $c_icon) {
               $c_url = new url('/modules/'.$module_id.'/'.$c_icon->file);
               $rendered_meta[] = (new markup('link', [
                 'rel'   => 'icon',
@@ -62,9 +69,9 @@ namespace effectivecore {
             );
           }
 
-        # collect styles
-          if (isset($c_part->styles)) {
-            foreach ($c_part->styles as $c_style) {
+        # render styles
+          if (isset($c_item->styles)) {
+            foreach ($c_item->styles as $c_style) {
               $c_url = new url('/modules/'.$module_id.'/'.$c_style->file);
               $rendered_styles[] = (new markup('link', [
                 'rel'   => 'stylesheet',
@@ -77,9 +84,9 @@ namespace effectivecore {
             );
           }
 
-        # collect script
-          if (isset($c_part->script)) {
-            foreach ($c_part->script as $c_script) {
+        # render script
+          if (isset($c_item->script)) {
+            foreach ($c_item->script as $c_script) {
               $c_url = new url('/modules/'.$module_id.'/'.$c_script->file);
               $rendered_script[] = (new markup('script', [
                 'src' => $c_url->get_full()
@@ -103,14 +110,14 @@ namespace effectivecore {
 
   # collect page content
     $contents = [];
-    foreach ($this->content as $c_content) {
-      $c_region = isset($c_content->region) ?
-                        $c_content->region : 'c_1_1';
-      switch ($c_content->type) {
-        case 'text': $contents[$c_region][] = $c_content->content; break;
-        case 'code': $contents[$c_region][] = call_user_func_array($c_content->handler, pages::$args); break;
-        case 'link': $contents[$c_region][] = factory::npath_get_object($c_content->npath, storages::get('settings')->select()); break;
-        default:     $contents[$c_region][] = $c_content;
+    foreach ($this->content as $c_block) {
+      $c_region = isset($c_block->region) ?
+                        $c_block->region : 'c_1_1';
+      switch ($c_block->type) {
+        case 'text': $contents[$c_region][] = $c_block->content; break;
+        case 'code': $contents[$c_region][] = call_user_func_array($c_block->handler, pages::$args); break;
+        case 'link': $contents[$c_region][] = factory::npath_get_object($c_block->npath, storages::get('settings')->select()); break;
+        default:     $contents[$c_region][] = $c_block;
       }
     }
 
