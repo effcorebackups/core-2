@@ -50,7 +50,7 @@ namespace effectivecore {
       foreach ($c_frontend_items as $c_item) {
         if (    (isset($c_item->display->url->match) &&
             preg_match($c_item->display->url->match, urls::get_current()->path)) ||
-                (isset($c_item->display->npath->match) &&
+                (isset($c_item->display->npath->match) && $c_item->display->npath->where == 'block' &&
             preg_match($c_item->display->npath->match.'m', implode(nl, $used_links)))) {
 
         # render meta

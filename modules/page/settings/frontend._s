@@ -1,9 +1,8 @@
 frontend
 - frontend_page_n
     display
-      npath
-        match: %^trees/.*$%
-        where: block
+      url
+        match: %.*%
     favicons
     - favicon_classic
         file: frontend/favicon.png
@@ -11,9 +10,6 @@ frontend
     styles
     - style_page
         file: frontend/page.css
-        media: all
-    - style_form
-        file: frontend/form.css
         media: all
     - style_console
         file: frontend/console.css
@@ -26,6 +22,10 @@ frontend
       npath
         match: %^forms/.*$%
         where: block
+    styles
+    - style_form
+        file: frontend/form.css
+        media: all
     script
     - script_form
         file: frontend/form.js
