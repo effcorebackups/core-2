@@ -58,10 +58,10 @@ namespace effectivecore {
             foreach ($c_item->favicons as $c_icon) {
               $c_url = new url('/modules/'.$module_id.'/'.$c_icon->file);
               $rendered_meta[] = (new markup('link', [
-                'rel'   => 'icon',
-                'type'  => 'image/png',
-                'sizes' => $c_icon->sizes,
-                'href'  => $c_url->get_full()
+                'rel'   => $c_icon->rel,
+                'type'  => $c_icon->type,
+                'href'  => $c_url->get_full(),
+                'sizes' => $c_icon->sizes
               ]))->render();
             }
             $template->set_var('meta',
