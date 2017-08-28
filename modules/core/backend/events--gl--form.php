@@ -73,23 +73,22 @@ namespace effectivecore {
             continue;
           }
 
-        # ─────────────────────────────────────────────────────────────────────
         # conversion matrix for value from text field (expected: undefined|string):
         # ─────────────────────────────────────────────────────────────────────
         # - unset($_POST[name])                 -> ''
         # - $_POST[name] == ''                  -> ''
         # - $_POST[name] == 'value'             -> 'value'
         # ─────────────────────────────────────────────────────────────────────
+
           $c_new_text_value = isset($values[$c_name]) ?
                                     $values[$c_name] : '';
 
-        # ─────────────────────────────────────────────────────────────────────
         # conversion matrix for value from singular select (expected: undefined|string):
         # ─────────────────────────────────────────────────────────────────────
         # - unset($_POST[name])                 -> []
         # - $_POST[name] == ''                  -> ['' => '']
         # - $_POST[name] == 'value'             -> ['value' => 'value']
-        # ─────────────────────────────────────────────────────────────────────
+
         # conversion matrix for values from multiple select (expected: undefined|array):
         # ─────────────────────────────────────────────────────────────────────
         # - unset($_POST[name])                 -> []
@@ -98,6 +97,7 @@ namespace effectivecore {
         # - $_POST[name] == [0 => 'value']      -> ['value' => 'value']
         # - $_POST[name] == [0 => 'value', ...] -> ['value' => 'value', ...]
         # ─────────────────────────────────────────────────────────────────────
+
           $c_new_select_values = factory::array_values_map_to_keys(
                 !isset($values[$c_name]) ? [] :
              (is_array($values[$c_name]) ?
@@ -207,8 +207,7 @@ namespace effectivecore {
       $element->title
     );
 
-  # ─────────────────────────────────────────────────────────────────────
-  # convert array with empty strings to array without empty strings
+  # convert array with empty strings to array without empty strings:
   # ─────────────────────────────────────────────────────────────────────
   # - []                        -> []
   # - ['' => '']                -> []
@@ -216,6 +215,7 @@ namespace effectivecore {
   # - ['value' => 'value']      -> ['value' => 'value']
   # - ['value' => 'value', ...] -> ['value' => 'value', ...]
   # ─────────────────────────────────────────────────────────────────────
+
     if ($element->attribute_select('required') && empty(array_filter($new_values, 'strlen'))) {
       $form->add_error($id,
         translations::get('Field "%%_title" must be selected!', ['title' => $title])
@@ -223,11 +223,11 @@ namespace effectivecore {
       return;
     }
 
-  # ─────────────────────────────────────────────────────────────────────
-  # normalize not empty array
+  # normalize not empty array:
   # ─────────────────────────────────────────────────────────────────────
   # - ['' => '', ...]           -> [...]
   # ─────────────────────────────────────────────────────────────────────
+
     if (isset($new_values['']) &&
         count($new_values) > 1)
         unset($new_values['']);
