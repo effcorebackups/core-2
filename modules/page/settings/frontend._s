@@ -10,7 +10,7 @@ frontend
         rel: icon
         file: frontend/icon-32x32.png
         sizes: 32x32
-  # icon for ipad air ...
+  # icon for ipad
     - icon_ipad
         type: image/png
         rel: apple-touch-icon
