@@ -4,8 +4,14 @@ frontend
       url
         match: %.*%
     favicons
+  # icon classic
+    - icon_32_classic
+        type: image/x-icon
+        rel: icon
+        file: frontend/icon-32x32.ico
+        sizes: 32x32
   # icon for all modern browsers: Safari, Opera, Chrome, Firefox, IE 11, Edge ...
-    - icon_32
+    - icon_32_modern
         type: image/png
         rel: icon
         file: frontend/icon-32x32.png
