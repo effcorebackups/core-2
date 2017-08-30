@@ -4,36 +4,31 @@ frontend
       url
         match: %.*%
     favicons
-  # icon for all modern browsers: ie-11, edge, ...
+  # icon for all modern browsers: Safari, Opera, Chrome, Firefox, IE 11, Edge ...
     - icon_32
         type: image/png
         rel: icon
         file: frontend/icon-32x32.png
         sizes: 32x32
-    - icon_64
-        type: image/png
-        rel: icon
-        file: frontend/icon-64x64.png
-        sizes: 64x64
-  # icon for: ipad 2
+  # icon for Safari on iPad 1/2
     - icon_apple_76
         type: image/png
         rel: apple-touch-icon
         file: frontend/icon-76x76.png
         sizes: 76x76
-  # icon for: iphone
+  # icon for Safari on iPhone
     - icon_apple_120
         type: image/png
         rel: apple-touch-icon
         file: frontend/icon-120x120.png
         sizes: 120x120
-  # icon for: ipad
+  # icon for Safari on any iPad
     - icon_apple_152
         type: image/png
         rel: apple-touch-icon
         file: frontend/icon-152x152.png
         sizes: 152x152
-  # icon for: ipad 3+, iphone
+  # icon for Safari on iPad 3+, iPhone, macOS
     - icon_apple_192
         type: image/png
         rel: apple-touch-icon
