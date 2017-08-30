@@ -10,22 +10,25 @@ frontend
         rel: icon
         file: frontend/icon-32x32.png
         sizes: 32x32
-  # icon for apple devices
+  # icon for: ipad 2
     - icon_apple_76
         type: image/png
         rel: apple-touch-icon
         file: frontend/icon-76x76.png
         sizes: 76x76
+  # icon for: iphone
     - icon_apple_120
         type: image/png
         rel: apple-touch-icon
         file: frontend/icon-120x120.png
         sizes: 120x120
+  # icon for: ipad
     - icon_apple_152
         type: image/png
         rel: apple-touch-icon
         file: frontend/icon-152x152.png
         sizes: 152x152
+  # icon for: ipad 3+, iphone
     - icon_apple_192
         type: image/png
         rel: apple-touch-icon
