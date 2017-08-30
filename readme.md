@@ -1,7 +1,7 @@
 
 
 SOFTWARE REQUIREMENTS
----------------------
+─────────────────────────────────────────────────────────────────────
 - Оperating system: Unix/Linux
 - Web server: nginx and/or Apache v2.2+
 - Server-side scripting language: PHP v.5.6+ or v.7.1+ (with libraries: ...)
@@ -10,15 +10,22 @@ SOFTWARE REQUIREMENTS
 
 
 HARDWARE REQUIREMENTS FOR SERVERS WITH THE BEST PERFORMANCE
------------------------------------------------------------
+─────────────────────────────────────────────────────────────────────
 - Memory: DDR4 ECC
 - Hard drive: SSD RAID on PCI-Express or faster
 - CPU: Intel Xeon/i7
 - Motherboard: server motherboard
 
 
+WEB CLIENTS SUPPORT
+─────────────────────────────────────────────────────────────────────
+- Safari on iOS v8, v9, v10
+- Windows: IE v9, IE v10, IE v11, Edge
+- All modern browsers
+
+
 SECURITY
---------
+─────────────────────────────────────────────────────────────────────
 - We recommend to using own servers located in rooms with access control.
   Deployment of your servers in USA/Russia/China data centers does not guarantee your privacy.
   You can get an internal network threat from different sniffers.

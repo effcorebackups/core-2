@@ -5,11 +5,16 @@ frontend
         match: %.*%
     favicons
   # icon for all modern browsers: ie-11, edge, ...
-    - icon_default
+    - icon_32
         type: image/png
         rel: icon
         file: frontend/icon-32x32.png
         sizes: 32x32
+    - icon_64
+        type: image/png
+        rel: icon
+        file: frontend/icon-64x64.png
+        sizes: 64x64
   # icon for: ipad 2
     - icon_apple_76
         type: image/png
