@@ -15,6 +15,9 @@ file_types
     use_tokens: 1
     headers
     - Content-type: application/javascript
+- ico
+    headers
+    - Content-type: image/x-icon
 - gif
     headers
     - Content-type: image/gif
