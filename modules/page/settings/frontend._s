@@ -16,6 +16,11 @@ frontend
         rel: apple-touch-icon
         file: frontend/icon-76x76.png
         sizes: 76x76
+    - icon_apple_120
+        type: image/png
+        rel: apple-touch-icon
+        file: frontend/icon-120x120.png
+        sizes: 120x120
     - icon_apple_152
         type: image/png
         rel: apple-touch-icon
