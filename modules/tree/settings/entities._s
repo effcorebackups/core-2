@@ -1,0 +1,42 @@
+entities
+- tree|entity
+    name: tree
+    storage_id: db_main
+    charset: utf8
+    fields
+      id
+        type: int
+        size: 11
+        unsigned: true
+        not_null: true
+        auto_increment: true
+      title
+        type: varchar
+        size: 255
+        not_null: true
+    indexes
+    - primary
+        type: primary key
+        fields
+        - id: id
+- tree_item|entity
+    name: tree_item
+    storage_id: db_main
+    charset: utf8
+    fields
+      id
+        type: int
+        size: 11
+        unsigned: true
+        not_null: true
+        auto_increment: true
+      parent_id
+        type: int
+        size: 11
+        unsigned: true
+        not_null: true
+    indexes
+    - primary
+        type: primary key
+        fields
+        - id: id
