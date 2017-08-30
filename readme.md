@@ -19,9 +19,13 @@ HARDWARE REQUIREMENTS FOR SERVERS WITH THE BEST PERFORMANCE
 
 WEB CLIENTS SUPPORT
 ─────────────────────────────────────────────────────────────────────
-- Safari on iOS v8, v9, v10
-- Windows: IE v9, IE v10, IE v11, Edge
-- All modern browsers
+- Safari (macOS, iOS 8+);
+- Opera;
+- Firefox;
+- Chrome;
+- MS IE 9+;
+- MS Edge;
+- other modern browsers.
 
 
 SECURITY
