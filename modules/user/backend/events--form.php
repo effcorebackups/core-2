@@ -16,7 +16,7 @@ namespace effectivecore\modules\user {
           use \effectivecore\modules\user\session_factory as session;
           abstract class events_form extends \effectivecore\events_form {
 
-  static function on_submit_user_n_delete($form, $elements) {
+  static function on_submit_user_n_delete($form, $elements, &$values) {
     $user_id = pages::$args['user_id'];
     switch ($form->clicked_button_name) {
       case 'delete':
@@ -46,14 +46,13 @@ namespace effectivecore\modules\user {
     }
   }
 
-  static function on_submit_user_n_edit($form, $elements) {
-    $user_id       = pages::$args['user_id'];
-    $password_hash = isset($_POST['password']) ? sha1($_POST['password']) : '';
+  static function on_submit_user_n_edit($form, $elements, &$values) {
+    $user_id = pages::$args['user_id'];
     switch ($form->clicked_button_name) {
       case 'save':
         $result = (new entity_instance('entities/user/user', [
           'id'            => $user_id,
-          'password_hash' => $password_hash,
+          'password_hash' => sha1($values['password_new']),
         ]))->update();
         if ($result) {
           messages::add_new(
@@ -72,17 +71,15 @@ namespace effectivecore\modules\user {
     }
   }
 
-  static function on_submit_user_login($form, $elements) {
-    $email         = isset($_POST['email'])    ? $_POST['email']          : '';
-    $password_hash = isset($_POST['password']) ? sha1($_POST['password']) : '';
+  static function on_submit_user_login($form, $elements, &$values) {
     switch ($form->clicked_button_name) {
       case 'login':
         $user = (new entity_instance('entities/user/user', [
-          'email' => $email
+          'email' => $values['email']
         ]))->select(['email']);
         if ($user &&
             $user->id &&
-            $user->password_hash === $password_hash) {
+            $user->password_hash === sha1($values['password'])) {
           session::init($user->id);
           urls::go('/user/'.$user->id);
         } else {
@@ -94,13 +91,11 @@ namespace effectivecore\modules\user {
     }
   }
 
-  static function on_submit_user_register($form, $elements) {
-    $email         = isset($_POST['email'])    ? $_POST['email']          : '';
-    $password_hash = isset($_POST['password']) ? sha1($_POST['password']) : '';
+  static function on_submit_user_register($form, $elements, &$values) {
     switch ($form->clicked_button_name) {
       case 'register':
         $user = (new entity_instance('entities/user/user', [
-          'email' => $email
+          'email' => $values['email']
         ]))->select(['email']);
         if ($user) {
           messages::add_new(
@@ -108,8 +103,8 @@ namespace effectivecore\modules\user {
           );
         } else {
           $user = (new entity_instance('entities/user/user', [
-            'email'         => $email,
-            'password_hash' => $password_hash,
+            'email'         => $values['email'],
+            'password_hash' => sha1($values['password']),
             'created'       => date(format_datetime, time())
           ]))->insert();
           if ($user->id) {
@@ -125,7 +120,7 @@ namespace effectivecore\modules\user {
     }
   }
 
-  static function on_submit_user_logout($form, $elements) {
+  static function on_submit_user_logout($form, $elements, &$values) {
     switch ($form->clicked_button_name) {
       case 'logout':
         session::destroy(users::get_current()->id);

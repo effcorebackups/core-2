@@ -16,7 +16,7 @@ namespace effectivecore\modules\page {
     $elements['fieldset_default/field_color_bg']->default_set($decoration['page']->color_bg);
   }
 
-  static function on_submit_admin_decoration($form, $elements, $values) {
+  static function on_submit_admin_decoration($form, $elements, &$values) {
     storages::get('settings')->changes_register_action('page', 'update', 'decoration/page/color',    $values['color'], false);
     storages::get('settings')->changes_register_action('page', 'update', 'decoration/page/color_bg', $values['color_bg']);
     messages::add_new('Changes was saved.');

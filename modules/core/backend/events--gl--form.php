@@ -68,7 +68,7 @@ namespace effectivecore {
   # input[type=color]    : VALUE should match the pattern #dddddd
   # ─────────────────────────────────────────────────────────────────────
 
-  static function on_validate($form, $elements, $values) {
+  static function on_validate($form, $elements, &$values) {
     foreach ($elements as $c_id => $c_element) {
       if ($c_element instanceof node) {
         $c_name = rtrim($c_element->attribute_select('name'), '[]');
@@ -303,7 +303,7 @@ namespace effectivecore {
   ### on_submit ###
   #################
 
-  static function on_submit_install($form, $elements) {
+  static function on_submit_install($form, $elements, &$values) {
     switch ($form->clicked_button_name) {
       case 'install':
         foreach (static::get()->on_module_install as $c_event) call_user_func($c_event->handler);

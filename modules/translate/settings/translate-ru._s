@@ -24,6 +24,8 @@ translate
   - Color ID = %%_id (value = %%_value): ID цвета = %%_id (значение = %%_value)
   - Modules was installed.: Модули были установлены.
   - Tables for module %%_name was installed.: Таблицы для модуля %%_name были установлены.
+  - Old password: Старый пароль
+  - New password: Новый пароль
   - - select -: - выбрать -
   - Actions: Действия
   - Administer: Администрирование

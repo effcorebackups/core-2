@@ -10,14 +10,27 @@ forms
     - fieldset_default|form_container
         tag_name: fieldset
         children
-        - field_password|form_field
+        - field_password_old|form_field
             children
             - default|form_element
                 tag_name: input
-                title: Password
+                title: Old password
                 attributes
                 - type: password
-                - name: password
+                - name: password_old
+                - required: required
+                - minlength: 5
+                - maxlength: 255
+                - autocomplete: off
+                - disabled: disabled
+        - field_password_new|form_field
+            children
+            - default|form_element
+                tag_name: input
+                title: New password
+                attributes
+                - type: password
+                - name: password_new
                 - required: required
                 - minlength: 5
                 - maxlength: 255

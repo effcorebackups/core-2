@@ -23,7 +23,7 @@ namespace effectivecore\modules\demo {
     $elements['fieldset_default/field_select_multiple_macro']->value_insert('Option 2.9 (inserted from init)', 'option_2_9', [], 'group_2_2');
   }
 
-  static function on_submit_demo($form, $elements) {
+  static function on_submit_demo($form, $elements, &$values) {
     messages::add_new('Call \effectivecore\modules\demo\events_form::on_submit_demo.');
   }
 
