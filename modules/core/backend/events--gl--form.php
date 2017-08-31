@@ -72,7 +72,7 @@ namespace effectivecore {
     foreach ($elements as $c_id => $c_element) {
       if ($c_element instanceof node) {
         $c_name = rtrim($c_element->attribute_select('name'), '[]');
-        $c_type = $c_element->attribute_select('type');
+        $c_type =       $c_element->attribute_select('type');
         if ($c_name) {
 
         # disable processing if element disabled or readonly
@@ -88,8 +88,11 @@ namespace effectivecore {
         # - $_POST[name] == 'value'             -> 'value'
         # ─────────────────────────────────────────────────────────────────────
 
-          $c_new_text_value = isset($values[$c_name]) ?
-                                    $values[$c_name] : '';
+          if ($c_element->tag_name == 'textarea' ||
+              $c_element->tag_name == 'input') {
+            $c_new_text_value = isset($values[$c_name]) ?
+                                      $values[$c_name] : '';
+          }
 
         # conversion matrix for value from singular select (expected: undefined|string):
         # ─────────────────────────────────────────────────────────────────────
@@ -106,11 +109,13 @@ namespace effectivecore {
         # - $_POST[name] == [0 => 'value', ...] -> ['value' => 'value', ...]
         # ─────────────────────────────────────────────────────────────────────
 
-          $c_new_select_values = factory::array_values_map_to_keys(
-                !isset($values[$c_name]) ? [] :
-             (is_array($values[$c_name]) ?
-                       $values[$c_name]  :
-                      [$values[$c_name]]));
+          if ($c_element->tag_name == 'select') {
+            $c_new_select_values = factory::array_values_map_to_keys(
+                  !isset($values[$c_name]) ? [] :
+               (is_array($values[$c_name]) ?
+                         $values[$c_name]  :
+                        [$values[$c_name]]));
+          }
 
         # select validation:
         # ─────────────────────────────────────────────────────────────────────
