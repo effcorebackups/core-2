@@ -7,6 +7,7 @@
 namespace effectivecore\modules\tree {
           use \effectivecore\factory;
           use \effectivecore\messages_factory as messages;
+          use \effectivecore\translations_factory as translations;
           use \effectivecore\modules\storage\storages_factory as storages;
           abstract class events_module extends \effectivecore\events_module {
 
@@ -26,7 +27,9 @@ namespace effectivecore\modules\tree {
 
   static function on_install() {
     foreach (storages::get('settings')->select('entities')['tree'] as $c_entity) $c_entity->install();
-    messages::add_new('Database for module "tree" was installed');
+    messages::add_new(
+      translations::get('Tables for module %%_name was installed.', ['name' => 'tree'])
+    );
   }
 
 }}

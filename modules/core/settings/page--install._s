@@ -1,5 +1,5 @@
 pages
-- page_install|page
+- page_installation|page
     title: Installation
     display
       url
@@ -13,7 +13,7 @@ pages
         region: nav
         type: link
         npath: trees/user/user
-    - block_install
+    - form_installation
         region: content_1_1
-        type: code
-        handler: \effectivecore\events_page::on_show_install
+        type: link
+        npath: forms/core/form_installation

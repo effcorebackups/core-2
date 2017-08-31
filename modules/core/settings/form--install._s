@@ -1,0 +1,26 @@
+forms
+- form_installation|form
+    attributes
+    - id: installation
+    - novalidate: novalidate
+    - method: post
+    children
+    - button_install|markup
+        tag_name: button
+        attributes
+        - type: submit
+        - name: button
+        - value: install
+        children
+        - label|text
+            text: install
+    - button_cancel|markup
+        tag_name: button
+        novalidate: true
+        attributes
+        - type: submit
+        - name: button
+        - value: cancel
+        children
+        - label|text
+            text: cancel

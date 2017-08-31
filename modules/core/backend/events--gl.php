@@ -11,8 +11,8 @@ namespace effectivecore {
   protected static $data;
 
   static function init() {
-    foreach (storages::get('settings')->select('events') as $module_id => $c_events) {
-      foreach ($c_events as $c_type => $c_events) {
+    foreach (storages::get('settings')->select('events') as $module_id => $c_grp_events) {
+      foreach ($c_grp_events as $c_type => $c_events) {
         foreach ($c_events as $c_id => $c_event) {
           static::$data->{$c_type}[$c_id] = $c_event;
         }

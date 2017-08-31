@@ -6,6 +6,8 @@
 
 namespace effectivecore {
           use \effectivecore\markup;
+          use \effectivecore\urls_factory as urls;
+          use \effectivecore\messages_factory as messages;
           use \effectivecore\translations_factory as translations;
           abstract class events_form extends events {
 
@@ -300,7 +302,16 @@ namespace effectivecore {
   ### on_submit ###
   #################
 
-  static function on_submit($form, $elements, $values) {
+  static function on_submit_install($form, $elements) {
+    switch ($form->clicked_button_name) {
+      case 'install':
+        foreach (static::get()->on_module_install as $c_event) call_user_func($c_event->handler);
+        messages::add_new('Modules was installed.');
+        break;
+      case 'cancel':
+        urls::go(urls::get_back_url() ?: '/');
+        break;
+    }
   }
 
 }}

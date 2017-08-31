@@ -5,15 +5,8 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\modules\page\pages_factory as pages;
           use \effectivecore\modules\storage\storages_factory as storages;
           abstract class events_page extends events {
-
-  static function on_show_install() {
-    foreach (static::get()->on_module_install as $c_event) {
-      call_user_func($c_event->handler);
-    }
-  }
 
   static function on_show_admin_modules() {
     $head = [[
