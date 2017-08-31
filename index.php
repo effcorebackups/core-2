@@ -26,7 +26,6 @@ namespace effectivecore {
   use \effectivecore\urls_factory as urls;
   use \effectivecore\tokens_factory as tokens;
   use \effectivecore\timers_factory as timers;
-  use \effectivecore\console_factory as console;
   use \effectivecore\modules\storage\storages_factory as storages;
   timers::tap('total');
 
@@ -86,17 +85,8 @@ namespace effectivecore {
 
   # case for page (non file)
   ob_start();
-  foreach (events::get()->on_module_start as $c_info) {
-    $c_handler = $c_info->handler;
-    timers::tap($c_handler);
-    $c_result = call_user_func($c_handler);
-    if ($c_result) {
-      print str_replace("\n\n", '', $c_result);
-    }
-    timers::tap($c_handler);
-    console::add_log(
-      'Call', $c_handler, '-', timers::get_period($c_handler, 0, 1)
-    );
+  foreach (events::start('on_module_start') as $c_result) {
+    print str_replace("\n\n", '', $c_result);
   }
 
 }

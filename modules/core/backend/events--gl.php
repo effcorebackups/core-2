@@ -5,6 +5,8 @@
   #############################################################
 
 namespace effectivecore {
+          use \effectivecore\timers_factory as timers;
+          use \effectivecore\console_factory as console;
           use \effectivecore\modules\storage\storages_factory as storages;
           abstract class events {
 
@@ -29,13 +31,21 @@ namespace effectivecore {
   }
 
   static function start($type, $id = null, $args = []) {
+    $return = [];
+    if (!static::$data) static::init();
     if (!empty(events::get()->{$type})) {
       foreach (events::get()->{$type} as $c_id => $c_info) {
         if ($id == null || $id == $c_id) {
-          call_user_func_array($c_info->handler, $args);
+          timers::tap($c_id);
+          $return[] = call_user_func_array($c_info->handler, $args);
+          timers::tap($c_id);
+          console::add_log(
+            'Event', $c_info->handler, '-', timers::get_period($c_id, 0, 1)
+          );
         }
       }
     }
+    return $return;
   }
 
 }}

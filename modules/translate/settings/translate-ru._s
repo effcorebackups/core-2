@@ -53,6 +53,7 @@ translate
   - disabled: выкл.
   - Edit profile (%%_user_email_context{2}): Редактировать профиль (%%_user_email_context{2})
   - Edit profile: Редактировать профиль
+  - Event: Событие
   - edit: изменить
   - EMail: Адрес электронной почты
   - enabled: вкл.
