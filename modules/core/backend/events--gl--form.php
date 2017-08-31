@@ -41,6 +41,11 @@ namespace effectivecore {
   # input[type=date]     : disabled, readonly, required, min, max
   # input[type=time]     : disabled, readonly, required, min, max
   # input[type=color]    : disabled, readonly, required
+  # input[type=submit]   : not processed element
+  # input[type=reset]    : not processed element
+  # input[type=image]    : not processed element
+  # input[type=button]   : not processed element
+  # input[type=hidden]   : not processed element
   # ─────────────────────────────────────────────────────────────────────
 
   # attributes validation plan:
@@ -67,6 +72,7 @@ namespace effectivecore {
     foreach ($elements as $c_id => $c_element) {
       if ($c_element instanceof node) {
         $c_name = rtrim($c_element->attribute_select('name'), '[]');
+        $c_type = $c_element->attribute_select('type');
         if ($c_name) {
 
         # disable processing if element disabled or readonly
@@ -106,95 +112,85 @@ namespace effectivecore {
                        $values[$c_name]  :
                       [$values[$c_name]]));
 
-        # elements validation
-          switch ($c_element->tag_name) {
-
-            case 'select':
-            # collect allowed values
-              $c_allowed_values = [];
-              foreach ($c_element->child_select_all() as $c_option) {
-                if ($c_option instanceof node && $c_option->tag_name == 'option') {
-                  if (!$c_option->attribute_select('disabled')) {
-                    $c_allowed_values[$c_option->attribute_select('value')] =
-                                      $c_option->attribute_select('value');
-                  }
+        # select validation:
+        # ─────────────────────────────────────────────────────────────────────
+          if ($c_element->tag_name == 'select') {
+          # collect allowed values
+            $c_allowed_values = [];
+            foreach ($c_element->child_select_all() as $c_option) {
+              if ($c_option instanceof node && $c_option->tag_name == 'option') {
+                if (!$c_option->attribute_select('disabled')) {
+                  $c_allowed_values[$c_option->attribute_select('value')] =
+                                    $c_option->attribute_select('value');
                 }
               }
-              static::_validate_field_selector($form, $c_element, $c_id,
-                $c_new_select_values, $c_allowed_values
-              );
-            # set new values after validation
-              foreach ($c_element->child_select_all() as $c_option) {
-                if ($c_option instanceof node && $c_option->tag_name == 'option') {
-                  $c_option->attribute_delete('selected');
-                  if (isset($c_new_select_values[$c_option->attribute_select('value')])) {
-                    $c_option->attribute_insert('selected', 'selected');
-                  }
+            }
+            static::_validate_field_selector($form, $c_element, $c_id,
+              $c_new_select_values, $c_allowed_values
+            );
+          # set new values after validation
+            foreach ($c_element->child_select_all() as $c_option) {
+              if ($c_option instanceof node && $c_option->tag_name == 'option') {
+                $c_option->attribute_delete('selected');
+                if (isset($c_new_select_values[$c_option->attribute_select('value')])) {
+                  $c_option->attribute_insert('selected', 'selected');
                 }
               }
-              break;
-
-            case 'textarea':
-              static::_validate_field_text($form, $c_element, $c_id, $c_new_text_value);
-              $content = $c_element->child_select('content');
-              $content->text = $c_new_text_value;
-              break;
-
-            case 'input':
-              $c_type = $c_element->attribute_select('type');
-              if ($c_type) {
-
-              # input[type=submit|reset|image|button|hidden]
-                if ($c_type == 'submit' ||
-                    $c_type == 'reset'  ||
-                    $c_type == 'image'  ||
-                    $c_type == 'button' ||
-                    $c_type == 'hidden'
-                ) {
-                # not processed elements
-                  continue;
-                }
-  
-              # input[type=file]
-                if ($c_type == 'file') {
-              # ... @todo: make functionality
-                }
-  
-              # input[type=checkbox]
-                if ($c_type == 'checkbox') {
-                  if ($c_new_text_value) {
-                    $c_element->attribute_insert('checked', 'checked');
-                  }
-                }
-  
-              # input[type=radio]
-              # delete default (from init) and set new (from post) CHECKED state
-                if ($c_type == 'radio') {
-                  if  ($c_element->attribute_select('value') == $c_new_text_value)
-                       $c_element->attribute_insert('checked', 'checked');
-                  else $c_element->attribute_delete('checked');
-                }
-  
-              # input[type=text|password|search|email|url|tel|number|range|date|time|color]
-                if ($c_type == 'text'     ||
-                    $c_type == 'password' ||
-                    $c_type == 'search'   ||
-                    $c_type == 'email'    ||
-                    $c_type == 'url'      ||
-                    $c_type == 'tel'      ||
-                    $c_type == 'number'   ||
-                    $c_type == 'range'    ||
-                    $c_type == 'date'     ||
-                    $c_type == 'time'     ||
-                    $c_type == 'color'
-                ) {
-                  static::_validate_field_text($form, $c_element, $c_id, $c_new_text_value);
-                  $c_element->attribute_insert('value', $c_new_text_value);
-                }
-
-              }
-              break;
+            }
           }
+
+        # textarea validation:
+        # ─────────────────────────────────────────────────────────────────────
+          if ($c_element->tag_name == 'textarea') {
+            static::_validate_field_text($form, $c_element, $c_id, $c_new_text_value);
+            $content = $c_element->child_select('content');
+            $content->text = $c_new_text_value;
+          }
+
+        # input[type=file] validation:
+        # ─────────────────────────────────────────────────────────────────────
+          if ($c_element->tag_name == 'input' &&
+              $c_type == 'file') {
+            # @todo: make functionality
+          }
+
+        # input[type=checkbox] validation:
+        # ─────────────────────────────────────────────────────────────────────
+          if ($c_element->tag_name == 'input' &&
+              $c_type == 'checkbox') {
+            if ($c_new_text_value) {
+              $c_element->attribute_insert('checked', 'checked');
+            }
+          }
+
+        # input[type=radio] validation:
+        # ─────────────────────────────────────────────────────────────────────
+          if ($c_element->tag_name == 'input' &&
+              $c_type == 'radio') {
+          # delete default (from _init) and set new (from $_POST) CHECKED state
+            if  ($c_element->attribute_select('value') == $c_new_text_value)
+                 $c_element->attribute_insert('checked', 'checked');
+            else $c_element->attribute_delete('checked');
+          }
+
+        # input[type=text|password|search|email|url|tel|number|range|date|time|color] validation:
+        # ─────────────────────────────────────────────────────────────────────
+          if ($c_element->tag_name == 'input' && (
+              $c_type == 'text'     ||
+              $c_type == 'password' ||
+              $c_type == 'search'   ||
+              $c_type == 'url'      ||
+              $c_type == 'tel'      ||
+              $c_type == 'email'    ||
+              $c_type == 'number'   ||
+              $c_type == 'range'    ||
+              $c_type == 'date'     ||
+              $c_type == 'time'     ||
+              $c_type == 'color')) {
+            static::_validate_field_text($form, $c_element, $c_id, $c_new_text_value);
+            $c_element->attribute_insert('value', $c_new_text_value);
+          }
+
         }
       }
     }
