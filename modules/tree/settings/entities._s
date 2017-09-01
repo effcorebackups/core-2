@@ -35,6 +35,10 @@ entities
         size: 11
         unsigned: true
         not_null: true
+      title
+        type: varchar
+        size: 255
+        not_null: true
     indexes
     - primary
         type: primary key
