@@ -36,12 +36,12 @@ namespace effectivecore {
     return file_put_contents($this->get_path_full(), $this->data);
   }
 
-  function insert($once = true) {
-// events::start('on_file_insert_before', 'all', [$this]);
+  function insert($once = true, $with_events = true) {
+ // if ($with_events) events::start('on_file_insert_before', 'all', [$this]);
     $relative = $this->get_path_relative();
     $return = $once ? require_once($this->get_path_full()) :
                            require($this->get_path_full());
-// events::start('on_file_insert_after', 'all', [$this]);
+ // if ($with_events) events::start('on_file_insert_after', 'all', [$this]);
     return $return;
   }
 
