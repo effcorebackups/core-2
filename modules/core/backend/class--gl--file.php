@@ -21,13 +21,13 @@ namespace effectivecore {
     files::parse_path($path, $this);
   }
 
-  function load($reset = false) {
-    events::start('on_file_load_before', 'all', [$this]);
+  function load($reset = false, $events_is_on = true) {
+    if ($events_is_on) events::start('on_file_load_before', 'all', [$this]);
     $relative = $this->get_path_relative();
     if (!$reset && isset(static::$cache[$relative]))
            $this->data = static::$cache[$relative];
     else   $this->data = static::$cache[$relative] = file_get_contents($this->get_path_full());
-    events::start('on_file_load_after', 'all', [$this]);
+    if ($events_is_on) events::start('on_file_load_after', 'all', [$this]);
     return $this->data;
   }
 
