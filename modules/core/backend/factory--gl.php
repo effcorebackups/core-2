@@ -61,6 +61,12 @@ namespace effectivecore {
     return explode('\\', $class_name);
   }
 
+  static function class_handler_get_part($handler, $partname) {
+    $parts = explode('::', $handler);
+    if ($partname == 'classname') return !empty($parts[0]) ? $parts[0] : null;
+    if ($partname == 'method')    return !empty($parts[1]) ? $parts[1] : null;
+  }
+
   static function class_is_local($class_name) {
     $parts = static::class_get_parts($class_name);
     return $parts[0] === __NAMESPACE__;

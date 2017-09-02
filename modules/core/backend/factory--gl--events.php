@@ -36,10 +36,10 @@ namespace effectivecore {
       foreach (static::get()->{$type} as $c_id => $c_info) {
         if ($id == null || $id == $c_id) {
           timers::tap($c_id);
-          $return[] = call_user_func_array($c_info->handler, $args);
+          $return[$c_info->handler][] = $c_return = call_user_func_array($c_info->handler, $args);
           timers::tap($c_id);
           console::add_log(
-            'call', $c_info->handler, '-', timers::get_period($c_id, -1, -2)
+            'call', $c_info->handler, $c_return ? 'ok' : '-', timers::get_period($c_id, -1, -2)
           );
         }
       }

@@ -22,4 +22,17 @@ namespace effectivecore {
     );
   }
 
+  static function on_file_insert_before($file) {
+    $relative = $file->get_path_relative();
+    timers::tap('insertion_'.$relative);
+  }
+
+  static function on_file_insert_after($file) {
+    $relative = $file->get_path_relative();
+    timers::tap('insertion_'.$relative);
+    console::add_log(
+      'insertion', $relative, 'ok', timers::get_period('insertion_'.$relative, -1, -2)
+    );
+  }
+
 }}

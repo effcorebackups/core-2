@@ -22,13 +22,13 @@ namespace effectivecore {
     files::parse_path($path, $this);
   }
 
-  function load($reset = false, $events_is_on = true) {
-    if ($events_is_on) events::start('on_file_load_before', 'all', [$this]);
+  function load($reset = false, $with_events = true) {
+    if ($with_events) events::start('on_file_load_before', 'all', [$this]);
     $relative = $this->get_path_relative();
     if (!$reset && isset(static::$cache[$relative]))
            $this->data = static::$cache[$relative];
     else   $this->data = static::$cache[$relative] = file_get_contents($this->get_path_full());
-    if ($events_is_on) events::start('on_file_load_after', 'all', [$this]);
+    if ($with_events) events::start('on_file_load_after', 'all', [$this]);
     return $this->data;
   }
 
@@ -37,12 +37,11 @@ namespace effectivecore {
   }
 
   function insert($once = true) {
+// events::start('on_file_insert_before', 'all', [$this]);
     $relative = $this->get_path_relative();
-    timers::tap('insertion_'.$relative);
     $return = $once ? require_once($this->get_path_full()) :
-                      require     ($this->get_path_full());
-    timers::tap('insertion_'.$relative);
-    console::add_log('insertion', $relative, 'ok', timers::get_period('insertion_'.$relative, -1, -2));
+                           require($this->get_path_full());
+// events::start('on_file_insert_after', 'all', [$this]);
     return $return;
   }
 
