@@ -7,7 +7,7 @@
 namespace effectivecore\modules\storage {
           use \effectivecore\timers_factory as timers;
           use \effectivecore\console_factory as console;
-          abstract class events_storage extends \effectivecore\events {
+          abstract class events_storage {
 
   static function on_storage_init_before($id) {
     timers::tap('init_pdo');

@@ -8,7 +8,7 @@ namespace effectivecore {
           use \effectivecore\timers_factory as timers;
           use \effectivecore\console_factory as console;
           use \effectivecore\modules\storage\storages_factory as storages;
-          abstract class events {
+          abstract class events_factory {
 
   protected static $data;
 
@@ -32,8 +32,8 @@ namespace effectivecore {
 
   static function start($type, $id = null, $args = []) {
     $return = [];
-    if (!empty(events::get()->{$type})) {
-      foreach (events::get()->{$type} as $c_id => $c_info) {
+    if (!empty(static::get()->{$type})) {
+      foreach (static::get()->{$type} as $c_id => $c_info) {
         if ($id == null || $id == $c_id) {
           timers::tap($c_id);
           $return[] = call_user_func_array($c_info->handler, $args);

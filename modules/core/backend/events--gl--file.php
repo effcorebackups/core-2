@@ -7,7 +7,7 @@
 namespace effectivecore {
           use \effectivecore\timers_factory as timers;
           use \effectivecore\console_factory as console;
-          abstract class events_file extends events {
+          abstract class events_file {
 
   static function on_file_load_before($file) {
     $relative = $file->get_path_relative();

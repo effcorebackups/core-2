@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          abstract class events_token extends events {
+          abstract class events_token {
 
   static function on_replace($match, $arg_1_num = null) {}
 

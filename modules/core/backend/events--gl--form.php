@@ -9,7 +9,7 @@ namespace effectivecore {
           use \effectivecore\urls_factory as urls;
           use \effectivecore\messages_factory as messages;
           use \effectivecore\translations_factory as translations;
-          abstract class events_form extends events {
+          abstract class events_form {
 
   ###############
   ### on_init ###
