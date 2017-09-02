@@ -22,13 +22,12 @@ namespace effectivecore {
   }
 
   function load($reset = false) {
+    events::start('on_file_load_before', 'all', [$this]);
     $relative = $this->get_path_relative();
-    timers::tap('load_'.$relative);
     if (!$reset && isset(static::$cache[$relative]))
-         $this->data = static::$cache[$relative];
-    else $this->data = static::$cache[$relative] = file_get_contents($this->get_path_full());
-    timers::tap('load_'.$relative);
-    console::add_log('Load', $relative, 'ok', timers::get_period('load_'.$relative, -1, -2));
+           $this->data = static::$cache[$relative];
+    else   $this->data = static::$cache[$relative] = file_get_contents($this->get_path_full());
+    events::start('on_file_load_after', 'all', [$this]);
     return $this->data;
   }
 
