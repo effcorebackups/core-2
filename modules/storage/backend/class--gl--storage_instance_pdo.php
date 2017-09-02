@@ -23,18 +23,14 @@ namespace effectivecore {
   function init() {
     if (empty($this->is_init)) {
       try {
-        timers::tap('init_db');
+        events::start('on_storage_init_before', 'pdo', [$this->id]);
         $this->connection = new \PDO($this->driver.':host='.
-          $this->host_name.';dbname='.
-          $this->directory_name,
-          $this->user_name,
-          $this->password
-        );
-        timers::tap('init_db');
+                                     $this->host_name.';dbname='.
+                                     $this->directory_name,
+                                     $this->user_name,
+                                     $this->password);
+        events::start('on_storage_init_after', 'pdo', [$this->id]);
         $this->is_init = true;
-        console::add_log(
-          'Query', 'The PDO database "'.$this->id.'" was initialized on first request.', 'ok', timers::get_period('init_db', 0, 1)
-        );
       } catch (\PDOException $e) {
         factory::send_header_and_exit('access_denided',
           'The PDO database "'.$this->id.'" is unavailable!'
@@ -49,10 +45,10 @@ namespace effectivecore {
 
   function query($query) {
     $this->queries[] = $query;
-    timers::tap('query_'.count($this->queries));
+    events::start('on_query_before', 'pdo', [&$query]);
     $result = $this->connection->query($query);
     $errors = $this->connection->errorInfo();
-    timers::tap('query_'.count($this->queries));
+    events::start('on_query_after', 'pdo', [$query, &$result, $errors]);
     if ($errors[0] != '00000') {
       messages::add_new(
         'Query error! '.br.
@@ -61,9 +57,6 @@ namespace effectivecore {
         'Driver error text: '.$errors[2], 'error'
       );
     }
-    console::add_log(
-      'Query', $query, $errors[0] == '00000' ? 'ok' : 'error', timers::get_period('query_'.count($this->queries), 0, 1)
-    );
     switch (substr($query, 0, 6)) {
       case 'SELECT': return $result ? $result->fetchAll(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE, '\effectivecore\entity_instance') : null;
       case 'UPDATE': return $result->rowCount();

@@ -1,0 +1,17 @@
+events
+  on_storage_init_before
+  - pdo
+      handler: \effectivecore\modules\storage\events_storage::on_storage_init_before
+      weight: 0
+  on_storage_init_after
+  - pdo
+      handler: \effectivecore\modules\storage\events_storage::on_storage_init_after
+      weight: 0
+  on_query_before
+  - pdo
+      handler: \effectivecore\modules\storage\events_storage::on_query_before
+      weight: 0
+  on_query_after
+  - pdo
+      handler: \effectivecore\modules\storage\events_storage::on_query_after
+      weight: 0
