@@ -10,7 +10,7 @@ namespace effectivecore {
           const settings_cache_file_name      = 'cache--settings.php';
           const settings_cache_file_name_orig = 'cache--settings--original.php';
           const changes_file_name             = 'changes.php';
-          class storage_instance_s {
+          class storage_instance_settings {
 
   static $data_orig;
   static $data;
@@ -121,7 +121,7 @@ namespace effectivecore {
     $file = new file(dir_dynamic.$file_name);
     $file->set_data(
       "<?php\n\nnamespace effectivecore { # ARRAY[type][scope]...\n\n  ".
-        "use \\effectivecore\\storage_instance_s as settings;\n\n".
+        "use \\effectivecore\\storage_instance_settings as settings;\n\n".
           factory::data_export($data, $prefix).
       "\n}");
     $file->save();

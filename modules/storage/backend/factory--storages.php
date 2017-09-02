@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore\modules\storage {
-          use \effectivecore\storage_instance_s as settings;
+          use \effectivecore\storage_instance_settings as settings;
           abstract class storages_factory {
 
   protected static $data;
