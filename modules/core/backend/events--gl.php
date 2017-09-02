@@ -39,7 +39,7 @@ namespace effectivecore {
           $return[] = call_user_func_array($c_info->handler, $args);
           timers::tap($c_id);
           console::add_log(
-            'Call', $c_info->handler, '-', timers::get_period($c_id, -1, -2)
+            'call', $c_info->handler, '-', timers::get_period($c_id, -1, -2)
           );
         }
       }

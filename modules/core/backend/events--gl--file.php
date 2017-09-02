@@ -18,7 +18,7 @@ namespace effectivecore {
     $relative = $file->get_path_relative();
     timers::tap('load_'.$relative);
     console::add_log(
-      'Load', $relative, 'ok', timers::get_period('load_'.$relative, -1, -2)
+      'load', $relative, 'ok', timers::get_period('load_'.$relative, -1, -2)
     );
   }
 

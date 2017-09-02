@@ -37,11 +37,11 @@ namespace effectivecore {
 
   function insert($once = true) {
     $relative = $this->get_path_relative();
-    timers::tap('insert_'.$relative);
+    timers::tap('insertion_'.$relative);
     $return = $once ? require_once($this->get_path_full()) :
                       require     ($this->get_path_full());
-    timers::tap('insert_'.$relative);
-    console::add_log('Insert', $relative, 'ok', timers::get_period('insert_'.$relative, -1, -2));
+    timers::tap('insertion_'.$relative);
+    console::add_log('insertion', $relative, 'ok', timers::get_period('insertion_'.$relative, -1, -2));
     return $return;
   }
 

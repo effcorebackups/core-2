@@ -34,7 +34,7 @@ translate
   - Anonymous: Анонимы
   - Background color: Цвет фона
   - button: кнопка
-  - Call: Вызов
+  - call: вызов
   - Cancel: Отмена
   - cancel: отмена
   - Checkboxes: Флажки
@@ -68,14 +68,14 @@ translate
   - Html 5 elements: Html 5 элементы
   - Home: Дом
   - Information: Информация
-  - Insert: Вставка
+  - insertion: вставка
   - Install: Установить
   - install: установить
   - Installation: Установка
   - installation: установка
   - Is always on: Всегда включен
   - Is embed: Встроенный
-  - Load: Загрузка
+  - load: загрузка
   - login: вход
   - Login: Вход
   - Logout from the system: Выйти из системы
@@ -102,7 +102,7 @@ translate
   - Path: Путь
   - profile: профиль
   - Queries: Запросы
-  - Query: Запрос
+  - query: запрос
   - Range: Диапазон
   - Radios: Переключатели
   - Radios (macro): Переключатели (макро)
