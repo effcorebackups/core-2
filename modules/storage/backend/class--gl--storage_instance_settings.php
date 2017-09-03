@@ -39,7 +39,7 @@ namespace effectivecore {
     $f_settings      = new file(dir_dynamic.settings_cache_file_name);
     $f_settings_orig = new file(dir_dynamic.settings_cache_file_name_orig);
     $f_changes       = new file(dir_dynamic.changes_file_name);
-    if ($f_changes->is_exist()) $f_changes->insert(true, false);
+    if ($f_changes->is_exist()) $f_changes->insert();
   # init changes
     $settings_d = isset(static::$changes_dynamic['changes']) ?
                         static::$changes_dynamic['changes'] : [];
@@ -79,8 +79,8 @@ namespace effectivecore {
     $f_settings      = new file(dir_dynamic.settings_cache_file_name);
     $f_settings_orig = new file(dir_dynamic.settings_cache_file_name_orig);
     $f_changes       = new file(dir_dynamic.changes_file_name);
-    if ($f_changes->is_exist())       $f_changes->insert(true, false);
-    if ($f_settings_orig->is_exist()) $f_settings_orig->insert(true, false);
+    if ($f_changes->is_exist())       $f_changes->insert();
+    if ($f_settings_orig->is_exist()) $f_settings_orig->insert();
   # init original settings
     if (empty(static::$data_orig)) {
       static::$data_orig = ['_created' => date(format_datetime, time())];

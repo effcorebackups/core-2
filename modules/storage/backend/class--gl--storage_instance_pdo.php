@@ -24,13 +24,13 @@ namespace effectivecore {
   function init() {
     if (empty($this->is_init)) {
       try {
-        events::start('on_storage_init_before', 'pdo', [$this->id]);
+        events::start('on_storage_init_before', 'pdo', [&$this]);
         $this->connection = new \PDO($this->driver.':host='.
                                      $this->host_name.';dbname='.
                                      $this->directory_name,
                                      $this->user_name,
                                      $this->password);
-        events::start('on_storage_init_after', 'pdo', [$this->id]);
+        events::start('on_storage_init_after', 'pdo', [&$this]);
         $this->is_init = true;
       } catch (\PDOException $e) {
         factory::send_header_and_exit('access_denided',
@@ -46,10 +46,10 @@ namespace effectivecore {
 
   function query($query) {
     $this->queries[] = $query;
-    events::start('on_query_before', 'pdo', [&$query]);
+    events::start('on_query_before', 'pdo', [&$this, &$query]);
     $result = $this->connection->query($query);
     $errors = $this->connection->errorInfo();
-    events::start('on_query_after', 'pdo', [$query, &$result, $errors]);
+    events::start('on_query_after', 'pdo', [&$this, &$query, &$result, &$errors]);
     if ($errors[0] != '00000') {
       messages::add_new(
         'Query error! '.br.
