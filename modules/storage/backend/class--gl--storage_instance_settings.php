@@ -147,7 +147,7 @@ namespace effectivecore {
           break;
         }
       }
-      $c_parsed = static::settings_to_code($c_file->load(true, false), $c_file->get_path_relative());
+      $c_parsed = static::settings_to_code($c_file->load(), $c_file->get_path_relative());
       foreach ($c_parsed as $c_type => $c_data) {
         if (is_object($c_data)) {
           if ($c_type == 'module') $c_data->path = $modules_path[$c_scope];

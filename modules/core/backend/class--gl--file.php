@@ -22,7 +22,7 @@ namespace effectivecore {
     files::parse_path($path, $this);
   }
 
-  function load($reset = false, $with_events = true) {
+  function load($reset = false, $with_events = false) {
     if ($with_events) events::start('on_file_load_before', 'all', [$this]);
     $relative = $this->get_path_relative();
     if (!$reset && isset(static::$cache[$relative]))

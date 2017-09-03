@@ -1,44 +1,21 @@
 translate
   ru
-  - Field "%%_title" must be selected!: Поле "%%_title" должно быть выбрано!
-  - Field "%%_title" can not be blank!: Поле "%%_title" не может быть пустым!
-  - Field "%%_title" contain too few characters!: Поле "%%_title" содержит слишком мало символов!
-  - Field "%%_title" contain too much characters!: Поле "%%_title" содержит слишком много символов!
-  - Field "%%_title" contains an invalid email address!: Поле "%%_title" содержит неверный адрес электронной почты!
-  - Field "%%_title" is not support multiple select!: Поле "%%_title" не поддерживает множественный выбор!
-  - Must be at least %%_value characters long.: Должно быть не менее %%_value символов.
-  - Must be no more than %%_value characters.: Должно быть не более %%_value символов.
-  - The value was trimmed to the required length!: Значение было обрезано до требуемой длинны!
-  - Check field again before submit.: Проверьте поле снова перед отправкой.
-  - Incorrect email or password!: Неверный адрес электронной почты или пароль!
-  - Data was not updated!: Данные не были обновлены!
-  - Data of user with ID = %%_id was updated.: Данные пользователя с ID = %%_id были обновлены.
-  - User with ID = %%_id was deleted.: Пользователь с ID = %%_id был удален.
-  - User was not deleted!: Пользователь не был удален!
-  - User with this email was already registered!: Пользователь с таким адресом электронной почты уже был зарегистрирован!
-  - User was not registered!: Пользователь не был зарегистрирован!
-  - Field must contain a minimum of %%_lenght characters.: Поле должно содержать минимум %%_lenght символов.
-  - Field must contain a maximum of %%_lenght characters.: Поле должно содержать максимум %%_lenght символов.
-  - Use international format of mobile phone numbers.: Используйте международный формат номеров мобильных телефонов.
-  - Element %%_info.: Элемент %%_info.
-  - Color ID = %%_id (value = %%_value): ID цвета = %%_id (значение = %%_value)
-  - Modules was installed.: Модули были установлены.
-  - Tables for module %%_name was installed.: Таблицы для модуля %%_name были установлены.
-  - Old password: Старый пароль
-  - New password: Новый пароль
   - - select -: - выбрать -
   - Actions: Действия
   - Administer: Администрирование
   - Administrators: Администраторы
   - always_enabled: всегда_вкл
   - Anonymous: Анонимы
+  - autoload: автозагрузка
   - Background color: Цвет фона
   - button: кнопка
   - call: вызов
   - Cancel: Отмена
   - cancel: отмена
-  - Checkboxes: Флажки
   - Changes was saved.: Изменения были сохранены.
+  - Check field again before submit.: Проверьте поле снова перед отправкой.
+  - Checkboxes: Флажки
+  - Color ID = %%_id (value = %%_value): ID цвета = %%_id (значение = %%_value)
   - Color: Цвет
   - Colors: Цвета
   - Console: Консоль
@@ -46,6 +23,8 @@ translate
   - Core: Ядро
   - created: создано
   - Created: Создано
+  - Data of user with ID = %%_id was updated.: Данные пользователя с ID = %%_id были обновлены.
+  - Data was not updated!: Данные не были обновлены!
   - Date: Дата
   - Decoration: Оформление
   - Delete profile (%%_user_email_context{4})?: Удалить профиль (%%_user_email_context{4})?
@@ -55,18 +34,28 @@ translate
   - disabled: выкл.
   - Edit profile (%%_user_email_context{2}): Редактировать профиль (%%_user_email_context{2})
   - Edit profile: Редактировать профиль
-  - Event: Событие
   - edit: изменить
+  - Element %%_info.: Элемент %%_info.
   - EMail: Адрес электронной почты
   - enabled: вкл.
+  - Event: Событие
   - Execute plan: План выполнения
+  - Field "%%_title" can not be blank!: Поле "%%_title" не может быть пустым!
+  - Field "%%_title" contain too few characters!: Поле "%%_title" содержит слишком мало символов!
+  - Field "%%_title" contain too much characters!: Поле "%%_title" содержит слишком много символов!
+  - Field "%%_title" contains an invalid email address!: Поле "%%_title" содержит неверный адрес электронной почты!
+  - Field "%%_title" is not support multiple select!: Поле "%%_title" не поддерживает множественный выбор!
+  - Field "%%_title" must be selected!: Поле "%%_title" должно быть выбрано!
+  - Field must contain a maximum of %%_lenght characters.: Поле должно содержать максимум %%_lenght символов.
+  - Field must contain a minimum of %%_lenght characters.: Поле должно содержать минимум %%_lenght символов.
   - File: Файл
   - Front page: Главная страница
   - Group: Группа
   - Hello %%_user_email: Привет %%_user_email
+  - Home: Дом
   - Html 4 elements: Html 4 элементы
   - Html 5 elements: Html 5 элементы
-  - Home: Дом
+  - Incorrect email or password!: Неверный адрес электронной почты или пароль!
   - Information: Информация
   - insertion: вставка
   - Install: Установить
@@ -89,12 +78,17 @@ translate
   - Module for working with pages.: Модуль работы со страницами.
   - Module for working with trees (hierarchical structures).: Модуль работы с деревьями (иерархическими структурами).
   - Module for working with user accounts and permissions.: Модуль работы с пользовательскими аккаунтами и разрешениями.
+  - Modules was installed.: Модули были установлены.
   - Modules: Модули
+  - Must be at least %%_value characters long.: Должно быть не менее %%_value символов.
+  - Must be no more than %%_value characters.: Должно быть не более %%_value символов.
   - my account: мой аккаунт
   - Name: Имя
+  - New password: Новый пароль
   - no items: нет элементов
   - No: Нет
   - Number: Число
+  - Old password: Старый пароль
   - Page: Страница
   - Parameter: Параметр
   - Password hash: Хеш пароля
@@ -103,27 +97,29 @@ translate
   - profile: профиль
   - Queries: Запросы
   - query: запрос
-  - Range: Диапазон
-  - Radios: Переключатели
   - Radios (macro): Переключатели (макро)
-  - reset: сбросить
+  - Radios: Переключатели
+  - Range: Диапазон
   - register: зарегистрировать
   - Registered: Зарегистрированные
   - Registration: Регистрация
+  - reset: сбросить
   - Roles: Роли
   - save: сохранить
   - Search: Поиск
-  - Select: Список
   - Select (macro): Список (макро)
   - Select multiple (macro): Список множественный (макро)
+  - Select: Список
   - State: Состояние
   - Status: Статус
   - Storage: Хранилище
-  - System: Система
   - submit: отправить
+  - System: Система
+  - Tables for module %%_name was installed.: Таблицы для модуля %%_name были установлены.
   - Telephone: Телефон
   - Text: Текст
   - Textarea: Текстовая область
+  - The value was trimmed to the required length!: Значение было обрезано до требуемой длинны!
   - Time: Время
   - Title: Заголовок
   - Total build time: Общее время сборки
@@ -131,9 +127,14 @@ translate
   - Total: Всего
   - Translate: Перевод
   - Tree: Дерево
+  - Use international format of mobile phone numbers.: Используйте международный формат номеров мобильных телефонов.
   - User menu: Меню пользователя
   - User profile (%%_user_email_context{2}): Профиль пользователя (%%_user_email_context{2})
   - User roles: Роли пользователя
+  - User was not deleted!: Пользователь не был удален!
+  - User was not registered!: Пользователь не был зарегистрирован!
+  - User with ID = %%_id was deleted.: Пользователь с ID = %%_id был удален.
+  - User with this email was already registered!: Пользователь с таким адресом электронной почты уже был зарегистрирован!
   - User: Пользователь
   - Users: Пользователи
   - Value: Значение

@@ -8,8 +8,9 @@
 
   x-console table.logs tr.load      {background-color: oldlace}
   x-console table.logs tr.insertion {background-color: aliceblue}
-  x-console table.logs tr.call      {background-color: lavender}
+  x-console table.logs tr.call      {background-color: lavenderblush}
   x-console table.logs tr.query     {background-color: honeydew}
+  x-console table.logs tr.autoload  {background-color: lavender}
   x-console table.logs tr.query td.name {font-size: .9em}
 
   x-console dl.diagram-load {margin: 50px 0; padding: 30px; border: 1px solid %%_color_border; border-top: 5px solid %%_color_bg}

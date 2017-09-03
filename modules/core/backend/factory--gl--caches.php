@@ -14,7 +14,7 @@ namespace effectivecore {
     if (!isset(static::$data[$name])) {
       $file = new file(dir_dynamic.'cache--'.$name.'.php');
       if ($file->is_exist()) {
-        $file->insert();
+        $file->insert(true, $name != 'classes_map');
       }
     }
     return isset(static::$data[$name]) ?

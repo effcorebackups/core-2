@@ -17,6 +17,7 @@ namespace effectivecore {
   #############################
 
   static function autoload($name) {
+    console::add_log('autoload', $name, '-');
     foreach (static::get_classes_map() as $c_class_name => $c_class_info) {
       if ($c_class_name == $name) {
         $c_file = new file($c_class_info->file);
@@ -38,7 +39,7 @@ namespace effectivecore {
                               '(?<type>class|trait|interface)\\s*'.
                               '(?<name>[a-z0-9_]+)\\s*'.
                    '(?:extends (?<extends>[a-z0-9_\\\\]+)|)\\s*'.
-                '(?:implements (?<implements>[a-z0-9_,\\\\ ]+)|)%sS', $c_file->load(true, false), $matches);
+                '(?:implements (?<implements>[a-z0-9_,\\\\ ]+)|)%sS', $c_file->load(), $matches);
         if (!empty($matches['namespace']) &&
             !empty($matches['name'])) {
           $c_info = new \stdClass();
