@@ -5,18 +5,20 @@
   #############################################################
 
 namespace effectivecore {
+          use \effectivecore\translations_factory as translations;
           abstract class console_factory {
 
   static $data = [];
   static $information = [];
 
-  static function add_log($object, $action, $description = '', $values = '', $time = 0) {
+  static function add_log($object, $action, $description = '', $values = '', $time = 0, $args = []) {
     static::$data[] = [
       'object'      => $object,
       'action'      => $action,
       'description' => $description,
       'values'      => $values,
       'time'        => $time,
+      'args'        => $args,
     ];
   }
 
@@ -42,9 +44,9 @@ namespace effectivecore {
       $row_class = factory::to_css_class($c_log['object']);
       $body[] = new table_body_row(['class' => [$row_class => $row_class]], [
         new table_body_row_cell(['class' => ['time'        => 'time']],          $c_log['time']),
-        new table_body_row_cell(['class' => ['object'      => 'object']],        $c_log['object']),
-        new table_body_row_cell(['class' => ['action'      => 'action']],        $c_log['action']),
-        new table_body_row_cell(['class' => ['description' => 'description']],   $c_log['description']),
+        new table_body_row_cell(['class' => ['object'      => 'object']],        translations::get($c_log['object'],      $c_log['args'])),
+        new table_body_row_cell(['class' => ['action'      => 'action']],        translations::get($c_log['action'],      $c_log['args'])),
+        new table_body_row_cell(['class' => ['description' => 'description']],   translations::get($c_log['description'], $c_log['args'])),
         new table_body_row_cell(['class' => ['values'      => 'values']],        $c_log['values'])
       ]);
     }

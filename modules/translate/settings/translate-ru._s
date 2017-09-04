@@ -43,6 +43,7 @@ translate
   - event: событие
   - Event: Событие
   - events: события
+  - Events: События
   - Execute plan: План выполнения
   - Field "%%_title" can not be blank!: Поле "%%_title" не может быть пустым!
   - Field "%%_title" contain too few characters!: Поле "%%_title" содержит слишком мало символов!
@@ -61,8 +62,8 @@ translate
   - Html 5 elements: Html 5 элементы
   - Incorrect email or password!: Неверный адрес электронной почты или пароль!
   - Information: Информация
-  - init.: инициал.
   - init: инициализация
+  - init.: инициал.
   - initialization: инициализация
   - insertion: вставка
   - Install: Установить
@@ -120,6 +121,8 @@ translate
   - Select (macro): Список (макро)
   - Select multiple (macro): Список множественный (макро)
   - Select: Список
+  - set: установка
+  - state: состояние
   - State: Состояние
   - storage: хранилище
   - Storage: Хранилище
@@ -151,6 +154,7 @@ translate
   - Users: Пользователи
   - val.: знач.
   - Val.: Знач.
+  - value = %%_value: значение = %%_value
   - Value: Значение
   - Value: Значение
   - Values: Значения

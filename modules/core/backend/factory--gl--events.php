@@ -13,7 +13,7 @@ namespace effectivecore {
   protected static $data;
 
   static function init() {
-    console::add_log('events', 'init.', 'The event system was initialized on first request.', '-');
+    console::add_log('event', 'init.', 'The event system was initialized on first request.', '-');
     foreach (storages::get('settings')->select('events') as $module_id => $c_grp_events) {
       foreach ($c_grp_events as $c_type => $c_events) {
         foreach ($c_events as $c_id => $c_event) {
@@ -40,7 +40,7 @@ namespace effectivecore {
           $return[$c_info->handler][] = $c_return = call_user_func_array($c_info->handler, $args);
           timers::tap($c_id);
           console::add_log(
-            'events', 'call', ltrim($c_info->handler, '\\'), $c_return ? 'ok' : '-', timers::get_period($c_id, -1, -2)
+            'event', 'call', ltrim($c_info->handler, '\\'), $c_return ? 'ok' : '-', timers::get_period($c_id, -1, -2)
           );
         }
       }
