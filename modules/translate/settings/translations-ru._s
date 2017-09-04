@@ -25,6 +25,7 @@ translate
   - Core: Ядро
   - created: создано
   - Created: Создано
+  - Current language: Текущий язык
   - Data of user with ID = %%_id was updated.: Данные пользователя с ID = %%_id были обновлены.
   - Data was not updated!: Данные не были обновлены!
   - Date: Дата
@@ -80,6 +81,7 @@ translate
   - logout: выход
   - Logout: Выход
   - Main menu: Главное меню
+  - Memory for php (bytes): Память для php (байт)
   - Moderators: Модераторы
   - Module for demonstrating capabilities.: Модуль для демонстрации возможностей.
   - Module for storages support.: Модуль поддержки хранилищ данных.
@@ -122,6 +124,7 @@ translate
   - Select (macro): Список (макро)
   - Select multiple (macro): Список множественный (макро)
   - Select: Список
+  - Server load (sys_getloadavg): Загр. серв. (sys_getloadavg)
   - set: установка
   - state: состояние
   - State: Состояние

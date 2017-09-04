@@ -5,11 +5,11 @@
   #############################################################
 
 namespace effectivecore {
+          use \effectivecore\languages_factory as languages;
           use \effectivecore\modules\storage\storages_factory as storages;
           abstract class translations_factory {
 
-  static $lang_current = 'ru';
-  static $data;
+  protected static $data;
 
   static function init() {
     foreach (storages::get('settings')->select('translate') as $c_module) {
@@ -23,8 +23,8 @@ namespace effectivecore {
 
   static function get($string, $args = [], $lang = '') {
     if (!static::$data) static::init();
-    $string = isset(static::$data[$lang ?: static::$lang_current][$string]) ?
-                    static::$data[$lang ?: static::$lang_current][$string] : $string;
+    $string = isset(static::$data[$lang ?: languages::get_current()][$string]) ?
+                    static::$data[$lang ?: languages::get_current()][$string] : $string;
     foreach ($args as $c_key => $c_value) {
       $string = str_replace('%%_'.$c_key, $c_value, $string);
     }

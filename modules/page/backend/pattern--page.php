@@ -10,6 +10,7 @@ namespace effectivecore {
           use \effectivecore\tokens_factory as tokens;
           use \effectivecore\console_factory as console;
           use \effectivecore\messages_factory as messages;
+          use \effectivecore\languages_factory as languages;
           use \effectivecore\translations_factory as translations;
           use \effectivecore\modules\user\users_factory as users;
           use \effectivecore\modules\page\pages_factory as pages;
@@ -138,8 +139,9 @@ namespace effectivecore {
     console::add_information('User roles', implode(', ', users::get_current()->roles));
     console::add_information('Server load (sys_getloadavg)', number_format(sys_getloadavg()[0], 6));
     console::add_information('Memory for php (bytes)', number_format(memory_get_usage(true), 0, '.', ' '));
+    console::add_information('Current language', languages::get_current());
 
-    $template->set_var('html_attributes', factory::data_to_attr(['lang' => translations::$lang_current]));
+    $template->set_var('html_attributes', factory::data_to_attr(['lang' => languages::get_current()]));
     $template->set_var('console', console::render()); # @todo: only for admins
     $template->set_var('messages', messages::render());
 

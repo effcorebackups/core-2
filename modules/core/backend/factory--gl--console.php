@@ -59,7 +59,7 @@ namespace effectivecore {
     $statistics = [];
     $total = 0;
     foreach (static::$data as $c_log) {
-      if(floatval($c_log['time'])) {
+      if (floatval($c_log['time'])) {
         if (!isset($statistics[$c_log['object']]))
                    $statistics[$c_log['object']] = 0;
         $statistics[$c_log['object']] += floatval($c_log['time']);
