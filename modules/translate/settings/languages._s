@@ -3,11 +3,13 @@ languages
   available
   - en
       code: en
+      decimal_point: .
       title
         en: English
         native: English
   - ru
       code: ru
+      decimal_point: ,
       title
         en: Russian
         native: Русский

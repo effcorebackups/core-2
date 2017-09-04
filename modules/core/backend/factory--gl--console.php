@@ -5,6 +5,7 @@
   #############################################################
 
 namespace effectivecore {
+          use \effectivecore\languages_factory as languages;
           use \effectivecore\translations_factory as translations;
           abstract class console_factory {
 
@@ -38,12 +39,13 @@ namespace effectivecore {
   }
 
   static function render_logs() {
+    $decimal_point = languages::get()->decimal_point;
     $head = [['Time', 'Object', 'Action', 'Description', 'Val.']];
     $body = [];
     foreach (static::get_all_logs() as $c_log) {
       $row_class = factory::to_css_class($c_log['object']);
       $body[] = new table_body_row(['class' => [$row_class => $row_class]], [
-        new table_body_row_cell(['class' => ['time'        => 'time']],          $c_log['time']),
+        new table_body_row_cell(['class' => ['time'        => 'time']],          number_format(floatval($c_log['time']), 6, $decimal_point, '')),
         new table_body_row_cell(['class' => ['object'      => 'object']],        translations::get($c_log['object'],      $c_log['args'])),
         new table_body_row_cell(['class' => ['action'      => 'action']],        translations::get($c_log['action'],      $c_log['args'])),
         new table_body_row_cell(['class' => ['description' => 'description']],   translations::get($c_log['description'], $c_log['args'])),
@@ -56,6 +58,7 @@ namespace effectivecore {
   }
 
   static function render_diagram_load() {
+    $decimal_point = languages::get()->decimal_point;
     $statistics = [];
     $total = 0;
     foreach (static::$data as $c_log) {
@@ -70,8 +73,8 @@ namespace effectivecore {
     foreach ($statistics as $c_param => $c_value) {
       $diagram->child_insert(new markup('dt', [], $c_param));
       $diagram->child_insert(new markup('dd', [], [
-        number_format($c_value, 6).' sec. ('.
-        number_format($c_value / $total * 100, 1).'%)',
+        number_format($c_value, 6, $decimal_point, '').' sec. ('.
+        number_format($c_value / $total * 100, 1, $decimal_point, '').'%)',
         new markup('div', [
           'class' => ['scale' => 'scale', 'scale-x' => 'scale-'.factory::to_css_class($c_param)],
           'style' => ['width: '.(int)($c_value / $total * 100).'%']

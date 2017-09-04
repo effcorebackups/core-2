@@ -139,9 +139,9 @@ namespace effectivecore {
     console::add_information('User roles', implode(', ', users::get_current()->roles));
     console::add_information('Server load (sys_getloadavg)', number_format(sys_getloadavg()[0], 6));
     console::add_information('Memory for php (bytes)', number_format(memory_get_usage(true), 0, '.', ' '));
-    console::add_information('Current language', languages::get_current());
+    console::add_information('Current language', languages::get()->code);
 
-    $template->set_var('html_attributes', factory::data_to_attr(['lang' => languages::get_current()]));
+    $template->set_var('html_attributes', factory::data_to_attr(['lang' => languages::get()->code]));
     $template->set_var('console', console::render()); # @todo: only for admins
     $template->set_var('messages', messages::render());
 
