@@ -24,12 +24,10 @@ namespace effectivecore {
 
   function load($reset = false) {
     console::add_log('file', 'load', $this->get_path_relative(), '-');
-    if (factory::$state >= state_1) events::start('on_file_load_before', 'all', [&$this]);
     $relative = $this->get_path_relative();
     if (!$reset && isset(static::$cache[$relative]))
            $this->data = static::$cache[$relative];
     else   $this->data = static::$cache[$relative] = file_get_contents($this->get_path_full());
-    if (factory::$state >= state_1) events::start('on_file_load_after', 'all', [&$this]);
     return $this->data;
   }
 
@@ -39,11 +37,9 @@ namespace effectivecore {
 
   function insert($once = true) {
     console::add_log('file', 'insertion', $this->get_path_relative(), '-');
-    if (factory::$state >= state_1) events::start('on_file_insert_before', 'all', [&$this]);
     $relative = $this->get_path_relative();
     $return = $once ? require_once($this->get_path_full()) :
                            require($this->get_path_full());
-    if (factory::$state >= state_1) events::start('on_file_insert_after', 'all', [&$this]);
     return $return;
   }
 

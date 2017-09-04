@@ -61,6 +61,7 @@ translate
   - Html 5 elements: Html 5 элементы
   - Incorrect email or password!: Неверный адрес электронной почты или пароль!
   - Information: Информация
+  - init.: инициал.
   - init: инициализация
   - initialization: инициализация
   - insertion: вставка
@@ -70,7 +71,6 @@ translate
   - installation: установка
   - Is always on: Всегда включен
   - Is embed: Встроенный
-  - load file: загрузка файла
   - load: загрузка
   - login: вход
   - Login: Вход
@@ -149,6 +149,8 @@ translate
   - User with this email was already registered!: Пользователь с таким адресом электронной почты уже был зарегистрирован!
   - User: Пользователь
   - Users: Пользователи
+  - val.: знач.
+  - Val.: Знач.
   - Value: Значение
   - Value: Значение
   - Values: Значения

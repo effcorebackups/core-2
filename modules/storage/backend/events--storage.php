@@ -17,7 +17,7 @@ namespace effectivecore\modules\storage {
   static function on_storage_init_after(&$instance) {
     timers::tap('init_pdo');
     console::add_log(
-      'storage', 'init', translations::get('The storage %%_name was initialized on first request.', ['name' => $instance->id]), 'ok', timers::get_period('init_pdo', 0, 1)
+      'storage', 'init.', translations::get('The storage %%_name was initialized on first request.', ['name' => $instance->id]), 'ok', timers::get_period('init_pdo', 0, 1)
     );
   }
 

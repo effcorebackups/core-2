@@ -15,7 +15,7 @@ namespace effectivecore {
     if (!isset(static::$data[$name])) {
       $file_name = dir_dynamic.'cache--'.$name.'.php';
       $file = new file($file_name);
-      console::add_log('cache', 'load file', $file->get_path_relative(), '-');
+      console::add_log('cache', 'load', $file->get_path_relative(), '-');
       if ($file->is_exist()) {
         $file->insert();
       }

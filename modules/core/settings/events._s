@@ -7,19 +7,3 @@ events
   - installation
       handler: \effectivecore\events_form::on_submit_install
       weight: 0
-  on_file_load_before
-  - all
-      handler: \effectivecore\events_file::on_file_load_before
-      weight: 0
-  on_file_load_after
-  - all
-      handler: \effectivecore\events_file::on_file_load_after
-      weight: 0
-  on_file_insert_before
-  - all
-      handler: \effectivecore\events_file::on_file_insert_before
-      weight: 0
-  on_file_insert_after
-  - all
-      handler: \effectivecore\events_file::on_file_insert_after
-      weight: 0

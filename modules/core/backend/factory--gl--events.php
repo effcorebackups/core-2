@@ -13,7 +13,7 @@ namespace effectivecore {
   protected static $data;
 
   static function init() {
-    console::add_log('events', 'init', 'The event system was initialized on first request.', '-');
+    console::add_log('events', 'init.', 'The event system was initialized on first request.', '-');
     foreach (storages::get('settings')->select('events') as $module_id => $c_grp_events) {
       foreach ($c_grp_events as $c_type => $c_events) {
         foreach ($c_events as $c_id => $c_event) {
