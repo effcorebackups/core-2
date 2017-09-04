@@ -17,14 +17,12 @@ namespace effectivecore {
   const state_0         = 0;
   const state_1         = 1; # in system context it'a means: settings is loaded
 
-  require_once('modules/core/backend/class--gl--file.php');
   require_once('modules/core/backend/factory--gl.php');
-  require_once('modules/core/backend/factory--gl--events.php');
   require_once('modules/core/backend/factory--gl--timers.php');
-  require_once('modules/core/backend/factory--gl--caches.php');
-  require_once('modules/core/backend/factory--gl--files.php');
   require_once('modules/core/backend/factory--gl--console.php');
-  require_once('modules/core/backend/factory--gl--messages.php');
+  require_once('modules/core/backend/factory--gl--caches.php');
+  require_once('modules/core/backend/class--gl--file.php');
+  require_once('modules/core/backend/factory--gl--files.php');
   spl_autoload_register('\effectivecore\factory::autoload');
 
   use \effectivecore\urls_factory as urls;

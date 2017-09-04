@@ -23,7 +23,7 @@ namespace effectivecore {
       foreach ($c_templates as $c_name => $c_path) {
         if ($name == $c_name) {
           $file = new file(storages::get('settings')->select('module')[$c_module_id]->path.'/'.$c_path);
-          $this->markup = $file->load(false, true);
+          $this->markup = $file->load(false);
           return $this;
         }
       }

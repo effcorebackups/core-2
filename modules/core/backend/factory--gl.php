@@ -18,7 +18,7 @@ namespace effectivecore {
   #############################
 
   static function autoload($name) {
-    console::add_log('autoload', 'search', $name, '-');
+    console::add_log('autoload', 'search', $name, 'ok');
     foreach (static::get_classes_map() as $c_class_name => $c_class_info) {
       if ($c_class_name == $name) {
         $c_file = new file($c_class_info->file);

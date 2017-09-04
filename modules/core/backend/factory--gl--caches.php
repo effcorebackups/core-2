@@ -5,6 +5,7 @@
   #############################################################
 
 namespace effectivecore {
+          use \effectivecore\timers_factory as timers;
           use \effectivecore\console_factory as console;
           use \effectivecore\messages_factory as messages;
           abstract class caches_factory {
@@ -12,15 +13,16 @@ namespace effectivecore {
   static $data = [];
 
   static function get($name) {
+    timers::tap('cache get: '.$name);
     if (!isset(static::$data[$name])) {
       $file_name = dir_dynamic.'cache--'.$name.'.php';
       $file = new file($file_name);
-      console::add_log('cache', 'load', $file->get_path_relative(), '-');
       if ($file->is_exist()) {
         $file->insert();
       }
     }
-    console::add_log('cache', 'return', $name, '-');
+    timers::tap('cache get: '.$name);
+    console::add_log('cache', 'get', $name, 'ok', timers::get_period('cache get: '.$name, -1, -2));
     return isset(static::$data[$name]) ?
                  static::$data[$name] : null;
   }

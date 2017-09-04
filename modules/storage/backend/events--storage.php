@@ -11,24 +11,24 @@ namespace effectivecore\modules\storage {
           abstract class events_storage {
 
   static function on_storage_init_before(&$instance) {
-    timers::tap('init_pdo');
+    timers::tap('storage init');
   }
 
   static function on_storage_init_after(&$instance) {
-    timers::tap('init_pdo');
+    timers::tap('storage init');
     console::add_log(
-      'storage', 'init.', 'The storage %%_name was initialized on first request.', 'ok', timers::get_period('init_pdo', 0, 1), ['name' => $instance->id]
+      'storage', 'init.', 'The storage %%_name was initialized on first request.', 'ok', timers::get_period('storage init', 0, 1), ['name' => $instance->id]
     );
   }
 
   static function on_query_before(&$instance, &$query) {
-    timers::tap('query_'.md5($query));
+    timers::tap('storage query: '.$query);
   }
 
   static function on_query_after(&$instance, &$query, &$result, &$errors) {
-    timers::tap('query_'.md5($query));
+    timers::tap('storage query: '.$query);
     console::add_log(
-      'storage', 'query', $query, $errors[0] == '00000' ? 'ok' : 'error', timers::get_period('query_'.md5($query), -1, -2)
+      'storage', 'query', $query, $errors[0] == '00000' ? 'ok' : 'error', timers::get_period('storage query: '.$query, -1, -2)
     );
   }
 

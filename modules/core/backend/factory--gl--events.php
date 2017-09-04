@@ -36,11 +36,11 @@ namespace effectivecore {
     if (!empty(static::get()->{$type})) {
       foreach (static::get()->{$type} as $c_id => $c_info) {
         if ($id == null || $id == $c_id) {
-          timers::tap($c_id);
+          timers::tap('event call: '.$c_id);
           $return[$c_info->handler][] = $c_return = call_user_func_array($c_info->handler, $args);
-          timers::tap($c_id);
+          timers::tap('event call: '.$c_id);
           console::add_log(
-            'event', 'call', ltrim($c_info->handler, '\\'), $c_return ? 'ok' : '-', timers::get_period($c_id, -1, -2)
+            'event', 'call', ltrim($c_info->handler, '\\'), $c_return ? 'ok' : '-', timers::get_period('event call: '.$c_id, -1, -2)
           );
         }
       }
