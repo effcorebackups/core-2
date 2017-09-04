@@ -14,6 +14,8 @@ namespace effectivecore {
   const dir_modules     = __DIR__.'/modules/';
   const nl              = "\n";
   const br              = "<br/>";
+  const state_0         = 0;
+  const state_1         = 1; # in system context it'a means: settings is loaded
 
   require_once('modules/core/backend/class--gl--file.php');
   require_once('modules/core/backend/factory--gl.php');
@@ -24,6 +26,7 @@ namespace effectivecore {
   require_once('modules/core/backend/factory--gl--console.php');
   require_once('modules/core/backend/factory--gl--messages.php');
   spl_autoload_register('\effectivecore\factory::autoload');
+
   use \effectivecore\urls_factory as urls;
   use \effectivecore\tokens_factory as tokens;
   use \effectivecore\timers_factory as timers;

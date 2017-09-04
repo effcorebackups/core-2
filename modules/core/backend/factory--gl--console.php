@@ -10,12 +10,13 @@ namespace effectivecore {
   static $data = [];
   static $information = [];
 
-  static function add_log($group = 'System', $name, $values, $time = 0) {
+  static function add_log($object, $action, $description = '', $values = '', $time = 0) {
     static::$data[] = [
-      'group'  => $group,
-      'name'   => $name,
-      'values' => $values,
-      'time'   => $time,
+      'object'      => $object,
+      'action'      => $action,
+      'description' => $description,
+      'values'      => $values,
+      'time'        => $time,
     ];
   }
 
@@ -35,15 +36,16 @@ namespace effectivecore {
   }
 
   static function render_logs() {
-    $head = [['Time', 'Group', 'Name', 'Status']];
+    $head = [['Time', 'Object', 'Action', 'Description', 'Value']];
     $body = [];
     foreach (static::get_all_logs() as $c_log) {
-      $group_class = factory::to_css_class($c_log['group']);
-      $body[] = new table_body_row(['class' => [$group_class => $group_class]], [
-        new table_body_row_cell(['class' => ['time'   => 'time']],   $c_log['time']),
-        new table_body_row_cell(['class' => ['group'  => 'group']],  $c_log['group']),
-        new table_body_row_cell(['class' => ['name'   => 'name']],   $c_log['name']),
-        new table_body_row_cell(['class' => ['values' => 'values']], $c_log['values'])
+      $row_class = factory::to_css_class($c_log['object']);
+      $body[] = new table_body_row(['class' => [$row_class => $row_class]], [
+        new table_body_row_cell(['class' => ['time'        => 'time']],          $c_log['time']),
+        new table_body_row_cell(['class' => ['object'      => 'object']],        $c_log['object']),
+        new table_body_row_cell(['class' => ['action'      => 'action']],        $c_log['action']),
+        new table_body_row_cell(['class' => ['description' => 'description']],   $c_log['description']),
+        new table_body_row_cell(['class' => ['values'      => 'values']],        $c_log['values'])
       ]);
     }
     return (
@@ -56,8 +58,9 @@ namespace effectivecore {
     $total = 0;
     foreach (static::$data as $c_log) {
       if(floatval($c_log['time'])) {
-        if (!isset($statistics[$c_log['group']])) $statistics[$c_log['group']] = 0;
-        $statistics[$c_log['group']] += floatval($c_log['time']);
+        if (!isset($statistics[$c_log['object']]))
+                   $statistics[$c_log['object']] = 0;
+        $statistics[$c_log['object']] += floatval($c_log['time']);
         $total += floatval($c_log['time']);
       }
     }

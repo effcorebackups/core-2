@@ -5,6 +5,7 @@
   #############################################################
 
 namespace effectivecore {
+          use \effectivecore\console_factory as console;
           use \effectivecore\messages_factory as messages;
           abstract class caches_factory {
 
@@ -12,11 +13,14 @@ namespace effectivecore {
 
   static function get($name) {
     if (!isset(static::$data[$name])) {
-      $file = new file(dir_dynamic.'cache--'.$name.'.php');
+      $file_name = dir_dynamic.'cache--'.$name.'.php';
+      $file = new file($file_name);
+      console::add_log('cache', 'load file', $file->get_path_relative(), '-');
       if ($file->is_exist()) {
         $file->insert();
       }
     }
+    console::add_log('cache', 'return', $name, '-');
     return isset(static::$data[$name]) ?
                  static::$data[$name] : null;
   }

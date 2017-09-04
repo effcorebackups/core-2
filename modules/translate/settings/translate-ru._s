@@ -1,6 +1,7 @@
 translate
   ru
   - - select -: - выбрать -
+  - Action: Действие
   - Actions: Действия
   - Administer: Администрирование
   - Administrators: Администраторы
@@ -9,6 +10,7 @@ translate
   - autoload: автозагрузка
   - Background color: Цвет фона
   - button: кнопка
+  - cache: кэш
   - call: вызов
   - Cancel: Отмена
   - cancel: отмена
@@ -38,7 +40,9 @@ translate
   - Element %%_info.: Элемент %%_info.
   - EMail: Адрес электронной почты
   - enabled: вкл.
+  - event: событие
   - Event: Событие
+  - events: события
   - Execute plan: План выполнения
   - Field "%%_title" can not be blank!: Поле "%%_title" не может быть пустым!
   - Field "%%_title" contain too few characters!: Поле "%%_title" содержит слишком мало символов!
@@ -49,14 +53,16 @@ translate
   - Field must contain a maximum of %%_lenght characters.: Поле должно содержать максимум %%_lenght символов.
   - Field must contain a minimum of %%_lenght characters.: Поле должно содержать минимум %%_lenght символов.
   - File: Файл
+  - file: файл
   - Front page: Главная страница
-  - Group: Группа
   - Hello %%_user_email: Привет %%_user_email
   - Home: Дом
   - Html 4 elements: Html 4 элементы
   - Html 5 elements: Html 5 элементы
   - Incorrect email or password!: Неверный адрес электронной почты или пароль!
   - Information: Информация
+  - init: инициализация
+  - initialization: инициализация
   - insertion: вставка
   - Install: Установить
   - install: установить
@@ -64,6 +70,7 @@ translate
   - installation: установка
   - Is always on: Всегда включен
   - Is embed: Встроенный
+  - load file: загрузка файла
   - load: загрузка
   - login: вход
   - Login: Вход
@@ -88,6 +95,7 @@ translate
   - no items: нет элементов
   - No: Нет
   - Number: Число
+  - Object: Объект
   - Old password: Старый пароль
   - Page: Страница
   - Parameter: Параметр
@@ -104,14 +112,16 @@ translate
   - Registered: Зарегистрированные
   - Registration: Регистрация
   - reset: сбросить
+  - return: возврат
   - Roles: Роли
   - save: сохранить
+  - search: поиск
   - Search: Поиск
   - Select (macro): Список (макро)
   - Select multiple (macro): Список множественный (макро)
   - Select: Список
   - State: Состояние
-  - Status: Статус
+  - storage: хранилище
   - Storage: Хранилище
   - submit: отправить
   - System: Система
@@ -119,6 +129,8 @@ translate
   - Telephone: Телефон
   - Text: Текст
   - Textarea: Текстовая область
+  - The event system was initialized on first request.: Система событий была инициализирована при первом запросе.
+  - The storage %%_name was initialized on first request.: Хранилище %%_name было инициализировано при первом запросе.
   - The value was trimmed to the required length!: Значение было обрезано до требуемой длинны!
   - Time: Время
   - Title: Заголовок
@@ -137,6 +149,7 @@ translate
   - User with this email was already registered!: Пользователь с таким адресом электронной почты уже был зарегистрирован!
   - User: Пользователь
   - Users: Пользователи
+  - Value: Значение
   - Value: Значение
   - Values: Значения
   - Version: Версия
