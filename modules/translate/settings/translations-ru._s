@@ -160,7 +160,7 @@ translate
   - Users: Пользователи
   - val.: знач.
   - Val.: Знач.
-  - value = %%_value: значение = %%_value
+  - value = 1 [settings is loaded]: значение = 1 [настройки загружены]
   - Value: Значение
   - Value: Значение
   - Values: Значения

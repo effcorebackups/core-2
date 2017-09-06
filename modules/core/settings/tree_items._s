@@ -21,8 +21,7 @@ tree_items
     attributes
     - href: /admin/modules
     - class
-      - admin: admin
-      - modules: modules
+      - admin-modules: admin-modules
     access
       roles
       - admins: admins

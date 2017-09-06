@@ -5,8 +5,7 @@ tree_items
     attributes
     - href: /admin/decoration
     - class
-      - admin: admin
-      - decoration: decoration
+      - admin-decoration: admin-decoration
     access
       roles
       - admins: admins

@@ -22,7 +22,7 @@ namespace effectivecore {
     if ($f_settings->is_exist()) $f_settings->insert();
     else static::settings_rebuild();
     factory::$state = state_1;
-    console::add_log('state', 'set', 'value = %%_value', 'ok', '', ['value' => state_1]);
+    console::add_log('state', 'set', 'value = 1 [settings is loaded]', 'ok', '');
   }
 
   ########################

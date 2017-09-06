@@ -1,11 +1,11 @@
 
   /* tree sizes and orientation */
   nav x-tree {margin: 0; padding: 0}
-  nav x-tree > ul {margin: 0; padding: 0; list-style: none}
-  nav x-tree > ul > li {float: left; cursor: default; margin: 0; padding: 0; list-style: none}
+  nav x-tree ul, nav x-tree li {margin: 0; padding: 0; list-style: none}
+  nav x-tree > ul > li {float: left; cursor: default}
   nav x-tree > ul > li > a {display: block; padding: 20px}
   nav x-tree > ul > li > ul {position: absolute; padding: 20px}
-  nav x-tree > ul > li > ul > li {list-style: none}
+  nav x-tree > ul > li > ul > li {}
   nav x-tree.user > ul > li {float: right}
 
   /* tree colors */

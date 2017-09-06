@@ -15,8 +15,7 @@ tree_items
     attributes
     - href: /user/login
     - class
-      - user: user
-      - login: login
+      - user-login: user-login
     access
       roles
       - anonymous: anonymous
@@ -27,8 +26,7 @@ tree_items
     attributes
     - href: /user/registration
     - class
-      - user: user
-      - registration: registration
+      - user-registration: user-registration
     access
       roles
       - anonymous: anonymous
@@ -38,8 +36,7 @@ tree_items
     attributes
     - href: /user/%%_user_id
     - class
-      - user: user
-      - id: id
+      - user-id: user-id
     access
       roles
       - admins: admins
@@ -51,8 +48,7 @@ tree_items
     attributes
     - href: /user/%%_user_id/edit
     - class
-      - user: user
-      - edit: edit
+      - user-edit: user-edit
     access
       roles
       - admins: admins
@@ -64,8 +60,7 @@ tree_items
     attributes
     - href: /user/logout
     - class
-      - user: user
-      - logout: logout
+      - user-logout: user-logout
     access
       roles
       - registered: registered
@@ -75,8 +70,7 @@ tree_items
     attributes
     - href: /admin/roles
     - class
-      - admin: admin
-      - roles: roles
+      - admin-roles: admin-roles
     access
       roles
       - admins: admins
@@ -86,8 +80,7 @@ tree_items
     attributes
     - href: /admin/users
     - class
-      - admin: admin
-      - users: users
+      - admin-users: admin-users
     access
       roles
       - admins: admins
