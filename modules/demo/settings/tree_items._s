@@ -5,6 +5,7 @@ tree_items
     attributes
     - href: /admin/demo
     - class
+      - admin: admin
       - demo: demo
     access
       roles

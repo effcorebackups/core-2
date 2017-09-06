@@ -5,7 +5,7 @@ tree_items
     attributes
     - href: /
     - class
-      - logo: logo
+      - home: home
 - main_admin|tree_item
     parent: trees/core/main
     title: Administer
@@ -21,6 +21,7 @@ tree_items
     attributes
     - href: /admin/modules
     - class
+      - admin: admin
       - modules: modules
     access
       roles
