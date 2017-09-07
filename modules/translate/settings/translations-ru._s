@@ -150,9 +150,9 @@ translate
   - Translate: Перевод
   - Tree: Дерево
   - Use international format of mobile phone numbers.: Используйте международный формат номеров мобильных телефонов.
+  - User %%_user_email_name: Пользователь %%_user_email_name
   - User menu: Меню пользователя
   - User profile %%_user_email_context{2}: Профиль пользователя %%_user_email_context{2}
-  - User %%_user_email_name_context{2}: Пользователь %%_user_email_name_context{2}
   - User roles: Роли пользователя
   - User was not deleted!: Пользователь не был удален!
   - User was not registered!: Пользователь не был зарегистрирован!

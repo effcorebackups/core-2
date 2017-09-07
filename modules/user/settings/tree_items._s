@@ -32,7 +32,7 @@ tree_items
       - anonymous: anonymous
 - user_n|tree_item
     parent: trees/user/user
-    title: User %%_user_email_name_context{2}
+    title: User %%_user_email_name
     attributes
     - href: /user/%%_user_id
     - class
