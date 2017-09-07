@@ -4,13 +4,13 @@ tree_items
     title: User
     attributes
     - class
-      - user: user
+      - user-anonymous: user-anonymous
     access
       roles
       - anonymous: anonymous
 - user_login|tree_item
     parent: tree_items/user/user_anonymous
-    title: Login
+    title: login
     weight: -80
     attributes
     - href: /user/login
@@ -21,7 +21,7 @@ tree_items
       - anonymous: anonymous
 - user_registration|tree_item
     parent: tree_items/user/user_anonymous
-    title: Registration
+    title: registration
     weight: -60
     attributes
     - href: /user/registration
@@ -32,7 +32,7 @@ tree_items
       - anonymous: anonymous
 - user_n|tree_item
     parent: trees/user/user
-    title: Hello %%_user_email
+    title: User %%_user_email_name_context{2}
     attributes
     - href: /user/%%_user_id
     - class
@@ -43,7 +43,7 @@ tree_items
       - registered: registered
 - user_n_edit|tree_item
     parent: tree_items/user/user_n
-    title: Edit profile
+    title: edit
     weight: -100
     attributes
     - href: /user/%%_user_id/edit
@@ -55,7 +55,7 @@ tree_items
       - registered: registered
 - user_logout|tree_item
     parent: tree_items/user/user_n
-    title: Logout
+    title: logout
     weight: -40
     attributes
     - href: /user/logout

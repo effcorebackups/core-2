@@ -1,4 +1,5 @@
 tokens
+# tokens for current user
 - user_id
     match: %%_user_id
     type: code
@@ -7,11 +8,20 @@ tokens
     match: %%_user_email
     type: code
     handler: \effectivecore\modules\user\events_token::on_replace
+- user_email_name
+    match: %%_user_email_name
+    type: code
+    handler: \effectivecore\modules\user\events_token::on_replace
+# tokens for context user (user id is taken from url)
+- user_id_context
+    match: %%_user_id_context
+    type: code
+    handler: \effectivecore\modules\user\events_token::on_replace
 - user_email_context
     match: %%_user_email_context
     type: code
     handler: \effectivecore\modules\user\events_token::on_replace
-- text_no_items
-    match: %%_text_no_items
-    type: translated_text
-    value: no items
+- user_email_name_context
+    match: %%_user_email_name_context
+    type: code
+    handler: \effectivecore\modules\user\events_token::on_replace

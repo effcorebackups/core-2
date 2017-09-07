@@ -30,15 +30,16 @@ translate
   - Data was not updated!: Данные не были обновлены!
   - Date: Дата
   - Decoration: Оформление
-  - Delete profile (%%_user_email_context{4})?: Удалить профиль (%%_user_email_context{4})?
+  - Delete profile %%_user_email_context{4}?: Удалить профиль %%_user_email_context{4}?
   - delete: удалить
   - Demo: Демо
   - Description: Описание
   - Develop: Разработка
   - disabled: выкл.
-  - Edit profile (%%_user_email_context{2}): Редактировать профиль (%%_user_email_context{2})
+  - Edit profile %%_user_email_context{2}: Редактировать профиль %%_user_email_context{2}
   - Edit profile: Редактировать профиль
-  - edit: изменить
+  - edit profile: редактировать профиль
+  - edit: редактировать
   - Element %%_info.: Элемент %%_info.
   - EMail: Адрес электронной почты
   - enabled: вкл.
@@ -59,7 +60,6 @@ translate
   - file: файл
   - Front page: Главная страница
   - get: получить
-  - Hello %%_user_email: Привет %%_user_email
   - Home: Дом
   - Html 4 elements: Html 4 элементы
   - Html 5 elements: Html 5 элементы
@@ -116,6 +116,7 @@ translate
   - Range: Диапазон
   - register: зарегистрировать
   - Registered: Зарегистрированные
+  - registration: регистрация
   - Registration: Регистрация
   - reset: сбросить
   - return: возврат
@@ -150,7 +151,8 @@ translate
   - Tree: Дерево
   - Use international format of mobile phone numbers.: Используйте международный формат номеров мобильных телефонов.
   - User menu: Меню пользователя
-  - User profile (%%_user_email_context{2}): Профиль пользователя (%%_user_email_context{2})
+  - User profile %%_user_email_context{2}: Профиль пользователя %%_user_email_context{2}
+  - User %%_user_email_name_context{2}: Пользователь %%_user_email_name_context{2}
   - User roles: Роли пользователя
   - User was not deleted!: Пользователь не был удален!
   - User was not registered!: Пользователь не был зарегистрирован!
