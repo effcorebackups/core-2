@@ -24,7 +24,8 @@
   nav x-tree > ul > li:hover > ul {display: block}
 
   /* icons */
-  nav x-tree.main a.home           {padding-left: 52px; background: url('tree-icons.svg') no-repeat}
-  nav x-tree.main a.admin          {padding-left: 52px; background: url('tree-icons.svg') no-repeat 0 -62px}
-  nav x-tree.user a.user-n,
-  nav x-tree.user a.user-anonymous {padding-left: 52px; background: url('tree-icons.svg') no-repeat 0 -124px}
+  nav x-tree.main a.home           {padding-left: 64px; background: url('tree-icons.svg') no-repeat}
+  nav x-tree.main a.admin          {padding-left: 64px; background: url('tree-icons.svg') no-repeat 0 -64px}
+  nav x-tree.main a.develop        {padding-left: 64px; background: url('tree-icons.svg') no-repeat 0 -128px}
+  nav x-tree.user a.user-anonymous {padding-left: 64px; background: url('tree-icons.svg') no-repeat 0 -192px}
+  nav x-tree.user a.user-n         {padding-left: 64px; background: url('tree-icons.svg') no-repeat 0 -256px}
