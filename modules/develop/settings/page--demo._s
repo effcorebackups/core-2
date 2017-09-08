@@ -3,7 +3,7 @@ pages
     title: Demo
     display
       url
-        match: %^/admin/demo$%
+        match: %^/develop/demo$%
     access
       roles
       - admins: admins
@@ -19,4 +19,4 @@ pages
     - form_demo
         region: content_1_1
         type: link
-        npath: forms/demo/form_demo
+        npath: forms/develop/form_demo

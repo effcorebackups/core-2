@@ -36,7 +36,7 @@ tree_items
     attributes
     - href: /user/%%_user_id
     - class
-      - user-id: user-id
+      - user-n: user-n
     access
       roles
       - admins: admins

@@ -26,5 +26,5 @@
   /* icons */
   nav x-tree.main a.home           {padding-left: 52px; background: url('tree-icons.svg') no-repeat}
   nav x-tree.main a.admin          {padding-left: 52px; background: url('tree-icons.svg') no-repeat 0 -62px}
-  nav x-tree.user a.user-id,
+  nav x-tree.user a.user-n,
   nav x-tree.user a.user-anonymous {padding-left: 52px; background: url('tree-icons.svg') no-repeat 0 -124px}

@@ -1,0 +1,20 @@
+tree_items
+- main_develop|tree_item
+    parent: trees/core/main
+    title: Develop
+    attributes
+    - class
+      - develop: develop
+    access
+      roles
+      - admins: admins
+- main_develop_demo|tree_item
+    parent: tree_items/develop/main_develop
+    title: Demo
+    attributes
+    - href: /develop/demo
+    - class
+      - develop-demo: develop-demo
+    access
+      roles
+      - admins: admins

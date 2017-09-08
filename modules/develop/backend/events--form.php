@@ -4,7 +4,7 @@
   ### Copyright © 2017 Maxim Rysevets. All rights reserved. ###
   #############################################################
 
-namespace effectivecore\modules\demo {
+namespace effectivecore\modules\develop {
           use \effectivecore\messages_factory as messages;
           abstract class events_form extends \effectivecore\events_form {
 
@@ -24,7 +24,7 @@ namespace effectivecore\modules\demo {
   }
 
   static function on_submit_demo($form, $elements, &$values) {
-    messages::add_new('Call \effectivecore\modules\demo\events_form::on_submit_demo.');
+    messages::add_new('Call \effectivecore\modules\develop\events_form::on_submit_demo.');
   }
 
 }}
