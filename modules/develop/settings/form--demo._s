@@ -379,6 +379,16 @@ forms
         - field_color_macro|form_palette
             title: Color
             name: color
+      # actions list
+        - actions_list_demo|actions_list
+            attributes
+            - class
+              - actions-list-demo: actions-list-demo
+            values
+            - edit: edit
+            - delete: delete
+            active
+            - edit: edit
       # table
         - table|table
             children

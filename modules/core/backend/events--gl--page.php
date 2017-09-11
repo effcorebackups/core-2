@@ -26,7 +26,7 @@ namespace effectivecore {
         $c_module->path,
         $c_module->description,
         locales::format_version($c_module->version),
-        $c_module->state,
+        new actions_list(['always_enabled', 'enabled', 'disabled'], [$c_module->state]),
       ];
     }
     return new table([], $body, $head);
