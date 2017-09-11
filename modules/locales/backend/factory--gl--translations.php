@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\languages_factory as languages;
+          use \effectivecore\locales_factory as locales;
           use \effectivecore\modules\storage\storages_factory as storages;
           abstract class translations_factory {
 
@@ -23,8 +23,8 @@ namespace effectivecore {
 
   static function get($string, $args = [], $code = '') {
     if (!static::$data) static::init();
-    $string = isset(static::$data[$code ?: languages::get()->code][$string]) ?
-                    static::$data[$code ?: languages::get()->code][$string] : $string;
+    $string = isset(static::$data[$code ?: locales::get_current()->lang_code][$string]) ?
+                    static::$data[$code ?: locales::get_current()->lang_code][$string] : $string;
     foreach ($args as $c_key => $c_value) {
       $string = str_replace('%%_'.$c_key, $c_value, $string);
     }

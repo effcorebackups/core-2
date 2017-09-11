@@ -4,10 +4,8 @@ languages
       en: English
       native: English
     code: en
-    decimal_point: .
 - ru
     title
       en: Russian
       native: Русский
     code: ru
-    decimal_point: ,

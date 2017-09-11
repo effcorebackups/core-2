@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\languages_factory as languages;
+          use \effectivecore\locales_factory as locales;
           use \effectivecore\translations_factory as translations;
           abstract class console_factory {
 
@@ -39,7 +39,7 @@ namespace effectivecore {
   }
 
   static function render_logs() {
-    $decimal_point = languages::get()->decimal_point;
+    $decimal_point = locales::get_current()->decimal_point;
     $head = [['Time', 'Object', 'Action', 'Description', 'Val.']];
     $body = [];
     foreach (static::get_all_logs() as $c_log) {
@@ -58,7 +58,7 @@ namespace effectivecore {
   }
 
   static function render_diagram_load() {
-    $decimal_point = languages::get()->decimal_point;
+    $decimal_point = locales::get_current()->decimal_point;
     $statistics = [];
     $total = 0;
     foreach (static::$data as $c_log) {

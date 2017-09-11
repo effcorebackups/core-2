@@ -9,25 +9,18 @@ namespace effectivecore {
           abstract class languages_factory {
 
   protected static $data;
-  protected static $current_code;
 
   static function init() {
-    static::$current_code = storages::get('settings')->select('current')['locales']->lang_code;
-    foreach (storages::get('settings')->select('languages') as $module_id => $languages) {
+    foreach (storages::get('settings')->select('languages') as $languages) {
       foreach ($languages as $c_language) {
         static::$data[$c_language->code] = $c_language;
       }
     }
   }
 
-  static function get($code = null) {
+  static function get($code) {
     if (!static::$data) static::init();
-    if (!$code) return static::$data[static::$current_code];
-                return static::$data[$code];
-  }
-
-  static function set_current($code) {
-    static::$current_code = $code;
+    return static::$data[$code];
   }
 
 }}
