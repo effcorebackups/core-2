@@ -135,10 +135,10 @@ namespace effectivecore {
       );
     }
     timers::tap('total');
-    console::add_information('Total build time', timers::get_period('total', 0, 1));
+    console::add_information('Total build time', locales::format_msecond(timers::get_period('total', 0, 1)));
     console::add_information('User roles', implode(', ', users::get_current()->roles));
-    console::add_information('Server load (sys_getloadavg)', number_format(sys_getloadavg()[0], 6));
-    console::add_information('Memory for php (bytes)', number_format(memory_get_usage(true), 0, '.', ' '));
+    console::add_information('Server load (sys_getloadavg)', locales::format_msecond(sys_getloadavg()[0]));
+    console::add_information('Memory for php (bytes)', locales::format_number(memory_get_usage(true), 0, null, ' '));
     console::add_information('Current language', locales::get_current()->lang_code);
 
     $template->set_var('html_attributes', factory::data_to_attr(['lang' => locales::get_current()->lang_code]));

@@ -1,3 +1,4 @@
 current
-  lang_code: en
-  decimal_point: .
+  lang_code: ru
+  decimal_point: ,
+  thousands_separator: 
