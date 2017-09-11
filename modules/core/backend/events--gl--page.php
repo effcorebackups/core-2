@@ -5,6 +5,7 @@
   #############################################################
 
 namespace effectivecore {
+          use \effectivecore\locales_factory as locales;
           use \effectivecore\modules\storage\storages_factory as storages;
           abstract class events_page {
 
@@ -24,7 +25,7 @@ namespace effectivecore {
         $c_module->id,
         $c_module->path,
         $c_module->description,
-        $c_module->version,
+        locales::format_version($c_module->version),
         $c_module->state,
       ];
     }

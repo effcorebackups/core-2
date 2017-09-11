@@ -31,6 +31,10 @@ namespace effectivecore {
     return static::format_number(floatval($number), $precision);
   }
 
+  static function format_version($number) {
+    return static::format_number(floatval($number), 2);
+  }
+
   static function format_number($number, $precision = 0, $decimal_point = null, $thousands_separator = null) {
     $current = static::get_current();
     return number_format($number, $precision,
