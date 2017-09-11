@@ -2,14 +2,14 @@ languages
   current: ru
   available
   - en
-      code: en
-      decimal_point: .
       title
         en: English
         native: English
+      code: en
+      decimal_point: .
   - ru
-      code: ru
-      decimal_point: ,
       title
         en: Russian
         native: Русский
+      code: ru
+      decimal_point: ,

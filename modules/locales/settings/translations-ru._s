@@ -76,6 +76,7 @@ translate
   - Is always on: Всегда включен
   - Is embed: Встроенный
   - load: загрузка
+  - Locales: Локализации
   - login: вход
   - Login: Вход
   - Logout from the system: Выйти из системы
@@ -86,8 +87,8 @@ translate
   - Moderators: Модераторы
   - Module for demonstrating capabilities.: Модуль для демонстрации возможностей.
   - Module for development: Модуль для разработки
+  - Module for internationalization.: Модуль для интернационализации.
   - Module for storages support.: Модуль поддержки хранилищ данных.
-  - Module for translate interface and content.: Модуль перевода интерфейса и контента.
   - Module for working with pages.: Модуль работы со страницами.
   - Module for working with trees (hierarchical structures).: Модуль работы с деревьями (иерархическими структурами).
   - Module for working with user accounts and permissions.: Модуль работы с пользовательскими аккаунтами и разрешениями.
