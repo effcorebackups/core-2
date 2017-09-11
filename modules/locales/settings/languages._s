@@ -1,15 +1,13 @@
 languages
-  current: ru
-  available
-  - en
-      title
-        en: English
-        native: English
-      code: en
-      decimal_point: .
-  - ru
-      title
-        en: Russian
-        native: Русский
-      code: ru
-      decimal_point: ,
+- en
+    title
+      en: English
+      native: English
+    code: en
+    decimal_point: .
+- ru
+    title
+      en: Russian
+      native: Русский
+    code: ru
+    decimal_point: ,
