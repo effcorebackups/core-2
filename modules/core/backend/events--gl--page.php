@@ -10,26 +10,19 @@ namespace effectivecore {
           abstract class events_page {
 
   static function on_show_admin_modules() {
-    $head = [[
-      'Title',
-      'ID',
-      'Path',
-      'Description',
-      'Version',
-      'State',
-    ]];
-    $body = [];
+    $thead = [['Title', 'ID', 'Path', 'Description', 'Version', '']];
+    $tbody = [];
     foreach (storages::get('settings')->select('module') as $c_module) {
-      $body[] = [
+      $tbody[] = [
         $c_module->title,
         $c_module->id,
         $c_module->path,
         $c_module->description,
         locales::format_version($c_module->version),
-        new actions_list(['always_enabled', 'enabled', 'disabled'], [$c_module->state]),
+        new actions_list(['always_enabled', 'enabled', 'disabled'], [$c_module->state], '...'),
       ];
     }
-    return new table([], $body, $head);
+    return new table([], $tbody, $thead);
   }
 
 }}

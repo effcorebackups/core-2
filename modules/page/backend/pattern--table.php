@@ -9,10 +9,10 @@ namespace effectivecore {
 
   public $template = 'table';
 
-  function __construct($attributes = [], $body = [], $head = [], $weight = 0) {
+  function __construct($attributes = [], $tbody = [], $thead = [], $weight = 0) {
     parent::__construct($attributes, null, $weight);
-    $this->child_insert(new table_head(null, $head), 'head');
-    $this->child_insert(new table_body(null, $body), 'body');
+    $this->child_insert(new table_head(null, $thead), 'head');
+    $this->child_insert(new table_body(null, $tbody), 'body');
   }
 
   function render() {

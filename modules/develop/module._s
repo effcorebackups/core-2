@@ -1,6 +1,6 @@
 module
   id: develop
   title: Develop
-  description: Мodule for development.
+  description: Module for development.
   version: 1.00
   state: enabled

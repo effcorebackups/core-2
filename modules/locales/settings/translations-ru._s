@@ -1,7 +1,9 @@
 translations
   ru
   - - select -: - выбрать -
+  - action: действие
   - Action: Действие
+  - actions: действия
   - Actions: Действия
   - Administer: Администрирование
   - Administrators: Администраторы
@@ -88,7 +90,7 @@ translations
   - Memory for php (bytes): Память для php (байт)
   - Moderators: Модераторы
   - Module for demonstrating capabilities.: Модуль для демонстрации возможностей.
-  - Module for development: Модуль для разработки
+  - Module for development.: Модуль для разработки.
   - Module for internationalization.: Модуль для интернационализации.
   - Module for storages support.: Модуль поддержки хранилищ данных.
   - Module for working with pages.: Модуль работы со страницами.

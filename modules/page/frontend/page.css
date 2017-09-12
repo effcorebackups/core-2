@@ -38,8 +38,10 @@
   x-block {display: block}
 
   /* control elements */
-  x-actions-list {display: inline-block}
-  x-actions-list x-action {display: block}
+  x-actions-control {display: inline-block; cursor: default}
+  x-actions-control x-action-list {position: absolute; display: none; padding: 10px; border: 1px solid %%_color_bg; border-radius: 10px; background: white}
+  x-actions-control:hover x-action-list {display: block}
+  x-actions-control:hover x-action {display: block}
 
   /* table */
   main table {border-collapse: collapse; width: 100%; margin: 20px 0}

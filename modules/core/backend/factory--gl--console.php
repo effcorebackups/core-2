@@ -39,11 +39,11 @@ namespace effectivecore {
   }
 
   static function render_logs() {
-    $head = [['Time', 'Object', 'Action', 'Description', 'Val.']];
-    $body = [];
+    $thead = [['Time', 'Object', 'Action', 'Description', 'Val.']];
+    $tbody = [];
     foreach (static::get_all_logs() as $c_log) {
       $row_class = factory::to_css_class($c_log['object']);
-      $body[] = new table_body_row(['class' => [$row_class => $row_class]], [
+      $tbody[] = new table_body_row(['class' => [$row_class => $row_class]], [
         new table_body_row_cell(['class' => ['time'        => 'time']],        locales::format_msecond($c_log['time'])),
         new table_body_row_cell(['class' => ['object'      => 'object']],      translations::get($c_log['object'],      $c_log['args'])),
         new table_body_row_cell(['class' => ['action'      => 'action']],      translations::get($c_log['action'],      $c_log['args'])),
@@ -52,7 +52,7 @@ namespace effectivecore {
       ]);
     }
     return (
-      new table(['class' => ['logs' => 'logs']], $body, $head)
+      new table(['class' => ['logs' => 'logs']], $tbody, $thead)
     )->render();
   }
 
