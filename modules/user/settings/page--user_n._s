@@ -23,4 +23,4 @@ pages
     - block_user_n
         region: content_1_1
         type: code
-        handler: \effectivecore\modules\user\events_page::on_show_user_n
+        handler: \effectivecore\modules\user\events_page::on_show_block_user_n

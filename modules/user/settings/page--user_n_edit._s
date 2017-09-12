@@ -20,10 +20,10 @@ pages
         region: nav
         type: link
         npath: trees/user/user
-    - code_on_page_user_n_edit
+    - check_access_user_n_edit
         region: content_1_1
         type: code
-        handler: \effectivecore\modules\user\events_page::on_show_user_n_edit
+        handler: \effectivecore\modules\user\events_page::on_check_access_user_n_edit
     - form_user_n_edit
         region: content_1_1
         type: link
