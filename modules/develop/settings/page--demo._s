@@ -20,3 +20,11 @@ pages
         region: content_1_1
         type: link
         npath: forms/develop/form_demo
+    - block_demo_static
+        region: content_1_1
+        type: link
+        npath: blocks/develop/block_demo
+    - block_demo_dynamic
+        region: content_1_1
+        type: code
+        handler: \effectivecore\modules\develop\events_page::on_show_block_demo_dynamic

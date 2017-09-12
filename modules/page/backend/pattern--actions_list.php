@@ -21,9 +21,9 @@ namespace effectivecore {
     foreach ($this->values as $c_value) {
       $c_attr = isset($this->active[$c_value]) ? ['class' => ['active']] : [];
       $this->child_insert(
-        new markup('x-action', $c_attr,
+        new markup('x-action', $c_attr, [
           new markup('a', ['href' => '?action='.$c_value], $c_value)
-        )
+        ])
       );
     }
     return parent::render();

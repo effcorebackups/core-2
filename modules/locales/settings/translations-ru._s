@@ -36,6 +36,7 @@ translations
   - Description: Описание
   - Develop: Разработка
   - disabled: выкл.
+  - Dynamic block: Динамический блок
   - Edit profile %%_user_email_context{2}: Редактировать профиль %%_user_email_context{2}
   - Edit profile: Редактировать профиль
   - edit profile: редактировать профиль
@@ -58,6 +59,7 @@ translations
   - Field must contain a minimum of %%_lenght characters.: Поле должно содержать минимум %%_lenght символов.
   - File: Файл
   - file: файл
+  - Form elements: Элементы формы
   - Front page: Главная страница
   - get: получить
   - Home: Дом
@@ -132,6 +134,7 @@ translations
   - set: установка
   - state: состояние
   - State: Состояние
+  - Static block: Статический блок
   - storage: хранилище
   - Storage: Хранилище
   - submit: отправить
