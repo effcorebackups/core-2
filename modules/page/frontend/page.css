@@ -34,6 +34,13 @@
   x-messages ul li {margin: 0 0 0 15px; padding: 0}
   x-messages ul li:only-child {margin: 0; list-style: none}
 
+  /* blocks */
+  x-block {display: block}
+
+  /* control elements */
+  x-actions-list {display: inline-block}
+  x-actions-list x-action {display: block}
+
   /* table */
   main table {border-collapse: collapse; width: 100%; margin: 20px 0}
   main table thead {border-bottom: 5px solid %%_color_bg}
