@@ -39,8 +39,9 @@
 
   /* control elements */
   x-actions-control {display: inline-block; cursor: default}
-  x-actions-control x-action-list {position: absolute; display: none; padding: 10px; border: 1px solid %%_color_bg; border-radius: 10px; background: white}
-  x-actions-control:hover x-action-list {display: block}
+  x-actions-control x-title {border-bottom: 1px dashed %%_color_bg}
+  x-actions-control x-action-list {position: absolute; display: none; padding: 5px 10px; border: 1px solid %%_color_bg; background: white}
+  x-actions-control:hover x-action-list {display: block; font-size: .85em}
   x-actions-control:hover x-action {display: block}
 
   /* table */

@@ -10,7 +10,7 @@ namespace effectivecore {
           abstract class events_page {
 
   static function on_show_admin_modules() {
-    $thead = [['Title', 'ID', 'Path', 'Description', 'Version', '']];
+    $thead = [['Title', 'ID', 'Path', 'Description', 'Ver.', '']];
     $tbody = [];
     foreach (storages::get('settings')->select('module') as $c_module) {
       $tbody[] = [
