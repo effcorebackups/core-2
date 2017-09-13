@@ -25,7 +25,7 @@ namespace effectivecore\modules\develop {
       new table_body_row([], ['td 3.1', 'td 3.2', new table_body_row_cell([], 'td 3.3')])
     ];
     $block->child_insert(
-      new table(['class' => 'table'], $tbody, $thead)
+      new table(['class' => ['table' => 'table']], $tbody, $thead)
     );
     return $block;
   }
