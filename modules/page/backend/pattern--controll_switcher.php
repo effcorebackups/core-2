@@ -19,7 +19,7 @@ namespace effectivecore {
     $this->attribute_insert('x-state', $this->state);
     $this->child_insert(
       new markup('a', ['href' => '?action='.($this->state == 'off' ? 'on' : 'off')],
-        new markup('x-switcher', [], new text())
+        new markup('x-switcher', [], ' ')
     ));
     return parent::render();
   }
