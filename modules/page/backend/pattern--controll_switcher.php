@@ -8,6 +8,7 @@ namespace effectivecore {
           class control_switcher extends \effectivecore\markup {
 
   public $tag_name = 'x-switcher-control';
+  public $state = false;
 
   function __construct() {
   }

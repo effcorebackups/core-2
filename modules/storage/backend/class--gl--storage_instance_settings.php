@@ -21,8 +21,8 @@ namespace effectivecore {
     $f_settings = new file(dir_dynamic.settings_cache_file_name);
     if ($f_settings->is_exist()) $f_settings->insert();
     else static::settings_rebuild();
-    factory::$state = state_1;
-    console::add_log('state', 'set', 'value = 1 [settings is loaded]', 'ok', '');
+    factory::$phase = phase_1;
+    console::add_log('phase', 'set', 'value = 1 [settings is loaded]', 'ok', '');
   }
 
   ########################

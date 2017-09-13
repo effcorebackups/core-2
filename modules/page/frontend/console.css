@@ -10,7 +10,7 @@
   x-console table.logs tr.cache    {background-color: lightyellow}
   x-console table.logs tr.file     {background-color: aliceblue}
   x-console table.logs tr.event    {background-color: mistyrose}
-  x-console table.logs tr.state    {background-color: paleturquoise}
+  x-console table.logs tr.phase    {background-color: paleturquoise}
   x-console table.logs tr.storage  {background-color: honeydew}
   
   x-console table.logs tr.query td.name {font-size: .9em}

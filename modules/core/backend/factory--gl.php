@@ -11,7 +11,7 @@ namespace effectivecore {
           abstract class factory {
 
   static $cache;
-  static $state = state_0;
+  static $phase = phase_0;
 
   #############################
   ### classes manipulations ###

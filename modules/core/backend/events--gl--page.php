@@ -6,7 +6,7 @@
 
 namespace effectivecore {
           use \effectivecore\locales_factory as locales;
-          use \effectivecore\control_actions_list as actions_list;
+          use \effectivecore\control_switcher as switcher;
           use \effectivecore\modules\storage\storages_factory as storages;
           abstract class events_page {
 
@@ -20,7 +20,7 @@ namespace effectivecore {
         $c_module->path,
         $c_module->description,
         locales::format_version($c_module->version),
-        new actions_list(['always_enabled', 'enabled', 'disabled'], [$c_module->state], '...'),
+        new switcher($c_module->state),
       ];
     }
     return new table([], $tbody, $thead);

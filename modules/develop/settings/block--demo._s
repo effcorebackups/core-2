@@ -91,3 +91,9 @@ blocks
         - delete: delete
         active
         - edit: edit
+  # switcher
+    - switcher_demo|control_switcher
+        attributes
+        - class
+          - switcher-demo: switcher-demo
+        state: on
