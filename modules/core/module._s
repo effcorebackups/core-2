@@ -1,6 +1,6 @@
 module
   id: core
   title: Core
-  description: Core module.
+  description: Main system module.
   version: 1.00
-  state: always_enabled
+  state: always_on

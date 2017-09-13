@@ -8,16 +8,19 @@ namespace effectivecore {
           class control_switcher extends \effectivecore\markup {
 
   public $tag_name = 'x-switcher-control';
-  public $state = false;
+  public $state = 'off';
 
-  function __construct($state = false) {
+  function __construct($state = 'off') {
     $this->state = $state;
     parent::__construct();
   }
 
   function render() {
-    $this->attribute_insert('x-state', $this->state ? 'on' : 'off');
-    $this->child_insert(new markup('x-switcher', [], new text()));
+    $this->attribute_insert('x-state', $this->state);
+    $this->child_insert(
+      new markup('a', ['href' => '?action='.($this->state == 'off' ? 'on' : 'off')],
+        new markup('x-switcher', [], new text())
+    ));
     return parent::render();
   }
 

@@ -3,4 +3,4 @@ module
   title: Tree
   description: Module for working with trees (hierarchical structures).
   version: 1.00
-  state: always_enabled
+  state: always_on

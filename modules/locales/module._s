@@ -3,4 +3,4 @@ module
   title: Locales
   description: Module for internationalization.
   version: 1.00
-  state: enabled
+  state: on

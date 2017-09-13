@@ -23,7 +23,6 @@ translations
   - Color: Цвет
   - Colors: Цвета
   - Console: Консоль
-  - Core module.: Модуль Core.
   - Core: Ядро
   - created: создано
   - Created: Создано
@@ -85,6 +84,7 @@ translations
   - logout: выход
   - Logout: Выход
   - Main menu: Главное меню
+  - Main system module.: Основной модуль системы.
   - Memory for php (bytes): Память для php (байт)
   - Moderators: Модераторы
   - Module for demonstrating capabilities.: Модуль для демонстрации возможностей.
@@ -106,7 +106,6 @@ translations
   - Number: Число
   - Object: Объект
   - Old password: Старый пароль
-  - On: Вкл.
   - Page: Страница
   - Parameter: Параметр
   - Password hash: Хеш пароля
@@ -136,6 +135,7 @@ translations
   - set: установка
   - state: состояние
   - State: Состояние
+  - State.: Сост.
   - Static block: Статический блок
   - storage: хранилище
   - Storage: Хранилище

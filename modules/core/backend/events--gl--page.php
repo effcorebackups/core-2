@@ -11,7 +11,7 @@ namespace effectivecore {
           abstract class events_page {
 
   static function on_show_admin_modules() {
-    $thead = [['Title', 'ID', 'Path', 'Description', 'Ver.', 'On']];
+    $thead = [['Title', 'ID', 'Path', 'Description', 'Ver.', 'State.']];
     $tbody = [];
     foreach (storages::get('settings')->select('module') as $c_module) {
       $tbody[] = [
@@ -20,7 +20,7 @@ namespace effectivecore {
         $c_module->path,
         $c_module->description,
         locales::format_version($c_module->version),
-        new switcher($c_module->state),
+        $c_module->state != 'always_on' ? new switcher($c_module->state) : '&nbsp;',
       ];
     }
     return new table([], $tbody, $thead);

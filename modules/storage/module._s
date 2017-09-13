@@ -3,4 +3,4 @@ module
   title: Storage
   description: Module for storages support.
   version: 1.00
-  state: enabled
+  state: always_on

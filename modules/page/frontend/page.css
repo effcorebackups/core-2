@@ -44,10 +44,12 @@
   x-actions-control:hover x-action-list {display: block; font-size: .85em}
   x-actions-control:hover x-action {display: block}
 
-  x-switcher-control {display: inline-block; cursor: pointer; vertical-align: middle; padding: 1px; border: 2px solid %%_color_bg; border-radius: 10px; background: white}
-  x-switcher-control[x-state=on] {padding-left: 10px}
-  x-switcher-control[x-state=off] {padding-right: 10px; border-color: gray}
-  x-switcher-control x-switcher {display: block; width: 10px; height: 10px; border-radius: 5px; background: %%_color_bg}
+  x-switcher-control {display: inline-block; vertical-align: middle; padding: 1px; border: 2px solid %%_color_bg; border-radius: 11px; background: white}
+  x-switcher-control[x-state=off] {border-color: gray}
+  x-switcher-control a {display: block}
+  x-switcher-control[x-state=on] a {padding-left: 15px}
+  x-switcher-control[x-state=off] a {padding-right: 15px}
+  x-switcher-control x-switcher {display: block; width: 15px; height: 15px; border-radius: 8px; background: %%_color_bg}
   x-switcher-control[x-state=off] x-switcher {background: gray}
 
   /* table */
