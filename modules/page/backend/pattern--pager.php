@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          class pager extends node {
+          class pager extends \effectivecore\node {
 
   public $id;
   public $has_error = false;

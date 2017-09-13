@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          class table extends node {
+          class table extends \effectivecore\node {
 
   public $template = 'table';
 

@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          class form_field_select extends form_field {
+          class form_field_select extends \effectivecore\form_field {
 
   public $values = [];
   public $selected = [];

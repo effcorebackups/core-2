@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          class form_container_radios extends form_container {
+          class form_container_radios extends \effectivecore\form_container {
 
   public $values = [];
 

@@ -7,7 +7,7 @@
 namespace effectivecore {
           use \effectivecore\events_factory as events;
           use \effectivecore\messages_factory as messages;
-          class form extends node {
+          class form extends \effectivecore\node {
 
   # support FORM elements:
   # ─────────────────────────────────────────────────────────────────────
