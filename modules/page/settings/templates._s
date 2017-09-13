@@ -2,7 +2,6 @@ templates
 - html_element: frontend/template--html_element.html
 - html_element_simple: frontend/template--html_element.simple.html
 - page: frontend/template--page.html
-- table_head: frontend/template--table_head.html
 - table_head_row: frontend/template--table_head_row.html
 - table_head_row_cell: frontend/template--table_head_row_cell.html
 - table_body: frontend/template--table_body.html

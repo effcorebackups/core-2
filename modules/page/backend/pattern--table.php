@@ -11,8 +11,8 @@ namespace effectivecore {
 
   function __construct($attributes = [], $tbody = [], $thead = [], $weight = 0) {
     parent::__construct($this->tag_name, $attributes, null, $weight);
-    if ($thead) $this->child_insert(new table_head(null, $thead), 'head');
-    if ($tbody) $this->child_insert(new table_body(null, $tbody), 'body');
+    if ($thead) $this->child_insert(new table_head([], $thead), 'head');
+    if ($tbody) $this->child_insert(new table_body([], $tbody), 'body');
   }
 
 }}
