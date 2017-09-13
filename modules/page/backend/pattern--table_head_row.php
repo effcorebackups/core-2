@@ -5,9 +5,13 @@
   #############################################################
 
 namespace effectivecore {
-          class table_head_row extends \effectivecore\node {
+          class table_head_row extends \effectivecore\markup {
 
-  public $template = 'table_head_row';
+  public $tag_name = 'tr';
+
+  function __construct($attributes = [], $children = [], $weight = 0) {
+    parent::__construct($this->tag_name, $attributes, $children, $weight);
+  }
 
   function child_insert($child, $id = null) {
     if ($child instanceof table_head_row_cell)   return parent::child_insert($child, $id);
