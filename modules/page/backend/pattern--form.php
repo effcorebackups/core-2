@@ -9,43 +9,45 @@ namespace effectivecore {
           use \effectivecore\messages_factory as messages;
           class form extends \effectivecore\node {
 
-  # support FORM elements:
+  # elements support:
   # ─────────────────────────────────────────────────────────────────────
-  # html4 elements:
+  # - textarea
   # - input[type=text]
   # - input[type=password]
+  # - input[type=search]
+  # - input[type=url]
+  # - input[type=tel]
+  # - input[type=email]
+  # - select
   # - input[type=file]
   # - input[type=checkbox]
   # - input[type=radio]
-  # - input[type=hidden]
-  # - select
-  # - textarea
-  # - button[type=button]
-  # - button[type=reset]
-  # - button[type=submit]
-  #
-  # html5 elements (restricted support on the browser side):
-  # - input[type=search]
-  # - input[type=email]
-  # - input[type=url]
-  # - input[type=tel]
   # - input[type=number]
   # - input[type=range]
   # - input[type=date]
   # - input[type=time]
   # - input[type=color]
-  #
-  # not supported html4 types (in this project):
-  # - input[type=image]          p.s use img
-  # - input[type=button]         p.s use button[type=button] instead
-  # - input[type=reset]          p.s use button[type=reset] instead
-  # - input[type=submit]         p.s use button[type=submit] instead
-  #
-  # not supported html5 types (in this project):
-  # - input[type=week]           p.s use week_macro
-  # - input[type=month]          p.s use month_macro
-  # - input[type=datetime]       p.s use date + time elements instead
-  # - input[type=datetime-local] p.s use date + time elements instead
+  # - button[type=button]
+  # - button[type=reset]
+  # - button[type=submit]
+  # - input[type=hidden]         : not processed
+  # ─────────────────────────────────────────────────────────────────────
+
+  # elements are not supported and not processed:
+  # ─────────────────────────────────────────────────────────────────────
+  # - input[type=button]         : use button[type=button] instead
+  # - input[type=reset]          : use button[type=reset] instead
+  # - input[type=submit]         : use button[type=submit] instead
+  # - input[type=image]          : use imgage instead
+  # - input[type=week]           : use week_macro instead
+  # - input[type=month]          : use month_macro instead
+  # - input[type=datetime]       : use date + time instead
+  # - input[type=datetime-local] : use date + time instead
+  # ─────────────────────────────────────────────────────────────────────
+
+  # note:
+  # ─────────────────────────────────────────────────────────────────────
+  # 1. more info in \effectivecore\events_form
   # ─────────────────────────────────────────────────────────────────────
 
   public $template = 'form';

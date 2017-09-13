@@ -22,50 +22,55 @@ namespace effectivecore {
   ### on_validate ###
   ###################
 
-  # аttributes which controlled:
+  # attributes support:
   # ─────────────────────────────────────────────────────────────────────
-  # textarea             : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
-  # input[type=text]     : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
-  # input[type=password] : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
-  # input[type=search]   : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
-  # input[type=url]      : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
-  # input[type=tel]      : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
-  # input[type=email]    : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern, multiple
-  # select               : DISABLED,           REQUIRED, MULTIPLE
-  # option               : DISABLED
-  # input[type=file]     : disabled, readonly, required, multiple
-  # input[type=checkbox] : disabled, readonly, required, checked
-  # input[type=radio]    : disabled, readonly, required, checked
-  # input[type=number]   : disabled, readonly, required, min, max, step
-  # input[type=range]    : disabled, readonly, required, min, max, step
-  # input[type=date]     : disabled, readonly, required, min, max
-  # input[type=time]     : disabled, readonly, required, min, max
-  # input[type=color]    : disabled, readonly, required
-  # input[type=submit]   : not processed element
-  # input[type=reset]    : not processed element
-  # input[type=image]    : not processed element
-  # input[type=button]   : not processed element
-  # input[type=hidden]   : not processed element
+  # - textarea                   : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
+  # - input[type=text]           : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
+  # - input[type=password]       : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
+  # - input[type=search]         : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
+  # - input[type=url]            : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
+  # - input[type=tel]            : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
+  # - input[type=email]          : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern, multiple
+  # - select                     : DISABLED,           REQUIRED, MULTIPLE
+  # - select::option             : DISABLED
+  # - input[type=file]           : disabled, readonly, required, multiple
+  # - input[type=checkbox]       : disabled, readonly, required, checked
+  # - input[type=radio]          : disabled, readonly, required, checked
+  # - input[type=number]         : disabled, readonly, required, min, max, step
+  # - input[type=range]          : disabled, readonly, required, min, max, step
+  # - input[type=date]           : disabled, readonly, required, min, max
+  # - input[type=time]           : disabled, readonly, required, min, max
+  # - input[type=color]          : disabled, readonly, required
+  # ─────────────────────────────────────────────────────────────────────
+  # - input[type=hidden]         : not processed element
+  # - input[type=button]         : not processed element
+  # - input[type=reset]          : not processed element
+  # - input[type=submit]         : not processed element
+  # - input[type=image]          : not processed element
+  # - input[type=week]           : not processed element
+  # - input[type=month]          : not processed element
+  # - input[type=datetime]       : not processed element
+  # - input[type=datetime-local] : not processed element
   # ─────────────────────────────────────────────────────────────────────
 
   # attributes validation plan:
   # ─────────────────────────────────────────────────────────────────────
-  # DISABLED             : disable any processing of element
-  # READONLY             : disable any processing of element
-  # REQUIRED             : VALUE != '' (value must be present in $_POST)
-  # MINLENGTH            : VALUE >= MINLENGTH
-  # MAXLENGTH            : VALUE <= MAXLENGTH
-  # MIN                  : VALUE >= MIN (for date|time should compare timestamps)
-  # MAX                  : VALUE <= MAX (for date|time should compare timestamps)
-  # STEP                 : VALUE should be in valid step range: MIN + STEP * N, where N = [0, 1, 2 ...]
-  # PATTERN              : VALUE should match the PATTERN (used FILTER_VALIDATE_REGEXP)
-  # MULTIPLE             : VALUE must be singular if MULTIPLE attribute is not present
+  # - DISABLED                   : disable any processing of element
+  # - READONLY                   : disable any processing of element
+  # - REQUIRED                   : VALUE != '' (value must be present in $_POST)
+  # - MINLENGTH                  : VALUE >= MINLENGTH
+  # - MAXLENGTH                  : VALUE <= MAXLENGTH
+  # - MIN                        : VALUE >= MIN (for date|time should compare timestamps)
+  # - MAX                        : VALUE <= MAX (for date|time should compare timestamps)
+  # - STEP                       : VALUE should be in valid step range: MIN + STEP * N, where N = [0, 1, 2 ...]
+  # - PATTERN                    : VALUE should match the PATTERN (used FILTER_VALIDATE_REGEXP)
+  # - MULTIPLE                   : VALUE must be singular if MULTIPLE attribute is not present
   # ─────────────────────────────────────────────────────────────────────
-  # input[type=email]    : VALUE should filtered via FILTER_VALIDATE_EMAIL
-  # input[type=url]      : VALUE should filtered via FILTER_VALIDATE_URL
-  # input[type=date]     : VALUE should match the pattern YYYY-MM-DD
-  # input[type=time]     : VALUE should match the pattern HH:MM:SS|HH:MM
-  # input[type=color]    : VALUE should match the pattern #dddddd
+  # - input[type=email]          : VALUE should filtered via FILTER_VALIDATE_EMAIL
+  # - input[type=url]            : VALUE should filtered via FILTER_VALIDATE_URL
+  # - input[type=date]           : VALUE should match the pattern YYYY-MM-DD
+  # - input[type=time]           : VALUE should match the pattern HH:MM:SS|HH:MM
+  # - input[type=color]          : VALUE should match the pattern #dddddd
   # ─────────────────────────────────────────────────────────────────────
 
   static function on_validate($form, $elements, &$values) {

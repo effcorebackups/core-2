@@ -10,7 +10,9 @@ namespace effectivecore {
   public $tag_name = 'x-switcher-control';
   public $state = false;
 
-  function __construct() {
+  function __construct($state = false) {
+    $this->state = $state;
+    parent::__construct();
   }
 
 }}
