@@ -2,8 +2,6 @@ templates
 - html_element: frontend/template--html_element.html
 - html_element_simple: frontend/template--html_element.simple.html
 - page: frontend/template--page.html
-- table_head_row_cell: frontend/template--table_head_row_cell.html
-- table_body_row_cell: frontend/template--table_body_row_cell.html
 - form: frontend/template--form.html
 - form_title: frontend/template--form_title.html
 - form_element: frontend/template--form_element.html
