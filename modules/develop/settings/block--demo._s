@@ -5,7 +5,7 @@ blocks
     - id: block_demo
     children
   # title
-    - title|markup
+    - block_title|markup
         tag_name: h2
         children
         - content|text
@@ -81,19 +81,31 @@ blocks
                     children
                     - content|text
                         text: 
+  # title
+    - controls_title|markup
+        tag_name: h2
+        children
+        - content|text
+            text: Control elements
   # actions list
-    - actions_list_demo|control_actions_list
-        attributes
-        - class
-          - actions-list-demo: actions-list-demo
-        values
-        - edit: edit
-        - delete: delete
-        active
-        - edit: edit
+    - actions_list_demo_wrapper|markup
+        tag_name: div
+        children
+        - actions_list_demo|control_actions_list
+            attributes
+            - class
+              - actions-list-demo: actions-list-demo
+            values
+            - edit: edit
+            - delete: delete
+            active
+            - edit: edit
   # switcher
-    - switcher_demo|control_switcher
-        attributes
-        - class
-          - switcher-demo: switcher-demo
-        state: on
+    - switcher_demo_wrapper|markup
+        tag_name: div
+        children
+        - switcher_demo|control_switcher
+            attributes
+            - class
+              - switcher-demo: switcher-demo
+            state: on

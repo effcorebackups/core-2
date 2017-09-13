@@ -67,7 +67,7 @@ namespace effectivecore {
         $total += floatval($c_log['time']);
       }
     }
-    $diagram = new markup('dl', ['class' => ['diagram-load' => 'diagram-load']], []);
+    $diagram = new markup('dl', ['class' => ['diagram-load' => 'diagram-load']]);
     foreach ($statistics as $c_param => $c_value) {
       $diagram->child_insert(new markup('dt', [], $c_param));
       $diagram->child_insert(new markup('dd', [], [
@@ -83,7 +83,7 @@ namespace effectivecore {
   }
 
   static function render_information() {
-    $info = new markup('dl', ['class' => ['info' => 'info']], []);
+    $info = new markup('dl', ['class' => ['info' => 'info']]);
     foreach (static::get_all_information() as $c_param => $c_value) {
       $info->child_insert(new markup('dt', [], $c_param));
       $info->child_insert(new markup('dd', [], $c_value));
