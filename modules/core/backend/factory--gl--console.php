@@ -73,8 +73,8 @@ namespace effectivecore {
       $diagram->child_insert(new markup('dd', [], [
         locales::format_msecond($c_value).' sec. ('.
         locales::format_persent($c_value / $total * 100, 1).')',
-        new markup('div', [
-          'class' => ['scale' => 'scale', 'scale-x' => 'scale-'.factory::to_css_class($c_param)],
+        new markup('x-scale', [
+          'class' => ['scope' => factory::to_css_class($c_param)],
           'style' => ['width: '.(int)($c_value / $total * 100).'%']
         ], ' ')
       ]));

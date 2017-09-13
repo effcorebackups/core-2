@@ -18,8 +18,9 @@
   x-console dl.diagram-load {margin: 50px 0; padding: 30px; border: 1px solid %%_color_border; border-top: 5px solid %%_color_bg}
   x-console dl.diagram-load dt {margin: 0 10px 0 0; padding: 0; float: left; min-width: 290px; font-size: 1.2em; line-height: 1.2em; text-align: right}
   x-console dl.diagram-load dd {margin: 0 0 0 300px; padding: 0; font-size: .9em}
-  x-console dl.diagram-load .scale {height: 5px; background: %%_color_bg}
 
   x-console dl.info {margin: 50px 0; padding: 5px 0; border: 1px solid %%_color_border; border-top: 5px solid %%_color_bg}
   x-console dl.info dt {margin: 0 10px 0 0; padding: 3px 3px 3px 14px; float: left; min-width: 200px}
   x-console dl.info dd {margin: 0 0 0 210px; padding: 3px}
+
+  x-scale {display: block; height: 5px; background: %%_color_bg}

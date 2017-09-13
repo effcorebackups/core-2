@@ -15,4 +15,10 @@ namespace effectivecore {
     parent::__construct();
   }
 
+  function render() {
+    $this->attribute_insert('x-state', $this->state ? 'on' : 'off');
+    $this->child_insert(new markup('x-switcher', [], new text()));
+    return parent::render();
+  }
+
 }}
