@@ -82,7 +82,7 @@ blocks
                     - content|text
                         text: 
   # actions list
-    - actions_list_demo|actions_list
+    - actions_list_demo|control_actions_list
         attributes
         - class
           - actions-list-demo: actions-list-demo

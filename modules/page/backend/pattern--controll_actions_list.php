@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          class actions_list extends \effectivecore\markup {
+          class control_actions_list extends \effectivecore\markup {
 
   public $tag_name = 'x-actions-control';
   public $title = null;

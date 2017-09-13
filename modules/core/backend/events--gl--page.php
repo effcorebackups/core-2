@@ -6,6 +6,7 @@
 
 namespace effectivecore {
           use \effectivecore\locales_factory as locales;
+          use \effectivecore\control_actions_list as actions_list;
           use \effectivecore\modules\storage\storages_factory as storages;
           abstract class events_page {
 
