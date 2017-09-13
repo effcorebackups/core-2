@@ -1,6 +1,6 @@
 templates
-- html_element: frontend/template--html_element.html
-- html_element_simple: frontend/template--html_element.simple.html
+- markup_element: frontend/template--markup_element.html
+- markup_element_simple: frontend/template--markup_element.simple.html
 - page: frontend/template--page.html
 - form: frontend/template--form.html
 - form_title: frontend/template--form_title.html
