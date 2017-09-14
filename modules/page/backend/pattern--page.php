@@ -91,7 +91,7 @@ namespace effectivecore {
               $c_url = new url('/modules/'.$module_id.'/'.$c_script->file);
               $rendered_script[] = (new markup('script', [
                 'src' => $c_url->get_full()
-              ], ' '))->render();
+              ]))->render();
               $template->set_var('script',
                 implode(nl, $rendered_script)
               );
