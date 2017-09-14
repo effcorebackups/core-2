@@ -81,6 +81,9 @@ blocks
                     children
                     - content|text
                         text: 
+  # pagers
+    - pager_1_demo|pager
+        id: 1
   # title
     - controls_title|markup
         tag_name: h2
