@@ -5,29 +5,15 @@
   #############################################################
 
 namespace effectivecore {
-          class node {
+          class node extends \effectivecore\node_simple {
 
-  public $weight = 0;
-  public $attributes = [];
   public $children = [];
-  public $template = null;
 
   function __construct($attributes = [], $children = [], $weight = 0) {
-    $this->weight = $weight;
-    if ($attributes) {
-      foreach ($attributes as $id => $c_attribute) {
-        $this->attribute_insert($id, $c_attribute);
-      }
-    }
-    if ($children) {
-      if (is_array($children)) {
-        foreach ($children as $id => $c_child) {
-          $this->child_insert($c_child, $id);
-        }
-      } else {
-        $this->child_insert($children);
-      }
-    }
+    $children = is_array($children) ?
+                         $children : [$children];
+    foreach ($children as $id => $c_child) $this->child_insert($c_child, $id);
+    parent::__construct($attributes, $weight);
   }
 
   ################
@@ -80,33 +66,6 @@ namespace effectivecore {
     return $id;
   }
 
-  ##################
-  ### attributes ###
-  ##################
-
-  function attribute_select($key = '') {
-    if ($key) {
-      return isset($this->attributes[$key]) ?
-                   $this->attributes[$key] : null;
-    } else {
-      return $this->attributes;
-    }
-  }
-
-  function attribute_insert($key, $data) {
-    if (is_array($data)) {
-      foreach ($data as $c_key => $c_value) {
-        $this->attributes[$key][$c_key] = $c_value;
-      }
-    } else {
-      $this->attributes[$key] = $data;
-    }
-  }
-
-  function attribute_delete($key) {
-    unset($this->attributes[$key]);
-  }
-
   ##############
   ### render ###
   ##############
@@ -124,19 +83,10 @@ namespace effectivecore {
     }
   }
 
-  function render_self() {
-    return isset($this->title) ?
-                 $this->title : '';
-  }
-
   function render_children($children, $join = true) {
     $rendered = [];
-    if (is_array($children)) {
-      foreach (factory::array_sort_by_weight($children) as $c_child) {
-        $rendered[] = $this->render_child($c_child);
-      }
-    } else {
-      $rendered[] = $this->render_child($children);
+    foreach (factory::array_sort_by_weight($children) as $c_child) {
+      $rendered[] = $this->render_child($c_child);
     }
     return $join ? implode(nl, $rendered) :
                                $rendered;

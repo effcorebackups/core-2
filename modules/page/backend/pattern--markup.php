@@ -16,9 +16,8 @@ namespace effectivecore {
   }
 
   function child_insert($child, $id = null) {
-    return parent::child_insert(
-      is_string($child) ? new text($child) : $child, $id
-    );
+    if (is_string($child) || is_numeric($child)) return parent::child_insert(new text($child), $id);
+    else                                         return parent::child_insert($child, $id);
   }
 
   function render() {
