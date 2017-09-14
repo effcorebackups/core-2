@@ -1,0 +1,16 @@
+changes
+  insert
+  - data_demo/develop/demo_object
+      prop_4: property value #4 (insert)
+      prop_5: property value #5 (insert)
+      prop_6: property value #6 (insert)
+  - data_demo/develop/demo_array
+    - item_4: item value #4 (insert)
+    - item_5: item value #5 (insert)
+    - item_6: item value #6 (insert)
+  update
+  - data_demo/develop/demo_object/prop_5: property value #5 (insert + update)
+  - data_demo/develop/demo_array/item_5: item value #5 (insert + update)
+  delete
+  - data_demo/develop/demo_object/prop_4: null
+  - data_demo/develop/demo_array/item_4: null

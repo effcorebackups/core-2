@@ -1,7 +1,7 @@
 data_demo
 # scalar types (except text)
   demo_integer: 1
-  demo_float: 1.0
+  demo_float: 2.3
   demo_boolean: true
   demo_string_empty: 
   demo_string: text
