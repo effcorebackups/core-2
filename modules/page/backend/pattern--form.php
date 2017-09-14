@@ -109,7 +109,7 @@ namespace effectivecore {
     }
 
   # add form_id to the form markup
-    $this->child_insert(new markup('input', [
+    $this->child_insert(new markup_simple('input', [
       'type'  => 'hidden',
       'name'  => 'form_id',
       'value' => $id,

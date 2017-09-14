@@ -38,7 +38,7 @@ namespace effectivecore {
     }
 
   # render frontend items: icons, styles, script
-    $rendered_meta = [(new markup('meta', ['charset' => 'utf-8']))->render()];
+    $rendered_meta = [(new markup_simple('meta', ['charset' => 'utf-8']))->render()];
     $rendered_styles = '';
     $rendered_script = '';
     $used_links = [];
@@ -58,7 +58,7 @@ namespace effectivecore {
           if (isset($c_item->favicons)) {
             foreach ($c_item->favicons as $c_icon) {
               $c_url = new url('/modules/'.$module_id.'/'.$c_icon->file);
-              $rendered_meta[] = (new markup('link', [
+              $rendered_meta[] = (new markup_simple('link', [
                 'rel'   => $c_icon->rel,
                 'type'  => $c_icon->type,
                 'href'  => $c_url->get_full(),
