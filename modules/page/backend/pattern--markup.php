@@ -9,8 +9,9 @@ namespace effectivecore {
           class markup extends \effectivecore\node {
 
   public $tag_name = 'div';
+  public $template = 'markup_element';
 
-  function __construct($tag_name = '', $attributes = [], $children = [], $weight = 0) {
+  function __construct($tag_name = null, $attributes = [], $children = [], $weight = 0) {
     if ($tag_name) $this->tag_name = $tag_name;
     parent::__construct($attributes, $children, $weight);
   }
@@ -21,8 +22,7 @@ namespace effectivecore {
   }
 
   function render() {
-    $template = $this->template ?: (count($this->children) ? 'markup_element' : 'markup_element_simple');
-    return (new template($template, [
+    return (new template($this->template, [
       'tag_name'   => $this->tag_name,
       'attributes' => factory::data_to_attr($this->attribute_select()),
       'content'    => $this->render_children($this->children)
