@@ -7,6 +7,7 @@
 namespace effectivecore {
           class form_field_select extends \effectivecore\form_field {
 
+  public $title_tag_name = 'label';
   public $values = [];
   public $selected = [];
   public $disabled = [];

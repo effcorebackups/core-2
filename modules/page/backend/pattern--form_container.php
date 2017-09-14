@@ -11,6 +11,7 @@ namespace effectivecore {
   public $template_title = 'form_title';
   public $template = 'form_container';
   public $tag_name = 'x-container';
+  public $title_tag_name = 'x-title';
   public $title = '';
   public $description = '';
 
@@ -32,7 +33,7 @@ namespace effectivecore {
 
   function render_self() {
     return empty($this->title) ? '' : (new template($this->template_title, [
-      'tag_name'      => $this->tag_name == 'fieldset' ? 'legend' : 'x-title',
+      'tag_name'      => $this->tag_name == 'fieldset' ? 'legend' : $this->title_tag_name,
       'title'         => translations::get($this->title),
       'required_mark' => $this->attribute_select('required') ? $this->render_required_mark() : ''
     ]))->render();
