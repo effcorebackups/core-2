@@ -20,7 +20,7 @@ namespace effectivecore {
   }
 
   function render() {
-    $this->child_insert(new markup('x-title', [], !is_null($this->title) ? $this->title : 'actions'), 'title');
+    $this->child_insert(new markup('x-title', [], $this->title ?: 'actions'), 'title');
     $this->child_insert(new markup('x-action-list'), 'action_list');
     $list = $this->child_select('action_list');
     foreach ($this->values as $c_value) {

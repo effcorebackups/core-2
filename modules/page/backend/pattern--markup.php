@@ -39,10 +39,10 @@ namespace effectivecore {
 
   function render_description() {
     $return = [];
-    if (!empty($this->description))             $return[] = (new markup('p', [], is_string($this->description) ? translations::get($this->description) : $this->description))->render();
-    if (!empty($this->attributes['minlength'])) $return[] = (new markup('p', ['class' => ['minlength' => 'minlength']], translations::get('Field must contain a minimum of %%_lenght characters.', ['lenght' => $this->attributes['minlength']])))->render();
-    if (!empty($this->attributes['maxlength'])) $return[] = (new markup('p', ['class' => ['maxlength' => 'maxlength']], translations::get('Field must contain a maximum of %%_lenght characters.', ['lenght' => $this->attributes['maxlength']])))->render();
-    return count($return) ? (new markup('x-description', [], implode($return)))->render() : '';
+    if (!empty($this->description))             $return[] = new markup('p', [], is_string($this->description) ? translations::get($this->description) : $this->description);
+    if (!empty($this->attributes['minlength'])) $return[] = new markup('p', ['class' => ['minlength' => 'minlength']], translations::get('Field must contain a minimum of %%_lenght characters.', ['lenght' => $this->attributes['minlength']]));
+    if (!empty($this->attributes['maxlength'])) $return[] = new markup('p', ['class' => ['maxlength' => 'maxlength']], translations::get('Field must contain a maximum of %%_lenght characters.', ['lenght' => $this->attributes['maxlength']]));
+    return count($return) ? (new markup('x-description', [], $return))->render() : '';
   }
 
 }}

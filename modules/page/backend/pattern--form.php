@@ -7,7 +7,7 @@
 namespace effectivecore {
           use \effectivecore\events_factory as events;
           use \effectivecore\messages_factory as messages;
-          class form extends \effectivecore\node {
+          class form extends \effectivecore\markup {
 
   # elements support:
   # ─────────────────────────────────────────────────────────────────────
@@ -50,10 +50,14 @@ namespace effectivecore {
   # 1. more info in \effectivecore\events_form
   # ─────────────────────────────────────────────────────────────────────
 
-  public $template = 'form';
+  public $tag_name = 'form';
   public $clicked_button = null;
   public $clicked_button_name = null;
   public $errors = [];
+
+  function __construct($attributes = [], $children = [], $weight = 0) {
+    parent::__construct($attributes, $children, $weight);
+  }
 
   function render() {
     $this->build();
