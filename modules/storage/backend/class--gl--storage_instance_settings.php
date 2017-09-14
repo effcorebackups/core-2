@@ -234,21 +234,24 @@ namespace effectivecore {
       $line_num++;
     # skip comments
       if (substr(ltrim($c_line, ' '), 0, 1) === '#') continue;
-    # ───────────────────
-    # available variants:
-    # ───────────────────
-    # - name
-    #   name
-    # - name|class_name
-    #   name|class_name
-    # - name: value
-    #   name: value
-    # ───────────────────
+    # ─────────────────────────────────────────────────────────────────────
+    # valid strings        | description
+    # ─────────────────────────────────────────────────────────────────────
+    # root                 | root element
+    # - name: value        | root item     as null|string|float|integer|boolean
+    #   name: value        | root property as null|string|float|integer|boolean
+    # - name               | root item     as array|object[stdClass]
+    #   name               | root property as array|object[stdClass]
+    # - name|classname     | root item     as object[classname]
+    #   name|classname     | root property as object[classname]
+    # - name|_empty_array  | root item     as empty array
+    #   name|_empty_array  | root property as empty array
+    # ─────────────────────────────────────────────────────────────────────
       $matches = [];
       preg_match('%(?<indent>[ ]*)'.
                   '(?<prefix>- |)'.
                   '(?<name>[^:|]+)'.
-                  '(?<class>\\|[a-z0-9_\\\\]+|)'.
+                  '(?<qualifier>\\|[a-z0-9_\\\\]+|)'.
                   '(?<delimiter>: |)'.
                   '(?<value>.*)%sS', $c_line, $matches);
       if (!empty($matches['name'])) {
@@ -261,14 +264,19 @@ namespace effectivecore {
           if ($c_value === 'false') $c_value = false;
           if ($c_value === 'null')  $c_value = null;
         } else {
-          $c_class_name = !empty($matches['class']) ? '\\effectivecore\\'.substr($matches['class'], 1) : 'stdClass';
-          $c_reflection = new \ReflectionClass($c_class_name);
-          $c_is_post_constructor = $c_reflection->implementsInterface('\\effectivecore\\post_constructor');
-          $c_is_post_init        = $c_reflection->implementsInterface('\\effectivecore\\post_init');
-          if ($c_is_post_constructor) $c_value = factory::class_get_new_instance($c_class_name);
-          else                        $c_value = new $c_class_name;
-          if ($c_is_post_constructor) $pc_objects[] = $c_value;
-          if ($c_is_post_init)        $pi_objects[] = $c_value;
+          if (!empty($matches['qualifier']) &&
+               ltrim($matches['qualifier'], '|') == '_empty_array') {
+            $c_value = [];
+          } else {
+            $c_class_name = !empty($matches['qualifier']) ? '\\effectivecore\\'.ltrim($matches['qualifier'], '|') : 'stdClass';
+            $c_reflection = new \ReflectionClass($c_class_name);
+            $c_is_pc = $c_reflection->implementsInterface('\\effectivecore\\post_constructor');
+            $c_is_pi = $c_reflection->implementsInterface('\\effectivecore\\post_init');
+            if ($c_is_pc) $c_value = factory::class_get_new_instance($c_class_name);
+            else          $c_value = factory::class_get_new_instance($c_class_name, [], true);
+            if ($c_is_pc) $pc_objects[] = $c_value;
+            if ($c_is_pi) $pi_objects[] = $c_value;
+          }
         }
       # add new item to tree
         if (is_array($p[$c_depth-1])) {

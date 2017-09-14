@@ -1,0 +1,22 @@
+data_demo
+# scalar types (except text)
+  demo_integer: 1
+  demo_float: 1.0
+  demo_boolean: true
+  demo_string_empty: 
+  demo_string: text
+  demo_string_text|text
+    text: like code: new text('any text') # translated by default
+# compound types
+  demo_array_empty|_empty_array
+  demo_array
+  - item_1: item value #1
+  - item_2: item value #2
+  - item_3: item value #3
+  demo_object_empty
+  demo_object
+    prop_1: property value #1
+    prop_2: property value #2
+    prop_3: property value #3
+# special types
+  demo_null: null
