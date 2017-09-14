@@ -24,21 +24,21 @@ namespace effectivecore {
 
   function render() {
     $pager = new markup($this->tag_name);
-    $pager->child_insert(new markup('a', ['href' => '#'], '1'));
+    $pager->child_insert(new markup('a', ['href' => '#'], 1));
     $pager->child_insert(new text('...'));
-    $pager->child_insert(new markup('a', ['href' => '#'], '25'));
+    $pager->child_insert(new markup('a', ['href' => '#'], 25));
     $pager->child_insert(new text('...'));
-    $pager->child_insert(new markup('a', ['href' => '#'], '47'));
-    $pager->child_insert(new markup('a', ['href' => '#'], '48'));
-    $pager->child_insert(new markup('a', ['href' => '#'], '49'));
-    $pager->child_insert(new markup('a', ['href' => '#', 'class' => ['active']], '50'));
-    $pager->child_insert(new markup('a', ['href' => '#'], '51'));
-    $pager->child_insert(new markup('a', ['href' => '#'], '52'));
-    $pager->child_insert(new markup('a', ['href' => '#'], '53'));
+    $pager->child_insert(new markup('a', ['href' => '#'], 47));
+    $pager->child_insert(new markup('a', ['href' => '#'], 48));
+    $pager->child_insert(new markup('a', ['href' => '#'], 49));
+    $pager->child_insert(new markup('a', ['href' => '#', 'class' => ['active']], 50));
+    $pager->child_insert(new markup('a', ['href' => '#'], 51));
+    $pager->child_insert(new markup('a', ['href' => '#'], 52));
+    $pager->child_insert(new markup('a', ['href' => '#'], 53));
     $pager->child_insert(new text('...'));
-    $pager->child_insert(new markup('a', ['href' => '#'], '75'));
+    $pager->child_insert(new markup('a', ['href' => '#'], 75));
     $pager->child_insert(new text('...'));
-    $pager->child_insert(new markup('a', ['href' => '#'], '100'));
+    $pager->child_insert(new markup('a', ['href' => '#'], 100));
     return $pager->render();
   }
 
