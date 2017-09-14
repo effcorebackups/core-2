@@ -15,7 +15,7 @@ namespace effectivecore {
   public $page_num_cur = 50;
 
   function __construct($attributes = [], $weight = 0) {
-    parent::__construct($attributes, [], $weight);
+    parent::__construct($this->tag_name, $attributes, [], $weight);
   }
 
   function get_page_num_cur() {

@@ -16,7 +16,7 @@ namespace effectivecore {
     $this->values = factory::array_values_map_to_keys($values);
     $this->active = factory::array_values_map_to_keys($active);
     if (!is_null($title)) $this->title = $title;
-    parent::__construct($attributes, [], $weight);
+    parent::__construct($this->tag_name, $attributes, [], $weight);
   }
 
   function render() {
