@@ -74,7 +74,7 @@ namespace effectivecore {
           if (isset($c_item->styles)) {
             foreach ($c_item->styles as $c_style) {
               $c_url = new url('/modules/'.$module_id.'/'.$c_style->file);
-              $rendered_styles[] = (new markup('link', [
+              $rendered_styles[] = (new markup_simple('link', [
                 'rel'   => 'stylesheet',
                 'media' => $c_style->media,
                 'href'  => $c_url->get_full()
