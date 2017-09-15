@@ -13,14 +13,14 @@ forms
         children
       # input text
         - field_text|form_box
+            title: Text
+            description|text
+              text: Element %%_info.
+              args
+              - info: &lt;input type="text"&gt;
             children
             - default|markup_simple
                 tag_name: input
-                title: Text
-                description|text
-                  text: Element %%_info.
-                  args
-                  - info: &lt;input type="text"&gt;
                 attributes
                 - type: text
                 - name: input_text
@@ -31,14 +31,14 @@ forms
                 - pattern: [a-zA-Z0-9]+
       # input password
         - field_password|form_box
+            title: Password
+            description|text
+              text: Element %%_info.
+              args
+              - info: &lt;input type="password"&gt;
             children
             - default|markup_simple
                 tag_name: input
-                title: Password
-                description|text
-                  text: Element %%_info.
-                  args
-                  - info: &lt;input type="password"&gt;
                 attributes
                 - type: password
                 - name: input_password
@@ -49,14 +49,14 @@ forms
                 - autocomplete: off
       # input search
         - field_search|form_box
+            title: Search
+            description|text
+              text: Element %%_info.
+              args
+              - info: &lt;input type="search"&gt;
             children
             - default|markup_simple
                 tag_name: input
-                title: Search
-                description|text
-                  text: Element %%_info.
-                  args
-                  - info: &lt;input type="search"&gt;
                 attributes
                 - type: search
                 - name: input_search
@@ -66,14 +66,14 @@ forms
                 - maxlength: 255
       # input url
         - field_url|form_box
+            title: URL
+            description|text
+              text: Element %%_info.
+              args
+              - info: &lt;input type="url"&gt;
             children
             - default|markup_simple
                 tag_name: input
-                title: URL
-                description|text
-                  text: Element %%_info.
-                  args
-                  - info: &lt;input type="url"&gt;
                 attributes
                 - type: url
                 - name: input_url
@@ -83,12 +83,12 @@ forms
                 - maxlength: 255
       # input telephone
         - field_tel|form_box
+            title: Telephone
+            description|text
+              text: Use international format of mobile phone numbers.
             children
             - default|markup_simple
                 tag_name: input
-                title: Telephone
-                description|text
-                  text: Use international format of mobile phone numbers.
                 attributes
                 - type: tel
                 - name: input_tel
@@ -98,14 +98,14 @@ forms
                 - maxlength: 15
       # input email
         - field_email|form_box
+            title: EMail
+            description|text
+              text: Element %%_info.
+              args
+              - info: &lt;input type="email"&gt;
             children
             - default|markup_simple
                 tag_name: input
-                title: EMail
-                description|text
-                  text: Element %%_info.
-                  args
-                  - info: &lt;input type="email"&gt;
                 attributes
                 - type: email
                 - name: input_email
@@ -116,14 +116,14 @@ forms
                 - multiple: multiple
       # input file
         - field_file|form_box
+            title: File
+            description|text
+              text: Element %%_info.
+              args
+              - info: &lt;input type="file"&gt;
             children
             - default|markup_simple
                 tag_name: input
-                title: File
-                description|text
-                  text: Element %%_info.
-                  args
-                  - info: &lt;input type="file"&gt;
                 attributes
                 - type: file
                 - name: input_file
@@ -131,14 +131,14 @@ forms
                 - multiple: multiple
       # input number
         - field_number|form_box
+            title: Number
+            description|text
+              text: Element %%_info.
+              args
+              - info: &lt;input type="number"&gt;
             children
             - default|markup_simple
                 tag_name: input
-                title: Number
-                description|text
-                  text: Element %%_info.
-                  args
-                  - info: &lt;input type="number"&gt;
                 attributes
                 - type: number
                 - name: input_number
@@ -149,14 +149,14 @@ forms
                 - step: 0.5
       # input range
         - field_range|form_box
+            title: Range
+            description|text
+              text: Element %%_info.
+              args
+              - info: &lt;input type="range"&gt;
             children
             - default|markup_simple
                 tag_name: input
-                title: Range
-                description|text
-                  text: Element %%_info.
-                  args
-                  - info: &lt;input type="range"&gt;
                 attributes
                 - type: range
                 - name: input_range
@@ -166,14 +166,14 @@ forms
                 - step: 0.5
       # input date
         - field_date|form_box
+            title: Date
+            description|text
+              text: Element %%_info.
+              args
+              - info: &lt;input type="date"&gt;
             children
             - default|markup_simple
                 tag_name: input
-                title: Date
-                description|text
-                  text: Element %%_info.
-                  args
-                  - info: &lt;input type="date"&gt;
                 attributes
                 - type: date
                 - name: input_date
@@ -183,14 +183,14 @@ forms
                 - max: 2020-12-31
       # input time
         - field_time|form_box
+            title: Time
+            description|text
+              text: Element %%_info.
+              args
+              - info: &lt;input type="time"&gt;
             children
             - default|markup_simple
                 tag_name: input
-                title: Time
-                description|text
-                  text: Element %%_info.
-                  args
-                  - info: &lt;input type="time"&gt;
                 attributes
                 - type: time
                 - name: input_time
@@ -198,28 +198,28 @@ forms
                 - value: 00:00:00
       # input color
         - field_color|form_box
+            title: Color
+            description|text
+              text: Element %%_info.
+              args
+              - info: &lt;input type="color"&gt;
             children
             - default|markup_simple
                 tag_name: input
-                title: Color
-                description|text
-                  text: Element %%_info.
-                  args
-                  - info: &lt;input type="color"&gt;
                 attributes
                 - type: color
                 - name: input_color
                 - value: #ffffff
       # textarea
         - field_textarea|form_box
+            title: Textarea
+            description|text
+              text: Element %%_info.
+              args
+              - info: &lt;textarea&gt;&lt;/textarea&gt;
             children
             - default|markup
                 tag_name: textarea
-                title: Textarea
-                description|text
-                  text: Element %%_info.
-                  args
-                  - info: &lt;textarea&gt;&lt;/textarea&gt;
                 attributes
                 - name: textarea
                 - rows: 5
@@ -290,31 +290,31 @@ forms
               - checkboxes: checkboxes
             children
             - field_checkbox_1|form_box
+                title: Checkbox 1
+                title_position: bottom
                 children
                 - default|markup_simple
                     tag_name: input
-                    title: Checkbox 1
-                    title_position: bottom
                     attributes
                     - type: checkbox
                     - name: input_checkbox_1
                     - value: checkbox_1
             - field_checkbox_2|form_box
+                title: Checkbox 2
+                title_position: bottom
                 children
                 - default|markup_simple
                     tag_name: input
-                    title: Checkbox 2
-                    title_position: bottom
                     attributes
                     - type: checkbox
                     - name: input_checkbox_2
                     - value: checkbox_2
             - field_checkbox_3|form_box
+                title: Checkbox 3
+                title_position: bottom
                 children
                 - default|markup_simple
                     tag_name: input
-                    title: Checkbox 3
-                    title_position: bottom
                     attributes
                     - type: checkbox
                     - name: input_checkbox_3
@@ -333,31 +333,31 @@ forms
               - radios: radios
             children
             - field_radio_1|form_box
+                title: Radio 1.1
+                title_position: bottom
                 children
                 - default|markup_simple
                     tag_name: input
-                    title: Radio 1.1
-                    title_position: bottom
                     attributes
                     - type: radio
                     - name: input_radio
                     - value: radio_1_1
             - field_radio_2|form_box
+                title: Radio 1.2
+                title_position: bottom
                 children
                 - default|markup_simple
                     tag_name: input
-                    title: Radio 1.2
-                    title_position: bottom
                     attributes
                     - type: radio
                     - name: input_radio
                     - value: radio_1_2
             - field_radio_3|form_box
+                title: Radio 1.3
+                title_position: bottom
                 children
                 - default|markup_simple
                     tag_name: input
-                    title: Radio 1.3
-                    title_position: bottom
                     attributes
                     - type: radio
                     - name: input_radio

@@ -11,10 +11,10 @@ forms
         tag_name: fieldset
         children
         - field_password_old|form_box
+            title: Old password
             children
             - default|markup_simple
                 tag_name: input
-                title: Old password
                 attributes
                 - type: password
                 - name: password_old
@@ -24,10 +24,10 @@ forms
                 - autocomplete: off
                 - disabled: disabled
         - field_password_new|form_box
+            title: New password
             children
             - default|markup_simple
                 tag_name: input
-                title: New password
                 attributes
                 - type: password
                 - name: password_new
