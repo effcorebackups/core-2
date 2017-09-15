@@ -10,7 +10,7 @@ forms
     - fieldset_default|markup
         tag_name: fieldset
         children
-        - field_password_old|form_box
+        - field_password_old|form_field
             title: Old password
             children
             - default|markup_simple
@@ -23,7 +23,7 @@ forms
                 - maxlength: 255
                 - autocomplete: off
                 - disabled: disabled
-        - field_password_new|form_box
+        - field_password_new|form_field
             title: New password
             children
             - default|markup_simple

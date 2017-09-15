@@ -10,7 +10,7 @@ forms
     - fieldset_default|markup
         tag_name: fieldset
         children
-        - field_email|form_box
+        - field_email|form_field
             title: EMail
             children
             - default|markup_simple
@@ -21,7 +21,7 @@ forms
                 - required: required
                 - minlength: 5
                 - maxlength: 255
-        - field_password|form_box
+        - field_password|form_field
             title: Password
             children
             - default|markup_simple

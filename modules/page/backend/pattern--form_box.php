@@ -8,7 +8,7 @@ namespace effectivecore {
           use \effectivecore\translations_factory as translations;
           class form_box extends \effectivecore\markup {
 
-  public $tag_name = 'x-form_box';
+  public $tag_name = 'x-form-box';
   public $template = 'form_box';
   public $title = null;
   public $description = '';
