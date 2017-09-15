@@ -2,6 +2,5 @@ templates
 - markup_element: frontend/template--markup_element.html
 - markup_element_simple: frontend/template--markup_element.simple.html
 - page: frontend/template--page.html
-- form_title: frontend/template--form_title.html
-- form_element: frontend/template--form_element.html
+- form_box: frontend/template--form_box.html
 - form_container: frontend/template--form_container.html

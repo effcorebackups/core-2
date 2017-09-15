@@ -17,11 +17,10 @@ namespace effectivecore {
   }
 
   function item_insert($title = '', $attr = []) {
-    $item = new form_element('input', $title, '', $attr + [
-      'type' => 'radio',
-      'name' => $this->attribute_select('name')]);
+ // $item = new form_element('input', $title, '', $attr + ['type' => 'radio', 'name' => $this->attribute_select('name')]);
+    $item = new markup('input', $attr + ['type' => 'radio', 'name' => $this->attribute_select('name')]);
     $item->title_position = 'right';
-    $this->child_insert(new form_field(), $attr['value']);
+    $this->child_insert(new form_container('x-field'), $attr['value']);
     $this->child_select($attr['value'])->child_insert($item, 'default');
   }
 

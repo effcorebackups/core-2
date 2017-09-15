@@ -7,12 +7,12 @@ forms
     - class
       - form-user: form-user
     children
-    - fieldset_default|form_container
+    - fieldset_default|markup
         tag_name: fieldset
         children
-        - field_email|form_field
+        - field_email|form_box
             children
-            - default|form_element
+            - default|markup_simple
                 tag_name: input
                 title: EMail
                 attributes
@@ -21,9 +21,9 @@ forms
                 - required: required
                 - minlength: 5
                 - maxlength: 255
-        - field_password|form_field
+        - field_password|form_box
             children
-            - default|form_element
+            - default|markup_simple
                 tag_name: input
                 title: Password
                 attributes

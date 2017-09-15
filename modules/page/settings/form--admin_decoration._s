@@ -7,14 +7,14 @@ forms
     - class
       - form-decoration: form-decoration
     children
-    - fieldset_default|form_container
+    - fieldset_default|markup
         tag_name: fieldset
         title: Colors
         children
-        - field_color|form_palette
+        - field_color|form_field_palette
             title: Color
             name: color
-        - field_color_bg|form_palette
+        - field_color_bg|form_field_palette
             title: Background color
             name: color_bg
     - button_save|markup

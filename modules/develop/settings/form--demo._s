@@ -7,14 +7,14 @@ forms
     - class
       - form-demo: form-demo
     children
-    - fieldset_default|form_container
+    - fieldset_default|markup
         tag_name: fieldset
         title: Form elements
         children
       # input text
-        - field_text|form_field
+        - field_text|form_box
             children
-            - default|form_element
+            - default|markup_simple
                 tag_name: input
                 title: Text
                 description|text
@@ -30,9 +30,9 @@ forms
                 - maxlength: 255
                 - pattern: [a-zA-Z0-9]+
       # input password
-        - field_password|form_field
+        - field_password|form_box
             children
-            - default|form_element
+            - default|markup_simple
                 tag_name: input
                 title: Password
                 description|text
@@ -48,9 +48,9 @@ forms
                 - maxlength: 255
                 - autocomplete: off
       # input search
-        - field_search|form_field
+        - field_search|form_box
             children
-            - default|form_element
+            - default|markup_simple
                 tag_name: input
                 title: Search
                 description|text
@@ -65,9 +65,9 @@ forms
                 - minlength: 5
                 - maxlength: 255
       # input url
-        - field_url|form_field
+        - field_url|form_box
             children
-            - default|form_element
+            - default|markup_simple
                 tag_name: input
                 title: URL
                 description|text
@@ -82,9 +82,9 @@ forms
                 - minlength: 5
                 - maxlength: 255
       # input telephone
-        - field_tel|form_field
+        - field_tel|form_box
             children
-            - default|form_element
+            - default|markup_simple
                 tag_name: input
                 title: Telephone
                 description|text
@@ -97,9 +97,9 @@ forms
                 - minlength: 5
                 - maxlength: 15
       # input email
-        - field_email|form_field
+        - field_email|form_box
             children
-            - default|form_element
+            - default|markup_simple
                 tag_name: input
                 title: EMail
                 description|text
@@ -115,9 +115,9 @@ forms
                 - maxlength: 255
                 - multiple: multiple
       # input file
-        - field_file|form_field
+        - field_file|form_box
             children
-            - default|form_element
+            - default|markup_simple
                 tag_name: input
                 title: File
                 description|text
@@ -130,9 +130,9 @@ forms
                 - accept: image/*,audio/*,video/*
                 - multiple: multiple
       # input number
-        - field_number|form_field
+        - field_number|form_box
             children
-            - default|form_element
+            - default|markup_simple
                 tag_name: input
                 title: Number
                 description|text
@@ -148,9 +148,9 @@ forms
                 - max: 5
                 - step: 0.5
       # input range
-        - field_range|form_field
+        - field_range|form_box
             children
-            - default|form_element
+            - default|markup_simple
                 tag_name: input
                 title: Range
                 description|text
@@ -165,9 +165,9 @@ forms
                 - max: 5
                 - step: 0.5
       # input date
-        - field_date|form_field
+        - field_date|form_box
             children
-            - default|form_element
+            - default|markup_simple
                 tag_name: input
                 title: Date
                 description|text
@@ -182,9 +182,9 @@ forms
                 - min: 2000-12-31
                 - max: 2020-12-31
       # input time
-        - field_time|form_field
+        - field_time|form_box
             children
-            - default|form_element
+            - default|markup_simple
                 tag_name: input
                 title: Time
                 description|text
@@ -197,9 +197,9 @@ forms
                 - required: required
                 - value: 00:00:00
       # input color
-        - field_color|form_field
+        - field_color|form_box
             children
-            - default|form_element
+            - default|markup_simple
                 tag_name: input
                 title: Color
                 description|text
@@ -211,9 +211,9 @@ forms
                 - name: input_color
                 - value: #ffffff
       # textarea
-        - field_textarea|form_field
+        - field_textarea|form_box
             children
-            - default|form_element
+            - default|markup
                 tag_name: textarea
                 title: Textarea
                 description|text
@@ -277,87 +277,87 @@ forms
             disabled
             - option_2_2: option_2_2
       # checkboxes
-        - field_checkboxes|form_container
+        - field_checkboxes|form_box
             title: Checkboxes
+            description|text
+              text: Element %%_info.
+              args
+              - info: &lt;input type="checkbox"&gt;
             attributes
             - required: required
             - class
               - boxes: boxes
               - checkboxes: checkboxes
-            description|text
-              text: Element %%_info.
-              args
-              - info: &lt;input type="checkbox"&gt;
             children
-            - field_checkbox_1|form_field
+            - field_checkbox_1|form_box
                 children
-                - default|form_element
+                - default|markup_simple
                     tag_name: input
                     title: Checkbox 1
-                    title_position: right
+                    title_position: bottom
                     attributes
                     - type: checkbox
                     - name: input_checkbox_1
                     - value: checkbox_1
-            - field_checkbox_2|form_field
+            - field_checkbox_2|form_box
                 children
-                - default|form_element
+                - default|markup_simple
                     tag_name: input
                     title: Checkbox 2
-                    title_position: right
+                    title_position: bottom
                     attributes
                     - type: checkbox
                     - name: input_checkbox_2
                     - value: checkbox_2
-            - field_checkbox_3|form_field
+            - field_checkbox_3|form_box
                 children
-                - default|form_element
+                - default|markup_simple
                     tag_name: input
                     title: Checkbox 3
-                    title_position: right
+                    title_position: bottom
                     attributes
                     - type: checkbox
                     - name: input_checkbox_3
                     - value: checkbox_3
       # radios
-        - field_radios|form_container
+        - field_radios|form_box
             title: Radios
+            description|text
+              text: Element %%_info.
+              args
+              - info: &lt;input type="radio"&gt;
             attributes
             - required: required
             - class
               - boxes: boxes
               - radios: radios
-            description|text
-              text: Element %%_info.
-              args
-              - info: &lt;input type="radio"&gt;
             children
-            - field_radio_1|form_field
+            - field_radio_1|form_box
                 children
-                - default|form_element
+                - default|markup_simple
                     tag_name: input
                     title: Radio 1.1
-                    title_position: right
+                    title_position: bottom
                     attributes
                     - type: radio
                     - name: input_radio
                     - value: radio_1_1
-            - field_radio_2|form_field
+            - field_radio_2|form_box
                 children
-                - default|form_element
+                - default|markup_simple
                     tag_name: input
                     title: Radio 1.2
-                    title_position: right
+                    title_position: bottom
                     attributes
                     - type: radio
                     - name: input_radio
                     - value: radio_1_2
-            - field_radio_3|form_field
+            - field_radio_3|form_box
                 children
-                - default|form_element
+                - default|markup_simple
                     tag_name: input
                     title: Radio 1.3
-                    title_position: right
+                    title_position: bottom
                     attributes
                     - type: radio
                     - name: input_radio
@@ -376,7 +376,7 @@ forms
             - radio_2_2: Radio 2.2
             - radio_2_3: Radio 2.3
       # radios color macro
-        - field_color_macro|form_palette
+        - field_color_macro|form_field_palette
             title: Color
             name: color
     - button_submit|markup

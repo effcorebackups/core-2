@@ -5,26 +5,30 @@
   #############################################################
 
 namespace effectivecore {
-          class form_container extends \effectivecore\markup {
+          class form_box extends \effectivecore\markup {
 
-  public $tag_name = 'x-container';
-  public $template = 'form_container';
-  public $title = '';
+  public $tag_name = 'x-form_box';
+  public $template = 'form_box';
+  public $title = null;
   public $description = '';
 
-  function __construct($tag_name = '', $title = '', $description = '', $attributes = [], $children = [], $weight = 0) {
+  function __construct($tag_name = null, $title = null, $description = null, $attributes = [], $children = [], $weight = 0) {
+    if ($tag_name)    $this->tag_name    = $tag_name;
     if ($title)       $this->title       = $title;
     if ($description) $this->description = $description;
-    parent::__construct($tag_name, $attributes, $children, $weight);
+    parent::__construct($attributes, $children, $weight);
   }
 
   function render() {
+    $is_bottom_title = !empty($this->title_position) &&
+                              $this->title_position == 'bottom';
     return (new template($this->template, [
-      'attributes'  => factory::data_to_attr($this->attribute_select()),
       'tag_name'    => $this->tag_name,
-      'title'       => $this->render_self(),
+      'attributes'  => factory::data_to_attr($this->attribute_select()),
       'content'     => $this->render_children($this->children),
-      'description' => $this->render_description()
+      'description' => $this->render_description(),
+      'title_t'     => $is_bottom_title ? '' : $this->render_self(),
+      'title_b'     => $is_bottom_title ?      $this->render_self() : ''
     ]))->render();
   }
 
