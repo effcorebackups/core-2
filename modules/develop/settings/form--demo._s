@@ -277,7 +277,7 @@ forms
             disabled
             - option_2_2: option_2_2
       # checkboxes
-        - group_checkboxes|form_box
+        - group_checkboxes|form_container
             title: Checkboxes
             description|text
               text: Element %%_info.
@@ -320,7 +320,7 @@ forms
                     - name: input_checkbox_3
                     - value: checkbox_3
       # radios
-        - group_radios|form_box
+        - group_radios|form_container
             title: Radios
             description|text
               text: Element %%_info.
@@ -363,7 +363,7 @@ forms
                     - name: input_radio
                     - value: radio_1_3
       # radios macro
-        - field_radios_macro|form_box_radios
+        - field_radios_macro|form_container_radios
             title: Radios (macro)
             description|text
               text: Element %%_info.
@@ -376,7 +376,7 @@ forms
             - radio_2_2: Radio 2.2
             - radio_2_3: Radio 2.3
       # radios color macro
-        - field_color_macro|form_box_palette
+        - field_color_macro|form_container_palette
             title: Color
             name: color
     - button_submit|markup
