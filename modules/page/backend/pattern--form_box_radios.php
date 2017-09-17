@@ -5,22 +5,22 @@
   #############################################################
 
 namespace effectivecore {
-          class form_container_radios extends \effectivecore\form_container {
+          class form_box_radios extends \effectivecore\form_box {
 
   public $values = [];
 
   function build() {
     $this->attribute_insert('class', ['boxes' => 'boxes', 'radios' => 'radios']);
     foreach ($this->values as $value => $title) {
-      $this->item_insert($title, ['value' => $value]);
+      $this->field_insert($title, ['value' => $value]);
     }
   }
 
-  function item_insert($title = '', $attr = []) {
+  function field_insert($title = '', $attr = []) {
  // $item = new form_element('input', $title, '', $attr + ['type' => 'radio', 'name' => $this->attribute_select('name')]);
     $item = new markup('input', $attr + ['type' => 'radio', 'name' => $this->attribute_select('name')]);
     $item->title_position = 'right';
-    $this->child_insert(new form_container('x-field'), $attr['value']);
+    $this->child_insert(new form_box('x-field'), $attr['value']);
     $this->child_select($attr['value'])->child_insert($item, 'default');
   }
 

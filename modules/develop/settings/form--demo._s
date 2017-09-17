@@ -363,7 +363,7 @@ forms
                     - name: input_radio
                     - value: radio_1_3
       # radios macro
-        - field_radios_macro|form_container_radios
+        - field_radios_macro|form_box_radios
             title: Radios (macro)
             description|text
               text: Element %%_info.
@@ -376,7 +376,7 @@ forms
             - radio_2_2: Radio 2.2
             - radio_2_3: Radio 2.3
       # radios color macro
-        - field_color_macro|form_field_palette
+        - field_color_macro|form_box_palette
             title: Color
             name: color
     - button_submit|markup
