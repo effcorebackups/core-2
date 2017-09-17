@@ -8,9 +8,10 @@ namespace effectivecore {
           class form_container_radios extends \effectivecore\form_container {
 
   public $values = [];
-  public $each_name = null;
+  public $each_field_tag_name = 'x-field';
   public $each_title_tag_name = 'label';
   public $each_title_position = 'bottom';
+  public $each_name = null;
 
   function build() {
     $this->attribute_insert('class', ['boxes' => 'boxes', 'radios' => 'radios']);
@@ -21,7 +22,7 @@ namespace effectivecore {
 
   function radio_insert($title = null, $attr = []) {
     $input = new markup_simple('input', $attr + ['type' => 'radio', 'name' => $this->each_name]);
-    $field = new form_field('x-field', $title);
+    $field = new form_field( $this->each_field_tag_name, $title );
     $field->title_tag_name = $this->each_title_tag_name;
     $field->title_position = $this->each_title_position;
     $field->child_insert($input, 'default');
