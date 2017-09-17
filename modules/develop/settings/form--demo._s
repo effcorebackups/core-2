@@ -292,7 +292,6 @@ forms
             children
             - field_checkbox_1|form_field
                 title: Checkbox 1
-                title_tag_name: label
                 title_position: bottom
                 children
                 - default|markup_simple
@@ -303,7 +302,6 @@ forms
                     - value: checkbox_1
             - field_checkbox_2|form_field
                 title: Checkbox 2
-                title_tag_name: label
                 title_position: bottom
                 children
                 - default|markup_simple
@@ -314,7 +312,6 @@ forms
                     - value: checkbox_2
             - field_checkbox_3|form_field
                 title: Checkbox 3
-                title_tag_name: label
                 title_position: bottom
                 children
                 - default|markup_simple
@@ -338,7 +335,6 @@ forms
             children
             - field_radio_1|form_field
                 title: Radio 1.1
-                title_tag_name: label
                 title_position: bottom
                 children
                 - default|markup_simple
@@ -349,7 +345,6 @@ forms
                     - value: radio_1_1
             - field_radio_2|form_field
                 title: Radio 1.2
-                title_tag_name: label
                 title_position: bottom
                 children
                 - default|markup_simple
@@ -360,7 +355,6 @@ forms
                     - value: radio_1_2
             - field_radio_3|form_field
                 title: Radio 1.3
-                title_tag_name: label
                 title_position: bottom
                 children
                 - default|markup_simple
