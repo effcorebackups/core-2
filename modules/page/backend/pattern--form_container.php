@@ -13,6 +13,7 @@ namespace effectivecore {
 
   public $title = null;
   public $title_tag_name = 'x-title';
+  public $title_position = 'top';
   public $description = null;
   public $description_tag_name = 'x-description';
 
