@@ -13,17 +13,13 @@ namespace effectivecore {
     $this->attribute_insert('class', ['palette' => 'palette']);
     foreach (storages::get('settings')->select('colors') as $module_id => $c_colors) {
       foreach ($c_colors as $c_color_id => $c_color_info) {
-        $this->field_insert('', [
+        $this->radio_insert('', [
           'value' => $c_color_id,
           'title' => translations::get('Color ID = %%_id (value = %%_value)', ['id' => $c_color_id, 'value' => $c_color_info->value]),
           'style' => ['background-color: '.$c_color_info->value]
         ]);
       }
     }
-  }
-
-  function field_insert($title = '', $attr = []) {
-    return parent::field_insert($title, $attr + ['name' => $this->name]);
   }
 
 }}

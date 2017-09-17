@@ -11,8 +11,10 @@ namespace effectivecore {
 
   function __construct($attributes = [], $children = [], $weight = 0) {
     parent::__construct($attributes, $weight);
-    foreach (is_array($children) ? $children : [$children] as $id => $c_child) {
-      $this->child_insert($c_child, $id);
+    if ($children) {
+      foreach (is_array($children) ? $children : [$children] as $id => $c_child) {
+        $this->child_insert($c_child, $id);
+      }
     }
   }
 
