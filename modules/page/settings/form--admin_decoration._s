@@ -13,10 +13,10 @@ forms
         children
         - field_color|form_container_palette
             title: Color
-            name: color
+            each_name: color
         - field_color_bg|form_container_palette
             title: Background color
-            name: color_bg
+            each_name: color_bg
     - button_save|markup
         tag_name: button
         attributes

@@ -378,7 +378,7 @@ forms
       # radios color macro
         - field_color_macro|form_container_palette
             title: Color
-            name: color
+            each_name: color
     - button_submit|markup
         tag_name: button
         attributes
