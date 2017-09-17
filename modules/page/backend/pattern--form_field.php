@@ -9,6 +9,18 @@ namespace effectivecore {
           class form_field extends \effectivecore\form_container {
 
   public $tag_name = 'x-field';
+  public $title_tag_name = 'label';
+
+  function render_self() {
+    $default = $this->child_select('default');
+    if ($this->title) {
+      $required_mark = $this->attribute_select('required') ||
+                    $default->attribute_select('required') ? $this->render_required_mark() : '';
+      return (new markup($this->title_tag_name, [], [
+        $this->title, $required_mark
+      ]))->render();
+    }
+  }
 
   function render_description() {
     $return = [];
