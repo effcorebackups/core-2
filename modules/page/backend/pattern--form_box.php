@@ -48,11 +48,10 @@ namespace effectivecore {
 
   function render_description() {
     if ($this->description) {
-      return (new markup('x-description', [],
-        new markup('p', [], is_string($this->description) ?
-                    translations::get($this->description) :
-                                      $this->description)
-      ))->render();
+      return (
+        new markup('x-description', [],
+        new markup('p', [], $this->description
+      )))->render();
     }
   }
 
