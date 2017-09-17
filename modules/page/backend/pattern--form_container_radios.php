@@ -20,7 +20,7 @@ namespace effectivecore {
   function radio_insert($title = '', $attr = []) {
     $field = new markup('x-field');
     $field->child_insert(new markup_simple('input', $attr + ['name' => $this->each_name, 'type' => 'radio']), 'default');
-    if ($title) $field->child_insert(new markup('x-title', [], $title));
+    if ($title) $field->child_insert(new markup('label', [], $title));
     $this->child_insert($field);
   }
 

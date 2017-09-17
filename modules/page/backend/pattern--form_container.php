@@ -10,9 +10,11 @@ namespace effectivecore {
 
   public $tag_name = 'x-container';
   public $template = 'form_container';
+
   public $title = null;
   public $title_tag_name = 'x-title';
-  public $description = '';
+  public $description = null;
+  public $description_tag_name = 'x-description';
 
   function __construct($tag_name = null, $title = null, $description = null, $attributes = [], $children = [], $weight = 0) {
     if ($tag_name)    $this->tag_name    = $tag_name;
@@ -50,9 +52,9 @@ namespace effectivecore {
   function render_description() {
     if ($this->description) {
       return (
-        new markup('x-description', [],
-        new markup('p', [], $this->description
-      )))->render();
+        new markup($this->description_tag_name, [],
+        new markup('p', [], $this->description)
+      ))->render();
     }
   }
 
