@@ -7,9 +7,10 @@ forms
     - class
       - form-demo: form-demo
     children
-    - fieldset_default|markup
+    - fieldset_default|form_container
         tag_name: fieldset
         title: Form elements
+        title_tag_name: legend
         children
       # input text
         - field_text|form_field

@@ -7,7 +7,7 @@ forms
     - class
       - form-user: form-user
     children
-    - fieldset_default|markup
+    - fieldset_default|form_container
         tag_name: fieldset
         children
         - field_email|form_field

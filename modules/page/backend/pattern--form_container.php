@@ -11,6 +11,7 @@ namespace effectivecore {
   public $tag_name = 'x-container';
   public $template = 'form_container';
   public $title = null;
+  public $title_tag_name = 'x-title';
   public $description = '';
 
   function __construct($tag_name = null, $title = null, $description = null, $attributes = [], $children = [], $weight = 0) {
@@ -36,7 +37,7 @@ namespace effectivecore {
   function render_self() {
     if ($this->title) {
       $required_mark = $this->attribute_select('required') ? $this->render_required_mark() : '';
-      return (new markup('x-title', [], [
+      return (new markup($this->title_tag_name, [], [
         $this->title, $required_mark
       ]))->render();
     }

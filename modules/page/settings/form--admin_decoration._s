@@ -7,9 +7,10 @@ forms
     - class
       - form-decoration: form-decoration
     children
-    - fieldset_default|markup
+    - fieldset_default|form_container
         tag_name: fieldset
         title: Colors
+        title_tag_name: legend
         children
         - field_color|form_container_palette
             title: Color
