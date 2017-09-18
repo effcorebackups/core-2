@@ -17,7 +17,7 @@ namespace effectivecore {
           'value' => $c_color_id,
           'title' => translations::get('Color ID = %%_id (value = %%_value)', ['id' => $c_color_id, 'value' => $c_color_info->value]),
           'style' => ['background-color: '.$c_color_info->value]
-        ]);
+        ], $c_color_id);
       }
     }
   }

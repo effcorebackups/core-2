@@ -16,7 +16,7 @@ namespace effectivecore\modules\user {
           use \effectivecore\modules\user\session_factory as session;
           abstract class events_form extends \effectivecore\events_form {
 
-  static function on_submit_user_n_delete($form, $elements, &$values) {
+  static function on_submit_user_n_delete($form, $fields, &$values) {
     $user_id = pages::$args['user_id'];
     switch ($form->clicked_button_name) {
       case 'delete':
@@ -46,7 +46,7 @@ namespace effectivecore\modules\user {
     }
   }
 
-  static function on_submit_user_n_edit($form, $elements, &$values) {
+  static function on_submit_user_n_edit($form, $fields, &$values) {
     $user_id = pages::$args['user_id'];
     switch ($form->clicked_button_name) {
       case 'save':
@@ -71,7 +71,7 @@ namespace effectivecore\modules\user {
     }
   }
 
-  static function on_submit_user_login($form, $elements, &$values) {
+  static function on_submit_user_login($form, $fields, &$values) {
     switch ($form->clicked_button_name) {
       case 'login':
         $user = (new entity_instance('entities/user/user', [
@@ -91,7 +91,7 @@ namespace effectivecore\modules\user {
     }
   }
 
-  static function on_submit_user_register($form, $elements, &$values) {
+  static function on_submit_user_register($form, $fields, &$values) {
     switch ($form->clicked_button_name) {
       case 'register':
         $user = (new entity_instance('entities/user/user', [
@@ -120,7 +120,7 @@ namespace effectivecore\modules\user {
     }
   }
 
-  static function on_submit_user_logout($form, $elements, &$values) {
+  static function on_submit_user_logout($form, $fields, &$values) {
     switch ($form->clicked_button_name) {
       case 'logout':
         session::destroy(users::get_current()->id);

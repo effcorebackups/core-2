@@ -73,9 +73,10 @@ namespace effectivecore {
   # - input[type=color]          : VALUE should match the pattern #dddddd
   # ─────────────────────────────────────────────────────────────────────
 
-  static function on_validate($form, $elements, &$values) {
-    foreach ($elements as $c_id => $c_element) {
-      if ($c_element instanceof node) {
+  static function on_validate($form, $fields, &$values) {
+    foreach ($fields as $c_id => $c_field) {
+      $c_element = $c_field->child_select('default');
+      if ($c_element instanceof markup_simple) {
         $c_name = rtrim($c_element->attribute_select('name'), '[]');
         $c_type =       $c_element->attribute_select('type');
         if ($c_name) {

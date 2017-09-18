@@ -71,7 +71,7 @@ namespace effectivecore {
   function build() {
     $values = $_POST;
     $id = $this->attribute_select('id');
-  # build form elements
+  # build all form elements
     $elements = $this->child_select_all();
     foreach ($elements as $c_element) {
       if (method_exists($c_element, 'build')) {
@@ -79,8 +79,8 @@ namespace effectivecore {
       }
     }
   # call init handlers
-    events::start('on_form_init', $id, [$this, $elements]);
-    $elements = $this->child_select_all();
+    $fields = $this->fields_get();
+    events::start('on_form_init', $id, [$this, $fields]);
   # if current user click the button
     if (isset($values['form_id']) &&
               $values['form_id'] === $id && isset($values['button'])) {
@@ -97,7 +97,7 @@ namespace effectivecore {
       }
     # call validate handlers
       if (empty($this->clicked_button->novalidate)) {
-        events::start('on_form_validate', $id, [$this, $elements, &$values]);
+        events::start('on_form_validate', $id, [$this, $fields, &$values]);
       }
     # show errors and set error class
       foreach ($this->errors as $c_id => $c_errors) {
@@ -108,7 +108,7 @@ namespace effectivecore {
       }
     # call submit handler (if no errors)
       if (count($this->errors) == 0) {
-        events::start('on_form_submit', $id, [$this, $elements, &$values]);
+        events::start('on_form_submit', $id, [$this, $fields, &$values]);
       }
     }
 
@@ -118,6 +118,16 @@ namespace effectivecore {
       'name'  => 'form_id',
       'value' => $id,
     ]), 'hidden_form_id');
+  }
+
+  function fields_get() {
+    $return = [];
+    foreach ($this->child_select_all() as $npath => $c_child) {
+      if ($c_child instanceof \effectivecore\form_container) {
+        $return[$npath] = $c_child;
+      }
+    }
+    return $return;
   }
 
 }}
