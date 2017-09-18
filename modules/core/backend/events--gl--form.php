@@ -15,7 +15,7 @@ namespace effectivecore {
   ### on_init ###
   ###############
 
-  static function on_init($form, $elements) {
+  static function on_init($form, $fields) {
   }
 
   ###################
@@ -74,7 +74,7 @@ namespace effectivecore {
   # ─────────────────────────────────────────────────────────────────────
 
   static function on_validate($form, $fields, &$values) {
-    foreach ($fields as $c_id => $c_field) {
+    foreach ($fields as $c_npath => $c_field) {
       $c_element = $c_field->child_select('default');
       if ($c_element instanceof markup_simple) {
         $c_name = rtrim($c_element->attribute_select('name'), '[]');
@@ -136,7 +136,7 @@ namespace effectivecore {
                 }
               }
             }
-            static::_validate_field_selector($form, $c_element, $c_id,
+            static::_validate_field_selector($form, $c_field, $c_element, $c_npath,
               $c_new_select_values, $c_allowed_values
             );
           # set new values after validation
@@ -153,7 +153,7 @@ namespace effectivecore {
         # textarea validation:
         # ─────────────────────────────────────────────────────────────────────
           if ($c_element->tag_name == 'textarea') {
-            static::_validate_field_text($form, $c_element, $c_id, $c_new_text_value);
+            static::_validate_field_text($form, $c_field, $c_element, $c_npath, $c_new_text_value);
             $content = $c_element->child_select('content');
             $content->text = $c_new_text_value;
           }
@@ -198,7 +198,7 @@ namespace effectivecore {
               $c_type == 'date'     ||
               $c_type == 'time'     ||
               $c_type == 'color')) {
-            static::_validate_field_text($form, $c_element, $c_id, $c_new_text_value);
+            static::_validate_field_text($form, $c_field, $c_element, $c_npath, $c_new_text_value);
             $c_element->attribute_insert('value', $c_new_text_value);
           }
 
@@ -211,9 +211,9 @@ namespace effectivecore {
   ### _validate_field_selector ###
   ################################
 
-  static function _validate_field_selector($form, $element, $id, &$new_values, $allowed_values) {
+  static function _validate_field_selector($form, $field, $element, $npath, &$new_values, $allowed_values) {
     $title = translations::get(
-      $element->title
+      $field->title
     );
 
   # convert array with empty strings to array without empty strings:
@@ -226,7 +226,7 @@ namespace effectivecore {
   # ─────────────────────────────────────────────────────────────────────
 
     if ($element->attribute_select('required') && empty(array_filter($new_values, 'strlen'))) {
-      $form->add_error($id,
+      $form->add_error($npath.'/default',
         translations::get('Field "%%_title" must be selected!', ['title' => $title])
       );
       return;
@@ -248,7 +248,7 @@ namespace effectivecore {
   # check if field is multiple or singular
     if (!$element->attribute_select('multiple') && count($new_values) > 1) {
       $new_values = array_slice($new_values, 0, 1);
-      $form->add_error($id,
+      $form->add_error($npath.'/default',
         translations::get('Field "%%_title" is not support multiple select!', ['title' => $title])
       );
     }
@@ -258,14 +258,14 @@ namespace effectivecore {
   ### _validate_field_text ###
   ############################
 
-  static function _validate_field_text($form, $element, $id, &$new_value) {
+  static function _validate_field_text($form, $field, $element, $npath, &$new_value) {
     $title = translations::get(
-      $element->title
+      $field->title
     );
 
   # check required fields
     if ($element->attribute_select('required') && strlen($new_value) == 0) {
-      $form->add_error($id,
+      $form->add_error($npath.'/default',
         translations::get('Field "%%_title" can not be blank!', ['title' => $title])
       );
       return;
@@ -274,7 +274,7 @@ namespace effectivecore {
   # check minimum length
     if ($element->attribute_select('minlength') &&
         $element->attribute_select('minlength') > strlen($new_value)) {
-      $form->add_error($id,
+      $form->add_error($npath.'/default',
         translations::get('Field "%%_title" contain too few characters!', ['title' => $title]).br.
         translations::get('Must be at least %%_value characters long.', ['value' => $element->attribute_select('minlength')])
       );
@@ -284,7 +284,7 @@ namespace effectivecore {
   # check maximum length
     if ($element->attribute_select('maxlength') &&
         $element->attribute_select('maxlength') < strlen($new_value)) {
-      $form->add_error($id,
+      $form->add_error($npath.'/default',
         translations::get('Field "%%_title" contain too much characters!', ['title' => $title]).br.
         translations::get('Must be no more than %%_value characters.', ['value' => $element->attribute_select('maxlength')]).br.
         translations::get('The value was trimmed to the required length!').br.
@@ -298,7 +298,7 @@ namespace effectivecore {
   # check email field
     if ($element->attribute_select('type') == 'email' &&
         filter_var($new_value, FILTER_VALIDATE_EMAIL) == false) {
-      $form->add_error($id,
+      $form->add_error($npath.'/default',
         translations::get('Field "%%_title" contains an invalid email address!', ['title' => $title])
       );
       return;
@@ -309,7 +309,7 @@ namespace effectivecore {
   ### on_submit ###
   #################
 
-  static function on_submit_install($form, $elements, &$values) {
+  static function on_submit_install($form, $fields, &$values) {
     switch ($form->clicked_button_name) {
       case 'install':
         foreach (static::get()->on_module_install as $c_event) call_user_func($c_event->handler);
