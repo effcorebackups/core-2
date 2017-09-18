@@ -41,10 +41,10 @@ namespace effectivecore {
     $f_changes       = new file(dir_dynamic.changes_file_name);
     if ($f_changes->is_exist()) $f_changes->insert();
   # init changes
-    $settings_d = isset(static::$changes_dynamic['changes']) ?
-                        static::$changes_dynamic['changes'] : [];
+    $changes_d = isset(static::$changes_dynamic['changes']) ?
+                       static::$changes_dynamic['changes'] : [];
   # add new action
-    $settings_d[$module_id]->{$action}[$npath] = $value;
+    $changes_d[$module_id]->{$action}[$npath] = $value;
   # save data
     if (!is_writable(dir_dynamic) ||
         ($f_settings_orig->is_exist() &&
@@ -62,8 +62,8 @@ namespace effectivecore {
         'Setting is not saved.', 'error'
       );
     } else {
-      static::$changes_dynamic['changes'] = $settings_d; # prevent opcache work
-      static::settings_save_to_file($settings_d, changes_file_name, '  settings::$changes_dynamic[\'changes\']');
+      static::$changes_dynamic['changes'] = $changes_d; # prevent opcache work
+      static::settings_save_to_file($changes_d, changes_file_name, '  settings::$changes_dynamic[\'changes\']');
       if ($rebuild) {
         static::$data_orig = ['_changed' => date(format_datetime, time())];
         static::settings_rebuild();
@@ -87,14 +87,14 @@ namespace effectivecore {
       static::$data_orig += static::settings_find_static();
     }
   # init changes
-    $settings_d = isset(static::$changes_dynamic['changes']) ?
-                        static::$changes_dynamic['changes'] : [];
-    $settings_s = isset(static::$data_orig['changes']) ?
-                        static::$data_orig['changes'] : [];
+    $changes_d = isset(static::$changes_dynamic['changes']) ?
+                       static::$changes_dynamic['changes'] : [];
+    $changes_s = isset(static::$data_orig['changes']) ?
+                       static::$data_orig['changes'] : [];
   # apply all changes to original settings and get final settings
     $data_new = unserialize(serialize(static::$data_orig)); # deep array clone
-    static::changes_apply_to_settings($settings_d, $data_new);
-    static::changes_apply_to_settings($settings_s, $data_new);
+    static::changes_apply_to_settings($changes_d, $data_new);
+    static::changes_apply_to_settings($changes_s, $data_new);
     static::$data = $data_new; # prevent opcache work
     unset(static::$data['changes']);
   # save cache
