@@ -36,11 +36,11 @@ namespace effectivecore {
   # - input[type=file]           : disabled, readonly, required, multiple
   # - input[type=checkbox]       : disabled, readonly, required, checked
   # - input[type=radio]          : disabled, readonly, required, checked
-  # - input[type=number]         : disabled, readonly, required, min, max, step
-  # - input[type=range]          : disabled, readonly, required, min, max, step
-  # - input[type=date]           : disabled, readonly, required, min, max
-  # - input[type=time]           : disabled, readonly, required, min, max
-  # - input[type=color]          : disabled, readonly, required
+  # - input[type=number]         : disabled, readonly, REQUIRED, min, max, step
+  # - input[type=range]          : disabled, readonly, REQUIRED, min, max, step
+  # - input[type=date]           : disabled, readonly, REQUIRED, min, max
+  # - input[type=time]           : disabled, readonly, REQUIRED, min, max
+  # - input[type=color]          : disabled, readonly, REQUIRED
   # ─────────────────────────────────────────────────────────────────────
   # - input[type=hidden]         : not processed element
   # - input[type=button]         : not processed element
