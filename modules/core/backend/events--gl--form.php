@@ -24,15 +24,15 @@ namespace effectivecore {
 
   # attributes support:
   # ─────────────────────────────────────────────────────────────────────
-  # - textarea                   : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
-  # - input[type=text]           : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
-  # - input[type=password]       : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
-  # - input[type=search]         : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
-  # - input[type=url]            : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
-  # - input[type=tel]            : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
-  # - input[type=email]          : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern, multiple
-  # - select                     : DISABLED,           REQUIRED, MULTIPLE
-  # - select::option             : DISABLED
+  # - textarea                   : disabled, readonly, REQUIRED, MINLENGTH, MAXLENGTH, pattern
+  # - input[type=text]           : disabled, readonly, REQUIRED, MINLENGTH, MAXLENGTH, pattern
+  # - input[type=password]       : disabled, readonly, REQUIRED, MINLENGTH, MAXLENGTH, pattern
+  # - input[type=search]         : disabled, readonly, REQUIRED, MINLENGTH, MAXLENGTH, pattern
+  # - input[type=url]            : disabled, readonly, required, minlength, maxlength, pattern
+  # - input[type=tel]            : disabled, readonly, required, minlength, maxlength, pattern
+  # - input[type=email]          : disabled, readonly, required, minlength, maxlength, pattern, multiple
+  # - select                     : disabled,           required, multiple
+  # - select::option             : disabled
   # - input[type=file]           : disabled, readonly, required, multiple
   # - input[type=checkbox]       : disabled, readonly, required, checked
   # - input[type=radio]          : disabled, readonly, required, checked
@@ -76,7 +76,8 @@ namespace effectivecore {
   static function on_validate($form, $fields, &$values) {
     foreach ($fields as $c_npath => $c_field) {
       $c_element = $c_field->child_select('default');
-      if ($c_element instanceof markup_simple) {
+      if ($c_element instanceof markup ||
+          $c_element instanceof markup_simple) {
         $c_name = rtrim($c_element->attribute_select('name'), '[]');
         $c_type =       $c_element->attribute_select('type');
         if ($c_name) {
