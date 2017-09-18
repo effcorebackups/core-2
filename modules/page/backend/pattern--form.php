@@ -78,8 +78,10 @@ namespace effectivecore {
         $c_element->build();
       }
     }
+  # renew elements list after build and get all fields
+    $elements = $this->child_select_all();
+    $fields   = $this->fields_get();
   # call init handlers
-    $fields = $this->fields_get();
     events::start('on_form_init', $id, [$this, $fields]);
   # if current user click the button
     if (isset($values['form_id']) &&
@@ -100,9 +102,9 @@ namespace effectivecore {
         events::start('on_form_validate', $id, [$this, $fields, &$values]);
       }
     # show errors and set error class
-      foreach ($this->errors as $c_id => $c_errors) {
+      foreach ($this->errors as $c_npath => $c_errors) {
         foreach ($c_errors as $c_error) {
-          $elements[$c_id]->attribute_insert('class', ['error' => 'error']);
+          $elements[$c_npath]->attribute_insert('class', ['error' => 'error']);
           messages::add_new($c_error, 'error');
         }
       }
