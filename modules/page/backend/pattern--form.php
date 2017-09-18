@@ -55,10 +55,6 @@ namespace effectivecore {
   public $clicked_button_name = null;
   public $errors = [];
 
-  function __construct($attributes = [], $children = [], $weight = 0) {
-    parent::__construct($attributes, $children, $weight);
-  }
-
   function render() {
     $this->build();
     return parent::render();

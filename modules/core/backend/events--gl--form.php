@@ -28,10 +28,10 @@ namespace effectivecore {
   # - input[type=text]           : disabled, readonly, REQUIRED, MINLENGTH, MAXLENGTH, pattern
   # - input[type=password]       : disabled, readonly, REQUIRED, MINLENGTH, MAXLENGTH, pattern
   # - input[type=search]         : disabled, readonly, REQUIRED, MINLENGTH, MAXLENGTH, pattern
-  # - input[type=url]            : disabled, readonly, required, minlength, maxlength, pattern
-  # - input[type=tel]            : disabled, readonly, required, minlength, maxlength, pattern
-  # - input[type=email]          : disabled, readonly, required, minlength, maxlength, pattern, multiple
-  # - select                     : disabled,           required, multiple
+  # - input[type=url]            : disabled, readonly, REQUIRED, MINLENGTH, MAXLENGTH, pattern
+  # - input[type=tel]            : disabled, readonly, REQUIRED, MINLENGTH, MAXLENGTH, pattern
+  # - input[type=email]          : disabled, readonly, REQUIRED, MINLENGTH, MAXLENGTH, pattern, multiple
+  # - select                     : disabled,           REQUIRED, multiple
   # - select::option             : disabled
   # - input[type=file]           : disabled, readonly, required, multiple
   # - input[type=checkbox]       : disabled, readonly, required, checked
