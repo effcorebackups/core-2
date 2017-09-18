@@ -12,8 +12,8 @@ namespace effectivecore\modules\page {
 
   static function on_init_admin_decoration($form, $elements) {
     $decoration = storages::get('settings')->select('decoration');
-    $elements['fieldset_default/field_color'   ]->default_set($decoration['page']->color);
-    $elements['fieldset_default/field_color_bg']->default_set($decoration['page']->color_bg);
+    $elements['fieldset_default/field_color_id'   ]->default_set($decoration['page']->color_id);
+    $elements['fieldset_default/field_color_bg_id']->default_set($decoration['page']->color_bg_id);
   }
 
   static function on_submit_admin_decoration($form, $elements, &$values) {

@@ -2,8 +2,8 @@ document.addEventListener('DOMContentLoaded', function(){
 
   effcore = {};
   effcore.tokens = [];
-  effcore.tokens['color'] = '%%_color';
-  effcore.tokens['color_bg'] = '%%_color_bg';
+  effcore.tokens['color_id'] = '%%_color_id';
+  effcore.tokens['color_bg_id'] = '%%_color_bg_id';
 
   NodeList.prototype.each = function(func){
     for (var i = 0; i < this.length; i++) {

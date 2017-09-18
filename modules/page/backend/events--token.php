@@ -12,8 +12,8 @@ namespace effectivecore\modules\page {
     $decoration = storages::get('settings')->select('decoration');
     $colors     = storages::get('settings')->select('colors');
     switch ($match) {
-      case '%%_color'   : return $colors['page'][$decoration['page']->color   ]->value;
-      case '%%_color_bg': return $colors['page'][$decoration['page']->color_bg]->value;
+      case '%%_color'   : return $colors['page'][ $decoration['page']->color_id    ]->value;
+      case '%%_color_bg': return $colors['page'][ $decoration['page']->color_bg_id ]->value;
     }
   }
 
