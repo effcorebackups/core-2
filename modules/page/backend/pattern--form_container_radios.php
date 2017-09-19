@@ -21,7 +21,7 @@ namespace effectivecore {
   }
 
   function radio_insert($title = null, $attr = [], $new_id = null) {
-    $input = new markup_simple('input', ['type' => 'radio'] + $this->attribute_select('', 'radios_attributes') + $attr);
+    $input = new markup_simple('input', ['type' => 'radio'] + $attr + $this->attribute_select('', 'radios_attributes'));
     $field = new form_field( $this->each_field_tag_name, $title );
     $field->title_tag_name = $this->each_title_tag_name;
     $field->title_position = $this->each_title_position;
