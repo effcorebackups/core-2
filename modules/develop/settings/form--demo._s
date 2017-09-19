@@ -366,11 +366,12 @@ forms
       # radios macro
         - field_radios_macro|form_container_radios
             title: Radios (macro)
-            each_name: input_radio_macro
             description|text
               text: Element %%_info.
               args
               - info: &lt;input type="radio"&gt;
+            radios_attributes
+            - name: input_radio_macro
             values
             - radio_2_1: Radio 2.1
             - radio_2_2: Radio 2.2
@@ -378,7 +379,8 @@ forms
       # radios color macro
         - field_color_macro|form_container_palette
             title: Color
-            each_name: color
+            radios_attributes
+            - name: color
     - button_submit|markup
         tag_name: button
         attributes
