@@ -237,7 +237,7 @@ forms
               text: Element %%_info.
               args
               - info: &lt;select&gt;
-            attributes
+            select_attributes
             - name: select_macro
             - required: required
             values
@@ -260,7 +260,7 @@ forms
               text: Element %%_info.
               args
               - info: &lt;select&gt;
-            attributes
+            select_attributes
             - name: select_multiple_macro[]
             - required: required
             - multiple: multiple

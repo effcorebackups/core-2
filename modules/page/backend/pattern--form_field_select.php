@@ -7,12 +7,13 @@
 namespace effectivecore {
           class form_field_select extends \effectivecore\form_field {
 
+  public $select_attributes = [];
   public $values = [];
   public $selected = [];
   public $disabled = [];
 
   function build() {
-    $this->child_insert(new markup('select', $this->attribute_select()), 'default');
+    $this->child_insert(new markup('select', $this->attribute_select('', 'select_attributes')), 'default');
     $this->child_select('default')->title = $this->title;
     foreach ($this->values as $c_id => $c_data) {
       if (is_object($c_data) &&
