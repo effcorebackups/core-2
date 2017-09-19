@@ -29,7 +29,7 @@ namespace effectivecore {
     if ($default && !empty($default->attributes['maxlength'])) $return[] = new markup('p', ['class' => ['maxlength' => 'maxlength']], translations::get('Field must contain a maximum of %%_lenght characters.', ['lenght' => $default->attributes['maxlength']]));
     if ($this->description)                                    $return[] = new markup('p', [], $this->description);
     if (count($return)) {
-      return (new markup('x-description', [], $return))->render();
+      return (new markup($this->description_tag_name, [], $return))->render();
     }
   }
 
