@@ -90,7 +90,7 @@ namespace effectivecore {
     foreach (factory::array_sort_by_weight($children) as $c_child) {
       $rendered[] = $this->render_child($c_child);
     }
-    return $join ? implode(nl, $rendered) :
+    return $join ? implode('', $rendered) :
                                $rendered;
   }
 

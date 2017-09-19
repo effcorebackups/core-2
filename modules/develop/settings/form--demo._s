@@ -161,7 +161,6 @@ forms
                 attributes
                 - type: range
                 - name: input_range
-                - required: required
                 - value: -2.5
                 - min: -5
                 - max: 5
@@ -211,7 +210,6 @@ forms
                 attributes
                 - type: color
                 - name: input_color
-                - required: required
                 - value: #ffffff
       # textarea
         - field_textarea|form_field
