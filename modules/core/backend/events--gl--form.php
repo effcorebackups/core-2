@@ -102,13 +102,13 @@ namespace effectivecore {
                                       $values[$c_name] : '';
           }
 
-        # conversion matrix for value from singular select (expected: undefined|string):
+        # conversion matrix for value from singular elements (expected: undefined|string):
         # ─────────────────────────────────────────────────────────────────────
         # - unset($_POST[name])                 -> []
         # - $_POST[name] == ''                  -> ['' => '']
         # - $_POST[name] == 'value'             -> ['value' => 'value']
 
-        # conversion matrix for values from multiple select (expected: undefined|array):
+        # conversion matrix for values from multiple elements (expected: undefined|array):
         # ─────────────────────────────────────────────────────────────────────
         # - unset($_POST[name])                 -> []
         # - $_POST[name] == [0 => '']           -> ['' => '']
@@ -117,8 +117,9 @@ namespace effectivecore {
         # - $_POST[name] == [0 => 'value', ...] -> ['value' => 'value', ...]
         # ─────────────────────────────────────────────────────────────────────
 
-          if ($c_element->tag_name == 'select') {
-            $c_new_select_values = factory::array_values_map_to_keys(
+          if (($c_element->tag_name == 'select') ||
+              ($c_element->tag_name == 'input' && $c_type == 'checkbox')) {
+            $c_new_array_values = factory::array_values_map_to_keys(
                   !isset($values[$c_name]) ? [] :
                (is_array($values[$c_name]) ?
                          $values[$c_name]  :
@@ -139,13 +140,13 @@ namespace effectivecore {
               }
             }
             static::_validate_field_selector($form, $c_field, $c_element, $c_npath,
-              $c_new_select_values, $c_allowed_values
+              $c_new_array_values, $c_allowed_values
             );
           # set new values after validation
             foreach ($c_element->child_select_all() as $c_option) {
               if ($c_option instanceof node && $c_option->tag_name == 'option') {
                 $c_option->attribute_delete('selected');
-                if (isset($c_new_select_values[$c_option->attribute_select('value')])) {
+                if (isset($c_new_array_values[$c_option->attribute_select('value')])) {
                   $c_option->attribute_insert('selected', 'selected');
                 }
               }
@@ -171,7 +172,7 @@ namespace effectivecore {
         # ─────────────────────────────────────────────────────────────────────
           if ($c_element->tag_name == 'input' &&
               $c_type == 'checkbox') {
-            if ($c_new_text_value) {
+            if (isset($c_new_array_values[$c_element->attribute_select('value')])) {
               $c_element->attribute_insert('checked', 'checked');
             }
           }
