@@ -118,7 +118,8 @@ namespace effectivecore {
         # ─────────────────────────────────────────────────────────────────────
 
           if (($c_element->tag_name == 'select') ||
-              ($c_element->tag_name == 'input' && $c_type == 'checkbox')) {
+              ($c_element->tag_name == 'input' && $c_type == 'checkbox') ||
+              ($c_element->tag_name == 'input' && $c_type == 'radio')) {
             $c_new_array_values = factory::array_values_map_to_keys(
                   !isset($values[$c_name]) ? [] :
                (is_array($values[$c_name]) ?
@@ -182,7 +183,7 @@ namespace effectivecore {
           if ($c_element->tag_name == 'input' &&
               $c_type == 'radio') {
           # delete default (from _init) and set new (from $_POST) CHECKED state
-            if  ($c_element->attribute_select('value') == $c_new_text_value)
+            if (isset($c_new_array_values[$c_element->attribute_select('value')]))
                  $c_element->attribute_insert('checked', 'checked');
             else $c_element->attribute_delete('checked');
           }
