@@ -321,6 +321,7 @@ forms
                     - type: checkbox
                     - name: input_checkbox_1_3
                     - value: checkbox_1_3
+                    - checked: checked
       # checkboxes macro
         - field_checkboxes_macro|form_container_checkboxes
             title: Checkboxes (macro)
@@ -335,7 +336,7 @@ forms
             - checkbox_2_2: Checkbox 2.2
             - checkbox_2_3: Checkbox 2.3
             checked
-            - checkbox_2_2: checkbox_2_2
+            - checkbox_2_3: checkbox_2_3
             disabled
             - checkbox_2_2: checkbox_2_2
       # radios

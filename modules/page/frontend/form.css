@@ -14,15 +14,11 @@
   form x-description {display: block; margin-top: 10px; font-size: .9em; line-height: 1.3em; color: darkgray}
   form x-description p {margin: 5px 0}
   form b.required {position: absolute; margin-left: .2em; font-size: 1.1em; color: %%_color_error}
-  form .boxes x-field {margin: 10px 0}
-  form .boxes label {font-size: 1em}
-  form .boxes input[type="checkbox"],
-  form .boxes input[type="radio"] {margin: 0 5px 2px 0; cursor: pointer}
 
   /* inputs */
-  form input,
-  form textarea,
-  form select {
+  form x-field input,
+  form x-field textarea,
+  form x-field select {
     -webkit-appearance: none;
     display: block;
     margin: 5px 0;
@@ -32,18 +28,28 @@
     color: %%_color;
     font-family: 'Arial';
     font-size: 16px}
-  form input:disabled,
-  form textarea:disabled,
-  form select:disabled {border-color: silver; background-color: silver}
-  form select {cursor: pointer}
-  form textarea {width: 70%; min-width: 100px}
+  form x-field select {cursor: pointer}
+  form x-field textarea {width: 70%; min-width: 100px}
 
   /* checkboxes and radios */
-  form input[type="checkbox"],
-  form input[type="radio"] {display: inline-block; vertical-align: middle; cursor: pointer; background-color: white}
-  form input[type="radio"] {border-radius: 13px}
-  form input[type="checkbox"]:checked,
-  form input[type="radio"]:checked {border-color: black; background-color: silver}
+  form x-field input[type="checkbox"],
+  form x-field input[type="radio"] {display: inline-block; vertical-align: middle; cursor: pointer; background-color: white}
+  form x-field input[type="checkbox"] {border-radius: 6px}
+  form x-field input[type="radio"] {border-radius: 13px}
+  form x-container.boxes x-field {margin: 10px 0}
+  form x-container.boxes label {font-size: 1em}
+  form x-container.boxes input[type="checkbox"],
+  form x-container.boxes input[type="radio"] {margin: 0 5px 2px 0}
+
+  /* disabled elements */
+  form x-field.disabled * {color: lightgray; cursor: default !important}
+  form x-field input:disabled,
+  form x-field textarea:disabled,
+  form x-field select:disabled {border-color: lightgray}
+
+  /* checked elements */
+  form x-field input[type="checkbox"]:checked,
+  form x-field input[type="radio"]:checked {border-color: black; background-color: silver}
 
   /* buttons */
   form button {
