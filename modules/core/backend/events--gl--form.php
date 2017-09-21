@@ -25,7 +25,7 @@ namespace effectivecore {
 
   # attributes support:
   # ─────────────────────────────────────────────────────────────────────
-  # - textarea                   : DISABLED, readonly, REQUIRED, MINLENGTH, MAXLENGTH, pattern
+  # - textarea                   : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern, NAME[]
   # - input[type=text]           : DISABLED, readonly, REQUIRED, MINLENGTH, MAXLENGTH, pattern
   # - input[type=password]       : DISABLED, readonly, REQUIRED, MINLENGTH, MAXLENGTH, pattern
   # - input[type=search]         : DISABLED, readonly, REQUIRED, MINLENGTH, MAXLENGTH, pattern
@@ -75,6 +75,7 @@ namespace effectivecore {
   # ─────────────────────────────────────────────────────────────────────
 
   static function on_validate($form, $fields, &$values) {
+    $indexes = [];
     foreach ($fields as $c_npath => $c_field) {
       $c_element = $c_field->child_select('default');
       if ($c_element instanceof markup ||
@@ -88,6 +89,11 @@ namespace effectivecore {
               $c_element->attribute_select('readonly')) {
             continue;
           }
+
+        # define value index
+          $c_index = !isset($indexes[$c_name]) ?
+                           ($indexes[$c_name] = 0) :
+                          ++$indexes[$c_name];
 
         # conversion matrix for value from text field (expected: undefined|string):
         # ─────────────────────────────────────────────────────────────────────
@@ -127,13 +133,33 @@ namespace effectivecore {
                         [$values[$c_name]]));
           }
 
+        # conversion matrix (expected: undefined|string|array):
+        # ─────────────────────────────────────────────────────────────────────
+        # - unset($_POST[name])                 -> []
+        # - $_POST[name] == ''                  -> [0 => '']
+        # - $_POST[name] == 'value'             -> [0 => 'value']
+        # ─────────────────────────────────────────────────────────────────────
+        # - $_POST[name] == [0 => '']           -> [0 => '']
+        # - $_POST[name] == [0 => '', ...]      -> [0 => '', ...]
+        # - $_POST[name] == [0 => 'value']      -> [0 => 'value']
+        # - $_POST[name] == [0 => 'value', ...] -> [0 => 'value', ...]
+        # ─────────────────────────────────────────────────────────────────────
+
+          if (($c_element->tag_name == 'textarea')) {
+            $c_new_values = !isset($values[$c_name]) ? [] :
+                         (is_array($values[$c_name]) ?
+                                   $values[$c_name]  :
+                                  [$values[$c_name]]);
+          }
+
         # select validation:
         # ─────────────────────────────────────────────────────────────────────
           if ($c_element->tag_name == 'select') {
           # collect allowed values
             $c_allowed_values = [];
             foreach ($c_element->child_select_all() as $c_option) {
-              if ($c_option instanceof node && $c_option->tag_name == 'option') {
+              if ($c_option instanceof node &&
+                  $c_option->tag_name == 'option') {
                 if (!$c_option->attribute_select('disabled')) {
                   $c_allowed_values[$c_option->attribute_select('value')] =
                                     $c_option->attribute_select('value');
@@ -145,7 +171,8 @@ namespace effectivecore {
             );
           # set new values after validation
             foreach ($c_element->child_select_all() as $c_option) {
-              if ($c_option instanceof node && $c_option->tag_name == 'option') {
+              if ($c_option instanceof node &&
+                  $c_option->tag_name == 'option') {
                 $c_option->attribute_delete('selected');
                 if (isset($c_new_array_values[$c_option->attribute_select('value')])) {
                   $c_option->attribute_insert('selected', 'selected');
@@ -157,9 +184,9 @@ namespace effectivecore {
         # textarea validation:
         # ─────────────────────────────────────────────────────────────────────
           if ($c_element->tag_name == 'textarea') {
-            static::_validate_field_text($form, $c_field, $c_element, $c_npath, $c_new_text_value);
+            static::_validate_field_text($form, $c_field, $c_element, $c_npath, $c_new_values[$c_index]);
             $content = $c_element->child_select('content');
-            $content->text = $c_new_text_value;
+            $content->text = $c_new_values[$c_index];
           }
 
         # input[type=file] validation:
