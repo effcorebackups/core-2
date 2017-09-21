@@ -26,22 +26,22 @@ namespace effectivecore {
   # attributes support:
   # ─────────────────────────────────────────────────────────────────────
   # - textarea                   : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern, NAME[]
-  # - input[type=text]           : DISABLED, readonly, REQUIRED, MINLENGTH, MAXLENGTH, pattern
-  # - input[type=password]       : DISABLED, readonly, REQUIRED, MINLENGTH, MAXLENGTH, pattern
-  # - input[type=search]         : DISABLED, readonly, REQUIRED, MINLENGTH, MAXLENGTH, pattern
-  # - input[type=url]            : DISABLED, readonly, REQUIRED, MINLENGTH, MAXLENGTH, pattern
-  # - input[type=tel]            : DISABLED, readonly, REQUIRED, MINLENGTH, MAXLENGTH, pattern
-  # - input[type=email]          : DISABLED, readonly, REQUIRED, MINLENGTH, MAXLENGTH, pattern, multiple
+  # - input[type=text]           : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
+  # - input[type=password]       : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
+  # - input[type=search]         : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
+  # - input[type=url]            : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
+  # - input[type=tel]            : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
+  # - input[type=email]          : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern, multiple
   # - select                     : disabled,           REQUIRED, multiple
   # - select::option             : disabled
-  # - input[type=file]           : disabled, readonly, required, multiple
-  # - input[type=checkbox]       : disabled, readonly, required, checked
-  # - input[type=radio]          : disabled, readonly, required, checked
-  # - input[type=number]         : DISABLED, readonly, REQUIRED, min, max, step
-  # - input[type=range]          : DISABLED, readonly, REQUIRED, min, max, step
-  # - input[type=date]           : DISABLED, readonly, REQUIRED, min, max
-  # - input[type=time]           : DISABLED, readonly, REQUIRED, min, max
-  # - input[type=color]          : DISABLED, readonly, REQUIRED
+  # - input[type=file]           : disabled,           required, multiple
+  # - input[type=checkbox]       : disabled,           required, checked
+  # - input[type=radio]          : disabled,           required, checked
+  # - input[type=number]         : DISABLED, READONLY, REQUIRED, min, max, step
+  # - input[type=range]          : DISABLED,           REQUIRED, min, max, step
+  # - input[type=date]           : DISABLED, READONLY, REQUIRED, min, max
+  # - input[type=time]           : DISABLED, READONLY, REQUIRED, min, max
+  # - input[type=color]          : DISABLED,           REQUIRED
   # ─────────────────────────────────────────────────────────────────────
   # - input[type=hidden]         : not processed element
   # - input[type=button]         : not processed element
