@@ -19,28 +19,28 @@ namespace effectivecore {
       if (is_object($c_data) &&
              !empty($c_data->title) &&
              !empty($c_data->values)) {
-        if (!$this->group_select($c_id))
-             $this->group_insert($c_id, $c_data->title);
+        if (!$this->optgroup_select($c_id))
+             $this->optgroup_insert($c_id, $c_data->title);
         foreach ($c_data->values as $g_id => $g_data) {
-          $this->value_insert($g_data, $g_id, [], $c_id);
+          $this->option_insert($g_data, $g_id, [], $c_id);
         }
       } else {
-        $this->value_insert($c_data, $c_id);
+        $this->option_insert($c_data, $c_id);
       }
     }
   }
 
-  function group_select($id) {
+  function optgroup_select($id) {
     return $this->child_select('default')->child_select($id);
   }
 
-  function group_insert($id, $title, $attr = []) {
+  function optgroup_insert($id, $title, $attr = []) {
     $this->child_select('default')->child_insert(
       new markup('optgroup', $attr + ['label' => $title]), $id
     );
   }
 
-  function value_insert($title, $value, $attr = [], $grp_id = null) {
+  function option_insert($title, $value, $attr = [], $grp_id = null) {
     $parent_el = $grp_id ? $this->child_select('default')->child_select($grp_id) :
                            $this->child_select('default');
     $new_option = new markup('option', $attr, ['content' => $title]);

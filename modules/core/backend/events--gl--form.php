@@ -145,7 +145,8 @@ namespace effectivecore {
         # - $_POST[name] == [0 => 'value', ...] -> [0 => 'value', ...]
         # ─────────────────────────────────────────────────────────────────────
 
-          if (($c_element->tag_name == 'textarea')) {
+          if (($c_element->tag_name == 'textarea') ||
+              ($c_element->tag_name == 'input' && $c_type == 'checkbox')) {
             $c_new_values = !isset($values[$c_name]) ? [] :
                          (is_array($values[$c_name]) ?
                                    $values[$c_name]  :
@@ -200,7 +201,7 @@ namespace effectivecore {
         # ─────────────────────────────────────────────────────────────────────
           if ($c_element->tag_name == 'input' &&
               $c_type == 'checkbox') {
-            if (isset($c_new_array_values[$c_element->attribute_select('value')])) {
+            if (in_array($c_element->attribute_select('value'), $c_new_values)) {
               $c_element->attribute_insert('checked', 'checked');
             }
           }

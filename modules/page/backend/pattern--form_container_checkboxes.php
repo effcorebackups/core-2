@@ -12,6 +12,8 @@ namespace effectivecore {
   public $each_field_tag_name = 'x-field';
   public $each_title_tag_name = 'label';
   public $each_title_position = 'bottom';
+  public $checked = [];
+  public $disabled = [];
 
   function build() {
     $this->attribute_insert('class', ['boxes' => 'boxes', 'checkboxes' => 'checkboxes']);
@@ -22,6 +24,9 @@ namespace effectivecore {
 
   function checkbox_insert($title = null, $attr = [], $new_id = null) {
     $input = new markup_simple('input', ['type' => 'checkbox'] + $attr + $this->attribute_select('', 'checkboxes_attributes'));
+    $value = $input->attribute_select('value');
+    if (isset($this->checked[$value]))  $input->attribute_insert('checked', 'checked');
+    if (isset($this->disabled[$value])) $input->attribute_insert('disabled', 'disabled');
     $field = new form_field( $this->each_field_tag_name, $title );
     $field->title_tag_name = $this->each_title_tag_name;
     $field->title_position = $this->each_title_position;

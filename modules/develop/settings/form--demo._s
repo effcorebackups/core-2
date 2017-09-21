@@ -310,6 +310,7 @@ forms
                     - type: checkbox
                     - name: input_checkbox_1_2
                     - value: checkbox_1_2
+                    - disabled: disabled
             - field_checkbox_1_3|form_field
                 title: Checkbox 1.3
                 title_position: bottom
@@ -333,6 +334,10 @@ forms
             - checkbox_2_1: Checkbox 2.1
             - checkbox_2_2: Checkbox 2.2
             - checkbox_2_3: Checkbox 2.3
+            checked
+            - checkbox_2_2: checkbox_2_2
+            disabled
+            - checkbox_2_2: checkbox_2_2
       # radios
         - group_radios|form_container
             title: Radios
