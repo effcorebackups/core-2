@@ -46,6 +46,7 @@ translations
   - edit profile: редактировать профиль
   - edit: редактировать
   - Element %%_info.: Элемент %%_info.
+  - Element %%_info. Not used in touch devices.: Элемент %%_info. Не используется в сенсорных устройствах.
   - EMail: Адрес электронной почты
   - enabled: вкл.
   - event: событие

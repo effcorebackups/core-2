@@ -35,8 +35,8 @@ namespace effectivecore {
   # - select                     : disabled,           REQUIRED, multiple
   # - select::option             : disabled
   # - input[type=file]           : disabled,           required, multiple
-  # - input[type=checkbox]       : DISABLED,           required, checked, NAME[]
-  # - input[type=radio]          : disabled,           required, checked
+  # - input[type=checkbox]       : DISABLED,           required, CHECKED, NAME[]
+  # - input[type=radio]          : DISABLED,           required, CHECKED, NAME[]
   # - input[type=number]         : DISABLED, READONLY, REQUIRED, min, max, step
   # - input[type=range]          : DISABLED,           REQUIRED, min, max, step
   # - input[type=date]           : DISABLED, READONLY, REQUIRED, min, max
@@ -72,6 +72,31 @@ namespace effectivecore {
   # - input[type=date]           : VALUE should match the pattern YYYY-MM-DD
   # - input[type=time]           : VALUE should match the pattern HH:MM:SS|HH:MM
   # - input[type=color]          : VALUE should match the pattern #dddddd
+  # ─────────────────────────────────────────────────────────────────────
+
+  # note:
+  # ─────────────────────────────────────────────────────────────────────
+  # 1. not recommend to use disabled radio element with checked state - 
+  #    this element will be always checked regardless of user choice
+  #    second element will be allways in checked state:
+  #    - input[type=radio]
+  #    - input[type=radio,checked,disabled]
+  # 2. not recommend to use disabled text elements with shared name - user
+  #    can remove disabled state from element and change the element value
+  #    and submit form - after this action the new value will be setted to
+  #    next shared element
+  #    default form state:
+  #    - input[type=text,name=shared_name[],value=1]
+  #    - input[type=text,name=shared_name[],value=2,disabled]
+  #    - input[type=text,name=shared_name[],value=3]
+  #    user remove disabled state, change value and submit form:
+  #    - input[type=text,name=shared_name[],value=1]
+  #    - input[type=text,name=shared_name[],value=new_value]
+  #    - input[type=text,name=shared_name[],value=3]
+  #    yor get the next form state:
+  #    - input[type=text,name=shared_name[],value=1]
+  #    - input[type=text,name=shared_name[],value=2,disabled]
+  #    - input[type=text,name=shared_name[],value=new_value]
   # ─────────────────────────────────────────────────────────────────────
 
   static function on_validate($form, $fields, &$values) {
@@ -183,14 +208,6 @@ namespace effectivecore {
             }
           }
 
-        # textarea validation:
-        # ─────────────────────────────────────────────────────────────────────
-          if ($c_element->tag_name == 'textarea') {
-            static::_validate_field_text($form, $c_field, $c_element, $c_npath, $c_new_values[$c_index]);
-            $content = $c_element->child_select('content');
-            $content->text = $c_new_values[$c_index];
-          }
-
         # input[type=file] validation:
         # ─────────────────────────────────────────────────────────────────────
           if ($c_element->tag_name == 'input' &&
@@ -206,6 +223,14 @@ namespace effectivecore {
             if (in_array($c_element->attribute_select('value'), $c_new_values))
                  $c_element->attribute_insert('checked', 'checked');
             else $c_element->attribute_delete('checked');
+          }
+
+        # textarea validation:
+        # ─────────────────────────────────────────────────────────────────────
+          if ($c_element->tag_name == 'textarea') {
+            static::_validate_field_text($form, $c_field, $c_element, $c_npath, $c_new_values[$c_index]);
+            $content = $c_element->child_select('content');
+            $content->text = $c_new_values[$c_index];
           }
 
         # input[type=text|password|search|email|url|tel|number|range|date|time|color] validation:

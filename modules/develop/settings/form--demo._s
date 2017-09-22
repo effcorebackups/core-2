@@ -257,7 +257,7 @@ forms
         - field_select_multiple_macro|form_field_select
             title: Select multiple (macro)
             description|text
-              text: Element %%_info.
+              text: Element %%_info. Not used in touch devices.
               args
               - info: &lt;select&gt;
             select_attributes
@@ -378,7 +378,7 @@ forms
                     - name: input_radio
                     - value: radio_1_1
             - field_radio_1_2|form_field
-                title: Radio 1.2
+                title: Radio 1.2 (checked)
                 title_position: bottom
                 children
                 - default|markup_simple
@@ -387,8 +387,9 @@ forms
                     - type: radio
                     - name: input_radio
                     - value: radio_1_2
+                    - checked: checked
             - field_radio_1_3|form_field
-                title: Radio 1.3
+                title: Radio 1.3 (disabled)
                 title_position: bottom
                 children
                 - default|markup_simple
@@ -397,6 +398,7 @@ forms
                     - type: radio
                     - name: input_radio
                     - value: radio_1_3
+                    - disabled: disabled
       # radios macro
         - field_radios_macro|form_container_radios
             title: Radios (macro)
@@ -408,8 +410,12 @@ forms
             - name: input_radio_macro
             values
             - radio_2_1: Radio 2.1
-            - radio_2_2: Radio 2.2
-            - radio_2_3: Radio 2.3
+            - radio_2_2: Radio 2.2 (checked)
+            - radio_2_3: Radio 2.3 (disabled)
+            disabled
+            - radio_2_3: radio_2_3
+            checked
+            - radio_2_2: radio_2_2
       # radios color macro
         - field_color_macro|form_container_palette
             title: Color
