@@ -16,11 +16,11 @@ translations
   - call: вызов
   - Cancel: Отмена
   - cancel: отмена
-  - Changes was saved.: Изменения были сохранены.
   - Changes was removed.: Изменения были удалены.
+  - Changes was saved.: Изменения были сохранены.
   - Check field again before submit.: Проверьте поле снова перед отправкой.
-  - Checkboxes: Флажки
   - Checkboxes (macro): Флажки (макро)
+  - Checkboxes: Флажки
   - Color ID = %%_id (value = %%_value): ID цвета = %%_id (значение = %%_value)
   - Color: Цвет
   - Colors: Цвета
@@ -45,8 +45,9 @@ translations
   - Edit profile: Редактировать профиль
   - edit profile: редактировать профиль
   - edit: редактировать
-  - Element %%_info.: Элемент %%_info.
   - Element %%_info. Not used in touch devices.: Элемент %%_info. Не используется в сенсорных устройствах.
+  - Element %%_info.: Элемент %%_info.
+  - Elements: Элементы
   - EMail: Адрес электронной почты
   - enabled: вкл.
   - event: событие
@@ -160,6 +161,7 @@ translations
   - Total: Всего
   - Translate: Перевод
   - Tree: Дерево
+  - UNDER CONSTRUCTION: В РАЗРАБОТКЕ
   - Use international format of mobile phone numbers.: Используйте международный формат номеров мобильных телефонов.
   - User %%_user_email_name: Пользователь %%_user_email_name
   - User menu: Меню пользователя

@@ -11,7 +11,7 @@ blocks
         - content|text
             text: Static block
   # table
-    - table|table
+    - table_demo|table
         children
         - head|table_head
             children
@@ -90,25 +90,45 @@ blocks
         children
         - content|text
             text: Control elements
-  # actions list
-    - actions_list_demo_wrapper|markup
-        tag_name: div
+    - table_for_controls|table
         children
-        - actions_list_demo|control_actions_list
-            attributes
-            - class
-              - actions-list-demo: actions-list-demo
-            values
-            - edit: edit
-            - delete: delete
-            active
-            - edit: edit
-  # switcher
-    - switcher_demo_wrapper|markup
-        tag_name: div
-        children
-        - switcher_demo|control_switcher
-            attributes
-            - class
-              - switcher-demo: switcher-demo
-            state: on
+        - head|table_head
+            children
+            - tr|table_head_row
+                children
+                - th_1|table_head_row_cell
+                    children
+                    - content|text
+                        text: Elements
+        - body|table_body
+            children
+            - tr_1|table_body_row
+                children
+                - td_1|table_body_row_cell
+                    children
+                  # actions list
+                    - actions_list_demo_wrapper|markup
+                        tag_name: div
+                        children
+                        - actions_list_demo|control_actions_list
+                            attributes
+                            - class
+                              - actions-list-demo: actions-list-demo
+                            values
+                            - edit: edit
+                            - delete: delete
+                            active
+                            - edit: edit
+            - tr_2|table_body_row
+                children
+                - td_1|table_body_row_cell
+                    children
+                  # switcher
+                    - switcher_demo_wrapper|markup
+                        tag_name: div
+                        children
+                        - switcher_demo|control_switcher
+                            attributes
+                            - class
+                              - switcher-demo: switcher-demo
+                            state: on
