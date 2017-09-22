@@ -145,15 +145,10 @@ namespace effectivecore {
         # - $_POST[name] == [0 => 'value', ...] -> [0 => 'value', ...]
         # ─────────────────────────────────────────────────────────────────────
 
-          if (($c_element->tag_name == 'select')   ||
-              ($c_element->tag_name == 'textarea') ||
-              ($c_element->tag_name == 'input' && $c_type == 'checkbox') ||
-              ($c_element->tag_name == 'input' && $c_type == 'radio')) {
-            $c_new_values = !isset($values[$c_name]) ? [] :
-                         (is_array($values[$c_name]) ?
-                                   $values[$c_name]  :
-                                  [$values[$c_name]]);
-          }
+          $c_new_values = !isset($values[$c_name]) ? [] :
+                       (is_array($values[$c_name]) ?
+                                 $values[$c_name]  :
+                                [$values[$c_name]]);
 
         # select validation:
         # ─────────────────────────────────────────────────────────────────────
@@ -174,9 +169,7 @@ namespace effectivecore {
             );
           # set new values after validation
             foreach ($c_element->child_select_all() as $c_option) {
-              if ($c_option instanceof node &&
-                  $c_option->tag_name == 'option') {
-                $c_option->attribute_delete('selected');
+              if ($c_option instanceof node && $c_option->tag_name == 'option') {
                 if (in_array($c_option->attribute_select('value'), $c_new_values))
                      $c_option->attribute_insert('selected', 'selected');
                 else $c_option->attribute_delete('selected');
