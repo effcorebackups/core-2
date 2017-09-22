@@ -17,6 +17,7 @@ translations
   - Cancel: Отмена
   - cancel: отмена
   - Changes was saved.: Изменения были сохранены.
+  - Changes was removed.: Изменения были удалены.
   - Check field again before submit.: Проверьте поле снова перед отправкой.
   - Checkboxes: Флажки
   - Checkboxes (macro): Флажки (макро)
@@ -125,6 +126,7 @@ translations
   - registration: регистрация
   - Registration: Регистрация
   - reset: сбросить
+  - restore: восстановить
   - return: возврат
   - Roles: Роли
   - save: сохранить

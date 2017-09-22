@@ -22,7 +22,7 @@ namespace effectivecore {
     return $this->page_num_cur;
   }
 
-  function render() {
+  function render() { # @todo: make workable
     $pager = new markup($this->tag_name);
     $pager->child_insert(new markup('a', ['href' => '#'], 1));
     $pager->child_insert(new text('...'));
@@ -39,6 +39,7 @@ namespace effectivecore {
     $pager->child_insert(new markup('a', ['href' => '#'], 75));
     $pager->child_insert(new text('...'));
     $pager->child_insert(new markup('a', ['href' => '#'], 100));
+    $pager->child_insert(new markup('div', [], 'UNDER CONSTRUCTION'));
     return $pager->render();
   }
 

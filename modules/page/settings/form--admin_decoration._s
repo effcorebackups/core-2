@@ -29,3 +29,12 @@ forms
         children
         - label|text
             text: save
+    - button_restore|markup
+        tag_name: button
+        attributes
+        - type: submit
+        - name: button
+        - value: restore
+        children
+        - label|text
+            text: restore

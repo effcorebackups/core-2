@@ -71,6 +71,9 @@ namespace effectivecore {
     }
   }
 
+  function changes_unregister_action($module_id, $action, $npath) {
+  }
+
   ################
   ### settings ###
   ################

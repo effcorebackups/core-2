@@ -17,9 +17,19 @@ namespace effectivecore\modules\page {
   }
 
   static function on_submit_admin_decoration($form, $fields, &$values) {
-    storages::get('settings')->changes_register_action('page', 'update', 'decoration/page/color_id',    $values['color_id'], false);
-    storages::get('settings')->changes_register_action('page', 'update', 'decoration/page/color_bg_id', $values['color_bg_id']);
-    messages::add_new('Changes was saved.');
+    switch ($form->clicked_button_name) {
+      case 'save':
+        storages::get('settings')->changes_register_action('page', 'update', 'decoration/page/color_id',    $values['color_id'], false);
+        storages::get('settings')->changes_register_action('page', 'update', 'decoration/page/color_bg_id', $values['color_bg_id']);
+        messages::add_new('Changes was saved.');
+        break;
+      case 'restore':
+        storages::get('settings')->changes_unregister_action('page', 'update', 'decoration/page/color_id');
+        storages::get('settings')->changes_unregister_action('page', 'update', 'decoration/page/color_bg_id');
+      # messages::add_new('Changes was removed.');
+        messages::add_new('UNDER CONSTRUCTION'); # @todo: make workable
+        break;
+    }
   }
 
 }}
