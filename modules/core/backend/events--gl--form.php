@@ -32,7 +32,7 @@ namespace effectivecore {
   # - input[type=url]            : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
   # - input[type=tel]            : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
   # - input[type=email]          : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern, multiple
-  # - select                     : disabled,           REQUIRED, multiple
+  # - select                     : disabled,           required, multiple
   # - select::option             : disabled
   # - input[type=file]           : disabled,           required, multiple
   # - input[type=checkbox]       : DISABLED,           required, CHECKED, NAME[]
@@ -153,21 +153,15 @@ namespace effectivecore {
         # select validation:
         # ─────────────────────────────────────────────────────────────────────
           if ($c_element->tag_name == 'select') {
-          # collect allowed values
             $c_allowed_values = [];
             foreach ($c_element->child_select_all() as $c_option) {
-              if ($c_option instanceof node &&
-                  $c_option->tag_name == 'option') {
+              if ($c_option instanceof node && $c_option->tag_name == 'option') {
                 if (!$c_option->attribute_select('disabled')) {
-                  $c_allowed_values[$c_option->attribute_select('value')] =
-                                    $c_option->attribute_select('value');
+                  $c_allowed_values[] = $c_option->attribute_select('value');
                 }
               }
             }
-            static::_validate_field_selector($form, $c_field, $c_element, $c_npath,
-              $c_new_values, $c_allowed_values
-            );
-          # set new values after validation
+            static::_validate_field_selector($form, $c_field, $c_element, $c_npath, $c_new_values, $c_allowed_values);
             foreach ($c_element->child_select_all() as $c_option) {
               if ($c_option instanceof node && $c_option->tag_name == 'option') {
                 if (in_array($c_option->attribute_select('value'), $c_new_values))
@@ -234,6 +228,9 @@ namespace effectivecore {
       $field->title
     );
 
+  # deleting fake values from the user's side
+    $new_values = array_intersect($new_values, $allowed_values);
+
   # convert array with empty strings to array without empty strings:
   # ─────────────────────────────────────────────────────────────────────
   # - []                  -> []
@@ -257,10 +254,6 @@ namespace effectivecore {
 
     if (isset($new_values['']) && count($new_values) > 1)
         unset($new_values['']);
-
-  # deleting fake values from the user's side
-  # deleting DISABLED values
-    $new_values = array_intersect($new_values, $allowed_values);
 
   # check if field is multiple or singular
     if (!$element->attribute_select('multiple') && count($new_values) > 1) {
