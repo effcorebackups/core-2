@@ -133,31 +133,6 @@ namespace effectivecore {
                                       $values[$c_name] : '';
           }
 
-        # conversion matrix for value from singular elements (expected: undefined|string):
-        # ─────────────────────────────────────────────────────────────────────
-        # - unset($_POST[name])                 -> []
-        # - $_POST[name] == ''                  -> ['' => '']
-        # - $_POST[name] == 'value'             -> ['value' => 'value']
-
-        # conversion matrix for values from multiple elements (expected: undefined|array):
-        # ─────────────────────────────────────────────────────────────────────
-        # - unset($_POST[name])                 -> []
-        # - $_POST[name] == [0 => '']           -> ['' => '']
-        # - $_POST[name] == [0 => '', ...]      -> ['' => '', ...]
-        # - $_POST[name] == [0 => 'value']      -> ['value' => 'value']
-        # - $_POST[name] == [0 => 'value', ...] -> ['value' => 'value', ...]
-        # ─────────────────────────────────────────────────────────────────────
-
-          if (($c_element->tag_name == 'select') ||
-              ($c_element->tag_name == 'input' && $c_type == 'checkbox') ||
-              ($c_element->tag_name == 'input' && $c_type == 'radio')) {
-            $c_new_array_values = factory::array_values_map_to_keys(
-                  !isset($values[$c_name]) ? [] :
-               (is_array($values[$c_name]) ?
-                         $values[$c_name]  :
-                        [$values[$c_name]]));
-          }
-
         # conversion matrix (expected: undefined|string|array):
         # ─────────────────────────────────────────────────────────────────────
         # - unset($_POST[name])                 -> []
@@ -170,7 +145,8 @@ namespace effectivecore {
         # - $_POST[name] == [0 => 'value', ...] -> [0 => 'value', ...]
         # ─────────────────────────────────────────────────────────────────────
 
-          if (($c_element->tag_name == 'textarea') ||
+          if (($c_element->tag_name == 'select')   ||
+              ($c_element->tag_name == 'textarea') ||
               ($c_element->tag_name == 'input' && $c_type == 'checkbox') ||
               ($c_element->tag_name == 'input' && $c_type == 'radio')) {
             $c_new_values = !isset($values[$c_name]) ? [] :
@@ -194,16 +170,16 @@ namespace effectivecore {
               }
             }
             static::_validate_field_selector($form, $c_field, $c_element, $c_npath,
-              $c_new_array_values, $c_allowed_values
+              $c_new_values, $c_allowed_values
             );
           # set new values after validation
             foreach ($c_element->child_select_all() as $c_option) {
               if ($c_option instanceof node &&
                   $c_option->tag_name == 'option') {
                 $c_option->attribute_delete('selected');
-                if (isset($c_new_array_values[$c_option->attribute_select('value')])) {
-                  $c_option->attribute_insert('selected', 'selected');
-                }
+                if (in_array($c_option->attribute_select('value'), $c_new_values))
+                     $c_option->attribute_insert('selected', 'selected');
+                else $c_option->attribute_delete('selected');
               }
             }
           }
@@ -267,11 +243,11 @@ namespace effectivecore {
 
   # convert array with empty strings to array without empty strings:
   # ─────────────────────────────────────────────────────────────────────
-  # - []                        -> []
-  # - ['' => '']                -> []
-  # - ['' => '', ...]           -> [...]
-  # - ['value' => 'value']      -> ['value' => 'value']
-  # - ['value' => 'value', ...] -> ['value' => 'value', ...]
+  # - []                  -> []
+  # - [0 => '']           -> []
+  # - [0 => '', ...]      -> [...]
+  # - [0 => 'value']      -> [0 => 'value']
+  # - [0 => 'value', ...] -> [0 => 'value', ...]
   # ─────────────────────────────────────────────────────────────────────
 
     if ($element->attribute_select('required') && empty(array_filter($new_values, 'strlen'))) {
@@ -283,11 +259,10 @@ namespace effectivecore {
 
   # normalize not empty array:
   # ─────────────────────────────────────────────────────────────────────
-  # - ['' => '', ...]           -> [...]
+  # - ['' => '', ...]     -> [...]
   # ─────────────────────────────────────────────────────────────────────
 
-    if (isset($new_values['']) &&
-        count($new_values) > 1)
+    if (isset($new_values['']) && count($new_values) > 1)
         unset($new_values['']);
 
   # deleting fake values from the user's side
