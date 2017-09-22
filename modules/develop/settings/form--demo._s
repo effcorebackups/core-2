@@ -301,7 +301,7 @@ forms
                     - name: input_checkbox_1_1
                     - value: checkbox_1_1
             - field_checkbox_1_2|form_field
-                title: Checkbox 1.2
+                title: Checkbox 1.2 (checked)
                 title_position: bottom
                 children
                 - default|markup_simple
@@ -310,9 +310,9 @@ forms
                     - type: checkbox
                     - name: input_checkbox_1_2
                     - value: checkbox_1_2
-                    - disabled: disabled
+                    - checked: checked
             - field_checkbox_1_3|form_field
-                title: Checkbox 1.3
+                title: Checkbox 1.3 (disabled)
                 title_position: bottom
                 children
                 - default|markup_simple
@@ -321,6 +321,18 @@ forms
                     - type: checkbox
                     - name: input_checkbox_1_3
                     - value: checkbox_1_3
+                    - disabled: disabled
+            - field_checkbox_1_4|form_field
+                title: Checkbox 1.4 (disabled + checked)
+                title_position: bottom
+                children
+                - default|markup_simple
+                    tag_name: input
+                    attributes
+                    - type: checkbox
+                    - name: input_checkbox_1_4
+                    - value: checkbox_1_4
+                    - disabled: disabled
                     - checked: checked
       # checkboxes macro
         - field_checkboxes_macro|form_container_checkboxes
@@ -333,12 +345,15 @@ forms
             - name: input_checkbox_macro[]
             values
             - checkbox_2_1: Checkbox 2.1
-            - checkbox_2_2: Checkbox 2.2
-            - checkbox_2_3: Checkbox 2.3
-            checked
-            - checkbox_2_3: checkbox_2_3
+            - checkbox_2_2: Checkbox 2.2 (checked)
+            - checkbox_2_3: Checkbox 2.3 (disabled)
+            - checkbox_2_4: Checkbox 2.4 (disabled + checked)
             disabled
+            - checkbox_2_3: checkbox_2_3
+            - checkbox_2_4: checkbox_2_4
+            checked
             - checkbox_2_2: checkbox_2_2
+            - checkbox_2_4: checkbox_2_4
       # radios
         - group_radios|form_container
             title: Radios

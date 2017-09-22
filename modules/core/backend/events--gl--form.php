@@ -35,7 +35,7 @@ namespace effectivecore {
   # - select                     : disabled,           REQUIRED, multiple
   # - select::option             : disabled
   # - input[type=file]           : disabled,           required, multiple
-  # - input[type=checkbox]       : disabled,           required, checked
+  # - input[type=checkbox]       : DISABLED,           required, checked, NAME[]
   # - input[type=radio]          : disabled,           required, checked
   # - input[type=number]         : DISABLED, READONLY, REQUIRED, min, max, step
   # - input[type=range]          : DISABLED,           REQUIRED, min, max, step
@@ -146,7 +146,8 @@ namespace effectivecore {
         # ─────────────────────────────────────────────────────────────────────
 
           if (($c_element->tag_name == 'textarea') ||
-              ($c_element->tag_name == 'input' && $c_type == 'checkbox')) {
+              ($c_element->tag_name == 'input' && $c_type == 'checkbox') ||
+              ($c_element->tag_name == 'input' && $c_type == 'radio')) {
             $c_new_values = !isset($values[$c_name]) ? [] :
                          (is_array($values[$c_name]) ?
                                    $values[$c_name]  :
@@ -197,21 +198,12 @@ namespace effectivecore {
             # @todo: make functionality
           }
 
-        # input[type=checkbox] validation:
+        # input[type=checkbox|radio] validation:
         # ─────────────────────────────────────────────────────────────────────
-          if ($c_element->tag_name == 'input' &&
-              $c_type == 'checkbox') {
-            if (in_array($c_element->attribute_select('value'), $c_new_values)) {
-              $c_element->attribute_insert('checked', 'checked');
-            }
-          }
-
-        # input[type=radio] validation:
-        # ─────────────────────────────────────────────────────────────────────
-          if ($c_element->tag_name == 'input' &&
-              $c_type == 'radio') {
+          if (($c_element->tag_name == 'input' && $c_type == 'checkbox') ||
+              ($c_element->tag_name == 'input' && $c_type == 'radio')) {
           # delete default (from _init) and set new (from $_POST) CHECKED state
-            if (isset($c_new_array_values[$c_element->attribute_select('value')]))
+            if (in_array($c_element->attribute_select('value'), $c_new_values))
                  $c_element->attribute_insert('checked', 'checked');
             else $c_element->attribute_delete('checked');
           }

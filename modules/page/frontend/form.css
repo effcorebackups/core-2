@@ -51,6 +51,10 @@
   form x-field input[type="checkbox"]:checked,
   form x-field input[type="radio"]:checked {border-color: black; background-color: silver}
 
+  /* disabled + checked elements */
+  form x-field.disabled input[type="checkbox"]:checked,
+  form x-field.disabled input[type="radio"]:checked {border-color: silver; background-color: lightgray}
+
   /* buttons */
   form button {
     min-width: 150px;
