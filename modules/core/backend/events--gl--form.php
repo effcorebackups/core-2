@@ -77,26 +77,26 @@ namespace effectivecore {
   # note:
   # ─────────────────────────────────────────────────────────────────────
   # 1. not recommend to use disabled radio element with checked state - 
-  #    this element will be always checked regardless of user choice
+  #    this element will be always checked regardless of user choice.
   #    second element will be allways in checked state:
   #    - input[type=radio]
   #    - input[type=radio,checked,disabled]
   # 2. not recommend to use disabled text elements with shared name - user
   #    can remove disabled state from element and change the element value
   #    and submit form - after this action the new value will be setted to
-  #    next shared element
-  #    default form state:
-  #    - input[type=text,name=shared_name[],value=1]
-  #    - input[type=text,name=shared_name[],value=2,disabled]
+  #    next shared element.
+  #    example of default form state:
+  #    - input[type=text,name=shared_name[],value=1,disabled]
+  #    - input[type=text,name=shared_name[],value=2]
   #    - input[type=text,name=shared_name[],value=3]
-  #    user remove disabled state, change value and submit form:
-  #    - input[type=text,name=shared_name[],value=1]
+  #    example of user fake changes:
   #    - input[type=text,name=shared_name[],value=new_value]
+  #    - input[type=text,name=shared_name[],value=2]
   #    - input[type=text,name=shared_name[],value=3]
-  #    you get the next form state:
-  #    - input[type=text,name=shared_name[],value=1]
-  #    - input[type=text,name=shared_name[],value=2,disabled]
+  #    example of result form state:
+  #    - input[type=text,name=shared_name[],value=1,disabled]
   #    - input[type=text,name=shared_name[],value=new_value]
+  #    - input[type=text,name=shared_name[],value=2]
   # ─────────────────────────────────────────────────────────────────────
 
   static function on_validate($form, $fields, &$values) {
@@ -231,6 +231,7 @@ namespace effectivecore {
   # - ['' => '']          -> ['' => '']
   # - ['' => '', ...]     -> [...]
   # ─────────────────────────────────────────────────────────────────────
+  
     $new_values = array_filter($new_values, 'strlen') ?: $new_values;
 
   # check if field is multiple or singular
