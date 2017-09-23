@@ -25,23 +25,23 @@ namespace effectivecore {
 
   # attributes support:
   # ─────────────────────────────────────────────────────────────────────
-  # - textarea                   : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern, NAME[]
-  # - input[type=text]           : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern, NAME[]
-  # - input[type=password]       : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern, NAME[]
-  # - input[type=search]         : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern, NAME[]
-  # - input[type=url]            : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
-  # - input[type=tel]            : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
-  # - input[type=email]          : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern, multiple
-  # - select                     : DISABLED,           REQUIRED, MULTIPLE, NAME[]
-  # - select::option             : DISABLED
-  # - input[type=file]           : disabled,           required, multiple
-  # - input[type=checkbox]       : DISABLED,           required, CHECKED, NAME[]
-  # - input[type=radio]          : DISABLED,           required, CHECKED, NAME[]
-  # - input[type=number]         : DISABLED, READONLY, REQUIRED, min, max, step
-  # - input[type=range]          : DISABLED,           REQUIRED, min, max, step
-  # - input[type=date]           : DISABLED, READONLY, REQUIRED, min, max
-  # - input[type=time]           : DISABLED, READONLY, REQUIRED, min, max
-  # - input[type=color]          : DISABLED,           REQUIRED
+  # - textarea                   : disabled, readonly, required, minlength, maxlength, PATTERN, name[]
+  # - input[type=text]           : disabled, readonly, required, minlength, maxlength, PATTERN, name[]
+  # - input[type=password]       : disabled, readonly, required, minlength, maxlength, PATTERN, name[]
+  # - input[type=search]         : disabled, readonly, required, minlength, maxlength, PATTERN, name[]
+  # - input[type=url]            : disabled, readonly, required, minlength, maxlength, PATTERN, name[]
+  # - input[type=tel]            : disabled, readonly, required, minlength, maxlength, PATTERN, name[]
+  # - input[type=email]          : disabled, readonly, required, minlength, maxlength, PATTERN, MULTIPLE, NAME[]
+  # - select                     : disabled,           required, multiple, name[]
+  # - select::option             : disabled
+  # - input[type=file]           : DISABLED,           REQUIRED, MULTIPLE, NAME[]
+  # - input[type=checkbox]       : disabled,           REQUIRED, checked, name[]
+  # - input[type=radio]          : disabled,           REQUIRED, checked, name[]
+  # - input[type=number]         : disabled, readonly, required, MIN, MAX, STEP, NAME[]
+  # - input[type=range]          : disabled,           required, MIN, MAX, STEP, NAME[]
+  # - input[type=date]           : disabled, readonly, required, MIN, MAX, NAME[]
+  # - input[type=time]           : disabled, readonly, required, MIN, MAX, NAME[]
+  # - input[type=color]          : disabled,           required, NAME[]
   # ─────────────────────────────────────────────────────────────────────
   # - input[type=hidden]         : not processed element
   # - input[type=button]         : not processed element
