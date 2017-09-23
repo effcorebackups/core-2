@@ -45,7 +45,6 @@ translations
   - Edit profile: Редактировать профиль
   - edit profile: редактировать профиль
   - edit: редактировать
-  - Element %%_info. Not used in touch devices.: Элемент %%_info. Не используется в сенсорных устройствах.
   - Element %%_info.: Элемент %%_info.
   - Elements: Элементы
   - EMail: Адрес электронной почты
@@ -135,7 +134,6 @@ translations
   - search: поиск
   - Search: Поиск
   - Select (macro): Список (макро)
-  - Select multiple (macro): Список множественный (макро)
   - Select: Список
   - Server load (sys_getloadavg): Загр. серв. (sys_getloadavg)
   - set: установка

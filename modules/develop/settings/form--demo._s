@@ -253,30 +253,6 @@ forms
             - option_1_1: option_1_1
             disabled
             - option_1_2: option_1_2
-      # select multiple macro
-        - field_select_multiple_macro|form_field_select
-            title: Select multiple (macro)
-            description|text
-              text: Element %%_info. Not used in touch devices.
-              args
-              - info: &lt;select&gt;
-            select_attributes
-            - name: select_multiple_macro[]
-            - required: required
-            - multiple: multiple
-            - size: 11
-            values
-            - option_2_1: Option 2.1
-            - option_2_2: Option 2.2 (disabled)
-            - option_2_3: Option 2.3
-            - group_2_1
-                title: Group 2.1
-                values
-                - option_2_4: Option 2.4
-            selected
-            - option_2_1: option_2_1
-            disabled
-            - option_2_2: option_2_2
       # checkboxes
         - group_checkboxes|form_container
             title: Checkboxes
