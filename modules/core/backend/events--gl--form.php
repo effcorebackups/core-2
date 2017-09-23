@@ -78,24 +78,24 @@ namespace effectivecore {
   # ─────────────────────────────────────────────────────────────────────
   # 1. not recommend to use disabled radio element with checked state - 
   #    this element will be always checked regardless of user choice.
-  #    second element will be allways in checked state:
+  #    example (second element will be allways checked):
   #    - input[type=radio]
   #    - input[type=radio,checked,disabled]
-  # 2. not recommend to use disabled text elements with shared name - user
-  #    can remove disabled state from element and change the element value
-  #    and submit form - after this action the new value will be setted to
-  #    next shared element.
-  #    example of default form state:
-  #    - input[type=text,name=shared_name[],value=1,disabled]
+  # 2. not recommend to use disabled|readonly text elements with shared
+  #    name because user can remove disabled|readonly state from element
+  #    and change the element value and submit form - after this action
+  #    the new value will be setted to the next element with shared name.
+  #    example (default form state):
+  #    - input[type=text,name=shared_name[],value=1,disabled|readonly]
   #    - input[type=text,name=shared_name[],value=2]
   #    - input[type=text,name=shared_name[],value=3]
-  #    example of user fake changes:
-  #    - input[type=text,name=shared_name[],value=new_value]
+  #    example (user made a fake changes):
+  #    - input[type=text,name=shared_name[],value=fake_value]
   #    - input[type=text,name=shared_name[],value=2]
   #    - input[type=text,name=shared_name[],value=3]
-  #    example of result form state:
-  #    - input[type=text,name=shared_name[],value=1,disabled]
-  #    - input[type=text,name=shared_name[],value=new_value]
+  #    example (result form state after validate):
+  #    - input[type=text,name=shared_name[],value=1,disabled|readonly]
+  #    - input[type=text,name=shared_name[],value=fake_value]
   #    - input[type=text,name=shared_name[],value=2]
   # ─────────────────────────────────────────────────────────────────────
 
