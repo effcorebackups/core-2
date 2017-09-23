@@ -76,15 +76,17 @@ namespace effectivecore {
 
   # note:
   # ─────────────────────────────────────────────────────────────────────
-  # 1. not recommend to use disabled radio element with checked state - 
-  #    this element will be always checked regardless of user choice.
-  #    example (second element will be allways checked):
+  # 1. attribute REQUIRED is not standart for input[type=color|range]
+  #    but supported and recomend in this system
+  # 2. not recommend to use DISABLED radio field with CHECKED state - 
+  #    this element will be always CHECKED regardless of user choice.
+  #    example (second field will be allways CHECKED):
   #    - input[type=radio]
   #    - input[type=radio,checked,disabled]
-  # 2. not recommend to use disabled|readonly text elements with shared
-  #    name because user can remove disabled|readonly state from element
-  #    and change the element value and submit form - after this action
-  #    the new value will be setted to the next element with shared name.
+  # 3. not recommend to use DISABLED|READONLY text fields with shared
+  #    NAME because user can remove DISABLED|READONLY state from field
+  #    and change the field VALUE and submit form - after this action
+  #    the new VALUE will be setted to the next field with shared NAME.
   #    example (default form state):
   #    - input[type=text,name=shared_name[],value=1,disabled|readonly]
   #    - input[type=text,name=shared_name[],value=2]

@@ -165,6 +165,7 @@ forms
                 - min: -5
                 - max: 5
                 - step: 0.5
+                - required: required
       # input date
         - field_date|form_field
             title: Date
@@ -211,6 +212,7 @@ forms
                 - type: color
                 - name: input_color
                 - value: #ffffff
+                - required: required
       # textarea
         - field_textarea|form_field
             title: Textarea
