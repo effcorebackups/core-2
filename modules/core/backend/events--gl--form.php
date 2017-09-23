@@ -93,7 +93,7 @@ namespace effectivecore {
   #    - input[type=text,name=shared_name[],value=1]
   #    - input[type=text,name=shared_name[],value=new_value]
   #    - input[type=text,name=shared_name[],value=3]
-  #    yor get the next form state:
+  #    you get the next form state:
   #    - input[type=text,name=shared_name[],value=1]
   #    - input[type=text,name=shared_name[],value=2,disabled]
   #    - input[type=text,name=shared_name[],value=new_value]
@@ -119,19 +119,6 @@ namespace effectivecore {
           $c_index = !isset($indexes[$c_name]) ?
                            ($indexes[$c_name] = 0) :
                           ++$indexes[$c_name];
-
-        # conversion matrix for value from text field (expected: undefined|string):
-        # ─────────────────────────────────────────────────────────────────────
-        # - unset($_POST[name])                 -> ''
-        # - $_POST[name] == ''                  -> ''
-        # - $_POST[name] == 'value'             -> 'value'
-        # ─────────────────────────────────────────────────────────────────────
-
-          if ($c_element->tag_name == 'textarea' ||
-              $c_element->tag_name == 'input') {
-            $c_new_text_value = isset($values[$c_name]) ?
-                                      $values[$c_name] : '';
-          }
 
         # conversion matrix (expected: undefined|string|array):
         # ─────────────────────────────────────────────────────────────────────
@@ -210,8 +197,8 @@ namespace effectivecore {
               $c_type == 'date'     ||
               $c_type == 'time'     ||
               $c_type == 'color')) {
-            static::_validate_field_text($form, $c_field, $c_element, $c_npath, $c_new_text_value);
-            $c_element->attribute_insert('value', $c_new_text_value);
+            static::_validate_field_text($form, $c_field, $c_element, $c_npath, $c_new_values[$c_index]);
+            $c_element->attribute_insert('value', $c_new_values[$c_index]);
           }
 
         }
