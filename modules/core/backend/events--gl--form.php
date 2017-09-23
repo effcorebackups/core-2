@@ -32,8 +32,8 @@ namespace effectivecore {
   # - input[type=url]            : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
   # - input[type=tel]            : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern
   # - input[type=email]          : DISABLED, READONLY, REQUIRED, MINLENGTH, MAXLENGTH, pattern, multiple
-  # - select                     : disabled,           required, multiple
-  # - select::option             : disabled
+  # - select                     : disabled,           REQUIRED, MULTIPLE
+  # - select::option             : DISABLED
   # - input[type=file]           : disabled,           required, multiple
   # - input[type=checkbox]       : DISABLED,           required, CHECKED, NAME[]
   # - input[type=radio]          : DISABLED,           required, CHECKED, NAME[]
@@ -228,18 +228,10 @@ namespace effectivecore {
       $field->title
     );
 
-  # deleting fake values from the user's side
-    $new_values = array_intersect($new_values, $allowed_values);
+  # filter fake values from the user's side
+    $new_values = array_unique(array_intersect($new_values, $allowed_values));
 
-  # convert array with empty strings to array without empty strings:
-  # ─────────────────────────────────────────────────────────────────────
-  # - []                  -> []
-  # - [0 => '']           -> []
-  # - [0 => '', ...]      -> [...]
-  # - [0 => 'value']      -> [0 => 'value']
-  # - [0 => 'value', ...] -> [0 => 'value', ...]
-  # ─────────────────────────────────────────────────────────────────────
-
+  # check required fields
     if ($element->attribute_select('required') && empty(array_filter($new_values, 'strlen'))) {
       $form->add_error($npath.'/default',
         translations::get('Field "%%_title" must be selected!', ['title' => $title])
@@ -247,17 +239,16 @@ namespace effectivecore {
       return;
     }
 
-  # normalize not empty array:
+  # deleting empty value '' in array with many values
   # ─────────────────────────────────────────────────────────────────────
+  # - ['' => '']          -> ['' => '']
   # - ['' => '', ...]     -> [...]
   # ─────────────────────────────────────────────────────────────────────
-
-    if (isset($new_values['']) && count($new_values) > 1)
-        unset($new_values['']);
+    $new_values = array_filter($new_values, 'strlen') ?: $new_values;
 
   # check if field is multiple or singular
     if (!$element->attribute_select('multiple') && count($new_values) > 1) {
-      $new_values = array_slice($new_values, 0, 1);
+      $new_values = array_slice($new_values, -1);
       $form->add_error($npath.'/default',
         translations::get('Field "%%_title" is not support multiple select!', ['title' => $title])
       );
