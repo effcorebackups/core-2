@@ -89,7 +89,9 @@ translations
   - Logout: Выход
   - Main menu: Главное меню
   - Main system module.: Основной модуль системы.
+  - Maximal field value\: %%_value.: Максимальное значение поля: %%_value.
   - Memory for php (bytes): Память для php (байт)
+  - Minimal field value\: %%_value.: Минимальное значение поля: %%_value.
   - Moderators: Модераторы
   - Module for demonstrating capabilities.: Модуль для демонстрации возможностей.
   - Module for development.: Модуль для разработки.

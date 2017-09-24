@@ -34,6 +34,8 @@ namespace effectivecore {
     $default = $this->child_select('default');
     if ($default instanceof node_simple && !empty($default->attributes['minlength'])) $return[] = new markup('p', ['class' => ['minlength' => 'minlength']], translations::get('Field must contain a minimum of %%_lenght characters.', ['lenght' => $default->attributes['minlength']]));
     if ($default instanceof node_simple && !empty($default->attributes['maxlength'])) $return[] = new markup('p', ['class' => ['maxlength' => 'maxlength']], translations::get('Field must contain a maximum of %%_lenght characters.', ['lenght' => $default->attributes['maxlength']]));
+    if ($default instanceof node_simple && !empty($default->attributes['min']))       $return[] = new markup('p', ['class' => ['min' => 'min']],             translations::get('Minimal field value: %%_value.', ['value' => $default->attributes['min']]));
+    if ($default instanceof node_simple && !empty($default->attributes['max']))       $return[] = new markup('p', ['class' => ['max' => 'max']],             translations::get('Maximal field value: %%_value.', ['value' => $default->attributes['max']]));
     if ($this->description)                                                           $return[] = new markup('p', [], $this->description);
     if (count($return)) {
       return (new markup($this->description_tag_name, [], $return))->render();

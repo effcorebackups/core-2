@@ -253,9 +253,8 @@ namespace effectivecore {
       $matches = [];
       preg_match('%(?<indent>[ ]*)'.
                   '(?<prefix>- |)'.
-                  '(?<name>[^:|]+)'.
-                  '(?<qualifier>\\|[a-z0-9_\\\\]+|)'.
-                  '(?<delimiter>: |)'.
+                  '(?<name>.+?)'.
+                  '(?<delimiter>(?<!\\\\): |(?<!\\\\)\\||$)'.
                   '(?<value>.*)%sS', $c_line, $matches);
       if (!empty($matches['name'])) {
         $c_depth = intval(strlen($matches['indent'].$matches['prefix']) / 2);
@@ -267,11 +266,10 @@ namespace effectivecore {
           if ($c_value === 'false') $c_value = false;
           if ($c_value === 'null')  $c_value = null;
         } else {
-          if (!empty($matches['qualifier']) &&
-               ltrim($matches['qualifier'], '|') == '_empty_array') {
+          if ($matches['value'] == '_empty_array') {
             $c_value = [];
           } else {
-            $c_class_name = !empty($matches['qualifier']) ? '\\effectivecore\\'.ltrim($matches['qualifier'], '|') : 'stdClass';
+            $c_class_name = $matches['value'] ? '\\effectivecore\\'.$matches['value'] : 'stdClass';
             $c_reflection = new \ReflectionClass($c_class_name);
             $c_is_pc = $c_reflection->implementsInterface('\\effectivecore\\post_constructor');
             $c_is_pi = $c_reflection->implementsInterface('\\effectivecore\\post_init');

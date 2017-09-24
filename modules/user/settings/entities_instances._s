@@ -2,7 +2,7 @@ entities_instances
 - user_1|entity_instance
     entity|linker
       npath: entities/user/user
-    values:
+    values
     - id: 1
     - email: admin@example.com
     - password_hash: 8cb2237d0679ca88db6464eac60da96345513964
@@ -10,76 +10,76 @@ entities_instances
 - user_2|entity_instance
     entity|linker
       npath: entities/user/user
-    values:
+    values
     - id: 2
     - email: user@example.com
     - password_hash: 8cb2237d0679ca88db6464eac60da96345513964
 - role_anonymous|entity_instance
     entity|linker
       npath: entities/user/role
-    values:
+    values
     - id: anonymous
     - title: Anonymous
     - is_embed: 1
 - role_registered|entity_instance
     entity|linker
       npath: entities/user/role
-    values:
+    values
     - id: registered
     - title: Registered
     - is_embed: 1
 - role_admins|entity_instance
     entity|linker
       npath: entities/user/role
-    values:
+    values
     - id: admins
     - title: Administrators
     - is_embed: 1
 - role_moderators|entity_instance
     entity|linker
       npath: entities/user/role
-    values:
+    values
     - id: moderators
     - title: Moderators
 - permission_user_profile_select|entity_instance
     entity|linker
       npath: entities/user/permission
-    values:
+    values
     - id: user_profile_select
     - title: User profile: select
 - permission_user_profile_update|entity_instance
     entity|linker
       npath: entities/user/permission
-    values:
+    values
     - id: user_profile_update
     - title: User profile: update
 - permission_user_profile_delete|entity_instance
     entity|linker
       npath: entities/user/permission
-    values:
+    values
     - id: user_profile_delete
     - title: User profile: delete
 - relation_role_ws_user_admins_1|entity_instance
     entity|linker
       npath: entities/user/relation_role_ws_user
-    values:
+    values
     - role_id: admins
     - user_id: 1
 - relation_role_ws_permission_admins_user_profile_select|entity_instance
     entity|linker
       npath: entities/user/relation_role_ws_permission
-    values:
+    values
     - role_id: admins
     - permission_id: user_profile_select
 - relation_role_ws_permission_admins_user_profile_update|entity_instance
     entity|linker
       npath: entities/user/relation_role_ws_permission
-    values:
+    values
     - role_id: admins
     - permission_id: user_profile_update
 - relation_role_ws_permission_admins_user_profile_insert|entity_instance
     entity|linker
       npath: entities/user/relation_role_ws_permission
-    values:
+    values
     - role_id: admins
     - permission_id: user_profile_insert
