@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', function(){
 
-  document.querySelectorAll('input[type=range]').each(function(){
-    var x_value = this.parentNode.querySelector('x-value');
-    this.addEventListener('mousemove', function(){
-      x_value.innerText = this.value;
+  document.querySelectorAll('input[type=range]').forEach(function(range){
+    var x_value = range.parentNode.querySelector('x-value');
+    range.addEventListener('mousemove', function(){
+      x_value.innerText = range.value;
     });
   });
 
