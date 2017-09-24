@@ -34,7 +34,7 @@ namespace effectivecore {
   }
 
   function render_self() {
-    $attr = $this->attributes;
+    $attr = $this->attribute_select();
     if (isset($attr['href'])) {
       $attr['href'] = tokens::replace($attr['href']);
       if (urls::is_active($attr['href'])) {

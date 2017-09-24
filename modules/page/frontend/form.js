@@ -1,10 +1,9 @@
 document.addEventListener('DOMContentLoaded', function(){
 
   document.querySelectorAll('input[type=range]').each(function(){
-    var c_value_box = document.createElement('div');
-    this.parentNode.insertBefore(c_value_box, this.nextSibling);
+    var x_value = this.parentNode.querySelector('x-value');
     this.addEventListener('mousemove', function(){
-      c_value_box.innerHTML = this.value;
+      x_value.innerText = this.value;
     });
   });
 

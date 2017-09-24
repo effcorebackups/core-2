@@ -32,11 +32,12 @@ namespace effectivecore {
   function render_description() {
     $return = [];
     $default = $this->child_select('default');
-    if ($default instanceof node_simple && !empty($default->attributes['minlength'])) $return[] = new markup('p', ['class' => ['minlength' => 'minlength']], translations::get('Field must contain a minimum of %%_lenght characters.', ['lenght' => $default->attributes['minlength']]));
-    if ($default instanceof node_simple && !empty($default->attributes['maxlength'])) $return[] = new markup('p', ['class' => ['maxlength' => 'maxlength']], translations::get('Field must contain a maximum of %%_lenght characters.', ['lenght' => $default->attributes['maxlength']]));
-    if ($default instanceof node_simple && !empty($default->attributes['min']))       $return[] = new markup('p', ['class' => ['min' => 'min']],             translations::get('Minimal field value: %%_value.', ['value' => $default->attributes['min']]));
-    if ($default instanceof node_simple && !empty($default->attributes['max']))       $return[] = new markup('p', ['class' => ['max' => 'max']],             translations::get('Maximal field value: %%_value.', ['value' => $default->attributes['max']]));
-    if ($this->description)                                                           $return[] = new markup('p', [], $this->description);
+    if ($default instanceof node_simple && $default->attribute_select('minlength'))       $return[] = new markup('p', ['class' => ['minlength' => 'minlength']], translations::get('Field must contain a minimum of %%_lenght characters.', ['lenght' => $default->attribute_select('minlength')]));
+    if ($default instanceof node_simple && $default->attribute_select('maxlength'))       $return[] = new markup('p', ['class' => ['maxlength' => 'maxlength']], translations::get('Field must contain a maximum of %%_lenght characters.', ['lenght' => $default->attribute_select('maxlength')]));
+    if ($default instanceof node_simple && $default->attribute_select('min'))             $return[] = new markup('p', ['class' => ['min' => 'min']],             translations::get('Minimal field value: %%_value.', ['value' => $default->attribute_select('min')]));
+    if ($default instanceof node_simple && $default->attribute_select('max'))             $return[] = new markup('p', ['class' => ['max' => 'max']],             translations::get('Maximal field value: %%_value.', ['value' => $default->attribute_select('max')]));
+    if ($default instanceof node_simple && $default->attribute_select('type') == 'range') $return[] = new markup('p', ['class' => ['cur' => 'cur']],             translations::get('Current field value: %%_value.', ['value' => (new markup('x-value', [], $default->attribute_select('value')))->render()]));
+    if ($this->description)                                                               $return[] = new markup('p', [], $this->description);
     if (count($return)) {
       return (new markup($this->description_tag_name, [], $return))->render();
     }
