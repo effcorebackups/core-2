@@ -286,22 +286,36 @@ namespace effectivecore {
       return;
     }
 
-  # check min value
-    if ($element->attribute_select('min') &&
-        $element->attribute_select('min') > $new_value) {
+  # check number value
+    if (($element->attribute_select('type') == 'number' ||
+         $element->attribute_select('type') == 'range') && !is_numeric($new_value)) {
       $form->add_error($npath.'/default',
         translations::get('Field "%%_title" contains incorrect value!', ['title' => $title]).br.
-        translations::get('Value is less than %%_value.', ['value' => $element->attribute_select('min')])
+        translations::get('Field value is not a number.')
+      );
+      return;
+    }
+
+  # check min value
+    if (($element->attribute_select('type') == 'number' ||
+         $element->attribute_select('type') == 'range') &&
+         $element->attribute_select('min') !== null &&
+         $element->attribute_select('min') > $new_value) {
+      $form->add_error($npath.'/default',
+        translations::get('Field "%%_title" contains incorrect value!', ['title' => $title]).br.
+        translations::get('Field value is less than %%_value.', ['value' => $element->attribute_select('min')])
       );
       return;
     }
   
   # check max value
-    if ($element->attribute_select('max') &&
-        $element->attribute_select('max') < $new_value) {
+    if (($element->attribute_select('type') == 'number' ||
+         $element->attribute_select('type') == 'range') &&
+         $element->attribute_select('max') !== null &&
+         $element->attribute_select('max') < $new_value) {
       $form->add_error($npath.'/default',
         translations::get('Field "%%_title" contains incorrect value!', ['title' => $title]).br.
-        translations::get('Value is more than %%_value.', ['value' => $element->attribute_select('max')])
+        translations::get('Field value is more than %%_value.', ['value' => $element->attribute_select('max')])
       );
       return;
     }
