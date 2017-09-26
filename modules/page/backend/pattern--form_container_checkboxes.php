@@ -7,14 +7,14 @@
 namespace effectivecore {
           class form_container_checkboxes extends \effectivecore\form_container {
 
-  public $values = [];
   public $field_tag_name = 'x-field';
   public $field_title_tag_name = 'label';
   public $field_title_position = 'bottom';
-  public $input_attributes = [];
   public $input_tag_name = 'checkbox';
-  public $checked = [];
+  public $input_attributes = [];
+  public $values = [];
   public $disabled = [];
+  public $checked = [];
 
   function build() {
     $this->attribute_insert('class', factory::array_values_map_to_keys(['boxes', $this->input_tag_name]));
