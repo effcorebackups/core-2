@@ -390,7 +390,7 @@ forms
               text: Element %%_info.
               args
               - info: &lt;input type="checkbox"&gt;
-            checkboxes_attributes
+            input_attributes
             - name: input_checkbox_macro[]
             values
             - checkbox_2_1: Checkbox 2.1
@@ -455,7 +455,7 @@ forms
               text: Element %%_info.
               args
               - info: &lt;input type="radio"&gt;
-            radios_attributes
+            input_attributes
             - name: input_radio_macro
             values
             - radio_2_1: Radio 2.1
@@ -468,7 +468,7 @@ forms
       # radios color macro
         - field_color_macro|form_container_palette
             title: Color
-            radios_attributes
+            input_attributes
             - name: color
     - button_submit|markup
         tag_name: button

@@ -14,11 +14,11 @@ forms
         children
         - field_color_id|form_container_palette
             title: Color
-            radios_attributes
+            input_attributes
             - name: color_id
         - field_color_bg_id|form_container_palette
             title: Background color
-            radios_attributes
+            input_attributes
             - name: color_bg_id
     - button_save|markup
         tag_name: button
