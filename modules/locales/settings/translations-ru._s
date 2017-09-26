@@ -56,13 +56,16 @@ translations
   - Events: События
   - Execute plan: План выполнения
   - Field "%%_title" can not be blank!: Поле "%%_title" не может быть пустым!
-  - Field "%%_title" contain too few characters!: Поле "%%_title" содержит слишком мало символов!
-  - Field "%%_title" contain too much characters!: Поле "%%_title" содержит слишком много символов!
-  - Field "%%_title" contains an invalid email address!: Поле "%%_title" содержит неверный адрес электронной почты!
+  - Field "%%_title" contains incorrect value!: Поле "%%_title" содержит неверное значение!
+  - Field "%%_title" contains too few characters!: Поле "%%_title" содержит слишком мало символов!
+  - Field "%%_title" contains too much characters!: Поле "%%_title" содержит слишком много символов!
+  - Field "%%_title" contains an incorrect email address!: Поле "%%_title" содержит неверный адрес электронной почты!
   - Field "%%_title" is not support multiple select!: Поле "%%_title" не поддерживает множественный выбор!
   - Field "%%_title" must be selected!: Поле "%%_title" должно быть выбрано!
   - Field must contain a maximum of %%_lenght characters.: Поле должно содержать максимум %%_lenght символов.
   - Field must contain a minimum of %%_lenght characters.: Поле должно содержать минимум %%_lenght символов.
+  - Value is less than %%_value.: Значение меньше чем %%_value.
+  - Value is more than %%_value.: Значение больше чем %%_value.
   - File: Файл
   - file: файл
   - Form elements: Элементы формы
