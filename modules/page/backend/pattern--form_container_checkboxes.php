@@ -8,22 +8,23 @@ namespace effectivecore {
           class form_container_checkboxes extends \effectivecore\form_container {
 
   public $values = [];
-  public $input_attributes = [];
   public $field_tag_name = 'x-field';
   public $field_title_tag_name = 'label';
   public $field_title_position = 'bottom';
+  public $input_attributes = [];
+  public $input_tag_name = 'checkbox';
   public $checked = [];
   public $disabled = [];
 
   function build() {
-    $this->attribute_insert('class', ['boxes' => 'boxes', 'checkboxes' => 'checkboxes']);
+    $this->attribute_insert('class', factory::array_values_map_to_keys(['boxes', $this->input_tag_name]));
     foreach ($this->values as $value => $title) {
       $this->input_insert($title, ['value' => $value]);
     }
   }
 
   function input_insert($title = null, $attr = [], $new_id = null) {
-    $input = new markup_simple('input', ['type' => 'checkbox'] + $attr + $this->attribute_select('', 'input_attributes'));
+    $input = new markup_simple('input', ['type' => $this->input_tag_name] + $attr + $this->attribute_select('', 'input_attributes'));
     $value = $input->attribute_select('value');
     if (isset($this->checked[$value]))  $input->attribute_insert('checked', 'checked');
     if (isset($this->disabled[$value])) $input->attribute_insert('disabled', 'disabled');
@@ -36,18 +37,18 @@ namespace effectivecore {
 
   function default_set($value) {
     foreach ($this->children as $c_field) {
-      $c_checkbox = $c_field->child_select('default');
-      if ($c_checkbox->attribute_select('value') == $value) {
-        return $c_checkbox->attribute_insert('checked', 'checked');
+      $c_input = $c_field->child_select('default');
+      if ($c_input->attribute_select('value') == $value) {
+        return $c_input->attribute_insert('checked', 'checked');
       }
     }
   }
 
   function default_get() {
     foreach ($this->children as $c_field) {
-      $c_checkbox = $c_field->child_select('default');
-      if ($c_checkbox->attribute_select('checked') == 'checked') {
-        return $c_checkbox->attribute_select('value');
+      $c_input = $c_field->child_select('default');
+      if ($c_input->attribute_select('checked') == 'checked') {
+        return $c_input->attribute_select('value');
       }
     }
   }

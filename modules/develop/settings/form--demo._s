@@ -337,7 +337,7 @@ forms
             - required: required
             - class
               - boxes: boxes
-              - checkboxes: checkboxes
+              - checkbox: checkbox
             children
             - field_checkbox_1_1|form_field
                 title: Checkbox 1.1
@@ -414,7 +414,7 @@ forms
             - required: required
             - class
               - boxes: boxes
-              - radios: radios
+              - radio: radio
             children
             - field_radio_1_1|form_field
                 title: Radio 1.1
