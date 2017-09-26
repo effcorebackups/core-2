@@ -18,11 +18,11 @@ namespace effectivecore {
   function build() {
     $this->attribute_insert('class', ['boxes' => 'boxes', 'checkboxes' => 'checkboxes']);
     foreach ($this->values as $value => $title) {
-      $this->checkbox_insert($title, ['value' => $value]);
+      $this->input_insert($title, ['value' => $value]);
     }
   }
 
-  function checkbox_insert($title = null, $attr = [], $new_id = null) {
+  function input_insert($title = null, $attr = [], $new_id = null) {
     $input = new markup_simple('input', ['type' => 'checkbox'] + $attr + $this->attribute_select('', 'input_attributes'));
     $value = $input->attribute_select('value');
     if (isset($this->checked[$value]))  $input->attribute_insert('checked', 'checked');

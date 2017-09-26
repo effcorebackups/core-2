@@ -13,7 +13,7 @@ namespace effectivecore {
     $this->attribute_insert('class', ['palette' => 'palette']);
     foreach (storages::get('settings')->select('colors') as $module_id => $c_colors) {
       foreach ($c_colors as $c_color_id => $c_color_info) {
-        $this->radio_insert(null, [
+        $this->input_insert(null, [
           'value' => $c_color_id,
           'title' => translations::get('Color ID = %%_id (value = %%_value)', ['id' => $c_color_id, 'value' => $c_color_info->value]),
           'style' => ['background-color: '.$c_color_info->value]
