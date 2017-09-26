@@ -9,9 +9,9 @@ namespace effectivecore {
 
   public $values = [];
   public $input_attributes = [];
-  public $each_field_tag_name = 'x-field';
-  public $each_title_tag_name = 'label';
-  public $each_title_position = 'bottom';
+  public $field_tag_name = 'x-field';
+  public $field_title_tag_name = 'label';
+  public $field_title_position = 'bottom';
   public $checked = [];
   public $disabled = [];
 
@@ -27,9 +27,9 @@ namespace effectivecore {
     $value = $input->attribute_select('value');
     if (isset($this->checked[$value]))  $input->attribute_insert('checked', 'checked');
     if (isset($this->disabled[$value])) $input->attribute_insert('disabled', 'disabled');
-    $field = new form_field( $this->each_field_tag_name, $title );
-    $field->title_tag_name = $this->each_title_tag_name;
-    $field->title_position = $this->each_title_position;
+    $field = new form_field( $this->field_tag_name, $title );
+    $field->title_tag_name = $this->field_title_tag_name;
+    $field->title_position = $this->field_title_position;
     $field->child_insert($input, 'default');
     return $this->child_insert($field, $new_id);
   }
