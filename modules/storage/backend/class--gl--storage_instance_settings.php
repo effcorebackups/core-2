@@ -251,11 +251,11 @@ namespace effectivecore {
     #   name|_empty_array  | root property as empty array
     # ─────────────────────────────────────────────────────────────────────
       $matches = [];
-      preg_match('%(?<indent>[ ]*)'.
-                  '(?<prefix>- |)'.
-                  '(?<name>.+?)'.
-                  '(?<delimiter>(?<!\\\\): |(?<!\\\\)\\||$)'.
-                  '(?<value>.*)%sS', $c_line, $matches);
+      preg_match('%^(?<indent>[ ]*)'.
+                   '(?<prefix>- |)'.
+                   '(?<name>.+?)'.
+                   '(?<delimiter>(?<!\\\\): |(?<!\\\\)\\||$)'.
+                   '(?<value>.*)$%S', $c_line, $matches);
       if ($matches['name']) {
         $c_depth = intval(strlen($matches['indent'].$matches['prefix']) / 2);
         $matches['name'] = str_replace(['\\:', '\\|'], [':', '|'], $matches['name']);

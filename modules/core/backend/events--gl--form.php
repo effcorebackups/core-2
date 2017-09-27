@@ -286,14 +286,25 @@ namespace effectivecore {
       return;
     }
 
+  # number validation matrix - [number('...') => is_valid(0|1), ...]
+  # ─────────────────────────────────────────────────────────────────────
+  # ''   => 0, '-'   => 0, '0'   => 1, '-0'   => 0, '1'   => 1, '-1'   => 1, '01'   => 0, '-01'   => 0, '12'   => 1, '-12'   => 1, '012'   => 0, '-012'   => 0,
+  # '.'  => 0, '-.'  => 0, '0.'  => 0, '-0.'  => 0, '1.'  => 0, '-1.'  => 0, '01.'  => 0, '-01.'  => 0, '12.'  => 0, '-12.'  => 0, '012.'  => 0, '-012.'  => 0,
+  # '.0' => 0, '-.0' => 0, '0.1' => 1, '-0.1' => 1, '1.2' => 1, '-1.2' => 1, '01.2' => 0, '-01.2' => 0, '12.3' => 1, '-12.3' => 1, '012.3' => 0, '-012.3' => 0,
+  # ─────────────────────────────────────────────────────────────────────
+
   # check number value
-    if (($element->attribute_select('type') == 'number' ||
-         $element->attribute_select('type') == 'range') && !is_numeric($new_value)) {
-      $form->add_error($npath.'/default',
-        translations::get('Field "%%_title" contains incorrect value!', ['title' => $title]).br.
-        translations::get('Field value is not a number.')
-      );
-      return;
+    if ($element->attribute_select('type') == 'number' ||
+        $element->attribute_select('type') == 'range') {
+      if (!preg_match('%^(?<integer>[-]?[1-9][0-9]*|0)$|'.
+                       '^(?<float_s>[-]?[0-9][.][0-9]+)$|'.
+                       '^(?<float_l>[-]?[1-9][0-9]+[.][0-9]+)$%S', $new_value)) {
+        $form->add_error($npath.'/default',
+          translations::get('Field "%%_title" contains incorrect value!', ['title' => $title]).br.
+          translations::get('Field value is not a valid number.')
+        );
+        return;
+      }
     }
 
   # check min value

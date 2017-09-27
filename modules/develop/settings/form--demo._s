@@ -145,8 +145,8 @@ forms
                 - name: input_number
                 - required: required
                 - value: -2.5
-                - min: -5
-                - max: 5
+                - min: -100
+                - max: 100
                 - step: 0.5
       # input range
         - field_range|form_field
@@ -162,8 +162,8 @@ forms
                 - type: range
                 - name: input_range
                 - value: -2.5
-                - min: -5
-                - max: 5
+                - min: -100
+                - max: 100
                 - step: 0.5
                 - required: required
       # input date
