@@ -37,8 +37,8 @@ namespace effectivecore {
   # - input[type=file]           : DISABLED,           REQUIRED, MULTIPLE, NAME[]
   # - input[type=checkbox]       : disabled,           REQUIRED, checked, name[]
   # - input[type=radio]          : disabled,           REQUIRED, checked, name[]
-  # - input[type=number]         : disabled, readonly, required, MIN, MAX, STEP, name[]
-  # - input[type=range]          : disabled,           required, MIN, MAX, STEP, name[]
+  # - input[type=number]         : disabled, readonly, required, min, max, STEP, name[]
+  # - input[type=range]          : disabled,           required, min, max, STEP, name[]
   # - input[type=date]           : disabled, readonly, required, MIN, MAX, name[]
   # - input[type=time]           : disabled, readonly, required, MIN, MAX, name[]
   # - input[type=color]          : disabled,           required, name[]
@@ -293,9 +293,10 @@ namespace effectivecore {
   # '.0' => 0, '-.0' => 0, '0.1' => 1, '-0.1' => 1, '1.2' => 1, '-1.2' => 1, '01.2' => 0, '-01.2' => 0, '12.3' => 1, '-12.3' => 1, '012.3' => 0, '-012.3' => 0,
   # ─────────────────────────────────────────────────────────────────────
 
-  # check number value
     if ($element->attribute_select('type') == 'number' ||
         $element->attribute_select('type') == 'range') {
+
+    # check number value
       if (!preg_match('%^(?<integer>[-]?[1-9][0-9]*|0)$|'.
                        '^(?<float_s>[-]?[0-9][.][0-9]+)$|'.
                        '^(?<float_l>[-]?[1-9][0-9]+[.][0-9]+)$%S', $new_value)) {
@@ -305,30 +306,26 @@ namespace effectivecore {
         );
         return;
       }
-    }
 
-  # check min value
-    if (($element->attribute_select('type') == 'number' ||
-         $element->attribute_select('type') == 'range') &&
-         $element->attribute_select('min') !== null &&
-         $element->attribute_select('min') > $new_value) {
-      $form->add_error($npath.'/default',
-        translations::get('Field "%%_title" contains incorrect value!', ['title' => $title]).br.
-        translations::get('Field value is less than %%_value.', ['value' => $element->attribute_select('min')])
-      );
-      return;
-    }
-  
-  # check max value
-    if (($element->attribute_select('type') == 'number' ||
-         $element->attribute_select('type') == 'range') &&
-         $element->attribute_select('max') !== null &&
-         $element->attribute_select('max') < $new_value) {
-      $form->add_error($npath.'/default',
-        translations::get('Field "%%_title" contains incorrect value!', ['title' => $title]).br.
-        translations::get('Field value is more than %%_value.', ['value' => $element->attribute_select('max')])
-      );
-      return;
+    # check min value
+      if ($element->attribute_select('min') !== null &&
+          $element->attribute_select('min') > $new_value) {
+        $form->add_error($npath.'/default',
+          translations::get('Field "%%_title" contains incorrect value!', ['title' => $title]).br.
+          translations::get('Field value is less than %%_value.', ['value' => $element->attribute_select('min')])
+        );
+        return;
+      }
+    
+    # check max value
+      if ($element->attribute_select('max') !== null &&
+          $element->attribute_select('max') < $new_value) {
+        $form->add_error($npath.'/default',
+          translations::get('Field "%%_title" contains incorrect value!', ['title' => $title]).br.
+          translations::get('Field value is more than %%_value.', ['value' => $element->attribute_select('max')])
+        );
+        return;
+      }
     }
 
   # check email field
