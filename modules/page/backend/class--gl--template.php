@@ -40,10 +40,11 @@ namespace effectivecore {
                                        '(?<prefix>\\%\\%_)'.
                                        '(?<name>[a-z0-9_]+)'.
                                        '(?<args>\\{[a-z0-9_,]+\\}|)%sS', function($matches) {
-      return !empty($matches['prefix']) &&
-             !empty($matches['name']) &&
-             !empty($this->vars[$matches['name']]) ? $matches['spacer'].
-                    $this->vars[$matches['name']] : '';
+      return isset($matches['prefix']) &&
+             isset($matches['name']) &&
+             isset($this->vars[$matches['name']]) &&
+                   $this->vars[$matches['name']] !== '' ? $matches['spacer'].
+                   $this->vars[$matches['name']] : '';
     }, $rendered);
     return $rendered;
   }
