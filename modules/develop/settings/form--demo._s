@@ -144,10 +144,10 @@ forms
                 - type: number
                 - name: input_number
                 - required: required
-                - value: -2.5
-                - min: -100
-                - max: 100
-                - step: 0.5
+                - value: 0
+                - min: -5
+                - max: 5
+                - step: 0.3
       # input range
         - field_range|form_field
             title: Range
@@ -161,10 +161,10 @@ forms
                 attributes
                 - type: range
                 - name: input_range
-                - value: -2.5
-                - min: -100
-                - max: 100
-                - step: 0.5
+                - value: 0
+                - min: -5
+                - max: 5
+                - step: 0.3
                 - required: required
       # input date
         - field_date|form_field
