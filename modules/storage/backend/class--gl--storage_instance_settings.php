@@ -12,13 +12,14 @@ namespace effectivecore {
           const changes_file_name = 'changes.php';
           class storage_instance_settings {
 
-  static $data_orig;
   static $data;
+  static $data_orig;
   static $changes_dynamic;
 
   static function init() {
-    static::$data = caches::get('settings') ?:
-                    static::settings_cache_rebuild();
+    $cache = caches::get('settings');
+    if ($cache) static::$data = $cache;
+    else        static::settings_cache_rebuild();
     factory::$phase = phase_1;
     console::add_log('phase', 'set', 'value = 1 [settings is loaded]', 'ok', '');
   }
@@ -63,7 +64,7 @@ namespace effectivecore {
     }
   # rebuild settings cache
     if ($rebuild) {
-      static::$data = static::settings_cache_rebuild();
+      static::settings_cache_rebuild();
     }
   }
 
@@ -136,7 +137,9 @@ namespace effectivecore {
   # save cache
     caches::set('settings_orig', $data_orig);
     caches::set('settings',      $data);
-    return $data;
+  # prevent opcache work
+    static::$data      = $data;
+    static::$data_orig = $data_orig;
   }
 
   static function settings_find_static() {
