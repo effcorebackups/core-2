@@ -17,9 +17,8 @@ namespace effectivecore {
   static $changes_dynamic;
 
   static function init() {
-    $cache = caches::get('settings');
-    if (!$cache) static::settings_cache_rebuild();
-    static::$data = $cache;
+    static::$data = caches::get('settings') ?:
+                    static::settings_cache_rebuild();
     factory::$phase = phase_1;
     console::add_log('phase', 'set', 'value = 1 [settings is loaded]', 'ok', '');
   }
@@ -109,29 +108,28 @@ namespace effectivecore {
   ################
 
   static function settings_cache_rebuild() {
-    $cache      = caches::get('settings');
-    $cache_orig = caches::get('settings_orig');
+    $data_orig = caches::get('settings_orig');
   # init original settings
-    if (!$cache_orig) {
-      static::$data_orig = ['_created' => date(format_datetime, time())];
-      static::$data_orig += static::settings_find_static();
+    if (!$data_orig) {
+      $data_orig = ['_created' => date(format_datetime, time())];
+      $data_orig += static::settings_find_static();
     }
   # init changes
     $file = new file(dir_dynamic.changes_file_name);
     if ($file->is_exist()) $file->insert();
     $changes_d = isset(static::$changes_dynamic['changes']) ?
                        static::$changes_dynamic['changes'] : [];
-    $changes_s = isset($cache_orig['changes']) ?
-                       $cache_orig['changes'] : [];
+    $changes_s = isset($data_orig['changes']) ?
+                       $data_orig['changes'] : [];
   # apply all changes to original settings and get final settings
-    $data_new = factory::array_clone_deep(static::$data_orig);
-    static::changes_apply_to_settings($changes_d, $data_new);
-    static::changes_apply_to_settings($changes_s, $data_new);
-    static::$data = $data_new; # prevent opcache work
-    unset(static::$data['changes']);
+    $data = factory::array_clone_deep($data_orig);
+    static::changes_apply_to_settings($changes_d, $data);
+    static::changes_apply_to_settings($changes_s, $data);
+    unset($data['changes']);
   # save cache
-    caches::set('settings_orig', static::$data_orig);
-    caches::set('settings',      static::$data);
+    caches::set('settings_orig', $data_orig);
+    caches::set('settings',      $data);
+    return $data;
   }
 
   static function settings_find_static() {
