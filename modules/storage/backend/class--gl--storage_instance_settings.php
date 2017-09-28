@@ -6,11 +6,10 @@
 
 namespace effectivecore {
           use \effectivecore\files_factory as files;
+          use \effectivecore\caches_factory as caches;
           use \effectivecore\console_factory as console;
           use \effectivecore\messages_factory as messages;
-          const settings_cache_file_name      = 'cache--settings.php';
-          const settings_cache_file_name_orig = 'cache--settings--original.php';
-          const changes_file_name             = 'changes.php';
+          const changes_file_name = 'changes.php';
           class storage_instance_settings {
 
   static $data_orig;
@@ -18,9 +17,9 @@ namespace effectivecore {
   static $changes_dynamic;
 
   static function init() {
-    $f_settings = new file(dir_dynamic.settings_cache_file_name);
-    if ($f_settings->is_exist()) $f_settings->insert();
-    else static::settings_rebuild();
+    $cache = caches::get('settings');
+    if (!$cache) static::settings_cache_rebuild();
+    static::$data = $cache;
     factory::$phase = phase_1;
     console::add_log('phase', 'set', 'value = 1 [settings is loaded]', 'ok', '');
   }
@@ -40,38 +39,19 @@ namespace effectivecore {
   ###############################
 
   function changes_register_action($module_id, $action, $npath, $value = null, $rebuild = true) {
-    $f_settings      = new file(dir_dynamic.settings_cache_file_name);
-    $f_settings_orig = new file(dir_dynamic.settings_cache_file_name_orig);
-    $f_changes       = new file(dir_dynamic.changes_file_name);
-    if ($f_changes->is_exist()) $f_changes->insert();
   # init changes
+    $f_changes_d = new file(dir_dynamic.changes_file_name);
+    if ($f_changes_d->is_exist()) $f_changes_d->insert();
     $changes_d = isset(static::$changes_dynamic['changes']) ?
                        static::$changes_dynamic['changes'] : [];
   # add new action
     $changes_d[$module_id]->{$action}[$npath] = $value;
   # save data
-    if (!is_writable(dir_dynamic) ||
-        ($f_settings_orig->is_exist() &&
-        !$f_settings_orig->is_writable()) ||
-        ($f_settings->is_exist() &&
-        !$f_settings->is_writable()) ||
-        ($f_changes->is_exist() &&
-        !$f_changes->is_writable())) {
-      messages::add_new(
-        'Can not save file "'.changes_file_name.            '" to the directory "dynamic"!'.br.
-        'Check if file "'.    changes_file_name.            '" is writable.'.br.
-        'Check if file "'.    settings_cache_file_name.     '" is writable.'.br.
-        'Check if file "'.    settings_cache_file_name_orig.'" is writable.'.br.
-        'Check if directory "dynamic" is writable.'.br.
-        'Setting is not saved.', 'error'
-      );
-    } else {
-      static::$changes_dynamic['changes'] = $changes_d; # prevent opcache work
-      static::settings_save_to_file($changes_d, changes_file_name, '  settings::$changes_dynamic[\'changes\']');
-      if ($rebuild) {
-        static::$data_orig = ['_changed' => date(format_datetime, time())];
-        static::settings_rebuild();
-      }
+    static::$changes_dynamic['changes'] = $changes_d; # prevent opcache work
+    static::settings_save_to_file($changes_d, changes_file_name, '  settings::$changes_dynamic[\'changes\']');
+    if ($rebuild) {
+      static::$data_orig = ['_changed' => date(format_datetime, time())];
+      static::settings_cache_rebuild();
     }
   }
 
@@ -118,46 +98,30 @@ namespace effectivecore {
   ### settings ###
   ################
 
-  static function settings_rebuild() {
-    $f_settings      = new file(dir_dynamic.settings_cache_file_name);
-    $f_settings_orig = new file(dir_dynamic.settings_cache_file_name_orig);
-    $f_changes       = new file(dir_dynamic.changes_file_name);
-    if ($f_changes->is_exist())       $f_changes->insert();
-    if ($f_settings_orig->is_exist()) $f_settings_orig->insert();
+  static function settings_cache_rebuild() {
+    $cache      = caches::get('settings');
+    $cache_orig = caches::get('settings_orig');
   # init original settings
-    if (empty(static::$data_orig)) {
+    if (!$cache_orig) {
       static::$data_orig = ['_created' => date(format_datetime, time())];
       static::$data_orig += static::settings_find_static();
     }
   # init changes
+    $f_changes_d = new file(dir_dynamic.changes_file_name);
+    if ($f_changes_d->is_exist()) $f_changes_d->insert();
     $changes_d = isset(static::$changes_dynamic['changes']) ?
                        static::$changes_dynamic['changes'] : [];
-    $changes_s = isset(static::$data_orig['changes']) ?
-                       static::$data_orig['changes'] : [];
+    $changes_s = isset($cache_orig['changes']) ?
+                       $cache_orig['changes'] : [];
   # apply all changes to original settings and get final settings
-    $data_new = unserialize(serialize(static::$data_orig)); # deep array clone
+    $data_new = factory::array_clone_deep(static::$data_orig);
     static::changes_apply_to_settings($changes_d, $data_new);
     static::changes_apply_to_settings($changes_s, $data_new);
     static::$data = $data_new; # prevent opcache work
     unset(static::$data['changes']);
   # save cache
-    if (!is_writable(dir_dynamic) ||
-        ($f_settings_orig->is_exist() &&
-        !$f_settings_orig->is_writable()) ||
-        ($f_settings->is_exist() &&
-        !$f_settings->is_writable())) {
-      messages::add_new(
-        'Can not save file "'.settings_cache_file_name.     '" to the directory "dynamic"!'.br.
-        'Can not save file "'.settings_cache_file_name_orig.'" to the directory "dynamic"!'.br.
-        'Check if file "'.    settings_cache_file_name.     '" is writable.'.br.
-        'Check if file "'.    settings_cache_file_name_orig.'" is writable.'.br.
-        'Check if directory "dynamic" is writable.'.br.
-        'System is working slowly at now.', 'warning'
-      );
-    } else {
-      static::settings_save_to_file(static::$data_orig, settings_cache_file_name_orig, '  settings::$data_orig');
-      static::settings_save_to_file(static::$data,      settings_cache_file_name,      '  settings::$data');
-    }
+    caches::set('settings_orig', static::$data_orig);
+    caches::set('settings',      static::$data);
   }
 
   static function settings_save_to_file($data, $file_name, $prefix) {
