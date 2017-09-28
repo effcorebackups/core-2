@@ -39,15 +39,19 @@ namespace effectivecore {
 
   function changes_register_action($module_id, $action, $npath, $value = null, $rebuild = true) {
   # init changes
-    $file = new file(dir_dynamic.changes_file_name);
-    if ($file->is_exist()) $file->insert();
+    if (!isset(static::$changes_dynamic['changes'])) {
+      $file = new file(dir_dynamic.changes_file_name);
+      if ($file->is_exist()) {
+        $file->insert();
+      }
+    }
     $changes_d = isset(static::$changes_dynamic['changes']) ?
                        static::$changes_dynamic['changes'] : [];
   # add new action
     $changes_d[$module_id]->{$action}[$npath] = $value;
   # save data
     $file->set_data(
-      "<?php\n\nnamespace effectivecore { # ARRAY[type][scope]...\n\n  ".
+      "<?php\n\nnamespace effectivecore {\n\n  ".
         "use \\effectivecore\\storage_instance_settings as settings;\n\n".
           factory::data_export($changes_d, '  settings::$changes_dynamic[\'changes\']').
       "\n}");
@@ -59,8 +63,7 @@ namespace effectivecore {
     }
   # rebuild settings cache
     if ($rebuild) {
-      static::$data_orig = ['_changed' => date(format_datetime, time())];
-      static::settings_cache_rebuild();
+      static::$data = static::settings_cache_rebuild();
     }
   }
 
@@ -115,8 +118,12 @@ namespace effectivecore {
       $data_orig += static::settings_find_static();
     }
   # init changes
-    $file = new file(dir_dynamic.changes_file_name);
-    if ($file->is_exist()) $file->insert();
+    if (!isset(static::$changes_dynamic['changes'])) {
+      $file = new file(dir_dynamic.changes_file_name);
+      if ($file->is_exist()) {
+        $file->insert();
+      }
+    }
     $changes_d = isset(static::$changes_dynamic['changes']) ?
                        static::$changes_dynamic['changes'] : [];
     $changes_s = isset($data_orig['changes']) ?
