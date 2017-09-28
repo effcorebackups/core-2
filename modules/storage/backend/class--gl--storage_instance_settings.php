@@ -12,8 +12,8 @@ namespace effectivecore {
           const changes_file_name = 'changes.php';
           class storage_instance_settings {
 
-  static $data;
   static $data_orig;
+  static $data;
   static $changes_dynamic;
 
   static function init() {
@@ -138,8 +138,8 @@ namespace effectivecore {
     caches::set('settings_orig', $data_orig);
     caches::set('settings',      $data);
   # prevent opcache work
-    static::$data      = $data;
     static::$data_orig = $data_orig;
+    static::$data      = $data;
   }
 
   static function settings_find_static() {
