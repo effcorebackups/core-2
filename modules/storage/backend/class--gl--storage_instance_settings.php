@@ -40,15 +40,25 @@ namespace effectivecore {
 
   function changes_register_action($module_id, $action, $npath, $value = null, $rebuild = true) {
   # init changes
-    $f_changes_d = new file(dir_dynamic.changes_file_name);
-    if ($f_changes_d->is_exist()) $f_changes_d->insert();
+    $file = new file(dir_dynamic.changes_file_name);
+    if ($file->is_exist()) $file->insert();
     $changes_d = isset(static::$changes_dynamic['changes']) ?
                        static::$changes_dynamic['changes'] : [];
   # add new action
     $changes_d[$module_id]->{$action}[$npath] = $value;
   # save data
-    static::$changes_dynamic['changes'] = $changes_d; # prevent opcache work
-    static::settings_save_to_file($changes_d, changes_file_name, '  settings::$changes_dynamic[\'changes\']');
+    $file->set_data(
+      "<?php\n\nnamespace effectivecore { # ARRAY[type][scope]...\n\n  ".
+        "use \\effectivecore\\storage_instance_settings as settings;\n\n".
+          factory::data_export($changes_d, '  settings::$changes_dynamic[\'changes\']').
+      "\n}");
+    $file->save();
+  # prevent opcache work
+    static::$changes_dynamic['changes'] = $changes_d;
+    if (function_exists('opcache_invalidate')) {
+      opcache_invalidate($file->get_path_full());
+    }
+  # rebuild settings cache
     if ($rebuild) {
       static::$data_orig = ['_changed' => date(format_datetime, time())];
       static::settings_cache_rebuild();
@@ -107,8 +117,8 @@ namespace effectivecore {
       static::$data_orig += static::settings_find_static();
     }
   # init changes
-    $f_changes_d = new file(dir_dynamic.changes_file_name);
-    if ($f_changes_d->is_exist()) $f_changes_d->insert();
+    $file = new file(dir_dynamic.changes_file_name);
+    if ($file->is_exist()) $file->insert();
     $changes_d = isset(static::$changes_dynamic['changes']) ?
                        static::$changes_dynamic['changes'] : [];
     $changes_s = isset($cache_orig['changes']) ?
@@ -122,19 +132,6 @@ namespace effectivecore {
   # save cache
     caches::set('settings_orig', static::$data_orig);
     caches::set('settings',      static::$data);
-  }
-
-  static function settings_save_to_file($data, $file_name, $prefix) {
-    $file = new file(dir_dynamic.$file_name);
-    $file->set_data(
-      "<?php\n\nnamespace effectivecore { # ARRAY[type][scope]...\n\n  ".
-        "use \\effectivecore\\storage_instance_settings as settings;\n\n".
-          factory::data_export($data, $prefix).
-      "\n}");
-    $file->save();
-    if (function_exists('opcache_invalidate')) {
-      opcache_invalidate($file->get_path_full());
-    }
   }
 
   static function settings_find_static() {
