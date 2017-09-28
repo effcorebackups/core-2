@@ -38,9 +38,9 @@ namespace effectivecore {
   ###############################
 
   function changes_register_action($module_id, $action, $npath, $value = null, $rebuild = true) {
+    $file = new file(dir_dynamic.changes_file_name);
   # init changes
     if (!isset(static::$changes_dynamic['changes'])) {
-      $file = new file(dir_dynamic.changes_file_name);
       if ($file->is_exist()) {
         $file->insert();
       }
