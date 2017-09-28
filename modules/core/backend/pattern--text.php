@@ -13,9 +13,9 @@ namespace effectivecore {
   public $weight = 0;
 
   function __construct($text = '', $args = [], $weight = 0) {
-    if ($text)   $this->text   = $text;
-    if ($args)   $this->args   = $args;
-    if ($weight) $this->weight = $weight;
+    if ($text !== '') $this->text   = $text;
+    if ($args)        $this->args   = $args;
+    if ($weight)      $this->weight = $weight;
   }
 
   function render() {

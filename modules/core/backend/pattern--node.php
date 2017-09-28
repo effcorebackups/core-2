@@ -11,7 +11,11 @@ namespace effectivecore {
 
   function __construct($attributes = [], $children = [], $weight = 0) {
     parent::__construct($attributes, $weight);
-    if ($children) {
+  # ─────────────────────────────────────────────────────────────────────
+  # allowed  : null, '', '...', 0, '0', 0.1, [], [...], obj{}, obj{...}
+  # disalowed: boolean - not used and not controlled anywere!!!
+  # ─────────────────────────────────────────────────────────────────────
+    if ($children !== null) {
       foreach (is_array($children) ? $children : [$children] as $id => $c_child) {
         $this->child_insert($c_child, $id);
       }
