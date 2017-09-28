@@ -59,9 +59,6 @@ namespace effectivecore {
     $file->save();
   # prevent opcache work
     static::$changes_dynamic['changes'] = $changes_d;
-    if (function_exists('opcache_invalidate')) {
-      opcache_invalidate($file->get_path_full());
-    }
   # rebuild settings cache
     if ($rebuild) {
       static::settings_cache_rebuild();

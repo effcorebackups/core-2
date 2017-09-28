@@ -36,6 +36,9 @@ namespace effectivecore {
            factory::data_export($data, '  caches_factory::$data[\''.$name.'\']').
         "\n}");
       $file->save();
+      if (function_exists('opcache_invalidate')) {
+        opcache_invalidate($file->get_path_full());
+      }
     } else {
       messages::add_new(
         'Can not write "cache-'.$name.'.php" to the directory "dynamic"!'.br.
