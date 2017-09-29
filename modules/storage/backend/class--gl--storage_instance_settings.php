@@ -7,9 +7,9 @@
 namespace effectivecore {
           use \effectivecore\files_factory as files;
           use \effectivecore\caches_factory as caches;
+          use \effectivecore\dynamic_factory as dynamic;
           use \effectivecore\console_factory as console;
           use \effectivecore\messages_factory as messages;
-          const changes_file_name = 'changes.php';
           class storage_instance_settings {
 
   static $data_orig;
@@ -39,27 +39,12 @@ namespace effectivecore {
   ###############################
 
   function changes_register_action($module_id, $action, $npath, $value = null, $rebuild = true) {
-    $file = new file(dir_dynamic.changes_file_name);
-  # init changes
-    if (!isset(static::$changes_dynamic['changes'])) {
-      if ($file->is_exist()) {
-        $file->insert();
-      }
-    }
-    $changes_d = isset(static::$changes_dynamic['changes']) ?
-                       static::$changes_dynamic['changes'] : [];
   # add new action
+    $changes_d = dynamic::get('changes') ?: [];
     $changes_d[$module_id]->{$action}[$npath] = $value;
-  # save data
-    $file->set_data(
-      "<?php\n\nnamespace effectivecore {\n\n  ".
-        "use \\effectivecore\\storage_instance_settings as settings;\n\n".
-          factory::data_export($changes_d, '  settings::$changes_dynamic[\'changes\']').
-      "\n}");
-    $file->save();
+    dynamic::set('changes', $changes_d);
   # prevent opcache work
     static::$changes_dynamic['changes'] = $changes_d;
-  # rebuild settings cache
     if ($rebuild) {
       static::settings_cache_rebuild();
     }
@@ -116,16 +101,8 @@ namespace effectivecore {
       $data_orig += static::settings_find_static();
     }
   # init changes
-    if (!isset(static::$changes_dynamic['changes'])) {
-      $file = new file(dir_dynamic.changes_file_name);
-      if ($file->is_exist()) {
-        $file->insert();
-      }
-    }
-    $changes_d = isset(static::$changes_dynamic['changes']) ?
-                       static::$changes_dynamic['changes'] : [];
-    $changes_s = isset($data_orig['changes']) ?
-                       $data_orig['changes'] : [];
+    $changes_d = dynamic::get('changes') ?: [];
+    $changes_s = isset($data_orig['changes']) ? $data_orig['changes'] : [];
   # apply all changes to original settings and get final settings
     $data = factory::array_clone_deep($data_orig);
     static::changes_apply_to_settings($changes_d, $data);
