@@ -34,61 +34,6 @@ namespace effectivecore {
     else         return static::$data;
   }
 
-  ###############################
-  ### operations with changes ###
-  ###############################
-
-  function changes_register_action($module_id, $action, $npath, $value = null, $rebuild = true) {
-  # add new action
-    $changes_d = dynamic::get('changes') ?: [];
-    $changes_d[$module_id]->{$action}[$npath] = $value;
-    dynamic::set('changes', $changes_d);
-  # prevent opcache work
-    static::$changes_dynamic['changes'] = $changes_d;
-    if ($rebuild) {
-      static::settings_cache_rebuild();
-    }
-  }
-
-  function changes_unregister_action($module_id, $action, $npath) {
-  }
-
-  static function changes_apply_to_settings($changes, &$data) {
-    foreach ($changes as $module_id => $c_module_changes) {
-      foreach ($c_module_changes as $c_action_id => $c_changes) {
-        foreach ($c_changes as $c_npath => $c_value) {
-          $path_parts = explode('/', $c_npath);
-          $child_name = array_pop($path_parts);
-          $parent_obj = &factory::npath_get_pointer(implode('/', $path_parts), $data, true);
-          switch ($c_action_id) {
-            case 'insert': # only structured types support (array|object)
-              switch (gettype($parent_obj)) {
-                case 'array' : $destination_obj = &$parent_obj[$child_name];   break;
-                case 'object': $destination_obj = &$parent_obj->{$child_name}; break;
-              }
-              switch (gettype($destination_obj)) {
-                case 'array' : foreach ($c_value as $key => $value) $destination_obj[$key]   = $value; break;
-                case 'object': foreach ($c_value as $key => $value) $destination_obj->{$key} = $value; break;
-              }
-              break;
-            case 'update': # only scalar types support (string|numeric) @todo: test bool|null
-              switch (gettype($parent_obj)) {
-                case 'array' : $parent_obj[$child_name]   = $c_value; break;
-                case 'object': $parent_obj->{$child_name} = $c_value; break;
-              }
-              break;
-            case 'delete':
-              switch (gettype($parent_obj)) {
-                case 'array' : unset($parent_obj[$child_name]);   break;
-                case 'object': unset($parent_obj->{$child_name}); break;
-              }
-              break;
-            }
-        }
-      }
-    }
-  }
-
   ################
   ### settings ###
   ################
@@ -146,6 +91,61 @@ namespace effectivecore {
       }
     }
     return $return;
+  }
+
+  ###############################
+  ### operations with changes ###
+  ###############################
+
+  function changes_register_action($module_id, $action, $npath, $value = null, $rebuild = true) {
+  # add new action
+    $changes_d = dynamic::get('changes') ?: [];
+    $changes_d[$module_id]->{$action}[$npath] = $value;
+    dynamic::set('changes', $changes_d);
+  # prevent opcache work
+    static::$changes_dynamic['changes'] = $changes_d;
+    if ($rebuild) {
+      static::settings_cache_rebuild();
+    }
+  }
+
+  function changes_unregister_action($module_id, $action, $npath) {
+  }
+
+  static function changes_apply_to_settings($changes, &$data) {
+    foreach ($changes as $module_id => $c_module_changes) {
+      foreach ($c_module_changes as $c_action_id => $c_changes) {
+        foreach ($c_changes as $c_npath => $c_value) {
+          $path_parts = explode('/', $c_npath);
+          $child_name = array_pop($path_parts);
+          $parent_obj = &factory::npath_get_pointer(implode('/', $path_parts), $data, true);
+          switch ($c_action_id) {
+            case 'insert': # only structured types support (array|object)
+              switch (gettype($parent_obj)) {
+                case 'array' : $destination_obj = &$parent_obj[$child_name];   break;
+                case 'object': $destination_obj = &$parent_obj->{$child_name}; break;
+              }
+              switch (gettype($destination_obj)) {
+                case 'array' : foreach ($c_value as $key => $value) $destination_obj[$key]   = $value; break;
+                case 'object': foreach ($c_value as $key => $value) $destination_obj->{$key} = $value; break;
+              }
+              break;
+            case 'update': # only scalar types support (string|numeric) @todo: test bool|null
+              switch (gettype($parent_obj)) {
+                case 'array' : $parent_obj[$child_name]   = $c_value; break;
+                case 'object': $parent_obj->{$child_name} = $c_value; break;
+              }
+              break;
+            case 'delete':
+              switch (gettype($parent_obj)) {
+                case 'array' : unset($parent_obj[$child_name]);   break;
+                case 'object': unset($parent_obj->{$child_name}); break;
+              }
+              break;
+            }
+        }
+      }
+    }
   }
 
   ###############
