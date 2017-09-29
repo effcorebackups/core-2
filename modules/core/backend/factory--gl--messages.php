@@ -30,7 +30,10 @@ namespace effectivecore {
 
   static function add_new($message, $type = 'notice') {
     if (!static::$data) static::init();
-    static::$data[$type][] = $message;
+    if (!isset(static::$data[$type])) static::$data[$type] = [];
+    if (!in_array($message, static::$data[$type])) {
+      static::$data[$type][] = $message;
+    }
   }
 
   static function render() {
