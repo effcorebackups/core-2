@@ -154,9 +154,9 @@ translations
   - Telephone: Телефон
   - Text: Текст
   - Textarea: Текстовая область
-  - The event system was initialized on first request.: Система событий была инициализирована при первом запросе.
-  - The storage %%_name was initialized on first request.: Хранилище %%_name было инициализировано при первом запросе.
-  - The storage cache for group %%_name was loaded on first request.: Кэш хранилища для группы %%_name был загружен при первом запросе.
+  - the event system was initialized: система событий была инициализирована
+  - the storage %%_name was initialized: хранилище %%_name было инициализировано
+  - the storage cache for group %%_name was loaded: кэш хранилища для группы %%_name был загружен
   - The value was trimmed to the required length!: Значение было обрезано до требуемой длинны!
   - Time: Время
   - Title: Заголовок
