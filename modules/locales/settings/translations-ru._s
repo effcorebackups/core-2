@@ -121,7 +121,6 @@ translations
   - Password hash: Хеш пароля
   - Password: Пароль
   - Path: Путь
-  - phase: фаза
   - profile: профиль
   - Queries: Запросы
   - query: запрос
@@ -157,6 +156,7 @@ translations
   - Textarea: Текстовая область
   - The event system was initialized on first request.: Система событий была инициализирована при первом запросе.
   - The storage %%_name was initialized on first request.: Хранилище %%_name было инициализировано при первом запросе.
+  - The storage cache for group %%_name was loaded on first request.: Кэш хранилища для группы %%_name был загружен при первом запросе.
   - The value was trimmed to the required length!: Значение было обрезано до требуемой длинны!
   - Time: Время
   - Title: Заголовок
@@ -179,7 +179,6 @@ translations
   - Users: Пользователи
   - val.: знач.
   - Val.: Знач.
-  - value = 1 [settings is loaded]: значение = 1 [настройки загружены]
   - Value: Значение
   - Value: Значение
   - Values: Значения

@@ -16,12 +16,11 @@ namespace effectivecore {
   static $data;
   static $changes_dynamic;
 
-  static function init() {
+  static function init($group) {
     $cache = caches::get('settings');
     if ($cache) static::$data = $cache;
     else        static::settings_cache_rebuild();
-    factory::$phase = phase_1;
-    console::add_log('phase', 'set', 'value = 1 [settings is loaded]', 'ok', '');
+    console::add_log('storage', 'init.', 'The storage cache for group %%_name was loaded on first request.', 'ok', 0, ['name' => $group]);
   }
 
   ########################
