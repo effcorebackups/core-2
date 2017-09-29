@@ -60,17 +60,18 @@
   form button {
     min-width: 150px;
     margin: 5px 10px 5px 0;
-    padding: 10px 30px;
+    padding: 12px 30px;
     cursor: pointer;
-    border: 3px solid %%_color_bg;
+    border: none;
     font-family: 'Arial';
     font-size: 16px;
     color: white;
     background: %%_color_bg}
-  form button:hover {border-color: %%_color_hover_bg; background-color: %%_color_hover_bg}
-  form button:active {border-color: black; background: %%_color_hover_bg; text-shadow: 0 0 2px black; box-shadow: inset 0 0 12px 2px rgba(0, 0, 0, 0.6)}
-  form button[value="delete"] {border-color: %%_color_warning; background-color: %%_color_warning}
-  form button[value="delete"]:hover {border-color: %%_color_hover_bg; background-color: %%_color_hover_bg}
+  form button:enabled:hover {background-color: %%_color_hover_bg}
+  form button:enabled:active {background-color: %%_color_hover_bg; text-shadow: 0 0 2px black; box-shadow: inset 0 0 12px 2px rgba(0, 0, 0, 0.6)}
+  form button:enabled[value="delete"] {background-color: %%_color_warning}
+  form button:enabled[value="delete"]:hover {background-color: %%_color_hover_bg}
+  form button:disabled {cursor: default; background-color: lightgray !important}
 
   /* palette */
   form x-container.palette {margin: 5px 0}

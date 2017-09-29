@@ -35,6 +35,7 @@ forms
         - type: submit
         - name: button
         - value: restore
+        - disabled: disabled
         children
         - label|text
             text: restore
