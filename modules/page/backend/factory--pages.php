@@ -16,7 +16,7 @@ namespace effectivecore\modules\page {
 
   static function find_and_render() {
   # render page
-    foreach (storages::get('settings')->select('pages') as $c_pages) {
+    foreach (storages::get('settings')->select_group('pages') as $c_pages) {
       foreach ($c_pages as $c_page) {
         if (   isset($c_page->display->url->match) &&
           preg_match($c_page->display->url->match, urls::get_current()->path)) {

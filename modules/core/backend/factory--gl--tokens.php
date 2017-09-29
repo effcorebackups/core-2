@@ -12,7 +12,7 @@ namespace effectivecore {
   protected static $data;
 
   static function init() {
-    foreach (storages::get('settings')->select('tokens') as $c_tokens) {
+    foreach (storages::get('settings')->select_group('tokens') as $c_tokens) {
       foreach ($c_tokens as $c_token) {
         static::$data[$c_token->match] = $c_token;
       }

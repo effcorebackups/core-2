@@ -13,7 +13,7 @@ namespace effectivecore {
   static function on_show_admin_modules() {
     $thead = [['Title', 'ID', 'Path', 'Description', 'Ver.', 'State.']];
     $tbody = [];
-    foreach (storages::get('settings')->select('module') as $c_module) {
+    foreach (storages::get('settings')->select_group('module') as $c_module) {
       $tbody[] = [
         $c_module->title,
         $c_module->id,

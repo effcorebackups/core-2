@@ -11,7 +11,7 @@ namespace effectivecore {
   protected static $current;
 
   static function init() {
-    static::$current = storages::get('settings')->select('current')['locales'];
+    static::$current = storages::get('settings')->select_group('current')['locales'];
   }
 
   static function get_current() {

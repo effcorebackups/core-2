@@ -43,7 +43,7 @@ namespace effectivecore {
   ##########################
 
   $file_types = [];
-  foreach (storages::get('settings')->select('file_types') as $c_types) {
+  foreach (storages::get('settings')->select_group('file_types') as $c_types) {
     foreach ($c_types as $c_name => $c_info) {
       $file_types[$c_name] = $c_info;
     }

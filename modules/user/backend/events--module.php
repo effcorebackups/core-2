@@ -17,8 +17,8 @@ namespace effectivecore\modules\user {
   }
 
   static function on_install() {
-    foreach (storages::get('settings')->select('entities')['user'] as $c_entity) $c_entity->install();
-    foreach (storages::get('settings')->select('entities_instances')['user'] as $c_instance) $c_instance->insert();
+    foreach (storages::get('settings')->select_group('entities')['user'] as $c_entity) $c_entity->install();
+    foreach (storages::get('settings')->select_group('entities_instances')['user'] as $c_instance) $c_instance->insert();
     messages::add_new(
       translations::get('Tables for module %%_name was installed.', ['name' => 'user'])
     );

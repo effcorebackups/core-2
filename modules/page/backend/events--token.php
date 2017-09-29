@@ -9,8 +9,8 @@ namespace effectivecore\modules\page {
           abstract class events_token extends \effectivecore\events_token {
 
   static function on_color_get($match, $arg_1_num = null) {
-    $decoration = storages::get('settings')->select('decoration');
-    $colors     = storages::get('settings')->select('colors');
+    $decoration = storages::get('settings')->select_group('decoration');
+    $colors     = storages::get('settings')->select_group('colors');
     switch ($match) {
       case '%%_color'   : return $colors['page'][ $decoration['page']->color_id    ]->value;
       case '%%_color_bg': return $colors['page'][ $decoration['page']->color_bg_id ]->value;

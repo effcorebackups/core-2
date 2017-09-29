@@ -27,7 +27,7 @@ namespace effectivecore {
   ### shared functions ###
   ########################
 
-  function select($group) {
+  function select_group($group) {
     if   (!isset(static::$data[$group])) static::init($group);
     return isset(static::$data[$group]) ?
                  static::$data[$group] : null;
@@ -36,7 +36,7 @@ namespace effectivecore {
   function select_by_npath($npath) {
     $npath_parts = explode('/', $npath);
     $group = array_shift($npath_parts);
-    $group_data = $this->select($group);
+    $group_data = $this->select_group($group);
     return factory::npath_get_object(implode('/', $npath_parts), $group_data);
   }
 

@@ -11,7 +11,7 @@ namespace effectivecore {
 
   function build() {
     $this->attribute_insert('class', ['palette' => 'palette']);
-    foreach (storages::get('settings')->select('colors') as $module_id => $c_colors) {
+    foreach (storages::get('settings')->select_group('colors') as $module_id => $c_colors) {
       foreach ($c_colors as $c_color_id => $c_color_info) {
         $this->input_insert(null, [
           'value' => $c_color_id,

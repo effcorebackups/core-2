@@ -11,7 +11,7 @@ namespace effectivecore {
   protected static $data;
 
   static function init() {
-    foreach (storages::get('settings')->select('entities') as $c_entities) {
+    foreach (storages::get('settings')->select_group('entities') as $c_entities) {
       foreach ($c_entities as $c_entity) {
         static::$data[$c_entity->name] = $c_entity;
       }

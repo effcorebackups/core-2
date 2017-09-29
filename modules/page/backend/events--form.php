@@ -11,7 +11,7 @@ namespace effectivecore\modules\page {
           abstract class events_form extends \effectivecore\events_form {
 
   static function on_init_admin_decoration($form, $fields) {
-    $decoration = storages::get('settings')->select('decoration');
+    $decoration = storages::get('settings')->select_group('decoration');
     $fields['fieldset_default/field_color_id'   ]->default_set($decoration['page']->color_id);
     $fields['fieldset_default/field_color_bg_id']->default_set($decoration['page']->color_bg_id);
   }

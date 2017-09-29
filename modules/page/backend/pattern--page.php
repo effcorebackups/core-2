@@ -47,7 +47,7 @@ namespace effectivecore {
         $used_links[] = $c_block->npath;
       }
     }
-    foreach (storages::get('settings')->select('frontend') as $module_id => $c_frontend_items) {
+    foreach (storages::get('settings')->select_group('frontend') as $module_id => $c_frontend_items) {
       foreach ($c_frontend_items as $c_item) {
         if (    (isset($c_item->display->url->match) &&
             preg_match($c_item->display->url->match, urls::get_current()->path)) ||

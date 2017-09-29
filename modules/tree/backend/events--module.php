@@ -13,7 +13,7 @@ namespace effectivecore\modules\tree {
 
   static function on_start() {
   # link all parents for tree_items
-    foreach (storages::get('settings')->select('tree_items') as $c_items) {
+    foreach (storages::get('settings')->select_group('tree_items') as $c_items) {
       foreach ($c_items as $item_id => $c_item) {
         if (!empty($c_item->parent_npath)) {
           $c_parent = storages::get('settings')->select_by_npath($c_item->parent_npath);
@@ -26,7 +26,7 @@ namespace effectivecore\modules\tree {
   }
 
   static function on_install() {
-    foreach (storages::get('settings')->select('entities')['tree'] as $c_entity) $c_entity->install();
+    foreach (storages::get('settings')->select_group('entities')['tree'] as $c_entity) $c_entity->install();
     messages::add_new(
       translations::get('Tables for module %%_name was installed.', ['name' => 'tree'])
     );
