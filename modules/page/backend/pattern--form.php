@@ -120,9 +120,9 @@ namespace effectivecore {
 
   function fields_get() {
     $return = [];
-    foreach ($this->child_select_all() as $npath => $c_child) {
+    foreach ($this->child_select_all() as $c_npath => $c_child) {
       if ($c_child instanceof \effectivecore\form_container) {
-        $return[$npath] = $c_child;
+        $return[$c_npath] = $c_child;
       }
     }
     return $return;

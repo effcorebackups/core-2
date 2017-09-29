@@ -1,13 +1,13 @@
 tree_items
 - main_home|tree_item
-    parent: trees/core/main
+    parent_npath: trees/core/main
     title: Home
     attributes
     - href: /
     - class
       - home: home
 - main_admin|tree_item
-    parent: trees/core/main
+    parent_npath: trees/core/main
     title: Administer
     attributes
     - class
@@ -16,7 +16,7 @@ tree_items
       roles
       - admins: admins
 - main_admin_modules|tree_item
-    parent: tree_items/core/main_admin
+    parent_npath: tree_items/core/main_admin
     title: Modules
     attributes
     - href: /admin/modules
