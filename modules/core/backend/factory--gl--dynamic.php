@@ -24,8 +24,8 @@ namespace effectivecore {
 
   static function set($name, $data) {
     static::$data[$name] = $data;
-    if (is_writable(dir_dynamic)) {
-      $file = new file(dir_dynamic.static::$type.'--'.$name.'.php');
+    $file = new file(dir_dynamic.static::$type.'--'.$name.'.php');
+    if (is_writable(dir_dynamic) && $file->is_writable()) {
       $file->set_data(
         "<?php\n\nnamespace effectivecore { # ".static::$type." for ".$name."\n\n".
            factory::data_export($data, '  '.factory::class_get_short_name(static::class).'::$data[\''.$name.'\']').
@@ -38,6 +38,7 @@ namespace effectivecore {
       messages::add_new(
         'Can not write "'.static::$type.'--'.$name.'.php" to the directory "dynamic"!'.br.
         'Directory "dynamic" should be writable.'.br.
+        'File "'.static::$type.'--'.$name.'.php" should be writable.'.br.
         'System is working slowly at now.', 'warning'
       );
     }
