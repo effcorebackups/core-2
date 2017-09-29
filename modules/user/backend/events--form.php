@@ -6,8 +6,8 @@
 
 namespace effectivecore\modules\user {
           use const \effectivecore\format_datetime;
-          use \effectivecore\entity_instance as entity_instance;
           use \effectivecore\urls_factory as urls;
+          use \effectivecore\entity_instance as entity_instance;
           use \effectivecore\entities_factory as entities;
           use \effectivecore\messages_factory as messages;
           use \effectivecore\translations_factory as translations;
@@ -20,7 +20,7 @@ namespace effectivecore\modules\user {
     $user_id = pages::$args['user_id'];
     switch ($form->clicked_button_name) {
       case 'delete':
-        $result = (new entity_instance('entities/user/user', [
+        $result = (new entity_instance('user', [
           'id' => $user_id,
         ]))->delete();
         if ($result) {
@@ -50,7 +50,7 @@ namespace effectivecore\modules\user {
     $user_id = pages::$args['user_id'];
     switch ($form->clicked_button_name) {
       case 'save':
-        $result = (new entity_instance('entities/user/user', [
+        $result = (new entity_instance('user', [
           'id'            => $user_id,
           'password_hash' => sha1($values['password_new']),
         ]))->update();
@@ -74,7 +74,7 @@ namespace effectivecore\modules\user {
   static function on_submit_user_login($form, $fields, &$values) {
     switch ($form->clicked_button_name) {
       case 'login':
-        $user = (new entity_instance('entities/user/user', [
+        $user = (new entity_instance('user', [
           'email' => $values['email']
         ]))->select(['email']);
         if ($user &&
@@ -94,7 +94,7 @@ namespace effectivecore\modules\user {
   static function on_submit_user_register($form, $fields, &$values) {
     switch ($form->clicked_button_name) {
       case 'register':
-        $user = (new entity_instance('entities/user/user', [
+        $user = (new entity_instance('user', [
           'email' => $values['email']
         ]))->select(['email']);
         if ($user) {
@@ -102,7 +102,7 @@ namespace effectivecore\modules\user {
             translations::get('User with this email was already registered!'), 'error'
           );
         } else {
-          $user = (new entity_instance('entities/user/user', [
+          $user = (new entity_instance('user', [
             'email'         => $values['email'],
             'password_hash' => sha1($values['password']),
             'created'       => date(format_datetime, time())

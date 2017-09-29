@@ -8,7 +8,7 @@ namespace effectivecore {
           use \effectivecore\modules\storage\storages_factory as storages;
           abstract class entities_factory {
 
-  static $data;
+  protected static $data;
 
   static function init() {
     foreach (storages::get('settings')->select('entities') as $c_entities) {

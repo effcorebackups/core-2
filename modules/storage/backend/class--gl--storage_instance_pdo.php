@@ -108,7 +108,7 @@ namespace effectivecore {
       ($offset            ? ' OFFSET '.$offset : '').';'
     );
     foreach ($result as $c_instance) {
-      $c_instance->set_npath('entities/user/'.$entity->name); # @todo: make universal
+      $c_instance->set_entity_name($entity->name);
     }
     return $result;
   }
@@ -116,9 +116,9 @@ namespace effectivecore {
   function select_instance($instance, $custom_ids = []) {
     $this->init();
     $result = $this->query(
-      'SELECT `'.implode('`, `', $instance->get_fields()).'` '.
-      'FROM `'.$instance->get_name().'` '.
-      'WHERE '.factory::data_to_attr($instance->get_values($custom_ids ?: $instance->get_ids()), ' and ', '`').' '.
+      'SELECT `'.implode('`, `', $instance->get_entity_fields()).'` '.
+      'FROM `'.$instance->get_entity_name().'` '.
+      'WHERE '.factory::data_to_attr($instance->get_values($custom_ids ?: $instance->get_entity_ids()), ' and ', '`').' '.
       'LIMIT 1;'
     );
     if (isset($result[0])) {
@@ -130,11 +130,11 @@ namespace effectivecore {
   function insert_instance($instance) {
     $this->init();
     $result = $this->query(
-      'INSERT INTO `'.$instance->get_name().'` (`'.implode('`, `', array_keys($instance->get_values())).'`) '.
+      'INSERT INTO `'.$instance->get_entity_name().'` (`'.implode('`, `', array_keys($instance->get_values())).'`) '.
       'VALUES ("'.implode('", "', $instance->get_values()).'");'
     );
-    if (!empty($result) && count($instance->get_ids()) == 1) { # only for autoincrement field
-      $id = $instance->get_ids()[0];
+    if (!empty($result) && count($instance->get_entity_ids()) == 1) { # only for autoincrement field
+      $id = $instance->get_entity_ids()[0];
       $instance->values[$id] = $result;
       return $instance;
     }
@@ -143,17 +143,17 @@ namespace effectivecore {
   function update_instance($instance) {
     $this->init();
     return $this->query(
-      'UPDATE `'.$instance->get_name().'` '.
+      'UPDATE `'.$instance->get_entity_name().'` '.
       'SET '.factory::data_to_attr($instance->get_values(), ', ', '`').' '.
-      'WHERE '.factory::data_to_attr($instance->get_values($instance->get_ids()), ' and ', '`').';'
+      'WHERE '.factory::data_to_attr($instance->get_values($instance->get_entity_ids()), ' and ', '`').';'
     );
   }
 
   function delete_instance($instance) {
     $this->init();
     $result = $this->query(
-      'DELETE FROM `'.$instance->get_name().'` '.
-      'WHERE '.factory::data_to_attr($instance->get_values($instance->get_ids()), ' and ', '`').';'
+      'DELETE FROM `'.$instance->get_entity_name().'` '.
+      'WHERE '.factory::data_to_attr($instance->get_values($instance->get_entity_ids()), ' and ', '`').';'
     );
     if ($result) {
       $instance->set_values([]);

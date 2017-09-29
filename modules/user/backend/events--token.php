@@ -21,7 +21,7 @@ namespace effectivecore\modules\user {
         case '%%_user_email_context':
         case '%%_user_email_name_context':
           $user_id_from_url = urls::get_current()->get_args($args[0]);
-          $user = (new entity_instance('entities/user/user', ['id' => $user_id_from_url]))->select();
+          $user = (new entity_instance('user', ['id' => $user_id_from_url]))->select();
           if ($user && $match == '%%_user_id_context')         return $user->id;
           if ($user && $match == '%%_user_email_context')      return $user->email;
           if ($user && $match == '%%_user_email_name_context') return strstr($user->email, '@', true).'@...';

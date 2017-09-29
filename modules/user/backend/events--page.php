@@ -9,9 +9,9 @@ namespace effectivecore\modules\user {
           use \effectivecore\markup;
           use \effectivecore\table;
           use \effectivecore\pager;
-          use \effectivecore\entity_instance;
           use \effectivecore\factory;
           use \effectivecore\urls_factory as urls;
+          use \effectivecore\entity_instance as entity_instance;
           use \effectivecore\entities_factory as entities;
           use \effectivecore\modules\user\users_factory as users;
           abstract class events_page extends \effectivecore\events_page {
@@ -52,7 +52,7 @@ namespace effectivecore\modules\user {
   }
 
   static function on_show_block_user_n($id) {
-    $user = (new entity_instance('entities/user/user', ['id' => $id]))->select();
+    $user = (new entity_instance('user', ['id' => $id]))->select();
     if ($user) {
       if ($user->id == users::get_current()->id ||               # owner
                  isset(users::get_current()->roles['admins'])) { # admin

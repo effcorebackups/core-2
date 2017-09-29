@@ -9,9 +9,13 @@ namespace effectivecore {
           class entity {
 
   public $name;
+  public $storage_id;
+  public $charset;
   public $fields;
+  public $indexes;
 
   function get_name()         {return $this->name;}
+  function get_storage_id()   {return $this->storage_id;}
   function get_fields_info()  {return $this->fields;}
   function get_indexes_info() {return $this->indexes;}
   function get_ids()          {return array_keys((array)$this->indexes['primary']->fields);}

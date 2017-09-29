@@ -5,8 +5,8 @@
   #############################################################
 
 namespace effectivecore\modules\user {
-          use \effectivecore\entities_factory as entities;
           use \effectivecore\entity_instance as entity_instance;
+          use \effectivecore\entities_factory as entities;
           abstract class users_factory {
 
   static $data;
@@ -17,7 +17,7 @@ namespace effectivecore\modules\user {
     static::$data->roles = ['anonymous' => 'anonymous'];
   # load user from db
     if ($id) {
-      $user = (new entity_instance('entities/user/user', ['id' => $id]))->select();
+      $user = (new entity_instance('user', ['id' => $id]))->select();
       if ($user) {
         static::$data = (object)($user->get_values());
         static::$data->roles = ['registered' => 'registered'];
