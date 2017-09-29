@@ -11,7 +11,6 @@ namespace effectivecore {
           abstract class factory {
 
   static $cache;
-  static $phase = phase_0;
 
   #############################
   ### classes manipulations ###
@@ -183,6 +182,11 @@ namespace effectivecore {
       'id'           => array_pop($npath_parts),
       'parent_npath' => implode('/', $npath_parts),
     ];
+  }
+
+  static function npath_get_group($npath) {
+    $npath_parts = explode('/', $npath);
+    return array_shift($npath_parts);
   }
 
   static function &npath_get_pointer($npath, &$p, $reset = false) {
