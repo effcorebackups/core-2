@@ -57,8 +57,6 @@ namespace effectivecore {
   }
 
   function is_exist()          {return file_exists($this->get_path_full());}
-  function is_writable()       {return is_writable($this->get_path_full());}
-
   function get_dirs_info()     {return $this->dirs;}
   function get_file_info()     {return $this->file;}
   function get_dirs_full()     {return $this->dirs->full;}
