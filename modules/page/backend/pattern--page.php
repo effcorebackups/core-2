@@ -117,8 +117,8 @@ namespace effectivecore {
       switch ($c_block->type) {
         case 'text': $contents[$c_region][] = $c_block->content; break;
         case 'code': $contents[$c_region][] = call_user_func_array($c_block->handler, pages::$args); break;
-        case 'link': $contents[$c_region][] = factory::npath_get_object($c_block->npath, storages::get('settings')->select()); break;
-        default:     $contents[$c_region][] = $c_block;
+        case 'link': $contents[$c_region][] = storages::get('settings')->select_by_npath($c_block->npath); break;
+        default    : $contents[$c_region][] = $c_block;
       }
     }
 

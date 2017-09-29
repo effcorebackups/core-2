@@ -13,24 +13,31 @@ namespace effectivecore {
           class storage_instance_settings {
 
   static $data_orig;
-  static $data;
+  static $data = [];
   static $changes_dynamic;
 
   static function init($group) {
-    $cache = caches::get('settings');
-    if ($cache) static::$data = $cache;
+    $cache = caches::get('settings--'.$group);
+    if ($cache) static::$data[$group] = $cache;
     else        static::settings_cache_rebuild();
-    console::add_log('storage', 'init.', 'The storage cache for group %%_name was loaded on first request.', 'ok', 0, ['name' => $group]);
+    console::add_log('storage', 'init.', 'the storage cache for group %%_name was loaded', 'ok', 0, ['name' => $group]);
   }
 
   ########################
   ### shared functions ###
   ########################
 
-  function select($group = '') {
-    if (!static::$data) static::init();
-    if ($group)  return static::$data[$group];
-    else         return static::$data;
+  function select($group) {
+    if   (!isset(static::$data[$group])) static::init($group);
+    return isset(static::$data[$group]) ?
+                 static::$data[$group] : null;
+  }
+
+  function select_by_npath($npath) {
+    $npath_parts = explode('/', $npath);
+    $group = array_shift($npath_parts);
+    $group_data = $this->select($group);
+    return factory::npath_get_object(implode('/', $npath_parts), $group_data);
   }
 
   ################
@@ -38,13 +45,8 @@ namespace effectivecore {
   ################
 
   static function settings_cache_rebuild() {
-    $data_orig = caches::get('settings_orig');
-  # init original settings
-    if (!$data_orig) {
-      $data_orig = ['_created' => date(format_datetime, time())];
-      $data_orig += static::settings_find_static();
-    }
-  # init changes
+  # init all data
+    $data_orig = caches::get('settings_orig') ?: static::settings_find_static();
     $changes_d = dynamic::get('changes') ?: [];
     $changes_s = isset($data_orig['changes']) ? $data_orig['changes'] : [];
   # apply all changes to original settings and get final settings
@@ -53,11 +55,15 @@ namespace effectivecore {
     static::changes_apply_to_settings($changes_s, $data);
     unset($data['changes']);
   # save cache
-    caches::set('settings_orig', $data_orig);
-    caches::set('settings',      $data);
-  # prevent opcache work
+    $_created = date(format_datetime, time());
+    caches::set('settings_orig', ['_created' => $_created] + $data_orig);
     static::$data_orig = $data_orig;
-    static::$data      = $data;
+    foreach ($data as $group => $slice) {
+      if ($group[0] !== '_') {
+        caches::set('settings--'.$group, $slice);
+        static::$data[$group] = $slice;
+      }
+    }
   }
 
   static function settings_find_static() {

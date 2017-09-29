@@ -11,7 +11,7 @@ namespace effectivecore\modules\storage {
   protected static $data;
 
   static function init() {
-    settings::init();
+    settings::init('storages');
     foreach (settings::$data['storages'] as $c_storages) {
       foreach ($c_storages as $c_storage) {
         static::$data[$c_storage->id] = $c_storage;

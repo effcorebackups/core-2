@@ -15,8 +15,8 @@ namespace effectivecore\modules\tree {
   # link all parents for tree_items
     foreach (storages::get('settings')->select('tree_items') as $c_items) {
       foreach ($c_items as $item_id => $c_item) {
-        if (!empty($c_item->parent)) {
-          $c_parent = factory::npath_get_object($c_item->parent, storages::get('settings')->select());
+        if (!empty($c_item->parent_npath)) {
+          $c_parent = storages::get('settings')->select_by_npath($c_item->parent_npath);
           if ($c_parent) {
             $c_parent->children[$item_id] = $c_item;
           }
