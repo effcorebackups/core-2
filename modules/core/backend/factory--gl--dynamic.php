@@ -5,8 +5,6 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\timers_factory as timers;
-          use \effectivecore\console_factory as console;
           use \effectivecore\messages_factory as messages;
           abstract class dynamic_factory {
 
@@ -14,15 +12,12 @@ namespace effectivecore {
   static $data = [];
 
   static function get($name) {
-    timers::tap('dynamic file get: '.$name);
     if (!isset(static::$data[$name])) {
       $file = new file(dir_dynamic.static::$type.'--'.$name.'.php');
       if ($file->is_exist()) {
         $file->insert();
       }
     }
-    timers::tap('dynamic file get: '.$name);
-    console::add_log('dynamic file', 'get', $name, 'ok', timers::get_period('dynamic file get: '.$name, -1, -2));
     return isset(static::$data[$name]) ?
                  static::$data[$name] : null;
   }

@@ -12,7 +12,6 @@ translations
   - autoload: автозагрузка
   - Background color: Цвет фона
   - button: кнопка
-  - cache: кэш
   - call: вызов
   - Cancel: Отмена
   - cancel: отмена
