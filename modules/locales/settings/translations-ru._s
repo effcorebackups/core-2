@@ -156,7 +156,7 @@ translations
   - Textarea: Текстовая область
   - the event system was initialized: система событий была инициализирована
   - the storage %%_name was initialized: хранилище %%_name было инициализировано
-  - the storage cache for group %%_name was loaded: кэш хранилища для группы %%_name был загружен
+  - the storage cache for group %%_name will be load: кэш хранилища для группы %%_name будет загружен
   - The value was trimmed to the required length!: Значение было обрезано до требуемой длинны!
   - Time: Время
   - Title: Заголовок
