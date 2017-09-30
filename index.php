@@ -89,7 +89,7 @@ namespace effectivecore {
   ob_start();
   foreach (events::start('on_module_start') as $c_results) {
     foreach ($c_results as $c_result) {
-      print str_replace("\n\n", '', $c_result);
+      print str_replace(nl.nl, '', $c_result);
     }
   }
 

@@ -31,10 +31,10 @@ namespace effectivecore {
        ($file->is_exist() && is_writable($file->get_path_full())))) {
       $info = ['created' => date(format_datetime, time())];
       $file->set_data(
-        "<?php\n\nnamespace effectivecore { # ".static::$type." for ".$name.nl.nl.
+        "<?php".nl.nl."namespace effectivecore { # ".static::$type." for ".$name.nl.nl.
            factory::data_export($info, '  '.factory::class_get_short_name(static::class).'::$info[\''.$name.'\']').
-           factory::data_export($data, '  '.factory::class_get_short_name(static::class).'::$data[\''.$name.'\']').
-        "\n}");
+           factory::data_export($data, '  '.factory::class_get_short_name(static::class).'::$data[\''.$name.'\']').nl.
+        "}");
       $file->save();
       if (function_exists('opcache_invalidate')) {
         opcache_invalidate($file->get_path_full());

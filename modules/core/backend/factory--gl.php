@@ -176,34 +176,28 @@ namespace effectivecore {
   ### npath functions ###
   #######################
 
-  static function &npath_get_pointer($npath, &$p, $reset = false) {
-    if (!$reset) {
-      if (isset(static::$cache[__FUNCTION__][$npath])) {
-         return static::$cache[__FUNCTION__][$npath];
-      }
-    }
+  static function &npath_get_pointer($npath, &$data, $reset = false) {
+    if (isset(static::$cache[__FUNCTION__][$npath]) && !$reset)
+       return static::$cache[__FUNCTION__][$npath];
+    $pointer = $data;
     foreach (explode('/', $npath) as $c_part) {
-      switch (gettype($p)) {
-        case 'array' : $p = &$p[$c_part];   break;
-        case 'object': $p = &$p->{$c_part}; break;
-      }
+      if (gettype($pointer) == 'array')      $pointer = &$pointer[$c_part];
+      elseif (gettype($pointer) == 'object') $pointer = &$pointer->{$c_part};
     }
-    static::$cache[__FUNCTION__][$npath] = &$p;
-    return $p;
+    static::$cache[__FUNCTION__][$npath] = &$pointer;
+    return $pointer;
   }
 
   static function npath_get_object($npath, $data, $reset = false) {
-    if (!$reset) {
-      if (isset(static::$cache[__FUNCTION__][$npath]))
-         return static::$cache[__FUNCTION__][$npath];
-    }
-    $p = null;
+    if (isset(static::$cache[__FUNCTION__][$npath]) && !$reset)
+       return static::$cache[__FUNCTION__][$npath];
+    $pointer = $data;
     foreach (explode('/', $npath) as $c_part) {
-      if ($p == null) { if (isset($data[$c_part])) {$p = $data[$c_part]; continue;} else {$p = null; break;} } # iteration 1
-      if ($p != null) { if (isset(   $p[$c_part])) {$p =    $p[$c_part]; continue;} else {$p = null; break;} } # iteration 2, 3, 4 …
+      if (gettype($pointer) == 'array')      $pointer = &$pointer[$c_part];
+      elseif (gettype($pointer) == 'object') $pointer = &$pointer->{$c_part};
     }
-    static::$cache[__FUNCTION__][$npath] = $p;
-    return $p;
+    static::$cache[__FUNCTION__][$npath] = $pointer;
+    return $pointer;
   }
 
   ########################
