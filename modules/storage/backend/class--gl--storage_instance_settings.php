@@ -55,8 +55,7 @@ namespace effectivecore {
     static::changes_apply_to_settings($changes_s, $data);
     unset($data['changes']);
   # save cache
-    $_created = date(format_datetime, time());
-    caches::set('settings_orig', ['_created' => $_created] + $data_orig);
+    caches::set('settings_orig', $data_orig);
     static::$data_orig = $data_orig;
     foreach ($data as $group => $slice) {
       if ($group[0] !== '_') {

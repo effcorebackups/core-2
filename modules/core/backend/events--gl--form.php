@@ -76,14 +76,16 @@ namespace effectivecore {
 
   # note:
   # ─────────────────────────────────────────────────────────────────────
-  # 1. attribute REQUIRED is not standart for input[type=color|range]
+  # 1. attribute MULTIPLE in SELECT element is not supported on touch
+  #    devices - tablets, phones, monitors with touch screens
+  # 2. attribute REQUIRED is not standart for input[type=color|range]
   #    but supported and recomend in this system
-  # 2. not recommend to use DISABLED radio field with CHECKED state - 
+  # 3. not recommend to use DISABLED radio field with CHECKED state - 
   #    this element will be always CHECKED regardless of user choice.
   #    example (second field will be allways CHECKED):
   #    - input[type=radio]
   #    - input[type=radio,checked,disabled]
-  # 3. not recommend to use DISABLED|READONLY text fields with shared
+  # 4. not recommend to use DISABLED|READONLY text fields with shared
   #    NAME because user can remove DISABLED|READONLY state from field
   #    and change the field VALUE and submit form - after this action
   #    the new VALUE will be setted to the next field with shared NAME.

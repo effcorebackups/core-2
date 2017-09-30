@@ -9,6 +9,7 @@ namespace effectivecore {
           abstract class dynamic_factory {
 
   static $type = 'data';
+  static $info = [];
   static $data = [];
 
   static function get($name) {
@@ -28,8 +29,10 @@ namespace effectivecore {
     if (is_writable(dir_dynamic) &&
        ($file->is_exist() == false ||
        ($file->is_exist() && is_writable($file->get_path_full())))) {
+      $info = ['created' => date(format_datetime, time())];
       $file->set_data(
-        "<?php\n\nnamespace effectivecore { # ".static::$type." for ".$name."\n\n".
+        "<?php\n\nnamespace effectivecore { # ".static::$type." for ".$name.nl.nl.
+           factory::data_export($info, '  '.factory::class_get_short_name(static::class).'::$info[\''.$name.'\']').
            factory::data_export($data, '  '.factory::class_get_short_name(static::class).'::$data[\''.$name.'\']').
         "\n}");
       $file->save();
