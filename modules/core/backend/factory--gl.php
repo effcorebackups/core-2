@@ -152,15 +152,20 @@ namespace effectivecore {
   }
 
   static function array_sort_by_weight(&$array) {
-  # prepare array for stable sorting when weight = 0
+  # prepare weight for stable sorting
     $c_weight = 0;
     foreach ($array as $c_item) {
-      if ($c_item->weight == 0) {
-        $c_item->weight = ($c_weight += .0002);
-      }
+      $c_item->weight = $c_item->weight ?: $c_weight += .000001;
     }
   # sorting
-    uasort($array, '\\effectivecore\\factory::_compare_by_weight');
+    uasort($array, function($a, $b){
+      return $a->weight == $b->weight ? 0 : ($a->weight < $b->weight ? -1 : 1);
+    });
+  # restore weight
+    $c_weight = 0;
+    foreach ($array as $c_item) {
+      $c_item->weight = $c_item->weight > .0001 ?: 0;
+    }
     return $array;
   }
 
@@ -218,10 +223,6 @@ namespace effectivecore {
             '</style>';
     }
     exit();
-  }
-
-  static function _compare_by_weight($a, $b) {
-    return $a->weight == $b->weight ? 0 : ($a->weight < $b->weight ? -1 : 1);
   }
 
   static function to_css_class($string) {
