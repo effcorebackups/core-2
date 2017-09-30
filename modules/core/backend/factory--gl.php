@@ -6,7 +6,7 @@
 
 namespace effectivecore {
           use \effectivecore\files_factory as files;
-          use \effectivecore\caches_factory as caches;
+          use \effectivecore\cache_factory as cache;
           use \effectivecore\console_factory as console;
           abstract class factory {
 
@@ -27,7 +27,7 @@ namespace effectivecore {
   }
 
   static function get_classes_map() {
-    $cache = caches::get('classes_map');
+    $cache = cache::get('classes_map');
     if ($cache) {
       return $cache;
     } else {
@@ -53,7 +53,7 @@ namespace effectivecore {
                        $matches['name']] = $c_info;
         }
       }
-      caches::set('classes_map', $classes_map);
+      cache::set('classes_map', $classes_map);
       return $classes_map;
     }
   }

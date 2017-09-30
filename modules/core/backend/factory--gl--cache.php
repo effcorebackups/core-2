@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          abstract class caches_factory extends \effectivecore\dynamic_factory {
+          abstract class cache_factory extends \effectivecore\dynamic_factory {
 
   static $type = 'cache';
 

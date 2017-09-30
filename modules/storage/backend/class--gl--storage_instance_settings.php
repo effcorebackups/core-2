@@ -6,7 +6,7 @@
 
 namespace effectivecore {
           use \effectivecore\files_factory as files;
-          use \effectivecore\caches_factory as caches;
+          use \effectivecore\cache_factory as cache;
           use \effectivecore\dynamic_factory as dynamic;
           use \effectivecore\console_factory as console;
           use \effectivecore\messages_factory as messages;
@@ -17,7 +17,7 @@ namespace effectivecore {
   static $changes_dynamic;
 
   static function init($group) {
-    $cache = caches::get('settings--'.$group);
+    $cache = cache::get('settings--'.$group);
     if ($cache) static::$data[$group] = $cache;
     else        static::settings_cache_rebuild();
     console::add_log('storage', 'init.', 'the storage cache for group %%_name was loaded', 'ok', 0, ['name' => $group]);
@@ -46,7 +46,7 @@ namespace effectivecore {
 
   static function settings_cache_rebuild() {
   # init all data
-    $data_orig = caches::get('settings_orig') ?: static::settings_find_static();
+    $data_orig = cache::get('settings_orig') ?: static::settings_find_static();
     $changes_d = dynamic::get('changes') ?: [];
     $changes_s = isset($data_orig['changes']) ? $data_orig['changes'] : [];
   # apply all changes to original settings and get final settings
@@ -55,11 +55,11 @@ namespace effectivecore {
     static::changes_apply_to_settings($changes_s, $data);
     unset($data['changes']);
   # save cache
-    caches::set('settings_orig', $data_orig);
+    cache::set('settings_orig', $data_orig);
     static::$data_orig = $data_orig;
     foreach ($data as $group => $slice) {
       if ($group[0] !== '_') {
-        caches::set('settings--'.$group, $slice);
+        cache::set('settings--'.$group, $slice);
         static::$data[$group] = $slice;
       }
     }
