@@ -46,7 +46,7 @@ namespace effectivecore {
 
   static function settings_cache_rebuild() {
   # init all data
-    $data_orig = cache::get('settings_orig') ?: static::settings_find_static();
+    $data_orig = cache::get('settings_original') ?: static::settings_find_static();
     $changes_d = dynamic::get('changes') ?: [];
     $changes_s = isset($data_orig['changes']) ? $data_orig['changes'] : [];
   # apply all changes to original settings and get final settings
@@ -55,13 +55,11 @@ namespace effectivecore {
     static::changes_apply_to_settings($changes_s, $data);
     unset($data['changes']);
   # save cache
-    cache::set('settings_orig', $data_orig);
+    cache::set('settings_original', $data_orig);
     static::$data_orig = $data_orig;
     foreach ($data as $group => $slice) {
-      if ($group[0] !== '_') {
-        cache::set('settings--'.$group, $slice);
-        static::$data[$group] = $slice;
-      }
+      cache::set('settings--'.$group, $slice);
+      static::$data[$group] = $slice;
     }
   }
 
