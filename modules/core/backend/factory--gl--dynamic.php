@@ -39,6 +39,7 @@ namespace effectivecore {
       if (function_exists('opcache_invalidate')) {
         opcache_invalidate($file->get_path_full());
       }
+      return true;
     } else {
       messages::add_new(
         'Can not write file "'.$file->get_file_full().'" to the directory "dynamic"!'.br.
