@@ -11,8 +11,8 @@ namespace effectivecore {
 
   static $type = 'cache';
 
-  static function set($name, $data, $add_info = false) {
-    if (parent::set($name, $data, $add_info)) {
+  static function set($name, $data, $info = null) {
+    if (parent::set($name, $data, $info)) {
       messages::add_new('Cache for "'.$name.'" was rebuilded.');
       console::add_log('storage', 'cache', 'Cache for "'.$name.'" was rebuilded.', 'ok', 0);
     }

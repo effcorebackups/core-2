@@ -61,7 +61,7 @@ namespace effectivecore {
     unset($data['changes']);
   # save cache
     foreach ($data as $group => $slice) {
-      cache::set('settings--'.$group, $slice);
+      cache::set('settings--'.$group, $slice, ['created' => cache::get_info()['settings_original']]);
       static::$data[$group] = $slice;
     }
   }

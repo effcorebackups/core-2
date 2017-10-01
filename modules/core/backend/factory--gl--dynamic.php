@@ -12,6 +12,10 @@ namespace effectivecore {
   static $info = [];
   static $data = [];
 
+  static function get_info() {
+    return static::$info;
+  }
+
   static function get($name) {
     if (!isset(static::$data[$name])) {
       $file = new file(dir_dynamic.static::$type.'--'.$name.'.php');
@@ -26,6 +30,7 @@ namespace effectivecore {
   static function set($name, $data, $info = null) {
     static::$data[$name] = $data;
     $file = new file(dir_dynamic.static::$type.'--'.$name.'.php');
+    if ($info) static::$info[$name] = $info;
     if (is_writable(dir_dynamic) &&
        ($file->is_exist() == false ||
        ($file->is_exist() && is_writable($file->get_path_full())))) {
