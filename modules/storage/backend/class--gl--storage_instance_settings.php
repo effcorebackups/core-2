@@ -49,7 +49,7 @@ namespace effectivecore {
     $data_orig = cache::get('settings_original');
     if (!$data_orig) {
       static::$data_orig = $data_orig = static::settings_find_static();
-      cache::set('settings_original', $data_orig, true);
+      cache::set('settings_original', $data_orig, ['created' => date(format_datetime, time())]);
     }
   # init dynamic and static changes
     $changes_d = dynamic::get('changes') ?: [];
