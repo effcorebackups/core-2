@@ -6,6 +6,7 @@
 
 namespace effectivecore\modules\user {
           use const \effectivecore\format_datetime;
+          use \effectivecore\factory as factory;
           use \effectivecore\entity_instance as entity_instance;
           use \effectivecore\modules\user\users_factory as users;
           abstract class session_factory {
@@ -17,7 +18,7 @@ namespace effectivecore\modules\user {
       (new entity_instance('session', [
         'id'      => session_id(),
         'user_id' => $user_id,
-        'created' => date(format_datetime, time())
+        'created' => factory::datetime_get_curent()
       ]))->insert();
     }
   # restore session for authenticated user

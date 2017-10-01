@@ -49,7 +49,7 @@ namespace effectivecore {
     $data_orig = cache::get('settings_original');
     if (!$data_orig) {
       static::$data_orig = $data_orig = static::settings_find_static();
-      cache::set('settings_original', $data_orig, ['build' => date(format_datetime, time())]);
+      cache::set('settings_original', $data_orig, ['build' => factory::datetime_get_curent()]);
     }
   # init dynamic and static changes
     $changes_d = dynamic::get('changes') ?: [];
@@ -106,7 +106,7 @@ namespace effectivecore {
   # add new action
     $changes_d = dynamic::get('changes') ?: [];
     $changes_d[$module_id]->{$action}[$npath] = $value;
-    dynamic::set('changes', $changes_d, ['build' => date(format_datetime, time())]);
+    dynamic::set('changes', $changes_d, ['build' => factory::datetime_get_curent()]);
   # prevent opcache work
     static::$changes_dynamic['changes'] = $changes_d;
     if ($rebuild) {

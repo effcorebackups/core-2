@@ -6,6 +6,7 @@
 
 namespace effectivecore\modules\user {
           use const \effectivecore\format_datetime;
+          use \effectivecore\factory as factory;
           use \effectivecore\urls_factory as urls;
           use \effectivecore\entity_instance as entity_instance;
           use \effectivecore\entities_factory as entities;
@@ -105,7 +106,7 @@ namespace effectivecore\modules\user {
           $user = (new entity_instance('user', [
             'email'         => $values['email'],
             'password_hash' => sha1($values['password']),
-            'created'       => date(format_datetime, time())
+            'created'       => factory::datetime_get_curent()
           ]))->insert();
           if ($user->id) {
             session::init($user->id);

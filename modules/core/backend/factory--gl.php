@@ -53,7 +53,7 @@ namespace effectivecore {
                        $matches['name']] = $c_info;
         }
       }
-      cache::set('classes_map', $classes_map, ['build' => date(format_datetime, time())]);
+      cache::set('classes_map', $classes_map, ['build' => static::datetime_get_curent()]);
       return $classes_map;
     }
   }
@@ -227,6 +227,10 @@ namespace effectivecore {
 
   static function to_css_class($string) {
     return str_replace(['/', ' '], '-', strtolower($string));
+  }
+
+  static function datetime_get_curent() {
+    return date(format_datetime, time());
   }
 
 }}
