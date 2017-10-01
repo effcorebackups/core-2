@@ -49,7 +49,7 @@ namespace effectivecore {
     $data_orig = cache::get('settings_original');
     if (!$data_orig) {
       static::$data_orig = $data_orig = static::settings_find_static();
-      cache::set('settings_original', $data_orig, ['created' => date(format_datetime, time())]);
+      cache::set('settings_original', $data_orig, ['build' => date(format_datetime, time())]);
     }
   # init dynamic and static changes
     $changes_d = dynamic::get('changes') ?: [];
@@ -61,7 +61,7 @@ namespace effectivecore {
     unset($data['changes']);
   # save cache
     foreach ($data as $group => $slice) {
-      cache::set('settings--'.$group, $slice, ['created' => cache::get_info()['settings_original']]);
+      cache::set('settings--'.$group, $slice, cache::get_info()['settings_original']);
       static::$data[$group] = $slice;
     }
   }
@@ -106,7 +106,7 @@ namespace effectivecore {
   # add new action
     $changes_d = dynamic::get('changes') ?: [];
     $changes_d[$module_id]->{$action}[$npath] = $value;
-    dynamic::set('changes', $changes_d);
+    dynamic::set('changes', $changes_d, ['build' => date(format_datetime, time())]);
   # prevent opcache work
     static::$changes_dynamic['changes'] = $changes_d;
     if ($rebuild) {
