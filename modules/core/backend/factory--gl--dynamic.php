@@ -41,8 +41,8 @@ namespace effectivecore {
       }
     } else {
       messages::add_new(
-        'Can not write "'.$file->get_file_full().'" to the directory "dynamic"!'.br.
-        'System is working slowly or / and cannot save dynamic changes!'.br.
+        'Can not write file "'.$file->get_file_full().'" to the directory "dynamic"!'.br.
+        'The system cannot save dynamic file and will work slowly!'.br.
         (!is_writable(dir_dynamic) ? 'Directory "dynamic" should be writable!'.br : '').
         (!is_writable($file->get_path_full()) && $file->is_exist() ? 'File "'.$file->get_file_full().'" should be writable!' : ''), 'warning'
       );

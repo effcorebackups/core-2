@@ -142,6 +142,7 @@ translations
   - Select: Список
   - Server load (sys_getloadavg): Загр. серв. (sys_getloadavg)
   - set: установка
+  - Settings cache was rebuilded.: Кэш настроек был перестроен.
   - state: состояние
   - State: Состояние
   - State.: Сост.

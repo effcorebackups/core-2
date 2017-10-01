@@ -64,6 +64,9 @@ namespace effectivecore {
       cache::set('settings--'.$group, $slice);
       static::$data[$group] = $slice;
     }
+  # report
+    messages::add_new('Settings cache was rebuilded.');
+    console::add_log('storage', 'init.', 'Settings cache was rebuilded.', 'ok', 0);
   }
 
   static function settings_find_static() {
