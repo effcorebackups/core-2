@@ -4,6 +4,9 @@ pages
     display
       url
         match: %^/install$%
+    access
+      roles
+      - anonymous: anonymous
     content
     - block_tree_main
         region: nav
