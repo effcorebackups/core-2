@@ -53,7 +53,7 @@ namespace effectivecore {
                        $matches['name']] = $c_info;
         }
       }
-      cache::set('classes_map', $classes_map);
+      cache::set('classes_map', $classes_map, true);
       return $classes_map;
     }
   }

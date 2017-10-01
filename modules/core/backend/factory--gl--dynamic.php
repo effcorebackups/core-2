@@ -23,7 +23,7 @@ namespace effectivecore {
                  static::$data[$name] : null;
   }
 
-  static function set($name, $data) {
+  static function set($name, $data, $add_info = false) {
     static::$data[$name] = $data;
     $file = new file(dir_dynamic.static::$type.'--'.$name.'.php');
     if (is_writable(dir_dynamic) &&
@@ -31,8 +31,8 @@ namespace effectivecore {
        ($file->is_exist() && is_writable($file->get_path_full())))) {
       $info = ['created' => date(format_datetime, time())];
       $file->set_data(
-        "<?php".nl.nl."namespace effectivecore { # ".static::$type." for ".$name.nl.nl.
-           factory::data_export($info, '  '.factory::class_get_short_name(static::class).'::$info[\''.$name.'\']').
+        "<?php".nl.nl."namespace effectivecore { # ".static::$type." for ".$name.nl.nl.($add_info ?
+           factory::data_export($info, '  '.factory::class_get_short_name(static::class).'::$info[\''.$name.'\']') : '').
            factory::data_export($data, '  '.factory::class_get_short_name(static::class).'::$data[\''.$name.'\']').nl.
         "}");
       $file->save();
