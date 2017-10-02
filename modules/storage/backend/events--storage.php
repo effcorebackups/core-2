@@ -17,7 +17,7 @@ namespace effectivecore\modules\storage {
   static function on_storage_init_after(&$instance) {
     timers::tap('storage init');
     console::add_log(
-      'storage', 'init.', 'the storage %%_name was initialized', 'ok', timers::get_period('storage init', 0, 1), ['name' => $instance->id]
+      'storage', 'init.', 'the storage "%%_name" was initialized', 'ok', timers::get_period('storage init', 0, 1), ['name' => $instance->id]
     );
   }
 
