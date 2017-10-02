@@ -1,7 +1,7 @@
 entities
 - user|entity
     name: user
-    storage_id: db_main
+    storage_id: db
     charset: utf8
     fields
       id
@@ -37,7 +37,7 @@ entities
         - email: email
 - session|entity
     name: session
-    storage_id: db_main
+    storage_id: db
     charset: utf8
     fields
       id
@@ -63,7 +63,7 @@ entities
         - id: id
 - role|entity
     name: role
-    storage_id: db_main
+    storage_id: db
     charset: utf8
     fields
       id
@@ -86,7 +86,7 @@ entities
         - id: id
 - permission|entity
     name: permission
-    storage_id: db_main
+    storage_id: db
     charset: utf8
     fields
       id
@@ -104,7 +104,7 @@ entities
         - id: id
 - relation_role_ws_user|entity
     name: relation_role_ws_user
-    storage_id: db_main
+    storage_id: db
     charset: utf8
     fields
       role_id
@@ -124,7 +124,7 @@ entities
         - user_id: user_id
 - relation_role_ws_permission|entity
     name: relation_role_ws_permission
-    storage_id: db_main
+    storage_id: db
     charset: utf8
     fields
       role_id

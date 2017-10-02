@@ -10,7 +10,7 @@ namespace effectivecore {
           use \effectivecore\dynamic_factory as dynamic;
           use \effectivecore\console_factory as console;
           use \effectivecore\messages_factory as messages;
-          class storage_instance_settings {
+          class storage_settings {
 
   static $data_orig;
   static $data = [];

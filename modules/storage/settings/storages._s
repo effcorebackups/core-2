@@ -1,10 +1,10 @@
 storages
-- storage_dpo_main|storage_pdo
-    id: db_main
+- storage_sql_dpo|storage_pdo
+    id: db
+    driver: mysql
     directory_name: effectivecore
     host_name: 127.0.0.1
     user_name: root
     password: 123
-    driver: mysql
-- storage_settings|storage_instance_settings
+- storage_nosql_settings|storage_settings
     id: settings
