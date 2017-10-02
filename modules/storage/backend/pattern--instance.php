@@ -37,6 +37,7 @@ namespace effectivecore {
   function get_entity_name()       {return $this->get_entity()->get_name();}
   function get_entity_fields()     {return $this->get_entity()->get_fields();}
   function get_entity_ids()        {return $this->get_entity()->get_ids();}
+  function get_entity_keys()       {return $this->get_entity()->get_keys();}
   function get_entity_storage_id() {return $this->get_entity()->get_storage_id();}
   function set_entity_name($entity_name) {$this->entity_name = $entity_name;}
 

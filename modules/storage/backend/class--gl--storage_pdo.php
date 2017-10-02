@@ -113,14 +113,12 @@ namespace effectivecore {
     return $result;
   }
 
-  function select_instance($instance, $custom_ids = []) {
+  function select_instance($instance) {
     $this->init();
-    $result = $this->query(
-      'SELECT `'.implode('`, `', $instance->get_entity_fields()).'` '.
-      'FROM `'.$instance->get_entity_name().'` '.
-      'WHERE '.factory::data_to_attr($instance->get_values($custom_ids ?: $instance->get_entity_ids()), ' and ', '`').' '.
-      'LIMIT 1;'
-    );
+    $table  = $instance->get_entity_name();
+    $ids    = array_intersect_key($instance->get_values(), $instance->get_entity_keys());
+    $where  = factory::data_to_attr($ids, ' and ', '`');
+    $result = $this->query('SELECT * FROM `'.$table.'` WHERE '.$where.' LIMIT 1;');
     if (isset($result[0])) {
       $instance->values = $result[0]->values;
       return $instance;

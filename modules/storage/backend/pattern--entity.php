@@ -18,8 +18,18 @@ namespace effectivecore {
   function get_storage_id()   {return $this->storage_id;}
   function get_fields_info()  {return $this->fields;}
   function get_indexes_info() {return $this->indexes;}
-  function get_ids()          {return array_keys((array)$this->indexes['primary']->fields);}
-  function get_fields()       {return array_keys((array)$this->fields);}
+  function get_fields()       {return factory::array_values_map_to_keys(array_keys((array)$this->fields));}
+  function get_ids()          {return factory::array_values_map_to_keys(array_keys((array)$this->indexes['primary']->fields));}
+
+  function get_keys() {
+    $keys = [];
+    foreach ($this->indexes as $c_index) {
+      if ($c_index->type == 'primary key' || $c_index->type == 'unique key') {
+        $keys += $c_index->fields;
+      }
+    }
+    return factory::array_values_map_to_keys($keys);
+  }
 
   function install() {
     $storage = storages::get($this->storage_id);
