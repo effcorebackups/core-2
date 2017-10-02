@@ -7,7 +7,7 @@
 namespace effectivecore {
           use \effectivecore\entities_factory as entities;
           use \effectivecore\modules\storage\storages_factory as storages;
-          class entity_instance {
+          class instance {
 
   public $entity_name;
   public $values;

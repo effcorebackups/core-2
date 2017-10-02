@@ -6,7 +6,7 @@
 
 namespace effectivecore\modules\user {
           use \effectivecore\urls_factory as urls;
-          use \effectivecore\entity_instance as entity_instance;
+          use \effectivecore\instance as instance;
           use \effectivecore\translations_factory as translations;
           use \effectivecore\modules\user\users_factory as users;
           abstract class events_token extends \effectivecore\events_token {
@@ -21,7 +21,7 @@ namespace effectivecore\modules\user {
         case '%%_user_email_context':
         case '%%_user_email_name_context':
           $user_id_from_url = urls::get_current()->get_args($args[0]);
-          $user = (new entity_instance('user', ['id' => $user_id_from_url]))->select();
+          $user = (new instance('user', ['id' => $user_id_from_url]))->select();
           if ($user && $match == '%%_user_id_context')         return $user->id;
           if ($user && $match == '%%_user_email_context')      return $user->email;
           if ($user && $match == '%%_user_email_name_context') return strstr($user->email, '@', true).'@...';

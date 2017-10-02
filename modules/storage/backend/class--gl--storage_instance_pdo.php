@@ -59,7 +59,7 @@ namespace effectivecore {
       );
     }
     switch (substr($query, 0, 6)) {
-      case 'SELECT': return $result ? $result->fetchAll(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE, '\effectivecore\entity_instance') : null;
+      case 'SELECT': return $result ? $result->fetchAll(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE, '\effectivecore\instance') : null;
       case 'UPDATE': return $result->rowCount();
       case 'DELETE': return $result->rowCount();
       case 'INSERT': return $this->connection->lastInsertId();

@@ -7,7 +7,7 @@
 namespace effectivecore\modules\user {
           use const \effectivecore\format_datetime;
           use \effectivecore\factory as factory;
-          use \effectivecore\entity_instance as entity_instance;
+          use \effectivecore\instance as instance;
           use \effectivecore\modules\user\users_factory as users;
           abstract class session_factory {
 
@@ -15,7 +15,7 @@ namespace effectivecore\modules\user {
   # renew session for user with selected id
     if ($user_id != 0) {
       session_start();
-      (new entity_instance('session', [
+      (new instance('session', [
         'id'      => session_id(),
         'user_id' => $user_id,
         'created' => factory::datetime_get_curent()
@@ -23,7 +23,7 @@ namespace effectivecore\modules\user {
     }
   # restore session for authenticated user
     if ($user_id == 0 && isset($_COOKIE[session_name()])) {
-      $session = (new entity_instance('session', [
+      $session = (new instance('session', [
         'id' => $_COOKIE[session_name()]
       ]))->select();
       if ($session) {
@@ -39,7 +39,7 @@ namespace effectivecore\modules\user {
   }
 
   static function destroy($user_id) {
-    (new entity_instance('session', [
+    (new instance('session', [
       'id'      => session_id(),
       'user_id' => $user_id
     ]))->delete();
