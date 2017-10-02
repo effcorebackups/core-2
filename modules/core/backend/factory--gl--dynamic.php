@@ -32,9 +32,9 @@ namespace effectivecore {
     static::$data[$name] = $data;
     $file = new file(static::$directory.static::$type.'--'.$name.'.php');
     if ($info) static::$info[$name] = $info;
-    if (is_writable(static::$directory) &&
-       ($file->is_exist() == false ||
-       ($file->is_exist() && is_writable($file->get_path_full())))) {
+    if (is_writable($file->get_dirs_full()) && ((
+        is_writable($file->get_path_full()) && $file->is_exist()) ||
+                    $file->is_exist() == false)) {
       $file->set_data(
         "<?php".nl.nl."namespace effectivecore { # ".static::$type." for ".$name.nl.nl.($info ?
            factory::data_export($info, '  '.factory::class_get_short_name(static::class).'::$info[\''.$name.'\']') : '').
@@ -47,9 +47,9 @@ namespace effectivecore {
       return true;
     } else {
       messages::add_new(
-        'Can not write file "'.$file->get_file_full().'" to the directory "dynamic"!'.br.
+        'Can not write file "'.$file->get_file_full().'" to the directory "'.$file->get_dirs_relative().'"!'.br.
         'The system cannot save dynamic file and will work slowly!'.br.
-        (!is_writable(static::$directory) ? 'Directory "dynamic" should be writable!'.br : '').
+        (!is_writable($file->get_dirs_full()) ? 'Directory "'.$file->get_dirs_relative().'" should be writable!'.br : '').
         (!is_writable($file->get_path_full()) && $file->is_exist() ? 'File "'.$file->get_file_full().'" should be writable!' : ''), 'warning'
       );
     }
