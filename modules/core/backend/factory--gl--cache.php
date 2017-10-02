@@ -10,6 +10,7 @@ namespace effectivecore {
           abstract class cache_factory extends \effectivecore\dynamic_factory {
 
   static $type = 'cache';
+  static $directory = dir_dynamic.'cache/';
 
   static function set($name, $data, $info = null) {
     if (parent::set($name, $data, $info)) {
