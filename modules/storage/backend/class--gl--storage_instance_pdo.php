@@ -9,7 +9,7 @@ namespace effectivecore {
           use \effectivecore\events_factory as events;
           use \effectivecore\console_factory as console;
           use \effectivecore\messages_factory as messages;
-          class storage_instance_pdo {
+          class storage_pdo {
 
   public $id;
   public $connection;
