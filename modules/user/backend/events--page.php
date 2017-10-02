@@ -19,7 +19,7 @@ namespace effectivecore\modules\user {
   static function on_show_block_admin_roles() {
     $block = new markup('x-block', ['id' => 'admin_roles']);
     $thead = [['ID', 'Title', 'Is embed']];
-    $tbody = entities::get('role')->select_set();
+    $tbody = entities::get('role')->select_instance_set();
     foreach ($tbody as $c_row) {
       $c_row->is_embed = $c_row->is_embed ? 'Yes' : 'No';
     }
@@ -36,7 +36,7 @@ namespace effectivecore\modules\user {
     } else {
       $block = new markup('x-block', ['id' => 'admin_users']);
       $thead = [['ID', 'EMail', 'Password hash', 'Created', 'Is embed', 'Actions']];
-      $tbody = entities::get('user')->select_set();
+      $tbody = entities::get('user')->select_instance_set();
       foreach ($tbody as $c_row) {
         $c_actions = new markup('ul', ['class' => ['actions' => 'actions']]);
         $c_actions->child_insert( new markup('li', [], new markup('a', ['href' => (new url('/user/'.$c_row->id))->get_full()], 'view') ) );
@@ -59,7 +59,7 @@ namespace effectivecore\modules\user {
         $block = new markup('x-block', ['id' => 'user']);
       # get roles
         $roles = [];
-        $db_roles = entities::get('relation_role_ws_user')->select_set(['user_id' => $id]);
+        $db_roles = entities::get('relation_role_ws_user')->select_instance_set(['user_id' => $id]);
         if ($db_roles) {
           foreach ($db_roles as $c_role) {
             $roles[] = $c_role->role_id;

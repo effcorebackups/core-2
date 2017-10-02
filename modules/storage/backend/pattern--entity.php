@@ -21,11 +21,6 @@ namespace effectivecore {
   function get_ids()          {return array_keys((array)$this->indexes['primary']->fields);}
   function get_fields()       {return array_keys((array)$this->fields);}
 
-  function select_set($conditions = [], $order = [], $count = 0, $offset = 0) {
-    $storage = storages::get($this->storage_id);
-    return $storage->select_instance_set($this, $conditions, $order, $count, $offset);
-  }
-
   function install() {
     $storage = storages::get($this->storage_id);
     return $storage->install_entity($this);
@@ -35,5 +30,14 @@ namespace effectivecore {
     $storage = storages::get($this->storage_id);
     return $storage->uninstall_entity($this);
   }
+
+  function select_instance_set($conditions = [], $order = [], $count = 0, $offset = 0) {
+    $storage = storages::get($this->storage_id);
+    return $storage->select_instance_set($this, $conditions, $order, $count, $offset);
+  }
+
+  function select_instance() {}
+  function insert_instance() {}
+  function delete_instance() {}
 
 }}
