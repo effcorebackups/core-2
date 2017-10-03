@@ -57,6 +57,7 @@ namespace effectivecore {
         'Driver error code: '.$errors[1].br.
         'Driver error text: '.$errors[2], 'error'
       );
+      return null;
     }
     switch (substr($query, 0, 6)) {
       case 'SELECT': return $result ? $result->fetchAll(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE, '\effectivecore\instance') : null;
@@ -115,10 +116,10 @@ namespace effectivecore {
 
   function select_instance($instance) {
     $this->init();
-    $table  = $instance->get_entity_name();
-    $ids    = array_intersect_key($instance->get_values(), $instance->get_entity_keys());
-    $where  = factory::data_to_attr($ids, ' and ', '`');
-    $result = $this->query('SELECT * FROM `'.$table.'` WHERE '.$where.' LIMIT 1;');
+    $keys = array_intersect_key($instance->get_values(), $instance->get_entity_keys());
+    $p_table_name = '`'.$instance->get_entity_name().'`';
+    $p_where = factory::data_to_attr($keys, ' and ', '`');
+    $result = $this->query('SELECT * FROM '.$p_table_name.' WHERE '.$p_where.' LIMIT 1;');
     if (isset($result[0])) {
       $instance->values = $result[0]->values;
       return $instance;
@@ -127,13 +128,14 @@ namespace effectivecore {
 
   function insert_instance($instance) {
     $this->init();
-    $result = $this->query(
-      'INSERT INTO `'.$instance->get_entity_name().'` (`'.implode('`, `', array_keys($instance->get_values())).'`) '.
-      'VALUES ("'.implode('", "', $instance->get_values()).'");'
-    );
-    if (!empty($result) && count($instance->get_entity_ids()) == 1) { # only for autoincrement field
-      $id = $instance->get_entity_ids()[0];
-      $instance->values[$id] = $result;
+    $auto_increment = $instance->get_entity_auto_increment();
+    $p_table_name = '`'.$instance->get_entity_name().'`';
+    $p_fields = '`'.implode('`, `', array_keys($instance->get_values())).'`';
+    $p_values = '"'.implode('", "', $instance->get_values()).'"';
+    $result = $this->query('INSERT INTO '.$p_table_name.' ('.$p_fields.') VALUES ('.$p_values.');');
+    if ($result !== null && $auto_increment == null) return $instance;
+    if ($result !== null && $auto_increment != null) {
+      $instance->values[$auto_increment] = $result;
       return $instance;
     }
   }

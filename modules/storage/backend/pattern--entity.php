@@ -21,10 +21,20 @@ namespace effectivecore {
   function get_fields()       {return factory::array_values_map_to_keys(array_keys((array)$this->fields));}
   function get_ids()          {return factory::array_values_map_to_keys(array_keys((array)$this->indexes['primary']->fields));}
 
-  function get_keys() {
+  function get_auto_increment() {
+    foreach ($this->fields as $name => $info) {
+      if (!empty($info->auto_increment)) {
+        return $name;
+      }
+    }
+  }
+
+  function get_keys($only_unique = true) {
     $keys = [];
     foreach ($this->indexes as $c_index) {
-      if ($c_index->type == 'primary key' || $c_index->type == 'unique key') {
+      if ($c_index->type == 'unique key'  ||
+          $c_index->type == 'primary key' ||
+         ($c_index->type == 'key' && !$only_unique)) {
         $keys += $c_index->fields;
       }
     }
