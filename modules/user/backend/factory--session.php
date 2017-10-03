@@ -11,9 +11,9 @@ namespace effectivecore\modules\user {
           use \effectivecore\modules\user\users_factory as users;
           abstract class session_factory {
 
-  static function init($user_id = 0) {
-  # renew session for user with selected id
-    if ($user_id != 0) {
+  static function init($user_id = null) {
+  # create session after login or register new user
+    if ($user_id != null) {
       session_start();
       (new instance('session', [
         'id'      => session_id(),
@@ -22,13 +22,13 @@ namespace effectivecore\modules\user {
       ]))->insert();
     }
   # restore session for authenticated user
-    if ($user_id == 0 && isset($_COOKIE[session_name()])) {
+    if ($user_id == null && isset($_COOKIE[session_name()])) {
       $session = (new instance('session', [
         'id' => $_COOKIE[session_name()]
       ]))->select();
       if ($session) {
-        $user_id = $session->user_id;
         session_start();
+        $user_id = $session->user_id;
       } else {
       # remove lost or fake sid in browser
         setcookie(session_name(), '', 0, '/');

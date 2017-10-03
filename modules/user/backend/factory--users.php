@@ -11,17 +11,17 @@ namespace effectivecore\modules\user {
 
   static $data;
 
-  static function init($id = 0) {
+  static function init($id = null) {
     static::$data = new \stdClass();
     static::$data->id = 0;
     static::$data->roles = ['anonymous' => 'anonymous'];
   # load user from db
-    if ($id) {
+    if ($id !== null) {
       $user = (new instance('user', ['id' => $id]))->select();
       if ($user) {
         static::$data = (object)($user->get_values());
         static::$data->roles = ['registered' => 'registered'];
-        foreach (entities::get('relation_role_ws_user')->select_instance_set(['user_id' => $id]) as $c_role) {
+        foreach (entities::get('relation_role_ws_user')->select_instance_set(['user_id' => $user->id]) as $c_role) {
           static::$data->roles[$c_role->role_id] = $c_role->role_id;
         }
       }
