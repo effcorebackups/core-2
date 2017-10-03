@@ -77,9 +77,8 @@ namespace effectivecore\modules\user {
       case 'login':
         $user = (new instance('user', [
           'email' => $values['email']
-        ]))->select(['email']);
+        ]))->select();
         if ($user &&
-            $user->id &&
             $user->password_hash === sha1($values['password'])) {
           session::init($user->id);
           urls::go('/user/'.$user->id);
@@ -97,7 +96,7 @@ namespace effectivecore\modules\user {
       case 'register':
         $user = (new instance('user', [
           'email' => $values['email']
-        ]))->select(['email']);
+        ]))->select();
         if ($user) {
           messages::add_new(
             translations::get('User with this email was already registered!'), 'error'
