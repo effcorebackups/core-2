@@ -26,7 +26,8 @@ namespace effectivecore\modules\user {
       $session = (new instance('session', [
         'id' => $_COOKIE[session_name()]
       ]))->select();
-      if ($session) {
+      if ($session &&
+          $session->user_id) {
         session_start();
         $user_id = $session->user_id;
       } else {
