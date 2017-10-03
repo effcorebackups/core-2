@@ -78,7 +78,8 @@ namespace effectivecore\modules\user {
         $user = (new instance('user', [
           'email' => $values['email']
         ]))->select();
-        if ($user &&
+        if ($user     &&
+            $user->id &&
             $user->password_hash === sha1($values['password'])) {
           session::init($user->id);
           urls::go('/user/'.$user->id);
@@ -107,7 +108,8 @@ namespace effectivecore\modules\user {
             'password_hash' => sha1($values['password']),
             'created'       => factory::datetime_get_curent()
           ]))->insert();
-          if ($user->id) {
+          if ($user &&
+              $user->id) {
             session::init($user->id);
             urls::go('/user/'.$user->id);
           } else {
