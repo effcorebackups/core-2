@@ -30,7 +30,7 @@ namespace effectivecore\modules\user {
         $user_id = $session->user_id;
         session_start();
       } else {
-      # remove lost or substituted sid in browser
+      # remove lost or fake sid in browser
         setcookie(session_name(), '', 0, '/');
       }
     }
