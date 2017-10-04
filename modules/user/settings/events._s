@@ -1,41 +1,53 @@
 events
   on_module_start
   - user
+      for: user
       handler: \effectivecore\modules\user\events_module::on_start
       weight: -80
   on_module_install
   - user
+      for: user
       handler: \effectivecore\modules\user\events_module::on_install
       weight: 0
   on_form_validate
   - user_login
+      for: user_login
       handler: \effectivecore\events_form::on_validate
       weight: 0
   - user_logout
+      for: user_logout
       handler: \effectivecore\events_form::on_validate
       weight: 0
   - user_n_delete
+      for: user_n_delete
       handler: \effectivecore\events_form::on_validate
       weight: 0
   - user_n_edit
+      for: user_n_edit
       handler: \effectivecore\events_form::on_validate
       weight: 0
   - user_registration
+      for: user_registration
       handler: \effectivecore\events_form::on_validate
       weight: 0
   on_form_submit
   - user_login
+      for: user_login
       handler: \effectivecore\modules\user\events_form::on_submit_user_login
       weight: 0
   - user_logout
+      for: user_logout
       handler: \effectivecore\modules\user\events_form::on_submit_user_logout
       weight: 0
   - user_n_delete
+      for: user_n_delete
       handler: \effectivecore\modules\user\events_form::on_submit_user_n_delete
       weight: 0
   - user_n_edit
+      for: user_n_edit
       handler: \effectivecore\modules\user\events_form::on_submit_user_n_edit
       weight: 0
   - user_registration
+      for: user_registration
       handler: \effectivecore\modules\user\events_form::on_submit_user_register
       weight: 0

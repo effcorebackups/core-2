@@ -1,17 +1,21 @@
 events
   on_module_start
   - demo
+      for: demo
       handler: \effectivecore\modules\develop\events_module::on_start
       weight: 0
   on_form_init
   - form_demo
+      for: form_demo
       handler: \effectivecore\modules\develop\events_form::on_init_demo
       weight: 0
   on_form_validate
   - form_demo
+      for: form_demo
       handler: \effectivecore\events_form::on_validate
       weight: 0
   on_form_submit
   - form_demo
+      for: form_demo
       handler: \effectivecore\modules\develop\events_form::on_submit_demo
       weight: 0
