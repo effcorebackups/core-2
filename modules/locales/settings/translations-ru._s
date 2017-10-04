@@ -116,6 +116,7 @@ translations
   - No: Нет
   - Number: Число
   - Object: Объект
+  - Old password is incorrect!: Старый пароль неверен!
   - Old password: Старый пароль
   - Page: Страница
   - Parameter: Параметр
@@ -157,6 +158,7 @@ translations
   - Text: Текст
   - Textarea: Текстовая область
   - the event system was initialized: система событий была инициализирована
+  - The new password must be different from the old password!: Новый пароль должен отличаться от старого пароля!
   - the storage "%%_name" was initialized: хранилище "%%_name" было инициализировано
   - the storage "%%_storage" cache for group "%%_group" will be load: кэш хранилища "%%_storage" для группы "%%_group" будет загружен
   - The value was trimmed to the required length!: Значение было обрезано до требуемой длинны!

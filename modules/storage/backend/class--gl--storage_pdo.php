@@ -61,9 +61,9 @@ namespace effectivecore {
     }
     switch (substr($query, 0, 6)) {
       case 'SELECT': return $result ? $result->fetchAll(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE, '\effectivecore\instance') : null;
+      case 'INSERT': return $this->connection->lastInsertId();
       case 'UPDATE': return $result->rowCount();
       case 'DELETE': return $result->rowCount();
-      case 'INSERT': return $this->connection->lastInsertId();
     }
   }
 
@@ -142,11 +142,11 @@ namespace effectivecore {
 
   function update_instance($instance) {
     $this->init();
-    return $this->query(
-      'UPDATE `'.$instance->get_entity_name().'` '.
-      'SET '.factory::data_to_attr($instance->get_values(), ', ', '`').' '.
-      'WHERE '.factory::data_to_attr($instance->get_values($instance->get_entity_ids()), ' and ', '`').';'
-    );
+    $keys = array_intersect_key($instance->get_values(), $instance->get_entity_keys());
+    $p_table_name = '`'.$instance->get_entity_name().'`';
+    $p_changes = factory::data_to_attr($instance->get_values(), ', ', '`');
+    $p_where = factory::data_to_attr($keys, ' and ', '`');
+    return $this->query('UPDATE '.$p_table_name.' SET '.$p_changes.' WHERE '.$p_where.';');
   }
 
   function delete_instance($instance) {

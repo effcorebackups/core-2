@@ -22,7 +22,6 @@ forms
                 - minlength: 5
                 - maxlength: 255
                 - autocomplete: off
-                - disabled: disabled
         - field_password_new|form_field
             title: New password
             children

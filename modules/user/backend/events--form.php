@@ -18,21 +18,21 @@ namespace effectivecore\modules\user {
           abstract class events_form extends \effectivecore\events_form {
 
   static function on_submit_user_n_delete($form, $fields, &$values) {
-    $user_id = pages::$args['user_id'];
+    $id = pages::$args['user_id'];
     switch ($form->clicked_button_name) {
       case 'delete':
         $result = (new instance('user', [
-          'id' => $user_id,
+          'id' => $id,
         ]))->delete();
         if ($result) {
-          $session_set = entities::get('session')->select_instance_set(['user_id' => $user_id]);
+          $session_set = entities::get('session')->select_instance_set(['user_id' => $id]);
           if ($session_set) {
             foreach ($session_set as $c_session) {
               $c_session->delete();
             }
           }
           messages::add_new(
-            translations::get('User with ID = %%_id was deleted.', ['id' => $user_id])
+            translations::get('User with ID = %%_id was deleted.', ['id' => $id])
           );
           urls::go(urls::get_back_url() ?: '/admin/users');
         } else {
@@ -48,18 +48,31 @@ namespace effectivecore\modules\user {
   }
 
   static function on_submit_user_n_edit($form, $fields, &$values) {
-    $user_id = pages::$args['user_id'];
+    $id = pages::$args['user_id'];
     switch ($form->clicked_button_name) {
       case 'save':
-        $result = (new instance('user', [
-          'id'            => $user_id,
-          'password_hash' => sha1($values['password_new']),
-        ]))->update();
-        if ($result) {
+        $user = (new instance('user', ['id' => $id]))->select();
+      # check password
+        if ($user->password_hash != sha1($values['password_old'])) {
           messages::add_new(
-            translations::get('Data of user with ID = %%_id was updated.', ['id' => $user_id])
+            translations::get('Old password is incorrect!', ['id' => $id]), 'error'
           );
-          urls::go(urls::get_back_url() ?: '/user/'.$user_id);
+          return;
+        }
+        if ($values['password_new'] ==
+            $values['password_old']) {
+          messages::add_new(
+            translations::get('The new password must be different from the old password!', ['id' => $id]), 'error'
+          );
+          return;
+        }
+      # change password
+        $user->password_hash = sha1($values['password_new']);
+        if ($user->update() === 1) {
+          messages::add_new(
+            translations::get('Data of user with ID = %%_id was updated.', ['id' => $id])
+          );
+          urls::go(urls::get_back_url() ?: '/user/'.$id);
         } else {
           messages::add_new(
             translations::get('Data was not updated!'), 'error'
@@ -67,7 +80,7 @@ namespace effectivecore\modules\user {
         }
         break;
       case 'cancel':
-        urls::go(urls::get_back_url() ?: '/user/'.$user_id);
+        urls::go(urls::get_back_url() ?: '/user/'.$id);
         break;
     }
   }
