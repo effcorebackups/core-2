@@ -126,7 +126,7 @@ namespace effectivecore {
     }
   }
 
-  function insert_instance($instance) { # return: null | instance | instance+lastInsertId
+  function insert_instance($instance) { # return: null | instance | instance + new_id
     $this->init();
     $auto_increment = $instance->get_entity_auto_increment();
     $p_table_name = '`'.$instance->get_entity_name().'`';
@@ -140,16 +140,19 @@ namespace effectivecore {
     }
   }
 
-  function update_instance($instance) { # return: null | (int)rowCount == 0 | (int)rowCount == 1
+  function update_instance($instance) { # return: null | instance
     $this->init();
     $keys = array_intersect_key($instance->get_values(), $instance->get_entity_keys());
     $p_table_name = '`'.$instance->get_entity_name().'`';
     $p_changes = factory::data_to_attr($instance->get_values(), ', ', '`');
     $p_where = factory::data_to_attr($keys, ' and ', '`');
-    return $this->query('UPDATE '.$p_table_name.' SET '.$p_changes.' WHERE '.$p_where.';');
+    $row_count = $this->query('UPDATE '.$p_table_name.' SET '.$p_changes.' WHERE '.$p_where.' LIMIT 1;');
+    if ($row_count === 1) {
+      return $instance;
+    }
   }
 
-  function delete_instance($instance) { # return: null | instance
+  function delete_instance($instance) { # return: null | instance + empty(values)
     $this->init();
     $keys = array_intersect_key($instance->get_values(), $instance->get_entity_keys());
     $p_table_name = '`'.$instance->get_entity_name().'`';

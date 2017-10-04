@@ -68,7 +68,7 @@ namespace effectivecore\modules\user {
         }
       # change password
         $user->password_hash = sha1($values['password_new']);
-        if ($user->update() === 1) {
+        if ($user->update()) {
           messages::add_new(
             translations::get('Data of user with ID = %%_id was updated.', ['id' => $id])
           );
