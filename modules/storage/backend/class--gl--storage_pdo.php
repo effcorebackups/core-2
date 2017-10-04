@@ -114,7 +114,7 @@ namespace effectivecore {
     return $result;
   }
 
-  function select_instance($instance) {
+  function select_instance($instance) { # return: null | instance
     $this->init();
     $keys = array_intersect_key($instance->get_values(), $instance->get_entity_keys());
     $p_table_name = '`'.$instance->get_entity_name().'`';
@@ -126,21 +126,21 @@ namespace effectivecore {
     }
   }
 
-  function insert_instance($instance) {
+  function insert_instance($instance) { # return: null | instance | instance+lastInsertId
     $this->init();
     $auto_increment = $instance->get_entity_auto_increment();
     $p_table_name = '`'.$instance->get_entity_name().'`';
     $p_fields = '`'.implode('`, `', array_keys($instance->get_values())).'`';
     $p_values = '"'.implode('", "', $instance->get_values()).'"';
-    $result = $this->query('INSERT INTO '.$p_table_name.' ('.$p_fields.') VALUES ('.$p_values.');');
-    if ($result !== null && $auto_increment == null) return $instance;
-    if ($result !== null && $auto_increment != null) {
-      $instance->values[$auto_increment] = $result;
+    $new_id = $this->query('INSERT INTO '.$p_table_name.' ('.$p_fields.') VALUES ('.$p_values.');');
+    if ($new_id !== null && $auto_increment == null) return $instance;
+    if ($new_id !== null && $auto_increment != null) {
+      $instance->values[$auto_increment] = $new_id;
       return $instance;
     }
   }
 
-  function update_instance($instance) {
+  function update_instance($instance) { # return: null | (int)rowCount == 0 | (int)rowCount == 1
     $this->init();
     $keys = array_intersect_key($instance->get_values(), $instance->get_entity_keys());
     $p_table_name = '`'.$instance->get_entity_name().'`';
@@ -149,13 +149,13 @@ namespace effectivecore {
     return $this->query('UPDATE '.$p_table_name.' SET '.$p_changes.' WHERE '.$p_where.';');
   }
 
-  function delete_instance($instance) {
+  function delete_instance($instance) { # return: null | instance
     $this->init();
-    $result = $this->query(
-      'DELETE FROM `'.$instance->get_entity_name().'` '.
-      'WHERE '.factory::data_to_attr($instance->get_values($instance->get_entity_ids()), ' and ', '`').';'
-    );
-    if ($result) {
+    $keys = array_intersect_key($instance->get_values(), $instance->get_entity_keys());
+    $p_table_name = '`'.$instance->get_entity_name().'`';
+    $p_where = factory::data_to_attr($keys, ' and ', '`');
+    $row_count = $this->query('DELETE FROM '.$p_table_name.' WHERE '.$p_where.' LIMIT 1;');
+    if ($row_count === 1) {
       $instance->set_values([]);
       return $instance;
     }
