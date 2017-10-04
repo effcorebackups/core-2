@@ -40,9 +40,9 @@ namespace effectivecore {
     }
   }
 
-  function transaction_begin()     {$this->$connection->beginTransaction();}
-  function transaction_roll_back() {$this->$connection->rollBack();}
-  function transaction_commit()    {$this->$connection->commit();}
+  function transaction_begin()     {$this->init(); $this->connection->beginTransaction();}
+  function transaction_roll_back() {$this->init(); $this->connection->rollBack();}
+  function transaction_commit()    {$this->init(); $this->connection->commit();}
 
   function query($query) {
     $this->queries[] = $query;
