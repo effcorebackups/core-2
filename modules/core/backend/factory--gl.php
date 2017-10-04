@@ -155,17 +155,12 @@ namespace effectivecore {
   # prepare weight for stable sorting
     $c_weight = 0;
     foreach ($array as $c_item) {
-      $c_item->weight = $c_item->weight ?: $c_weight += .000001;
+      $c_item->weight = $c_item->weight ?: $c_weight += .0002;
     }
   # sorting
     uasort($array, function($a, $b){
       return $a->weight == $b->weight ? 0 : ($a->weight < $b->weight ? -1 : 1);
     });
-  # restore weight
-    $c_weight = 0;
-    foreach ($array as $c_item) {
-      $c_item->weight = $c_item->weight > .0001 ?: 0;
-    }
     return $array;
   }
 
