@@ -217,10 +217,9 @@ namespace effectivecore {
       case 'not_found'     : header('HTTP/1.0 404 Not Found'); break;
     }
     if ($message) {
-      print $message;
-      print '<style>'.
-              'body {padding: 30px; font-family: Arial; font-size: 24px; text-align: center}'.
-            '</style>';
+      print (new template('page_simple', [
+        'message' => $message
+      ]))->render();
     }
     exit();
   }
