@@ -17,6 +17,10 @@ namespace effectivecore\modules\user {
           use \effectivecore\modules\user\session_factory as session;
           abstract class events_form extends \effectivecore\events_form {
 
+  ###########################
+  ### form: user_n_delete ###
+  ###########################
+
   static function on_submit_user_n_delete($form, $fields, &$values) {
     $id = pages::$args['user_id'];
     switch ($form->clicked_button_name) {
@@ -47,8 +51,31 @@ namespace effectivecore\modules\user {
     }
   }
 
+  #########################
+  ### form: user_n_edit ###
+  #########################
+
   static function on_validate_user_n_edit($form, $fields, &$values) {
-    messages::add_new(translations::get('test'), 'error');
+    if (!count($form->errors)) {
+      $id = pages::$args['user_id'];
+      switch ($form->clicked_button_name) {
+        case 'save':
+          $user = (new instance('user', ['id' => $id]))->select();
+          if ($user->password_hash !== sha1($values['password_old'])) {
+            $form->add_error('fieldset_default/field_password_old/default',
+              translations::get('Old password is incorrect!')
+            );
+            return;
+          }
+          if ($values['password_new'] ==
+              $values['password_old']) {
+            $form->add_error('fieldset_default/field_password_new/default',
+              translations::get('The new password must be different from the old password!')
+            );
+            return;
+          }
+      }
+    }
   }
 
   static function on_submit_user_n_edit($form, $fields, &$values) {
@@ -56,21 +83,6 @@ namespace effectivecore\modules\user {
     switch ($form->clicked_button_name) {
       case 'save':
         $user = (new instance('user', ['id' => $id]))->select();
-      # check password
-        if ($user->password_hash != sha1($values['password_old'])) {
-          messages::add_new(
-            translations::get('Old password is incorrect!', ['id' => $id]), 'error'
-          );
-          return;
-        }
-        if ($values['password_new'] ==
-            $values['password_old']) {
-          messages::add_new(
-            translations::get('The new password must be different from the old password!', ['id' => $id]), 'error'
-          );
-          return;
-        }
-      # change password
         $user->password_hash = sha1($values['password_new']);
         if ($user->update()) {
           messages::add_new(
@@ -88,6 +100,10 @@ namespace effectivecore\modules\user {
         break;
     }
   }
+
+  ########################
+  ### form: user_login ###
+  ########################
 
   static function on_submit_user_login($form, $fields, &$values) {
     switch ($form->clicked_button_name) {
@@ -108,6 +124,10 @@ namespace effectivecore\modules\user {
         break;
     }
   }
+
+  ###########################
+  ### form: user_register ###
+  ###########################
 
   static function on_submit_user_register($form, $fields, &$values) {
     switch ($form->clicked_button_name) {
@@ -138,6 +158,10 @@ namespace effectivecore\modules\user {
         break;
     }
   }
+
+  #########################
+  ### form: user_logout ###
+  #########################
 
   static function on_submit_user_logout($form, $fields, &$values) {
     switch ($form->clicked_button_name) {

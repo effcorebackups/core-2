@@ -8,6 +8,10 @@ namespace effectivecore\modules\develop {
           use \effectivecore\messages_factory as messages;
           abstract class events_form extends \effectivecore\events_form {
 
+  ##################
+  ### form: demo ###
+  ##################
+
   static function on_init_demo($form, $fields) {
     $fields['fieldset_default/field_select_macro']->option_insert('Option 2.5 (inserted + disabled from init)', 'option_2_5', ['disabled' => 'disabled'], 'group_2_1');
     $fields['fieldset_default/field_select_macro']->option_insert('Option 2.6 (inserted from init)', 'option_2_6', [], 'group_2_1');
