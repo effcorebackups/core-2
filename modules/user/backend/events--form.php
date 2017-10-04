@@ -47,6 +47,10 @@ namespace effectivecore\modules\user {
     }
   }
 
+  static function on_validate_user_n_edit($form, $fields, &$values) {
+    messages::add_new(translations::get('test'), 'error');
+  }
+
   static function on_submit_user_n_edit($form, $fields, &$values) {
     $id = pages::$args['user_id'];
     switch ($form->clicked_button_name) {

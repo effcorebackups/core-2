@@ -10,7 +10,7 @@ events
       handler: \effectivecore\modules\page\events_form::on_init_admin_decoration
       weight: 0
   on_form_validate
-  - admin_decoration
+  - admin_decoration_default
       for: admin_decoration
       handler: \effectivecore\events_form::on_validate
       weight: 0

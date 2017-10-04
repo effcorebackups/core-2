@@ -1,6 +1,6 @@
 events
   on_form_validate
-  - installation
+  - installation_default
       for: installation
       handler: \effectivecore\events_form::on_validate
       weight: 0

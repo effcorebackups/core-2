@@ -10,23 +10,27 @@ events
       handler: \effectivecore\modules\user\events_module::on_install
       weight: 0
   on_form_validate
-  - user_login
+  - user_login_default
       for: user_login
       handler: \effectivecore\events_form::on_validate
       weight: 0
-  - user_logout
+  - user_logout_default
       for: user_logout
       handler: \effectivecore\events_form::on_validate
       weight: 0
-  - user_n_delete
+  - user_n_delete_default
       for: user_n_delete
+      handler: \effectivecore\events_form::on_validate
+      weight: 0
+  - user_n_edit_default
+      for: user_n_edit
       handler: \effectivecore\events_form::on_validate
       weight: 0
   - user_n_edit
       for: user_n_edit
-      handler: \effectivecore\events_form::on_validate
-      weight: 0
-  - user_registration
+      handler: \effectivecore\modules\user\events_form::on_validate_user_n_edit
+      weight: 1
+  - user_registration_default
       for: user_registration
       handler: \effectivecore\events_form::on_validate
       weight: 0
