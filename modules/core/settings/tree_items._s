@@ -1,7 +1,7 @@
 tree_items
 - main_home|tree_item
     id: main_home
-    parent_type: tree
+    parent_is_tree: true
     parent_id: main
     parent_npath: trees/core/main
     title: Home
@@ -11,7 +11,7 @@ tree_items
       - home: home
 - main_admin|tree_item
     id: main_admin
-    parent_type: tree
+    parent_is_tree: true
     parent_id: main
     parent_npath: trees/core/main
     title: Administer

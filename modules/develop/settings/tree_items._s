@@ -1,7 +1,7 @@
 tree_items
 - main_develop|tree_item
     id: main_develop
-    parent_type: tree
+    parent_is_tree: true
     parent_id: main
     parent_npath: trees/core/main
     title: Develop

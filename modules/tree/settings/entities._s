@@ -30,6 +30,11 @@ entities
         unsigned: true
         not_null: true
         auto_increment: true
+      parent_is_tree
+        type: int
+        size: 1
+        not_null: true
+        default: 0
       parent_id
         type: int
         size: 11
