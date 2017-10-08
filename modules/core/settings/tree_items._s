@@ -1,6 +1,7 @@
 tree_items
 - main_home|tree_item
     id: main_home
+    parent_id: tree:main
     parent_npath: trees/core/main
     title: Home
     attributes
@@ -9,6 +10,7 @@ tree_items
       - home: home
 - main_admin|tree_item
     id: main_admin
+    parent_id: tree:main
     parent_npath: trees/core/main
     title: Administer
     attributes
@@ -19,6 +21,7 @@ tree_items
       - admins: admins
 - main_admin_modules|tree_item
     id: main_admin_modules
+    parent_id: main_admin
     parent_npath: tree_items/core/main_admin
     title: Modules
     attributes
