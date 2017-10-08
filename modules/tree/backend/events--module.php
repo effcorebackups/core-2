@@ -6,23 +6,22 @@
 
 namespace effectivecore\modules\tree {
           use \effectivecore\factory;
+          use \effectivecore\trees_factory as trees;
           use \effectivecore\messages_factory as messages;
           use \effectivecore\translations_factory as translations;
           use \effectivecore\modules\storage\storages_factory as storages;
           abstract class events_module extends \effectivecore\events_module {
 
   static function on_start() {
-  # link all parents for tree_items
-    foreach (storages::get('settings')->select_group('tree_items') as $c_items) {
-      foreach ($c_items as $item_id => $c_item) {
-        if (!empty($c_item->parent_npath)) {
-          $c_parent = storages::get('settings')->select_by_npath($c_item->parent_npath);
-          if ($c_parent) {
-            $c_parent->children[$item_id] = $c_item;
-          }
-        }
+    trees::init();
+    foreach(trees::get_tree_items() as $c_item) {
+      if ($c_item->parent_id) {
+        $c_parent = !empty($c_item->parent_is_tree) ?
+           trees::get_tree($c_item->parent_id) :
+           trees::get_tree_item($c_item->parent_id);
+        $c_parent->child_insert($c_item, $c_item->id);
       }
-    }
+    };
   }
 
   static function on_install() {

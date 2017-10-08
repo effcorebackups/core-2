@@ -3,7 +3,6 @@ tree_items
     id: main_home
     parent_is_tree: true
     parent_id: main
-    parent_npath: trees/core/main
     title: Home
     attributes
     - href: /
@@ -13,7 +12,6 @@ tree_items
     id: main_admin
     parent_is_tree: true
     parent_id: main
-    parent_npath: trees/core/main
     title: Administer
     attributes
     - class
@@ -24,7 +22,6 @@ tree_items
 - main_admin_modules|tree_item
     id: main_admin_modules
     parent_id: main_admin
-    parent_npath: tree_items/core/main_admin
     title: Modules
     attributes
     - href: /admin/modules

@@ -3,7 +3,6 @@ tree_items
     id: user_anonymous
     parent_is_tree: true
     parent_id: user
-    parent_npath: trees/user/user
     title: User
     attributes
     - class
@@ -14,7 +13,6 @@ tree_items
 - user_login|tree_item
     id: user_login
     parent_id: user_anonymous
-    parent_npath: tree_items/user/user_anonymous
     title: login
     weight: -80
     attributes
@@ -27,7 +25,6 @@ tree_items
 - user_registration|tree_item
     id: user_registration
     parent_id: user_anonymous
-    parent_npath: tree_items/user/user_anonymous
     title: registration
     weight: -60
     attributes
@@ -41,7 +38,6 @@ tree_items
     id: user_n
     parent_is_tree: true
     parent_id: user
-    parent_npath: trees/user/user
     title: User %%_user_email_name
     attributes
     - href: /user/%%_user_id
@@ -54,7 +50,6 @@ tree_items
 - user_n_edit|tree_item
     id: user_n_edit
     parent_id: user_n
-    parent_npath: tree_items/user/user_n
     title: edit
     weight: -100
     attributes
@@ -68,7 +63,6 @@ tree_items
 - user_logout|tree_item
     id: user_logout
     parent_id: user_n
-    parent_npath: tree_items/user/user_n
     title: logout
     weight: -40
     attributes
@@ -81,7 +75,6 @@ tree_items
 - main_admin_roles|tree_item
     id: main_admin_roles
     parent_id: main_admin
-    parent_npath: tree_items/core/main_admin
     title: Roles
     attributes
     - href: /admin/roles
@@ -93,7 +86,6 @@ tree_items
 - main_admin_users|tree_item
     id: main_admin_users
     parent_id: main_admin
-    parent_npath: tree_items/core/main_admin
     title: Users
     attributes
     - href: /admin/users

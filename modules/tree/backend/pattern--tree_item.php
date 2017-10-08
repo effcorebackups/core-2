@@ -14,7 +14,6 @@ namespace effectivecore {
   public $id;
   public $parent_is_tree;
   public $parent_id;
-  public $parent_npath = '';
   public $title = '';
   public $template = 'tree_item';
   public $template_children = 'tree_item_children';

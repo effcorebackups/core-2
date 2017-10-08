@@ -2,7 +2,6 @@ tree_items
 - main_admin_decoration|tree_item
     id: main_admin_decoration
     parent_id: main_admin
-    parent_npath: tree_items/core/main_admin
     title: Decoration
     attributes
     - href: /admin/decoration
