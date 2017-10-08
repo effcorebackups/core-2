@@ -1,5 +1,6 @@
 trees
 - main|tree
+    id: main
     title: Main menu
     weight: 2
     attributes

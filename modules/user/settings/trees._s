@@ -1,5 +1,6 @@
 trees
 - user|tree
+    id: user
     title: User menu
     weight: 1
     attributes

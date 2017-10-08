@@ -7,6 +7,7 @@
 namespace effectivecore {
           class tree extends \effectivecore\node {
 
+  public $id;
   public $title = '';
   public $template = 'tree';
 
