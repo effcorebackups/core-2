@@ -1,7 +1,8 @@
 tree_items
 - user_anonymous|tree_item
     id: user_anonymous
-    parent_id: tree:user
+    parent_type: tree
+    parent_id: user
     parent_npath: trees/user/user
     title: User
     attributes
@@ -38,7 +39,8 @@ tree_items
       - anonymous: anonymous
 - user_n|tree_item
     id: user_n
-    parent_id: tree:user
+    parent_type: tree
+    parent_id: user
     parent_npath: trees/user/user
     title: User %%_user_email_name
     attributes

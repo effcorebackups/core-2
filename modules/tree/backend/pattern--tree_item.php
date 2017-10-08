@@ -12,6 +12,8 @@ namespace effectivecore {
           class tree_item extends \effectivecore\node {
 
   public $id;
+  public $parent_id;
+  public $parent_type;
   public $parent_npath = '';
   public $title = '';
   public $template = 'tree_item';
