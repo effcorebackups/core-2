@@ -1,5 +1,6 @@
 tree_items
 - main_admin_decoration|tree_item
+    id: main_admin_decoration
     parent_npath: tree_items/core/main_admin
     title: Decoration
     attributes

@@ -11,6 +11,7 @@ namespace effectivecore {
           use \effectivecore\modules\user\access_factory as access;
           class tree_item extends \effectivecore\node {
 
+  public $id;
   public $parent_npath = '';
   public $title = '';
   public $template = 'tree_item';

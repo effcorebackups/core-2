@@ -1,5 +1,6 @@
 tree_items
 - main_develop|tree_item
+    id: main_develop
     parent_npath: trees/core/main
     title: Develop
     attributes
@@ -9,6 +10,7 @@ tree_items
       roles
       - admins: admins
 - main_develop_demo|tree_item
+    id: main_develop_demo
     parent_npath: tree_items/develop/main_develop
     title: Demo
     attributes
