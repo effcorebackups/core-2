@@ -5,6 +5,39 @@ forms
     - novalidate: novalidate
     - method: post
     children
+    - fieldset_default|form_container
+        tag_name: fieldset
+        title: Storage params
+        title_tag_name: legend
+        children
+      # driver
+        - field_driver|form_field_select
+            title: Driver
+            select_attributes
+            - name: driver
+            - required: required
+            values
+            - not_selected: - select -
+            - mysql: MySQL
+            - pgsql: PostgreSQL
+            - sqlte: SQLite
+            disabled
+            - pgsql: pgsql
+            - sqlte: sqlte
+      # database name
+        - field_database|form_field
+            title: Database name
+            children
+            - default|markup_simple
+                tag_name: input
+                attributes
+                - type: text
+                - name: database_name
+                - required: required
+                - value: main
+                - minlength: 1
+                - maxlength: 128
+                - pattern: [a-zA-Z0-9\-\_]+
     - button_install|markup
         tag_name: button
         attributes

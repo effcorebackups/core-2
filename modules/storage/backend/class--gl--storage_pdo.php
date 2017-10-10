@@ -13,7 +13,7 @@ namespace effectivecore {
 
   public $id;
   public $connection;
-  public $directory_name;
+  public $database_name;
   public $host_name;
   public $user_name;
   public $password;
@@ -27,7 +27,7 @@ namespace effectivecore {
         events::start('on_storage_init_before', 'pdo', [&$this]);
         $this->connection = new \PDO($this->driver.':host='.
                                      $this->host_name.';dbname='.
-                                     $this->directory_name,
+                                     $this->database_name,
                                      $this->user_name,
                                      $this->password);
         events::start('on_storage_init_after', 'pdo', [&$this]);

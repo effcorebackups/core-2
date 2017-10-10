@@ -3,6 +3,7 @@ entities_instances
     entity_name: user
     values
     - id: 1
+    - login: admin
     - email: admin@example.com
     - password_hash: 8cb2237d0679ca88db6464eac60da96345513964
     - is_embed: 1
@@ -10,6 +11,7 @@ entities_instances
     entity_name: user
     values
     - id: 2
+    - login: user
     - email: user@example.com
     - password_hash: 8cb2237d0679ca88db6464eac60da96345513964
 - role_anonymous|instance

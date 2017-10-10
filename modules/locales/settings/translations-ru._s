@@ -33,6 +33,7 @@ translations
   - Current language: Текущий язык
   - Data of user with ID = %%_id was updated.: Данные пользователя с ID = %%_id были обновлены.
   - Data was not updated!: Данные не были обновлены!
+  - Database name: Имя базы данных
   - Date: Дата
   - Decoration: Оформление
   - Delete profile %%_user_email_context{4}?: Удалить профиль %%_user_email_context{4}?
@@ -41,6 +42,7 @@ translations
   - Description: Описание
   - Develop: Разработка
   - disabled: выкл.
+  - Driver: Драйвер
   - Dynamic block: Динамический блок
   - Edit profile %%_user_email_context{2}: Редактировать профиль %%_user_email_context{2}
   - Edit profile: Редактировать профиль
@@ -149,6 +151,7 @@ translations
   - State: Состояние
   - State.: Сост.
   - Static block: Статический блок
+  - Storage params: Параметры хранилища
   - storage: хранилище
   - Storage: Хранилище
   - submit: отправить

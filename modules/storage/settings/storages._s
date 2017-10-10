@@ -2,7 +2,7 @@ storages
 - storage_sql_dpo|storage_pdo
     id: db
     driver: mysql
-    directory_name: effectivecore
+    database_name: effectivecore
     host_name: 127.0.0.1
     user_name: root
     password: 123
