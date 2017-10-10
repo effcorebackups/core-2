@@ -6,9 +6,7 @@
 
 namespace effectivecore\modules\user {
           use \effectivecore\factory as factory;
-          use \effectivecore\urls_factory as urls;
           use \effectivecore\instance as instance;
-          use \effectivecore\entities_factory as entities;
           use \effectivecore\modules\user\users_factory as users;
           abstract class events_access extends \effectivecore\events_access {
 
