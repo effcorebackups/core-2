@@ -73,12 +73,23 @@ forms
                 tag_name: input
                 attributes
                 - type: text
-                - name: user_name
+                - name: user
                 - required: required
                 - value: root
                 - minlength: 1
                 - maxlength: 64
                 - pattern: [a-zA-Z0-9-_]+
+      # password
+        - field_password|form_field
+            title: Password
+            children
+            - default|markup_simple
+                tag_name: input
+                attributes
+                - type: password
+                - name: password
+                - maxlength: 255
+                - autocomplete: off
     - button_install|markup
         tag_name: button
         attributes
