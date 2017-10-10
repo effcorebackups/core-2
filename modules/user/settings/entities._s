@@ -14,6 +14,10 @@ entities
         type: varchar
         size: 255
         not_null: true
+      login
+        type: varchar
+        size: 255
+        not_null: true
       password_hash
         type: varchar
         size: 255
@@ -35,6 +39,10 @@ entities
         type: unique key
         fields
         - email: email
+    - unique_login
+        type: unique key
+        fields
+        - login: login
 - session|entity
     name: session
     storage_id: db
