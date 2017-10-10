@@ -55,7 +55,7 @@ namespace effectivecore {
     $changes_d = dynamic::get('changes') ?: [];
     $changes_s = isset($data_orig['changes']) ? $data_orig['changes'] : [];
   # apply all changes to original settings and get final settings
-    $data = factory::array_clone_deep($data_orig);
+    $data = factory::array_deep_clone($data_orig);
     static::changes_apply_to_settings($changes_d, $data);
     static::changes_apply_to_settings($changes_s, $data);
     unset($data['changes']);

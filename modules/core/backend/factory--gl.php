@@ -168,7 +168,7 @@ namespace effectivecore {
     return array_combine($array, $array);
   }
 
-  static function array_clone_deep($array) {
+  static function array_deep_clone($array) {
     return unserialize(serialize($array));
   }
 

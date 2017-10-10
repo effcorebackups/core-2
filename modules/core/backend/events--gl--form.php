@@ -376,9 +376,8 @@ namespace effectivecore {
           'database_name' => $values['database_name'],
           'user_name'     => $values['user_name'],
           'password'      => $values['password']];
-        storages::get('settings')->changes_register_action('core', 'insert',
-          'storages/storage/storage_sql_dpo', (object)$credentials
-        );
+        storages::get('settings')->changes_register_action('core', 'insert', 'storages/storage/storage_sql_dpo', (object)$credentials);
+        storages::rebuild();
         events::start('on_module_install');
         messages::add_new('Modules was installed.');
         break;

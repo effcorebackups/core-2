@@ -5,7 +5,6 @@
   #############################################################
 
 namespace effectivecore\modules\user {
-          use \effectivecore\url;
           use \effectivecore\messages_factory as messages;
           use \effectivecore\translations_factory as translations;
           use \effectivecore\modules\user\session_factory as session;

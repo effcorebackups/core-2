@@ -19,6 +19,11 @@ namespace effectivecore\modules\storage {
     }
   }
 
+  static function rebuild() {
+    static::$data = [];
+    static::init();
+  }
+
   static function get($storage_id) {
     if (!static::$data) static::init();
     return static::$data[$storage_id];

@@ -42,11 +42,13 @@ namespace effectivecore {
 
   function test($data = []) {
     try {
-      new \PDO($data['driver'].':host='.
-               $data['host_name'].';dbname='.
-               $data['database_name'],
-               $data['user_name'],
-               $data['password']);
+      $connection = new \PDO(
+        $data['driver'].':host='.
+        $data['host_name'].';dbname='.
+        $data['database_name'],
+        $data['user_name'],
+        $data['password']);
+      $connection = null;
       return true;
     } catch (\PDOException $e) {
       return false;
@@ -58,6 +60,7 @@ namespace effectivecore {
   function transaction_commit()    {$this->init(); $this->connection->commit();}
 
   function query($query) {
+    $this->init();
     $this->queries[] = $query;
     events::start('on_query_before', 'pdo', [&$this, &$query]);
     $result = $this->connection->query($query);
