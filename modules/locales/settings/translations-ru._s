@@ -168,6 +168,7 @@ translations
   - The new password must be different from the old password!: Новый пароль должен отличаться от старого пароля!
   - the storage "%%_name" was initialized: хранилище "%%_name" было инициализировано
   - the storage "%%_storage" cache for group "%%_group" will be load: кэш хранилища "%%_storage" для группы "%%_group" будет загружен
+  - The system was installed!: Система была установлена!
   - The value was trimmed to the required length!: Значение было обрезано до требуемой длинны!
   - Time: Время
   - Title: Заголовок
