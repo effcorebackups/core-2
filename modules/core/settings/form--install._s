@@ -32,12 +32,31 @@ forms
                 tag_name: input
                 attributes
                 - type: text
-                - name: database_name
+                - name: database
                 - required: required
                 - value: main
                 - minlength: 1
                 - maxlength: 128
-                - pattern: [a-zA-Z0-9\-\_]+
+                - pattern: [a-zA-Z0-9-_]+
+      # host name
+        - field_host|form_field
+            title: Host name
+            description|text
+              text: Examples: %%_examples. Allowable characters: %%_chars.
+              args
+              - examples: 127.0.0.1, example.com
+              - chars: "a"-"z", "A"-"Z", "0"-"9", "-", "_", "." 
+            children
+            - default|markup_simple
+                tag_name: input
+                attributes
+                - type: text
+                - name: host
+                - required: required
+                - value: 127.0.0.1
+                - minlength: 1
+                - maxlength: 128
+                - pattern: [a-zA-Z0-9-_.]+
     - button_install|markup
         tag_name: button
         attributes

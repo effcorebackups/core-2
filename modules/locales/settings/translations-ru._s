@@ -56,6 +56,7 @@ translations
   - Event: Событие
   - events: события
   - Events: События
+  - Examples\: %%_examples. Allowable characters\: %%_chars.: Примеры: %%_examples. Допустимые символы: %%_chars.
   - Execute plan: План выполнения
   - Field "%%_title" can not be blank!: Поле "%%_title" не может быть пустым!
   - Field "%%_title" contains an incorrect email address!: Поле "%%_title" содержит неверный адрес электронной почты!
@@ -75,6 +76,7 @@ translations
   - Front page: Главная страница
   - get: получить
   - Home: Дом
+  - Host name: Имя хоста
   - Incorrect email or password!: Неверный адрес электронной почты или пароль!
   - Information: Информация
   - init: инициализация
