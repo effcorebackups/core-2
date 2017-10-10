@@ -40,6 +40,19 @@ namespace effectivecore {
     }
   }
 
+  function test($data = []) {
+    try {
+      new \PDO($data['driver'].':host='.
+               $data['host_name'].';dbname='.
+               $data['database_name'],
+               $data['user_name'],
+               $data['password']);
+      return true;
+    } catch (\PDOException $e) {
+      return false;
+    }
+  }
+
   function transaction_begin()     {$this->init(); $this->connection->beginTransaction();}
   function transaction_roll_back() {$this->init(); $this->connection->rollBack();}
   function transaction_commit()    {$this->init(); $this->connection->commit();}

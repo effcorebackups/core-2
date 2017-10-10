@@ -163,6 +163,7 @@ translations
   - Telephone: Телефон
   - Text: Текст
   - Textarea: Текстовая область
+  - The database is not available with these credentials!: База данных не доступна с этими учетными данными!
   - the event system was initialized: система событий была инициализирована
   - The new password must be different from the old password!: Новый пароль должен отличаться от старого пароля!
   - the storage "%%_name" was initialized: хранилище "%%_name" было инициализировано
@@ -179,6 +180,7 @@ translations
   - Use international format of mobile phone numbers.: Используйте международный формат номеров мобильных телефонов.
   - User %%_user_email_name: Пользователь %%_user_email_name
   - User menu: Меню пользователя
+  - User name: Имя пользователя
   - User profile %%_user_email_context{2}: Профиль пользователя %%_user_email_context{2}
   - User roles: Роли пользователя
   - User was not deleted!: Пользователь не был удален!

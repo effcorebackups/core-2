@@ -25,7 +25,7 @@ forms
             - pgsql: pgsql
             - sqlte: sqlte
       # database name
-        - field_database|form_field
+        - field_database_name|form_field
             title: Database name
             description|text
               text: Allowable characters: %%_chars.
@@ -36,14 +36,14 @@ forms
                 tag_name: input
                 attributes
                 - type: text
-                - name: database
+                - name: database_name
                 - required: required
                 - value: main
                 - minlength: 1
                 - maxlength: 128
                 - pattern: [a-zA-Z0-9-_]+
       # host name
-        - field_host|form_field
+        - field_host_name|form_field
             title: Host name
             description|text
               text: Allowable characters: %%_chars. Examples: %%_examples.
@@ -55,14 +55,14 @@ forms
                 tag_name: input
                 attributes
                 - type: text
-                - name: host
+                - name: host_name
                 - required: required
                 - value: 127.0.0.1
                 - minlength: 1
                 - maxlength: 253
                 - pattern: [a-zA-Z0-9-_.]+
       # user name
-        - field_user|form_field
+        - field_user_name|form_field
             title: User name
             description|text
               text: Allowable characters: %%_chars.
@@ -73,7 +73,7 @@ forms
                 tag_name: input
                 attributes
                 - type: text
-                - name: user
+                - name: user_name
                 - required: required
                 - value: root
                 - minlength: 1

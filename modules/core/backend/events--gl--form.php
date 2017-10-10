@@ -10,6 +10,7 @@ namespace effectivecore {
           use \effectivecore\events_factory as events;
           use \effectivecore\messages_factory as messages;
           use \effectivecore\translations_factory as translations;
+          use \effectivecore\modules\storage\storages_factory as storages;
           abstract class events_form {
 
   ###############
@@ -340,9 +341,33 @@ namespace effectivecore {
     }
   }
 
-  #################
-  ### on_submit ###
-  #################
+  #####################
+  ### form: install ###
+  #####################
+
+  static function on_validate_install($form, $fields, &$values) {
+    switch ($form->clicked_button_name) {
+      case 'install':
+        if (count($form->errors) == 0) {
+          $db = storages::get('db');
+          $result = $db->test([
+            'driver'        => $values['driver'],
+            'host_name'     => $values['host_name'],
+            'database_name' => $values['database_name'],
+            'user_name'     => $values['user_name'],
+            'password'      => $values['password']
+          ]);
+          if (!$result) {
+            $form->add_error('fieldset_default/field_database_name/default');
+            $form->add_error('fieldset_default/field_host_name/default');
+            $form->add_error('fieldset_default/field_user_name/default');
+            $form->add_error('fieldset_default/field_password/default');
+            messages::add_new('The database is not available with these credentials!', 'error');
+          }
+        }
+        break;
+    }
+  }
 
   static function on_submit_install($form, $fields, &$values) {
     switch ($form->clicked_button_name) {
