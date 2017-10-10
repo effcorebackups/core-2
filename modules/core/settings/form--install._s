@@ -27,6 +27,10 @@ forms
       # database name
         - field_database|form_field
             title: Database name
+            description|text
+              text: Allowable characters: %%_chars.
+              args
+              - chars: "a"-"z", "A"-"Z", "0"-"9", "-", "_"
             children
             - default|markup_simple
                 tag_name: input
@@ -42,10 +46,10 @@ forms
         - field_host|form_field
             title: Host name
             description|text
-              text: Examples: %%_examples. Allowable characters: %%_chars.
+              text: Allowable characters: %%_chars. Examples: %%_examples.
               args
               - examples: 127.0.0.1, example.com
-              - chars: "a"-"z", "A"-"Z", "0"-"9", "-", "_", "." 
+              - chars: "a"-"z", "A"-"Z", "0"-"9", "-", "_", "."
             children
             - default|markup_simple
                 tag_name: input
@@ -55,8 +59,26 @@ forms
                 - required: required
                 - value: 127.0.0.1
                 - minlength: 1
-                - maxlength: 128
+                - maxlength: 253
                 - pattern: [a-zA-Z0-9-_.]+
+      # user name
+        - field_user|form_field
+            title: User name
+            description|text
+              text: Allowable characters: %%_chars.
+              args
+              - chars: "a"-"z", "A"-"Z", "0"-"9", "-", "_"
+            children
+            - default|markup_simple
+                tag_name: input
+                attributes
+                - type: text
+                - name: user_name
+                - required: required
+                - value: root
+                - minlength: 1
+                - maxlength: 64
+                - pattern: [a-zA-Z0-9-_]+
     - button_install|markup
         tag_name: button
         attributes
