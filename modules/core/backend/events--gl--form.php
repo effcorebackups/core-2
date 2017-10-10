@@ -349,15 +349,13 @@ namespace effectivecore {
     switch ($form->clicked_button_name) {
       case 'install':
         if (count($form->errors) == 0) {
-          $db = storages::get('db');
-          $result = $db->test([
+          $credentials = [
             'driver'        => $values['driver'],
             'host_name'     => $values['host_name'],
             'database_name' => $values['database_name'],
             'user_name'     => $values['user_name'],
-            'password'      => $values['password']
-          ]);
-          if (!$result) {
+            'password'      => $values['password']];
+          if (!storages::get('db')->test($credentials)) {
             $form->add_error('fieldset_default/field_database_name/default');
             $form->add_error('fieldset_default/field_host_name/default');
             $form->add_error('fieldset_default/field_user_name/default');
@@ -372,6 +370,15 @@ namespace effectivecore {
   static function on_submit_install($form, $fields, &$values) {
     switch ($form->clicked_button_name) {
       case 'install':
+        $credentials = [
+          'driver'        => $values['driver'],
+          'host_name'     => $values['host_name'],
+          'database_name' => $values['database_name'],
+          'user_name'     => $values['user_name'],
+          'password'      => $values['password']];
+        storages::get('settings')->changes_register_action('core', 'insert',
+          'storages/storage/storage_sql_dpo', (object)$credentials
+        );
         events::start('on_module_install');
         messages::add_new('Modules was installed.');
         break;
