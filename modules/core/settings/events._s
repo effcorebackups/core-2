@@ -1,4 +1,9 @@
 events
+  on_form_init
+  - installation
+      for: installation
+      handler: \effectivecore\events_form::on_init_install
+      weight: 0
   on_form_validate
   - installation_default
       for: installation

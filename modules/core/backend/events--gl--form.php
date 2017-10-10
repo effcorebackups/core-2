@@ -345,6 +345,18 @@ namespace effectivecore {
   ### form: install ###
   #####################
 
+  static function on_init_install($form, $fields) {
+    $db = storages::get('db');
+    if (isset($db->driver) &&
+        isset($db->host_name) &&
+        isset($db->database_name) &&
+        isset($db->user_name)) {
+      $form->child_delete('fieldset_default');
+      $form->child_delete('button_install');
+      messages::add_new('The system was installed!', 'warning');
+    }
+  }
+
   static function on_validate_install($form, $fields, &$values) {
     switch ($form->clicked_button_name) {
       case 'install':
