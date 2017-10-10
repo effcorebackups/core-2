@@ -392,6 +392,8 @@ namespace effectivecore {
         storages::rebuild();
         events::start('on_module_install');
         messages::add_new('Modules was installed.');
+        $form->child_delete('fieldset_default');
+        $form->child_delete('button_install');
         break;
       case 'cancel':
         urls::go(urls::get_back_url() ?: '/');
