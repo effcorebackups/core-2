@@ -20,10 +20,9 @@ forms
             - not_selected: - select -
             - mysql: MySQL
             - pgsql: PostgreSQL
-            - sqlte: SQLite
+            - sqlite: SQLite
             disabled
-            - pgsql: pgsql
-            - sqlte: sqlte
+            - sqlite: sqlite
       # database name
         - field_database_name|form_field
             title: Database name

@@ -1,6 +1,5 @@
 translations
   ru
-  - - select -: - выбрать -
   - action: действие
   - Action: Действие
   - actions: действия
@@ -166,6 +165,8 @@ translations
   - The database is not available with these credentials!: База данных не доступна с этими учетными данными!
   - the event system was initialized: система событий была инициализирована
   - The new password must be different from the old password!: Новый пароль должен отличаться от старого пароля!
+  - The PHP PDO driver for %%_name is not available.: PHP PDO драйвер для %%_name не доступен.
+  - The PHP PDO extension is not available.: PHP PDO расширение не доступно.
   - the storage "%%_name" was initialized: хранилище "%%_name" было инициализировано
   - the storage "%%_storage" cache for group "%%_group" will be load: кэш хранилища "%%_storage" для группы "%%_group" будет загружен
   - The system was installed!: Система была установлена!
@@ -199,3 +200,4 @@ translations
   - Version: Версия
   - view: просмотреть
   - Yes: Да
+  - - select -: - выбрать -

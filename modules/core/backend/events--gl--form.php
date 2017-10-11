@@ -346,6 +346,23 @@ namespace effectivecore {
   #####################
 
   static function on_init_install($form, $fields) {
+    $driver = $fields['fieldset_default/field_driver']->child_select('default');
+    if (!extension_loaded('pdo')) {
+      $driver->attribute_insert('disabled', 'disabled');
+      messages::add_new(translations::get('The PHP PDO extension is not available.'), 'warning');
+    }
+    if (!extension_loaded('pdo_mysql')) {
+      $driver->child_select('mysql')->attribute_insert('disabled', 'disabled');
+      messages::add_new(translations::get('The PHP PDO driver for %%_name is not available.', ['name' => 'MySQL']), 'warning');
+    }
+    if (!extension_loaded('pdo_pgsql')) {
+      $driver->child_select('pgsql')->attribute_insert('disabled', 'disabled');
+      messages::add_new(translations::get('The PHP PDO driver for %%_name is not available.', ['name' => 'PostgreSQL']), 'warning');
+    }
+    if (!extension_loaded('pdo_sqlite')) {
+      $driver->child_select('sqlite')->attribute_insert('disabled', 'disabled');
+      messages::add_new(translations::get('The PHP PDO driver for %%_name is not available.', ['name' => 'SQLite']), 'warning');
+    }
     $db = storages::get('db');
     if (isset($db->driver) &&
         isset($db->host_name) &&
@@ -368,6 +385,8 @@ namespace effectivecore {
             'user_name'     => $values['user_name'],
             'password'      => $values['password']];
           $result = storages::get('db')->test($credentials);
+//var_dump($result);
+return;
           if ($result !== true) {
             messages::add_new('The database is not available with these credentials!', 'error');
             messages::add_new($result['message'], 'error');
