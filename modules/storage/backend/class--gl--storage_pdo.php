@@ -48,10 +48,9 @@ namespace effectivecore {
         $data['database_name'],
         $data['user_name'],
         $data['password']);
-      $connection = null;
       return true;
     } catch (\PDOException $e) {
-      return false;
+      return ['message' => $e->getMessage(), 'code' => $e->getCode()];
     }
   }
 

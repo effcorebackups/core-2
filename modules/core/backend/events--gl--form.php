@@ -367,12 +367,14 @@ namespace effectivecore {
             'database_name' => $values['database_name'],
             'user_name'     => $values['user_name'],
             'password'      => $values['password']];
-          if (!storages::get('db')->test($credentials)) {
-            $form->add_error('fieldset_default/field_database_name/default');
-            $form->add_error('fieldset_default/field_host_name/default');
-            $form->add_error('fieldset_default/field_user_name/default');
-            $form->add_error('fieldset_default/field_password/default');
+          $result = storages::get('db')->test($credentials);
+          if ($result !== true) {
             messages::add_new('The database is not available with these credentials!', 'error');
+            messages::add_new($result['message'], 'error');
+            if ($result['code'] == '1049') $form->add_error('fieldset_default/field_database_name/default');
+            if ($result['code'] == '2002') $form->add_error('fieldset_default/field_host_name/default');
+            if ($result['code'] == '1045') $form->add_error('fieldset_default/field_user_name/default');
+            if ($result['code'] == '1045') $form->add_error('fieldset_default/field_password/default');
           }
         }
         break;
