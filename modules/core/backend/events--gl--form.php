@@ -385,8 +385,6 @@ namespace effectivecore {
             'user_name'     => $values['user_name'],
             'password'      => $values['password']];
           $result = storages::get('db')->test($credentials);
-//var_dump($result);
-return;
           if ($result !== true) {
             messages::add_new('The database is not available with these credentials!', 'error');
             messages::add_new($result['message'], 'error');
