@@ -114,16 +114,14 @@ namespace effectivecore {
     $this->query('DROP TABLE '.$entity->get_name().';');
   }
 
-  function select_instance_set($entity, $conditions = [], $order = [], $count = 0, $offset = 0) {
+  function select_instance_set($entity, $conditions = [], $order = [], $limit = 0, $offset = 0) {
     $this->init();
-    $result = $this->query(
-      'SELECT '.implode(', ', $entity->get_fields()).
-      'FROM '.$entity->get_name().
-      (count($conditions) ? ' WHERE '.factory::data_to_attr($conditions, ' and ') : '').
-      (count($order)      ? ' ORDER BY '.str_replace('!', ' DESC ', implode(', ', $order)) : '').
-      ($count             ? ' LIMIT ' .$count  : '').
-      ($offset            ? ' OFFSET '.$offset : '').';'
-    );
+    $p_table_name = $entity->get_name();
+    $p_conditions = count($conditions) ? ' WHERE '.factory::data_to_attr($conditions, ' and ') : '';
+    $p_order = count($order) ? ' ORDER BY '.str_replace('!', ' DESC ', implode(', ', $order)) : '';
+    $p_limit = $limit ? ' LIMIT ' .$limit : '';
+    $p_offset = $offset ? ' OFFSET '.$offset : '';
+    $result = $this->query('SELECT * FROM '.$p_table_name.$p_conditions.$p_order.$p_limit.$p_offset.';');
     foreach ($result as $c_instance) {
       $c_instance->set_entity_name($entity->name);
     }
