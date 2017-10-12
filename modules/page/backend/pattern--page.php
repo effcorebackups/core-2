@@ -39,8 +39,8 @@ namespace effectivecore {
 
   # render frontend items: icons, styles, script
     $rendered_meta = [(new markup_simple('meta', ['charset' => 'utf-8']))->render()];
-    $rendered_styles = '';
-    $rendered_script = '';
+    $rendered_styles = [];
+    $rendered_script = [];
     $used_links = [];
     foreach ($this->content as $c_block) {
       if ($c_block->type == 'link') {
@@ -65,9 +65,6 @@ namespace effectivecore {
                 'sizes' => $c_icon->sizes
               ]))->render();
             }
-            $template->set_var('meta',
-              implode(nl, $rendered_meta)
-            );
           }
 
         # render styles
@@ -80,9 +77,6 @@ namespace effectivecore {
                 'href'  => $c_url->get_full()
               ]))->render();
             }
-            $template->set_var('styles',
-              implode(nl, $rendered_styles)
-            );
           }
 
         # render script
@@ -92,9 +86,6 @@ namespace effectivecore {
               $rendered_script[] = (new markup('script', [
                 'src' => $c_url->get_full()
               ]))->render();
-              $template->set_var('script',
-                implode(nl, $rendered_script)
-              );
             }
           }
 
@@ -144,6 +135,9 @@ namespace effectivecore {
     $template->set_var('attributes', factory::data_to_attr(['lang' => locales::get_current()->lang_code]));
     $template->set_var('console', console::render()); # @todo: only for admins
     $template->set_var('messages', messages::render());
+    $template->set_var('meta', implode(nl, $rendered_meta));
+    $template->set_var('styles', implode(nl, $rendered_styles));
+    $template->set_var('script', implode(nl, $rendered_script));
 
     return $template->render();
   }
