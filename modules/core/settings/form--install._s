@@ -98,13 +98,13 @@ forms
         children
         - label|text
             text: install
-    - button_cancel|markup
+    - button_to_front|markup
         tag_name: button
         novalidate: true
         attributes
         - type: submit
         - name: button
-        - value: cancel
+        - value: to_front
         children
         - label|text
-            text: cancel
+            text: to front

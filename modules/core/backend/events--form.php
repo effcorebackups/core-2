@@ -85,7 +85,7 @@ namespace effectivecore\modules\core {
         $form->child_delete('fieldset_default');
         $form->child_delete('button_install');
         break;
-      case 'cancel':
+      case 'to_front':
         urls::go(urls::get_back_url() ?: '/');
         break;
     }
