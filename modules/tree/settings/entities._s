@@ -5,9 +5,7 @@ entities
     charset: utf8
     fields
       id
-        type: int
-        size: 11
-        unsigned: true
+        type: integer
         not_null: true
         auto_increment: true
       title
@@ -25,20 +23,15 @@ entities
     charset: utf8
     fields
       id
-        type: int
-        size: 11
-        unsigned: true
+        type: integer
         not_null: true
         auto_increment: true
       parent_is_tree
-        type: int
-        size: 1
+        type: integer
         not_null: true
         default: 0
       parent_id
-        type: int
-        size: 11
-        unsigned: true
+        type: integer
         not_null: true
       title
         type: varchar

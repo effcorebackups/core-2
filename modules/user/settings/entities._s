@@ -5,9 +5,7 @@ entities
     charset: utf8
     fields
       id
-        type: int
-        size: 11
-        unsigned: true
+        type: integer
         not_null: true
         auto_increment: true
       email
@@ -26,8 +24,7 @@ entities
         not_null: true
         default: current_timestamp
       is_embed
-        type: int
-        size: 1
+        type: integer
         not_null: true
         default: 0
     indexes
@@ -53,9 +50,7 @@ entities
         size: 255
         not_null: true
       user_id
-        type: int
-        size: 11
-        unsigned: true
+        type: integer
         not_null: true
       created
         type: timestamp
@@ -83,8 +78,7 @@ entities
         size: 255
         not_null: true
       is_embed
-        type: int
-        size: 1
+        type: integer
         not_null: true
         default: 0
     indexes
@@ -120,9 +114,7 @@ entities
         size: 255
         not_null: true
       user_id
-        type: int
-        size: 11
-        unsigned: true
+        type: integer
         not_null: true
     indexes
     - primary
