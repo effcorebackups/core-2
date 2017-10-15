@@ -10,7 +10,6 @@ namespace effectivecore {
 
   public $name;
   public $storage_id;
-  public $charset = 'utf8';
   public $fields = [];
   public $indexes = [];
 

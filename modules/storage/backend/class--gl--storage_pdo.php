@@ -101,10 +101,7 @@ namespace effectivecore {
       $field_desc[] = $c_info->type.' ('.implode(', ', $c_info->fields).')';
     }
     $this->query('DROP TABLE IF EXISTS '.$entity->get_name().';');
-    return $this->query(
-      'CREATE TABLE '.$entity->get_name().' ('.implode(', ', $field_desc).') '.
-      'default charset='.$entity->charset.';'
-    );
+    return $this->query( 'CREATE TABLE '.$entity->get_name().' ('.implode(', ', $field_desc).');');
   }
 
   function uninstall_entity($entity) {
