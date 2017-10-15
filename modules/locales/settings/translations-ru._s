@@ -54,6 +54,8 @@ translations
   - Elements: Элементы
   - EMail: Адрес электронной почты
   - enabled: вкл.
+  - Entity %%_name was installed.: Сущность %%_name была установлена.
+  - Entity %%_name was not installed!: Сущность %%_name не была установлена!
   - event: событие
   - Event: Событие
   - events: события
@@ -88,6 +90,8 @@ translations
   - install: установить
   - Installation: Установка
   - installation: установка
+  - Instances of entity %%_name was added.: Экземпляр сущности %%_name был добавлен.
+  - Instances of entity %%_name was not added!: Экземпляр сущности %%_name не был добавлен!
   - Is always on: Всегда включен
   - Is embed: Встроенный
   - load: загрузка
@@ -159,7 +163,6 @@ translations
   - Storage: Хранилище
   - submit: отправить
   - System: Система
-  - Tables for module %%_name was installed.: Таблицы для модуля %%_name были установлены.
   - Telephone: Телефон
   - Text: Текст
   - Textarea: Текстовая область

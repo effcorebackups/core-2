@@ -10,9 +10,9 @@ namespace effectivecore {
 
   public $name;
   public $storage_id;
-  public $charset;
-  public $fields;
-  public $indexes;
+  public $charset = 'utf8';
+  public $fields = [];
+  public $indexes = [];
 
   function get_name()         {return $this->name;}
   function get_storage_id()   {return $this->storage_id;}

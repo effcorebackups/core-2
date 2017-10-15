@@ -25,12 +25,11 @@ namespace effectivecore\modules\tree {
   }
 
   static function on_install() {
-    foreach (storages::get('settings')->select_group('entities')['tree'] as $c_entity) {
-      $c_entity->install();
+    $entities = storages::get('settings')->select_group('entities')['tree'];
+    foreach ($entities as $c_entity) {
+      if ($c_entity->install()) messages::add_new(translations::get('Entity %%_name was installed.',     ['name' => $c_entity->get_name()]));
+      else                      messages::add_new(translations::get('Entity %%_name was not installed!', ['name' => $c_entity->get_name()]), 'error');
     }
-    messages::add_new(
-      translations::get('Tables for module %%_name was installed.', ['name' => 'tree'])
-    );
   }
 
 }}

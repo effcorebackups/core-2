@@ -2,7 +2,6 @@ entities
 - tree|entity
     name: tree
     storage_id: db
-    charset: utf8
     fields
       id
         type: integer
@@ -20,7 +19,6 @@ entities
 - tree_item|entity
     name: tree_item
     storage_id: db
-    charset: utf8
     fields
       id
         type: integer

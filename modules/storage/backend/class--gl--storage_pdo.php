@@ -77,6 +77,7 @@ namespace effectivecore {
       case 'INSERT': return $this->connection->lastInsertId();
       case 'UPDATE': return $result->rowCount();
       case 'DELETE': return $result->rowCount();
+      default      : return $result;
     }
   }
 
@@ -100,7 +101,7 @@ namespace effectivecore {
       $field_desc[] = $c_info->type.' ('.implode(', ', $c_info->fields).')';
     }
     $this->query('DROP TABLE IF EXISTS '.$entity->get_name().';');
-    $this->query(
+    return $this->query(
       'CREATE TABLE '.$entity->get_name().' ('.implode(', ', $field_desc).') '.
       'default charset='.$entity->charset.';'
     );

@@ -1,0 +1,9 @@
+entities
+- test|entity
+    name: test
+    storage_id: db
+    charset: utf8
+    fields
+      field_integer
+        type: integer
+        not_null: true
