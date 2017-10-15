@@ -1,8 +1,12 @@
 entities
-- test|entity
-    name: test
+- demo|entity
+    name: demo
     storage_id: db
     fields
+      id
+        auto: true
+        type: integer
+        not_null: true
       field_integer
         type: integer
         not_null: true
@@ -10,3 +14,8 @@ entities
         type: varchar
         size: 255
         not_null: true
+    indexes
+    - primary
+        type: primary key
+        fields
+        - id: id

@@ -86,9 +86,9 @@ namespace effectivecore {
     $field_desc = [];
     foreach ($entity->get_fields_info() as $c_name => $c_info) {
       $c_properties = [$c_info->type.(isset($c_info->size) ? '('.$c_info->size.')' : '')];
-      if (property_exists($c_info, 'auto_increment') && $c_info->auto_increment) $c_properties[] = 'auto_increment';
-      if (property_exists($c_info, 'not_null')       && $c_info->not_null)       $c_properties[] = 'not null';
-      if (property_exists($c_info, 'null')           && $c_info->null)           $c_properties[] = 'null';
+      if (property_exists($c_info, 'auto')     && $c_info->auto)     $c_properties[] = 'auto_increment';
+      if (property_exists($c_info, 'not_null') && $c_info->not_null) $c_properties[] = 'not null';
+      if (property_exists($c_info, 'null')     && $c_info->null)     $c_properties[] = 'null';
       if (property_exists($c_info, 'default')) {
         if     ($c_info->default === 0)                   $c_properties[] = 'default 0';
         elseif ($c_info->default === null)                $c_properties[] = 'default null';
