@@ -33,12 +33,12 @@ namespace effectivecore {
     }
   }
 
-  function get_entity()                  {return entities::get($this->entity_name);}
-  function get_entity_name()             {return $this->get_entity()->get_name();}
-  function get_entity_fields()           {return $this->get_entity()->get_fields();}
-  function get_entity_keys()             {return $this->get_entity()->get_keys();}
-  function get_entity_storage_id()       {return $this->get_entity()->get_storage_id();}
-  function get_entity_auto_increment()   {return $this->get_entity()->get_auto_increment();}
+  function get_entity()            {return entities::get($this->entity_name);}
+  function get_entity_name()       {return $this->get_entity()->get_name();}
+  function get_entity_fields()     {return $this->get_entity()->get_fields();}
+  function get_entity_keys()       {return $this->get_entity()->get_keys();}
+  function get_entity_storage_id() {return $this->get_entity()->get_storage_id();}
+  function get_entity_auto_id()    {return $this->get_entity()->get_auto_id();}
   function set_entity_name($entity_name) {$this->entity_name = $entity_name;}
 
   function select($custom_ids = []) {

@@ -137,14 +137,14 @@ namespace effectivecore {
 
   function insert_instance($instance) { # return: null | instance | instance + new_id
     $this->init();
-    $auto_increment = $instance->get_entity_auto_increment();
+    $auto_id = $instance->get_entity_auto_id();
     $p_table_name = $instance->get_entity_name();
     $p_fields =     implode(', ', array_keys($instance->get_values()));
     $p_values = '"'.implode('", "', $instance->get_values()).'"';
     $new_id = $this->query('INSERT INTO '.$p_table_name.' ('.$p_fields.') VALUES ('.$p_values.');');
-    if ($new_id !== null && $auto_increment == null) return $instance;
-    if ($new_id !== null && $auto_increment != null) {
-      $instance->values[$auto_increment] = $new_id;
+    if ($new_id !== null && $auto_id == null) return $instance;
+    if ($new_id !== null && $auto_id != null) {
+      $instance->values[$auto_id] = $new_id;
       return $instance;
     }
   }
