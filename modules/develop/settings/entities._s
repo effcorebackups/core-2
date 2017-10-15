@@ -6,3 +6,7 @@ entities
       field_integer
         type: integer
         not_null: true
+      field_text
+        type: varchar
+        size: 255
+        not_null: true
