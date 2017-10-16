@@ -14,6 +14,10 @@ events
       for: user_login
       handler: \effectivecore\events_form::on_validate
       weight: 0
+  - user_login
+      for: user_login
+      handler: \effectivecore\modules\user\events_form::on_validate_user_login
+      weight: 0
   - user_logout_default
       for: user_logout
       handler: \effectivecore\events_form::on_validate

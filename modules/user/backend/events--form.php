@@ -105,6 +105,25 @@ namespace effectivecore\modules\user {
   ### form: user_login ###
   ########################
 
+  static function on_validate_user_login($form, $fields, &$values) {
+    switch ($form->clicked_button_name) {
+      case 'login':
+        if (count($form->errors) == 0) {
+          $user = (new instance('user', [
+            'email' => $values['email']
+          ]))->select();
+          if ($user     &&
+              $user->id &&
+              $user->password_hash !== sha1($values['password'])) {
+            $form->add_error('credentials/email/default');
+            $form->add_error('credentials/password/default');
+            messages::add_new(translations::get('Incorrect email or password!'), 'error');
+          }
+        }
+        break;
+    }
+  }
+
   static function on_submit_user_login($form, $fields, &$values) {
     switch ($form->clicked_button_name) {
       case 'login':
@@ -116,10 +135,6 @@ namespace effectivecore\modules\user {
             $user->password_hash === sha1($values['password'])) {
           session::init($user->id);
           urls::go('/user/'.$user->id);
-        } else {
-          messages::add_new(
-            translations::get('Incorrect email or password!'), 'error'
-          );
         }
         break;
     }
