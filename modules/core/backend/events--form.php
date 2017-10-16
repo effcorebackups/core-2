@@ -18,7 +18,7 @@ namespace effectivecore\modules\core {
 
   static function on_init_install($form, $fields) {
     if (!extension_loaded('pdo')) {
-      messages::add_new(translations::get('The PHP PDO extension is not available.'), 'warning');
+      messages::add_new('The PHP PDO extension is not available.', 'warning');
     }
     if (!extension_loaded('pdo_mysql')) {
       $fields['storage/default/driver/mysql']->child_select('default')->attribute_insert('disabled', 'disabled');

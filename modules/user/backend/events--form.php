@@ -40,9 +40,7 @@ namespace effectivecore\modules\user {
           );
           urls::go(urls::get_back_url() ?: '/admin/users');
         } else {
-          messages::add_new(
-            translations::get('User was not deleted!'), 'error'
-          );
+          messages::add_new('User was not deleted!', 'error');
         }
         break;
       case 'cancel':
@@ -117,7 +115,7 @@ namespace effectivecore\modules\user {
               $user->password_hash !== sha1($values['password'])) {
             $form->add_error('credentials/email/default');
             $form->add_error('credentials/password/default');
-            messages::add_new(translations::get('Incorrect email or password!'), 'error');
+            messages::add_new('Incorrect email or password!', 'error');
           }
         }
         break;
