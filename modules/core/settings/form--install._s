@@ -21,8 +21,6 @@ forms
             - mysql: MySQL
             - pgsql: PostgreSQL
             - sqlite: SQLite
-            disabled
-            - sqlite: sqlite
       # database name
         - field_database_name|form_field
             title: Database name

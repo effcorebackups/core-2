@@ -10,24 +10,31 @@ namespace effectivecore {
           class storage_pdo {
 
   public $id;
-  public $connection;
-  public $database_name;
-  public $host_name;
-  public $user_name;
-  public $password;
-  public $driver;
   public $is_init = false;
+  public $connection;
+  public $driver;
+  public $credentials;
   public $queries = [];
 
   function init() {
     if (empty($this->is_init)) {
       try {
         events::start('on_storage_init_before', 'pdo', [&$this]);
-        $this->connection = new \PDO($this->driver.':host='.
-                                     $this->host_name.';dbname='.
-                                     $this->database_name,
-                                     $this->user_name,
-                                     $this->password);
+        switch ($this->driver) {
+          case 'sqlite':
+            $this->connection = new \PDO(
+              $this->driver.':'.
+              $this->credentials->file);
+            break;
+          default:
+            $this->connection = new \PDO(
+              $this->driver.':host='.
+              $this->credentials->host_name.';dbname='.
+              $this->credentials->database_name,
+              $this->credentials->user_name,
+              $this->credentials->password);
+            break;       
+        }
         events::start('on_storage_init_after', 'pdo', [&$this]);
         $this->is_init = true;
       } catch (\PDOException $e) {
@@ -38,14 +45,24 @@ namespace effectivecore {
     }
   }
 
-  function test($data = []) {
+  function test($driver, $params = []) {
     try {
-      $connection = new \PDO(
-        $data['driver'].':host='.
-        $data['host_name'].';dbname='.
-        $data['database_name'],
-        $data['user_name'],
-        $data['password']);
+      switch ($driver) {
+        case 'sqlite':
+          $connection = new \PDO(
+            $driver.':'.
+            $params['file']);
+          break;
+        default:
+          $connection = new \PDO(
+            $driver.':host='.
+            $params['host_name'].';dbname='.
+            $params['database_name'],
+            $params['user_name'],
+            $params['password']);
+          break;       
+      }
+      $connection = null;
       return true;
     } catch (\PDOException $e) {
       return ['message' => $e->getMessage(), 'code' => $e->getCode()];
