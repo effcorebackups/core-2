@@ -60,7 +60,7 @@ namespace effectivecore {
     return parent::render();
   }
 
-  function add_error($element_id, $message = null) {
+  function add_error($element_id = null, $message = null) {
     $this->errors[$element_id][] = $message;
   }
 
@@ -100,10 +100,8 @@ namespace effectivecore {
     # show errors and set error class
       foreach ($this->errors as $c_npath => $c_errors) {
         foreach ($c_errors as $c_error) {
-          $elements[$c_npath]->attribute_insert('class', ['error' => 'error']);
-          if ($c_error) {
-            messages::add_new($c_error, 'error');
-          }
+          if ($c_npath) $elements[$c_npath]->attribute_insert('class', ['error' => 'error']);
+          if ($c_error) messages::add_new($c_error, 'error');
         }
       }
     # call submit handler (if no errors)

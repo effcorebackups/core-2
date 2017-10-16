@@ -17,26 +17,24 @@ namespace effectivecore\modules\core {
   #####################
 
   static function on_init_install($form, $fields) {
-    $driver = $fields['fieldset_default/field_driver']->child_select('default');
     if (!extension_loaded('pdo')) {
-      $driver->attribute_insert('disabled', 'disabled');
       messages::add_new(translations::get('The PHP PDO extension is not available.'), 'warning');
     }
     if (!extension_loaded('pdo_mysql')) {
-      $driver->child_select('mysql')->attribute_insert('disabled', 'disabled');
+      $fields['storage/default/driver/mysql']->child_select('default')->attribute_insert('disabled', 'disabled');
       messages::add_new(translations::get('The PHP PDO driver for %%_name is not available.', ['name' => 'MySQL']), 'warning');
     }
     if (!extension_loaded('pdo_pgsql')) {
-      $driver->child_select('pgsql')->attribute_insert('disabled', 'disabled');
+      $fields['storage/default/driver/pgsql']->child_select('default')->attribute_insert('disabled', 'disabled');
       messages::add_new(translations::get('The PHP PDO driver for %%_name is not available.', ['name' => 'PostgreSQL']), 'warning');
     }
     if (!extension_loaded('pdo_sqlite')) {
-      $driver->child_select('sqlite')->attribute_insert('disabled', 'disabled');
+      $fields['storage/sqlite/driver/sqlite']->child_select('default')->attribute_insert('disabled', 'disabled');
       messages::add_new(translations::get('The PHP PDO driver for %%_name is not available.', ['name' => 'SQLite']), 'warning');
     }
     $db = storages::get('db');
     if (isset($db->driver)) {
-      $form->child_delete('fieldset_default');
+      $form->child_delete('storage');
       $form->child_delete('button_install');
       messages::add_new('The system was installed!', 'warning');
     }
@@ -45,19 +43,27 @@ namespace effectivecore\modules\core {
   static function on_validate_install($form, $fields, &$values) {
     switch ($form->clicked_button_name) {
       case 'install':
+        if (empty($values['driver'])) {
+          $form->add_error(null, 'Driver is not selected!');
+          return;
+        }
         if (count($form->errors) == 0) {
-          $test = storages::get('db')->test($values['driver'], [
-            'host_name'     => $values['host_name'],
-            'database_name' => $values['database_name'],
-            'user_name'     => $values['user_name'],
-            'password'      => $values['password']]);
+          switch ($values['driver']) {
+            case 'sqlite': $test = storages::get('db')->test($values['driver'], ['file_name' => $values['file_name']]); break;
+            default      : $test = storages::get('db')->test($values['driver'], [
+                'host_name'     => $values['host_name'],
+                'database_name' => $values['database_name'],
+                'user_name'     => $values['user_name'],
+                'password'      => $values['password']
+              ]); break;
+          }
           if ($test !== true) {
             messages::add_new('The database is not available with these credentials!', 'error');
             messages::add_new($test['message'], 'error');
-            if ($test['code'] == '1049') $form->add_error('fieldset_default/field_database_name/default');
-            if ($test['code'] == '2002') $form->add_error('fieldset_default/field_host_name/default');
-            if ($test['code'] == '1045') $form->add_error('fieldset_default/field_user_name/default');
-            if ($test['code'] == '1045') $form->add_error('fieldset_default/field_password/default');
+            if ($test['code'] == '1049') $form->add_error('storage/default/database_name/default');
+            if ($test['code'] == '2002') $form->add_error('storage/default/host_name/default');
+            if ($test['code'] == '1045') $form->add_error('storage/default/user_name/default');
+            if ($test['code'] == '1045') $form->add_error('storage/default/password/default');
           }
         }
         break;
@@ -78,7 +84,7 @@ namespace effectivecore\modules\core {
         storages::rebuild();
         events::start('on_module_install');
         messages::add_new('Modules was installed.');
-        $form->child_delete('fieldset_default');
+        $form->child_delete('storage');
         $form->child_delete('button_install');
         break;
       case 'to_front':

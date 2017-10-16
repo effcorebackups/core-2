@@ -35,6 +35,7 @@ translations
   - Current language: Текущий язык
   - Data of user with ID = %%_id was updated.: Данные пользователя с ID = %%_id были обновлены.
   - Data was not updated!: Данные не были обновлены!
+  - Database file path: Путь к файлу БД
   - Database name: Имя базы данных
   - Date: Дата
   - Decoration: Оформление
@@ -44,6 +45,7 @@ translations
   - Description: Описание
   - Develop: Разработка
   - disabled: выкл.
+  - Driver is not selected!: Драйвер не выбран!
   - Driver: Драйвер
   - Dynamic block: Динамический блок
   - Edit profile %%_user_email_context{2}: Редактировать профиль %%_user_email_context{2}
