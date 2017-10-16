@@ -7,13 +7,13 @@ forms
     - class
       - form-demo: form-demo
     children
-    - fieldset_default|form_container
+    - form_elements|form_container
         tag_name: fieldset
         title: Form elements
         title_tag_name: legend
         children
-      # input text
-        - field_text|form_field
+      # field text
+        - text|form_field
             title: Text
             description|text
               text: Element %%_info.
@@ -24,14 +24,14 @@ forms
                 tag_name: input
                 attributes
                 - type: text
-                - name: input_text
+                - name: text
                 - required: required
                 - value: text in input
                 - minlength: 5
                 - maxlength: 255
                 - pattern: [a-zA-Z0-9]+
-      # input password
-        - field_password|form_field
+      # field password
+        - password|form_field
             title: Password
             description|text
               text: Element %%_info.
@@ -42,14 +42,14 @@ forms
                 tag_name: input
                 attributes
                 - type: password
-                - name: input_password
+                - name: password
                 - required: required
                 - value: text in password
                 - minlength: 5
                 - maxlength: 255
                 - autocomplete: off
-      # input search
-        - field_search|form_field
+      # field search
+        - search|form_field
             title: Search
             description|text
               text: Element %%_info.
@@ -60,13 +60,13 @@ forms
                 tag_name: input
                 attributes
                 - type: search
-                - name: input_search
+                - name: search
                 - required: required
                 - value: text in search
                 - minlength: 5
                 - maxlength: 255
-      # input url
-        - field_url|form_field
+      # field url
+        - url|form_field
             title: URL
             description|text
               text: Element %%_info.
@@ -77,13 +77,13 @@ forms
                 tag_name: input
                 attributes
                 - type: url
-                - name: input_url
+                - name: url
                 - required: required
                 - value: http://example.com
                 - minlength: 5
                 - maxlength: 255
-      # input telephone
-        - field_tel|form_field
+      # field telephone
+        - tel|form_field
             title: Telephone
             description|text
               text: Use international format of mobile phone numbers.
@@ -92,13 +92,13 @@ forms
                 tag_name: input
                 attributes
                 - type: tel
-                - name: input_tel
+                - name: tel
                 - required: required
                 - value: &#43;0123456789
                 - minlength: 5
                 - maxlength: 15
-      # input email
-        - field_email|form_field
+      # field email
+        - email|form_field
             title: EMail
             description|text
               text: Element %%_info.
@@ -109,14 +109,14 @@ forms
                 tag_name: input
                 attributes
                 - type: email
-                - name: input_email
+                - name: email
                 - required: required
                 - value: test@example.com
                 - minlength: 5
                 - maxlength: 255
                 - multiple: multiple
-      # input file
-        - field_file|form_field
+      # field file
+        - file|form_field
             title: File
             description|text
               text: Element %%_info.
@@ -127,11 +127,11 @@ forms
                 tag_name: input
                 attributes
                 - type: file
-                - name: input_file
+                - name: file
                 - accept: image/*,audio/*,video/*
                 - multiple: multiple
-      # input number
-        - field_number|form_field
+      # field number
+        - number|form_field
             title: Number
             description|text
               text: Element %%_info.
@@ -142,14 +142,14 @@ forms
                 tag_name: input
                 attributes
                 - type: number
-                - name: input_number
+                - name: number
                 - required: required
                 - value: 0
                 - min: -5
                 - max: 5
                 - step: 0.3
-      # input range
-        - field_range|form_field
+      # field range
+        - range|form_field
             title: Range
             description|text
               text: Element %%_info.
@@ -160,14 +160,14 @@ forms
                 tag_name: input
                 attributes
                 - type: range
-                - name: input_range
+                - name: range
                 - value: 0
                 - min: -5
                 - max: 5
                 - step: 0.3
                 - required: required
-      # input date
-        - field_date|form_field
+      # field date
+        - date|form_field
             title: Date
             description|text
               text: Element %%_info.
@@ -178,13 +178,13 @@ forms
                 tag_name: input
                 attributes
                 - type: date
-                - name: input_date
+                - name: date
                 - required: required
                 - value: 2017-12-31
                 - min: 2000-12-31
                 - max: 2020-12-31
-      # input time
-        - field_time|form_field
+      # field time
+        - time|form_field
             title: Time
             description|text
               text: Element %%_info.
@@ -195,11 +195,11 @@ forms
                 tag_name: input
                 attributes
                 - type: time
-                - name: input_time
+                - name: time
                 - required: required
                 - value: 00:00:00
-      # input color
-        - field_color|form_field
+      # field color
+        - color|form_field
             title: Color
             description|text
               text: Element %%_info.
@@ -210,11 +210,11 @@ forms
                 tag_name: input
                 attributes
                 - type: color
-                - name: input_color
+                - name: color
                 - value: #ffffff
                 - required: required
-      # textarea
-        - field_textarea|form_field
+      # field textarea
+        - textarea|form_field
             title: Textarea
             description|text
               text: Element %%_info.
@@ -232,8 +232,8 @@ forms
                 children
                 - content|text
                     text: text in textarea
-      # select
-        - field_select|form_field
+      # field select
+        - select|form_field
             title: Select
             description|text
               text: Element %%_info.
@@ -303,8 +303,8 @@ forms
                         children
                         - default|text
                             text: Option 1.6
-      # select macro
-        - field_select_macro|form_field_select
+      # field select macro
+        - select_macro|form_field_select
             title: Select (macro)
             description|text
               text: Element %%_info.
@@ -326,8 +326,8 @@ forms
             - option_2_1: option_2_1
             disabled
             - option_2_2: option_2_2
-      # checkboxes
-        - group_checkboxes|form_container
+      # field checkboxes
+        - checkboxes|form_container
             title: Checkboxes
             description|text
               text: Element %%_info.
@@ -339,7 +339,7 @@ forms
               - boxes: boxes
               - checkboxes: checkboxes
             children
-            - field_checkbox_1_1|form_field
+            - checkbox_1_1|form_field
                 title: Checkbox 1.1
                 title_position: bottom
                 children
@@ -347,9 +347,9 @@ forms
                     tag_name: input
                     attributes
                     - type: checkbox
-                    - name: input_checkbox_1_1
+                    - name: checkbox_1_1
                     - value: checkbox_1_1
-            - field_checkbox_1_2|form_field
+            - checkbox_1_2|form_field
                 title: Checkbox 1.2 (checked)
                 title_position: bottom
                 children
@@ -357,10 +357,10 @@ forms
                     tag_name: input
                     attributes
                     - type: checkbox
-                    - name: input_checkbox_1_2
+                    - name: checkbox_1_2
                     - value: checkbox_1_2
                     - checked: checked
-            - field_checkbox_1_3|form_field
+            - checkbox_1_3|form_field
                 title: Checkbox 1.3 (disabled)
                 title_position: bottom
                 children
@@ -368,10 +368,10 @@ forms
                     tag_name: input
                     attributes
                     - type: checkbox
-                    - name: input_checkbox_1_3
+                    - name: checkbox_1_3
                     - value: checkbox_1_3
                     - disabled: disabled
-            - field_checkbox_1_4|form_field
+            - checkbox_1_4|form_field
                 title: Checkbox 1.4 (disabled + checked)
                 title_position: bottom
                 children
@@ -379,19 +379,19 @@ forms
                     tag_name: input
                     attributes
                     - type: checkbox
-                    - name: input_checkbox_1_4
+                    - name: checkbox_1_4
                     - value: checkbox_1_4
                     - disabled: disabled
                     - checked: checked
-      # checkboxes macro
-        - field_checkboxes_macro|form_container_checkboxes
+      # field checkboxes macro
+        - checkboxes_macro|form_container_checkboxes
             title: Checkboxes (macro)
             description|text
               text: Element %%_info.
               args
               - info: &lt;input type="checkbox"&gt;
             input_attributes
-            - name: input_checkbox_macro[]
+            - name: checkbox_macro[]
             values
             - checkbox_2_1: Checkbox 2.1
             - checkbox_2_2: Checkbox 2.2 (checked)
@@ -403,8 +403,8 @@ forms
             checked
             - checkbox_2_2: checkbox_2_2
             - checkbox_2_4: checkbox_2_4
-      # radios
-        - group_radios|form_container
+      # field radios
+        - radios|form_container
             title: Radios
             description|text
               text: Element %%_info.
@@ -416,7 +416,7 @@ forms
               - boxes: boxes
               - radioboxes: radioboxes
             children
-            - field_radio_1_1|form_field
+            - radio_1_1|form_field
                 title: Radio 1.1
                 title_position: bottom
                 children
@@ -424,9 +424,9 @@ forms
                     tag_name: input
                     attributes
                     - type: radio
-                    - name: input_radio
+                    - name: radio
                     - value: radio_1_1
-            - field_radio_1_2|form_field
+            - radio_1_2|form_field
                 title: Radio 1.2 (checked)
                 title_position: bottom
                 children
@@ -434,10 +434,10 @@ forms
                     tag_name: input
                     attributes
                     - type: radio
-                    - name: input_radio
+                    - name: radio
                     - value: radio_1_2
                     - checked: checked
-            - field_radio_1_3|form_field
+            - radio_1_3|form_field
                 title: Radio 1.3 (disabled)
                 title_position: bottom
                 children
@@ -445,18 +445,18 @@ forms
                     tag_name: input
                     attributes
                     - type: radio
-                    - name: input_radio
+                    - name: radio
                     - value: radio_1_3
                     - disabled: disabled
-      # radios macro
-        - field_radios_macro|form_container_radios
+      # field radios macro
+        - radios_macro|form_container_radios
             title: Radios (macro)
             description|text
               text: Element %%_info.
               args
               - info: &lt;input type="radio"&gt;
             input_attributes
-            - name: input_radio_macro
+            - name: radio_macro
             values
             - radio_2_1: Radio 2.1
             - radio_2_2: Radio 2.2 (checked)
@@ -465,8 +465,8 @@ forms
             - radio_2_3: radio_2_3
             checked
             - radio_2_2: radio_2_2
-      # radios color macro
-        - field_color_macro|form_container_palette
+      # field radios color macro
+        - color_macro|form_container_palette
             title: Color
             input_attributes
             - name: color
