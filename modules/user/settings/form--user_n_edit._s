@@ -7,10 +7,10 @@ forms
     - class
       - form-user: form-user
     children
-    - fieldset_default|form_container
+    - credentials|form_container
         tag_name: fieldset
         children
-        - field_password_old|form_field
+        - password_old|form_field
             title: Old password
             children
             - default|markup_simple
@@ -22,7 +22,7 @@ forms
                 - minlength: 5
                 - maxlength: 255
                 - autocomplete: off
-        - field_password_new|form_field
+        - password_new|form_field
             title: New password
             children
             - default|markup_simple

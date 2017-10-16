@@ -62,15 +62,15 @@ namespace effectivecore\modules\user {
         case 'save':
           $user = (new instance('user', ['id' => $id]))->select();
           if ($user->password_hash !== sha1($values['password_old'])) {
-            $form->add_error('fieldset_default/field_password_old/default',
-              translations::get('Old password is incorrect!')
+            $form->add_error('credentials/password_old/default',
+              'Old password is incorrect!'
             );
             return;
           }
           if ($values['password_new'] ==
               $values['password_old']) {
-            $form->add_error('fieldset_default/field_password_new/default',
-              translations::get('The new password must be different from the old password!')
+            $form->add_error('credentials/password_new/default',
+              'The new password must be different from the old password!'
             );
             return;
           }
@@ -91,7 +91,7 @@ namespace effectivecore\modules\user {
           urls::go(urls::get_back_url() ?: '/user/'.$id);
         } else {
           messages::add_new(
-            translations::get('Data was not updated!'), 'error'
+            'Data was not updated!', 'error'
           );
         }
         break;
@@ -151,9 +151,7 @@ namespace effectivecore\modules\user {
           'email' => $values['email']
         ]))->select();
         if ($user) {
-          messages::add_new(
-            translations::get('User with this email was already registered!'), 'error'
-          );
+          messages::add_new('User with this email was already registered!', 'error');
         } else {
           $user = (new instance('user', [
             'email'         => $values['email'],
@@ -165,9 +163,7 @@ namespace effectivecore\modules\user {
             session::init($user->id);
             urls::go('/user/'.$user->id);
           } else {
-            messages::add_new(
-              translations::get('User was not registered!'), 'error'
-            );
+            messages::add_new('User was not registered!', 'error');
           }
         }
         break;
