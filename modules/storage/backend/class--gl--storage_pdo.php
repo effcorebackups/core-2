@@ -30,7 +30,7 @@ namespace effectivecore {
             $this->connection = new \PDO(
               $this->driver.':host='.
               $this->credentials->host_name.';dbname='.
-              $this->credentials->database_name,
+              $this->credentials->storage_name,
               $this->credentials->user_name,
               $this->credentials->password);
             break;       
@@ -57,7 +57,7 @@ namespace effectivecore {
           $connection = new \PDO(
             $driver.':host='.
             $params['host_name'].';dbname='.
-            $params['database_name'],
+            $params['storage_name'],
             $params['user_name'],
             $params['password']);
           break;       

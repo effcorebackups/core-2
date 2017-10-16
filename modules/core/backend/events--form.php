@@ -51,16 +51,16 @@ namespace effectivecore\modules\core {
           switch ($values['driver']) {
             case 'sqlite': $test = storages::get('db')->test($values['driver'], ['file_name' => $values['file_name']]); break;
             default      : $test = storages::get('db')->test($values['driver'], [
-                'host_name'     => $values['host_name'],
-                'database_name' => $values['database_name'],
-                'user_name'     => $values['user_name'],
-                'password'      => $values['password']
+                'host_name'    => $values['host_name'],
+                'storage_name' => $values['storage_name'],
+                'user_name'    => $values['user_name'],
+                'password'     => $values['password']
               ]); break;
           }
           if ($test !== true) {
             messages::add_new('Storage is not available with these credentials!', 'error');
             messages::add_new($test['message'], 'error');
-            if ($test['code'] == '1049') $form->add_error('storage/default/database_name/default');
+            if ($test['code'] == '1049') $form->add_error('storage/default/storage_name/default');
             if ($test['code'] == '2002') $form->add_error('storage/default/host_name/default');
             if ($test['code'] == '1045') $form->add_error('storage/default/user_name/default');
             if ($test['code'] == '1045') $form->add_error('storage/default/password/default');
@@ -76,10 +76,10 @@ namespace effectivecore\modules\core {
         $params = new \stdClass;
         $params->driver = $values['driver'];
         $params->credentials = new \stdClass;
-        $params->credentials->host_name     = $values['host_name'];
-        $params->credentials->database_name = $values['database_name'];
-        $params->credentials->user_name     = $values['user_name'];
-        $params->credentials->password      = $values['password'];
+        $params->credentials->host_name    = $values['host_name'];
+        $params->credentials->storage_name = $values['storage_name'];
+        $params->credentials->user_name    = $values['user_name'];
+        $params->credentials->password     = $values['password'];
         storages::get('settings')->changes_register_action('core', 'insert', 'storages/storage/storage_sql_dpo', $params);
         storages::rebuild();
         events::start('on_module_install');
