@@ -68,7 +68,7 @@ namespace effectivecore\modules\user {
           if ($values['password_new'] ==
               $values['password_old']) {
             $form->add_error('credentials/password_new/default',
-              'The new password must be different from the old password!'
+              'New password must be different from the old password!'
             );
             return;
           }

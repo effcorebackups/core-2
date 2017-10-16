@@ -58,6 +58,7 @@ translations
   - enabled: вкл.
   - Entity %%_name was installed.: Сущность %%_name была установлена.
   - Entity %%_name was not installed!: Сущность %%_name не была установлена!
+  - event system was initialized: система событий была инициализирована
   - event: событие
   - Event: Событие
   - events: события
@@ -122,6 +123,7 @@ translations
   - Must be no more than %%_value characters.: Должно быть не более %%_value символов.
   - my account: мой аккаунт
   - Name: Имя
+  - New password must be different from the old password!: Новый пароль должен отличаться от старого пароля!
   - New password: Новый пароль
   - no items: нет элементов
   - No: Нет
@@ -134,6 +136,8 @@ translations
   - Password hash: Хеш пароля
   - Password: Пароль
   - Path: Путь
+  - PHP PDO driver for %%_name is not available.: PHP PDO драйвер для %%_name не доступен.
+  - PHP PDO extension is not available.: PHP PDO расширение не доступно.
   - profile: профиль
   - Queries: Запросы
   - query: запрос
@@ -160,23 +164,19 @@ translations
   - State: Состояние
   - State.: Сост.
   - Static block: Статический блок
+  - storage "%%_name" was initialized: хранилище "%%_name" было инициализировано
+  - storage "%%_storage" cache for group "%%_group" will be load: кэш хранилища "%%_storage" для группы "%%_group" будет загружен
+  - Storage is not available with these credentials!: Хранилище не доступно с этими учетными данными!
   - Storage params: Параметры хранилища
+  - Storage PDO with id %%_id is not available!: Хранилище PDO c id %%_id не доступна!
   - storage: хранилище
   - Storage: Хранилище
   - submit: отправить
+  - System was installed!: Система была установлена!
   - System: Система
   - Telephone: Телефон
   - Text: Текст
   - Textarea: Текстовая область
-  - The database is not available with these credentials!: База данных не доступна с этими учетными данными!
-  - the event system was initialized: система событий была инициализирована
-  - The new password must be different from the old password!: Новый пароль должен отличаться от старого пароля!
-  - The PHP PDO driver for %%_name is not available.: PHP PDO драйвер для %%_name не доступен.
-  - The PHP PDO extension is not available.: PHP PDO расширение не доступно.
-  - the storage "%%_name" was initialized: хранилище "%%_name" было инициализировано
-  - the storage "%%_storage" cache for group "%%_group" will be load: кэш хранилища "%%_storage" для группы "%%_group" будет загружен
-  - The system was installed!: Система была установлена!
-  - The value was trimmed to the required length!: Значение было обрезано до требуемой длинны!
   - Time: Время
   - Title: Заголовок
   - to front: на главную
@@ -200,6 +200,7 @@ translations
   - Users: Пользователи
   - val.: знач.
   - Val.: Знач.
+  - Value was trimmed to the required length!: Значение было обрезано до требуемой длинны!
   - Value: Значение
   - Value: Значение
   - Values: Значения

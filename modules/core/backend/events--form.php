@@ -18,25 +18,25 @@ namespace effectivecore\modules\core {
 
   static function on_init_install($form, $fields) {
     if (!extension_loaded('pdo')) {
-      messages::add_new('The PHP PDO extension is not available.', 'warning');
+      messages::add_new('PHP PDO extension is not available.', 'warning');
     }
     if (!extension_loaded('pdo_mysql')) {
       $fields['storage/default/driver/mysql']->child_select('default')->attribute_insert('disabled', 'disabled');
-      messages::add_new(translations::get('The PHP PDO driver for %%_name is not available.', ['name' => 'MySQL']), 'warning');
+      messages::add_new(translations::get('PHP PDO driver for %%_name is not available.', ['name' => 'MySQL']), 'warning');
     }
     if (!extension_loaded('pdo_pgsql')) {
       $fields['storage/default/driver/pgsql']->child_select('default')->attribute_insert('disabled', 'disabled');
-      messages::add_new(translations::get('The PHP PDO driver for %%_name is not available.', ['name' => 'PostgreSQL']), 'warning');
+      messages::add_new(translations::get('PHP PDO driver for %%_name is not available.', ['name' => 'PostgreSQL']), 'warning');
     }
     if (!extension_loaded('pdo_sqlite')) {
       $fields['storage/sqlite/driver/sqlite']->child_select('default')->attribute_insert('disabled', 'disabled');
-      messages::add_new(translations::get('The PHP PDO driver for %%_name is not available.', ['name' => 'SQLite']), 'warning');
+      messages::add_new(translations::get('PHP PDO driver for %%_name is not available.', ['name' => 'SQLite']), 'warning');
     }
     $db = storages::get('db');
     if (isset($db->driver)) {
       $form->child_delete('storage');
       $form->child_delete('button_install');
-      messages::add_new('The system was installed!', 'warning');
+      messages::add_new('System was installed!', 'warning');
     }
   }
 
@@ -58,7 +58,7 @@ namespace effectivecore\modules\core {
               ]); break;
           }
           if ($test !== true) {
-            messages::add_new('The database is not available with these credentials!', 'error');
+            messages::add_new('Storage is not available with these credentials!', 'error');
             messages::add_new($test['message'], 'error');
             if ($test['code'] == '1049') $form->add_error('storage/default/database_name/default');
             if ($test['code'] == '2002') $form->add_error('storage/default/host_name/default');

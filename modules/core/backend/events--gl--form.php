@@ -278,7 +278,7 @@ namespace effectivecore {
       $form->add_error($npath.'/default',
         translations::get('Field "%%_title" contains too much characters!', ['title' => $title]).br.
         translations::get('Must be no more than %%_value characters.', ['value' => $element->attribute_select('maxlength')]).br.
-        translations::get('The value was trimmed to the required length!').br.
+        translations::get('Value was trimmed to the required length!').br.
         translations::get('Check field again before submit.')
       );
     # trim value to maximum lenght
