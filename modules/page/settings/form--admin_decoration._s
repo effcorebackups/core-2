@@ -7,16 +7,16 @@ forms
     - class
       - form-decoration: form-decoration
     children
-    - fieldset_default|form_container
+    - colors|form_container
         tag_name: fieldset
         title: Colors
         title_tag_name: legend
         children
-        - field_color_id|form_container_palette
+        - color_id|form_container_palette
             title: Color
             input_attributes
             - name: color_id
-        - field_color_bg_id|form_container_palette
+        - color_bg_id|form_container_palette
             title: Background color
             input_attributes
             - name: color_bg_id
