@@ -1,5 +1,5 @@
 pages
-- page_admin_users|page
+- admin_users|page
     title: Users
     display
       url
