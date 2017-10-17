@@ -11,7 +11,7 @@ entities
         type: varchar
         size: 255
         not_null: true
-      login
+      nick
         type: varchar
         size: 255
         not_null: true
@@ -35,10 +35,10 @@ entities
         type: unique key
         fields
         - email: email
-    - unique_login
+    - unique_nick
         type: unique key
         fields
-        - login: login
+        - nick: nick
 - session|entity
     name: session
     storage_id: main
