@@ -37,38 +37,38 @@ instances
     values
     - id: moderators
     - title: Moderators
-- permission_user_profile_select|instance
+- permission_user_select|instance
     entity_name: permission
     values
-    - id: user_profile_select
-    - title: User profile: select
-- permission_user_profile_update|instance
+    - id: user_select
+    - title: User: select
+- permission_user_update|instance
     entity_name: permission
     values
-    - id: user_profile_update
-    - title: User profile: update
-- permission_user_profile_delete|instance
+    - id: user_update
+    - title: User: update
+- permission_user_delete|instance
     entity_name: permission
     values
-    - id: user_profile_delete
-    - title: User profile: delete
+    - id: user_delete
+    - title: User: delete
 - relation_role_ws_user_admins_1|instance
     entity_name: relation_role_ws_user
     values
     - role_id: admins
     - user_id: 1
-- relation_role_ws_permission_admins_user_profile_select|instance
+- relation_role_ws_permission_admins_user_select|instance
     entity_name: relation_role_ws_permission
     values
     - role_id: admins
-    - permission_id: user_profile_select
-- relation_role_ws_permission_admins_user_profile_update|instance
+    - permission_id: user_select
+- relation_role_ws_permission_admins_user_update|instance
     entity_name: relation_role_ws_permission
     values
     - role_id: admins
-    - permission_id: user_profile_update
-- relation_role_ws_permission_admins_user_profile_insert|instance
+    - permission_id: user_update
+- relation_role_ws_permission_admins_user_insert|instance
     entity_name: relation_role_ws_permission
     values
     - role_id: admins
-    - permission_id: user_profile_insert
+    - permission_id: user_insert
