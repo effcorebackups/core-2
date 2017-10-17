@@ -1,19 +1,22 @@
 forms
-- form_user_n_edit|form
+- user_n_edit|form
     attributes
     - id: user_n_edit
     - novalidate: novalidate
     - method: post
     - class
-      - form-user: form-user
+      - user: user
+      - user-n-edit: user-n-edit
     children
     - credentials|form_container
         tag_name: fieldset
+        title: Credentials
+        title_tag_name: legend
         children
         - password_old|form_field
             title: Old password
             children
-            - default|markup_simple
+            - element|markup_simple
                 tag_name: input
                 attributes
                 - type: password
@@ -25,7 +28,7 @@ forms
         - password_new|form_field
             title: New password
             children
-            - default|markup_simple
+            - element|markup_simple
                 tag_name: input
                 attributes
                 - type: password

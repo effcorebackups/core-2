@@ -60,14 +60,14 @@ namespace effectivecore\modules\user {
         case 'save':
           $user = (new instance('user', ['id' => $id]))->select();
           if ($user->password_hash !== sha1($values['password_old'])) {
-            $form->add_error('credentials/password_old/default',
+            $form->add_error('credentials/password_old/element',
               'Old password is incorrect!'
             );
             return;
           }
           if ($values['password_new'] ==
               $values['password_old']) {
-            $form->add_error('credentials/password_new/default',
+            $form->add_error('credentials/password_new/element',
               'New password must be different from the old password!'
             );
             return;
