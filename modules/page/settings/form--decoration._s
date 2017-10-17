@@ -14,10 +14,14 @@ forms
         children
         - color_id|form_container_palette
             title: Color
+            attributes
+            - required: required
             input_attributes
             - name: color_id
         - color_bg_id|form_container_palette
             title: Background color
+            attributes
+            - required: required
             input_attributes
             - name: color_bg_id
     - button_save|markup
