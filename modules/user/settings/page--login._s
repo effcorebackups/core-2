@@ -1,5 +1,5 @@
 pages
-- page_user_login|page
+- login|page
     title: Login
     https: true
     display
