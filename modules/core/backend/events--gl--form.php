@@ -104,7 +104,7 @@ namespace effectivecore {
   static function on_validate($form, $fields, &$values) {
     $indexes = [];
     foreach ($fields as $c_npath => $c_field) {
-      $c_element = $c_field->child_select('default');
+      $c_element = $c_field->child_select('element');
       if ($c_element instanceof markup ||
           $c_element instanceof markup_simple) {
         $c_name = rtrim($c_element->attribute_select('name'), '[]');
@@ -222,7 +222,7 @@ namespace effectivecore {
 
   # check required fields
     if ($element->attribute_select('required') && empty(array_filter($new_values, 'strlen'))) {
-      $form->add_error($npath.'/default',
+      $form->add_error($npath.'/element',
         translations::get('Field "%%_title" must be selected!', ['title' => $title])
       );
       return;
@@ -239,7 +239,7 @@ namespace effectivecore {
   # check if field is multiple or singular
     if (!$element->attribute_select('multiple') && count($new_values) > 1) {
       $new_values = array_slice($new_values, -1);
-      $form->add_error($npath.'/default',
+      $form->add_error($npath.'/element',
         translations::get('Field "%%_title" is not support multiple select!', ['title' => $title])
       );
     }
@@ -256,7 +256,7 @@ namespace effectivecore {
 
   # check required fields
     if ($element->attribute_select('required') && strlen($new_value) == 0) {
-      $form->add_error($npath.'/default',
+      $form->add_error($npath.'/element',
         translations::get('Field "%%_title" can not be blank!', ['title' => $title])
       );
       return;
@@ -265,7 +265,7 @@ namespace effectivecore {
   # check minimum length
     if ($element->attribute_select('minlength') &&
         $element->attribute_select('minlength') > strlen($new_value)) {
-      $form->add_error($npath.'/default',
+      $form->add_error($npath.'/element',
         translations::get('Field "%%_title" contains too few characters!', ['title' => $title]).br.
         translations::get('Must be at least %%_value characters long.', ['value' => $element->attribute_select('minlength')])
       );
@@ -275,7 +275,7 @@ namespace effectivecore {
   # check maximum length
     if ($element->attribute_select('maxlength') &&
         $element->attribute_select('maxlength') < strlen($new_value)) {
-      $form->add_error($npath.'/default',
+      $form->add_error($npath.'/element',
         translations::get('Field "%%_title" contains too much characters!', ['title' => $title]).br.
         translations::get('Must be no more than %%_value characters.', ['value' => $element->attribute_select('maxlength')]).br.
         translations::get('Value was trimmed to the required length!').br.
@@ -300,7 +300,7 @@ namespace effectivecore {
       if (!preg_match('%^(?<integer>[-]?[1-9][0-9]*|0)$|'.
                        '^(?<float_s>[-]?[0-9][.][0-9]+)$|'.
                        '^(?<float_l>[-]?[1-9][0-9]+[.][0-9]+)$%S', $new_value)) {
-        $form->add_error($npath.'/default',
+        $form->add_error($npath.'/element',
           translations::get('Field "%%_title" contains incorrect value!', ['title' => $title]).br.
           translations::get('Field value is not a valid number.')
         );
@@ -310,7 +310,7 @@ namespace effectivecore {
     # check min value
       if ($element->attribute_select('min') !== null &&
           $element->attribute_select('min') > $new_value) {
-        $form->add_error($npath.'/default',
+        $form->add_error($npath.'/element',
           translations::get('Field "%%_title" contains incorrect value!', ['title' => $title]).br.
           translations::get('Field value is less than %%_value.', ['value' => $element->attribute_select('min')])
         );
@@ -320,7 +320,7 @@ namespace effectivecore {
     # check max value
       if ($element->attribute_select('max') !== null &&
           $element->attribute_select('max') < $new_value) {
-        $form->add_error($npath.'/default',
+        $form->add_error($npath.'/element',
           translations::get('Field "%%_title" contains incorrect value!', ['title' => $title]).br.
           translations::get('Field value is more than %%_value.', ['value' => $element->attribute_select('max')])
         );
@@ -331,7 +331,7 @@ namespace effectivecore {
   # check email field
     if ($element->attribute_select('type') == 'email' &&
         filter_var($new_value, FILTER_VALIDATE_EMAIL) == false) {
-      $form->add_error($npath.'/default',
+      $form->add_error($npath.'/element',
         translations::get('Field "%%_title" contains an incorrect email address!', ['title' => $title])
       );
       return;

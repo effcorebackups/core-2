@@ -20,7 +20,7 @@ forms
               args
               - info: &lt;input type="text"&gt;
             children
-            - default|markup_simple
+            - element|markup_simple
                 tag_name: input
                 attributes
                 - type: text
@@ -38,7 +38,7 @@ forms
               args
               - info: &lt;input type="password"&gt;
             children
-            - default|markup_simple
+            - element|markup_simple
                 tag_name: input
                 attributes
                 - type: password
@@ -56,7 +56,7 @@ forms
               args
               - info: &lt;input type="search"&gt;
             children
-            - default|markup_simple
+            - element|markup_simple
                 tag_name: input
                 attributes
                 - type: search
@@ -73,7 +73,7 @@ forms
               args
               - info: &lt;input type="url"&gt;
             children
-            - default|markup_simple
+            - element|markup_simple
                 tag_name: input
                 attributes
                 - type: url
@@ -88,7 +88,7 @@ forms
             description|text
               text: Use international format of mobile phone numbers.
             children
-            - default|markup_simple
+            - element|markup_simple
                 tag_name: input
                 attributes
                 - type: tel
@@ -105,7 +105,7 @@ forms
               args
               - info: &lt;input type="email"&gt;
             children
-            - default|markup_simple
+            - element|markup_simple
                 tag_name: input
                 attributes
                 - type: email
@@ -123,7 +123,7 @@ forms
               args
               - info: &lt;input type="file"&gt;
             children
-            - default|markup_simple
+            - element|markup_simple
                 tag_name: input
                 attributes
                 - type: file
@@ -138,7 +138,7 @@ forms
               args
               - info: &lt;input type="number"&gt;
             children
-            - default|markup_simple
+            - element|markup_simple
                 tag_name: input
                 attributes
                 - type: number
@@ -156,7 +156,7 @@ forms
               args
               - info: &lt;input type="range"&gt;
             children
-            - default|markup_simple
+            - element|markup_simple
                 tag_name: input
                 attributes
                 - type: range
@@ -174,7 +174,7 @@ forms
               args
               - info: &lt;input type="date"&gt;
             children
-            - default|markup_simple
+            - element|markup_simple
                 tag_name: input
                 attributes
                 - type: date
@@ -191,7 +191,7 @@ forms
               args
               - info: &lt;input type="time"&gt;
             children
-            - default|markup_simple
+            - element|markup_simple
                 tag_name: input
                 attributes
                 - type: time
@@ -206,7 +206,7 @@ forms
               args
               - info: &lt;input type="color"&gt;
             children
-            - default|markup_simple
+            - element|markup_simple
                 tag_name: input
                 attributes
                 - type: color
@@ -221,7 +221,7 @@ forms
               args
               - info: &lt;textarea&gt;&lt;/textarea&gt;
             children
-            - default|markup
+            - element|markup
                 tag_name: textarea
                 attributes
                 - name: textarea
@@ -240,7 +240,7 @@ forms
               args
               - info: &lt;select&gt;
             children
-            - default|markup
+            - element|markup
                 tag_name: select
                 attributes
                 - name: select
@@ -251,7 +251,7 @@ forms
                     attributes
                     - value: 
                     children
-                    - default|text
+                    - label|text
                         text: - select -
                 - option_1_1|markup
                     tag_name: option
@@ -259,7 +259,7 @@ forms
                     - value: option_1_1
                     - selected: selected
                     children
-                    - default|text
+                    - label|text
                         text: Option 1.1 (selected)
                 - option_1_2|markup
                     tag_name: option
@@ -267,14 +267,14 @@ forms
                     - value: option_1_2
                     - disabled: disabled
                     children
-                    - default|text
+                    - label|text
                         text: Option 1.2 (disabled)
                 - option_1_3|markup
                     tag_name: option
                     attributes
                     - value: option_1_3
                     children
-                    - default|text
+                    - label|text
                         text: Option 1.3
                 - group_1_1|markup
                     tag_name: optgroup
@@ -286,7 +286,7 @@ forms
                         attributes
                         - value: option_1_4
                         children
-                        - default|text
+                        - label|text
                             text: Option 1.4
                     - option_1_5|markup
                         tag_name: option
@@ -294,14 +294,14 @@ forms
                         - value: option_1_5
                         - disabled: disabled
                         children
-                        - default|text
+                        - label|text
                             text: Option 1.5 (disabled)
                     - option_1_6|markup
                         tag_name: option
                         attributes
                         - value: option_1_6
                         children
-                        - default|text
+                        - label|text
                             text: Option 1.6
       # field select macro
         - select_macro|form_field_select
@@ -343,7 +343,7 @@ forms
                 title: Checkbox 1.1
                 title_position: bottom
                 children
-                - default|markup_simple
+                - element|markup_simple
                     tag_name: input
                     attributes
                     - type: checkbox
@@ -353,7 +353,7 @@ forms
                 title: Checkbox 1.2 (checked)
                 title_position: bottom
                 children
-                - default|markup_simple
+                - element|markup_simple
                     tag_name: input
                     attributes
                     - type: checkbox
@@ -364,7 +364,7 @@ forms
                 title: Checkbox 1.3 (disabled)
                 title_position: bottom
                 children
-                - default|markup_simple
+                - element|markup_simple
                     tag_name: input
                     attributes
                     - type: checkbox
@@ -375,7 +375,7 @@ forms
                 title: Checkbox 1.4 (disabled + checked)
                 title_position: bottom
                 children
-                - default|markup_simple
+                - element|markup_simple
                     tag_name: input
                     attributes
                     - type: checkbox
@@ -420,7 +420,7 @@ forms
                 title: Radio 1.1
                 title_position: bottom
                 children
-                - default|markup_simple
+                - element|markup_simple
                     tag_name: input
                     attributes
                     - type: radio
@@ -430,7 +430,7 @@ forms
                 title: Radio 1.2 (checked)
                 title_position: bottom
                 children
-                - default|markup_simple
+                - element|markup_simple
                     tag_name: input
                     attributes
                     - type: radio
@@ -441,7 +441,7 @@ forms
                 title: Radio 1.3 (disabled)
                 title_position: bottom
                 children
-                - default|markup_simple
+                - element|markup_simple
                     tag_name: input
                     attributes
                     - type: radio

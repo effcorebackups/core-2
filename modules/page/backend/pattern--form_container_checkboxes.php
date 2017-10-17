@@ -31,13 +31,13 @@ namespace effectivecore {
     $field = new form_field( $this->field_tag_name, $title );
     $field->title_tag_name = $this->field_title_tag_name;
     $field->title_position = $this->field_title_position;
-    $field->child_insert($input, 'default');
+    $field->child_insert($input, 'element');
     return $this->child_insert($field, $new_id);
   }
 
   function default_set($value) {
     foreach ($this->children as $c_field) {
-      $c_input = $c_field->child_select('default');
+      $c_input = $c_field->child_select('element');
       if ($c_input->attribute_select('value') == $value) {
         return $c_input->attribute_insert('checked', 'checked');
       }
@@ -46,7 +46,7 @@ namespace effectivecore {
 
   function default_get() {
     foreach ($this->children as $c_field) {
-      $c_input = $c_field->child_select('default');
+      $c_input = $c_field->child_select('element');
       if ($c_input->attribute_select('checked') == 'checked') {
         return $c_input->attribute_select('value');
       }

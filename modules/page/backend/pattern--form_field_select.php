@@ -13,8 +13,8 @@ namespace effectivecore {
   public $disabled = [];
 
   function build() {
-    $this->child_insert(new markup('select', $this->attribute_select('', 'select_attributes')), 'default');
-    $this->child_select('default')->title = $this->title;
+    $this->child_insert(new markup('select', $this->attribute_select('', 'select_attributes')), 'element');
+    $this->child_select('element')->title = $this->title;
     foreach ($this->values as $c_id => $c_data) {
       if (is_object($c_data) &&
              !empty($c_data->title) &&
@@ -31,18 +31,18 @@ namespace effectivecore {
   }
 
   function optgroup_select($id) {
-    return $this->child_select('default')->child_select($id);
+    return $this->child_select('element')->child_select($id);
   }
 
   function optgroup_insert($id, $title, $attr = []) {
-    $this->child_select('default')->child_insert(
+    $this->child_select('element')->child_insert(
       new markup('optgroup', $attr + ['label' => $title]), $id
     );
   }
 
   function option_insert($title, $value, $attr = [], $grp_id = null) {
-    $parent_el = $grp_id ? $this->child_select('default')->child_select($grp_id) :
-                           $this->child_select('default');
+    $parent_el = $grp_id ? $this->child_select('element')->child_select($grp_id) :
+                           $this->child_select('element');
     $new_option = new markup('option', $attr, ['content' => $title]);
     if (isset($this->selected[$value])) $new_option->attribute_insert('selected', 'selected');
     if (isset($this->disabled[$value])) $new_option->attribute_insert('disabled', 'disabled');
