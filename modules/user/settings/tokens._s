@@ -8,8 +8,8 @@ tokens
     match: %%_user_email
     type: code
     handler: \effectivecore\modules\user\events_token::on_replace
-- user_email_name
-    match: %%_user_email_name
+- user_nick
+    match: %%_user_nick
     type: code
     handler: \effectivecore\modules\user\events_token::on_replace
 # tokens for context user (user id is taken from url)
@@ -21,7 +21,7 @@ tokens
     match: %%_user_email_context
     type: code
     handler: \effectivecore\modules\user\events_token::on_replace
-- user_email_name_context
-    match: %%_user_email_name_context
+- user_nick_context
+    match: %%_user_nick_context
     type: code
     handler: \effectivecore\modules\user\events_token::on_replace

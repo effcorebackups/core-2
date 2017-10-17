@@ -16,16 +16,16 @@ namespace effectivecore\modules\user {
       switch ($match) {
         case '%%_user_id'        : return users::get_current()->id;
         case '%%_user_email'     : return users::get_current()->email;
-        case '%%_user_email_name': return strstr(users::get_current()->email, '@', true).'@...';
+        case '%%_user_nick'      : return users::get_current()->nick;
         case '%%_user_id_context':
         case '%%_user_email_context':
-        case '%%_user_email_name_context':
+        case '%%_user_nick_context':
           $arg_num = $args[0];
           $user_id = urls::get_current()->get_args($arg_num);
           $user = (new instance('user', ['id' => $user_id]))->select();
-          if ($user && $match == '%%_user_id_context')         return $user->id;
-          if ($user && $match == '%%_user_email_context')      return $user->email;
-          if ($user && $match == '%%_user_email_name_context') return strstr($user->email, '@', true).'@...';
+          if ($user && $match == '%%_user_id_context')    return $user->id;
+          if ($user && $match == '%%_user_email_context') return $user->email;
+          if ($user && $match == '%%_user_nick_context')  return $user->nick;
           return '[unknown uid]';
       }
     }

@@ -1,6 +1,6 @@
 pages
 - page_user_n_edit|page
-    title: Edit profile %%_user_email_context{2}
+    title: Edit profile %%_user_nick_context{2}
     https: true
     display
       url

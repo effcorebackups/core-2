@@ -39,7 +39,7 @@ translations
   - Data was not updated!: Данные не были обновлены!
   - Date: Дата
   - Decoration: Оформление
-  - Delete profile %%_user_email_context{4}?: Удалить профиль %%_user_email_context{4}?
+  - Delete profile %%_user_nick_context{4}?: Удалить профиль %%_user_nick_context{4}?
   - delete: удалить
   - Demo: Демо
   - Description: Описание
@@ -48,7 +48,7 @@ translations
   - Driver is not selected!: Драйвер не выбран!
   - Driver: Драйвер
   - Dynamic block: Динамический блок
-  - Edit profile %%_user_email_context{2}: Редактировать профиль %%_user_email_context{2}
+  - Edit profile %%_user_nick_context{2}: Редактировать профиль %%_user_nick_context{2}
   - Edit profile: Редактировать профиль
   - edit profile: редактировать профиль
   - edit: редактировать
@@ -190,10 +190,10 @@ translations
   - Tree: Дерево
   - UNDER CONSTRUCTION: В РАЗРАБОТКЕ
   - Use international format of mobile phone numbers.: Используйте международный формат номеров мобильных телефонов.
-  - User %%_user_email_name: Пользователь %%_user_email_name
+  - User %%_user_nick: Пользователь %%_user_nick
   - User menu: Меню пользователя
   - User name: Имя пользователя
-  - User profile %%_user_email_context{2}: Профиль пользователя %%_user_email_context{2}
+  - User profile %%_user_nick_context{2}: Профиль пользователя %%_user_nick_context{2}
   - User roles: Роли пользователя
   - User was not deleted!: Пользователь не был удален!
   - User was not registered!: Пользователь не был зарегистрирован!
