@@ -1,6 +1,6 @@
 pages
-- page_user_logout|page
-    title: Logout from the system
+- logout|page
+    title: Loggin out
     display
       url
         match: %^/user/logout$%
@@ -16,7 +16,7 @@ pages
         region: nav
         type: link
         npath: trees/user/user
-    - form_user_logout
+    - form_logout
         region: content_1_1
         type: link
         npath: forms/user/logout
