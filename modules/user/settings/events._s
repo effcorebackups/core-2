@@ -38,6 +38,10 @@ events
       for: registration
       handler: \effectivecore\events_form::on_validate
       weight: 0
+  - registration
+      for: registration
+      handler: \effectivecore\modules\user\events_form::on_validate_registration
+      weight: 0
   on_form_submit
   - login
       for: login

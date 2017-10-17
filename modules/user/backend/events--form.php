@@ -142,27 +142,39 @@ namespace effectivecore\modules\user {
   ### form: registration ###
   ##########################
 
+  static function on_validate_registration($form, $fields, &$values) {
+    switch ($form->clicked_button_name) {
+      case 'register':
+        if (count($form->errors) == 0) {
+        # test email
+          if ((new instance('user', ['email' => $values['email']]))->select()) {
+            $form->add_error('credentials/email/element', 'User with this EMail was already registered!');
+            return;
+          }
+        # test nick
+          if ((new instance('user', ['nick' => $values['nick']]))->select()) {
+            $form->add_error('credentials/nick/element', 'User with this Nick was already registered!');
+            return;
+          }
+        }
+        break;
+    }
+  }
+
   static function on_submit_registration($form, $fields, &$values) {
     switch ($form->clicked_button_name) {
       case 'register':
         $user = (new instance('user', [
-          'email' => $values['email']
-        ]))->select();
+          'email'         => $values['email'],
+          'nick'          => $values['nick'],
+          'password_hash' => sha1($values['password']),
+          'created'       => factory::datetime_get_curent()
+        ]))->insert();
         if ($user) {
-          messages::add_new('User with this email was already registered!', 'error');
+          session::init($user->id);
+          urls::go('/user/'.$user->id);
         } else {
-          $user = (new instance('user', [
-            'email'         => $values['email'],
-            'password_hash' => sha1($values['password']),
-            'created'       => factory::datetime_get_curent()
-          ]))->insert();
-          if ($user &&
-              $user->id) {
-            session::init($user->id);
-            urls::go('/user/'.$user->id);
-          } else {
-            messages::add_new('User was not registered!', 'error');
-          }
+          messages::add_new('User was not registered!', 'error');
         }
         break;
     }
