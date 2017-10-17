@@ -1,11 +1,11 @@
 forms
-- form_admin_decoration|form
+- decoration|form
     attributes
-    - id: admin_decoration
+    - id: decoration
     - novalidate: novalidate
     - method: post
     - class
-      - form-decoration: form-decoration
+      - decoration: decoration
     children
     - colors|form_container
         tag_name: fieldset

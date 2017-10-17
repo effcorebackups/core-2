@@ -10,17 +10,17 @@ namespace effectivecore\modules\page {
           use \effectivecore\modules\storage\storages_factory as storages;
           abstract class events_form extends \effectivecore\events_form {
 
-  ##############################
-  ### form: admin_decoration ###
-  ##############################
+  ########################
+  ### form: decoration ###
+  ########################
 
-  static function on_init_admin_decoration($form, $fields) {
+  static function on_init_decoration($form, $fields) {
     $decoration = storages::get('settings')->select_group('decoration');
     $fields['colors/color_id'   ]->default_set($decoration['page']->color_id);
     $fields['colors/color_bg_id']->default_set($decoration['page']->color_bg_id);
   }
 
-  static function on_submit_admin_decoration($form, $fields, &$values) {
+  static function on_submit_decoration($form, $fields, &$values) {
     switch ($form->clicked_button_name) {
       case 'save':
         storages::get('settings')->changes_register_action('page', 'update', 'decoration/page/color_id',    $values['color_id'], false);

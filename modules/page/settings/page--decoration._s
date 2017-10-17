@@ -19,4 +19,4 @@ pages
     - form_admin_decoration
         region: content_1_1
         type: link
-        npath: forms/page/form_admin_decoration
+        npath: forms/page/decoration
