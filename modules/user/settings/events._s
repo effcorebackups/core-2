@@ -10,13 +10,13 @@ events
       handler: \effectivecore\modules\user\events_module::on_install
       weight: 0
   on_form_validate
-  - user_login_default
-      for: user_login
+  - login_default
+      for: login
       handler: \effectivecore\events_form::on_validate
       weight: 0
-  - user_login
-      for: user_login
-      handler: \effectivecore\modules\user\events_form::on_validate_user_login
+  - login
+      for: login
+      handler: \effectivecore\modules\user\events_form::on_validate_login
       weight: 0
   - user_logout_default
       for: user_logout
@@ -39,9 +39,9 @@ events
       handler: \effectivecore\events_form::on_validate
       weight: 0
   on_form_submit
-  - user_login
-      for: user_login
-      handler: \effectivecore\modules\user\events_form::on_submit_user_login
+  - login
+      for: login
+      handler: \effectivecore\modules\user\events_form::on_submit_login
       weight: 0
   - user_logout
       for: user_logout
