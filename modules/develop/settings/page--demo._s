@@ -1,5 +1,5 @@
 pages
-- page_demo|page
+- demo|page
     title: Demo
     display
       url
@@ -23,7 +23,7 @@ pages
     - block_demo_static
         region: content_1_1
         type: link
-        npath: blocks/develop/block_demo
+        npath: blocks/develop/demo
     - block_demo_dynamic
         region: content_1_1
         type: code

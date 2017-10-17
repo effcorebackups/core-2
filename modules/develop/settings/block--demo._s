@@ -1,5 +1,5 @@
 blocks
-- block_demo|markup
+- demo|markup
     tag_name: x-block
     attributes
     - id: block_demo

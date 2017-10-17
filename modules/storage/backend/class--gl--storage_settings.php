@@ -123,7 +123,7 @@ namespace effectivecore {
         foreach ($c_changes as $c_npath => $c_value) {
           $path_parts = explode('/', $c_npath);
           $child_name = array_pop($path_parts);
-          $parent_obj = &factory::npath_get_pointer(implode('/', $path_parts), $data, true);
+          $parent_obj = &factory::npath_get_pointer(implode('/', $path_parts), $data);
           switch ($c_action_id) {
             case 'insert': # only structured types support (array|object)
               switch (gettype($parent_obj)) {

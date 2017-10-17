@@ -104,7 +104,7 @@ namespace effectivecore {
     $contents = [];
     foreach ($this->content as $c_block) {
       $c_region = isset($c_block->region) ?
-                        $c_block->region : 'c_1_1';
+                        $c_block->region : 'content_1_1';
       switch ($c_block->type) {
         case 'text': $contents[$c_region][] = $c_block->content; break;
         case 'code': $contents[$c_region][] = call_user_func_array($c_block->handler, pages::$args); break;

@@ -176,27 +176,21 @@ namespace effectivecore {
   ### npath functions ###
   #######################
 
-  static function &npath_get_pointer($npath, &$data, $reset = false) {
-    if (isset(static::$cache[__FUNCTION__][$npath]) && !$reset)
-       return static::$cache[__FUNCTION__][$npath];
+  static function &npath_get_pointer($npath, &$data) {
     $pointer = $data;
     foreach (explode('/', $npath) as $c_part) {
-      if (gettype($pointer) == 'array')      $pointer = &$pointer[$c_part];
+      if     (gettype($pointer) == 'array')  $pointer = &$pointer[$c_part];
       elseif (gettype($pointer) == 'object') $pointer = &$pointer->{$c_part};
     }
-    static::$cache[__FUNCTION__][$npath] = &$pointer;
     return $pointer;
   }
 
-  static function npath_get_object($npath, $data, $reset = false) {
-    if (isset(static::$cache[__FUNCTION__][$npath]) && !$reset)
-       return static::$cache[__FUNCTION__][$npath];
+  static function npath_get_object($npath, $data) {
     $pointer = $data;
     foreach (explode('/', $npath) as $c_part) {
-      if (gettype($pointer) == 'array')      $pointer = &$pointer[$c_part];
+      if     (gettype($pointer) == 'array')  $pointer = &$pointer[$c_part];
       elseif (gettype($pointer) == 'object') $pointer = &$pointer->{$c_part};
     }
-    static::$cache[__FUNCTION__][$npath] = $pointer;
     return $pointer;
   }
 
