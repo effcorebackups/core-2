@@ -19,7 +19,7 @@ pages
     - form_demo
         region: content_1_1
         type: link
-        npath: forms/develop/form_demo
+        npath: forms/develop/demo
     - block_demo_static
         region: content_1_1
         type: link

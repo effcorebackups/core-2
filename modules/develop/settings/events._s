@@ -11,16 +11,16 @@ events
       weight: 0
   on_form_init
   - form_demo
-      for: form_demo
+      for: demo
       handler: \effectivecore\modules\develop\events_form::on_init_demo
       weight: 0
   on_form_validate
   - form_demo_default
-      for: form_demo
+      for: demo
       handler: \effectivecore\events_form::on_validate
       weight: 0
   on_form_submit
   - form_demo
-      for: form_demo
+      for: demo
       handler: \effectivecore\modules\develop\events_form::on_submit_demo
       weight: 0

@@ -1,11 +1,11 @@
 forms
-- form_demo|form
+- demo|form
     attributes
-    - id: form_demo
+    - id: demo
     - novalidate: novalidate
     - method: post
     - class
-      - form-demo: form-demo
+      - demo: demo
     children
     - form_elements|form_container
         tag_name: fieldset
