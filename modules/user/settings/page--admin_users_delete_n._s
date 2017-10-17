@@ -25,4 +25,4 @@ pages
     - form_user_n_delete
         region: content_1_1
         type: link
-        npath: forms/user/form_user_n_delete
+        npath: forms/user/user_n_delete

@@ -1,11 +1,12 @@
 forms
-- form_user_n_delete|form
+- user_n_delete|form
     attributes
     - id: user_n_delete
     - novalidate: novalidate
     - method: post
     - class
-      - form-user: form-user
+      - user: user
+      - user-n-delete: user-n-delete
     children
     - button_delete|markup
         tag_name: button
