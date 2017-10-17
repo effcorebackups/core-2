@@ -168,11 +168,11 @@ namespace effectivecore\modules\user {
     }
   }
 
-  #########################
-  ### form: user_logout ###
-  #########################
+  ####################
+  ### form: logout ###
+  ####################
 
-  static function on_submit_user_logout($form, $fields, &$values) {
+  static function on_submit_logout($form, $fields, &$values) {
     switch ($form->clicked_button_name) {
       case 'logout':
         session::destroy(users::get_current()->id);

@@ -82,4 +82,4 @@
 
   /* particular cases */
   form#user_n_delete,
-  form#user_logout {width: 320px; margin: 100px auto}
+  form#logout {width: 320px; margin: 100px auto}

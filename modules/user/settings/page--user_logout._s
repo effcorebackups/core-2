@@ -19,4 +19,4 @@ pages
     - form_user_logout
         region: content_1_1
         type: link
-        npath: forms/user/form_user_logout
+        npath: forms/user/logout
