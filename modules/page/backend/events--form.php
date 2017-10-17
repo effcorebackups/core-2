@@ -20,6 +20,10 @@ namespace effectivecore\modules\page {
     $fields['colors/color_bg_id']->default_set($decoration['page']->color_bg_id);
   }
 
+  static function on_validate_decoration($form, $fields, &$values) {
+    static::on_validate($form, $fields, $values);
+  }
+
   static function on_submit_decoration($form, $fields, &$values) {
     switch ($form->clicked_button_name) {
       case 'save':

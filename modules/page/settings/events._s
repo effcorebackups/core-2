@@ -10,9 +10,9 @@ events
       handler: \effectivecore\modules\page\events_form::on_init_decoration
       weight: 0
   on_form_validate
-  - decoration_default
+  - decoration
       for: decoration
-      handler: \effectivecore\events_form::on_validate
+      handler: \effectivecore\modules\page\events_form::on_validate_decoration
       weight: 0
   on_form_submit
   - decoration

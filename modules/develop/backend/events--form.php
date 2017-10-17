@@ -21,6 +21,10 @@ namespace effectivecore\modules\develop {
     $fields['form_elements/select_macro']->option_insert('Option 2.9 (inserted from init)', 'option_2_9', [], 'group_2_2');
   }
 
+  static function on_validate_demo($form, $fields, &$values) {
+    static::on_validate($form, $fields, $values);
+  }
+
   static function on_submit_demo($form, $fields, &$values) {
     messages::add_new('Call \effectivecore\modules\develop\events_form::on_submit_demo.');
   }

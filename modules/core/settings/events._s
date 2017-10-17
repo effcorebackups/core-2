@@ -5,10 +5,6 @@ events
       handler: \effectivecore\modules\core\events_form::on_init_installation
       weight: 0
   on_form_validate
-  - installation_default
-      for: installation
-      handler: \effectivecore\events_form::on_validate
-      weight: 0
   - installation
       for: installation
       handler: \effectivecore\modules\core\events_form::on_validate_installation

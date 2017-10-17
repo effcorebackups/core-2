@@ -41,6 +41,7 @@ namespace effectivecore\modules\core {
   }
 
   static function on_validate_installation($form, $fields, &$values) {
+    static::on_validate($form, $fields, $values);
     switch ($form->clicked_button_name) {
       case 'install':
         if (empty($values['driver'])) {

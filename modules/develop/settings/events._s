@@ -15,9 +15,9 @@ events
       handler: \effectivecore\modules\develop\events_form::on_init_demo
       weight: 0
   on_form_validate
-  - demo_default
+  - demo
       for: demo
-      handler: \effectivecore\events_form::on_validate
+      handler: \effectivecore\modules\develop\events_form::on_validate_demo
       weight: 0
   on_form_submit
   - demo
