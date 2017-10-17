@@ -1,6 +1,6 @@
 pages
-- page_user_n|page
-    title: User profile %%_user_nick_context{2}
+- user|page
+    title: User %%_user_nick_context{2}
     https: true
     display
       url
@@ -20,7 +20,7 @@ pages
         region: nav
         type: link
         npath: trees/user/user
-    - block_user_n
+    - block_user
         region: content_1_1
         type: code
-        handler: \effectivecore\modules\user\events_page::on_show_block_user_n
+        handler: \effectivecore\modules\user\events_page::on_show_block_user

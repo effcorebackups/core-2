@@ -191,12 +191,12 @@ translations
   - Use international format of mobile phone numbers.: Используйте международный формат номеров мобильных телефонов.
   - User %%_nick was deleted.: Пользователь %%_nick был удален.
   - User %%_nick was not deleted!: Пользователь %%_nick не был удален.
-  - User %%_nick was updated.: Пользователь %%_nick был обновлен.
   - User %%_nick was not updated.: Пользователь %%_nick не был обновлен.
+  - User %%_nick was updated.: Пользователь %%_nick был обновлен.
+  - User %%_user_nick_context{2}: Пользователь %%_user_nick_context{2}
   - User %%_user_nick: Пользователь %%_user_nick
   - User menu: Меню пользователя
   - User name: Имя пользователя
-  - User profile %%_user_nick_context{2}: Профиль пользователя %%_user_nick_context{2}
   - User roles: Роли пользователя
   - User was not deleted!: Пользователь не был удален!
   - User was not registered!: Пользователь не был зарегистрирован!

@@ -56,7 +56,7 @@ namespace effectivecore\modules\user {
     }
   }
 
-  static function on_show_block_user_n($id) {
+  static function on_show_block_user($id) {
     $user = (new instance('user', ['id' => $id]))->select();
     if ($user) {
       if ($user->id == users::get_current()->id ||               # owner
