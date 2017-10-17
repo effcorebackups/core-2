@@ -10,7 +10,7 @@ namespace effectivecore {
           use \effectivecore\modules\storage\storages_factory as storages;
           abstract class events_page {
 
-  static function on_show_admin_modules() {
+  static function on_show_modules() {
     $thead = [['Title', 'ID', 'Path', 'Description', 'Ver.', 'State.']];
     $tbody = [];
     foreach (storages::get('settings')->select_group('module') as $c_module) {
