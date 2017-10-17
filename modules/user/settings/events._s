@@ -34,8 +34,8 @@ events
       for: user_n_edit
       handler: \effectivecore\modules\user\events_form::on_validate_user_n_edit
       weight: 1
-  - user_registration_default
-      for: user_registration
+  - registration_default
+      for: registration
       handler: \effectivecore\events_form::on_validate
       weight: 0
   on_form_submit
@@ -55,7 +55,7 @@ events
       for: user_n_edit
       handler: \effectivecore\modules\user\events_form::on_submit_user_n_edit
       weight: 0
-  - user_registration
-      for: user_registration
-      handler: \effectivecore\modules\user\events_form::on_submit_user_register
+  - registration
+      for: registration
+      handler: \effectivecore\modules\user\events_form::on_submit_registration
       weight: 0

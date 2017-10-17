@@ -31,6 +31,8 @@ translations
   - Core: Ядро
   - created: создано
   - Created: Создано
+  - Credentials: Учётные данные
+  - credentials: учётные данные
   - Current field value\: %%_value.: Текущее значение поля: %%_value.
   - Current language: Текущий язык
   - Data of user with ID = %%_id was updated.: Данные пользователя с ID = %%_id были обновлены.
@@ -123,6 +125,7 @@ translations
   - Name: Имя
   - New password must be different from the old password!: Новый пароль должен отличаться от старого пароля!
   - New password: Новый пароль
+  - Nick: Ник
   - no items: нет элементов
   - No: Нет
   - Number: Число

@@ -15,7 +15,7 @@ namespace effectivecore\modules\user {
     static::$data = new \stdClass();
     static::$data->id = 0;
     static::$data->roles = ['anonymous' => 'anonymous'];
-  # load user from db
+  # load user from storage
     if ($id !== null) {
       $user = (new instance('user', ['id' => $id]))->select();
       if ($user) {

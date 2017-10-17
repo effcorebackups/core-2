@@ -59,9 +59,9 @@ namespace effectivecore\modules\user {
         $block = new markup('x-block', ['id' => 'user']);
       # get roles
         $roles = [];
-        $db_roles = entities::get('relation_role_ws_user')->select_instance_set(['user_id' => $id]);
-        if ($db_roles) {
-          foreach ($db_roles as $c_role) {
+        $storage_roles = entities::get('relation_role_ws_user')->select_instance_set(['user_id' => $id]);
+        if ($storage_roles) {
+          foreach ($storage_roles as $c_role) {
             $roles[] = $c_role->role_id;
           }
         }

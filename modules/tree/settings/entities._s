@@ -1,7 +1,7 @@
 entities
 - tree|entity
     name: tree
-    storage_id: db
+    storage_id: main
     fields
       id
         auto: true
@@ -18,7 +18,7 @@ entities
         - id: id
 - tree_item|entity
     name: tree_item
-    storage_id: db
+    storage_id: main
     fields
       id
         auto: true

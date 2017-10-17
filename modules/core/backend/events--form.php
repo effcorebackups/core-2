@@ -32,8 +32,8 @@ namespace effectivecore\modules\core {
       $fields['storage/sqlite/driver/sqlite']->child_select('default')->attribute_insert('disabled', 'disabled');
       messages::add_new(translations::get('PHP PDO driver for %%_name is not available.', ['name' => 'SQLite']), 'warning');
     }
-    $db = storages::get('db');
-    if (isset($db->driver)) {
+    $main = storages::get('main');
+    if (isset($main->driver)) {
       $form->child_delete('storage');
       $form->child_delete('button_install');
       messages::add_new('System was installed!', 'warning');
@@ -49,8 +49,8 @@ namespace effectivecore\modules\core {
         }
         if (count($form->errors) == 0) {
           switch ($values['driver']) {
-            case 'sqlite': $test = storages::get('db')->test($values['driver'], ['file_name' => $values['file_name']]); break;
-            default      : $test = storages::get('db')->test($values['driver'], [
+            case 'sqlite': $test = storages::get('main')->test($values['driver'], ['file_name' => $values['file_name']]); break;
+            default      : $test = storages::get('main')->test($values['driver'], [
                 'host_name'    => $values['host_name'],
                 'storage_name' => $values['storage_name'],
                 'user_name'    => $values['user_name'],

@@ -1,7 +1,7 @@
 entities
 - demo|entity
     name: demo
-    storage_id: db
+    storage_id: main
     fields
       id
         auto: true
