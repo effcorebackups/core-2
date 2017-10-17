@@ -35,16 +35,21 @@ namespace effectivecore\modules\user {
       );
     } else {
       $block = new markup('x-block', ['id' => 'admin_users']);
-      $thead = [['ID', 'EMail', 'Password hash', 'Created', 'Is embed', 'Actions']];
-      $tbody = entities::get('user')->select_instance_set();
-      foreach ($tbody as $c_row) {
+      $thead = [['ID', 'EMail', 'Nick', 'Created', 'Is embed', 'Actions']];
+      $tbody = [];
+      foreach (entities::get('user')->select_instance_set() as $c_user) {
         $c_actions = new markup('ul', ['class' => ['actions' => 'actions']]);
-        $c_actions->child_insert( new markup('li', [], new markup('a', ['href' => (new url('/user/'.$c_row->id))->get_full()], 'view') ) );
-        $c_actions->child_insert( new markup('li', [], new markup('a', ['href' => (new url('/user/'.$c_row->id.'/edit?'.urls::make_back_part()))->get_full()], 'edit') ) );
-        if ($c_row->is_embed != 1) $c_actions->child_insert( new markup('li', [], new markup('a', ['href' => (new url('/admin/users/delete/'.$c_row->id.'?'.urls::make_back_part()))->get_full()], 'delete') ) );
-        $c_row->is_embed = $c_row->is_embed ? 'Yes' : 'No';
-        $c_row->password_hash = '*****';
-        $c_row->actions = $c_actions;
+                                    $c_actions->child_insert( new markup('li', [], new markup('a', ['href' => (new url('/user/'.$c_user->id))->get_full()], 'view') ) );
+                                    $c_actions->child_insert( new markup('li', [], new markup('a', ['href' => (new url('/user/'.$c_user->id.'/edit?'.urls::make_back_part()))->get_full()], 'edit') ) );
+        if ($c_user->is_embed != 1) $c_actions->child_insert( new markup('li', [], new markup('a', ['href' => (new url('/admin/users/delete/'.$c_user->id.'?'.urls::make_back_part()))->get_full()], 'delete') ) );
+        $tbody[] = [
+          $c_user->id,
+          $c_user->email,
+          $c_user->nick.' ',
+          $c_user->created,
+          $c_user->is_embed ? 'Yes' : 'No',
+          $c_actions
+        ];
       }
       $block->child_insert(new table([], $tbody, $thead));
       return $block;
