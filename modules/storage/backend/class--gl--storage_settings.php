@@ -17,7 +17,7 @@ namespace effectivecore {
   static $changes_dynamic;
 
   static function init($group) {
-    console::add_log('storage', 'cache', 'storage "%%_storage" cache for group "%%_group" will be load', 'ok', 0, ['storage' => 'settings', 'group' => $group]);
+    console::add_log('storage', 'cache', 'storage %%_id cache for group %%_group will be load', 'ok', 0, ['id' => 'settings', 'group' => $group]);
     $cache = cache::get('settings--'.$group);
     if ($cache) static::$data[$group] = $cache;
     else        static::settings_cache_rebuild();
