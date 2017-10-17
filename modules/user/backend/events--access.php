@@ -25,7 +25,7 @@ namespace effectivecore\modules\user {
     }
   }
 
-  static function on_check_access_user_n_edit($id) {
+  static function on_check_access_user_edit($id) {
     $user = (new instance('user', ['id' => $id]))->select();
     if ($user) {
       if (!($user->id == users::get_current()->id ||                # not owner or

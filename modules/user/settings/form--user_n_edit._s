@@ -1,12 +1,12 @@
 forms
-- user_n_edit|form
+- user_edit|form
     attributes
-    - id: user_n_edit
+    - id: user_edit
     - novalidate: novalidate
     - method: post
     - class
       - user: user
-      - user-n-edit: user-n-edit
+      - user-edit: user-edit
     children
     - credentials|form_container
         tag_name: fieldset

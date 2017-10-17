@@ -48,11 +48,11 @@ namespace effectivecore\modules\user {
     }
   }
 
-  #########################
-  ### form: user_n_edit ###
-  #########################
+  #######################
+  ### form: user_edit ###
+  #######################
 
-  static function on_validate_user_n_edit($form, $fields, &$values) {
+  static function on_validate_user_edit($form, $fields, &$values) {
     if (!count($form->errors)) {
       $id = pages::$args['user_id'];
       switch ($form->clicked_button_name) {
@@ -75,7 +75,7 @@ namespace effectivecore\modules\user {
     }
   }
 
-  static function on_submit_user_n_edit($form, $fields, &$values) {
+  static function on_submit_user_edit($form, $fields, &$values) {
     $id = pages::$args['user_id'];
     switch ($form->clicked_button_name) {
       case 'save':
@@ -83,12 +83,12 @@ namespace effectivecore\modules\user {
         $user->password_hash = sha1($values['password_new']);
         if ($user->update()) {
           messages::add_new(
-            translations::get('Data of user with ID = %%_id was updated.', ['id' => $id])
+            translations::get('User %%_nick was updated.', ['nick' => $user->nick])
           );
           urls::go(urls::get_back_url() ?: '/user/'.$id);
         } else {
           messages::add_new(
-            'Data was not updated!', 'error'
+            translations::get('User %%_nick was not updated.', ['nick' => $user->nick]), 'error'
           );
         }
         break;

@@ -26,13 +26,13 @@ events
       for: user_delete
       handler: \effectivecore\events_form::on_validate
       weight: 0
-  - user_n_edit_default
-      for: user_n_edit
+  - user_edit_default
+      for: user_edit
       handler: \effectivecore\events_form::on_validate
       weight: 0
-  - user_n_edit
-      for: user_n_edit
-      handler: \effectivecore\modules\user\events_form::on_validate_user_n_edit
+  - user_edit
+      for: user_edit
+      handler: \effectivecore\modules\user\events_form::on_validate_user_edit
       weight: 1
   - registration_default
       for: registration
@@ -55,9 +55,9 @@ events
       for: user_delete
       handler: \effectivecore\modules\user\events_form::on_submit_user_delete
       weight: 0
-  - user_n_edit
-      for: user_n_edit
-      handler: \effectivecore\modules\user\events_form::on_submit_user_n_edit
+  - user_edit
+      for: user_edit
+      handler: \effectivecore\modules\user\events_form::on_submit_user_edit
       weight: 0
   - registration
       for: registration
