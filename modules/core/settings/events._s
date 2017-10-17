@@ -2,7 +2,7 @@ events
   on_form_init
   - installation
       for: installation
-      handler: \effectivecore\modules\core\events_form::on_init_install
+      handler: \effectivecore\modules\core\events_form::on_init_installation
       weight: 0
   on_form_validate
   - installation_default
@@ -11,10 +11,10 @@ events
       weight: 0
   - installation
       for: installation
-      handler: \effectivecore\modules\core\events_form::on_validate_install
+      handler: \effectivecore\modules\core\events_form::on_validate_installation
       weight: 0
   on_form_submit
   - installation
       for: installation
-      handler: \effectivecore\modules\core\events_form::on_submit_install
+      handler: \effectivecore\modules\core\events_form::on_submit_installation
       weight: 0

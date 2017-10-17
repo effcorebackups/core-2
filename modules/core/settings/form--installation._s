@@ -1,5 +1,5 @@
 forms
-- form_installation|form
+- installation|form
     attributes
     - id: installation
     - novalidate: novalidate
@@ -24,7 +24,7 @@ forms
                     title: MySQL
                     title_position: bottom
                     children
-                    - default|markup_simple
+                    - element|markup_simple
                         tag_name: input
                         attributes
                         - type: radio
@@ -34,7 +34,7 @@ forms
                     title: PostgreSQL
                     title_position: bottom
                     children
-                    - default|markup_simple
+                    - element|markup_simple
                         tag_name: input
                         attributes
                         - type: radio
@@ -48,7 +48,7 @@ forms
                   args
                   - chars: "a"-"z", "A"-"Z", "0"-"9", "-", "_"
                 children
-                - default|markup_simple
+                - element|markup_simple
                     tag_name: input
                     attributes
                     - type: text
@@ -67,7 +67,7 @@ forms
                   - examples: 127.0.0.1, example.com
                   - chars: "a"-"z", "A"-"Z", "0"-"9", "-", "_", "."
                 children
-                - default|markup_simple
+                - element|markup_simple
                     tag_name: input
                     attributes
                     - type: text
@@ -85,7 +85,7 @@ forms
                   args
                   - chars: "a"-"z", "A"-"Z", "0"-"9", "-", "_"
                 children
-                - default|markup_simple
+                - element|markup_simple
                     tag_name: input
                     attributes
                     - type: text
@@ -99,7 +99,7 @@ forms
             - password|form_field
                 title: Password
                 children
-                - default|markup_simple
+                - element|markup_simple
                     tag_name: input
                     attributes
                     - type: password
@@ -120,7 +120,7 @@ forms
                     title: SQLite
                     title_position: bottom
                     children
-                    - default|markup_simple
+                    - element|markup_simple
                         tag_name: input
                         attributes
                         - type: radio
@@ -134,7 +134,7 @@ forms
                   args
                   - chars: "a"-"z", "A"-"Z", "0"-"9", "-", "_", ".", "/"
                 children
-                - default|markup_simple
+                - element|markup_simple
                     tag_name: input
                     attributes
                     - type: text

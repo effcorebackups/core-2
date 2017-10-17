@@ -19,4 +19,4 @@ pages
     - form_installation
         region: content_1_1
         type: link
-        npath: forms/core/form_installation
+        npath: forms/core/installation

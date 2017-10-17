@@ -12,24 +12,24 @@ namespace effectivecore\modules\core {
           use \effectivecore\modules\storage\storages_factory as storages;
           abstract class events_form extends \effectivecore\events_form {
 
-  #####################
-  ### form: install ###
-  #####################
+  ##########################
+  ### form: installation ###
+  ##########################
 
-  static function on_init_install($form, $fields) {
+  static function on_init_installation($form, $fields) {
     if (!extension_loaded('pdo')) {
       messages::add_new('PHP PDO extension is not available.', 'warning');
     }
     if (!extension_loaded('pdo_mysql')) {
-      $fields['storage/default/driver/mysql']->child_select('default')->attribute_insert('disabled', 'disabled');
+      $fields['storage/default/driver/mysql']->child_select('element')->attribute_insert('disabled', 'disabled');
       messages::add_new(translations::get('PHP PDO driver for %%_name is not available.', ['name' => 'MySQL']), 'warning');
     }
     if (!extension_loaded('pdo_pgsql')) {
-      $fields['storage/default/driver/pgsql']->child_select('default')->attribute_insert('disabled', 'disabled');
+      $fields['storage/default/driver/pgsql']->child_select('element')->attribute_insert('disabled', 'disabled');
       messages::add_new(translations::get('PHP PDO driver for %%_name is not available.', ['name' => 'PostgreSQL']), 'warning');
     }
     if (!extension_loaded('pdo_sqlite')) {
-      $fields['storage/sqlite/driver/sqlite']->child_select('default')->attribute_insert('disabled', 'disabled');
+      $fields['storage/sqlite/driver/sqlite']->child_select('element')->attribute_insert('disabled', 'disabled');
       messages::add_new(translations::get('PHP PDO driver for %%_name is not available.', ['name' => 'SQLite']), 'warning');
     }
     $main = storages::get('main');
@@ -40,7 +40,7 @@ namespace effectivecore\modules\core {
     }
   }
 
-  static function on_validate_install($form, $fields, &$values) {
+  static function on_validate_installation($form, $fields, &$values) {
     switch ($form->clicked_button_name) {
       case 'install':
         if (empty($values['driver'])) {
@@ -60,17 +60,17 @@ namespace effectivecore\modules\core {
           if ($test !== true) {
             messages::add_new('Storage is not available with these credentials!', 'error');
             messages::add_new($test['message'], 'error');
-            if ($test['code'] == '1049') $form->add_error('storage/default/storage_name/default');
-            if ($test['code'] == '2002') $form->add_error('storage/default/host_name/default');
-            if ($test['code'] == '1045') $form->add_error('storage/default/user_name/default');
-            if ($test['code'] == '1045') $form->add_error('storage/default/password/default');
+            if ($test['code'] == '1049') $form->add_error('storage/default/storage_name/element');
+            if ($test['code'] == '2002') $form->add_error('storage/default/host_name/element');
+            if ($test['code'] == '1045') $form->add_error('storage/default/user_name/element');
+            if ($test['code'] == '1045') $form->add_error('storage/default/password/element');
           }
         }
         break;
     }
   }
 
-  static function on_submit_install($form, $fields, &$values) {
+  static function on_submit_installation($form, $fields, &$values) {
     switch ($form->clicked_button_name) {
       case 'install':
         $params = new \stdClass;
