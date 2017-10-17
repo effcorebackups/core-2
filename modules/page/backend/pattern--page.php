@@ -106,7 +106,7 @@ namespace effectivecore {
       $c_region = isset($c_block->region) ?
                         $c_block->region : 'content_1_1';
       switch ($c_block->type) {
-        case 'text': $contents[$c_region][] = $c_block->content; break;
+        case 'text': $contents[$c_region][] = new text($c_block->content); break;
         case 'code': $contents[$c_region][] = call_user_func_array($c_block->handler, pages::$args); break;
         case 'link': $contents[$c_region][] = storages::get('settings')->select_by_npath($c_block->npath); break;
         default    : $contents[$c_region][] = $c_block;

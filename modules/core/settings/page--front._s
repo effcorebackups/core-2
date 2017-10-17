@@ -1,5 +1,5 @@
 pages
-- page_front|page
+- front|page
     title: Front page
     display
       url
