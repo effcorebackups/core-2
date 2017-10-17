@@ -4,8 +4,8 @@ tokens
     match: %%_user_id
     type: code
     handler: \effectivecore\modules\user\events_token::on_replace
-- user_email
-    match: %%_user_email
+- email
+    match: %%_email
     type: code
     handler: \effectivecore\modules\user\events_token::on_replace
 - nick
@@ -17,8 +17,8 @@ tokens
     match: %%_user_id_context
     type: code
     handler: \effectivecore\modules\user\events_token::on_replace
-- user_email_context
-    match: %%_user_email_context
+- email_context
+    match: %%_email_context
     type: code
     handler: \effectivecore\modules\user\events_token::on_replace
 - nick_context
