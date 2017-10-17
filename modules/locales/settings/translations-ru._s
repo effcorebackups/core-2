@@ -47,9 +47,7 @@ translations
   - Driver is not selected!: Драйвер не выбран!
   - Driver: Драйвер
   - Dynamic block: Динамический блок
-  - Edit profile %%_user_nick_context{2}: Редактировать профиль %%_user_nick_context{2}
-  - Edit profile: Редактировать профиль
-  - edit profile: редактировать профиль
+  - Edit user %%_user_nick_context{2}: Редактировать пользователя %%_user_nick_context{2}
   - edit: редактировать
   - Element %%_info.: Элемент %%_info.
   - Elements: Элементы
@@ -139,7 +137,6 @@ translations
   - Path: Путь
   - PHP PDO driver for %%_name is not available.: PHP PDO драйвер для %%_name не доступен.
   - PHP PDO extension is not available.: PHP PDO расширение не доступно.
-  - profile: профиль
   - Queries: Запросы
   - query: запрос
   - Radios (macro): Переключатели (макро)
