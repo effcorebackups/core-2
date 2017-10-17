@@ -186,8 +186,8 @@ translations
   - User %%_nick was not deleted!: Пользователь %%_nick не был удален.
   - User %%_nick was not updated.: Пользователь %%_nick не был обновлен.
   - User %%_nick was updated.: Пользователь %%_nick был обновлен.
-  - User %%_user_nick_context{2}: Пользователь %%_user_nick_context{2}
-  - User %%_user_nick: Пользователь %%_user_nick
+  - User %%_nick_context{2}: Пользователь %%_user_nick_context{2}
+  - User %%_nick: Пользователь %%_user_nick
   - User menu: Меню пользователя
   - User name: Имя пользователя
   - User roles: Роли пользователя

@@ -38,7 +38,7 @@ tree_items
     id: user_n
     parent_is_tree: true
     parent_id: user
-    title: User %%_user_nick
+    title: User %%_nick
     attributes
     - href: /user/%%_user_id
     - class

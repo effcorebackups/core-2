@@ -1,6 +1,6 @@
 pages
 - admin_user_delete|page
-    title: Delete user %%_user_nick_context{4}?
+    title: Delete user %%_nick_context{4}?
     display
       url
         match: %^/admin/users/delete/[0-9]+$%
