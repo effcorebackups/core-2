@@ -99,9 +99,9 @@ namespace effectivecore\modules\user {
     }
   }
 
-  ########################
+  ###################
   ### form: login ###
-  ########################
+  ###################
 
   static function on_validate_login($form, $fields, &$values) {
     switch ($form->clicked_button_name) {
