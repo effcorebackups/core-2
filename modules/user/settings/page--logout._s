@@ -1,6 +1,7 @@
 pages
 - logout|page
     title: Loggin out
+    https: true
     display
       url
         match: %^/user/logout$%

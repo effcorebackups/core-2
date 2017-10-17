@@ -1,6 +1,7 @@
 pages
 - users|page
     title: Users
+    https: true
     display
       url
         match: %^/admin/users$%

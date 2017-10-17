@@ -1,6 +1,7 @@
 pages
 - roles|page
     title: Roles
+    https: true
     display
       url
         match: %^/admin/roles$%

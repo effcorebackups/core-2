@@ -1,6 +1,7 @@
 pages
 - modules|page
     title: Modules
+    https: true
     display
       url
         match: %^/admin/modules$%

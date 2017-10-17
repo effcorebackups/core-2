@@ -1,6 +1,7 @@
 pages
 - demo|page
     title: Demo
+    https: true
     display
       url
         match: %^/develop/demo$%

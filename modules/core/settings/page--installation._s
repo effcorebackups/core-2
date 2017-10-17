@@ -1,6 +1,7 @@
 pages
 - installation|page
     title: Installation
+    https: true
     display
       url
         match: %^/install$%

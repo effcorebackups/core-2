@@ -1,6 +1,7 @@
 pages
 - decoration|page
     title: Decoration
+    https: true
     display
       url
         match: %^/admin/decoration$%
