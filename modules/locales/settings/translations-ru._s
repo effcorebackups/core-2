@@ -38,7 +38,7 @@ translations
   - Data was not updated!: Данные не были обновлены!
   - Date: Дата
   - Decoration: Оформление
-  - Delete user %%_user_nick_context{4}?: Удалить пользователя %%_user_nick_context{4}?
+  - Delete user %%_nick_context{4}?: Удалить пользователя %%_nick_context{4}?
   - delete: удалить
   - Demo: Демо
   - Description: Описание
@@ -46,7 +46,7 @@ translations
   - Driver is not selected!: Драйвер не выбран!
   - Driver: Драйвер
   - Dynamic block: Динамический блок
-  - Edit user %%_user_nick_context{2}: Редактировать пользователя %%_user_nick_context{2}
+  - Edit user %%_nick_context{2}: Редактировать пользователя %%_nick_context{2}
   - edit: редактировать
   - Element %%_info.: Элемент %%_info.
   - Elements: Элементы
@@ -186,8 +186,8 @@ translations
   - User %%_nick was not deleted!: Пользователь %%_nick не был удален.
   - User %%_nick was not updated.: Пользователь %%_nick не был обновлен.
   - User %%_nick was updated.: Пользователь %%_nick был обновлен.
-  - User %%_nick_context{2}: Пользователь %%_user_nick_context{2}
-  - User %%_nick: Пользователь %%_user_nick
+  - User %%_nick_context{2}: Пользователь %%_nick_context{2}
+  - User %%_nick: Пользователь %%_nick
   - User menu: Меню пользователя
   - User name: Имя пользователя
   - User roles: Роли пользователя
