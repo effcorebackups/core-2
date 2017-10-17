@@ -138,11 +138,11 @@ namespace effectivecore\modules\user {
     }
   }
 
-  ###########################
-  ### form: user_register ###
-  ###########################
+  ##########################
+  ### form: registration ###
+  ##########################
 
-  static function on_submit_user_register($form, $fields, &$values) {
+  static function on_submit_registration($form, $fields, &$values) {
     switch ($form->clicked_button_name) {
       case 'register':
         $user = (new instance('user', [
