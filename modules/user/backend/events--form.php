@@ -110,9 +110,9 @@ namespace effectivecore\modules\user {
           $user = (new instance('user', [
             'email' => $values['email']
           ]))->select();
-          if ($user     &&
-              $user->id &&
-              $user->password_hash !== sha1($values['password'])) {
+          if (!$user || (
+               $user->password_hash &&
+               $user->password_hash !== sha1($values['password']))) {
             $form->add_error('credentials/email/element');
             $form->add_error('credentials/password/element');
             messages::add_new('Incorrect email or password!', 'error');
