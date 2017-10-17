@@ -17,31 +17,30 @@ namespace effectivecore\modules\user {
           use \effectivecore\modules\user\session_factory as session;
           abstract class events_form extends \effectivecore\events_form {
 
-  ###########################
-  ### form: user_n_delete ###
-  ###########################
+  #########################
+  ### form: user_delete ###
+  #########################
 
-  static function on_submit_user_n_delete($form, $fields, &$values) {
+  static function on_submit_user_delete($form, $fields, &$values) {
     $id = pages::$args['user_id'];
     switch ($form->clicked_button_name) {
       case 'delete':
-        $result = (new instance('user', [
+        $user = (new instance('user', [
           'id' => $id,
-        ]))->delete();
-        if ($result) {
-          $session_set = entities::get('session')->select_instance_set(['user_id' => $id]);
-          if ($session_set) {
-            foreach ($session_set as $c_session) {
-              $c_session->delete();
+        ]))->select();
+        if ($user) {
+          $nick = $user->nick;
+          if ($user->delete()) {
+            $sessions = entities::get('session')->select_instance_set(['user_id' => $id]);
+            if ($sessions) {
+              foreach ($sessions as $c_session) {
+                $c_session->delete();
+              }
             }
-          }
-          messages::add_new(
-            translations::get('User with ID = %%_id was deleted.', ['id' => $id])
-          );
-          urls::go(urls::get_back_url() ?: '/admin/users');
-        } else {
-          messages::add_new('User was not deleted!', 'error');
+               messages::add_new(translations::get('User %%_nick was deleted.',     ['nick' => $nick]));}
+          else messages::add_new(translations::get('User %%_nick was not deleted!', ['nick' => $nick]), 'error');
         }
+        urls::go(urls::get_back_url() ?: '/admin/users');
         break;
       case 'cancel':
         urls::go(urls::get_back_url() ?: '/admin/users');

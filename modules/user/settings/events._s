@@ -22,8 +22,8 @@ events
       for: logout
       handler: \effectivecore\events_form::on_validate
       weight: 0
-  - user_n_delete_default
-      for: user_n_delete
+  - user_delete_default
+      for: user_delete
       handler: \effectivecore\events_form::on_validate
       weight: 0
   - user_n_edit_default
@@ -51,9 +51,9 @@ events
       for: logout
       handler: \effectivecore\modules\user\events_form::on_submit_logout
       weight: 0
-  - user_n_delete
-      for: user_n_delete
-      handler: \effectivecore\modules\user\events_form::on_submit_user_n_delete
+  - user_delete
+      for: user_delete
+      handler: \effectivecore\modules\user\events_form::on_submit_user_delete
       weight: 0
   - user_n_edit
       for: user_n_edit

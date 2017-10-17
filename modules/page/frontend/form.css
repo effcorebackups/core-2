@@ -81,5 +81,5 @@
   form x-container.palette x-field input[type="radio"]:checked {border-color: black}
 
   /* particular cases */
-  form#user_n_delete,
+  form#user_delete,
   form#logout {width: 320px; margin: 100px auto}

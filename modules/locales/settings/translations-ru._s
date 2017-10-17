@@ -39,7 +39,7 @@ translations
   - Data was not updated!: Данные не были обновлены!
   - Date: Дата
   - Decoration: Оформление
-  - Delete profile %%_user_nick_context{4}?: Удалить профиль %%_user_nick_context{4}?
+  - Delete user %%_user_nick_context{4}?: Удалить пользователя %%_user_nick_context{4}?
   - delete: удалить
   - Demo: Демо
   - Description: Описание
@@ -197,7 +197,8 @@ translations
   - User roles: Роли пользователя
   - User was not deleted!: Пользователь не был удален!
   - User was not registered!: Пользователь не был зарегистрирован!
-  - User with ID = %%_id was deleted.: Пользователь с ID = %%_id был удален.
+  - User %%_nick was deleted.: Пользователь %%_nick был удален.
+  - User %%_nick was not deleted!: Пользователь %%_nick не был удален.
   - User with this EMail was already registered!: Пользователь с таким Адресом электронной почты уже был зарегистрирован!
   - User with this Nick was already registered!: Пользователь с таким Ником уже был зарегистрирован!
   - User: Пользователь

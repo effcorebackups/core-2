@@ -1,6 +1,6 @@
 pages
-- page_admin_users_delete_n|page
-    title: Delete profile %%_user_nick_context{4}?
+- admin_user_delete|page
+    title: Delete user %%_user_nick_context{4}?
     display
       url
         match: %^/admin/users/delete/[0-9]+$%
@@ -10,6 +10,10 @@ pages
       roles
       - admins: admins
     content
+    - check_access_user_delete
+        region: content_1_1
+        type: code
+        handler: \effectivecore\modules\user\events_access::on_check_access_user_delete
     - block_tree_main
         region: nav
         type: link
@@ -18,11 +22,7 @@ pages
         region: nav
         type: link
         npath: trees/user/user
-    - check_access_user_n_delete
-        region: content_1_1
-        type: code
-        handler: \effectivecore\modules\user\events_access::on_check_access_user_n_delete
-    - form_user_n_delete
+    - form_user_delete
         region: content_1_1
         type: link
-        npath: forms/user/user_n_delete
+        npath: forms/user/user_delete
