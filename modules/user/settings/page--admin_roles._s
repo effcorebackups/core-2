@@ -1,5 +1,5 @@
 pages
-- page_admin_roles|page
+- admin_roles|page
     title: Roles
     display
       url
