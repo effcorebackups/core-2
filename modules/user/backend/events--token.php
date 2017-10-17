@@ -14,9 +14,9 @@ namespace effectivecore\modules\user {
   static function on_replace($match, $args = []) {
     if (!empty(users::get_current()->id)) {
       switch ($match) {
-        case '%%_user_id' : return users::get_current()->id;
-        case '%%_email'   : return users::get_current()->email;
-        case '%%_nick'    : return users::get_current()->nick;
+        case '%%_user_id': return users::get_current()->id;
+        case '%%_email'  : return users::get_current()->email;
+        case '%%_nick'   : return users::get_current()->nick;
         case '%%_user_id_context':
         case '%%_email_context':
         case '%%_nick_context':
