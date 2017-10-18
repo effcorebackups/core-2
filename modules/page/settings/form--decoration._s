@@ -4,8 +4,6 @@ forms
     - id: decoration
     - novalidate: novalidate
     - method: post
-    - class
-      - decoration: decoration
     children
     - colors|form_container
         tag_name: fieldset

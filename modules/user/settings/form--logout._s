@@ -4,9 +4,6 @@ forms
     - id: logout
     - novalidate: novalidate
     - method: post
-    - class
-      - user: user
-      - user-logout: user-logout
     children
     - button_logout|markup
         tag_name: button

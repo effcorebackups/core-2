@@ -4,9 +4,6 @@ forms
     - id: login
     - novalidate: novalidate
     - method: post
-    - class
-      - user: user
-      - user-login: user-login
     children
     - credentials|form_container
         tag_name: fieldset

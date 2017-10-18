@@ -4,9 +4,6 @@ forms
     - id: registration
     - novalidate: novalidate
     - method: post
-    - class
-      - user: user
-      - user-registration: user-registration
     children
     - credentials|form_container
         tag_name: fieldset
