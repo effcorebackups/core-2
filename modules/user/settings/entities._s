@@ -4,8 +4,7 @@ entities
     storage_id: main
     fields
       id
-        auto: true
-        type: integer
+        type: serial
         not_null: true
       email
         type: varchar

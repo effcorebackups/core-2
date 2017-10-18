@@ -102,8 +102,15 @@ namespace effectivecore {
     $this->init();
     $field_desc = [];
     foreach ($entity->get_fields_info() as $c_name => $c_info) {
-      $c_properties = [$c_info->type.(isset($c_info->size) ? '('.$c_info->size.')' : '')];
-      if (property_exists($c_info, 'auto')     && $c_info->auto)     $c_properties[] = 'auto_increment';
+      switch ($c_info->type) {
+        case 'serial':
+          if ($this->driver == 'mysql')  $c_properties = ['integer auto_increment'];
+          if ($this->driver == 'sqlite') $c_properties = ['integer autoincrement'];
+          if ($this->driver == 'pgsql')  $c_properties = ['serial'];
+          break;
+        default: $c_properties = [$c_info->type.(isset($c_info->size) ?
+                                                   '('.$c_info->size.')' : '')];
+      }
       if (property_exists($c_info, 'not_null') && $c_info->not_null) $c_properties[] = 'not null';
       if (property_exists($c_info, 'null')     && $c_info->null)     $c_properties[] = 'null';
       if (property_exists($c_info, 'default')) {

@@ -21,7 +21,7 @@ namespace effectivecore {
 
   function get_auto_id() {
     foreach ($this->fields as $name => $info) {
-      if (!empty($info->auto)) {
+      if ($info->type == 'serial') {
         return $name;
       }
     }
