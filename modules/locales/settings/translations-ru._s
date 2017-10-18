@@ -66,8 +66,8 @@ translations
   - Field "%%_title" must be selected!: Поле "%%_title" должно быть выбрано!
   - Field "%%_title" must contain a maximum of %%_num characters!: Поле "%%_title" должно содержать максимум %%_num символов!
   - Field "%%_title" must contain a minimum of %%_num characters!: Поле "%%_title" должно содержать минимум %%_num символов!
-  - Field must contain a maximum of %%_num characters.: Поле должно содержать минимум %%_num символов.
-  - Field must contain a minimum of %%_num characters.: Поле должно содержать максимум %%_num символов.
+  - Field must contain a maximum of %%_num characters.: Поле должно содержать максимум %%_num символов.
+  - Field must contain a minimum of %%_num characters.: Поле должно содержать минимум %%_num символов.
   - Field value is less than %%_value.: Значение поля меньше чем %%_value.
   - Field value is more than %%_value.: Значение поля больше чем %%_value.
   - Field value is not a valid number.: Значение поля не является допустимым числом.
@@ -91,6 +91,7 @@ translations
   - Instances of entity %%_name was not added!: Экземпляры сущности %%_name не были добавлены!
   - Is always on: Всегда включен
   - Is embed: Встроенный
+  - Leave the field blank if you do not want to change its value.: Оставьте поле пустым если не хотите менять его значение.
   - load: загрузка
   - Locales: Локализации
   - Loggin out: Выход
@@ -114,15 +115,13 @@ translations
   - Modules was installed.: Модули были установлены.
   - Modules: Модули
   - Name: Имя
-  - New password must be different from the old password!: Новый пароль должен отличаться от старого пароля!
+  - New password must be different from the current password!: Новый пароль должен отличаться от текущего!
   - New password: Новый пароль
   - Nick: Ник
   - no items: нет элементов
   - No: Нет
   - Number: Число
   - Object: Объект
-  - Old password is incorrect!: Старый пароль неверен!
-  - Old password: Старый пароль
   - Page: Страница
   - Parameter: Параметр
   - Password hash: Хеш пароля

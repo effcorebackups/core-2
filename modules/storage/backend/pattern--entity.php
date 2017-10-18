@@ -27,12 +27,12 @@ namespace effectivecore {
     }
   }
 
-  function get_keys($only_unique = true) {
+  function get_keys($types = ['primary key', 'unique key', 'key']) {
     $keys = [];
     foreach ($this->indexes as $c_index) {
-      if ($c_index->type == 'unique key'  ||
-          $c_index->type == 'primary key' ||
-         ($c_index->type == 'key' && !$only_unique)) {
+      if (($c_index->type == 'primary key' && in_array($c_index->type, $types)) ||
+          ($c_index->type == 'unique key'  && in_array($c_index->type, $types)) ||
+          ($c_index->type == 'key'         && in_array($c_index->type, $types))) {
         $keys += $c_index->fields;
       }
     }

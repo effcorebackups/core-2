@@ -33,31 +33,26 @@ namespace effectivecore {
     }
   }
 
-  function get_entity()            {return entities::get($this->entity_name);}
-  function get_entity_name()       {return $this->get_entity()->get_name();}
-  function get_entity_fields()     {return $this->get_entity()->get_fields();}
-  function get_entity_keys()       {return $this->get_entity()->get_keys();}
-  function get_entity_storage_id() {return $this->get_entity()->get_storage_id();}
-  function get_entity_auto_id()    {return $this->get_entity()->get_auto_id();}
+  function get_entity() {return entities::get($this->entity_name);}
   function set_entity_name($entity_name) {$this->entity_name = $entity_name;}
 
   function select($custom_ids = []) {
-    $storage = storages::get($this->get_entity_storage_id());
+    $storage = storages::get($this->get_entity()->get_storage_id());
     return $storage->select_instance($this, $custom_ids);
   }
 
   function insert() {
-    $storage = storages::get($this->get_entity_storage_id());
+    $storage = storages::get($this->get_entity()->get_storage_id());
     return $storage->insert_instance($this);
   }
 
   function update() {
-    $storage = storages::get($this->get_entity_storage_id());
+    $storage = storages::get($this->get_entity()->get_storage_id());
     return $storage->update_instance($this);
   }
 
   function delete() {
-    $storage = storages::get($this->get_entity_storage_id());
+    $storage = storages::get($this->get_entity()->get_storage_id());
     return $storage->delete_instance($this);
   }
 

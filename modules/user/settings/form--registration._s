@@ -30,7 +30,7 @@ forms
                 - type: text
                 - name: nick
                 - required: required
-                - minlength: 5
+                - minlength: 4
                 - maxlength: 255
         - password|form_field
             title: Password

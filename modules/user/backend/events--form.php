@@ -61,25 +61,45 @@ namespace effectivecore\modules\user {
 
   static function on_validate_user_edit($form, $fields, &$values) {
     static::on_validate($form, $fields, $values);
-    if (!count($form->errors)) {
-      $id = pages::$args['user_id'];
-      switch ($form->clicked_button_name) {
-        case 'save':
-          $user = (new instance('user', ['id' => $id]))->select();
-          if ($user->password_hash !== sha1($values['password_old'])) {
-            $form->add_error('credentials/password_old/element',
-              'Old password is incorrect!'
+    switch ($form->clicked_button_name) {
+      case 'save':
+        if (count($form->errors) == 0) {
+          $id = pages::$args['user_id'];
+        # check security
+          $test_pass = (new instance('user', ['id' => $id]))->select();
+          if ($test_pass->password_hash !== factory::hash_get($values['password'])) {
+            $form->add_error('credentials/password/element',
+              translations::get('Field "%%_title" contains incorrect value!', [
+                'title' => translations::get($fields['credentials/password']->title)
+              ])
             );
             return;
           }
-          if ($values['password_new'] ==
-              $values['password_old']) {
+        # test email
+          $test_email = (new instance('user', ['email' => $values['email']]))->select();
+          if ($test_email &&
+              $test_email->id != $id) {
+            $form->add_error('credentials/email/element', 'User with this EMail was already registered!');
+            return;
+          }
+        # test nick
+          $test_nick = (new instance('user', ['nick' => $values['nick']]))->select();
+          if ($test_nick &&
+              $test_nick->id != $id) {
+            $form->add_error('credentials/nick/element', 'User with this Nick was already registered!');
+            return;
+          }
+        # test new password
+          if ($values['password'] ==
+              $values['password_new']) {
             $form->add_error('credentials/password_new/element',
-              'New password must be different from the old password!'
+              'New password must be different from the current password!'
             );
             return;
           }
-      }
+        # ...
+        }
+        break;
     }
   }
 
@@ -88,7 +108,9 @@ namespace effectivecore\modules\user {
     switch ($form->clicked_button_name) {
       case 'save':
         $user = (new instance('user', ['id' => $id]))->select();
-        $user->password_hash = sha1($values['password_new']);
+        $user->email         = $values['email'];
+        $user->nick          = $values['nick'];
+        $user->password_hash = factory::hash_get($values['password_new']);
         if ($user->update()) {
           messages::add_new(
             translations::get('User %%_nick was updated.', ['nick' => $user->nick])
@@ -120,7 +142,7 @@ namespace effectivecore\modules\user {
           ]))->select();
           if (!$user || (
                $user->password_hash &&
-               $user->password_hash !== sha1($values['password']))) {
+               $user->password_hash !== factory::hash_get($values['password']))) {
             $form->add_error('credentials/email/element');
             $form->add_error('credentials/password/element');
             messages::add_new('Incorrect email or password!', 'error');
@@ -138,7 +160,7 @@ namespace effectivecore\modules\user {
         ]))->select();
         if ($user     &&
             $user->id &&
-            $user->password_hash === sha1($values['password'])) {
+            $user->password_hash === factory::hash_get($values['password'])) {
           session::init($user->id);
           urls::go('/user/'.$user->id);
         }
@@ -176,7 +198,7 @@ namespace effectivecore\modules\user {
         $user = (new instance('user', [
           'email'         => $values['email'],
           'nick'          => $values['nick'],
-          'password_hash' => sha1($values['password']),
+          'password_hash' => factory::hash_get($values['password']),
           'created'       => factory::datetime_get_curent()
         ]))->insert();
         if ($user) {

@@ -10,6 +10,18 @@ forms
         title: Credentials
         title_tag_name: legend
         children
+        - password|form_field
+            title: Password
+            children
+            - element|markup_simple
+                tag_name: input
+                attributes
+                - type: password
+                - name: password
+                - required: required
+                - minlength: 5
+                - maxlength: 255
+                - autocomplete: off
         - email|form_field
             title: EMail
             children
@@ -21,7 +33,6 @@ forms
                 - required: required
                 - minlength: 5
                 - maxlength: 255
-                - disabled: disabled
         - nick|form_field
             title: Nick
             children
@@ -31,31 +42,17 @@ forms
                 - type: text
                 - name: nick
                 - required: required
-                - minlength: 5
+                - minlength: 4
                 - maxlength: 255
-                - disabled: disabled
-        - password_old|form_field
-            title: Old password
-            children
-            - element|markup_simple
-                tag_name: input
-                attributes
-                - type: password
-                - name: password_old
-                - required: required
-                - minlength: 5
-                - maxlength: 255
-                - autocomplete: off
         - password_new|form_field
             title: New password
+            description: Leave the field blank if you do not want to change its value.
             children
             - element|markup_simple
                 tag_name: input
                 attributes
                 - type: password
                 - name: password_new
-                - required: required
-                - minlength: 5
                 - maxlength: 255
                 - autocomplete: off
     - button_save|markup

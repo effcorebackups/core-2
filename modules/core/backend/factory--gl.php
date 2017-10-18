@@ -221,4 +221,8 @@ namespace effectivecore {
     return date(format_datetime, time());
   }
 
+  static function hash_get($data) {
+    return sha1($data);
+  }
+
 }}
