@@ -4,7 +4,7 @@ pages
     https: true
     display
       url
-        match: %^/install$%
+        match: %^/installation$%
     access
       roles
       - anonymous: anonymous
