@@ -263,8 +263,8 @@ namespace effectivecore {
     }
 
   # check minimum length
-    if ($element->attribute_select('minlength') &&
-        $element->attribute_select('minlength') > strlen($new_value)) {
+    if ($element->attribute_select('minlength') && strlen($new_value) &&
+        $element->attribute_select('minlength')  > strlen($new_value)) {
       $form->add_error($npath.'/element',
         translations::get('Field "%%_title" must contain a minimum of %%_num characters!', ['title' => $title, 'num' => $element->attribute_select('minlength')])
       );

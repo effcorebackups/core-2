@@ -108,9 +108,11 @@ namespace effectivecore\modules\user {
     switch ($form->clicked_button_name) {
       case 'save':
         $user = (new instance('user', ['id' => $id]))->select();
-        $user->email         = $values['email'];
-        $user->nick          = $values['nick'];
-        $user->password_hash = factory::hash_get($values['password_new']);
+        $user->email = $values['email'];
+        $user->nick  = $values['nick'];
+        if ($values['password_new']) {
+          $user->password_hash = factory::hash_get($values['password_new']);
+        }
         if ($user->update()) {
           messages::add_new(
             translations::get('User %%_nick was updated.', ['nick' => $user->nick])
@@ -118,7 +120,7 @@ namespace effectivecore\modules\user {
           urls::go(urls::get_back_url() ?: '/user/'.$id);
         } else {
           messages::add_new(
-            translations::get('User %%_nick was not updated.', ['nick' => $user->nick]), 'error'
+            translations::get('User %%_nick was not updated.', ['nick' => $user->nick]), 'warning'
           );
         }
         break;

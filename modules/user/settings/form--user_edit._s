@@ -10,18 +10,6 @@ forms
         title: Credentials
         title_tag_name: legend
         children
-        - password|form_field
-            title: Password
-            children
-            - element|markup_simple
-                tag_name: input
-                attributes
-                - type: password
-                - name: password
-                - required: required
-                - minlength: 5
-                - maxlength: 255
-                - autocomplete: off
         - email|form_field
             title: EMail
             children
@@ -53,6 +41,19 @@ forms
                 attributes
                 - type: password
                 - name: password_new
+                - minlength: 5
+                - maxlength: 255
+                - autocomplete: off
+        - password|form_field
+            title: Password
+            children
+            - element|markup_simple
+                tag_name: input
+                attributes
+                - type: password
+                - name: password
+                - required: required
+                - minlength: 5
                 - maxlength: 255
                 - autocomplete: off
     - button_save|markup
