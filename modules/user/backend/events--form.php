@@ -97,7 +97,6 @@ namespace effectivecore\modules\user {
             );
             return;
           }
-        # ...
         }
         break;
     }
