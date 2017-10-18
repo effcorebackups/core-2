@@ -156,7 +156,6 @@ translations
   - State.: Сост.
   - Static block: Статический блок
   - storage %%_id cache for group %%_group will be load: кэш хранилища %%_id для группы %%_group будет загружен
-  - Storage %%_id is not available!: Хранилище %%_id не доступно!
   - storage %%_id was initialized: хранилище %%_id было инициализировано
   - Storage is not available with these credentials!: Хранилище не доступно с этими учетными данными!
   - Storage name: Имя хранилища

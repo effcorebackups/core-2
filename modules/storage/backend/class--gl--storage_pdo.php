@@ -39,7 +39,7 @@ namespace effectivecore {
         $this->is_init = true;
       } catch (\PDOException $e) {
         factory::send_header_and_exit('access_denided',
-          translations::get('Storage %%_id is not available!', ['%%_id' => $this->id])
+          'Storage '.$this->id.' is not available!'
         );
       }
     }
