@@ -266,8 +266,7 @@ namespace effectivecore {
     if ($element->attribute_select('minlength') &&
         $element->attribute_select('minlength') > strlen($new_value)) {
       $form->add_error($npath.'/element',
-        translations::get('Field "%%_title" contains too few characters!', ['title' => $title]).br.
-        translations::get('Must be at least %%_value characters long.', ['value' => $element->attribute_select('minlength')])
+        translations::get('Field "%%_title" must contain a minimum of %%_num characters!', ['title' => $title, 'num' => $element->attribute_select('minlength')])
       );
       return;
     }
@@ -276,8 +275,7 @@ namespace effectivecore {
     if ($element->attribute_select('maxlength') &&
         $element->attribute_select('maxlength') < strlen($new_value)) {
       $form->add_error($npath.'/element',
-        translations::get('Field "%%_title" contains too much characters!', ['title' => $title]).br.
-        translations::get('Must be no more than %%_value characters.', ['value' => $element->attribute_select('maxlength')]).br.
+        translations::get('Field "%%_title" must contain a maximum of %%_num characters!', ['title' => $title, 'num' => $element->attribute_select('maxlength')]).br.
         translations::get('Value was trimmed to the required length!').br.
         translations::get('Check field again before submit.')
       );

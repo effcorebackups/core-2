@@ -62,12 +62,12 @@ translations
   - Field "%%_title" can not be blank!: Поле "%%_title" не может быть пустым!
   - Field "%%_title" contains an incorrect email address!: Поле "%%_title" содержит неверный адрес электронной почты!
   - Field "%%_title" contains incorrect value!: Поле "%%_title" содержит неверное значение!
-  - Field "%%_title" contains too few characters!: Поле "%%_title" содержит слишком мало символов!
-  - Field "%%_title" contains too much characters!: Поле "%%_title" содержит слишком много символов!
   - Field "%%_title" is not support multiple select!: Поле "%%_title" не поддерживает множественный выбор!
   - Field "%%_title" must be selected!: Поле "%%_title" должно быть выбрано!
-  - Field must contain a maximum of %%_lenght characters.: Поле должно содержать максимум %%_lenght символов.
-  - Field must contain a minimum of %%_lenght characters.: Поле должно содержать минимум %%_lenght символов.
+  - Field "%%_title" must contain a maximum of %%_num characters!: Поле "%%_title" должно содержать максимум %%_num символов!
+  - Field "%%_title" must contain a minimum of %%_num characters!: Поле "%%_title" должно содержать минимум %%_num символов!
+  - Field must contain a maximum of %%_num characters.: Поле должно содержать минимум %%_num символов.
+  - Field must contain a minimum of %%_num characters.: Поле должно содержать максимум %%_num символов.
   - Field value is less than %%_value.: Значение поля меньше чем %%_value.
   - Field value is more than %%_value.: Значение поля больше чем %%_value.
   - Field value is not a valid number.: Значение поля не является допустимым числом.
@@ -113,8 +113,6 @@ translations
   - Module for working with user accounts and permissions.: Модуль работы с пользовательскими аккаунтами и разрешениями.
   - Modules was installed.: Модули были установлены.
   - Modules: Модули
-  - Must be at least %%_value characters long.: Должно быть не менее %%_value символов.
-  - Must be no more than %%_value characters.: Должно быть не более %%_value символов.
   - Name: Имя
   - New password must be different from the old password!: Новый пароль должен отличаться от старого пароля!
   - New password: Новый пароль

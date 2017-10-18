@@ -32,8 +32,8 @@ namespace effectivecore {
   function render_description() {
     $return = [];
     $element = $this->child_select('element');
-    if ($element instanceof node_simple && $element->attribute_select('minlength'))       $return[] = new markup('p', ['class' => ['minlength' => 'minlength']], translations::get('Field must contain a minimum of %%_lenght characters.', ['lenght' => $element->attribute_select('minlength')]));
-    if ($element instanceof node_simple && $element->attribute_select('maxlength'))       $return[] = new markup('p', ['class' => ['maxlength' => 'maxlength']], translations::get('Field must contain a maximum of %%_lenght characters.', ['lenght' => $element->attribute_select('maxlength')]));
+    if ($element instanceof node_simple && $element->attribute_select('minlength'))       $return[] = new markup('p', ['class' => ['minlength' => 'minlength']], translations::get('Field must contain a minimum of %%_num characters.', ['num' => $element->attribute_select('minlength')]));
+    if ($element instanceof node_simple && $element->attribute_select('maxlength'))       $return[] = new markup('p', ['class' => ['maxlength' => 'maxlength']], translations::get('Field must contain a maximum of %%_num characters.', ['num' => $element->attribute_select('maxlength')]));
     if ($element instanceof node_simple && $element->attribute_select('min'))             $return[] = new markup('p', ['class' => ['min' => 'min']],             translations::get('Minimal field value: %%_value.', ['value' => $element->attribute_select('min')]));
     if ($element instanceof node_simple && $element->attribute_select('max'))             $return[] = new markup('p', ['class' => ['max' => 'max']],             translations::get('Maximal field value: %%_value.', ['value' => $element->attribute_select('max')]));
     if ($element instanceof node_simple && $element->attribute_select('type') == 'range') $return[] = new markup('p', ['class' => ['cur' => 'cur']],             translations::get('Current field value: %%_value.', ['value' => (new markup('x-value', [], $element->attribute_select('value')))->render()]));
