@@ -52,6 +52,13 @@ namespace effectivecore\modules\user {
   ### form: user_edit ###
   #######################
 
+  static function on_init_user_edit($form, $fields) {
+    $id = pages::$args['user_id'];
+    $user = (new instance('user', ['id' => $id]))->select();
+    $fields['credentials/email']->child_select('element')->attribute_insert('value', $user->email);
+    $fields['credentials/nick']->child_select('element')->attribute_insert('value', $user->nick);
+  }
+
   static function on_validate_user_edit($form, $fields, &$values) {
     static::on_validate($form, $fields, $values);
     if (!count($form->errors)) {

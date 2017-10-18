@@ -13,6 +13,30 @@ forms
         title: Credentials
         title_tag_name: legend
         children
+        - email|form_field
+            title: EMail
+            children
+            - element|markup_simple
+                tag_name: input
+                attributes
+                - type: email
+                - name: email
+                - required: required
+                - minlength: 5
+                - maxlength: 255
+                - disabled: disabled
+        - nick|form_field
+            title: Nick
+            children
+            - element|markup_simple
+                tag_name: input
+                attributes
+                - type: text
+                - name: nick
+                - required: required
+                - minlength: 5
+                - maxlength: 255
+                - disabled: disabled
         - password_old|form_field
             title: Old password
             children
