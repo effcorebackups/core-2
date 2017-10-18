@@ -10,7 +10,7 @@ translations
   - Allowable characters\: %%_chars. Examples\: %%_examples.: Допустимые символы: %%_chars. Примеры: %%_examples.
   - Allowable characters\: %%_chars.: Допустимые символы: %%_chars.
   - always_enabled: всегда_вкл
-  - Anonymous: Анонимы
+  - Anonymous: Аноним
   - autoload: автозагрузка
   - Background color: Цвет фона
   - button: кнопка

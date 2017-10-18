@@ -1,96 +1,96 @@
 tree_items
-- user_anonymous|tree_item
-    id: user_anonymous
+- anonymous|tree_item
+    id: anonymous
     parent_is_tree: true
     parent_id: user
-    title: User
-    attributes
-    - class
-      - user-anonymous: user-anonymous
+    title: Anonymous
     access
       roles
       - anonymous: anonymous
-- user_login|tree_item
-    id: user_login
-    parent_id: user_anonymous
+    attributes
+    - class
+      - anonymous: anonymous
+- login|tree_item
+    id: login
+    parent_id: anonymous
     title: login
     weight: -80
+    access
+      roles
+      - anonymous: anonymous
     attributes
     - href: /user/login
     - class
-      - user-login: user-login
+      - login: login
+- registration|tree_item
+    id: registration
+    parent_id: anonymous
+    title: registration
+    weight: -60
     access
       roles
       - anonymous: anonymous
-- user_registration|tree_item
-    id: user_registration
-    parent_id: user_anonymous
-    title: registration
-    weight: -60
     attributes
     - href: /user/registration
     - class
-      - user-registration: user-registration
-    access
-      roles
-      - anonymous: anonymous
-- user_n|tree_item
-    id: user_n
+      - registration: registration
+- user|tree_item
+    id: user
     parent_is_tree: true
     parent_id: user
-    title: User %%_nick
-    attributes
-    - href: /user/%%_user_id
-    - class
-      - user-n: user-n
+    title: %%_nick
     access
       roles
       - admins: admins
       - registered: registered
-- user_n_edit|tree_item
-    id: user_n_edit
-    parent_id: user_n
+    attributes
+    - href: /user/%%_user_id
+    - class
+      - user: user
+- user_edit|tree_item
+    id: user_edit
+    parent_id: user
     title: edit
     weight: -100
+    access
+      roles
+      - admins: admins
+      - registered: registered
     attributes
     - href: /user/%%_user_id/edit
     - class
       - user-edit: user-edit
-    access
-      roles
-      - admins: admins
-      - registered: registered
-- user_logout|tree_item
-    id: user_logout
-    parent_id: user_n
+- logout|tree_item
+    id: logout
+    parent_id: user
     title: logout
     weight: -40
+    access
+      roles
+      - registered: registered
     attributes
     - href: /user/logout
     - class
-      - user-logout: user-logout
+      - logout: logout
+- roles|tree_item
+    id: roles
+    parent_id: admin
+    title: Roles
     access
       roles
-      - registered: registered
-- main_admin_roles|tree_item
-    id: main_admin_roles
-    parent_id: main_admin
-    title: Roles
+      - admins: admins
     attributes
     - href: /admin/roles
     - class
-      - admin-roles: admin-roles
+      - roles: roles
+- users|tree_item
+    id: users
+    parent_id: admin
+    title: Users
     access
       roles
       - admins: admins
-- main_admin_users|tree_item
-    id: main_admin_users
-    parent_id: main_admin
-    title: Users
     attributes
     - href: /admin/users
     - class
-      - admin-users: admin-users
-    access
-      roles
-      - admins: admins
+      - users: users

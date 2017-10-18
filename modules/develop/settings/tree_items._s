@@ -1,23 +1,23 @@
 tree_items
-- main_develop|tree_item
-    id: main_develop
+- develop|tree_item
+    id: develop
     parent_is_tree: true
     parent_id: main
     title: Develop
+    access
+      roles
+      - admins: admins
     attributes
     - class
       - develop: develop
+- demo|tree_item
+    id: demo
+    parent_id: develop
+    title: Demo
     access
       roles
       - admins: admins
-- main_develop_demo|tree_item
-    id: main_develop_demo
-    parent_id: main_develop
-    title: Demo
     attributes
     - href: /develop/demo
     - class
-      - develop-demo: develop-demo
-    access
-      roles
-      - admins: admins
+      - demo: demo
