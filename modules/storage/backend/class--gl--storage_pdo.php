@@ -168,7 +168,7 @@ namespace effectivecore {
     $serial_id    = $instance->get_entity()->get_serial_id();
     $s_table_name = $instance->get_entity()->get_name();
     $s_fields =     implode(', ', array_keys($instance->get_values()));
-    $s_values = '"'.implode('", "', $instance->get_values()).'"';
+    $s_values = "'".implode("', '", $instance->get_values())."'";
     $new_id = $this->query('INSERT INTO '.$s_table_name.' ('.$s_fields.') VALUES ('.$s_values.');');
     if ($new_id !== null && $serial_id == null) return $instance;
     if ($new_id !== null && $serial_id != null) {
