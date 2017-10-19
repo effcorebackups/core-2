@@ -50,8 +50,8 @@ namespace effectivecore\modules\core {
         }
         if (count($form->errors) == 0) {
           switch ($values['driver']) {
-            case 'sqlite': $test = storages::get('main')->test($values['driver'], ['file_name' => $values['file_name']]); break;
-            default      : $test = storages::get('main')->test($values['driver'], [
+            case 'sqlite': $test = storages::get('main')->test($values['driver'], (object)['file_name' => $values['file_name']]); break;
+            default      : $test = storages::get('main')->test($values['driver'], (object)[
                 'host_name'    => $values['host_name'],
                 'storage_name' => $values['storage_name'],
                 'user_name'    => $values['user_name'],

@@ -19,7 +19,7 @@ namespace effectivecore {
   function get_indexes_info() {return $this->indexes;}
   function get_fields()       {return factory::array_values_map_to_keys(array_keys((array)$this->fields));}
 
-  function get_auto_id() {
+  function get_serial_id() {
     foreach ($this->fields as $name => $info) {
       if ($info->type == 'serial') {
         return $name;

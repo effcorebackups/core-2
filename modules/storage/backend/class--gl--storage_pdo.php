@@ -51,15 +51,15 @@ namespace effectivecore {
         case 'sqlite':
           $connection = new \PDO(
             $driver.':'.
-            $params['file']);
+            $params->file);
           break;
         default:
           $connection = new \PDO(
             $driver.':host='.
-            $params['host_name'].';dbname='.
-            $params['storage_name'],
-            $params['user_name'],
-            $params['password']);
+            $params->host_name.';dbname='.
+            $params->storage_name,
+            $params->user_name,
+            $params->password);
           break;       
       }
       $connection = null;
@@ -100,8 +100,9 @@ namespace effectivecore {
 
   function install_entity($entity) {
     $this->init();
-    $field_desc = [];
+    $fields = [];
     foreach ($entity->get_fields_info() as $c_name => $c_info) {
+    # define field type
       switch ($c_info->type) {
         case 'serial':
           if ($this->driver == 'mysql')  $c_properties = ['integer auto_increment'];
@@ -111,6 +112,7 @@ namespace effectivecore {
         default: $c_properties = [$c_info->type.(isset($c_info->size) ?
                                                    '('.$c_info->size.')' : '')];
       }
+    # define field properties
       if (property_exists($c_info, 'not_null') && $c_info->not_null) $c_properties[] = 'not null';
       if (property_exists($c_info, 'null')     && $c_info->null)     $c_properties[] = 'null';
       if (property_exists($c_info, 'default')) {
@@ -119,13 +121,15 @@ namespace effectivecore {
         elseif ($c_info->default === 'current_timestamp') $c_properties[] = 'default current_timestamp';
         else                                              $c_properties[] = 'default "'.$c_info->default.'"';
       }
-      $field_desc[] = $c_name.' '.implode(' ', $c_properties);
+      $fields[] = $c_name.' '.implode(' ', $c_properties);
     }
+  # define indexes
     foreach ($entity->get_indexes_info() as $c_info) {
-      $field_desc[] = $c_info->type.' ('.implode(', ', $c_info->fields).')';
+      $fields[] = $c_info->type.' ('.implode(', ', $c_info->fields).')';
     }
+  # create table
     $this->query('DROP TABLE IF EXISTS '.$entity->get_name().';');
-    return $this->query( 'CREATE TABLE '.$entity->get_name().' ('.implode(', ', $field_desc).');');
+    return $this->query( 'CREATE TABLE '.$entity->get_name().' ('.implode(', ', $fields).');');
   }
 
   function uninstall_entity($entity) {
@@ -135,12 +139,12 @@ namespace effectivecore {
 
   function select_instance_set($entity, $conditions = [], $order = [], $limit = 0, $offset = 0) {
     $this->init();
-    $p_table_name = $entity->get_name();
-    $p_conditions = count($conditions) ? ' WHERE '.factory::data_to_attr($conditions, ' and ') : '';
-    $p_order = count($order) ? ' ORDER BY '.str_replace('!', ' DESC ', implode(', ', $order)) : '';
-    $p_limit = $limit ? ' LIMIT ' .$limit : '';
-    $p_offset = $offset ? ' OFFSET '.$offset : '';
-    $result = $this->query('SELECT * FROM '.$p_table_name.$p_conditions.$p_order.$p_limit.$p_offset.';');
+    $s_table_name = $entity->get_name();
+    $s_conditions = count($conditions) ? ' WHERE '.factory::data_to_attr($conditions, ' and ') : '';
+    $s_order = count($order) ? ' ORDER BY '.str_replace('!', ' DESC ', implode(', ', $order)) : '';
+    $s_limit = $limit ? ' LIMIT ' .$limit : '';
+    $s_offset = $offset ? ' OFFSET '.$offset : '';
+    $result = $this->query('SELECT * FROM '.$s_table_name.$s_conditions.$s_order.$s_limit.$s_offset.';');
     foreach ($result as $c_instance) {
       $c_instance->set_entity_name($entity->name);
     }
@@ -150,9 +154,9 @@ namespace effectivecore {
   function select_instance($instance) { # return: null | instance
     $this->init();
     $keys = array_intersect_key($instance->get_values(), $instance->get_entity()->get_keys());
-    $p_table_name = $instance->get_entity()->get_name();
-    $p_where = factory::data_to_attr($keys, ' and ');
-    $result = $this->query('SELECT * FROM '.$p_table_name.' WHERE '.$p_where.' LIMIT 1;');
+    $s_table_name = $instance->get_entity()->get_name();
+    $s_where = factory::data_to_attr($keys, ' and ');
+    $result = $this->query('SELECT * FROM '.$s_table_name.' WHERE '.$s_where.' LIMIT 1;');
     if (isset($result[0])) {
       $instance->values = $result[0]->values;
       return $instance;
@@ -161,14 +165,14 @@ namespace effectivecore {
 
   function insert_instance($instance) { # return: null | instance | instance + new_id
     $this->init();
-    $auto_id = $instance->get_entity()->get_auto_id();
-    $p_table_name = $instance->get_entity()->get_name();
-    $p_fields =     implode(', ', array_keys($instance->get_values()));
-    $p_values = '"'.implode('", "', $instance->get_values()).'"';
-    $new_id = $this->query('INSERT INTO '.$p_table_name.' ('.$p_fields.') VALUES ('.$p_values.');');
-    if ($new_id !== null && $auto_id == null) return $instance;
-    if ($new_id !== null && $auto_id != null) {
-      $instance->values[$auto_id] = $new_id;
+    $serial_id    = $instance->get_entity()->get_serial_id();
+    $s_table_name = $instance->get_entity()->get_name();
+    $s_fields =     implode(', ', array_keys($instance->get_values()));
+    $s_values = '"'.implode('", "', $instance->get_values()).'"';
+    $new_id = $this->query('INSERT INTO '.$s_table_name.' ('.$s_fields.') VALUES ('.$s_values.');');
+    if ($new_id !== null && $serial_id == null) return $instance;
+    if ($new_id !== null && $serial_id != null) {
+      $instance->values[$serial_id] = $new_id;
       return $instance;
     }
   }
@@ -176,10 +180,10 @@ namespace effectivecore {
   function update_instance($instance) { # return: null | instance
     $this->init();
     $keys = array_intersect_key($instance->get_values(), $instance->get_entity()->get_keys(['primary key']));
-    $p_table_name = $instance->get_entity()->get_name();
-    $p_changes = factory::data_to_attr($instance->get_values(), ', ');
-    $p_where = factory::data_to_attr($keys, ' and ');
-    $row_count = $this->query('UPDATE '.$p_table_name.' SET '.$p_changes.' WHERE '.$p_where.' LIMIT 1;');
+    $s_table_name = $instance->get_entity()->get_name();
+    $s_changes = factory::data_to_attr($instance->get_values(), ', ');
+    $s_where = factory::data_to_attr($keys, ' and ');
+    $row_count = $this->query('UPDATE '.$s_table_name.' SET '.$s_changes.' WHERE '.$s_where.' LIMIT 1;');
     if ($row_count === 1) {
       return $instance;
     }
@@ -188,9 +192,9 @@ namespace effectivecore {
   function delete_instance($instance) { # return: null | instance + empty(values)
     $this->init();
     $keys = array_intersect_key($instance->get_values(), $instance->get_entity()->get_keys());
-    $p_table_name = $instance->get_entity()->get_name();
-    $p_where = factory::data_to_attr($keys, ' and ');
-    $row_count = $this->query('DELETE FROM '.$p_table_name.' WHERE '.$p_where.' LIMIT 1;');
+    $s_table_name = $instance->get_entity()->get_name();
+    $s_where = factory::data_to_attr($keys, ' and ');
+    $row_count = $this->query('DELETE FROM '.$s_table_name.' WHERE '.$s_where.' LIMIT 1;');
     if ($row_count === 1) {
       $instance->set_values([]);
       return $instance;
