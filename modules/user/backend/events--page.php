@@ -19,7 +19,7 @@ namespace effectivecore\modules\user {
   static function on_show_block_roles() {
     $block = new markup('x-block', ['id' => 'admin_roles']);
     $thead = [['ID', 'Title', 'Is embed']];
-    $tbody = entities::get('role')->select_instance_set();
+    $tbody = entities::get('role')->select_instances();
     foreach ($tbody as $c_row) {
       $c_row->is_embed = $c_row->is_embed ? 'Yes' : 'No';
     }
@@ -37,7 +37,7 @@ namespace effectivecore\modules\user {
       $block = new markup('x-block', ['id' => 'admin_users']);
       $thead = [['ID', 'EMail', 'Nick', 'Created', 'Is embed', 'Actions']];
       $tbody = [];
-      foreach (entities::get('user')->select_instance_set() as $c_user) {
+      foreach (entities::get('user')->select_instances() as $c_user) {
         $c_actions = new markup('ul', ['class' => ['actions' => 'actions']]);
                                     $c_actions->child_insert( new markup('li', [], new markup('a', ['href' => (new url('/user/'.$c_user->id))->get_full()], 'view') ) );
                                     $c_actions->child_insert( new markup('li', [], new markup('a', ['href' => (new url('/user/'.$c_user->id.'/edit?'.urls::make_back_part()))->get_full()], 'edit') ) );
@@ -64,7 +64,7 @@ namespace effectivecore\modules\user {
         $block = new markup('x-block', ['id' => 'user']);
       # get roles
         $roles = [];
-        $storage_roles = entities::get('relation_role_ws_user')->select_instance_set(['user_id' => $id]);
+        $storage_roles = entities::get('relation_role_ws_user')->select_instances(['user_id' => $id]);
         if ($storage_roles) {
           foreach ($storage_roles as $c_role) {
             $roles[] = $c_role->role_id;

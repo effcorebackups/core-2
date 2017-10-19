@@ -137,7 +137,7 @@ namespace effectivecore {
     $this->query('DROP TABLE '.$entity->get_name().';');
   }
 
-  function select_instance_set($entity, $conditions = [], $order = [], $limit = 0, $offset = 0) {
+  function select_instances($entity, $conditions = [], $order = [], $limit = 0, $offset = 0) {
     $this->init();
     $s_table_name = $entity->get_name();
     $s_conditions = count($conditions) ? ' WHERE '.factory::data_to_attr($conditions, ' and ') : '';

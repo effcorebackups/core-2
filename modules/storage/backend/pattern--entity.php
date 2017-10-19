@@ -49,13 +49,17 @@ namespace effectivecore {
     return $storage->uninstall_entity($this);
   }
 
-  function select_instance_set($conditions = [], $order = [], $count = 0, $offset = 0) {
+  function select_instances($conditions = [], $order = [], $count = 0, $offset = 0) {
     $storage = storages::get($this->storage_id);
-    return $storage->select_instance_set($this, $conditions, $order, $count, $offset);
+    return $storage->select_instances($this, $conditions, $order, $count, $offset);
   }
 
-  function select_instance() {}
-  function insert_instance() {}
-  function delete_instance() {}
+  function insert_instances() {
+  # todo: make functionality
+  }
+
+  function delete_instances() {
+  # todo: make functionality
+  }
 
 }}

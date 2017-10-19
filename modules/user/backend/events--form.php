@@ -31,7 +31,7 @@ namespace effectivecore\modules\user {
         if ($user) {
           $nick = $user->nick;
           if ($user->delete()) {
-            $sessions = entities::get('session')->select_instance_set(['user_id' => $id]);
+            $sessions = entities::get('session')->select_instances(['user_id' => $id]);
             if ($sessions) {
               foreach ($sessions as $c_session) {
                 $c_session->delete();
