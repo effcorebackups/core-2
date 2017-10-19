@@ -61,11 +61,11 @@ namespace effectivecore\modules\core {
           }
           if ($test !== true) {
             $form->add_error(null, 'Storage is not available with these credentials!');
-            $form->add_error(null, $test['message']);
-            if ($test['code'] == '1049') $form->add_error('storage/default/storage_name/element');
-            if ($test['code'] == '2002') $form->add_error('storage/default/host_name/element');
-            if ($test['code'] == '1045') $form->add_error('storage/default/user_name/element');
-            if ($test['code'] == '1045') $form->add_error('storage/default/password/element');
+            $form->add_error(null, 'Message from storage: "'.$test['message'].'"');
+            $form->add_error('storage/default/storage_name/element');
+            $form->add_error('storage/default/host_name/element');
+            $form->add_error('storage/default/user_name/element');
+            $form->add_error('storage/default/password/element');
           }
         }
         break;
