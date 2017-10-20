@@ -50,22 +50,32 @@ namespace effectivecore\modules\core {
         }
         if (count($form->errors) == 0) {
           switch ($values['driver']) {
-            case 'sqlite': $test = storages::get('main')->test($values['driver'], (object)['file_name' => $values['file_name']]); break;
-            default      : $test = storages::get('main')->test($values['driver'], (object)[
+            case 'sqlite':
+              $test = storages::get('main')->test($values['driver'], (object)[
+                'file_name' => $values['file_name']
+              ]);
+              if ($test !== true) {
+                $form->add_error(null, 'Storage is not available with these credentials!');
+                $form->add_error(null, 'Message from storage: "'.$test['message'].'"');
+                $form->add_error('storage/default/file_path/element');
+              }
+              break;
+            default:
+              $test = storages::get('main')->test($values['driver'], (object)[
                 'host_name'    => $values['host_name'],
                 'storage_name' => $values['storage_name'],
                 'user_name'    => $values['user_name'],
                 'password'     => $values['password']
               ]);
+              if ($test !== true) {
+                $form->add_error(null, 'Storage is not available with these credentials!');
+                $form->add_error(null, 'Message from storage: "'.$test['message'].'"');
+                $form->add_error('storage/default/storage_name/element');
+                $form->add_error('storage/default/host_name/element');
+                $form->add_error('storage/default/user_name/element');
+                $form->add_error('storage/default/password/element');
+              }
               break;
-          }
-          if ($test !== true) {
-            $form->add_error(null, 'Storage is not available with these credentials!');
-            $form->add_error(null, 'Message from storage: "'.$test['message'].'"');
-            $form->add_error('storage/default/storage_name/element');
-            $form->add_error('storage/default/host_name/element');
-            $form->add_error('storage/default/user_name/element');
-            $form->add_error('storage/default/password/element');
           }
         }
         break;
