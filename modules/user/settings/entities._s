@@ -8,11 +8,11 @@ entities
         not_null: true
       email
         type: varchar
-        size: 255
+        size: 64
         not_null: true
       nick
         type: varchar
-        size: 255
+        size: 32
         not_null: true
       password_hash
         type: varchar

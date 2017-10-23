@@ -20,7 +20,7 @@ forms
                 - name: email
                 - required: required
                 - minlength: 5
-                - maxlength: 255
+                - maxlength: 64
         - nick|form_field
             title: Nick
             children
@@ -31,7 +31,7 @@ forms
                 - name: nick
                 - required: required
                 - minlength: 4
-                - maxlength: 255
+                - maxlength: 32
         - password|form_field
             title: Password
             children

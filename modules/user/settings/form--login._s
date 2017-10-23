@@ -20,7 +20,7 @@ forms
                 - name: email
                 - required: required
                 - minlength: 5
-                - maxlength: 255
+                - maxlength: 64
         - password|form_field
             title: Password
             children

@@ -111,7 +111,7 @@ forms
                 - required: required
                 - value: test@example.com
                 - minlength: 5
-                - maxlength: 255
+                - maxlength: 64
                 - multiple: multiple
       # field file
         - file|form_field

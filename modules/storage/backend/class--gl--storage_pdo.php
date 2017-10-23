@@ -53,12 +53,16 @@ namespace effectivecore {
     }
   }
 
-  function prepare_value($value) {
-    switch ($this->driver) {
-      case 'mysql' : return $value;
-      case 'sqlite': return $value;
-      case 'pgsql' : return $value;
+  function prepare_values($values = []) {
+    $return = [];
+    foreach ($values as $c_key => $c_value) {
+      switch ($this->driver) {
+        case 'mysql' : $return[$c_key] = $c_value; break;
+        case 'sqlite': $return[$c_key] = $c_value; break;
+        case 'pgsql' : $return[$c_key] = $c_value; break;
+      }
     }
+    return $return;
   }
 
   function test($driver, $params = []) {
