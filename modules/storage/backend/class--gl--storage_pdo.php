@@ -89,6 +89,7 @@ namespace effectivecore {
     $return = [];
     foreach ($data as $c_field => $c_value) {
       switch ($mode) {
+        case 'order' : $return[] = $this->prepare_field($c_field).' '.$c_value; break;
         case 'fields': $return[] = $this->prepare_field($c_field); break;
         case 'values': $return[] = $this->prepare_value($c_value); break;
         default      : $return[] = $this->prepare_field($c_field).' = '.$this->prepare_value($c_value); break;
@@ -174,8 +175,8 @@ namespace effectivecore {
   function select_instances($entity, $conditions = [], $order = [], $limit = 0, $offset = 0) {
     $this->init();
     $s_table_name = $this->prepare_identifier($entity->get_name());
-    $s_conditions = count($conditions) ? ' WHERE '.factory::data_to_attr($conditions, ' and ') : '';
-    $s_order = count($order) ? ' ORDER BY '.str_replace('!', ' DESC ', implode(', ', $order)) : '';
+    $s_conditions = count($conditions) ? ' WHERE '.$this->prepare_attributes($conditions, null, ' and ') : '';
+    $s_order = count($order) ? ' ORDER BY '.$this->prepare_attributes($order, 'order') : '';
     $s_limit = $limit ? ' LIMIT ' .$limit : '';
     $s_offset = $offset ? ' OFFSET '.$offset : '';
     $result = $this->query('SELECT * FROM '.$s_table_name.$s_conditions.$s_order.$s_limit.$s_offset.';');
