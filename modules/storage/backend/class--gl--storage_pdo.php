@@ -98,7 +98,7 @@ namespace effectivecore {
   }
 
   function quote($data) {
-    return addslashes($data);
+    return \SQLite3::escapeString($data);
   }
 
   function transaction_begin()     {$this->init(); $this->connection->beginTransaction();}
@@ -214,9 +214,9 @@ namespace effectivecore {
     $this->init();
     $keys = array_intersect_key($instance->get_values(), $instance->get_entity()->get_keys(['primary key']));
     $s_table_name = $this->prepare_identifier($instance->get_entity()->get_name());
-    $s_changes = factory::data_to_attr($instance->get_values(), ', ');
-    $s_where = factory::data_to_attr($keys, ' and ');
-    $row_count = $this->query('UPDATE '.$s_table_name.' SET '.$s_changes.' WHERE '.$s_where.' LIMIT 1;');
+    $s_changes = $this->prepare_attributes($instance->get_values());
+    $s_where = $this->prepare_attributes($keys, null, ' and ');
+    $row_count = $this->query('UPDATE '.$s_table_name.' SET '.$s_changes.' WHERE '.$s_where.';');
     if ($row_count === 1) {
       return $instance;
     }
