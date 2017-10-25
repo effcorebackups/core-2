@@ -23,8 +23,8 @@ namespace effectivecore {
         switch ($this->driver) {
           case 'sqlite':
             $this->connection = new \PDO(
-              $this->driver.':'.
-              $this->credentials->file_path);
+              $this->driver.':'.dir_dynamic.'data/'.
+              $this->credentials->file_name);
             break;
           default:
             $this->connection = new \PDO(
@@ -50,8 +50,8 @@ namespace effectivecore {
       switch ($driver) {
         case 'sqlite':
           $connection = new \PDO(
-            $driver.':'.
-            $params->file_path);
+            $driver.':'.dir_dynamic.'data/'.
+            $params->file_name);
           break;
         default:
           $connection = new \PDO(

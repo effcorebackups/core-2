@@ -52,12 +52,12 @@ namespace effectivecore\modules\core {
           switch ($values['driver']) {
             case 'sqlite':
               $test = storages::get('main')->test($values['driver'], (object)[
-                'file_path' => $values['file_path']
+                'file_name' => $values['file_name']
               ]);
               if ($test !== true) {
                 $form->add_error(null, 'Storage is not available with these credentials!');
                 $form->add_error(null, 'Message from storage: "'.$test['message'].'"');
-                $form->add_error('storage/default/file_path/element');
+                $form->add_error('storage/default/file_name/element');
               }
               break;
             default:
@@ -85,13 +85,23 @@ namespace effectivecore\modules\core {
   static function on_submit_installation($form, $fields, &$values) {
     switch ($form->clicked_button_name) {
       case 'install':
-        $params = new \stdClass;
-        $params->driver = $values['driver'];
-        $params->credentials = new \stdClass;
-        $params->credentials->host_name    = $values['host_name'];
-        $params->credentials->storage_name = $values['storage_name'];
-        $params->credentials->user_name    = $values['user_name'];
-        $params->credentials->password     = $values['password'];
+        switch ($values['driver']) {
+          case 'sqlite':
+            $params = new \stdClass;
+            $params->driver = $values['driver'];
+            $params->credentials = new \stdClass;
+            $params->credentials->file_name = $values['file_name'];
+            break;
+          default:
+            $params = new \stdClass;
+            $params->driver = $values['driver'];
+            $params->credentials = new \stdClass;
+            $params->credentials->host_name    = $values['host_name'];
+            $params->credentials->storage_name = $values['storage_name'];
+            $params->credentials->user_name    = $values['user_name'];
+            $params->credentials->password     = $values['password'];
+            break;
+        }
         storages::get('settings')->changes_register_action('core', 'insert', 'storages/storage/storage_sql_dpo', $params);
         storages::rebuild();
         events::start('on_module_install');

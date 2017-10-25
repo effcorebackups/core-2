@@ -127,7 +127,7 @@ forms
                         - name: driver
                         - value: sqlite
           # storage file path
-            - file_path|form_field
+            - file_name|form_field
                 title: Path to file
                 description|text
                   text: Allowable characters: %%_chars.
@@ -138,7 +138,7 @@ forms
                     tag_name: input
                     attributes
                     - type: text
-                    - name: file_path
+                    - name: file_name
                     - required: required
                     - value: data.sqlite
                     - minlength: 1
