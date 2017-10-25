@@ -24,7 +24,7 @@ namespace effectivecore {
           case 'sqlite':
             $this->connection = new \PDO(
               $this->driver.':'.
-              $this->credentials->file);
+              $this->credentials->file_path);
             break;
           default:
             $this->connection = new \PDO(
@@ -51,7 +51,7 @@ namespace effectivecore {
         case 'sqlite':
           $connection = new \PDO(
             $driver.':'.
-            $params->file);
+            $params->file_path);
           break;
         default:
           $connection = new \PDO(
@@ -167,7 +167,8 @@ namespace effectivecore {
 
   function uninstall_entity($entity) {
     $this->init();
-    $this->query('DROP TABLE '.$entity->get_name().';');
+    $s_table_name = $this->prepare_identifier($entity->get_name());
+    $this->query('DROP TABLE '.$s_table_name.';');
   }
 
   function select_instances($entity, $conditions = [], $order = [], $limit = 0, $offset = 0) {
@@ -224,10 +225,10 @@ namespace effectivecore {
 
   function delete_instance($instance) { # return: null | instance + empty(values)
     $this->init();
-    $keys = array_intersect_key($instance->get_values(), $instance->get_entity()->get_keys());
+    $keys = array_intersect_key($instance->get_values(), $instance->get_entity()->get_keys(['primary key']));
     $s_table_name = $this->prepare_identifier($instance->get_entity()->get_name());
-    $s_where = factory::data_to_attr($keys, ' and ');
-    $row_count = $this->query('DELETE FROM '.$s_table_name.' WHERE '.$s_where.' LIMIT 1;');
+    $s_where = $this->prepare_attributes($keys, null, ' and ');
+    $row_count = $this->query('DELETE FROM '.$s_table_name.' WHERE '.$s_where.';');
     if ($row_count === 1) {
       $instance->set_values([]);
       return $instance;

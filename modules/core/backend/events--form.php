@@ -52,7 +52,7 @@ namespace effectivecore\modules\core {
           switch ($values['driver']) {
             case 'sqlite':
               $test = storages::get('main')->test($values['driver'], (object)[
-                'file_name' => $values['file_name']
+                'file_path' => $values['file_path']
               ]);
               if ($test !== true) {
                 $form->add_error(null, 'Storage is not available with these credentials!');
