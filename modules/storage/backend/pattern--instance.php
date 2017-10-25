@@ -23,11 +23,7 @@ namespace effectivecore {
   function set_values($values) {$this->values = $values;}
   function get_values($names = []) {
     if (count($names)) {
-      $values = [];
-      foreach ($names as $c_name) {
-        $values[$c_name] = $this->values[$c_name];
-      }
-      return $values;
+      return array_intersect_key($this->values, factory::array_values_map_to_keys($names));
     } else {
       return $this->values;
     }

@@ -45,35 +45,6 @@ namespace effectivecore {
     }
   }
 
-  function prepare_identifier($name) {
-    switch ($this->driver) {
-      case 'mysql' : return '`'.$name.'`';
-      case 'sqlite': return '"'.$name.'"';
-      case 'pgsql' : return '"'.$name.'"';
-    }
-  }
-
-  function prepare_field($name) {
-    return $name;
-  }
-
-  function prepare_value($data) {
-    return "'".$this->quote($data)."'";
-  }
-
-  function prepare_where($data) {
-    $return = [];
-    foreach ($data as $c_field => $c_value) {
-      $return[] = $this->prepare_field($c_field).' = '.
-                  $this->prepare_value($c_value);
-    }
-    return implode(', ', $return);
-  }
-
-  function quote($data) {
-    return addslashes($data);
-  }
-
   function test($driver, $params = []) {
     try {
       switch ($driver) {
@@ -96,6 +67,38 @@ namespace effectivecore {
     } catch (\PDOException $e) {
       return ['message' => $e->getMessage(), 'code' => $e->getCode()];
     }
+  }
+
+  function prepare_identifier($name) {
+    switch ($this->driver) {
+      case 'mysql' : return '`'.$name.'`';
+      case 'sqlite': return '"'.$name.'"';
+      case 'pgsql' : return '"'.$name.'"';
+    }
+  }
+
+  function prepare_field($name) {
+    return $name;
+  }
+
+  function prepare_value($data) {
+    return "'".$this->quote($data)."'";
+  }
+
+  function prepare_attributes($data, $mode = null, $delimiter = ', ') {
+    $return = [];
+    foreach ($data as $c_field => $c_value) {
+      switch ($mode) {
+        case 'fields': $return[] = $this->prepare_field($c_field); break;
+        case 'values': $return[] = $this->prepare_value($c_value); break;
+        default      : $return[] = $this->prepare_field($c_field).' = '.$this->prepare_value($c_value); break;
+      }
+    }
+    return implode($delimiter, $return);
+  }
+
+  function quote($data) {
+    return addslashes($data);
   }
 
   function transaction_begin()     {$this->init(); $this->connection->beginTransaction();}
@@ -185,7 +188,7 @@ namespace effectivecore {
     $this->init();
     $keys = array_intersect_key($instance->get_values(), $instance->get_entity()->get_keys());
     $s_table_name = $this->prepare_identifier($instance->get_entity()->get_name());
-    $s_where = $this->prepare_where($keys);
+    $s_where = $this->prepare_attributes($keys, null, ' and ');
     $result = $this->query('SELECT * FROM '.$s_table_name.' WHERE '.$s_where.' LIMIT 1;');
     if (isset($result[0])) {
       $instance->values = $result[0]->values;
@@ -195,10 +198,10 @@ namespace effectivecore {
 
   function insert_instance($instance) { # return: null | instance | instance + new_id
     $this->init();
-    $serial_id    = $instance->get_entity()->get_serial_id();
+    $serial_id = $instance->get_entity()->get_serial_id();
     $s_table_name = $this->prepare_identifier($instance->get_entity()->get_name());
-    $s_fields =     implode(', ', array_keys($instance->get_values()));
-    $s_values = "'".implode("', '", $instance->get_values())."'";
+    $s_fields = $this->prepare_attributes($instance->get_values(), 'fields');
+    $s_values = $this->prepare_attributes($instance->get_values(), 'values');
     $new_id = $this->query('INSERT INTO '.$s_table_name.' ('.$s_fields.') VALUES ('.$s_values.');');
     if ($new_id !== null && $serial_id == null) return $instance;
     if ($new_id !== null && $serial_id != null) {
