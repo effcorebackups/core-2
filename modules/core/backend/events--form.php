@@ -91,6 +91,7 @@ namespace effectivecore\modules\core {
             $params->driver = $values['driver'];
             $params->credentials = new \stdClass;
             $params->credentials->file_name = $values['file_name'];
+            $params->table_prefix           = $values['table_prefix'];
             break;
           default:
             $params = new \stdClass;
@@ -100,6 +101,7 @@ namespace effectivecore\modules\core {
             $params->credentials->storage_name = $values['storage_name'];
             $params->credentials->user_name    = $values['user_name'];
             $params->credentials->password     = $values['password'];
+            $params->table_prefix              = $values['table_prefix'];
             break;
         }
         storages::get('settings')->changes_register_action('core', 'insert', 'storages/storage/storage_sql_dpo', $params);

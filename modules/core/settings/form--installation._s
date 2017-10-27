@@ -12,6 +12,7 @@ forms
         children
       # mysql/pgsql
         - default|form_container
+            tag_name: fieldset
             children
           # driver
             - driver|form_container
@@ -108,6 +109,7 @@ forms
                     - autocomplete: off
       # sqlite
         - sqlite|form_container
+            tag_name: fieldset
             children
           # driver
             - driver|form_container
@@ -145,6 +147,24 @@ forms
                     - maxlength: 255
                     - pattern: [a-zA-Z0-9-_./]+
                     - readonly: readonly
+      # shared params
+        - params|form_container
+            children
+          # table prefix
+            - table_prefix|form_field
+                title: Table prefix
+                description|text
+                  text: Allowable characters: %%_chars.
+                  args
+                  - chars: "a"-"z", "A"-"Z", "0"-"9", "-", "_"
+                children
+                - element|markup_simple
+                    tag_name: input
+                    attributes
+                    - type: text
+                    - name: table_prefix
+                    - maxlength: 10
+                    - pattern: [a-zA-Z0-9-_]+
     - button_install|markup
         tag_name: button
         attributes
