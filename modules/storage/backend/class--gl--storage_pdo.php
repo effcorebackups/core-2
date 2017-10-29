@@ -138,7 +138,7 @@ namespace effectivecore {
     foreach ($entity->get_fields_info() as $c_name => $c_info) {
     # define field type
       switch ($c_info->type) {
-        case 'serial':
+        case 'auto':
           if ($this->driver == 'mysql')  $c_properties = ['integer auto_increment'];
           if ($this->driver == 'sqlite') $c_properties = ['integer autoincrement'];
           if ($this->driver == 'pgsql')  $c_properties = ['serial'];
@@ -201,14 +201,14 @@ namespace effectivecore {
 
   function insert_instance($instance) { # return: null | instance | instance + new_id
     $this->init();
-    $serial_id = $instance->get_entity()->get_serial_id();
+    $auto_name = $instance->get_entity()->get_auto_name();
     $s_table_name = $this->prepare_table_name($instance->get_entity()->get_name());
     $s_fields = $this->prepare_attributes($instance->get_values(), 'fields');
     $s_values = $this->prepare_attributes($instance->get_values(), 'values');
     $new_id = $this->query('INSERT INTO '.$s_table_name.' ('.$s_fields.') VALUES ('.$s_values.');');
-    if ($new_id !== null && $serial_id == null) return $instance;
-    if ($new_id !== null && $serial_id != null) {
-      $instance->values[$serial_id] = $new_id;
+    if ($new_id !== null && $auto_name == null) return $instance;
+    if ($new_id !== null && $auto_name != null) {
+      $instance->values[$auto_name] = $new_id;
       return $instance;
     }
   }

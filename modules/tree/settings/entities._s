@@ -4,7 +4,7 @@ entities
     storage_id: main
     fields
       id
-        type: serial
+        type: auto
         not_null: true
       title
         type: varchar
@@ -20,7 +20,7 @@ entities
     storage_id: main
     fields
       id
-        type: serial
+        type: auto
         not_null: true
       parent_is_tree
         type: integer
