@@ -1,20 +1,73 @@
 entities
-- demo|entity
-    name: demo
+- demo_auto|entity
+    name: demo_auto
     storage_id: main
     fields
       id
-        type: auto
+      # ─────────────────────────────────────────────────────────────────────
+      # mysql      | id integer ... primary key auto_increment
+      # postgresql | id serial  ... primary key
+      # sqlite     | id integer ... primary key autoincrement
+      # ─────────────────────────────────────────────────────────────────────
+        type: autoincrement
         not_null: true
-      field_integer
+- demo_pkey|entity
+    name: demo_pkey
+    storage_id: main
+    fields
+      id
         type: integer
         not_null: true
-      field_text
-        type: varchar
-        size: 255
+    constraints
+    - pkey
+      # ─────────────────────────────────────────────────────────────────────
+      # CONSTRAINT name PRIMARY KEY (field_1, ...)
+      # ─────────────────────────────────────────────────────────────────────
+        type: primary key
+        fields
+        - id: id
+- demo_cstr_uniq|entity
+    name: demo_cstr_uniq
+    storage_id: main
+    fields
+      id
+        type: integer
+        not_null: true
+    constraints
+    - cstr_uniq
+      # ─────────────────────────────────────────────────────────────────────
+      # CONSTRAINT name UNIQUE (field_1, ...)
+      # ─────────────────────────────────────────────────────────────────────
+        type: unique
+        fields
+        - id: id
+- demo_idx|entity
+    name: demo_idx
+    storage_id: main
+    fields
+      id
+        type: integer
         not_null: true
     indexes
-    - primary
-        type: primary key
+    - idx
+      # ─────────────────────────────────────────────────────────────────────
+      # CREATE INDEX name ON table_name (field_1, ...);
+      # ─────────────────────────────────────────────────────────────────────
+        type: index
+        fields
+        - id: id
+- demo_idx_uniq|entity
+    name: demo_idx_uniq
+    storage_id: main
+    fields
+      id
+        type: integer
+        not_null: true
+    indexes
+    - idx_uniq
+      # ─────────────────────────────────────────────────────────────────────
+      # CREATE UNIQUE INDEX name ON table_name (field_1, ...);
+      # ─────────────────────────────────────────────────────────────────────
+        type: unique index
         fields
         - id: id
