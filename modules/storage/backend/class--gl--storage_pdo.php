@@ -70,7 +70,7 @@ namespace effectivecore {
     }
   }
 
-  function prepare_table_name($name) {
+  function prepare_name($name) {
     switch ($this->driver) {
       case 'mysql' : return '`'.$this->table_prefix.$name.'`';
       case 'sqlite': return '"'.$this->table_prefix.$name.'"';
@@ -78,11 +78,11 @@ namespace effectivecore {
     }
   }
 
-  function prepare_field($name) {
+  function prepare_field_name($name) {
     return $name;
   }
 
-  function prepare_value($data) {
+  function prepare_field_value($data) {
     return "'".$this->quote($data)."'";
   }
 
@@ -90,10 +90,10 @@ namespace effectivecore {
     $return = [];
     foreach ($data as $c_field => $c_value) {
       switch ($mode) {
-        case 'order' : $return[] = $this->prepare_field($c_field).' '.$c_value; break;
-        case 'fields': $return[] = $this->prepare_field($c_field); break;
-        case 'values': $return[] = $this->prepare_value($c_value); break;
-        default      : $return[] = $this->prepare_field($c_field).' = '.$this->prepare_value($c_value); break;
+        case 'order' : $return[] = $this->prepare_field_name($c_field).' '.$c_value; break;
+        case 'fields': $return[] = $this->prepare_field_name($c_field); break;
+        case 'values': $return[] = $this->prepare_field_value($c_value); break;
+        default      : $return[] = $this->prepare_field_name($c_field).' = '.$this->prepare_field_value($c_value); break;
       }
     }
     return implode($delimiter, $return);
@@ -103,9 +103,9 @@ namespace effectivecore {
     return str_replace("'", "''", $data);
   }
 
-  function transaction_begin()     {$this->init(); $this->connection->beginTransaction();}
-  function transaction_roll_back() {$this->init(); $this->connection->rollBack();}
-  function transaction_commit()    {$this->init(); $this->connection->commit();}
+  function transaction_begin()     {$this->init(); return $this->connection->beginTransaction();}
+  function transaction_roll_back() {$this->init(); return $this->connection->rollBack();}
+  function transaction_commit()    {$this->init(); return $this->connection->commit();}
 
   function query($query) {
     $this->init();
@@ -158,31 +158,37 @@ namespace effectivecore {
       }
       $fields[] = $c_name.' '.implode(' ', $c_properties);
     }
-  # prepare indexes
+  # prepare constraints
     $auto_name = $entity->get_auto_name();
     foreach ($entity->get_constraints_info() as $c_info) {
       if ($c_info->fields != [$auto_name => $auto_name]) {
         $fields[] = $c_info->type.' ('.implode(', ', $c_info->fields).')';
       }
     }
-  # create table
-    $s_table_name = $this->prepare_table_name($entity->get_name());
+  # create entity
+    $s_table_name = $this->prepare_name($entity->get_name());
     $s_fields = implode(', ', $fields);
     $this->transaction_begin();
     $this->query('DROP TABLE IF EXISTS '.$s_table_name.';');
     $this->query('CREATE TABLE '.$s_table_name.' ('.$s_fields.');');
-    $this->transaction_commit();
+  # create indexes
+    foreach ($entity->get_indexes_info() as $id => $c_info) {
+      $s_index_name = $this->prepare_name($entity->get_name().'_'.$id);
+      $s_index_fields = implode(', ', $c_info->fields);
+      $this->query('CREATE '.$c_info->type.' '.$s_index_name.' ON '.$s_table_name.' ('.$s_index_fields.');');
+    }
+    return $this->transaction_commit();
   }
 
   function uninstall_entity($entity) {
     $this->init();
-    $s_table_name = $this->prepare_table_name($entity->get_name());
+    $s_table_name = $this->prepare_name($entity->get_name());
     $this->query('DROP TABLE '.$s_table_name.';');
   }
 
   function select_instances($entity, $conditions = [], $order = [], $limit = 0, $offset = 0) {
     $this->init();
-    $s_table_name = $this->prepare_table_name($entity->get_name());
+    $s_table_name = $this->prepare_name($entity->get_name());
     $s_conditions = count($conditions) ? ' WHERE '.$this->prepare_attributes($conditions, null, ' and ') : '';
     $s_order = count($order) ? ' ORDER BY '.$this->prepare_attributes($order, 'order') : '';
     $s_limit = $limit ? ' LIMIT ' .$limit : '';
@@ -197,7 +203,7 @@ namespace effectivecore {
   function select_instance($instance) { # return: null | instance
     $this->init();
     $keys = array_intersect_key($instance->get_values(), $instance->get_entity()->get_keys());
-    $s_table_name = $this->prepare_table_name($instance->get_entity()->get_name());
+    $s_table_name = $this->prepare_name($instance->get_entity()->get_name());
     $s_where = $this->prepare_attributes($keys, null, ' and ');
     $result = $this->query('SELECT * FROM '.$s_table_name.' WHERE '.$s_where.' LIMIT 1;');
     if (isset($result[0])) {
@@ -209,7 +215,7 @@ namespace effectivecore {
   function insert_instance($instance) { # return: null | instance | instance + new_id
     $this->init();
     $auto_name = $instance->get_entity()->get_auto_name();
-    $s_table_name = $this->prepare_table_name($instance->get_entity()->get_name());
+    $s_table_name = $this->prepare_name($instance->get_entity()->get_name());
     $s_fields = $this->prepare_attributes($instance->get_values(), 'fields');
     $s_values = $this->prepare_attributes($instance->get_values(), 'values');
     $new_id = $this->query('INSERT INTO '.$s_table_name.' ('.$s_fields.') VALUES ('.$s_values.');');
@@ -223,7 +229,7 @@ namespace effectivecore {
   function update_instance($instance) { # return: null | instance
     $this->init();
     $keys = array_intersect_key($instance->get_values(), $instance->get_entity()->get_keys(true, false));
-    $s_table_name = $this->prepare_table_name($instance->get_entity()->get_name());
+    $s_table_name = $this->prepare_name($instance->get_entity()->get_name());
     $s_changes = $this->prepare_attributes($instance->get_values());
     $s_where = $this->prepare_attributes($keys, null, ' and ');
     $row_count = $this->query('UPDATE '.$s_table_name.' SET '.$s_changes.' WHERE '.$s_where.';');
@@ -235,7 +241,7 @@ namespace effectivecore {
   function delete_instance($instance) { # return: null | instance + empty(values)
     $this->init();
     $keys = array_intersect_key($instance->get_values(), $instance->get_entity()->get_keys(true, false));
-    $s_table_name = $this->prepare_table_name($instance->get_entity()->get_name());
+    $s_table_name = $this->prepare_name($instance->get_entity()->get_name());
     $s_where = $this->prepare_attributes($keys, null, ' and ');
     $row_count = $this->query('DELETE FROM '.$s_table_name.' WHERE '.$s_where.';');
     if ($row_count === 1) {
