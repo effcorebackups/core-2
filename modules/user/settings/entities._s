@@ -54,7 +54,7 @@ entities
         not_null: true
         default: current_timestamp
       data
-        type: longblob
+        type: blob
         null: true
     constraints
     - primary
