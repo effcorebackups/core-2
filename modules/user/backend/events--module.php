@@ -25,8 +25,8 @@ namespace effectivecore\modules\user {
   # insert instances
     $instances = storages::get('settings')->select_group('instances')['user'];
     foreach ($instances as $c_instance) {
-      if ($c_instance->insert()) messages::add_new(translations::get('Instances of entity %%_name was added.',      ['name' => $c_entity->get_name()]));
-      else                       messages::add_new(translations::get('Instances of entity %%_name was not added.!', ['name' => $c_entity->get_name()]), 'error');
+      if ($c_instance->insert()) messages::add_new(translations::get('Instances of entity %%_name was added.',     ['name' => $c_entity->get_name()]));
+      else                       messages::add_new(translations::get('Instances of entity %%_name was not added!', ['name' => $c_entity->get_name()]), 'error');
     }
   }
 

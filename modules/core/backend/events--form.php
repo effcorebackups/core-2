@@ -36,7 +36,7 @@ namespace effectivecore\modules\core {
     if (isset($main->driver)) {
       $form->child_delete('storage');
       $form->child_delete('button_install');
-      messages::add_new('System was installed!', 'warning');
+      messages::add_new('Installation is not available because storage credentials was setted!', 'warning');
     }
   }
 
@@ -55,8 +55,8 @@ namespace effectivecore\modules\core {
                 'file_name' => $values['file_name']
               ]);
               if ($test !== true) {
-                $form->add_error(null, 'Storage is not available with these credentials!');
-                $form->add_error(null, 'Message from storage: "'.$test['message'].'"');
+                $form->add_error(null, translations::get('Storage is not available with these credentials!'));
+                $form->add_error(null, translations::get('Message from storage: %%_message', ['message' => strtolower($test['message'])]));
                 $form->add_error('storage/default/file_name/element');
               }
               break;
@@ -68,8 +68,8 @@ namespace effectivecore\modules\core {
                 'password'     => $values['password']
               ]);
               if ($test !== true) {
-                $form->add_error(null, 'Storage is not available with these credentials!');
-                $form->add_error(null, 'Message from storage: "'.$test['message'].'"');
+                $form->add_error(null, translations::get('Storage is not available with these credentials!'));
+                $form->add_error(null, translations::get('Message from storage: %%_message', ['message' => strtolower($test['message'])]));
                 $form->add_error('storage/default/storage_name/element');
                 $form->add_error('storage/default/host_name/element');
                 $form->add_error('storage/default/user_name/element');

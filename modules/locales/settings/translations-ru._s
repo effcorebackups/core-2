@@ -31,6 +31,7 @@ translations
   - Core: Ядро
   - created: создано
   - Created: Создано
+  - Credentials for storage %%_id was not setted!: Учётные данные для хранилища %%_id не были заданы!
   - Credentials: Учётные данные
   - credentials: учётные данные
   - Current field value\: %%_value.: Текущее значение поля: %%_value.
@@ -85,10 +86,12 @@ translations
   - insertion: вставка
   - Install: Установить
   - install: установить
+  - Installation is not available because storage credentials was setted!: Установка недоступна потому, что учетные данные хранилища уже были установлены.
   - Installation: Установка
   - installation: установка
   - Instances of entity %%_name was added.: Экземпляры сущности %%_name были добавлены.
   - Instances of entity %%_name was not added!: Экземпляры сущности %%_name не были добавлены!
+  - invalid session was deleted!: Недействительный сеанс был удален!
   - Is always on: Всегда включен
   - Is embed: Встроенный
   - Leave the field blank if you do not want to change its value.: Оставьте поле пустым если не хотите менять его значение.
@@ -103,6 +106,7 @@ translations
   - Main system module.: Основной модуль системы.
   - Maximal field value\: %%_value.: Максимальное значение поля: %%_value.
   - Memory for php (bytes): Память для php (байт)
+  - Message from storage\: %%_message: Сообщение от хранилища: %%_message
   - Minimal field value\: %%_value.: Минимальное значение поля: %%_value.
   - Moderators: Модераторы
   - Module for demonstrating capabilities.: Модуль для демонстрации возможностей.
@@ -163,7 +167,6 @@ translations
   - storage: хранилище
   - Storage: Хранилище
   - submit: отправить
-  - System was installed!: Система была установлена!
   - System: Система
   - Table prefix: Префикс таблиц
   - Telephone: Телефон
