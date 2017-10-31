@@ -3,8 +3,12 @@
   form {margin: 70px 0}
   form .error {border-color: %%_color_error}
 
-  form fieldset {margin: 100px 0 30px 0; padding: 10px 16px; border: 1px solid gainsboro; border-top: 5px solid %%_color_bg; background: whitesmoke}
+  form fieldset {margin: 100px 0 30px 0; padding: 10px 16px; border: 1px solid gainsboro; border-top: 5px solid %%_color_bg}
   form fieldset legend {position: absolute; margin: -60px 0 0 -20px; font-size: 1.5em}
+  form fieldset,
+  form fieldset fieldset fieldset {background: whitesmoke}
+  form fieldset fieldset,
+  form fieldset fieldset fieldset fieldset {background: white}
 
   /* form fields */
   form x-container {display: block; margin: 20px 0}

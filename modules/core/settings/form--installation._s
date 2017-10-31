@@ -13,6 +13,8 @@ forms
       # mysql/pgsql
         - default|form_container
             tag_name: fieldset
+            title: MySQL + PostgreSQL
+            title_tag_name: legend
             children
           # driver
             - driver|form_container
@@ -110,6 +112,8 @@ forms
       # sqlite
         - sqlite|form_container
             tag_name: fieldset
+            title: SQLite
+            title_tag_name: legend
             children
           # driver
             - driver|form_container
