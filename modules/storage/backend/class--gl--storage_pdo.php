@@ -43,8 +43,8 @@ namespace effectivecore {
           events::start('on_storage_init_after', 'pdo', [&$this]);
           return $this->is_init = true;
         } catch (\PDOException $e) {
-          factory::send_header_and_exit('access_denided',
-            'Storage '.$this->id.' is not available!'
+          messages::add_new(
+            translations::get('Storage %%_id is not available!', ['id' => $this->id]), 'warning'
           );
         }
       } else {
