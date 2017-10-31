@@ -4,13 +4,18 @@ entities
     storage_id: main
     fields
       id
+        type: autoincrement
+        not_null: true
+    constraints
+    - pkey
       # ─────────────────────────────────────────────────────────────────────
       # mysql      | id integer ... primary key auto_increment
       # postgresql | id serial  ... primary key
       # sqlite     | id integer ... primary key autoincrement
       # ─────────────────────────────────────────────────────────────────────
-        type: autoincrement
-        not_null: true
+        type: primary key
+        fields
+        - id: id
 - demo_pkey|entity
     name: demo_pkey
     storage_id: main

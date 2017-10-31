@@ -4,13 +4,13 @@ entities
     storage_id: main
     fields
       id
-        type: auto
+        type: autoincrement
         not_null: true
       title
         type: varchar
         size: 255
         not_null: true
-    indexes
+    constraints
     - primary
         type: primary key
         fields
@@ -20,7 +20,7 @@ entities
     storage_id: main
     fields
       id
-        type: auto
+        type: autoincrement
         not_null: true
       parent_is_tree
         type: integer
@@ -33,7 +33,7 @@ entities
         type: varchar
         size: 255
         not_null: true
-    indexes
+    constraints
     - primary
         type: primary key
         fields

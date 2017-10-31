@@ -11,29 +11,34 @@ namespace effectivecore {
   public $name;
   public $storage_id;
   public $fields = [];
+  public $constraints = [];
   public $indexes = [];
 
-  function get_name()         {return $this->name;}
-  function get_storage_id()   {return $this->storage_id;}
-  function get_fields_info()  {return $this->fields;}
-  function get_indexes_info() {return $this->indexes;}
-  function get_fields()       {return factory::array_values_map_to_keys(array_keys((array)$this->fields));}
+  function get_name()             {return $this->name;}
+  function get_storage_id()       {return $this->storage_id;}
+  function get_fields_info()      {return $this->fields;}
+  function get_indexes_info()     {return $this->indexes;}
+  function get_constraints_info() {return $this->constraints;}
+  function get_fields() {
+    return factory::array_values_map_to_keys(
+      array_keys((array)$this->fields)
+    );
+  }
 
   function get_auto_name() {
     foreach ($this->fields as $name => $info) {
-      if ($info->type == 'auto') {
+      if ($info->type == 'autoincrement') {
         return $name;
       }
     }
   }
 
-  function get_keys($types = ['primary key', 'unique key', 'key']) {
+  function get_keys($primary = true, $unique = true) {
     $keys = [];
-    foreach ($this->indexes as $c_index) {
-      if (($c_index->type == 'primary key' && in_array($c_index->type, $types)) ||
-          ($c_index->type == 'unique key'  && in_array($c_index->type, $types)) ||
-          ($c_index->type == 'key'         && in_array($c_index->type, $types))) {
-        $keys += $c_index->fields;
+    foreach ($this->constraints as $c_cstr) {
+      if (($c_cstr->type == 'primary key' && $primary) ||
+          ($c_cstr->type == 'unique key'  && $unique)) {
+        $keys += $c_cstr->fields;
       }
     }
     return factory::array_values_map_to_keys($keys);

@@ -136,17 +136,18 @@ namespace effectivecore {
     $this->init();
     $fields = [];
     foreach ($entity->get_fields_info() as $c_name => $c_info) {
-    # define field type
+    # prepare field type
       switch ($c_info->type) {
-        case 'auto':
-          if ($this->driver == 'mysql')  $c_properties = ['integer auto_increment'];
-          if ($this->driver == 'sqlite') $c_properties = ['integer autoincrement'];
-          if ($this->driver == 'pgsql')  $c_properties = ['serial'];
+        case 'autoincrement':
+          if ($this->driver == 'mysql')  $c_properties = ['integer primary key auto_increment'];
+          if ($this->driver == 'sqlite') $c_properties = ['integer primary key autoincrement'];
+          if ($this->driver == 'pgsql')  $c_properties = ['serial primary key'];
           break;
-        default: $c_properties = [$c_info->type.(isset($c_info->size) ?
-                                                   '('.$c_info->size.')' : '')];
+        default:
+          $c_properties = [$c_info->type.(isset($c_info->size) ?
+                                            '('.$c_info->size.')' : '')];
       }
-    # define field properties
+    # prepare field properties
       if (property_exists($c_info, 'not_null') && $c_info->not_null) $c_properties[] = 'not null';
       if (property_exists($c_info, 'null')     && $c_info->null)     $c_properties[] = 'null';
       if (property_exists($c_info, 'default')) {
@@ -157,14 +158,20 @@ namespace effectivecore {
       }
       $fields[] = $c_name.' '.implode(' ', $c_properties);
     }
-  # define indexes
-    foreach ($entity->get_indexes_info() as $c_info) {
-      $fields[] = $c_info->type.' ('.implode(', ', $c_info->fields).')';
+  # prepare indexes
+    $auto_name = $entity->get_auto_name();
+    foreach ($entity->get_constraints_info() as $c_info) {
+      if ($c_info->fields != [$auto_name => $auto_name]) {
+        $fields[] = $c_info->type.' ('.implode(', ', $c_info->fields).')';
+      }
     }
   # create table
     $s_table_name = $this->prepare_table_name($entity->get_name());
+    $s_fields = implode(', ', $fields);
+    $this->transaction_begin();
     $this->query('DROP TABLE IF EXISTS '.$s_table_name.';');
-    return $this->query( 'CREATE TABLE '.$s_table_name.' ('.implode(', ', $fields).');');
+    $this->query('CREATE TABLE '.$s_table_name.' ('.$s_fields.');');
+    $this->transaction_commit();
   }
 
   function uninstall_entity($entity) {
@@ -215,7 +222,7 @@ namespace effectivecore {
 
   function update_instance($instance) { # return: null | instance
     $this->init();
-    $keys = array_intersect_key($instance->get_values(), $instance->get_entity()->get_keys(['primary key']));
+    $keys = array_intersect_key($instance->get_values(), $instance->get_entity()->get_keys(true, false));
     $s_table_name = $this->prepare_table_name($instance->get_entity()->get_name());
     $s_changes = $this->prepare_attributes($instance->get_values());
     $s_where = $this->prepare_attributes($keys, null, ' and ');
@@ -227,7 +234,7 @@ namespace effectivecore {
 
   function delete_instance($instance) { # return: null | instance + empty(values)
     $this->init();
-    $keys = array_intersect_key($instance->get_values(), $instance->get_entity()->get_keys(['primary key']));
+    $keys = array_intersect_key($instance->get_values(), $instance->get_entity()->get_keys(true, false));
     $s_table_name = $this->prepare_table_name($instance->get_entity()->get_name());
     $s_where = $this->prepare_attributes($keys, null, ' and ');
     $row_count = $this->query('DELETE FROM '.$s_table_name.' WHERE '.$s_where.';');
