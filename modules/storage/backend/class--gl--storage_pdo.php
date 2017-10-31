@@ -143,6 +143,10 @@ namespace effectivecore {
           if ($this->driver == 'sqlite') $c_properties = ['integer primary key autoincrement'];
           if ($this->driver == 'pgsql')  $c_properties = ['serial primary key'];
           break;
+        case 'blob':
+          if ($this->driver == 'pgsql') {
+            $c_info->type = 'bytea';
+          }
         default:
           $c_properties = [$c_info->type.(isset($c_info->size) ?
                                             '('.$c_info->size.')' : '')];
