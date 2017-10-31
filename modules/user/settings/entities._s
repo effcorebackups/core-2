@@ -31,11 +31,11 @@ entities
         fields
         - id: id
     - unique_email
-        type: unique key
+        type: unique
         fields
         - email: email
     - unique_nick
-        type: unique key
+        type: unique
         fields
         - nick: nick
 - session|entity

@@ -37,7 +37,7 @@ namespace effectivecore {
     $keys = [];
     foreach ($this->constraints as $c_cstr) {
       if (($c_cstr->type == 'primary key' && $primary) ||
-          ($c_cstr->type == 'unique key'  && $unique)) {
+          ($c_cstr->type == 'unique'      && $unique)) {
         $keys += $c_cstr->fields;
       }
     }

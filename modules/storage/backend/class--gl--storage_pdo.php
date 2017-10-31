@@ -160,9 +160,12 @@ namespace effectivecore {
     }
   # prepare constraints
     $auto_name = $entity->get_auto_name();
-    foreach ($entity->get_constraints_info() as $c_info) {
+    foreach ($entity->get_constraints_info() as $suffix => $c_info) {
       if ($c_info->fields != [$auto_name => $auto_name]) {
-        $fields[] = $c_info->type.' ('.implode(', ', $c_info->fields).')';
+        $s_cstr_type = $c_info->type;
+        $s_cstr_name = $this->prepare_name($entity->get_name().'_'.$suffix);
+        $s_cstr_flds = implode(', ', $c_info->fields);
+        $fields[] = 'CONSTRAINT '.$s_cstr_name.' '.$s_cstr_type.' ('.$s_cstr_flds.')';
       }
     }
   # create entity
@@ -172,10 +175,11 @@ namespace effectivecore {
     $this->query('DROP TABLE IF EXISTS '.$s_table_name.';');
     $this->query('CREATE TABLE '.$s_table_name.' ('.$s_fields.');');
   # create indexes
-    foreach ($entity->get_indexes_info() as $id => $c_info) {
-      $s_index_name = $this->prepare_name($entity->get_name().'_'.$id);
-      $s_index_fields = implode(', ', $c_info->fields);
-      $this->query('CREATE '.$c_info->type.' '.$s_index_name.' ON '.$s_table_name.' ('.$s_index_fields.');');
+    foreach ($entity->get_indexes_info() as $suffix => $c_info) {
+      $s_idx_type = $c_info->type;
+      $s_idx_name = $this->prepare_name($entity->get_name().'_'.$suffix);
+      $s_idx_flds = implode(', ', $c_info->fields);
+      $this->query('CREATE '.$s_idx_type.' '.$s_idx_name.' ON '.$s_table_name.' ('.$s_idx_flds.');');
     }
     return $this->transaction_commit();
   }
