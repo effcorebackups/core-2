@@ -305,9 +305,13 @@ namespace effectivecore {
         return;
       }
 
-      $c_min  = $element->attribute_select('min')  ?: 0;
-      $c_max  = $element->attribute_select('max')  ?: 100;
       $c_step = $element->attribute_select('step') ?: 1;
+      if ($element->attribute_select('type') == 'number') {
+        $c_min = $element->attribute_select('min') ?: -1e+17; # ~ -100,000,000,000,000,008.00
+        $c_max = $element->attribute_select('max') ?: +1e+17; } else {
+        $c_min = $element->attribute_select('min') ?: 0;
+        $c_max = $element->attribute_select('max') ?: 100;
+      }
 
     # check min value
       if ($c_min > $new_value) {
@@ -328,7 +332,7 @@ namespace effectivecore {
       }
 
     # check step offset in the range
-      if (strstr(($new_value - $c_min) / $c_step, '.') != '') {
+      if (rtrim(strstr(number_format(($new_value - $c_min) / $c_step, 10, '.', ''), '.'), '.0') != '') {
         $form->add_error($npath.'/element',
           translations::get('Field "%%_title" contains incorrect value!', ['title' => $title]).br.
           translations::get('Field value is not in valid range.')

@@ -24,6 +24,7 @@
   form x-field textarea,
   form x-field select {
     -webkit-appearance: none;
+    -moz-appearance: none;
     display: block;
     margin: 5px 0;
     padding: 10px;
