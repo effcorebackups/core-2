@@ -62,7 +62,7 @@ namespace effectivecore {
   # - MIN                        : VALUE >= MIN (for date|time should compare timestamps)
   # - MAX                        : VALUE <= MAX (for date|time should compare timestamps)
   # - STEP                       : VALUE should be in valid step range: MIN + STEP * N, where N = [0, 1, 2 ...]
-  # - PATTERN                    : VALUE should match the PATTERN (used FILTER_VALIDATE_REGEXP)
+  # - PATTERN                    : VALUE should match the PATTERN
   # - MULTIPLE                   : VALUE must be singular if MULTIPLE attribute is not present
   # ─────────────────────────────────────────────────────────────────────
   # - input[type=email]          : VALUE should filtered via FILTER_VALIDATE_EMAIL
@@ -307,8 +307,8 @@ namespace effectivecore {
 
       $c_step = $element->attribute_select('step') ?: 1;
       if ($element->attribute_select('type') == 'number') {
-        $c_min = $element->attribute_select('min') ?: -1e+17; # ~ -100,000,000,000,000,008.00
-        $c_max = $element->attribute_select('max') ?: +1e+17; } else {
+        $c_min = $element->attribute_select('min') ?: -1e+14; # ~ -100,000,000,000,000.000
+        $c_max = $element->attribute_select('max') ?: +1e+14; } else {
         $c_min = $element->attribute_select('min') ?: 0;
         $c_max = $element->attribute_select('max') ?: 100;
       }
@@ -331,8 +331,8 @@ namespace effectivecore {
         return;
       }
 
-    # check step offset in the range
-      if (rtrim(strstr(number_format(($new_value - $c_min) / $c_step, 10, '.', ''), '.'), '.0') != '') {
+      if ((int)round(($c_min - $new_value) / $c_step, 5) !=
+               round(($c_min - $new_value) / $c_step, 5)) {
         $form->add_error($npath.'/element',
           translations::get('Field "%%_title" contains incorrect value!', ['title' => $title]).br.
           translations::get('Field value is not in valid range.')
