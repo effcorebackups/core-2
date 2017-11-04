@@ -307,8 +307,8 @@ namespace effectivecore {
 
       $c_step = $element->attribute_select('step') ?: 1;
       if ($element->attribute_select('type') == 'number') {
-        $c_min = $element->attribute_select('min') ?: -1e+14; # ~ -100,000,000,000,000.000
-        $c_max = $element->attribute_select('max') ?: +1e+14; } else {
+        $c_min = $element->attribute_select('min') ?: -10000000000.0;
+        $c_max = $element->attribute_select('max') ?: +10000000000.0; } else {
         $c_min = $element->attribute_select('min') ?: 0;
         $c_max = $element->attribute_select('max') ?: 100;
       }
