@@ -296,8 +296,8 @@ namespace effectivecore {
 
     # check number value
       if (!preg_match('%^(?<integer>[-]?[1-9][0-9]*|0)$|'.
-                       '^(?<float_s>[-]?[0-9][.][0-9]{1,5})$|'.
-                       '^(?<float_l>[-]?[1-9][0-9]+[.][0-9]{1,5})$%S', $new_value)) {
+                       '^(?<float_s>[-]?[0-9][.][0-9]{1,3})$|'.
+                       '^(?<float_l>[-]?[1-9][0-9]+[.][0-9]{1,3})$%S', $new_value)) {
         $form->add_error($npath.'/element',
           translations::get('Field "%%_title" contains incorrect value!', ['title' => $title]).br.
           translations::get('Field value is not a valid number.')
