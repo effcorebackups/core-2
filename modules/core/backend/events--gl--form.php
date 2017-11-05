@@ -38,7 +38,7 @@ namespace effectivecore {
   # - input[type=number]         : disabled, readonly, required, min, max, step, name[]
   # - input[type=range]          : disabled,           required, min, max, step, name[]
   # - input[type=date]           : disabled, readonly, required, min, max, name[]
-  # - input[type=time]           : disabled, readonly, required, MIN, MAX, name[]
+  # - input[type=time]           : disabled, readonly, required, MIN, MAX, STEP, name[]
   # - input[type=color]          : disabled,           required, name[]
   # ─────────────────────────────────────────────────────────────────────
   # - input[type=hidden]         : not processed element
@@ -133,7 +133,6 @@ namespace effectivecore {
         # - $_POST[name] == [0 => 'value']      -> [0 => 'value']
         # - $_POST[name] == [0 => 'value', ...] -> [0 => 'value', ...]
         # ─────────────────────────────────────────────────────────────────────
-
           $c_new_values = !isset($values[$c_name]) ? [] :
                        (is_array($values[$c_name]) ?
                                  $values[$c_name]  :
@@ -218,9 +217,11 @@ namespace effectivecore {
     );
 
   # filter fake values from the user's side
+  # ─────────────────────────────────────────────────────────────────────
     $new_values = array_unique(array_intersect($new_values, $allowed_values));
 
-  # check required fields
+  # check required
+  # ─────────────────────────────────────────────────────────────────────
     if ($element->attribute_select('required') && empty(array_filter($new_values, 'strlen'))) {
       $form->add_error($npath.'/element',
         translations::get('Field "%%_title" must be selected!', ['title' => $title])
@@ -233,10 +234,10 @@ namespace effectivecore {
   # - ['' => '']          -> ['' => '']
   # - ['' => '', ...]     -> [...]
   # ─────────────────────────────────────────────────────────────────────
-  
     $new_values = array_filter($new_values, 'strlen') ?: $new_values;
 
   # check if field is multiple or singular
+  # ─────────────────────────────────────────────────────────────────────
     if (!$element->attribute_select('multiple') && count($new_values) > 1) {
       $new_values = array_slice($new_values, -1);
       $form->add_error($npath.'/element',
@@ -254,7 +255,8 @@ namespace effectivecore {
       $field->title
     );
 
-  # check required fields
+  # check required
+  # ─────────────────────────────────────────────────────────────────────
     if ($element->attribute_select('required') && strlen($new_value) == 0) {
       $form->add_error($npath.'/element',
         translations::get('Field "%%_title" can not be blank!', ['title' => $title])
@@ -262,7 +264,8 @@ namespace effectivecore {
       return;
     }
 
-  # check minimum length
+  # check minlength
+  # ─────────────────────────────────────────────────────────────────────
     if ($element->attribute_select('minlength') && strlen($new_value) &&
         $element->attribute_select('minlength')  > strlen($new_value)) {
       $form->add_error($npath.'/element',
@@ -271,7 +274,8 @@ namespace effectivecore {
       return;
     }
 
-  # check maximum length
+  # check maxlength
+  # ─────────────────────────────────────────────────────────────────────
     if ($element->attribute_select('maxlength') &&
         $element->attribute_select('maxlength') < strlen($new_value)) {
       $form->add_error($npath.'/element',
@@ -284,17 +288,17 @@ namespace effectivecore {
       return;
     }
 
-  # number validation matrix - [number('...') => is_valid(0|1|2), ...]
+  # check number/range
   # ─────────────────────────────────────────────────────────────────────
-  # ''   => 0, '-'   => 0 | '0'   => 1, '-0'   => 0 | '1'   => 1, '-1'   => 1 | '01'   => 0, '-01'   => 0 | '10'   => 1, '-10'   => 1
-  # '.'  => 0, '-.'  => 0 | '0.'  => 0, '-0.'  => 0 | '1.'  => 0, '-1.'  => 0 | '01.'  => 0, '-01.'  => 0 | '10.'  => 0, '-10.'  => 0
-  # '.0' => 0, '-.0' => 0 | '0.0' => 1, '-0.0' => 2 | '1.0' => 1, '-1.0' => 1 | '01.0' => 0, '-01.0' => 0 | '10.0' => 1, '-10.0' => 1
-  # ─────────────────────────────────────────────────────────────────────
-
     if ($element->attribute_select('type') == 'number' ||
         $element->attribute_select('type') == 'range') {
 
-    # check number value
+    # value validation matrix - [number('...') => is_valid(0|1|2), ...]
+    # ─────────────────────────────────────────────────────────────────────
+    # ''   => 0, '-'   => 0 | '0'   => 1, '-0'   => 0 | '1'   => 1, '-1'   => 1 | '01'   => 0, '-01'   => 0 | '10'   => 1, '-10'   => 1
+    # '.'  => 0, '-.'  => 0 | '0.'  => 0, '-0.'  => 0 | '1.'  => 0, '-1.'  => 0 | '01.'  => 0, '-01.'  => 0 | '10.'  => 0, '-10.'  => 0
+    # '.0' => 0, '-.0' => 0 | '0.0' => 1, '-0.0' => 2 | '1.0' => 1, '-1.0' => 1 | '01.0' => 0, '-01.0' => 0 | '10.0' => 1, '-10.0' => 1
+    # ─────────────────────────────────────────────────────────────────────
       if (!preg_match('%^(?<integer>[-]?[1-9][0-9]*|0)$|'.
                        '^(?<float_s>[-]?[0-9][.][0-9]{1,3})$|'.
                        '^(?<float_l>[-]?[1-9][0-9]+[.][0-9]{1,3})$%S', $new_value)) {
@@ -313,7 +317,7 @@ namespace effectivecore {
         $c_max = $element->attribute_select('max') ?: 100;
       }
 
-    # check min value
+    # check min
       if ($c_min > $new_value) {
         $form->add_error($npath.'/element',
           translations::get('Field "%%_title" contains incorrect value!', ['title' => $title]).br.
@@ -322,7 +326,7 @@ namespace effectivecore {
         return;
       }
     
-    # check max value
+    # check max
       if ($c_max < $new_value) {
         $form->add_error($npath.'/element',
           translations::get('Field "%%_title" contains incorrect value!', ['title' => $title]).br.
@@ -342,9 +346,11 @@ namespace effectivecore {
 
     }
 
+  # check date
+  # ─────────────────────────────────────────────────────────────────────
     if ($element->attribute_select('type') == 'date') {
 
-    # check date value
+    # check value
       if (!(preg_match('%^(?<Y>[0-9]{4})-(?<m>[0-1][0-9])-(?<d>[0-3][0-9])$%S', $new_value, $matches) &&
             checkdate($matches['m'],
                       $matches['d'],
@@ -358,7 +364,7 @@ namespace effectivecore {
       $c_min = $element->attribute_select('min') ?: '1970-01-01';
       $c_max = $element->attribute_select('max') ?: '2038-01-01';
 
-    # check min value
+    # check min
       if ($c_min > $new_value) {
         $form->add_error($npath.'/element',
           translations::get('Field "%%_title" contains incorrect value!', ['title' => $title]).br.
@@ -367,7 +373,7 @@ namespace effectivecore {
         return;
       }
 
-    # check max value
+    # check max
       if ($c_max < $new_value) {
         $form->add_error($npath.'/element',
           translations::get('Field "%%_title" contains incorrect value!', ['title' => $title]).br.
@@ -378,7 +384,24 @@ namespace effectivecore {
 
     }
 
+  # check time
+  # ─────────────────────────────────────────────────────────────────────
+    if ($element->attribute_select('type') == 'time') {
+
+    # check value
+      if (!preg_match('%^(?<H>[0-1][0-9]|20|21|22|23)'.
+                    '(?::(?<i>[0-5][0-9]))'.
+                    '(?::(?<s>[0-5][0-9])|)$%S', $new_value, $matches)) {
+        $form->add_error($npath.'/element',
+          translations::get('Field "%%_title" contains an incorrect time!', ['title' => $title])
+        );
+        return;
+      }
+
+    }
+
   # check email field
+  # ─────────────────────────────────────────────────────────────────────
     if ($element->attribute_select('type') == 'email' &&
         filter_var($new_value, FILTER_VALIDATE_EMAIL) == false) {
       $form->add_error($npath.'/element',
@@ -386,6 +409,7 @@ namespace effectivecore {
       );
       return;
     }
+
   }
 
   #################
