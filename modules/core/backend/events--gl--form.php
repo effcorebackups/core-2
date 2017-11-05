@@ -38,7 +38,7 @@ namespace effectivecore {
   # - input[type=number]         : disabled, readonly, required, min, max, step, name[]
   # - input[type=range]          : disabled,           required, min, max, step, name[]
   # - input[type=date]           : disabled, readonly, required, min, max, name[]
-  # - input[type=time]           : disabled, readonly, required, MIN, MAX, STEP, name[]
+  # - input[type=time]           : disabled, readonly, required, min, max, STEP, name[]
   # - input[type=color]          : disabled,           required, name[]
   # ─────────────────────────────────────────────────────────────────────
   # - input[type=hidden]         : not processed element
@@ -77,7 +77,7 @@ namespace effectivecore {
   # 1. attribute MULTIPLE in SELECT element is not supported on touch
   #    devices - tablets, phones, monitors with touch screens
   # 2. attribute REQUIRED is not standart for input[type=color|range]
-  #    but supported and recomend in this system
+  #    but supported and recommended in this system
   # 3. not recommend to use DISABLED radio field with CHECKED state - 
   #    this element will be always CHECKED regardless of user choice.
   #    example (second field will be allways CHECKED):
@@ -85,7 +85,7 @@ namespace effectivecore {
   #    - input[type=radio,checked,disabled]
   # 4. not recommend to use DISABLED|READONLY text fields with shared
   #    NAME because user can remove DISABLED|READONLY state from field
-  #    and change the field VALUE and submit form - after this action
+  #    and change the field VALUE and submit the form - after this action
   #    the new VALUE will be setted to the next field with shared NAME.
   #    example (default form state):
   #    - input[type=text,name=shared_name[],value=1,disabled|readonly]
@@ -394,6 +394,30 @@ namespace effectivecore {
                     '(?::(?<s>[0-5][0-9])|)$%S', $new_value, $matches)) {
         $form->add_error($npath.'/element',
           translations::get('Field "%%_title" contains an incorrect time!', ['title' => $title])
+        );
+        return;
+      }
+
+      $c_min = $element->attribute_select('min') ?: '00:00:00';
+      $c_max = $element->attribute_select('max') ?: '23:59:59';
+      $c_min     = strlen($c_min)     == 5 ? $c_min.':00'     : $c_min;
+      $c_max     = strlen($c_max)     == 5 ? $c_max.':00'     : $c_max;
+      $new_value = strlen($new_value) == 5 ? $new_value.':00' : $new_value;
+
+    # check min
+      if ($c_min > $new_value) {
+        $form->add_error($npath.'/element',
+          translations::get('Field "%%_title" contains incorrect value!', ['title' => $title]).br.
+          translations::get('Field value is less than %%_value.', ['value' => $c_min])
+        );
+        return;
+      }
+
+    # check max
+      if ($c_max < $new_value) {
+        $form->add_error($npath.'/element',
+          translations::get('Field "%%_title" contains incorrect value!', ['title' => $title]).br.
+          translations::get('Field value is more than %%_value.', ['value' => $c_max])
         );
         return;
       }
