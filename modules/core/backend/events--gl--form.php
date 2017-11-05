@@ -37,7 +37,7 @@ namespace effectivecore {
   # - input[type=radio]          : disabled,           REQUIRED, checked, name[]
   # - input[type=number]         : disabled, readonly, required, min, max, step, name[]
   # - input[type=range]          : disabled,           required, min, max, step, name[]
-  # - input[type=date]           : disabled, readonly, required, MIN, MAX, name[]
+  # - input[type=date]           : disabled, readonly, required, min, max, name[]
   # - input[type=time]           : disabled, readonly, required, MIN, MAX, name[]
   # - input[type=color]          : disabled,           required, name[]
   # ─────────────────────────────────────────────────────────────────────
@@ -343,6 +343,8 @@ namespace effectivecore {
     }
 
     if ($element->attribute_select('type') == 'date') {
+
+    # check date value
       if (!(preg_match('%^(?<Y>[0-9]{4})-(?<m>[0-1][0-9])-(?<d>[0-3][0-9])$%S', $new_value, $matches) &&
             checkdate($matches['m'],
                       $matches['d'],
@@ -350,7 +352,30 @@ namespace effectivecore {
         $form->add_error($npath.'/element',
           translations::get('Field "%%_title" contains an incorrect date!', ['title' => $title])
         );
+        return;
       }
+
+      $c_min = $element->attribute_select('min') ?: '1970-01-01';
+      $c_max = $element->attribute_select('max') ?: '2038-01-01';
+
+    # check min value
+      if ($c_min > $new_value) {
+        $form->add_error($npath.'/element',
+          translations::get('Field "%%_title" contains incorrect value!', ['title' => $title]).br.
+          translations::get('Field value is less than %%_value.', ['value' => $c_min])
+        );
+        return;
+      }
+
+    # check max value
+      if ($c_max < $new_value) {
+        $form->add_error($npath.'/element',
+          translations::get('Field "%%_title" contains incorrect value!', ['title' => $title]).br.
+          translations::get('Field value is more than %%_value.', ['value' => $c_max])
+        );
+        return;
+      }
+
     }
 
   # check email field
