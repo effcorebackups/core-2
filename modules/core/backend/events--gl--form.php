@@ -342,6 +342,17 @@ namespace effectivecore {
 
     }
 
+    if ($element->attribute_select('type') == 'date') {
+      if (!(preg_match('%^(?<Y>[0-9]{4})-(?<m>[0-1][0-9])-(?<d>[0-3][0-9])$%S', $new_value, $matches) &&
+            checkdate($matches['m'],
+                      $matches['d'],
+                      $matches['Y']))) {
+        $form->add_error($npath.'/element',
+          translations::get('Field "%%_title" contains an incorrect date!', ['title' => $title])
+        );
+      }
+    }
+
   # check email field
     if ($element->attribute_select('type') == 'email' &&
         filter_var($new_value, FILTER_VALIDATE_EMAIL) == false) {
