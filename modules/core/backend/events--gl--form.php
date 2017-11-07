@@ -38,7 +38,7 @@ namespace effectivecore {
   # - input[type=number]         : disabled, readonly, required, min, max, step, name[]
   # - input[type=range]          : disabled,           required, min, max, step, name[]
   # - input[type=date]           : disabled, readonly, required, min, max, name[]
-  # - input[type=time]           : disabled, readonly, required, min, max, STEP, name[]
+  # - input[type=time]           : disabled, readonly, required, min, max, name[]
   # - input[type=color]          : disabled,           required, name[]
   # ─────────────────────────────────────────────────────────────────────
   # - input[type=hidden]         : not processed element

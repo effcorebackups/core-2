@@ -195,10 +195,10 @@ forms
                 - type: time
                 - name: time
                 - required: required
-                - value: 04:05:06
-                - min: 01:02:03
-                - max: 07:08:09
-                - step: 1
+                - value: 00:00:00
+                - min: 01:00:00
+                - max: 23:08:00
+                - step: 60
       # field color
         - color|form_field
             title: Color
