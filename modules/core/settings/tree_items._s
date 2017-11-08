@@ -1,8 +1,8 @@
 tree_items
 - home|tree_item
     id: home
+    id_parent: main
     parent_is_tree: true
-    parent_id: main
     title: Home
     attributes
     - href: /
@@ -10,8 +10,8 @@ tree_items
       - home: home
 - admin|tree_item
     id: admin
+    id_parent: main
     parent_is_tree: true
-    parent_id: main
     title: Administer
     access
       roles
@@ -21,7 +21,7 @@ tree_items
       - admin: admin
 - modules|tree_item
     id: modules
-    parent_id: admin
+    id_parent: admin
     title: Modules
     access
       roles

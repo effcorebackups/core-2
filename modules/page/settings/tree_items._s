@@ -1,7 +1,7 @@
 tree_items
 - decoration|tree_item
     id: decoration
-    parent_id: admin
+    id_parent: admin
     title: Decoration
     access
       roles

@@ -22,13 +22,13 @@ entities
       id
         type: autoincrement
         not_null: true
+      id_parent
+        type: integer
+        not_null: true
       parent_is_tree
         type: integer
         not_null: true
         default: 0
-      parent_id
-        type: integer
-        not_null: true
       title
         type: varchar
         size: 255

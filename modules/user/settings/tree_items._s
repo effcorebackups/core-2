@@ -1,8 +1,8 @@
 tree_items
 - anonymous|tree_item
     id: anonymous
+    id_parent: user
     parent_is_tree: true
-    parent_id: user
     title: Anonymous
     access
       roles
@@ -12,7 +12,7 @@ tree_items
       - anonymous: anonymous
 - login|tree_item
     id: login
-    parent_id: anonymous
+    id_parent: anonymous
     title: login
     weight: -80
     access
@@ -24,7 +24,7 @@ tree_items
       - login: login
 - registration|tree_item
     id: registration
-    parent_id: anonymous
+    id_parent: anonymous
     title: registration
     weight: -60
     access
@@ -36,8 +36,8 @@ tree_items
       - registration: registration
 - user|tree_item
     id: user
+    id_parent: user
     parent_is_tree: true
-    parent_id: user
     title: %%_nick
     access
       roles
@@ -49,7 +49,7 @@ tree_items
       - user: user
 - user_edit|tree_item
     id: user_edit
-    parent_id: user
+    id_parent: user
     title: edit
     weight: -100
     access
@@ -62,7 +62,7 @@ tree_items
       - user-edit: user-edit
 - logout|tree_item
     id: logout
-    parent_id: user
+    id_parent: user
     title: logout
     weight: -40
     access
@@ -74,7 +74,7 @@ tree_items
       - logout: logout
 - roles|tree_item
     id: roles
-    parent_id: admin
+    id_parent: admin
     title: Roles
     access
       roles
@@ -85,7 +85,7 @@ tree_items
       - roles: roles
 - users|tree_item
     id: users
-    parent_id: admin
+    id_parent: admin
     title: Users
     access
       roles

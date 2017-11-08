@@ -15,10 +15,10 @@ namespace effectivecore\modules\tree {
   static function on_start() {
     trees::init();
     foreach(trees::get_tree_items() as $c_item) {
-      if ($c_item->parent_id) {
+      if ($c_item->id_parent) {
         $c_parent = !empty($c_item->parent_is_tree) ?
-           trees::get_tree($c_item->parent_id) :
-           trees::get_tree_item($c_item->parent_id);
+           trees::get_tree($c_item->id_parent) :
+           trees::get_tree_item($c_item->id_parent);
         $c_parent->child_insert($c_item, $c_item->id);
       }
     };

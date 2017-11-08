@@ -1,8 +1,8 @@
 tree_items
 - develop|tree_item
     id: develop
+    id_parent: main
     parent_is_tree: true
-    parent_id: main
     title: Develop
     access
       roles
@@ -12,7 +12,7 @@ tree_items
       - develop: develop
 - demo|tree_item
     id: demo
-    parent_id: develop
+    id_parent: develop
     title: Demo
     access
       roles
