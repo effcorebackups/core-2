@@ -6,7 +6,7 @@ pages
       url
         match: %^/user/[0-9]+$%
         args
-        - user_id: 2
+        - id_user: 2
     access
       roles
       - admins: admins

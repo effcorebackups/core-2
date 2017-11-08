@@ -46,7 +46,7 @@ entities
         type: varchar
         size: 255
         not_null: true
-      user_id
+      id_user
         type: integer
         not_null: true
       created
@@ -107,7 +107,7 @@ entities
         type: varchar
         size: 255
         not_null: true
-      user_id
+      id_user
         type: integer
         not_null: true
     constraints
@@ -115,7 +115,7 @@ entities
         type: primary key
         fields
         - role_id: role_id
-        - user_id: user_id
+        - id_user: id_user
 - relation_role_ws_permission|entity
     name: relation_role_ws_permission
     storage_id: main

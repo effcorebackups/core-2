@@ -56,7 +56,7 @@ instances
     entity_name: relation_role_ws_user
     values
     - role_id: admins
-    - user_id: 1
+    - id_user: 1
 - relation_role_ws_permission_admins_user_select|instance
     entity_name: relation_role_ws_permission
     values

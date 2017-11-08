@@ -64,7 +64,7 @@ namespace effectivecore\modules\user {
         $block = new markup('x-block', ['id' => 'user']);
       # get roles
         $roles = [];
-        $storage_roles = entities::get('relation_role_ws_user')->select_instances(['user_id' => $id]);
+        $storage_roles = entities::get('relation_role_ws_user')->select_instances(['id_user' => $id]);
         if ($storage_roles) {
           foreach ($storage_roles as $c_role) {
             $roles[] = $c_role->role_id;

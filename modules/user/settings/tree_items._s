@@ -44,7 +44,7 @@ tree_items
       - admins: admins
       - registered: registered
     attributes
-    - href: /user/%%_user_id
+    - href: /user/%%_id_user
     - class
       - user: user
 - user_edit|tree_item
@@ -57,7 +57,7 @@ tree_items
       - admins: admins
       - registered: registered
     attributes
-    - href: /user/%%_user_id/edit
+    - href: /user/%%_id_user/edit
     - class
       - user-edit: user-edit
 - logout|tree_item

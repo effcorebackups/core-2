@@ -1,7 +1,7 @@
 tokens
 # tokens for current user
-- user_id
-    match: %%_user_id
+- id_user
+    match: %%_id_user
     type: code
     handler: \effectivecore\modules\user\events_token::on_replace
 - email
@@ -13,8 +13,8 @@ tokens
     type: code
     handler: \effectivecore\modules\user\events_token::on_replace
 # tokens for context user (user id is taken from url)
-- user_id_context
-    match: %%_user_id_context
+- id_user_context
+    match: %%_id_user_context
     type: code
     handler: \effectivecore\modules\user\events_token::on_replace
 - email_context

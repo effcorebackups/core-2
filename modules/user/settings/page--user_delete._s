@@ -6,7 +6,7 @@ pages
       url
         match: %^/admin/users/delete/[0-9]+$%
         args
-        - user_id: 4
+        - id_user: 4
     access
       roles
       - admins: admins

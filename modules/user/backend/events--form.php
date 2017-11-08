@@ -22,7 +22,7 @@ namespace effectivecore\modules\user {
   #########################
 
   static function on_submit_user_delete($form, $fields, &$values) {
-    $id = pages::$args['user_id'];
+    $id = pages::$args['id_user'];
     switch ($form->clicked_button_name) {
       case 'delete':
         $user = (new instance('user', [
@@ -31,7 +31,7 @@ namespace effectivecore\modules\user {
         if ($user) {
           $nick = $user->nick;
           if ($user->delete()) {
-            $sessions = entities::get('session')->select_instances(['user_id' => $id]);
+            $sessions = entities::get('session')->select_instances(['id_user' => $id]);
             if ($sessions) {
               foreach ($sessions as $c_session) {
                 $c_session->delete();
@@ -53,7 +53,7 @@ namespace effectivecore\modules\user {
   #######################
 
   static function on_init_user_edit($form, $fields) {
-    $id = pages::$args['user_id'];
+    $id = pages::$args['id_user'];
     $user = (new instance('user', ['id' => $id]))->select();
     $fields['credentials/email']->child_select('element')->attribute_insert('value', $user->email);
     $fields['credentials/nick']->child_select('element')->attribute_insert('value', $user->nick);
@@ -64,7 +64,7 @@ namespace effectivecore\modules\user {
     switch ($form->clicked_button_name) {
       case 'save':
         if (count($form->errors) == 0) {
-          $id = pages::$args['user_id'];
+          $id = pages::$args['id_user'];
         # check security
           $test_pass = (new instance('user', ['id' => $id]))->select();
           if ($test_pass->password_hash !== factory::hash_get($values['password'])) {
@@ -103,7 +103,7 @@ namespace effectivecore\modules\user {
   }
 
   static function on_submit_user_edit($form, $fields, &$values) {
-    $id = pages::$args['user_id'];
+    $id = pages::$args['id_user'];
     switch ($form->clicked_button_name) {
       case 'save':
         $user = (new instance('user', ['id' => $id]))->select();

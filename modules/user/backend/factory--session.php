@@ -12,25 +12,25 @@ namespace effectivecore\modules\user {
           use \effectivecore\modules\user\users_factory as users;
           abstract class session_factory {
 
-  static function init($user_id = null) {
+  static function init($id_user = null) {
   # create session after login or register new user
-    if ($user_id != null) {
+    if ($id_user != null) {
       session_start();
       (new instance('session', [
         'id'      => session_id(),
-        'user_id' => $user_id,
+        'id_user' => $id_user,
         'created' => factory::datetime_get_curent()
       ]))->insert();
     }
   # restore session for authenticated user
-    if ($user_id == null && isset($_COOKIE[session_name()])) {
+    if ($id_user == null && isset($_COOKIE[session_name()])) {
       $session = (new instance('session', [
         'id' => $_COOKIE[session_name()]
       ]))->select();
       if ($session &&
-          $session->user_id) {
+          $session->id_user) {
         session_start();
-        $user_id = $session->user_id;
+        $id_user = $session->id_user;
       } else {
       # remove lost or fake sid in browser
         setcookie(session_name(), '', 0, '/');
@@ -38,13 +38,13 @@ namespace effectivecore\modules\user {
       }
     }
   # init user
-    users::init($user_id);
+    users::init($id_user);
   }
 
-  static function destroy($user_id) {
+  static function destroy($id_user) {
     (new instance('session', [
       'id'      => session_id(),
-      'user_id' => $user_id
+      'id_user' => $id_user
     ]))->delete();
     setcookie(session_name(), '', 0, '/');
     session_destroy();
