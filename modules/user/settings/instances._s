@@ -55,20 +55,20 @@ instances
 - relation_role_ws_user_admins_1|instance
     entity_name: relation_role_ws_user
     values
-    - role_id: admins
+    - id_role: admins
     - id_user: 1
 - relation_role_ws_permission_admins_user_select|instance
     entity_name: relation_role_ws_permission
     values
-    - role_id: admins
-    - permission_id: user_select
+    - id_role: admins
+    - id_permission: user_select
 - relation_role_ws_permission_admins_user_update|instance
     entity_name: relation_role_ws_permission
     values
-    - role_id: admins
-    - permission_id: user_update
+    - id_role: admins
+    - id_permission: user_update
 - relation_role_ws_permission_admins_user_insert|instance
     entity_name: relation_role_ws_permission
     values
-    - role_id: admins
-    - permission_id: user_insert
+    - id_role: admins
+    - id_permission: user_insert

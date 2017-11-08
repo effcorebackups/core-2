@@ -22,7 +22,7 @@ namespace effectivecore\modules\user {
         static::$data = (object)($user->get_values());
         static::$data->roles = ['registered' => 'registered'];
         foreach (entities::get('relation_role_ws_user')->select_instances(['id_user' => $user->id]) as $c_role) {
-          static::$data->roles[$c_role->role_id] = $c_role->role_id;
+          static::$data->roles[$c_role->id_role] = $c_role->id_role;
         }
       }
     }

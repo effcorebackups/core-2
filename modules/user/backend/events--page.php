@@ -67,7 +67,7 @@ namespace effectivecore\modules\user {
         $storage_roles = entities::get('relation_role_ws_user')->select_instances(['id_user' => $id]);
         if ($storage_roles) {
           foreach ($storage_roles as $c_role) {
-            $roles[] = $c_role->role_id;
+            $roles[] = $c_role->id_role;
           }
         }
       # get values
