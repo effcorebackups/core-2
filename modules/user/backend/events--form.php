@@ -11,8 +11,8 @@ namespace effectivecore\modules\user {
           use \effectivecore\instance as instance;
           use \effectivecore\entity_factory as entity;
           use \effectivecore\message_factory as message;
+          use \effectivecore\modules\page\page_factory as page;
           use \effectivecore\translation_factory as translation;
-          use \effectivecore\modules\page\pages_factory as pages;
           use \effectivecore\modules\user\users_factory as users;
           use \effectivecore\modules\user\session_factory as session;
           abstract class events_form extends \effectivecore\events_form {
@@ -22,7 +22,7 @@ namespace effectivecore\modules\user {
   #########################
 
   static function on_submit_user_delete($form, $fields, &$values) {
-    $id = pages::$args['id_user'];
+    $id = page::$args['id_user'];
     switch ($form->clicked_button_name) {
       case 'delete':
         $user = (new instance('user', [
@@ -53,7 +53,7 @@ namespace effectivecore\modules\user {
   #######################
 
   static function on_init_user_edit($form, $fields) {
-    $id = pages::$args['id_user'];
+    $id = page::$args['id_user'];
     $user = (new instance('user', ['id' => $id]))->select();
     $fields['credentials/email']->child_select('element')->attribute_insert('value', $user->email);
     $fields['credentials/nick']->child_select('element')->attribute_insert('value', $user->nick);
@@ -64,7 +64,7 @@ namespace effectivecore\modules\user {
     switch ($form->clicked_button_name) {
       case 'save':
         if (count($form->errors) == 0) {
-          $id = pages::$args['id_user'];
+          $id = page::$args['id_user'];
         # check security
           $test_pass = (new instance('user', ['id' => $id]))->select();
           if ($test_pass->password_hash !== factory::hash_get($values['password'])) {
@@ -103,7 +103,7 @@ namespace effectivecore\modules\user {
   }
 
   static function on_submit_user_edit($form, $fields, &$values) {
-    $id = pages::$args['id_user'];
+    $id = page::$args['id_user'];
     switch ($form->clicked_button_name) {
       case 'save':
         $user = (new instance('user', ['id' => $id]))->select();

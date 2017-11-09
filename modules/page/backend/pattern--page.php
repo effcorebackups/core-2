@@ -13,7 +13,7 @@ namespace effectivecore {
           use \effectivecore\message_factory as message;
           use \effectivecore\translation_factory as translation;
           use \effectivecore\modules\user\users_factory as users;
-          use \effectivecore\modules\page\pages_factory as pages;
+          use \effectivecore\modules\page\page_factory as page_factory;
           use \effectivecore\modules\storage\storages_factory as storages;
           class page {
 
@@ -96,7 +96,7 @@ namespace effectivecore {
   # collect page arguments
     if (isset($this->display->url->args)) {
       foreach ($this->display->url->args as $c_name => $c_num) {
-        pages::$args[$c_name] = urls::get_current()->get_args($c_num);
+        page_factory::$args[$c_name] = urls::get_current()->get_args($c_num);
       }
     }
 
@@ -107,7 +107,7 @@ namespace effectivecore {
                         $c_block->region : 'content_1_1';
       switch ($c_block->type) {
         case 'text': $contents[$c_region][] = new text($c_block->content); break;
-        case 'code': $contents[$c_region][] = call_user_func_array($c_block->handler, pages::$args); break;
+        case 'code': $contents[$c_region][] = call_user_func_array($c_block->handler, page_factory::$args); break;
         case 'link': $contents[$c_region][] = storages::get('settings')->select_by_npath($c_block->npath); break;
         default    : $contents[$c_region][] = $c_block;
       }
