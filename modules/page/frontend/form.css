@@ -64,10 +64,11 @@
   /* buttons */
   form button {
     min-width: 150px;
-    margin: 5px 10px 5px 0;
+    margin: 5px 20px 5px 0;
     padding: 12px 30px;
     cursor: pointer;
     border: none;
+    border-radius: 5px;
     font-family: 'Arial';
     font-size: 16px;
     color: white;
@@ -87,4 +88,4 @@
 
   /* particular cases */
   form#user_delete,
-  form#logout {width: 320px; margin: 100px auto}
+  form#logout {width: 340px; margin: 100px auto}
