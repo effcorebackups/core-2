@@ -33,10 +33,8 @@ forms
                 - minlength: 5
                 - maxlength: 255
                 - autocomplete: off
-        - captcha|svg
-            width: 200
-            height: 150
-            color_bg: white
+        - captcha|captcha
+            length: 6
     - button_login|markup
         tag_name: button
         attributes

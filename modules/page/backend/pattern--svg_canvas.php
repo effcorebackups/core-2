@@ -5,20 +5,16 @@
   #############################################################
 
 namespace effectivecore {
-          class svg extends \effectivecore\node_simple {
+          class svg_canvas extends \effectivecore\node_simple {
 
-  public $template = 'svg';
+  public $template = 'svg_canvas';
   public $color_bg = 'white';
-  public $width = 0;
-  public $height = 0;
+  public $width = 100;
+  public $height = 200;
   public $canvas = [];
 
-  function __construct($attributes = [], $weight = 0) {
-    parent::__construct($attributes, $weight);
-  }
-
-  function pixel_set($x, $y, $state = 1) {
-    $this->canvas[$x][$y] = $state;
+  function pixel_set($x, $y, $color = '#000000') {
+    $this->canvas[$x][$y] = $color;
   }
 
   function render() {
@@ -33,9 +29,9 @@ namespace effectivecore {
   function render_canvas($canvas) {
     $return = [];
     foreach ($this->canvas as $x => $x_row) {
-      foreach ($x_row as $y => $c_value) {
+      foreach ($x_row as $y => $c_color) {
         $return[] = (new markup_xml_simple('rect', [
-          'style' => 'fill:#000000',
+          'style' => 'fill:'.$c_color,
           'x' => $x * 10,
           'y' => $y * 10,
           'width'  => 10,

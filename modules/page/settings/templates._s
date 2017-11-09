@@ -6,4 +6,4 @@ templates
 - page: frontend/template--page.html
 - page_simple: frontend/template--page_simple.html
 - form_container: frontend/template--form_container.html
-- svg: frontend/template--svg.xml
+- svg_canvas: frontend/template--svg_canvas.xml
