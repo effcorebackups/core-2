@@ -11,7 +11,7 @@ namespace effectivecore {
           use \effectivecore\locale_factory as locale;
           use \effectivecore\console_factory as console;
           use \effectivecore\message_factory as message;
-          use \effectivecore\translations_factory as translations;
+          use \effectivecore\translation_factory as translation;
           use \effectivecore\modules\user\users_factory as users;
           use \effectivecore\modules\page\pages_factory as pages;
           use \effectivecore\modules\storage\storages_factory as storages;
@@ -29,7 +29,7 @@ namespace effectivecore {
   function render() {
     $template = new template('page');
     $template->set_var('title',
-      token::replace(translations::get($this->title))
+      token::replace(translation::get($this->title))
     );
 
   # check https (@todo: enable this message)

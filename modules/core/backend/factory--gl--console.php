@@ -6,7 +6,7 @@
 
 namespace effectivecore {
           use \effectivecore\locale_factory as locale;
-          use \effectivecore\translations_factory as translations;
+          use \effectivecore\translation_factory as translation;
           abstract class console_factory {
 
   static $data = [];
@@ -45,9 +45,9 @@ namespace effectivecore {
       $row_class = factory::to_css_class($c_log['object']);
       $tbody[] = new table_body_row(['class' => [$row_class => $row_class]], [
         new table_body_row_cell(['class' => ['time'        => 'time']],        locale::format_msecond($c_log['time'])),
-        new table_body_row_cell(['class' => ['object'      => 'object']],      translations::get($c_log['object'],      $c_log['args'])),
-        new table_body_row_cell(['class' => ['action'      => 'action']],      translations::get($c_log['action'],      $c_log['args'])),
-        new table_body_row_cell(['class' => ['description' => 'description']], translations::get($c_log['description'], $c_log['args'])),
+        new table_body_row_cell(['class' => ['object'      => 'object']],      translation::get($c_log['object'],      $c_log['args'])),
+        new table_body_row_cell(['class' => ['action'      => 'action']],      translation::get($c_log['action'],      $c_log['args'])),
+        new table_body_row_cell(['class' => ['description' => 'description']], translation::get($c_log['description'], $c_log['args'])),
         new table_body_row_cell(['class' => ['values'      => 'values']],      $c_log['values'])
       ]);
     }

@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\translations_factory as translations;
+          use \effectivecore\translation_factory as translation;
           class form_field extends \effectivecore\form_container {
 
   public $tag_name = 'x-field';
@@ -32,11 +32,11 @@ namespace effectivecore {
   function render_description() {
     $return = [];
     $element = $this->child_select('element');
-    if ($element instanceof node_simple && $element->attribute_select('minlength'))       $return[] = new markup('p', ['class' => ['minlength' => 'minlength']], translations::get('Field must contain a minimum of %%_num characters.', ['num' => $element->attribute_select('minlength')]));
-    if ($element instanceof node_simple && $element->attribute_select('maxlength'))       $return[] = new markup('p', ['class' => ['maxlength' => 'maxlength']], translations::get('Field must contain a maximum of %%_num characters.', ['num' => $element->attribute_select('maxlength')]));
-    if ($element instanceof node_simple && $element->attribute_select('min'))             $return[] = new markup('p', ['class' => ['min' => 'min']],             translations::get('Minimal field value: %%_value.', ['value' => $element->attribute_select('min')]));
-    if ($element instanceof node_simple && $element->attribute_select('max'))             $return[] = new markup('p', ['class' => ['max' => 'max']],             translations::get('Maximal field value: %%_value.', ['value' => $element->attribute_select('max')]));
-    if ($element instanceof node_simple && $element->attribute_select('type') == 'range') $return[] = new markup('p', ['class' => ['cur' => 'cur']],             translations::get('Current field value: %%_value.', ['value' => (new markup('x-value', [], $element->attribute_select('value')))->render()]));
+    if ($element instanceof node_simple && $element->attribute_select('minlength'))       $return[] = new markup('p', ['class' => ['minlength' => 'minlength']], translation::get('Field must contain a minimum of %%_num characters.', ['num' => $element->attribute_select('minlength')]));
+    if ($element instanceof node_simple && $element->attribute_select('maxlength'))       $return[] = new markup('p', ['class' => ['maxlength' => 'maxlength']], translation::get('Field must contain a maximum of %%_num characters.', ['num' => $element->attribute_select('maxlength')]));
+    if ($element instanceof node_simple && $element->attribute_select('min'))             $return[] = new markup('p', ['class' => ['min' => 'min']],             translation::get('Minimal field value: %%_value.', ['value' => $element->attribute_select('min')]));
+    if ($element instanceof node_simple && $element->attribute_select('max'))             $return[] = new markup('p', ['class' => ['max' => 'max']],             translation::get('Maximal field value: %%_value.', ['value' => $element->attribute_select('max')]));
+    if ($element instanceof node_simple && $element->attribute_select('type') == 'range') $return[] = new markup('p', ['class' => ['cur' => 'cur']],             translation::get('Current field value: %%_value.', ['value' => (new markup('x-value', [], $element->attribute_select('value')))->render()]));
     if ($this->description)                                                               $return[] = new markup('p', [], $this->description);
     if (count($return)) {
       return (new markup($this->description_tag_name, [], $return))->render();

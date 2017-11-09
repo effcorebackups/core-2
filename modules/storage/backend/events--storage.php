@@ -7,7 +7,6 @@
 namespace effectivecore\modules\storage {
           use \effectivecore\timer_factory as timer;
           use \effectivecore\console_factory as console;
-          use \effectivecore\translations_factory as translations;
           abstract class events_storage {
 
   static function on_storage_init_before($instance) {

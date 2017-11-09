@@ -11,7 +11,7 @@ namespace effectivecore\modules\user {
           use \effectivecore\instance as instance;
           use \effectivecore\entity_factory as entity;
           use \effectivecore\message_factory as message;
-          use \effectivecore\translations_factory as translations;
+          use \effectivecore\translation_factory as translation;
           use \effectivecore\modules\page\pages_factory as pages;
           use \effectivecore\modules\user\users_factory as users;
           use \effectivecore\modules\user\session_factory as session;
@@ -37,8 +37,8 @@ namespace effectivecore\modules\user {
                 $c_session->delete();
               }
             }
-               message::add_new(translations::get('User %%_nick was deleted.',     ['nick' => $nick]));}
-          else message::add_new(translations::get('User %%_nick was not deleted!', ['nick' => $nick]), 'error');
+               message::add_new(translation::get('User %%_nick was deleted.',     ['nick' => $nick]));}
+          else message::add_new(translation::get('User %%_nick was not deleted!', ['nick' => $nick]), 'error');
         }
         urls::go(urls::get_back_url() ?: '/admin/users');
         break;
@@ -69,8 +69,8 @@ namespace effectivecore\modules\user {
           $test_pass = (new instance('user', ['id' => $id]))->select();
           if ($test_pass->password_hash !== factory::hash_get($values['password'])) {
             $form->add_error('credentials/password/element',
-              translations::get('Field "%%_title" contains incorrect value!', [
-                'title' => translations::get($fields['credentials/password']->title)
+              translation::get('Field "%%_title" contains incorrect value!', [
+                'title' => translation::get($fields['credentials/password']->title)
               ])
             );
             return;
@@ -114,12 +114,12 @@ namespace effectivecore\modules\user {
         }
         if ($user->update()) {
           message::add_new(
-            translations::get('User %%_nick was updated.', ['nick' => $user->nick])
+            translation::get('User %%_nick was updated.', ['nick' => $user->nick])
           );
           urls::go(urls::get_back_url() ?: '/user/'.$id);
         } else {
           message::add_new(
-            translations::get('User %%_nick was not updated.', ['nick' => $user->nick]), 'warning'
+            translation::get('User %%_nick was not updated.', ['nick' => $user->nick]), 'warning'
           );
         }
         break;

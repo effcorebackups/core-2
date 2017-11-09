@@ -7,7 +7,7 @@
 namespace effectivecore {
           use \effectivecore\locale_factory as locale;
           use \effectivecore\modules\storage\storages_factory as storages;
-          abstract class translations_factory {
+          abstract class translation_factory {
 
   protected static $data;
 

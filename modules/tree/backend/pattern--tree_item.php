@@ -7,7 +7,7 @@
 namespace effectivecore {
           use \effectivecore\urls_factory as urls;
           use \effectivecore\token_factory as token;
-          use \effectivecore\translations_factory as translations;
+          use \effectivecore\translation_factory as translation;
           use \effectivecore\modules\user\access_factory as access;
           class tree_item extends \effectivecore\node {
 
@@ -46,7 +46,7 @@ namespace effectivecore {
       }
     }
     return (new markup('a', $this->attribute_select(),
-      token::replace(translations::get($this->title))
+      token::replace(translation::get($this->title))
     ))->render();
   }
 

@@ -8,7 +8,7 @@ namespace effectivecore\modules\core {
           use \effectivecore\urls_factory as urls;
           use \effectivecore\event_factory as event;
           use \effectivecore\message_factory as message;
-          use \effectivecore\translations_factory as translations;
+          use \effectivecore\translation_factory as translation;
           use \effectivecore\modules\storage\storages_factory as storages;
           abstract class events_form extends \effectivecore\events_form {
 
@@ -22,15 +22,15 @@ namespace effectivecore\modules\core {
     }
     if (!extension_loaded('pdo_mysql')) {
       $fields['storage/default/driver/mysql']->child_select('element')->attribute_insert('disabled', 'disabled');
-      message::add_new(translations::get('PHP PDO driver for %%_name is not available.', ['name' => 'MySQL']), 'warning');
+      message::add_new(translation::get('PHP PDO driver for %%_name is not available.', ['name' => 'MySQL']), 'warning');
     }
     if (!extension_loaded('pdo_pgsql')) {
       $fields['storage/default/driver/pgsql']->child_select('element')->attribute_insert('disabled', 'disabled');
-      message::add_new(translations::get('PHP PDO driver for %%_name is not available.', ['name' => 'PostgreSQL']), 'warning');
+      message::add_new(translation::get('PHP PDO driver for %%_name is not available.', ['name' => 'PostgreSQL']), 'warning');
     }
     if (!extension_loaded('pdo_sqlite')) {
       $fields['storage/sqlite/driver/sqlite']->child_select('element')->attribute_insert('disabled', 'disabled');
-      message::add_new(translations::get('PHP PDO driver for %%_name is not available.', ['name' => 'SQLite']), 'warning');
+      message::add_new(translation::get('PHP PDO driver for %%_name is not available.', ['name' => 'SQLite']), 'warning');
     }
     $main = storages::get('main');
     if (isset($main->driver)) {
@@ -55,8 +55,8 @@ namespace effectivecore\modules\core {
                 'file_name' => $values['file_name']
               ]);
               if ($test !== true) {
-                $form->add_error(null, translations::get('Storage is not available with these credentials!'));
-                $form->add_error(null, translations::get('Message from storage: %%_message', ['message' => strtolower($test['message'])]));
+                $form->add_error(null, translation::get('Storage is not available with these credentials!'));
+                $form->add_error(null, translation::get('Message from storage: %%_message', ['message' => strtolower($test['message'])]));
                 $form->add_error('storage/default/file_name/element');
               }
               break;
@@ -68,8 +68,8 @@ namespace effectivecore\modules\core {
                 'password'     => $values['password']
               ]);
               if ($test !== true) {
-                $form->add_error(null, translations::get('Storage is not available with these credentials!'));
-                $form->add_error(null, translations::get('Message from storage: %%_message', ['message' => strtolower($test['message'])]));
+                $form->add_error(null, translation::get('Storage is not available with these credentials!'));
+                $form->add_error(null, translation::get('Message from storage: %%_message', ['message' => strtolower($test['message'])]));
                 $form->add_error('storage/default/storage_name/element');
                 $form->add_error('storage/default/host_name/element');
                 $form->add_error('storage/default/user_name/element');

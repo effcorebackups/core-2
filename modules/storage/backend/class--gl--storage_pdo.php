@@ -7,7 +7,7 @@
 namespace effectivecore {
           use \effectivecore\event_factory as event;
           use \effectivecore\message_factory as message;
-          use \effectivecore\translations_factory as translations;
+          use \effectivecore\translation_factory as translation;
           class storage_pdo {
 
   public $id;
@@ -43,12 +43,12 @@ namespace effectivecore {
           return $this->connection;
         } catch (\PDOException $e) {
           message::add_new(
-            translations::get('Storage %%_id is not available!', ['id' => $this->id]), 'warning'
+            translation::get('Storage %%_id is not available!', ['id' => $this->id]), 'warning'
           );
         }
       } else {
         message::add_new(
-          translations::get('Credentials for storage %%_id was not setted!', ['id' => $this->id]), 'warning'
+          translation::get('Credentials for storage %%_id was not setted!', ['id' => $this->id]), 'warning'
         );
       }
     }
