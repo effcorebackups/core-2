@@ -7,14 +7,14 @@
 namespace effectivecore {
           use \effectivecore\timer_factory as timer;
           use \effectivecore\console_factory as console;
-          use \effectivecore\modules\storage\storages_factory as storages;
+          use \effectivecore\modules\storage\storage_factory as storage;
           abstract class event_factory {
 
   protected static $data;
 
   static function init() {
     console::add_log('event', 'init.', 'event system was initialized', '-');
-    foreach (storages::get('settings')->select_group('events') as $c_events_by_module) {
+    foreach (storage::get('settings')->select_group('events') as $c_events_by_module) {
       foreach ($c_events_by_module as $c_type => $c_events_by_type) {
         foreach ($c_events_by_type as $c_event) {
           static::$data[$c_type][] = $c_event;

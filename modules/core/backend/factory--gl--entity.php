@@ -5,14 +5,14 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\modules\storage\storages_factory as storages;
+          use \effectivecore\modules\storage\storage_factory as storage;
           abstract class entity_factory {
 
   protected static $data;
   protected static $data_raw;
 
   static function init() {
-    static::$data_raw = storages::get('settings')->select_group('entities');
+    static::$data_raw = storage::get('settings')->select_group('entities');
     foreach (static::$data_raw as $c_entities) {
       foreach ($c_entities as $c_entity) {
         static::$data[$c_entity->name] = $c_entity;

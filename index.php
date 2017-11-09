@@ -28,7 +28,7 @@ namespace effectivecore {
   use \effectivecore\token_factory as token;
   use \effectivecore\timer_factory as timer;
   use \effectivecore\event_factory as event;
-  use \effectivecore\modules\storage\storages_factory as storages;
+  use \effectivecore\modules\storage\storage_factory as storage;
   timer::tap('total');
 
   # redirect from '/any_path/' to '/any_path'
@@ -43,7 +43,7 @@ namespace effectivecore {
   ##########################
 
   $file_types = [];
-  foreach (storages::get('settings')->select_group('file_types') as $c_types) {
+  foreach (storage::get('settings')->select_group('file_types') as $c_types) {
     foreach ($c_types as $c_name => $c_info) {
       $file_types[$c_name] = $c_info;
     }

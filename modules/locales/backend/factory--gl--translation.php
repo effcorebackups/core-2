@@ -6,13 +6,13 @@
 
 namespace effectivecore {
           use \effectivecore\locale_factory as locale;
-          use \effectivecore\modules\storage\storages_factory as storages;
+          use \effectivecore\modules\storage\storage_factory as storage;
           abstract class translation_factory {
 
   protected static $data;
 
   static function init() {
-    foreach (storages::get('settings')->select_group('translations') as $c_module) {
+    foreach (storage::get('settings')->select_group('translations') as $c_module) {
       foreach ($c_module as $code => $c_strings) {
         foreach ($c_strings as $c_original_text => $c_translated_text) {
           static::$data[$code][$c_original_text] = $c_translated_text;

@@ -8,7 +8,7 @@ namespace effectivecore\modules\page {
           use \effectivecore\factory;
           use \effectivecore\urls_factory as urls;
           use \effectivecore\modules\user\access_factory as access;
-          use \effectivecore\modules\storage\storages_factory as storages;
+          use \effectivecore\modules\storage\storage_factory as storage;
           abstract class page_factory {
 
   static $data = [];
@@ -16,7 +16,7 @@ namespace effectivecore\modules\page {
 
   static function find_and_render() {
   # render page
-    foreach (storages::get('settings')->select_group('pages') as $c_pages) {
+    foreach (storage::get('settings')->select_group('pages') as $c_pages) {
       foreach ($c_pages as $c_page) {
         if (   isset($c_page->display->url->match) &&
           preg_match($c_page->display->url->match, urls::get_current()->path)) {

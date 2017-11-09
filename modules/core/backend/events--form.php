@@ -9,7 +9,7 @@ namespace effectivecore\modules\core {
           use \effectivecore\event_factory as event;
           use \effectivecore\message_factory as message;
           use \effectivecore\translation_factory as translation;
-          use \effectivecore\modules\storage\storages_factory as storages;
+          use \effectivecore\modules\storage\storage_factory as storage;
           abstract class events_form extends \effectivecore\events_form {
 
   ##########################
@@ -32,7 +32,7 @@ namespace effectivecore\modules\core {
       $fields['storage/sqlite/driver/sqlite']->child_select('element')->attribute_insert('disabled', 'disabled');
       message::add_new(translation::get('PHP PDO driver for %%_name is not available.', ['name' => 'SQLite']), 'warning');
     }
-    $main = storages::get('main');
+    $main = storage::get('main');
     if (isset($main->driver)) {
       $form->child_delete('storage');
       $form->child_delete('button_install');
@@ -51,7 +51,7 @@ namespace effectivecore\modules\core {
         if (count($form->errors) == 0) {
           switch ($values['driver']) {
             case 'sqlite':
-              $test = storages::get('main')->test($values['driver'], (object)[
+              $test = storage::get('main')->test($values['driver'], (object)[
                 'file_name' => $values['file_name']
               ]);
               if ($test !== true) {
@@ -61,7 +61,7 @@ namespace effectivecore\modules\core {
               }
               break;
             default:
-              $test = storages::get('main')->test($values['driver'], (object)[
+              $test = storage::get('main')->test($values['driver'], (object)[
                 'host_name'    => $values['host_name'],
                 'storage_name' => $values['storage_name'],
                 'user_name'    => $values['user_name'],
@@ -104,8 +104,8 @@ namespace effectivecore\modules\core {
             $params->table_prefix              = $values['table_prefix'];
             break;
         }
-        storages::get('settings')->changes_register_action('core', 'insert', 'storages/storage/storage_sql_dpo', $params);
-        storages::rebuild();
+        storage::get('settings')->changes_register_action('core', 'insert', 'storages/storage/storage_sql_dpo', $params);
+        storage::rebuild();
         event::start('on_module_install');
         message::add_new('Modules was installed.');
         $form->child_delete('storage');

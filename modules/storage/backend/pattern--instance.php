@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\modules\storage\storages_factory as storages;
+          use \effectivecore\modules\storage\storage_factory as storage;
           class instance {
 
   public $entity_name;
@@ -32,22 +32,22 @@ namespace effectivecore {
   function set_entity_name($entity_name) {$this->entity_name = $entity_name;}
 
   function select($custom_ids = []) {
-    $storage = storages::get($this->get_entity()->get_storage_id());
+    $storage = storage::get($this->get_entity()->get_storage_id());
     return $storage->select_instance($this, $custom_ids);
   }
 
   function insert() {
-    $storage = storages::get($this->get_entity()->get_storage_id());
+    $storage = storage::get($this->get_entity()->get_storage_id());
     return $storage->insert_instance($this);
   }
 
   function update() {
-    $storage = storages::get($this->get_entity()->get_storage_id());
+    $storage = storage::get($this->get_entity()->get_storage_id());
     return $storage->update_instance($this);
   }
 
   function delete() {
-    $storage = storages::get($this->get_entity()->get_storage_id());
+    $storage = storage::get($this->get_entity()->get_storage_id());
     return $storage->delete_instance($this);
   }
 

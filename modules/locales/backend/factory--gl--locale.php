@@ -5,15 +5,15 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\modules\storage\storages_factory as storages;
+          use \effectivecore\modules\storage\storage_factory as storage;
           abstract class locale_factory {
 
   protected static $countries;
   protected static $settings;
 
   static function init() {
-    static::$settings = storages::get('settings')->select_group('current')['locales'];
-    foreach (storages::get('settings')->select_group('countries') as $c_countries) {
+    static::$settings = storage::get('settings')->select_group('current')['locales'];
+    foreach (storage::get('settings')->select_group('countries') as $c_countries) {
       foreach ($c_countries as $c_country) {
         static::$countries[$c_country->code] = $c_country;
       }
