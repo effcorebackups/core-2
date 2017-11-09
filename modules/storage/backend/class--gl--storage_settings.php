@@ -5,8 +5,8 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\files_factory as files;
           use \effectivecore\cache_factory as cache;
+          use \effectivecore\file_factory as file_factory;
           use \effectivecore\dynamic_factory as dynamic;
           use \effectivecore\console_factory as console;
           use \effectivecore\message_factory as message;
@@ -68,7 +68,7 @@ namespace effectivecore {
 
   static function settings_find_static() {
     $return = [];
-    $files = files::get_all(dir_modules, '%^.*\._s$%');
+    $files = file_factory::get_all(dir_modules, '%^.*\._s$%');
     $modules_path = [];
     foreach ($files as $c_file) {
       if ($c_file->get_file_full() == 'module._s') {

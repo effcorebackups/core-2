@@ -5,8 +5,8 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\url_factory as url_factory;
           use \effectivecore\token_factory as token;
+          use \effectivecore\url_factory as url_factory;
           use \effectivecore\translation_factory as translation;
           use \effectivecore\modules\user\access_factory as access;
           class tree_item extends \effectivecore\node {

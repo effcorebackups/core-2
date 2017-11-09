@@ -5,8 +5,8 @@
   #############################################################
 
 namespace effectivecore\modules\develop {
-          use \effectivecore\message_factory as message;
           use \effectivecore\entity_factory as entity;
+          use \effectivecore\message_factory as message;
           use \effectivecore\translation_factory as translation;
           abstract class events_module extends \effectivecore\events_module {
 

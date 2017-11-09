@@ -5,9 +5,9 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\files_factory as files;
           use \effectivecore\timer_factory as timer;
           use \effectivecore\console_factory as console;
+          use \effectivecore\file_factory as file_factory;
           class file {
 
   static private $cache;
@@ -18,7 +18,7 @@ namespace effectivecore {
   public $data;
 
   function __construct($path) {
-    files::parse_path($path, $this);
+    file_factory::parse_path($path, $this);
   }
 
   function load($reset = false) {
