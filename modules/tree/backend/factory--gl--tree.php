@@ -6,7 +6,7 @@
 
 namespace effectivecore {
           use \effectivecore\modules\storage\storage_factory as storage;
-          abstract class trees_factory {
+          abstract class tree_factory {
 
   protected static $trees;
   protected static $tree_items;

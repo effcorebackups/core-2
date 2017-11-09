@@ -6,19 +6,19 @@
 
 namespace effectivecore\modules\tree {
           use \effectivecore\factory;
-          use \effectivecore\trees_factory as trees;
+          use \effectivecore\tree_factory as tree;
           use \effectivecore\message_factory as message;
           use \effectivecore\entity_factory as entity;
           use \effectivecore\translation_factory as translation;
           abstract class events_module extends \effectivecore\events_module {
 
   static function on_start() {
-    trees::init();
-    foreach(trees::get_tree_items() as $c_item) {
+    tree::init();
+    foreach(tree::get_tree_items() as $c_item) {
       if ($c_item->id_parent) {
         $c_parent = !empty($c_item->parent_is_tree) ?
-           trees::get_tree($c_item->id_parent) :
-           trees::get_tree_item($c_item->id_parent);
+           tree::get_tree($c_item->id_parent) :
+           tree::get_tree_item($c_item->id_parent);
         $c_parent->child_insert($c_item, $c_item->id);
       }
     };
