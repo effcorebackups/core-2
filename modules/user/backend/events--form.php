@@ -9,7 +9,7 @@ namespace effectivecore\modules\user {
           use \effectivecore\factory as factory;
           use \effectivecore\urls_factory as urls;
           use \effectivecore\instance as instance;
-          use \effectivecore\entities_factory as entities;
+          use \effectivecore\entity_factory as entity;
           use \effectivecore\message_factory as message;
           use \effectivecore\translations_factory as translations;
           use \effectivecore\modules\page\pages_factory as pages;
@@ -31,7 +31,7 @@ namespace effectivecore\modules\user {
         if ($user) {
           $nick = $user->nick;
           if ($user->delete()) {
-            $sessions = entities::get('session')->select_instances(['id_user' => $id]);
+            $sessions = entity::get('session')->select_instances(['id_user' => $id]);
             if ($sessions) {
               foreach ($sessions as $c_session) {
                 $c_session->delete();
