@@ -7,7 +7,7 @@
 namespace effectivecore\modules\user {
           use \effectivecore\factory as factory;
           use \effectivecore\instance as instance;
-          use \effectivecore\modules\user\users_factory as users;
+          use \effectivecore\modules\user\user_factory as user;
           abstract class events_access extends \effectivecore\events_access {
 
   static function on_check_access_user_delete($id) {
@@ -28,8 +28,8 @@ namespace effectivecore\modules\user {
   static function on_check_access_user_edit($id) {
     $user = (new instance('user', ['id' => $id]))->select();
     if ($user) {
-      if (!($user->id == users::get_current()->id ||                # not owner or
-                   isset(users::get_current()->roles['admins']))) { # not admin
+      if (!($user->id == user::get_current()->id ||                # not owner or
+                   isset(user::get_current()->roles['admins']))) { # not admin
         factory::send_header_and_exit('access_denided',
           'Access denided!'
         );

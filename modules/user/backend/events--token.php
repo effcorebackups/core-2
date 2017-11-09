@@ -7,15 +7,15 @@
 namespace effectivecore\modules\user {
           use \effectivecore\urls_factory as urls;
           use \effectivecore\instance as instance;
-          use \effectivecore\modules\user\users_factory as users;
+          use \effectivecore\modules\user\user_factory as user;
           abstract class events_token extends \effectivecore\events_token {
 
   static function on_replace($match, $args = []) {
-    if (!empty(users::get_current()->id)) {
+    if (!empty(user::get_current()->id)) {
       switch ($match) {
-        case '%%_id_user': return users::get_current()->id;
-        case '%%_email'  : return users::get_current()->email;
-        case '%%_nick'   : return users::get_current()->nick;
+        case '%%_id_user': return user::get_current()->id;
+        case '%%_email'  : return user::get_current()->email;
+        case '%%_nick'   : return user::get_current()->nick;
         case '%%_id_user_context':
         case '%%_email_context':
         case '%%_nick_context':

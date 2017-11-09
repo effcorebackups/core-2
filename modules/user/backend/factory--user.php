@@ -7,7 +7,7 @@
 namespace effectivecore\modules\user {
           use \effectivecore\instance as instance;
           use \effectivecore\entity_factory as entity;
-          abstract class users_factory {
+          abstract class user_factory {
 
   static $data;
 

@@ -9,7 +9,7 @@ namespace effectivecore\modules\user {
           use \effectivecore\factory as factory;
           use \effectivecore\instance as instance;
           use \effectivecore\message_factory as message;
-          use \effectivecore\modules\user\users_factory as users;
+          use \effectivecore\modules\user\user_factory as user;
           abstract class session_factory {
 
   static function init($id_user = null) {
@@ -38,7 +38,7 @@ namespace effectivecore\modules\user {
       }
     }
   # init user
-    users::init($id_user);
+    user::init($id_user);
   }
 
   static function destroy($id_user) {

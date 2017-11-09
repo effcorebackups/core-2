@@ -11,8 +11,8 @@ namespace effectivecore {
           use \effectivecore\locale_factory as locale;
           use \effectivecore\console_factory as console;
           use \effectivecore\message_factory as message;
+          use \effectivecore\modules\user\user_factory as user;
           use \effectivecore\translation_factory as translation;
-          use \effectivecore\modules\user\users_factory as users;
           use \effectivecore\modules\page\page_factory as page_factory;
           use \effectivecore\modules\storage\storage_factory as storage;
           class page {
@@ -127,7 +127,7 @@ namespace effectivecore {
     }
     timer::tap('total');
     console::add_information('Total build time', locale::format_msecond(timer::get_period('total', 0, 1)));
-    console::add_information('User roles', implode(', ', users::get_current()->roles));
+    console::add_information('User roles', implode(', ', user::get_current()->roles));
     console::add_information('Server load (sys_getloadavg)', locale::format_msecond(sys_getloadavg()[0]));
     console::add_information('Memory for php (bytes)', locale::format_number(memory_get_usage(true), 0, null, ' '));
     console::add_information('Current language', locale::get_settings()->lang_code);

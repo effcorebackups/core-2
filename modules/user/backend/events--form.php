@@ -11,9 +11,9 @@ namespace effectivecore\modules\user {
           use \effectivecore\instance as instance;
           use \effectivecore\entity_factory as entity;
           use \effectivecore\message_factory as message;
+          use \effectivecore\modules\user\user_factory as user;
           use \effectivecore\modules\page\page_factory as page;
           use \effectivecore\translation_factory as translation;
-          use \effectivecore\modules\user\users_factory as users;
           use \effectivecore\modules\user\session_factory as session;
           abstract class events_form extends \effectivecore\events_form {
 
@@ -219,7 +219,7 @@ namespace effectivecore\modules\user {
   static function on_submit_logout($form, $fields, &$values) {
     switch ($form->clicked_button_name) {
       case 'logout':
-        session::destroy(users::get_current()->id);
+        session::destroy(user::get_current()->id);
         urls::go('/');
       case 'cancel':
         urls::go(urls::get_back_url() ?: '/');
