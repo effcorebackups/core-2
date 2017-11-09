@@ -9,9 +9,11 @@ namespace effectivecore {
           abstract class entities_factory {
 
   protected static $data;
+  protected static $data_raw;
 
   static function init() {
-    foreach (storages::get('settings')->select_group('entities') as $c_entities) {
+    static::$data_raw = storages::get('settings')->select_group('entities');
+    foreach (static::$data_raw as $c_entities) {
       foreach ($c_entities as $c_entity) {
         static::$data[$c_entity->name] = $c_entity;
       }
@@ -21,6 +23,11 @@ namespace effectivecore {
   static function get($name) {
     if (!static::$data) static::init();
     return static::$data[$name];
+  }
+
+  static function get_by_module($name) {
+    if (!static::$data_raw) static::init();
+    return static::$data_raw[$name];
   }
 
 }}

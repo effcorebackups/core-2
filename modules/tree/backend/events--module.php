@@ -8,8 +8,8 @@ namespace effectivecore\modules\tree {
           use \effectivecore\factory;
           use \effectivecore\trees_factory as trees;
           use \effectivecore\messages_factory as messages;
+          use \effectivecore\entities_factory as entities;
           use \effectivecore\translations_factory as translations;
-          use \effectivecore\modules\storage\storages_factory as storages;
           abstract class events_module extends \effectivecore\events_module {
 
   static function on_start() {
@@ -25,8 +25,7 @@ namespace effectivecore\modules\tree {
   }
 
   static function on_install() {
-    $entities = storages::get('settings')->select_group('entities')['tree'];
-    foreach ($entities as $c_entity) {
+    foreach (entities::get_by_module('tree') as $c_entity) {
       if ($c_entity->install()) messages::add_new(translations::get('Entity %%_name was installed.',     ['name' => $c_entity->get_name()]));
       else                      messages::add_new(translations::get('Entity %%_name was not installed!', ['name' => $c_entity->get_name()]), 'error');
     }
