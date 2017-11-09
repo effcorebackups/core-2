@@ -11,9 +11,10 @@ namespace effectivecore {
   public $w;
   public $h;
   public $color_bg;
+  public $scale = 10;
   public $canvas = [];
 
-  function __construct($w = 100, $h = 100, $color_bg = 'white', $weight = 0) {
+  function __construct($w = 10, $h = 10, $color_bg = 'white', $weight = 0) {
     if ($w) $this->w = $w;
     if ($h) $this->h = $h;
     if ($color_bg) $this->color_bg = $color_bg;
@@ -24,25 +25,33 @@ namespace effectivecore {
     $this->canvas[$x][$y] = $color;
   }
 
+  function fill_noise() {
+    for ($c_x = 0; $c_x < $this->w; $c_x++) {
+    for ($c_y = 0; $c_y < $this->h; $c_y++) {
+      $c_color = rand(0, 1) >= .5 ? '#000000' : '#ffffff';
+      $this->pixel_set($c_x, $c_y, $c_color);
+    }}
+  }
+
   function render() {
     return (new template($this->template, [
       'color_bg' => $this->color_bg,
-      'width'    => $this->w,
-      'height'   => $this->h,
+      'width'    => $this->scale * $this->w,
+      'height'   => $this->scale * $this->h,
       'canvas'   => $this->render_canvas($this->canvas),
     ]))->render();
   }
 
   function render_canvas($canvas) {
     $return = [];
-    foreach ($this->canvas as $x => $x_row) {
-      foreach ($x_row as $y => $c_color) {
+    foreach ($this->canvas as $c_x => $x_row) {
+      foreach ($x_row as $c_y => $c_color) {
         $return[] = (new markup_xml_simple('rect', [
-          'style' => 'fill:'.$c_color,
-          'x' => $x * 10,
-          'y' => $y * 10,
-          'width'  => 10,
-          'height' => 10
+          'style'  => 'fill:'.$c_color,
+          'x'      => 1 * $this->scale * $c_x,
+          'y'      => 1 * $this->scale * $c_y,
+          'width'  => 1 * $this->scale,
+          'height' => 1 * $this->scale
         ]))->render();
       }
     }

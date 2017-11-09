@@ -10,10 +10,11 @@ namespace effectivecore {
   public $length = 8;
 
   function render() {
-    $canvas = new canvas_svg(200, 100);
-    $canvas->pixel_set(0, 0);
-    $canvas->pixel_set(2, 0);
-    $canvas->pixel_set(4, 0);
+    $canvas = new canvas_svg(20, 10);
+    $canvas->fill_noise();
+  # $canvas->pixel_set(0, 0);
+  # $canvas->pixel_set(2, 0);
+  # $canvas->pixel_set(4, 0);
     return $canvas->render();
   }
 
