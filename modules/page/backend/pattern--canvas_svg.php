@@ -11,12 +11,13 @@ namespace effectivecore {
   public $w;
   public $h;
   public $color_bg;
-  public $scale = 10;
+  public $scale;
   public $canvas = [];
 
-  function __construct($w = 10, $h = 10, $color_bg = 'white', $weight = 0) {
+  function __construct($w = 10, $h = 10, $scale = 1, $color_bg = 'white', $weight = 0) {
     if ($w) $this->w = $w;
     if ($h) $this->h = $h;
+    if ($scale)    $this->scale    = $scale;
     if ($color_bg) $this->color_bg = $color_bg;
     parent::__construct([], $weight);
   }
@@ -24,12 +25,17 @@ namespace effectivecore {
   function pixel_set($x, $y, $color = '#000000') {
     $this->canvas[$x][$y] = $color;
   }
+  function pixel_get($x, $y) {
+    return isset($this->canvas[$x][$y]) ?
+                 $this->canvas[$x][$y] : null;
+  }
 
   function fill_noise() {
     for ($c_x = 0; $c_x < $this->w; $c_x++) {
     for ($c_y = 0; $c_y < $this->h; $c_y++) {
-      $c_color = rand(0, 1) >= .5 ? '#000000' : '#ffffff';
-      $this->pixel_set($c_x, $c_y, $c_color);
+      if (rand(0, 1) >= .5) {
+        $this->pixel_set($c_x, $c_y, '#000000');
+      }
     }}
   }
 
