@@ -10,6 +10,10 @@ events
       handler: \effectivecore\modules\user\events_module::on_install
       weight: 0
   on_form_init
+  - login
+      for: login
+      handler: \effectivecore\modules\user\events_form::on_init_login
+      weight: 0
   - user_edit
       for: user_edit
       handler: \effectivecore\modules\user\events_form::on_init_user_edit

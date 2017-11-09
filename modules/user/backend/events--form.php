@@ -133,6 +133,13 @@ namespace effectivecore\modules\user {
   ### form: login ###
   ###################
 
+  static function on_init_login($form, $fields) {
+    $captcha = $fields['credentials']->child_select('captcha');
+    $captcha->pixel_set(0, 0, 1);
+    $captcha->pixel_set(2, 0, 1);
+    $captcha->pixel_set(4, 0, 1);
+  }
+
   static function on_validate_login($form, $fields, &$values) {
     static::on_validate($form, $fields, $values);
     switch ($form->clicked_button_name) {
