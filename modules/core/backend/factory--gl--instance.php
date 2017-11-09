@@ -6,7 +6,7 @@
 
 namespace effectivecore {
           use \effectivecore\modules\storage\storages_factory as storages;
-          abstract class instances_factory {
+          abstract class instance_factory {
 
   protected static $data;
   protected static $data_raw;

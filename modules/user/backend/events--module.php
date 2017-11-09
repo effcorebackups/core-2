@@ -7,7 +7,7 @@
 namespace effectivecore\modules\user {
           use \effectivecore\message_factory as message;
           use \effectivecore\entities_factory as entities;
-          use \effectivecore\instances_factory as instances;
+          use \effectivecore\instance_factory as instance;
           use \effectivecore\translations_factory as translations;
           use \effectivecore\modules\user\session_factory as session;
           use \effectivecore\modules\storage\storages_factory as storages;
@@ -24,7 +24,7 @@ namespace effectivecore\modules\user {
       else                      message::add_new(translations::get('Entity %%_name was not installed!', ['name' => $c_entity->get_name()]), 'error');
     }
   # insert instances
-    foreach (instances::get_by_module('user') as $c_instance) {
+    foreach (instance::get_by_module('user') as $c_instance) {
       if ($c_instance->insert()) message::add_new(translations::get('Instances of entity %%_name was added.',     ['name' => $c_entity->get_name()]));
       else                       message::add_new(translations::get('Instances of entity %%_name was not added!', ['name' => $c_entity->get_name()]), 'error');
     }
