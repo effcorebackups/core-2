@@ -8,16 +8,31 @@ namespace effectivecore {
           use \effectivecore\modules\storage\storages_factory as storages;
           abstract class locales_factory {
 
-  protected static $current;
+  protected static $countries;
+  protected static $settings;
 
   static function init() {
-    static::$current = storages::get('settings')->select_group('current')['locales'];
+    static::$settings = storages::get('settings')->select_group('current')['locales'];
+    foreach (storages::get('settings')->select_group('countries') as $c_countries) {
+      foreach ($c_countries as $c_country) {
+        static::$countries[$c_country->code] = $c_country;
+      }
+    }
   }
 
-  static function get_current() {
-    if (!static::$current) static::init();
-    return static::$current;
+  static function get_countries() {
+    if (!static::$countries) static::init();
+    return static::$countries;
   }
+
+  static function get_settings() {
+    if (!static::$settings) static::init();
+    return static::$settings;
+  }
+
+  ###############
+  ### formats ###
+  ###############
 
   static function format_date() {}
   static function format_time() {}
@@ -36,7 +51,7 @@ namespace effectivecore {
   }
 
   static function format_number($number, $precision = 0, $decimal_point = null, $thousands_separator = null) {
-    $current = static::get_current();
+    $current = static::get_settings();
     return number_format($number, $precision,
       is_null($decimal_point)       ? $current->decimal_point       : $decimal_point,
       is_null($thousands_separator) ? $current->thousands_separator : $thousands_separator

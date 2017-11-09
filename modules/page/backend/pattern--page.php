@@ -130,9 +130,9 @@ namespace effectivecore {
     console::add_information('User roles', implode(', ', users::get_current()->roles));
     console::add_information('Server load (sys_getloadavg)', locales::format_msecond(sys_getloadavg()[0]));
     console::add_information('Memory for php (bytes)', locales::format_number(memory_get_usage(true), 0, null, ' '));
-    console::add_information('Current language', locales::get_current()->lang_code);
+    console::add_information('Current language', locales::get_settings()->lang_code);
 
-    $template->set_var('attributes', factory::data_to_attr(['lang' => locales::get_current()->lang_code]));
+    $template->set_var('attributes', factory::data_to_attr(['lang' => locales::get_settings()->lang_code]));
     $template->set_var('console', console::render()); # @todo: only for admins
     $template->set_var('messages', message::render_all());
     $template->set_var('meta', implode(nl, $rendered_meta));
