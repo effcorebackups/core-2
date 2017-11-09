@@ -8,7 +8,7 @@ namespace effectivecore {
           class markup_simple extends \effectivecore\node_simple {
 
   public $tag_name = 'div';
-  public $template = 'markup_element_simple';
+  public $template = 'markup_html_simple';
 
   function __construct($tag_name = null, $attributes = [], $weight = 0) {
     if ($tag_name) $this->tag_name = $tag_name;

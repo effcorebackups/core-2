@@ -34,7 +34,13 @@ namespace effectivecore {
     $return = [];
     foreach ($this->canvas as $x => $x_row) {
       foreach ($x_row as $y => $c_value) {
-        $return[] = '<rect style="fill:#000000" width="10" height="10" x="'.($x * 10).'" y="'.($y * 10).'" />';
+        $return[] = (new markup_xml_simple('rect', [
+          'style' => 'fill:#000000',
+          'x' => $x * 10,
+          'y' => $y * 10,
+          'width'  => 10,
+          'height' => 10
+        ]))->render();
       }
     }
     return implode(nl, $return);
