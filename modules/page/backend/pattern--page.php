@@ -7,7 +7,7 @@
 namespace effectivecore {
           use \effectivecore\urls_factory as urls;
           use \effectivecore\timers_factory as timers;
-          use \effectivecore\tokens_factory as tokens;
+          use \effectivecore\token_factory as token;
           use \effectivecore\console_factory as console;
           use \effectivecore\locales_factory as locales;
           use \effectivecore\messages_factory as messages;
@@ -29,7 +29,7 @@ namespace effectivecore {
   function render() {
     $template = new template('page');
     $template->set_var('title',
-      tokens::replace(translations::get($this->title))
+      token::replace(translations::get($this->title))
     );
 
   # check https (@todo: enable this message)

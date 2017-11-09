@@ -25,7 +25,7 @@ namespace effectivecore {
   spl_autoload_register('\effectivecore\factory::autoload');
 
   use \effectivecore\urls_factory as urls;
-  use \effectivecore\tokens_factory as tokens;
+  use \effectivecore\token_factory as token;
   use \effectivecore\timers_factory as timers;
   use \effectivecore\events_factory as events;
   use \effectivecore\modules\storage\storages_factory as storages;
@@ -61,9 +61,9 @@ namespace effectivecore {
     if (is_file($path) && is_readable($path)) {
       $file = new file($path);
       $data = $file->load();
-    # apply tokens
+    # replace tokens
       if (isset($file_types[$extension]->use_tokens)) {
-        $data = tokens::replace($data);
+        $data = token::replace($data);
       }
     # if get header HTTP_IF_NONE_MATCH
       $etag = base64_encode(md5($data, true));
