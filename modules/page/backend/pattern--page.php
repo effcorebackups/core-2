@@ -8,8 +8,8 @@ namespace effectivecore {
           use \effectivecore\urls_factory as urls;
           use \effectivecore\timer_factory as timer;
           use \effectivecore\token_factory as token;
+          use \effectivecore\locale_factory as locale;
           use \effectivecore\console_factory as console;
-          use \effectivecore\locales_factory as locales;
           use \effectivecore\message_factory as message;
           use \effectivecore\translations_factory as translations;
           use \effectivecore\modules\user\users_factory as users;
@@ -126,13 +126,13 @@ namespace effectivecore {
       );
     }
     timer::tap('total');
-    console::add_information('Total build time', locales::format_msecond(timer::get_period('total', 0, 1)));
+    console::add_information('Total build time', locale::format_msecond(timer::get_period('total', 0, 1)));
     console::add_information('User roles', implode(', ', users::get_current()->roles));
-    console::add_information('Server load (sys_getloadavg)', locales::format_msecond(sys_getloadavg()[0]));
-    console::add_information('Memory for php (bytes)', locales::format_number(memory_get_usage(true), 0, null, ' '));
-    console::add_information('Current language', locales::get_settings()->lang_code);
+    console::add_information('Server load (sys_getloadavg)', locale::format_msecond(sys_getloadavg()[0]));
+    console::add_information('Memory for php (bytes)', locale::format_number(memory_get_usage(true), 0, null, ' '));
+    console::add_information('Current language', locale::get_settings()->lang_code);
 
-    $template->set_var('attributes', factory::data_to_attr(['lang' => locales::get_settings()->lang_code]));
+    $template->set_var('attributes', factory::data_to_attr(['lang' => locale::get_settings()->lang_code]));
     $template->set_var('console', console::render()); # @todo: only for admins
     $template->set_var('messages', message::render_all());
     $template->set_var('meta', implode(nl, $rendered_meta));

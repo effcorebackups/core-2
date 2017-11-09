@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\locales_factory as locales;
+          use \effectivecore\locale_factory as locale;
           use \effectivecore\translations_factory as translations;
           abstract class console_factory {
 
@@ -44,7 +44,7 @@ namespace effectivecore {
     foreach (static::get_all_logs() as $c_log) {
       $row_class = factory::to_css_class($c_log['object']);
       $tbody[] = new table_body_row(['class' => [$row_class => $row_class]], [
-        new table_body_row_cell(['class' => ['time'        => 'time']],        locales::format_msecond($c_log['time'])),
+        new table_body_row_cell(['class' => ['time'        => 'time']],        locale::format_msecond($c_log['time'])),
         new table_body_row_cell(['class' => ['object'      => 'object']],      translations::get($c_log['object'],      $c_log['args'])),
         new table_body_row_cell(['class' => ['action'      => 'action']],      translations::get($c_log['action'],      $c_log['args'])),
         new table_body_row_cell(['class' => ['description' => 'description']], translations::get($c_log['description'], $c_log['args'])),
@@ -71,8 +71,8 @@ namespace effectivecore {
     foreach ($statistics as $c_param => $c_value) {
       $diagram->child_insert(new markup('dt', [], $c_param));
       $diagram->child_insert(new markup('dd', [], [
-        locales::format_msecond($c_value).' sec. ('.
-        locales::format_persent($c_value / $total * 100, 1).')',
+        locale::format_msecond($c_value).' sec. ('.
+        locale::format_persent($c_value / $total * 100, 1).')',
         new markup('x-scale', [
           'class' => ['scope' => factory::to_css_class($c_param)],
           'style' => ['width: '.(int)($c_value / $total * 100).'%']

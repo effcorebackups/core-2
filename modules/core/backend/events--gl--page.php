@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\locales_factory as locales;
+          use \effectivecore\locale_factory as locale;
           use \effectivecore\control_switcher as switcher;
           use \effectivecore\modules\storage\storages_factory as storages;
           abstract class events_page {
@@ -19,7 +19,7 @@ namespace effectivecore {
         $c_module->id,
         $c_module->path,
         $c_module->description,
-        locales::format_version($c_module->version),
+        locale::format_version($c_module->version),
         $c_module->state != 'always_on' ? new switcher($c_module->state) : '&nbsp;',
       ];
     }

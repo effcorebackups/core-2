@@ -6,7 +6,7 @@
 
 namespace effectivecore {
           use \effectivecore\modules\storage\storages_factory as storages;
-          abstract class locales_factory {
+          abstract class locale_factory {
 
   protected static $countries;
   protected static $settings;
