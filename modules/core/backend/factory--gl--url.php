@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          abstract class urls_factory {
+          abstract class url_factory {
 
   protected static $data;
 

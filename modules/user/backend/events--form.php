@@ -7,7 +7,7 @@
 namespace effectivecore\modules\user {
           use const \effectivecore\format_datetime;
           use \effectivecore\factory as factory;
-          use \effectivecore\urls_factory as urls;
+          use \effectivecore\url_factory as url;
           use \effectivecore\instance as instance;
           use \effectivecore\entity_factory as entity;
           use \effectivecore\message_factory as message;
@@ -40,10 +40,10 @@ namespace effectivecore\modules\user {
                message::add_new(translation::get('User %%_nick was deleted.',     ['nick' => $nick]));}
           else message::add_new(translation::get('User %%_nick was not deleted!', ['nick' => $nick]), 'error');
         }
-        urls::go(urls::get_back_url() ?: '/admin/users');
+        url::go(url::get_back_url() ?: '/admin/users');
         break;
       case 'cancel':
-        urls::go(urls::get_back_url() ?: '/admin/users');
+        url::go(url::get_back_url() ?: '/admin/users');
         break;
     }
   }
@@ -116,7 +116,7 @@ namespace effectivecore\modules\user {
           message::add_new(
             translation::get('User %%_nick was updated.', ['nick' => $user->nick])
           );
-          urls::go(urls::get_back_url() ?: '/user/'.$id);
+          url::go(url::get_back_url() ?: '/user/'.$id);
         } else {
           message::add_new(
             translation::get('User %%_nick was not updated.', ['nick' => $user->nick]), 'warning'
@@ -124,7 +124,7 @@ namespace effectivecore\modules\user {
         }
         break;
       case 'cancel':
-        urls::go(urls::get_back_url() ?: '/user/'.$id);
+        url::go(url::get_back_url() ?: '/user/'.$id);
         break;
     }
   }
@@ -163,7 +163,7 @@ namespace effectivecore\modules\user {
             $user->id &&
             $user->password_hash === factory::hash_get($values['password'])) {
           session::init($user->id);
-          urls::go('/user/'.$user->id);
+          url::go('/user/'.$user->id);
         }
         break;
     }
@@ -204,7 +204,7 @@ namespace effectivecore\modules\user {
         ]))->insert();
         if ($user) {
           session::init($user->id);
-          urls::go('/user/'.$user->id);
+          url::go('/user/'.$user->id);
         } else {
           message::add_new('User was not registered!', 'error');
         }
@@ -220,9 +220,9 @@ namespace effectivecore\modules\user {
     switch ($form->clicked_button_name) {
       case 'logout':
         session::destroy(user::get_current()->id);
-        urls::go('/');
+        url::go('/');
       case 'cancel':
-        urls::go(urls::get_back_url() ?: '/');
+        url::go(url::get_back_url() ?: '/');
         break;
     }
   }

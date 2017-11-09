@@ -5,10 +5,10 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\urls_factory as urls;
           use \effectivecore\timer_factory as timer;
           use \effectivecore\token_factory as token;
           use \effectivecore\locale_factory as locale;
+          use \effectivecore\url_factory as url_factory;
           use \effectivecore\console_factory as console;
           use \effectivecore\message_factory as message;
           use \effectivecore\modules\user\user_factory as user;
@@ -33,7 +33,7 @@ namespace effectivecore {
     );
 
   # check https (@todo: enable this message)
-    if (false && !empty($this->https) && urls::get_current()->get_protocol() != 'https') {
+    if (false && !empty($this->https) && url_factory::get_current()->get_protocol() != 'https') {
       message::add_new('This page should be use HTTPS protocol!', 'warning');
     }
 
@@ -50,7 +50,7 @@ namespace effectivecore {
     foreach (storage::get('settings')->select_group('frontend') as $module_id => $c_frontend_items) {
       foreach ($c_frontend_items as $c_item) {
         if (    (isset($c_item->display->url->match) &&
-            preg_match($c_item->display->url->match, urls::get_current()->path)) ||
+            preg_match($c_item->display->url->match, url_factory::get_current()->path)) ||
                 (isset($c_item->display->npath->match) && $c_item->display->npath->where == 'block' &&
             preg_match($c_item->display->npath->match.'m', implode(nl, $used_links)))) {
 
@@ -96,7 +96,7 @@ namespace effectivecore {
   # collect page arguments
     if (isset($this->display->url->args)) {
       foreach ($this->display->url->args as $c_name => $c_num) {
-        page_factory::$args[$c_name] = urls::get_current()->get_args($c_num);
+        page_factory::$args[$c_name] = url_factory::get_current()->get_args($c_num);
       }
     }
 

@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\urls_factory as urls;
+          use \effectivecore\url_factory as url_factory;
           use \effectivecore\token_factory as token;
           use \effectivecore\translation_factory as translation;
           use \effectivecore\modules\user\access_factory as access;
@@ -41,7 +41,7 @@ namespace effectivecore {
     if ($href) {
       $href = token::replace($href);
       $this->attribute_insert('href', $href);
-      if (urls::is_active($href)) {
+      if (url_factory::is_active($href)) {
         $this->attribute_insert('class', ['active' => 'active']);
       }
     }

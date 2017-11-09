@@ -10,8 +10,8 @@ namespace effectivecore\modules\user {
           use \effectivecore\table;
           use \effectivecore\pager;
           use \effectivecore\factory;
-          use \effectivecore\urls_factory as urls;
           use \effectivecore\instance as instance;
+          use \effectivecore\url_factory as url_factory;
           use \effectivecore\entity_factory as entity;
           use \effectivecore\modules\user\user_factory as user;
           abstract class events_page extends \effectivecore\events_page {
@@ -40,8 +40,8 @@ namespace effectivecore\modules\user {
       foreach (entity::get('user')->select_instances() as $c_user) {
         $c_actions = new markup('ul', ['class' => ['actions' => 'actions']]);
                                     $c_actions->child_insert( new markup('li', [], new markup('a', ['href' => (new url('/user/'.$c_user->id))->get_full()], 'view') ) );
-                                    $c_actions->child_insert( new markup('li', [], new markup('a', ['href' => (new url('/user/'.$c_user->id.'/edit?'.urls::make_back_part()))->get_full()], 'edit') ) );
-        if ($c_user->is_embed != 1) $c_actions->child_insert( new markup('li', [], new markup('a', ['href' => (new url('/admin/users/delete/'.$c_user->id.'?'.urls::make_back_part()))->get_full()], 'delete') ) );
+                                    $c_actions->child_insert( new markup('li', [], new markup('a', ['href' => (new url('/user/'.$c_user->id.'/edit?'.url_factory::make_back_part()))->get_full()], 'edit') ) );
+        if ($c_user->is_embed != 1) $c_actions->child_insert( new markup('li', [], new markup('a', ['href' => (new url('/admin/users/delete/'.$c_user->id.'?'.url_factory::make_back_part()))->get_full()], 'delete') ) );
         $tbody[] = [
           $c_user->id,
           $c_user->email,

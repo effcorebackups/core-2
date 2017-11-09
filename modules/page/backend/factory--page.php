@@ -6,7 +6,7 @@
 
 namespace effectivecore\modules\page {
           use \effectivecore\factory;
-          use \effectivecore\urls_factory as urls;
+          use \effectivecore\url_factory as url;
           use \effectivecore\modules\user\access_factory as access;
           use \effectivecore\modules\storage\storage_factory as storage;
           abstract class page_factory {
@@ -19,7 +19,7 @@ namespace effectivecore\modules\page {
     foreach (storage::get('settings')->select_group('pages') as $c_pages) {
       foreach ($c_pages as $c_page) {
         if (   isset($c_page->display->url->match) &&
-          preg_match($c_page->display->url->match, urls::get_current()->path)) {
+          preg_match($c_page->display->url->match, url::get_current()->path)) {
           if (!isset($c_page->access) ||
               (isset($c_page->access) && access::check($c_page->access))) {
             return $c_page->render();

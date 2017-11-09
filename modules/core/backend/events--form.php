@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore\modules\core {
-          use \effectivecore\urls_factory as urls;
+          use \effectivecore\url_factory as url;
           use \effectivecore\event_factory as event;
           use \effectivecore\message_factory as message;
           use \effectivecore\translation_factory as translation;
@@ -112,7 +112,7 @@ namespace effectivecore\modules\core {
         $form->child_delete('button_install');
         break;
       case 'to_front':
-        urls::go(urls::get_back_url() ?: '/');
+        url::go(url::get_back_url() ?: '/');
         break;
     }
   }
