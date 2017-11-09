@@ -11,17 +11,16 @@ namespace effectivecore {
           class storage_pdo {
 
   public $id;
-  public $is_init = false;
-  public $connection;
   public $driver;
   public $credentials;
   public $table_prefix = '';
-  public $queries = [];
+  protected $connection;
+  protected $queries = [];
 
   function init() {
-    if ($this->is_init) {
-      return true;
-    } else {
+    if ($this->connection) return
+        $this->connection;
+    else {
       if ($this->credentials) {
         try {
           events::start('on_storage_init_before', 'pdo', [&$this]);
@@ -41,7 +40,7 @@ namespace effectivecore {
               break;
           }
           events::start('on_storage_init_after', 'pdo', [&$this]);
-          return $this->is_init = true;
+          return $this->connection;
         } catch (\PDOException $e) {
           messages::add_new(
             translations::get('Storage %%_id is not available!', ['id' => $this->id]), 'warning'
@@ -140,6 +139,10 @@ namespace effectivecore {
         default      : return $result;
       }
     }
+  }
+
+  function get_queries() {
+    return $this->queries;
   }
 
   function install_entity($entity) {
