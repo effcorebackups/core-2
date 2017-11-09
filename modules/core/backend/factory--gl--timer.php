@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          abstract class timers_factory {
+          abstract class timer_factory {
 
   protected static $data;
 

@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\timers_factory as timers;
+          use \effectivecore\timer_factory as timer;
           use \effectivecore\console_factory as console;
           use \effectivecore\modules\storage\storages_factory as storages;
           abstract class events_factory {
@@ -38,11 +38,11 @@ namespace effectivecore {
     if (!empty(static::get()[$type])) {
       foreach (static::get()[$type] as $c_event) {
         if ($id == $c_event->for || $id == null) {
-          timers::tap('event call: '.$c_event->for);
+          timer::tap('event call: '.$c_event->for);
           $return[$c_event->handler][] = $c_return = call_user_func_array($c_event->handler, $args);
-          timers::tap('event call: '.$c_event->for);
+          timer::tap('event call: '.$c_event->for);
           console::add_log(
-            'event', 'call', ltrim($c_event->handler, '\\'), $c_return ? 'ok' : '-', timers::get_period('event call: '.$c_event->for, -1, -2)
+            'event', 'call', ltrim($c_event->handler, '\\'), $c_return ? 'ok' : '-', timer::get_period('event call: '.$c_event->for, -1, -2)
           );
         }
       }

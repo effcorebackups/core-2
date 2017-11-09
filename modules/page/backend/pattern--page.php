@@ -6,7 +6,7 @@
 
 namespace effectivecore {
           use \effectivecore\urls_factory as urls;
-          use \effectivecore\timers_factory as timers;
+          use \effectivecore\timer_factory as timer;
           use \effectivecore\token_factory as token;
           use \effectivecore\console_factory as console;
           use \effectivecore\locales_factory as locales;
@@ -125,8 +125,8 @@ namespace effectivecore {
         $rendered_c_region
       );
     }
-    timers::tap('total');
-    console::add_information('Total build time', locales::format_msecond(timers::get_period('total', 0, 1)));
+    timer::tap('total');
+    console::add_information('Total build time', locales::format_msecond(timer::get_period('total', 0, 1)));
     console::add_information('User roles', implode(', ', users::get_current()->roles));
     console::add_information('Server load (sys_getloadavg)', locales::format_msecond(sys_getloadavg()[0]));
     console::add_information('Memory for php (bytes)', locales::format_number(memory_get_usage(true), 0, null, ' '));

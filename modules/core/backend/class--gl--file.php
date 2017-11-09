@@ -6,7 +6,7 @@
 
 namespace effectivecore {
           use \effectivecore\files_factory as files;
-          use \effectivecore\timers_factory as timers;
+          use \effectivecore\timer_factory as timer;
           use \effectivecore\events_factory as events;
           use \effectivecore\console_factory as console;
           class file {
@@ -24,12 +24,12 @@ namespace effectivecore {
 
   function load($reset = false) {
     $relative = $this->get_path_relative();
-    timers::tap('file load: '.$relative);
+    timer::tap('file load: '.$relative);
     if (!$reset && isset(static::$cache[$relative]))
            $this->data = static::$cache[$relative];
     else   $this->data = static::$cache[$relative] = file_get_contents($this->get_path_full());
-    timers::tap('file load: '.$relative);
-    console::add_log('file', 'load', $relative, 'ok', timers::get_period('file load: '.$relative, -1, -2));
+    timer::tap('file load: '.$relative);
+    console::add_log('file', 'load', $relative, 'ok', timer::get_period('file load: '.$relative, -1, -2));
     return $this->data;
   }
 
@@ -39,11 +39,11 @@ namespace effectivecore {
 
   function insert($once = true) {
     $relative = $this->get_path_relative();
-    timers::tap('file insert: '.$relative);
+    timer::tap('file insert: '.$relative);
     $return = $once ? require_once($this->get_path_full()) :
                            require($this->get_path_full());
-    timers::tap('file insert: '.$relative);
-    console::add_log('file', 'insertion', $relative, 'ok', timers::get_period('file insert: '.$relative, -1, -2));
+    timer::tap('file insert: '.$relative);
+    console::add_log('file', 'insertion', $relative, 'ok', timer::get_period('file insert: '.$relative, -1, -2));
     return $return;
   }
 
