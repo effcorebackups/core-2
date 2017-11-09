@@ -10,7 +10,7 @@ namespace effectivecore\modules\user {
           use \effectivecore\urls_factory as urls;
           use \effectivecore\instance as instance;
           use \effectivecore\entities_factory as entities;
-          use \effectivecore\messages_factory as messages;
+          use \effectivecore\message_factory as message;
           use \effectivecore\translations_factory as translations;
           use \effectivecore\modules\page\pages_factory as pages;
           use \effectivecore\modules\user\users_factory as users;
@@ -37,8 +37,8 @@ namespace effectivecore\modules\user {
                 $c_session->delete();
               }
             }
-               messages::add_new(translations::get('User %%_nick was deleted.',     ['nick' => $nick]));}
-          else messages::add_new(translations::get('User %%_nick was not deleted!', ['nick' => $nick]), 'error');
+               message::add_new(translations::get('User %%_nick was deleted.',     ['nick' => $nick]));}
+          else message::add_new(translations::get('User %%_nick was not deleted!', ['nick' => $nick]), 'error');
         }
         urls::go(urls::get_back_url() ?: '/admin/users');
         break;
@@ -113,12 +113,12 @@ namespace effectivecore\modules\user {
           $user->password_hash = factory::hash_get($values['password_new']);
         }
         if ($user->update()) {
-          messages::add_new(
+          message::add_new(
             translations::get('User %%_nick was updated.', ['nick' => $user->nick])
           );
           urls::go(urls::get_back_url() ?: '/user/'.$id);
         } else {
-          messages::add_new(
+          message::add_new(
             translations::get('User %%_nick was not updated.', ['nick' => $user->nick]), 'warning'
           );
         }
@@ -146,7 +146,7 @@ namespace effectivecore\modules\user {
                $user->password_hash !== factory::hash_get($values['password']))) {
             $form->add_error('credentials/email/element');
             $form->add_error('credentials/password/element');
-            messages::add_new('Incorrect email or password!', 'error');
+            message::add_new('Incorrect email or password!', 'error');
           }
         }
         break;
@@ -206,7 +206,7 @@ namespace effectivecore\modules\user {
           session::init($user->id);
           urls::go('/user/'.$user->id);
         } else {
-          messages::add_new('User was not registered!', 'error');
+          message::add_new('User was not registered!', 'error');
         }
         break;
     }

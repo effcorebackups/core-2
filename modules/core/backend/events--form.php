@@ -7,7 +7,7 @@
 namespace effectivecore\modules\core {
           use \effectivecore\urls_factory as urls;
           use \effectivecore\events_factory as events;
-          use \effectivecore\messages_factory as messages;
+          use \effectivecore\message_factory as message;
           use \effectivecore\translations_factory as translations;
           use \effectivecore\modules\storage\storages_factory as storages;
           abstract class events_form extends \effectivecore\events_form {
@@ -18,25 +18,25 @@ namespace effectivecore\modules\core {
 
   static function on_init_installation($form, $fields) {
     if (!extension_loaded('pdo')) {
-      messages::add_new('PHP PDO extension is not available.', 'warning');
+      message::add_new('PHP PDO extension is not available.', 'warning');
     }
     if (!extension_loaded('pdo_mysql')) {
       $fields['storage/default/driver/mysql']->child_select('element')->attribute_insert('disabled', 'disabled');
-      messages::add_new(translations::get('PHP PDO driver for %%_name is not available.', ['name' => 'MySQL']), 'warning');
+      message::add_new(translations::get('PHP PDO driver for %%_name is not available.', ['name' => 'MySQL']), 'warning');
     }
     if (!extension_loaded('pdo_pgsql')) {
       $fields['storage/default/driver/pgsql']->child_select('element')->attribute_insert('disabled', 'disabled');
-      messages::add_new(translations::get('PHP PDO driver for %%_name is not available.', ['name' => 'PostgreSQL']), 'warning');
+      message::add_new(translations::get('PHP PDO driver for %%_name is not available.', ['name' => 'PostgreSQL']), 'warning');
     }
     if (!extension_loaded('pdo_sqlite')) {
       $fields['storage/sqlite/driver/sqlite']->child_select('element')->attribute_insert('disabled', 'disabled');
-      messages::add_new(translations::get('PHP PDO driver for %%_name is not available.', ['name' => 'SQLite']), 'warning');
+      message::add_new(translations::get('PHP PDO driver for %%_name is not available.', ['name' => 'SQLite']), 'warning');
     }
     $main = storages::get('main');
     if (isset($main->driver)) {
       $form->child_delete('storage');
       $form->child_delete('button_install');
-      messages::add_new('Installation is not available because storage credentials was setted!', 'warning');
+      message::add_new('Installation is not available because storage credentials was setted!', 'warning');
     }
   }
 
@@ -107,7 +107,7 @@ namespace effectivecore\modules\core {
         storages::get('settings')->changes_register_action('core', 'insert', 'storages/storage/storage_sql_dpo', $params);
         storages::rebuild();
         events::start('on_module_install');
-        messages::add_new('Modules was installed.');
+        message::add_new('Modules was installed.');
         $form->child_delete('storage');
         $form->child_delete('button_install');
         break;

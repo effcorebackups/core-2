@@ -6,7 +6,7 @@
 
 namespace effectivecore {
           use \effectivecore\events_factory as events;
-          use \effectivecore\messages_factory as messages;
+          use \effectivecore\message_factory as message;
           class form extends \effectivecore\markup {
 
   # elements support:
@@ -101,7 +101,7 @@ namespace effectivecore {
       foreach ($this->errors as $c_npath => $c_errors) {
         foreach ($c_errors as $c_error) {
           if ($c_npath) $elements[$c_npath]->attribute_insert('class', ['error' => 'error']);
-          if ($c_error) messages::add_new($c_error, 'error');
+          if ($c_error) message::add_new($c_error, 'error');
         }
       }
     # call submit handler (if no errors)

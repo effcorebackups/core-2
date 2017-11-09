@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore\modules\user {
-          use \effectivecore\messages_factory as messages;
+          use \effectivecore\message_factory as message;
           use \effectivecore\entities_factory as entities;
           use \effectivecore\instances_factory as instances;
           use \effectivecore\translations_factory as translations;
@@ -20,13 +20,13 @@ namespace effectivecore\modules\user {
   static function on_install() {
   # install entities
     foreach (entities::get_by_module('user') as $c_entity) {
-      if ($c_entity->install()) messages::add_new(translations::get('Entity %%_name was installed.',     ['name' => $c_entity->get_name()]));
-      else                      messages::add_new(translations::get('Entity %%_name was not installed!', ['name' => $c_entity->get_name()]), 'error');
+      if ($c_entity->install()) message::add_new(translations::get('Entity %%_name was installed.',     ['name' => $c_entity->get_name()]));
+      else                      message::add_new(translations::get('Entity %%_name was not installed!', ['name' => $c_entity->get_name()]), 'error');
     }
   # insert instances
     foreach (instances::get_by_module('user') as $c_instance) {
-      if ($c_instance->insert()) messages::add_new(translations::get('Instances of entity %%_name was added.',     ['name' => $c_entity->get_name()]));
-      else                       messages::add_new(translations::get('Instances of entity %%_name was not added!', ['name' => $c_entity->get_name()]), 'error');
+      if ($c_instance->insert()) message::add_new(translations::get('Instances of entity %%_name was added.',     ['name' => $c_entity->get_name()]));
+      else                       message::add_new(translations::get('Instances of entity %%_name was not added!', ['name' => $c_entity->get_name()]), 'error');
     }
   }
 

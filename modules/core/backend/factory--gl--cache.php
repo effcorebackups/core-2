@@ -6,7 +6,6 @@
 
 namespace effectivecore {
           use \effectivecore\console_factory as console;
-          use \effectivecore\messages_factory as messages;
           abstract class cache_factory extends \effectivecore\dynamic_factory {
 
   static $type = 'cache';

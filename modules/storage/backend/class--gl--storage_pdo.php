@@ -6,7 +6,7 @@
 
 namespace effectivecore {
           use \effectivecore\events_factory as events;
-          use \effectivecore\messages_factory as messages;
+          use \effectivecore\message_factory as message;
           use \effectivecore\translations_factory as translations;
           class storage_pdo {
 
@@ -42,12 +42,12 @@ namespace effectivecore {
           events::start('on_storage_init_after', 'pdo', [&$this]);
           return $this->connection;
         } catch (\PDOException $e) {
-          messages::add_new(
+          message::add_new(
             translations::get('Storage %%_id is not available!', ['id' => $this->id]), 'warning'
           );
         }
       } else {
-        messages::add_new(
+        message::add_new(
           translations::get('Credentials for storage %%_id was not setted!', ['id' => $this->id]), 'warning'
         );
       }
@@ -123,7 +123,7 @@ namespace effectivecore {
       $errors = $this->connection->errorInfo();
       events::start('on_query_after', 'pdo', [&$this, &$query, &$result, &$errors]);
       if ($errors[0] !== '00000') {
-        messages::add_new(
+        message::add_new(
           'Query error! '.br.
           'SQLState: '.$errors[0].br.
           'Driver error code: '.$errors[1].br.

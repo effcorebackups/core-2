@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore\modules\develop {
-          use \effectivecore\messages_factory as messages;
+          use \effectivecore\message_factory as message;
           abstract class events_form extends \effectivecore\events_form {
 
   ##################
@@ -26,7 +26,7 @@ namespace effectivecore\modules\develop {
   }
 
   static function on_submit_demo($form, $fields, &$values) {
-    messages::add_new('Call \effectivecore\modules\develop\events_form::on_submit_demo.');
+    message::add_new('Call \effectivecore\modules\develop\events_form::on_submit_demo.');
   }
 
 }}

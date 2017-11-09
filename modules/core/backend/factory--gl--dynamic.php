@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\messages_factory as messages;
+          use \effectivecore\message_factory as message;
           abstract class dynamic_factory {
 
   static $type = 'data';
@@ -46,7 +46,7 @@ namespace effectivecore {
       }
       return true;
     } else {
-      messages::add_new(
+      message::add_new(
         'Can not write file "'.$file->get_file_full().'" to the directory "'.$file->get_dirs_relative().'"!'.br.
         'The system cannot save dynamic file and will work slowly!'.br.
         (!is_writable($file->get_dirs_full()) ? 'Directory "'.$file->get_dirs_relative().'" should be writable!'.br : '').

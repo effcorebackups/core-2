@@ -8,7 +8,7 @@ namespace effectivecore\modules\user {
           use const \effectivecore\format_datetime;
           use \effectivecore\factory as factory;
           use \effectivecore\instance as instance;
-          use \effectivecore\messages_factory as messages;
+          use \effectivecore\message_factory as message;
           use \effectivecore\modules\user\users_factory as users;
           abstract class session_factory {
 
@@ -34,7 +34,7 @@ namespace effectivecore\modules\user {
       } else {
       # remove lost or fake sid in browser
         setcookie(session_name(), '', 0, '/');
-        messages::add_new('invalid session was deleted!', 'warning');
+        message::add_new('invalid session was deleted!', 'warning');
       }
     }
   # init user

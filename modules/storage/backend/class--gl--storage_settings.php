@@ -9,7 +9,7 @@ namespace effectivecore {
           use \effectivecore\cache_factory as cache;
           use \effectivecore\dynamic_factory as dynamic;
           use \effectivecore\console_factory as console;
-          use \effectivecore\messages_factory as messages;
+          use \effectivecore\message_factory as message;
           class storage_settings {
 
   static $data_orig;
@@ -243,7 +243,7 @@ namespace effectivecore {
       } else {
         $messages = ['Function: settings_to_code', 'Wrong syntax in settings data at line: '.$line_num];
         if ($file_name) $messages[] = 'File name: '.$file_name;
-        messages::add_new(implode(br, $messages), 'error');
+        message::add_new(implode(br, $messages), 'error');
       }
     }
   # call required functions

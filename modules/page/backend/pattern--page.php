@@ -10,7 +10,7 @@ namespace effectivecore {
           use \effectivecore\token_factory as token;
           use \effectivecore\console_factory as console;
           use \effectivecore\locales_factory as locales;
-          use \effectivecore\messages_factory as messages;
+          use \effectivecore\message_factory as message;
           use \effectivecore\translations_factory as translations;
           use \effectivecore\modules\user\users_factory as users;
           use \effectivecore\modules\page\pages_factory as pages;
@@ -34,7 +34,7 @@ namespace effectivecore {
 
   # check https (@todo: enable this message)
     if (false && !empty($this->https) && urls::get_current()->get_protocol() != 'https') {
-      messages::add_new('This page should be use HTTPS protocol!', 'warning');
+      message::add_new('This page should be use HTTPS protocol!', 'warning');
     }
 
   # render frontend items: icons, styles, script
@@ -134,7 +134,7 @@ namespace effectivecore {
 
     $template->set_var('attributes', factory::data_to_attr(['lang' => locales::get_current()->lang_code]));
     $template->set_var('console', console::render()); # @todo: only for admins
-    $template->set_var('messages', messages::render());
+    $template->set_var('messages', message::render_all());
     $template->set_var('meta', implode(nl, $rendered_meta));
     $template->set_var('styles', implode(nl, $rendered_styles));
     $template->set_var('script', implode(nl, $rendered_script));

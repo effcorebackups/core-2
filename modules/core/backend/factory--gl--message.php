@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          abstract class messages_factory {
+          abstract class message_factory {
 
   protected static $data = [];
 
@@ -36,7 +36,7 @@ namespace effectivecore {
     }
   }
 
-  static function render() {
+  static function render_all() {
     $groups = [];
     foreach (static::get_all() as $c_type => $c_messages) {
       $c_grpoup = new markup('ul', ['class' => [$c_type => $c_type]]);
