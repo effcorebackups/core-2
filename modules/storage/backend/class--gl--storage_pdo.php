@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\events_factory as events;
+          use \effectivecore\event_factory as event;
           use \effectivecore\message_factory as message;
           use \effectivecore\translations_factory as translations;
           class storage_pdo {
@@ -23,7 +23,7 @@ namespace effectivecore {
     else {
       if ($this->credentials) {
         try {
-          events::start('on_storage_init_before', 'pdo', [&$this]);
+          event::start('on_storage_init_before', 'pdo', [&$this]);
           switch ($this->driver) {
             case 'sqlite':
               $this->connection = new \PDO(
@@ -39,7 +39,7 @@ namespace effectivecore {
                 $this->credentials->password);
               break;
           }
-          events::start('on_storage_init_after', 'pdo', [&$this]);
+          event::start('on_storage_init_after', 'pdo', [&$this]);
           return $this->connection;
         } catch (\PDOException $e) {
           message::add_new(
@@ -118,10 +118,10 @@ namespace effectivecore {
   function query($query) {
     if ($this->init()) {
       $this->queries[] = $query;
-      events::start('on_query_before', 'pdo', [&$this, &$query]);
+      event::start('on_query_before', 'pdo', [&$this, &$query]);
       $result = $this->connection->query($query);
       $errors = $this->connection->errorInfo();
-      events::start('on_query_after', 'pdo', [&$this, &$query, &$result, &$errors]);
+      event::start('on_query_after', 'pdo', [&$this, &$query, &$result, &$errors]);
       if ($errors[0] !== '00000') {
         message::add_new(
           'Query error! '.br.

@@ -6,7 +6,7 @@
 
 namespace effectivecore\modules\core {
           use \effectivecore\urls_factory as urls;
-          use \effectivecore\events_factory as events;
+          use \effectivecore\event_factory as event;
           use \effectivecore\message_factory as message;
           use \effectivecore\translations_factory as translations;
           use \effectivecore\modules\storage\storages_factory as storages;
@@ -106,7 +106,7 @@ namespace effectivecore\modules\core {
         }
         storages::get('settings')->changes_register_action('core', 'insert', 'storages/storage/storage_sql_dpo', $params);
         storages::rebuild();
-        events::start('on_module_install');
+        event::start('on_module_install');
         message::add_new('Modules was installed.');
         $form->child_delete('storage');
         $form->child_delete('button_install');

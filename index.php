@@ -27,7 +27,7 @@ namespace effectivecore {
   use \effectivecore\urls_factory as urls;
   use \effectivecore\token_factory as token;
   use \effectivecore\timer_factory as timer;
-  use \effectivecore\events_factory as events;
+  use \effectivecore\event_factory as event;
   use \effectivecore\modules\storage\storages_factory as storages;
   timer::tap('total');
 
@@ -87,7 +87,7 @@ namespace effectivecore {
 
   # case for page (non file)
   ob_start();
-  foreach (events::start('on_module_start') as $c_results) {
+  foreach (event::start('on_module_start') as $c_results) {
     foreach ($c_results as $c_result) {
       print str_replace(nl.nl, '', $c_result);
     }

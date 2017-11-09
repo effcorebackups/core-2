@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\events_factory as events;
+          use \effectivecore\event_factory as event;
           use \effectivecore\message_factory as message;
           class form extends \effectivecore\markup {
 
@@ -78,7 +78,7 @@ namespace effectivecore {
     $elements = $this->child_select_all();
     $fields   = $this->fields_get();
   # call init handlers
-    events::start('on_form_init', $id, [$this, $fields]);
+    event::start('on_form_init', $id, [$this, $fields]);
   # if current user click the button
     if (isset($values['form_id']) &&
               $values['form_id'] === $id && isset($values['button'])) {
@@ -95,7 +95,7 @@ namespace effectivecore {
       }
     # call validate handlers
       if (empty($this->clicked_button->novalidate)) {
-        events::start('on_form_validate', $id, [$this, $fields, &$values]);
+        event::start('on_form_validate', $id, [$this, $fields, &$values]);
       }
     # show errors and set error class
       foreach ($this->errors as $c_npath => $c_errors) {
@@ -106,7 +106,7 @@ namespace effectivecore {
       }
     # call submit handler (if no errors)
       if (count($this->errors) == 0) {
-        events::start('on_form_submit', $id, [$this, $fields, &$values]);
+        event::start('on_form_submit', $id, [$this, $fields, &$values]);
       }
     }
 

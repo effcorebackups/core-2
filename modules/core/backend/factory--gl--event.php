@@ -8,7 +8,7 @@ namespace effectivecore {
           use \effectivecore\timer_factory as timer;
           use \effectivecore\console_factory as console;
           use \effectivecore\modules\storage\storages_factory as storages;
-          abstract class events_factory {
+          abstract class event_factory {
 
   protected static $data;
 
