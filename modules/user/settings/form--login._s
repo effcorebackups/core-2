@@ -33,7 +33,7 @@ forms
                 - minlength: 5
                 - maxlength: 255
                 - autocomplete: off
-        - captcha|captcha
+        - captcha|form_field_captcha
     - button_login|markup
         tag_name: button
         attributes

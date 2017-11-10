@@ -6,29 +6,49 @@
 
 namespace effectivecore {
           use \effectivecore\modules\storage\storage_factory as storage;
-          class captcha extends \effectivecore\node_simple {
+          class form_field_captcha extends \effectivecore\form_field {
 
-  public $length = 6;
+  public $title = 'Captcha';
+  public $g_length = 6;
+  public $g_characters = [];
+  static public $characters;
 
-  function render() {
-    foreach (storage::get('settings')->select_group('captcha')['page']->characters as $c_character) {
-      foreach ($c_character->glyphs as $c_glyph) {
-        $characters[$c_glyph] = $c_character->character;
+  static function init() {
+    foreach (storage::get('settings')->select_group('captcha') as $c_settings) {
+      foreach ($c_settings as $c_characters) {
+        foreach ($c_characters as $c_character) {
+          foreach ($c_character->glyphs as $c_glyph) {
+            static::$characters[$c_glyph] = $c_character->character;
+          }
+        }
       }
     }
-    $canvas = new canvas_svg(5 * $this->length, 15, 5);
+  }
+
+  function build() {
+    $this->child_insert(new markup('input'), 'element');
+  }
+
+  function render() {
+    return static::render_captcha().
+           parent::render();
+  }
+
+  function render_captcha() {
+    if (!static::$characters) static::init();
+    $canvas = new canvas_svg(5 * $this->g_length, 15, 5);
     $canvas->fill('#000000', .9);
-    for ($i = 0; $i < $this->length; $i++) {
+    for ($i = 0; $i < $this->g_length; $i++) {
       $canvas->glyph_set(
         rand(0, 2) - 1 + ($i * 5),
         rand(1, 5),
-        array_rand($characters)
+        array_rand(static::$characters)
       );
     }
     return $canvas->render();
   }
 
-   function render_demo() {
+   function render_captcha_demo() {
      $canvas = new canvas_svg(105, 15, 5);
      $canvas->fill('#ffffff');
      $canvas->glyph_set( 5, 3, '01110|10001|10001|10001|10001|10001|10001|10001|10001|01110'); # 0
