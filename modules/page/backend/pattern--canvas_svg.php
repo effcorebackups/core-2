@@ -22,20 +22,45 @@ namespace effectivecore {
     parent::__construct([], $weight);
   }
 
-  function pixel_set($x, $y, $color = '#000000') {
-    $this->canvas[$x][$y] = $color;
-  }
-
   function pixel_get($x, $y) {
-    return isset($this->canvas[$x][$y]) ?
-                 $this->canvas[$x][$y] : null;
+    return isset($this->canvas[$y][$x]) ?
+                 $this->canvas[$y][$x] : null;
   }
 
-  function fill_noise() {
+  function pixel_set($x, $y, $color = '#000000') {
+    $this->canvas[$y][$x] = $color;
+  }
+
+  function matrix_set($x, $y, $matrix) {
+    foreach ($matrix as $c_y => $y_row) {
+      foreach ($y_row as $c_x => $c_color) {
+        $this->pixel_set($c_x + $x, $c_y + $y, $c_color);
+      }
+    }
+  }
+
+  function glyph_set($x, $y, $data, $inversion = false) {
+    $rows = explode('|', $data);
+    for ($c_y = 0; $c_y < count($rows); $c_y++) {
+      for ($c_x = 0; $c_x < strlen($rows[$c_y]); $c_x++) {
+        $new_color = $rows[$c_y][$c_x] == '1' ? '#000000' : null;
+        if ($inversion && $new_color) {
+          $old_color = $this->pixel_get($c_x, $c_y);
+          $new_color = ['#000000' => '#ffffff',
+                        '#ffffff' => '#000000', null => '#000000'][$old_color];
+        }
+        if ($new_color) {
+          $this->pixel_set($c_x + $x, $c_y + $y, $new_color);
+        }
+      }
+    }
+  }
+
+  function fill($color, $random = 0) {
     for ($c_x = 0; $c_x < $this->w; $c_x++) {
     for ($c_y = 0; $c_y < $this->h; $c_y++) {
-      if (rand(0, 1) >= .5) {
-        $this->pixel_set($c_x, $c_y, '#000000');
+      if (!$random || ($random && rand(0, 10) / 10 > $random)) {
+        $this->pixel_set($c_x, $c_y, $color);
       }
     }}
   }
@@ -51,8 +76,8 @@ namespace effectivecore {
 
   function render_canvas($canvas) {
     $return = [];
-    foreach ($this->canvas as $c_x => $x_row) {
-      foreach ($x_row as $c_y => $c_color) {
+    foreach ($this->canvas as $c_y => $y_row) {
+      foreach ($y_row as $c_x => $c_color) {
         $return[] = (new markup_xml_simple('rect', [
           'style'  => 'fill:'.$c_color,
           'x'      => 1 * $this->scale * $c_x,
