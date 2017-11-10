@@ -86,6 +86,9 @@
   form x-container.palette x-field input[type="radio"] {margin: 0; border-color: white}
   form x-container.palette x-field input[type="radio"]:checked {border-color: black}
 
+  /* captcha */
+  form x-field.captcha svg {display: block; margin: 20px 0}
+
   /* particular cases */
   form#user_delete,
   form#logout {width: 340px; margin: 100px auto}
