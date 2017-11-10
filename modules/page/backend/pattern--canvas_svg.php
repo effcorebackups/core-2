@@ -25,6 +25,7 @@ namespace effectivecore {
   function pixel_set($x, $y, $color = '#000000') {
     $this->canvas[$x][$y] = $color;
   }
+
   function pixel_get($x, $y) {
     return isset($this->canvas[$x][$y]) ?
                  $this->canvas[$x][$y] : null;
