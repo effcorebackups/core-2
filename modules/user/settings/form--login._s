@@ -34,7 +34,6 @@ forms
                 - maxlength: 255
                 - autocomplete: off
         - captcha|captcha
-            length: 6
     - button_login|markup
         tag_name: button
         attributes
