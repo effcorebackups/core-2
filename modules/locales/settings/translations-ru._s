@@ -18,6 +18,7 @@ translations
   - call: вызов
   - Cancel: Отмена
   - cancel: отмена
+  - Captcha: Защитный код
   - Changes was removed.: Изменения были удалены.
   - Changes was saved.: Изменения были сохранены.
   - Check field again before submit.: Проверьте поле снова перед отправкой.
@@ -211,4 +212,5 @@ translations
   - Version: Версия
   - view: просмотреть
   - Wellcome to our site!: Добро пожаловать на наш сайт!
+  - Write the characters from the picture.: Напишите символы с картинки.
   - Yes: Да
