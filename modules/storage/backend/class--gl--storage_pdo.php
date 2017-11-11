@@ -94,14 +94,14 @@ namespace effectivecore {
     return "'".$this->quote($data)."'";
   }
 
-  function prepare_attributes($data, $mode = null, $delimiter = ', ') {
+  function prepare_attributes($data, $entity, $mode = null, $delimiter = ', ') {
     $return = [];
-    foreach ($data as $c_field => $c_value) {
+    foreach ($data as $c_name => $c_value) {
       switch ($mode) {
-        case 'order' : $return[] = $this->prepare_field_name($c_field).' '.$c_value; break;
-        case 'fields': $return[] = $this->prepare_field_name($c_field); break;
+        case 'order' : $return[] = $this->prepare_field_name($c_name).' '.$c_value; break;
+        case 'fields': $return[] = $this->prepare_field_name($c_name); break;
         case 'values': $return[] = $this->prepare_field_value($c_value); break;
-        default      : $return[] = $this->prepare_field_name($c_field).' = '.$this->prepare_field_value($c_value); break;
+        default      : $return[] = $this->prepare_field_name($c_name).' = '.$this->prepare_field_value($c_value); break;
       }
     }
     return implode($delimiter, $return);
@@ -212,8 +212,8 @@ namespace effectivecore {
   function select_instances($entity, $conditions = [], $order = [], $limit = 0, $offset = 0) {
     if ($this->init()) {
       $s_table_name = $this->prepare_name($entity->get_name());
-      $s_conditions = count($conditions) ? ' WHERE '.$this->prepare_attributes($conditions, null, ' and ') : '';
-      $s_order = count($order) ? ' ORDER BY '.$this->prepare_attributes($order, 'order') : '';
+      $s_conditions = count($conditions) ? ' WHERE '.$this->prepare_attributes($conditions, $entity, null, ' and ') : '';
+      $s_order = count($order) ? ' ORDER BY '.$this->prepare_attributes($order, $entity, 'order') : '';
       $s_limit = $limit ? ' LIMIT ' .$limit : '';
       $s_offset = $offset ? ' OFFSET '.$offset : '';
       $result = $this->query('SELECT * FROM '.$s_table_name.$s_conditions.$s_order.$s_limit.$s_offset.';');
@@ -226,9 +226,10 @@ namespace effectivecore {
 
   function select_instance($instance) { # return: null | instance
     if ($this->init()) {
-      $keys = array_intersect_key($instance->get_values(), $instance->get_entity()->get_keys());
-      $s_table_name = $this->prepare_name($instance->get_entity()->get_name());
-      $s_where = $this->prepare_attributes($keys, null, ' and ');
+      $entity = $instance->get_entity();
+      $keys = array_intersect_key($instance->get_values(), $entity->get_keys());
+      $s_table_name = $this->prepare_name($entity->get_name());
+      $s_where = $this->prepare_attributes($keys, $entity, null, ' and ');
       $result = $this->query('SELECT * FROM '.$s_table_name.' WHERE '.$s_where.' LIMIT 1;');
       if (isset($result[0])) {
         $instance->values = $result[0]->values;
@@ -239,10 +240,11 @@ namespace effectivecore {
 
   function insert_instance($instance) { # return: null | instance | instance + new_id
     if ($this->init()) {
-      $auto_name = $instance->get_entity()->get_auto_name();
-      $s_table_name = $this->prepare_name($instance->get_entity()->get_name());
-      $s_fields = $this->prepare_attributes($instance->get_values(), 'fields');
-      $s_values = $this->prepare_attributes($instance->get_values(), 'values');
+      $entity = $instance->get_entity();
+      $auto_name = $entity->get_auto_name();
+      $s_table_name = $this->prepare_name($entity->get_name());
+      $s_fields = $this->prepare_attributes($instance->get_values(), $entity, 'fields');
+      $s_values = $this->prepare_attributes($instance->get_values(), $entity, 'values');
       $new_id = $this->query('INSERT INTO '.$s_table_name.' ('.$s_fields.') VALUES ('.$s_values.');');
       if ($new_id !== null && $auto_name == null) return $instance;
       if ($new_id !== null && $auto_name != null) {
@@ -254,10 +256,11 @@ namespace effectivecore {
 
   function update_instance($instance) { # return: null | instance
     if ($this->init()) {
-      $keys = array_intersect_key($instance->get_values(), $instance->get_entity()->get_keys(true, false));
-      $s_table_name = $this->prepare_name($instance->get_entity()->get_name());
-      $s_changes = $this->prepare_attributes($instance->get_values());
-      $s_where = $this->prepare_attributes($keys, null, ' and ');
+      $entity = $instance->get_entity();
+      $keys = array_intersect_key($instance->get_values(), $entity->get_keys(true, false));
+      $s_table_name = $this->prepare_name($entity->get_name());
+      $s_changes = $this->prepare_attributes($instance->get_values(), $entity);
+      $s_where = $this->prepare_attributes($keys, $entity, null, ' and ');
       $row_count = $this->query('UPDATE '.$s_table_name.' SET '.$s_changes.' WHERE '.$s_where.';');
       if ($row_count === 1) {
         return $instance;
@@ -267,9 +270,10 @@ namespace effectivecore {
 
   function delete_instance($instance) { # return: null | instance + empty(values)
     if ($this->init()) {
-      $keys = array_intersect_key($instance->get_values(), $instance->get_entity()->get_keys(true, false));
-      $s_table_name = $this->prepare_name($instance->get_entity()->get_name());
-      $s_where = $this->prepare_attributes($keys, null, ' and ');
+      $entity = $instance->get_entity();
+      $keys = array_intersect_key($instance->get_values(), $entity->get_keys(true, false));
+      $s_table_name = $this->prepare_name($entity->get_name());
+      $s_where = $this->prepare_attributes($keys, $entity, null, ' and ');
       $row_count = $this->query('DELETE FROM '.$s_table_name.' WHERE '.$s_where.';');
       if ($row_count === 1) {
         $instance->set_values([]);
