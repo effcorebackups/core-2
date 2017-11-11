@@ -1,0 +1,24 @@
+entities
+- captcha|entity
+    name: captcha
+    storage_id: main
+    fields
+      id
+        type: autoincrement
+        not_null: true
+      characters
+        type: varchar
+        size: 32
+        not_null: true
+      canvas
+        type: blob
+        not_null: true
+      attempts
+        type: integer
+        not_null: true
+        default: 1
+    constraints
+    - primary
+        type: primary key
+        fields
+        - id: id

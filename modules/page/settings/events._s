@@ -1,4 +1,9 @@
 events
+  on_module_install
+  - page
+      for: page
+      handler: \effectivecore\modules\page\events_module::on_install
+      weight: 0
   on_module_start
   - page
       for: page
