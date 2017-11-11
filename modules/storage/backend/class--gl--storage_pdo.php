@@ -236,7 +236,7 @@ namespace effectivecore {
       $s_where = $this->prepare_attributes($keys, $entity, null, ' and ');
       $result = $this->query('SELECT * FROM '.$s_table_name.' WHERE '.$s_where.' LIMIT 1;');
       if (isset($result[0])) {
-        $instance->values = $result[0]->values;
+        $instance->set_values($result[0]->values);
         return $instance;
       }
     }
@@ -252,7 +252,7 @@ namespace effectivecore {
       $new_id = $this->query('INSERT INTO '.$s_table_name.' ('.$s_fields.') VALUES ('.$s_values.');');
       if ($new_id !== null && $auto_name == null) return $instance;
       if ($new_id !== null && $auto_name != null) {
-        $instance->values[$auto_name] = $new_id;
+        $instance->{$auto_name} = $new_id;
         return $instance;
       }
     }
