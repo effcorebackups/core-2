@@ -31,6 +31,16 @@ namespace effectivecore {
     $this->canvas[$y][$x] = $color;
   }
 
+  function matrix_get($x = 0, $y = 0, $w = null, $h = null) {
+    $matrix = [];
+    for ($c_y = 0; $c_y < ($w ?: $this->w); $c_y++) {
+    for ($c_x = 0; $c_x < ($h ?: $this->h); $c_x++) {
+      $matrix[$c_y][$c_x] = isset($this->canvas[$c_y + $y][$c_x + $x]) ?
+                                  $this->canvas[$c_y + $y][$c_x + $x] : null;
+    }}
+    return $matrix;
+  }
+
   function matrix_set($x, $y, $matrix) {
     foreach ($matrix as $c_y => $y_row) {
       foreach ($y_row as $c_x => $c_color) {
@@ -39,18 +49,13 @@ namespace effectivecore {
     }
   }
 
-  function glyph_set($x, $y, $data, $inversion = false) {
+  function glyph_set($x, $y, $data) {
     $rows = explode('|', $data);
     for ($c_y = 0; $c_y < count($rows); $c_y++) {
       for ($c_x = 0; $c_x < strlen($rows[$c_y]); $c_x++) {
-        $new_color = $rows[$c_y][$c_x] == '1' ? '#000000' : null;
-        if ($inversion && $new_color) {
-          $old_color = $this->pixel_get($c_x, $c_y);
-          $new_color = ['#000000' => '#ffffff',
-                        '#ffffff' => '#000000', null => '#000000'][$old_color];
-        }
-        if ($new_color) {
-          $this->pixel_set($c_x + $x, $c_y + $y, $new_color);
+        $c_color = $rows[$c_y][$c_x] == '1' ? '#000000' : null;
+        if ($c_color) {
+          $this->pixel_set($c_x + $x, $c_y + $y, $c_color);
         }
       }
     }
