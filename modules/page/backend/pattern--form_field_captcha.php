@@ -10,9 +10,10 @@ namespace effectivecore {
 
   public $title = 'Captcha';
   public $description = 'Write the characters from the picture.';
+  public $attributes = ['class' => ['captcha' => 'captcha']];
+
   public $g_length = 6;
   public $g_characters = [];
-  public $attributes = ['class' => ['captcha' => 'captcha']];
   public static $glyphs;
 
   static function init() {
@@ -39,8 +40,15 @@ namespace effectivecore {
         rand(1, 5), $c_glyph
       );
     }
-    $this->child_insert($canvas, 'captcha');
-    $this->child_insert(new markup_simple('input', ['required' => 'required', 'size' => $this->g_length]), 'element');
+    $this->child_insert($canvas, 'canvas');
+    $this->child_insert(new markup_simple('input', [
+      'type' => 'text',
+      'name' => 'captcha',
+      'size' => $this->g_length,
+      'required' => 'required',
+      'minlength' => $this->g_length,
+      'maxlength' => $this->g_length
+    ]), 'element');
   }
 
 }}
