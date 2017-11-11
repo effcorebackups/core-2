@@ -16,7 +16,6 @@ entities
       attempts
         type: integer
         not_null: true
-        default: 1
     constraints
     - primary
         type: primary key
