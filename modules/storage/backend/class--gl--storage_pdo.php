@@ -222,7 +222,7 @@ namespace effectivecore {
       $s_offset = $offset ? ' OFFSET '.$offset : '';
       $result = $this->query('SELECT * FROM '.$s_table_name.$s_conditions.$s_order.$s_limit.$s_offset.';');
       foreach ($result as $c_instance) {
-        $c_instance->set_entity_name($entity->name);
+        $c_instance->set_entity_name($entity->get_name());
       }
       return $result;
     } 
