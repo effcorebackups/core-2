@@ -90,18 +90,22 @@ namespace effectivecore {
     return $name;
   }
 
-  function prepare_field_value($data) {
-    return "'".$this->quote($data)."'";
+  function prepare_field_value($data, $type) {
+    switch ($type) {
+      case 'blob': return ($this->driver == 'pgsql' ? 'E' : 'X')."'".$this->quote($data)."'";
+      default    : return "'".$this->quote($data)."'";
+    }
   }
 
   function prepare_attributes($data, $entity, $mode = null, $delimiter = ', ') {
     $return = [];
     foreach ($data as $c_name => $c_value) {
+      $c_type = $entity->get_field_info($c_name)->type;
       switch ($mode) {
         case 'order' : $return[] = $this->prepare_field_name($c_name).' '.$c_value; break;
         case 'fields': $return[] = $this->prepare_field_name($c_name); break;
-        case 'values': $return[] = $this->prepare_field_value($c_value); break;
-        default      : $return[] = $this->prepare_field_name($c_name).' = '.$this->prepare_field_value($c_value); break;
+        case 'values': $return[] = $this->prepare_field_value($c_value, $c_type); break;
+        default      : $return[] = $this->prepare_field_name($c_name).' = '.$this->prepare_field_value($c_value, $c_type); break;
       }
     }
     return implode($delimiter, $return);

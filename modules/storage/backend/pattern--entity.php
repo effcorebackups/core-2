@@ -16,6 +16,7 @@ namespace effectivecore {
 
   function get_name()             {return $this->name;}
   function get_storage_id()       {return $this->storage_id;}
+  function get_field_info($name)  {return $this->fields->{$name};}
   function get_fields_info()      {return $this->fields;}
   function get_indexes_info()     {return $this->indexes;}
   function get_constraints_info() {return $this->constraints;}
