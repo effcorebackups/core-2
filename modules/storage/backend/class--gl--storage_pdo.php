@@ -91,10 +91,10 @@ namespace effectivecore {
   }
 
   function prepare_field_value($data, $type) {
-    switch ($type) {
-      case 'blob': return ($this->driver == 'pgsql' ? 'E' : 'X')."'".$this->quote($data)."'";
-      default    : return "'".$this->quote($data)."'";
-    }
+    if ($type == 'blob' && $this->driver == 'mysql')  return "X'".bin2hex($this->quote($data))."'";
+    if ($type == 'blob' && $this->driver == 'sqlite') return "X'".bin2hex($this->quote($data))."'";
+    if ($type == 'blob' && $this->driver == 'pgsql')  return "E'\\x".substr(chunk_split(bin2hex($this->quote($data)), 2, '\\x'), 0, -2)."'";
+    return "'".$this->quote($data)."'";
   }
 
   function prepare_attributes($data, $entity, $mode = null, $delimiter = ', ') {
