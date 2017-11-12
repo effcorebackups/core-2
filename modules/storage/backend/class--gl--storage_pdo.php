@@ -236,7 +236,11 @@ namespace effectivecore {
       $s_where = $this->prepare_attributes($keys, $entity, null, ' and ');
       $result = $this->query('SELECT * FROM '.$s_table_name.' WHERE '.$s_where.' LIMIT 1;');
       if (isset($result[0])) {
-        $instance->set_values($result[0]->values);
+        foreach ($result[0]->values as $c_name => $c_value) {
+          $c_type = $entity->get_field_info($c_name)->type;
+          if ($this->driver == 'pgsql' && $c_type == 'blob') $c_value = stream_get_contents($c_value);
+          $instance->{$c_name} = $c_value;
+        }
         return $instance;
       }
     }
