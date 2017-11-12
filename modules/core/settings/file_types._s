@@ -1,20 +1,36 @@
 file_types
+# protected files
 - php
     protected: 1
     headers
     - Content-type: text/html
+- sqlite
+    protected: 1
+# text files
 - css
     use_tokens: 1
     headers
     - Content-type: text/css
+- js
+    use_tokens: 1
+    headers
+    - Content-type: text/javascript
+- html
+    use_tokens: 1
+    headers
+    - Content-type: text/html
+- xml
+    use_tokens: 1
+    headers
+    - Content-type: text/xml
+- txt
+    headers
+    - Content-type: text/plain
+# images
 - svg
     use_tokens: 1
     headers
     - Content-type: image/svg+xml
-- js
-    use_tokens: 1
-    headers
-    - Content-type: application/javascript
 - ico
     headers
     - Content-type: image/x-icon
