@@ -31,7 +31,7 @@ namespace effectivecore {
   function build() {
     if (!static::$glyphs) static::init();
     $canvas = new canvas_svg(5 * $this->g_length, 15, 5);
-    $canvas->fill('#000000', .9);
+    $canvas->fill('#000000', 0, 0, null, null, .9);
     for ($i = 0; $i < $this->g_length; $i++) {
       $c_glyph = array_rand(static::$glyphs);
       $this->g_characters.= static::$glyphs[$c_glyph];

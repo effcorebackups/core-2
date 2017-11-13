@@ -49,13 +49,33 @@ namespace effectivecore {
     }
   }
 
-  function fill($color, $random = 0) {
-    for ($c_x = 0; $c_x < $this->w; $c_x++) {
-    for ($c_y = 0; $c_y < $this->h; $c_y++) {
+  function fill($color, $x = 0, $y = 0, $w = null, $h = null, $random = 0) {
+    for ($c_y = 0; $c_y < ($h ?: $this->h); $c_y++) {
+    for ($c_x = 0; $c_x < ($w ?: $this->w); $c_x++) {
       if (!$random || ($random && rand(0, 10) / 10 > $random)) {
-        $this->pixel_set($c_x, $c_y, $color);
+        $this->pixel_set($c_x + $x, $c_y + $y, $color);
       }
     }}
+  }
+
+  function clmask_to_hexstr($color = '#000000') {
+    $binstr = '';
+    for ($c_y = 0; $c_y < $this->h; $c_y++) {
+    for ($c_x = 0; $c_x < $this->w; $c_x++) {
+      $binstr.= isset($this->canvas[$c_y][$c_x]) &&
+                      $this->canvas[$c_y][$c_x] == $color ? '1' : '0';
+    }}
+    return factory::binstr2hexstr($binstr);
+  }
+
+  function hexstr_to_clmask($hexstr, $color = '#000000') {
+    $matrix = [];
+    $binstr = factory::hexstr2binstr($hexstr);
+    for ($c_y = 0; $c_y < $this->h; $c_y++) {
+    for ($c_x = 0; $c_x < $this->w; $c_x++) {
+      $matrix[$c_y][$c_x] = $binstr[$c_x + ($c_y * $this->w)] == '1' ? $color : null;
+    }}
+    return $matrix;
   }
 
   function render() {
