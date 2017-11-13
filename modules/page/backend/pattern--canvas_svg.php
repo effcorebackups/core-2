@@ -41,12 +41,11 @@ namespace effectivecore {
     return $matrix;
   }
 
-  function matrix_set($x, $y, $matrix) {
-    foreach ($matrix as $c_y => $y_row) {
-      foreach ($y_row as $c_x => $c_color) {
-        $this->pixel_set($c_x + $x, $c_y + $y, $c_color);
-      }
-    }
+  function matrix_set($matrix, $x = 0, $y = 0) {
+    for ($c_y = 0; $c_y < count($matrix);       $c_y++) {
+    for ($c_x = 0; $c_x < count($matrix[$c_y]); $c_x++) {
+      $this->pixel_set($c_x + $x, $c_y + $y, $matrix[$c_y][$c_x]);
+    }}
   }
 
   function fill($color, $x = 0, $y = 0, $w = null, $h = null, $random = 0) {
