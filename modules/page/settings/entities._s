@@ -10,7 +10,7 @@ entities
         type: varchar
         size: 32
         not_null: true
-      canvas
+      canvas_data
         type: blob
         not_null: true
       attempts
