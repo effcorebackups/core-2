@@ -33,8 +33,8 @@ namespace effectivecore {
 
   function matrix_get($x = 0, $y = 0, $w = null, $h = null) {
     $matrix = [];
-    for ($c_y = 0; $c_y < ($w ?: $this->w); $c_y++) {
-    for ($c_x = 0; $c_x < ($h ?: $this->h); $c_x++) {
+    for ($c_y = 0; $c_y < ($h ?: $this->h); $c_y++) {
+    for ($c_x = 0; $c_x < ($w ?: $this->w); $c_x++) {
       $matrix[$c_y][$c_x] = isset($this->canvas[$c_y + $y][$c_x + $x]) ?
                                   $this->canvas[$c_y + $y][$c_x + $x] : null;
     }}
@@ -45,18 +45,6 @@ namespace effectivecore {
     foreach ($matrix as $c_y => $y_row) {
       foreach ($y_row as $c_x => $c_color) {
         $this->pixel_set($c_x + $x, $c_y + $y, $c_color);
-      }
-    }
-  }
-
-  function glyph_set($x, $y, $data) {
-    $rows = explode('|', $data);
-    for ($c_y = 0; $c_y < count($rows); $c_y++) {
-      for ($c_x = 0; $c_x < strlen($rows[$c_y]); $c_x++) {
-        $c_color = $rows[$c_y][$c_x] == '1' ? '#000000' : null;
-        if ($c_color) {
-          $this->pixel_set($c_x + $x, $c_y + $y, $c_color);
-        }
       }
     }
   }
@@ -75,23 +63,24 @@ namespace effectivecore {
       'color_bg' => $this->color_bg,
       'width'    => $this->scale * $this->w,
       'height'   => $this->scale * $this->h,
-      'canvas'   => $this->render_canvas($this->canvas),
+      'canvas'   => $this->render_canvas($this->canvas)
     ]))->render();
   }
 
   function render_canvas($canvas) {
     $return = [];
-    foreach ($this->canvas as $c_y => $y_row) {
-      foreach ($y_row as $c_x => $c_color) {
+    for ($c_y = 0; $c_y < $this->h; $c_y++) {
+    for ($c_x = 0; $c_x < $this->w; $c_x++) {
+      if (isset($this->canvas[$c_y][$c_x])) {
         $return[] = (new markup_xml_simple('rect', [
-          'style'  => 'fill:'.$c_color,
+          'style'  => 'fill:'.$this->canvas[$c_y][$c_x],
           'x'      => 1 * $this->scale * $c_x,
           'y'      => 1 * $this->scale * $c_y,
           'width'  => 1 * $this->scale,
           'height' => 1 * $this->scale
         ]))->render();
       }
-    }
+    }}
     return implode(nl, $return);
   }
 

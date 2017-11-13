@@ -13,7 +13,7 @@ namespace effectivecore {
   public $attributes = ['class' => ['captcha' => 'captcha']];
 
   public $g_length = 6;
-  public $g_characters = [];
+  public $g_characters = '';
   public static $glyphs;
 
   static function init() {
@@ -34,12 +34,10 @@ namespace effectivecore {
     $canvas->fill('#000000', .9);
     for ($i = 0; $i < $this->g_length; $i++) {
       $c_glyph = array_rand(static::$glyphs);
-      $this->g_characters[] = static::$glyphs[$c_glyph];
-      $canvas->glyph_set(
-        rand(0, 2) - 1 + ($i * 5),
-        rand(1, 5), $c_glyph
-      );
+      $this->g_characters.= static::$glyphs[$c_glyph];
+      $this->glyph_set($canvas, rand(0, 2) - 1 + ($i * 5), rand(1, 5), $c_glyph);
     }
+  # build form elements
     $this->child_insert($canvas, 'canvas');
     $this->child_insert(new markup_simple('input', [
       'type' => 'text',
@@ -49,6 +47,18 @@ namespace effectivecore {
       'minlength' => $this->g_length,
       'maxlength' => $this->g_length
     ]), 'element');
+  }
+
+  function glyph_set($canvas, $x, $y, $data) {
+    $rows = explode('|', $data);
+    for ($c_y = 0; $c_y < count($rows); $c_y++) {
+      for ($c_x = 0; $c_x < strlen($rows[$c_y]); $c_x++) {
+        $c_color = $rows[$c_y][$c_x] == '1' ? '#000000' : null;
+        if ($c_color) {
+          $canvas->pixel_set($c_x + $x, $c_y + $y, $c_color);
+        }
+      }
+    }
   }
 
 }}
