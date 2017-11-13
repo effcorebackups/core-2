@@ -13,7 +13,6 @@ namespace effectivecore {
   public $description = 'Write the characters from the picture.';
   public $attributes = ['class' => ['captcha' => 'captcha']];
 
-  public $id;
   public $length = 6;
   public $attempts = 1;
   public static $glyphs;
@@ -30,6 +29,10 @@ namespace effectivecore {
     }
   }
 
+  static function id_get() {
+    return md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']);
+  }
+
   function captcha_generate() {
     if (!static::$glyphs) static::init();
     $characters = '';
@@ -41,6 +44,7 @@ namespace effectivecore {
       $canvas->glyph_set($c_glyph, rand(0, 2) - 1 + ($i * 5), rand(1, 5));
     }
     $captcha = new instance('captcha', [
+      'id'          => static::id_get(),
       'characters'  => $characters,
       'canvas'      => $canvas,
       'canvas_data' => $canvas->clmask_to_hexstr(),
@@ -50,25 +54,28 @@ namespace effectivecore {
   }
 
   function captcha_load($id) {
-    $captcha = (new instance('captcha', ['id' => $id]))->select();
-    $captcha->canvas = new canvas_svg(5 * $this->length, 15, 5);
-    $captcha->canvas->matrix_set(
-      $captcha->canvas->hexstr_to_clmask($captcha->canvas_data)
-    );
-    return $captcha;
+    $captcha = (new instance('captcha', [
+      'id' => $id
+    ]))->select();
+    if ($captcha) {
+      $captcha->canvas = new canvas_svg(5 * $this->length, 15, 5);
+      $captcha->canvas->matrix_set(
+        $captcha->canvas->hexstr_to_clmask(
+          $captcha->canvas_data
+        )
+      );
+      return $captcha;
+    }
   }
 
   function build() {
-    $captcha_0 = $this->captcha_generate();
-    $captcha_1 = $this->captcha_load('123');
+    $captcha = $this->captcha_load(static::id_get());
+    if (!$captcha) {
+      $captcha = $this->captcha_generate();
+      $captcha->insert();
+    }
   # build form elements
-    $this->child_insert($captcha_0->canvas, 'canvas_0');
-    $this->child_insert($captcha_1->canvas, 'canvas_1');
-    $this->child_insert(new markup_simple('input', [
-      'type'  => 'hidden',
-      'name'  => 'captcha_id',
-      'value' => $this->id
-    ]), 'captcha_id');
+    $this->child_insert($captcha->canvas, 'canvas');
     $this->child_insert(new markup_simple('input', [
       'type' => 'text',
       'name' => 'captcha',

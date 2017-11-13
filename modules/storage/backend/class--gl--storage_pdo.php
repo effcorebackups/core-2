@@ -249,10 +249,11 @@ namespace effectivecore {
   function insert_instance($instance) { # return: null | instance | instance + new_id
     if ($this->init()) {
       $entity = $instance->get_entity();
+      $values = array_intersect_key($instance->get_values(), $entity->get_fields());
       $auto_name = $entity->get_auto_name();
       $s_table_name = $this->prepare_name($entity->get_name());
-      $s_fields = $this->prepare_attributes($instance->get_values(), $entity, 'fields');
-      $s_values = $this->prepare_attributes($instance->get_values(), $entity, 'values');
+      $s_fields = $this->prepare_attributes($values, $entity, 'fields');
+      $s_values = $this->prepare_attributes($values, $entity, 'values');
       $new_id = $this->query('INSERT INTO '.$s_table_name.' ('.$s_fields.') VALUES ('.$s_values.');');
       if ($new_id !== null && $auto_name == null) return $instance;
       if ($new_id !== null && $auto_name != null) {
