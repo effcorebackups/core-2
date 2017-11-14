@@ -18,7 +18,7 @@ entities
         type: integer
         not_null: true
     constraints
-    - primary
+    - key_id
         type: primary key
         fields
         - id: id

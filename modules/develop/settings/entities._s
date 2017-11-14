@@ -7,7 +7,7 @@ entities
         type: autoincrement
         not_null: true
     constraints
-    - pkey
+    - key_id
       # ─────────────────────────────────────────────────────────────────────
       # mysql      | id integer ... primary key auto_increment
       # postgresql | id serial  ... primary key
@@ -24,7 +24,7 @@ entities
         type: integer
         not_null: true
     constraints
-    - pkey
+    - key_id
       # ─────────────────────────────────────────────────────────────────────
       # CONSTRAINT name PRIMARY KEY (field_1, ...)
       # ─────────────────────────────────────────────────────────────────────
@@ -39,7 +39,7 @@ entities
         type: integer
         not_null: true
     constraints
-    - cstr_uniq
+    - key_id
       # ─────────────────────────────────────────────────────────────────────
       # CONSTRAINT name UNIQUE (field_1, ...)
       # ─────────────────────────────────────────────────────────────────────
@@ -54,7 +54,7 @@ entities
         type: integer
         not_null: true
     indexes
-    - idx
+    - idx_id
       # ─────────────────────────────────────────────────────────────────────
       # CREATE INDEX name ON table_name (field_1, ...);
       # ─────────────────────────────────────────────────────────────────────
@@ -69,7 +69,7 @@ entities
         type: integer
         not_null: true
     indexes
-    - idx_uniq
+    - idx_id
       # ─────────────────────────────────────────────────────────────────────
       # CREATE UNIQUE INDEX name ON table_name (field_1, ...);
       # ─────────────────────────────────────────────────────────────────────

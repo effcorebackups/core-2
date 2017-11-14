@@ -11,7 +11,7 @@ entities
         size: 255
         not_null: true
     constraints
-    - primary
+    - key_id
         type: primary key
         fields
         - id: id
@@ -34,7 +34,7 @@ entities
         size: 255
         not_null: true
     constraints
-    - primary
+    - key_id
         type: primary key
         fields
         - id: id
