@@ -53,7 +53,7 @@ namespace effectivecore {
                        $matches['name']] = $c_info;
         }
       }
-      cache::set('classes_map', $classes_map, ['build' => static::datetime_get_curent()]);
+      cache::set('classes_map', $classes_map, ['build' => static::datetime_get()]);
       return $classes_map;
     }
   }
@@ -194,6 +194,18 @@ namespace effectivecore {
     return $pointer;
   }
 
+  ###########################
+  ### date/time functions ###
+  ###########################
+
+  # see: locale_factory::format_date($timestamp);
+  # see: locale_factory::format_time($timestamp);
+  # see: locale_factory::format_datetime($timestamp);
+
+  static function datetime_get($timestamp = null) {
+    return date('Y-m-d h:i:s', $timestamp ?: time());
+  }
+
   ########################
   ### shared functions ###
   ########################
@@ -215,10 +227,6 @@ namespace effectivecore {
 
   static function to_css_class($string) {
     return str_replace(['/', ' '], '-', strtolower($string));
-  }
-
-  static function datetime_get_curent() {
-    return date(format_datetime, time());
   }
 
   static function hash_get($data) {

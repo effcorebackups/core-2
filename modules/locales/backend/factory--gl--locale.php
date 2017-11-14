@@ -34,9 +34,9 @@ namespace effectivecore {
   ### formats ###
   ###############
 
-  static function format_date() {}
-  static function format_time() {}
-  static function format_datetime() {}
+  static function format_date($timestamp)     {return date(static::get_settings()->format_date, $timestamp);}
+  static function format_time($timestamp)     {return date(static::get_settings()->format_time, $timestamp);}
+  static function format_datetime($timestamp) {return date(static::get_settings()->format_datetime, $timestamp);}
 
   static function format_persent($number, $precision = 2) {
     return static::format_number(floatval($number), $precision).'%';

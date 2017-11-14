@@ -172,10 +172,9 @@ namespace effectivecore {
         if (property_exists($c_info, 'not_null') && $c_info->not_null) $c_properties[] = 'not null';
         if (property_exists($c_info, 'null')     && $c_info->null)     $c_properties[] = 'null';
         if (property_exists($c_info, 'default')) {
-          if     ($c_info->default === 0)                   $c_properties[] = 'default 0';
-          elseif ($c_info->default === null)                $c_properties[] = 'default null';
-          elseif ($c_info->default === 'current_timestamp') $c_properties[] = 'default current_timestamp';
-          else                                              $c_properties[] = 'default "'.$c_info->default.'"';
+          if     ($c_info->default === 0)    $c_properties[] = 'default 0';
+          elseif ($c_info->default === null) $c_properties[] = 'default null';
+          else                               $c_properties[] = 'default \''.$c_info->default.'\'';
         }
         $fields[] = $c_name.' '.implode(' ', $c_properties);
       }
@@ -238,7 +237,7 @@ namespace effectivecore {
       if (isset($result[0])) {
         foreach ($result[0]->values as $c_name => $c_value) {
           $c_type = $entity->get_field_info($c_name)->type;
-          if ($this->driver == 'pgsql' && $c_type == 'blob') $c_value = stream_get_contents($c_value);
+          if ($this->driver == 'pgsql' && $c_type == 'blob' && gettype($c_value) == 'resource') $c_value = stream_get_contents($c_value);
           $instance->{$c_name} = $c_value;
         }
         return $instance;

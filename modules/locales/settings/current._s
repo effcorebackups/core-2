@@ -2,3 +2,6 @@ current
   lang_code: ru
   decimal_point: ,
   thousands_separator: 
+  format_date: Y-m-d
+  format_time: h:i:s
+  format_datetime: Y-m-d h:i:s

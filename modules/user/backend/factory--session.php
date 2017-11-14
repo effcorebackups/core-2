@@ -5,7 +5,6 @@
   #############################################################
 
 namespace effectivecore\modules\user {
-          use const \effectivecore\format_datetime;
           use \effectivecore\factory as factory;
           use \effectivecore\instance as instance;
           use \effectivecore\message_factory as message;
@@ -19,7 +18,7 @@ namespace effectivecore\modules\user {
       (new instance('session', [
         'id'      => session_id(),
         'id_user' => $id_user,
-        'created' => factory::datetime_get_curent()
+        'created' => factory::datetime_get()
       ]))->insert();
     }
   # restore session for authenticated user

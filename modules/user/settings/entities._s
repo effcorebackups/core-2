@@ -20,7 +20,7 @@ entities
       created
         type: timestamp
         not_null: true
-        default: current_timestamp
+        default: 2000-01-01 00:00:00
       is_embed
         type: integer
         not_null: true
@@ -52,7 +52,7 @@ entities
       created
         type: timestamp
         not_null: true
-        default: current_timestamp
+        default: 2000-01-01 00:00:00
       data
         type: blob
         null: true

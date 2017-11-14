@@ -5,6 +5,7 @@
   #############################################################
 
 namespace effectivecore\modules\user {
+          use \effectivecore\factory as factory;
           use \effectivecore\entity_factory as entity;
           use \effectivecore\message_factory as message;
           use \effectivecore\instance_factory as instance;
@@ -24,6 +25,7 @@ namespace effectivecore\modules\user {
     }
   # insert instances
     foreach (instance::get_by_module('user') as $c_instance) {
+      if ($c_instance->entity_name == 'user') $c_instance->created = factory::datetime_get();
       if ($c_instance->insert()) message::add_new(translation::get('Instances of entity %%_name was added.',     ['name' => $c_entity->get_name()]));
       else                       message::add_new(translation::get('Instances of entity %%_name was not added!', ['name' => $c_entity->get_name()]), 'error');
     }

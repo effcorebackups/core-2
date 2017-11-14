@@ -5,7 +5,6 @@
   #############################################################
 
 namespace effectivecore\modules\user {
-          use const \effectivecore\format_datetime;
           use \effectivecore\factory as factory;
           use \effectivecore\url_factory as url;
           use \effectivecore\instance as instance;
@@ -200,7 +199,7 @@ namespace effectivecore\modules\user {
           'email'         => $values['email'],
           'nick'          => $values['nick'],
           'password_hash' => factory::hash_get($values['password']),
-          'created'       => factory::datetime_get_curent()
+          'created'       => factory::datetime_get()
         ]))->insert();
         if ($user) {
           session::init($user->id);
