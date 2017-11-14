@@ -75,7 +75,7 @@ namespace effectivecore\modules\user {
             return;
           }
         # test email
-          $test_email = (new instance('user', ['email' => $values['email']]))->select();
+          $test_email = (new instance('user', ['email' => strtolower($values['email'])]))->select();
           if ($test_email &&
               $test_email->id != $id) {
             $form->add_error('credentials/email/element', 'User with this EMail was already registered!');
@@ -106,7 +106,7 @@ namespace effectivecore\modules\user {
     switch ($form->clicked_button_name) {
       case 'save':
         $user = (new instance('user', ['id' => $id]))->select();
-        $user->email = $values['email'];
+        $user->email = strtolower($values['email']);
         $user->nick  = $values['nick'];
         if ($values['password_new']) {
           $user->password_hash = factory::hash_get($values['password_new']);
@@ -138,7 +138,7 @@ namespace effectivecore\modules\user {
       case 'login':
         if (count($form->errors) == 0) {
           $user = (new instance('user', [
-            'email' => $values['email']
+            'email' => strtolower($values['email'])
           ]))->select();
           if (!$user || (
                $user->password_hash &&
@@ -156,7 +156,7 @@ namespace effectivecore\modules\user {
     switch ($form->clicked_button_name) {
       case 'login':
         $user = (new instance('user', [
-          'email' => $values['email']
+          'email' => strtolower($values['email'])
         ]))->select();
         if ($user     &&
             $user->id &&
@@ -178,7 +178,7 @@ namespace effectivecore\modules\user {
       case 'register':
         if (count($form->errors) == 0) {
         # test email
-          if ((new instance('user', ['email' => $values['email']]))->select()) {
+          if ((new instance('user', ['email' => strtolower($values['email'])]))->select()) {
             $form->add_error('credentials/email/element', 'User with this EMail was already registered!');
             return;
           }
@@ -196,7 +196,7 @@ namespace effectivecore\modules\user {
     switch ($form->clicked_button_name) {
       case 'register':
         $user = (new instance('user', [
-          'email'         => $values['email'],
+          'email'         => strtolower($values['email']),
           'nick'          => $values['nick'],
           'password_hash' => factory::hash_get($values['password']),
           'created'       => factory::datetime_get()
