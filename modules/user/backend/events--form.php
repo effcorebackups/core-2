@@ -82,7 +82,7 @@ namespace effectivecore\modules\user {
             return;
           }
         # test nick
-          $test_nick = (new instance('user', ['nick' => $values['nick']]))->select();
+          $test_nick = (new instance('user', ['nick' => strtolower($values['nick'])]))->select();
           if ($test_nick &&
               $test_nick->id != $id) {
             $form->add_error('credentials/nick/element', 'User with this Nick was already registered!');
@@ -107,7 +107,7 @@ namespace effectivecore\modules\user {
       case 'save':
         $user = (new instance('user', ['id' => $id]))->select();
         $user->email = strtolower($values['email']);
-        $user->nick  = $values['nick'];
+        $user->nick  = strtolower($values['nick']);
         if ($values['password_new']) {
           $user->password_hash = factory::hash_get($values['password_new']);
         }
@@ -183,7 +183,7 @@ namespace effectivecore\modules\user {
             return;
           }
         # test nick
-          if ((new instance('user', ['nick' => $values['nick']]))->select()) {
+          if ((new instance('user', ['nick' => strtolower($values['nick'])]))->select()) {
             $form->add_error('credentials/nick/element', 'User with this Nick was already registered!');
             return;
           }
@@ -197,7 +197,7 @@ namespace effectivecore\modules\user {
       case 'register':
         $user = (new instance('user', [
           'email'         => strtolower($values['email']),
-          'nick'          => $values['nick'],
+          'nick'          => strtolower($values['nick']),
           'password_hash' => factory::hash_get($values['password']),
           'created'       => factory::datetime_get()
         ]))->insert();

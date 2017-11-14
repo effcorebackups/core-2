@@ -37,6 +37,7 @@
   form x-field textarea {width: 70%; min-width: 100px}
   form x-field input[type="range"] {border-radius: 20px}
   form x-field input[type="email"] {text-transform: lowercase}
+  form x-field input[name="nick"] {text-transform: lowercase}
 
   /* checkboxes and radios */
   form x-field input[type="checkbox"],
