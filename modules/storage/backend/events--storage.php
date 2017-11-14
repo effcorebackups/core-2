@@ -27,7 +27,7 @@ namespace effectivecore\modules\storage {
   static function on_query_after($instance, $query, $result, $errors) {
     timer::tap('storage query: '.$query);
     console::add_log(
-      'storage', 'query', chunk_split($query, 50, ' '), $errors[0] == '00000' ? 'ok' : 'error', timer::get_period('storage query: '.$query, -1, -2)
+      'storage', 'query', wordwrap($query, 50, ' ', true), $errors[0] == '00000' ? 'ok' : 'error', timer::get_period('storage query: '.$query, -1, -2)
     );
   }
 
