@@ -25,18 +25,18 @@ namespace effectivecore {
         try {
           event::start('on_storage_init_before', 'pdo', [&$this]);
           switch ($this->driver) {
-            case 'sqlite':
-              $this->connection = new \PDO(
-                $this->driver.':'.dir_dynamic.'data/'.
-                $this->credentials->file_name);
-              break;
-            default:
+            case 'mysql':
               $this->connection = new \PDO(
                 $this->driver.':host='.
                 $this->credentials->host_name.';dbname='.
                 $this->credentials->storage_name,
                 $this->credentials->user_name,
                 $this->credentials->password);
+              break;
+            case 'sqlite':
+              $this->connection = new \PDO(
+                $this->driver.':'.dir_dynamic.'data/'.
+                $this->credentials->file_name);
               break;
           }
           event::start('on_storage_init_after', 'pdo', [&$this]);
@@ -57,19 +57,19 @@ namespace effectivecore {
   function test($driver, $params = []) {
     try {
       switch ($driver) {
-        case 'sqlite':
-          $connection = new \PDO(
-            $driver.':'.dir_dynamic.'data/'.
-            $params->file_name);
-          break;
-        default:
+        case 'mysql':
           $connection = new \PDO(
             $driver.':host='.
             $params->host_name.';dbname='.
             $params->storage_name,
             $params->user_name,
             $params->password);
-          break;       
+          break;
+        case 'sqlite':
+          $connection = new \PDO(
+            $driver.':'.dir_dynamic.'data/'.
+            $params->file_name);
+          break;
       }
       $connection = null;
       return true;
@@ -90,8 +90,7 @@ namespace effectivecore {
   }
 
   function prepare_field_value($data, $type) {
-    if ($type == 'blob' && $this->driver == 'mysql')  return "X'".bin2hex($this->quote($data))."'";
-    if ($type == 'blob' && $this->driver == 'sqlite') return "X'".bin2hex($this->quote($data))."'";
+    if ($type == 'blob') return "X'".bin2hex($this->quote($data))."'";
     return "'".$this->quote($data)."'";
   }
 
