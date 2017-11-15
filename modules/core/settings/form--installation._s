@@ -66,6 +66,19 @@ forms
                     - minlength: 1
                     - maxlength: 253
                     - pattern: [a-zA-Z0-9-_.]+
+          # port
+            - port|form_field
+                title: Port
+                children
+                - element|markup_simple
+                    tag_name: input
+                    attributes
+                    - type: number
+                    - name: port
+                    - required: required
+                    - value: 3306
+                    - min: 1024
+                    - max: 49150
           # user name
             - user_name|form_field
                 title: User name

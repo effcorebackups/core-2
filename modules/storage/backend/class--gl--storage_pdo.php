@@ -28,7 +28,8 @@ namespace effectivecore {
             case 'mysql':
               $this->connection = new \PDO(
                 $this->driver.':host='.
-                $this->credentials->host_name.';dbname='.
+                $this->credentials->host_name.';port='.
+                $this->credentials->port.';dbname='.
                 $this->credentials->storage_name,
                 $this->credentials->user_name,
                 $this->credentials->password);
@@ -60,7 +61,8 @@ namespace effectivecore {
         case 'mysql':
           $connection = new \PDO(
             $driver.':host='.
-            $params->host_name.';dbname='.
+            $params->host_name.';port='.
+            $params->port.';dbname='.
             $params->storage_name,
             $params->user_name,
             $params->password);

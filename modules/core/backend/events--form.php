@@ -59,6 +59,7 @@ namespace effectivecore\modules\core {
             default:
               $test = storage::get('main')->test($values['driver'], (object)[
                 'host_name'    => $values['host_name'],
+                'port'         => $values['port'],
                 'storage_name' => $values['storage_name'],
                 'user_name'    => $values['user_name'],
                 'password'     => $values['password']
@@ -68,6 +69,7 @@ namespace effectivecore\modules\core {
                 $form->add_error(null, translation::get('Message from storage: %%_message', ['message' => strtolower($test['message'])]));
                 $form->add_error('storage/default/storage_name/element');
                 $form->add_error('storage/default/host_name/element');
+                $form->add_error('storage/default/port/element');
                 $form->add_error('storage/default/user_name/element');
                 $form->add_error('storage/default/password/element');
               }
@@ -94,6 +96,7 @@ namespace effectivecore\modules\core {
             $params->driver = $values['driver'];
             $params->credentials = new \stdClass;
             $params->credentials->host_name    = $values['host_name'];
+            $params->credentials->port         = $values['port'];
             $params->credentials->storage_name = $values['storage_name'];
             $params->credentials->user_name    = $values['user_name'];
             $params->credentials->password     = $values['password'];
