@@ -82,7 +82,6 @@ namespace effectivecore {
     switch ($this->driver) {
       case 'mysql' : return '`'.$this->table_prefix.$name.'`';
       case 'sqlite': return '"'.$this->table_prefix.$name.'"';
-      case 'pgsql' : return '"'.$this->table_prefix.$name.'"';
     }
   }
 
@@ -93,7 +92,6 @@ namespace effectivecore {
   function prepare_field_value($data, $type) {
     if ($type == 'blob' && $this->driver == 'mysql')  return "X'".bin2hex($this->quote($data))."'";
     if ($type == 'blob' && $this->driver == 'sqlite') return "X'".bin2hex($this->quote($data))."'";
-    if ($type == 'blob' && $this->driver == 'pgsql')  return "E'\\x".substr(chunk_split(bin2hex($this->quote($data)), 2, '\\x'), 0, -2)."'";
     return "'".$this->quote($data)."'";
   }
 
@@ -158,12 +156,7 @@ namespace effectivecore {
           case 'autoincrement':
             if ($this->driver == 'mysql')  $c_properties = ['integer primary key auto_increment'];
             if ($this->driver == 'sqlite') $c_properties = ['integer primary key autoincrement'];
-            if ($this->driver == 'pgsql')  $c_properties = ['serial primary key'];
             break;
-          case 'blob':
-            if ($this->driver == 'pgsql') {
-              $c_info->type = 'bytea';
-            }
           default:
             $c_properties = [$c_info->type.(isset($c_info->size) ?
                                               '('.$c_info->size.')' : '')];
@@ -237,7 +230,6 @@ namespace effectivecore {
       if (isset($result[0])) {
         foreach ($result[0]->values as $c_name => $c_value) {
           $c_type = $entity->get_field_info($c_name)->type;
-          if ($this->driver == 'pgsql' && $c_type == 'blob' && gettype($c_value) == 'resource') $c_value = stream_get_contents($c_value);
           $instance->{$c_name} = $c_value;
         }
         return $instance;

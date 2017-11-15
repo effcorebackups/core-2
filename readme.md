@@ -5,7 +5,7 @@ SOFTWARE REQUIREMENTS
 - Оperating system: Unix/Linux
 - Web server: nginx and/or Apache v2.2+
 - Server-side scripting language: PHP v.5.6+ or v.7.1+ (with libraries: ...)
-- Storage system: MySQL v5.6+ / SQLite v3+ / PostgreSQL v9+ or without storage
+- Storage system: MySQL v5.6+ / SQLite v3+ / without storage
 - Browsers: IE9+ and all modern
 
 

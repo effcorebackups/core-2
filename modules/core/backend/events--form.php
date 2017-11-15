@@ -24,10 +24,6 @@ namespace effectivecore\modules\core {
       $fields['storage/default/driver/mysql']->child_select('element')->attribute_insert('disabled', 'disabled');
       message::add_new(translation::get('PHP PDO driver for %%_name is not available.', ['name' => 'MySQL']), 'warning');
     }
-    if (!extension_loaded('pdo_pgsql')) {
-      $fields['storage/default/driver/pgsql']->child_select('element')->attribute_insert('disabled', 'disabled');
-      message::add_new(translation::get('PHP PDO driver for %%_name is not available.', ['name' => 'PostgreSQL']), 'warning');
-    }
     if (!extension_loaded('pdo_sqlite')) {
       $fields['storage/sqlite/driver/sqlite']->child_select('element')->attribute_insert('disabled', 'disabled');
       message::add_new(translation::get('PHP PDO driver for %%_name is not available.', ['name' => 'SQLite']), 'warning');

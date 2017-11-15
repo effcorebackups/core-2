@@ -10,39 +10,25 @@ forms
         title: Storage params
         title_tag_name: legend
         children
-      # mysql/pgsql
+      # driver
+        - is_mysql|form_field
+            title: MySQL
+            title_position: bottom
+            attributes
+            - class
+              - boxes: boxes
+              - radioboxes: radioboxes
+            children
+            - element|markup_simple
+                tag_name: input
+                attributes
+                - type: radio
+                - name: driver
+                - value: mysql
+      # mysql
         - default|form_container
             tag_name: fieldset
-            title: MySQL + PostgreSQL
-            title_tag_name: legend
             children
-          # driver
-            - driver|form_container
-                attributes
-                - class
-                  - boxes: boxes
-                  - radioboxes: radioboxes
-                children
-                - mysql|form_field
-                    title: MySQL
-                    title_position: bottom
-                    children
-                    - element|markup_simple
-                        tag_name: input
-                        attributes
-                        - type: radio
-                        - name: driver
-                        - value: mysql
-                - pgsql|form_field
-                    title: PostgreSQL
-                    title_position: bottom
-                    children
-                    - element|markup_simple
-                        tag_name: input
-                        attributes
-                        - type: radio
-                        - name: driver
-                        - value: pgsql
           # storage name
             - storage_name|form_field
                 title: Storage name
@@ -109,29 +95,25 @@ forms
                     - name: password
                     - maxlength: 255
                     - autocomplete: off
+      # driver
+        - is_sqlite|form_field
+            title: SQLite
+            title_position: bottom
+            attributes
+            - class
+              - boxes: boxes
+              - radioboxes: radioboxes
+            children
+            - element|markup_simple
+                tag_name: input
+                attributes
+                - type: radio
+                - name: driver
+                - value: sqlite
       # sqlite
         - sqlite|form_container
             tag_name: fieldset
-            title: SQLite
-            title_tag_name: legend
             children
-          # driver
-            - driver|form_container
-                attributes
-                - class
-                  - boxes: boxes
-                  - radioboxes: radioboxes
-                children
-                - sqlite|form_field
-                    title: SQLite
-                    title_position: bottom
-                    children
-                    - element|markup_simple
-                        tag_name: input
-                        attributes
-                        - type: radio
-                        - name: driver
-                        - value: sqlite
           # storage file path
             - file_name|form_field
                 title: Path to file

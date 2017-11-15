@@ -3,7 +3,7 @@
   form {margin: 70px 0}
   form .error {border-color: %%_color_error}
 
-  form fieldset {margin: 100px 0 30px 0; padding: 10px 16px; border: 1px solid gainsboro; border-top: 5px solid %%_color_bg}
+  form fieldset {margin: 30px 0; padding: 10px 16px; border: 1px solid gainsboro; border-top: 5px solid %%_color_bg}
   form fieldset legend {position: absolute; margin: -60px 0 0 -20px; font-size: 1.5em}
   form fieldset,
   form fieldset fieldset fieldset {background: whitesmoke}
@@ -44,10 +44,10 @@
   form x-field input[type="radio"] {display: inline-block; vertical-align: middle; cursor: pointer; background-color: white}
   form x-field input[type="checkbox"] {border-radius: 6px}
   form x-field input[type="radio"] {border-radius: 13px}
-  form x-container.boxes x-field {margin: 10px 0}
-  form x-container.boxes label {font-size: 1em}
-  form x-container.boxes input[type="checkbox"],
-  form x-container.boxes input[type="radio"] {margin: 0 5px 2px 0}
+  form .boxes x-field {margin: 10px 0}
+  form .boxes label {font-size: 1em}
+  form .boxes input[type="checkbox"],
+  form .boxes input[type="radio"] {margin: 0 5px 2px 0}
 
   /* disabled elements */
   form x-field.disabled * {color: lightgray; cursor: default !important}

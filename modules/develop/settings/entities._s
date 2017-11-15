@@ -9,9 +9,8 @@ entities
     constraints
     - key_id
       # ─────────────────────────────────────────────────────────────────────
-      # mysql      | id integer ... primary key auto_increment
-      # postgresql | id serial  ... primary key
-      # sqlite     | id integer ... primary key autoincrement
+      # mysql  | id integer ... primary key auto_increment
+      # sqlite | id integer ... primary key autoincrement
       # ─────────────────────────────────────────────────────────────────────
         type: primary key
         fields
