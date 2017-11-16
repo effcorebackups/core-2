@@ -21,11 +21,11 @@ namespace effectivecore\modules\core {
       message::add_new('PHP PDO extension is not available.', 'warning');
     }
     if (!extension_loaded('pdo_mysql')) {
-      $fields['storage/default/driver/mysql']->child_select('element')->attribute_insert('disabled', 'disabled');
+      $fields['storage/is_mysql']->child_select('element')->attribute_insert('disabled', 'disabled');
       message::add_new(translation::get('PHP PDO driver for %%_name is not available.', ['name' => 'MySQL']), 'warning');
     }
     if (!extension_loaded('pdo_sqlite')) {
-      $fields['storage/sqlite/driver/sqlite']->child_select('element')->attribute_insert('disabled', 'disabled');
+      $fields['storage/is_sqlite']->child_select('element')->attribute_insert('disabled', 'disabled');
       message::add_new(translation::get('PHP PDO driver for %%_name is not available.', ['name' => 'SQLite']), 'warning');
     }
     $main = storage::get('main');
@@ -51,9 +51,8 @@ namespace effectivecore\modules\core {
                 'file_name' => $values['file_name']
               ]);
               if ($test !== true) {
-                $form->add_error(null, translation::get('Storage is not available with these credentials!'));
-                $form->add_error(null, translation::get('Message from storage: %%_message', ['message' => strtolower($test['message'])]));
-                $form->add_error('storage/default/file_name/element');
+                $form->add_error(null, translation::get('Storage is not available with these credentials! Message from storage: %%_message', ['message' => strtolower($test['message'])]));
+                $form->add_error('storage/sqlite/file_name/element');
               }
               break;
             default:
@@ -65,13 +64,12 @@ namespace effectivecore\modules\core {
                 'password'     => $values['password']
               ]);
               if ($test !== true) {
-                $form->add_error(null, translation::get('Storage is not available with these credentials!'));
-                $form->add_error(null, translation::get('Message from storage: %%_message', ['message' => strtolower($test['message'])]));
-                $form->add_error('storage/default/storage_name/element');
-                $form->add_error('storage/default/host_name/element');
-                $form->add_error('storage/default/port/element');
-                $form->add_error('storage/default/user_name/element');
-                $form->add_error('storage/default/password/element');
+                $form->add_error(null, translation::get('Storage is not available with these credentials! Message from storage: %%_message', ['message' => strtolower($test['message'])]));
+                $form->add_error('storage/mysql/storage_name/element');
+                $form->add_error('storage/mysql/host_name/element');
+                $form->add_error('storage/mysql/port/element');
+                $form->add_error('storage/mysql/user_name/element');
+                $form->add_error('storage/mysql/password/element');
               }
               break;
           }

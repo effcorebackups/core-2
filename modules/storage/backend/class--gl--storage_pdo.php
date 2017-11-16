@@ -68,14 +68,18 @@ namespace effectivecore {
             $params->password);
           break;
         case 'sqlite':
-          $connection = new \PDO(
-            $driver.':'.dir_dynamic.'data/'.
-            $params->file_name);
+          $file_path = dir_dynamic.'data/'.$params->file_name;
+          $connection = new \PDO($driver.':'.$file_path);
+          if (!is_writable($file_path)) {
+            throw new \Exception('File is not writable!');
+          }
           break;
       }
       $connection = null;
       return true;
     } catch (\PDOException $e) {
+      return ['message' => $e->getMessage(), 'code' => $e->getCode()];
+    } catch (\Exception $e) {
       return ['message' => $e->getMessage(), 'code' => $e->getCode()];
     }
   }

@@ -26,7 +26,7 @@ forms
                 - name: driver
                 - value: mysql
       # mysql
-        - default|form_container
+        - mysql|form_container
             tag_name: fieldset
             children
           # storage name
