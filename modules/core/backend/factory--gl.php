@@ -198,9 +198,9 @@ namespace effectivecore {
   ### date/time functions ###
   ###########################
 
-  # see: locale_factory::format_date($timestamp);
-  # see: locale_factory::format_time($timestamp);
-  # see: locale_factory::format_datetime($timestamp);
+  # see: locale_factory::format_date(...);
+  # see: locale_factory::format_time(...);
+  # see: locale_factory::format_datetime(...);
 
   static function datetime_get($gm = true) {
     return $gm ? gmdate('Y-m-d H:i:s', time()) :
