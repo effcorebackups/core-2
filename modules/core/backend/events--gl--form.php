@@ -59,8 +59,8 @@ namespace effectivecore {
   # - REQUIRED                   : VALUE != '' (value must be present in $_POST)
   # - MINLENGTH                  : VALUE >= MINLENGTH
   # - MAXLENGTH                  : VALUE <= MAXLENGTH
-  # - MIN                        : VALUE >= MIN (for date|time should compare timestamps)
-  # - MAX                        : VALUE <= MAX (for date|time should compare timestamps)
+  # - MIN                        : VALUE >= MIN
+  # - MAX                        : VALUE <= MAX
   # - STEP                       : VALUE should be in valid step range: MIN + STEP * N, where N = [0, 1, 2 ...]
   # - PATTERN                    : VALUE should match the PATTERN
   # - MULTIPLE                   : VALUE must be singular if MULTIPLE attribute is not present

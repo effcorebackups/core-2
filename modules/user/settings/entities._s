@@ -50,9 +50,8 @@ entities
         type: integer
         not_null: true
       created
-        type: timestamp
+        type: datetime
         not_null: true
-        default: 2000-01-01 00:00:00
       data
         type: blob
         null: true
