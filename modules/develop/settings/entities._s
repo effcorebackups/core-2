@@ -80,33 +80,30 @@ entities
         type: unique
         fields
         - id: id
-- demo_idx|entity
-    name: demo_idx
+- demo_indexes|entity
+    name: demo_indexes
     storage_id: main
     fields
-      id
+      f_integer_1
         type: integer
         not_null: true
+        default: 0
+      f_integer_2
+        type: integer
+        not_null: true
+        default: 0
     indexes
-    - idx_id
-      # ─────────────────────────────────────────────────────────────────────
-      # CREATE INDEX name ON table_name (field_1, ...);
-      # ─────────────────────────────────────────────────────────────────────
+    # ─────────────────────────────────────────────────────────────────────
+    # CREATE INDEX name ON table_name (field_1, ...);
+    # ─────────────────────────────────────────────────────────────────────
+    - idx_f_integer_1
         type: index
         fields
-        - id: id
-- demo_idx_uniq|entity
-    name: demo_idx_uniq
-    storage_id: main
-    fields
-      id
-        type: integer
-        not_null: true
-    indexes
-    - idx_id
-      # ─────────────────────────────────────────────────────────────────────
-      # CREATE UNIQUE INDEX name ON table_name (field_1, ...);
-      # ─────────────────────────────────────────────────────────────────────
+        - f_integer_1: f_integer_1
+    # ─────────────────────────────────────────────────────────────────────
+    # CREATE UNIQUE INDEX name ON table_name (field_1, ...);
+    # ─────────────────────────────────────────────────────────────────────
+    - idx_f_integer_2
         type: unique index
         fields
-        - id: id
+        - f_integer_2: f_integer_2
