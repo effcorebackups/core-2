@@ -1,0 +1,17 @@
+instances
+- demo_types_example_1|instance
+    entity_name: demo_types
+    values
+    - id: 1
+    - description: use default values
+- demo_types_example_2|instance
+    entity_name: demo_types
+    values
+    - id: 2
+    - description: use own values
+    - f_integer: 123
+    - f_varchar: own text
+    - f_time: 12:34:56
+    - f_date: 2020-12-31
+    - f_datetime: 2020-12-31 12:34:56
+    - f_blob: 12345

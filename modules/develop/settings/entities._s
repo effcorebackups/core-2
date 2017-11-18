@@ -1,4 +1,39 @@
 entities
+- demo_types|entity
+    name: demo_types
+    storage_id: main
+    fields
+      id
+        type: autoincrement
+        not_null: true
+      description
+        type: varchar
+        size: 255
+        null: true
+      f_integer
+        type: integer
+        not_null: true
+        default: 0
+      f_varchar
+        type: varchar
+        size: 255
+        not_null: true
+        default: default text
+      f_time
+        type: time
+        not_null: true
+        default: 00:00:00
+      f_date
+        type: date
+        not_null: true
+        default: 2000-01-01
+      f_datetime
+        type: datetime
+        not_null: true
+        default: 2000-01-01 00:00:00
+      f_blob
+        type: blob
+        null: true
 - demo_auto|entity
     name: demo_auto
     storage_id: main
