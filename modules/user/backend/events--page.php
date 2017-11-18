@@ -11,6 +11,7 @@ namespace effectivecore\modules\user {
           use \effectivecore\pager;
           use \effectivecore\factory;
           use \effectivecore\instance as instance;
+          use \effectivecore\locale_factory as locale;
           use \effectivecore\url_factory as url_factory;
           use \effectivecore\entity_factory as entity;
           use \effectivecore\modules\user\user_factory as user;
@@ -46,7 +47,7 @@ namespace effectivecore\modules\user {
           $c_user->id,
           $c_user->email,
           $c_user->nick.' ',
-          $c_user->created,
+          locale::format_datetime($c_user->created),
           $c_user->is_embed ? 'Yes' : 'No',
           $c_actions
         ];
@@ -73,6 +74,7 @@ namespace effectivecore\modules\user {
       # get values
         $values = $user->get_values();
         $values['roles'] = count($roles) ? implode(', ', $roles) : '-';
+        $values['created'] = locale::format_datetime($values['created']);
         $values['password_hash'] = '*****';
         $values['is_embed'] = $values['is_embed'] ? 'Yes' : 'No';
       # show table
