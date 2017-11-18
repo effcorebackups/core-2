@@ -38,17 +38,9 @@ namespace effectivecore {
   static function format_date($date)         {return \DateTime::createFromFormat('Y-m-d', $date)->format(static::get_settings()->format_date);}
   static function format_datetime($datetime) {return \DateTime::createFromFormat('Y-m-d H:i:s', $datetime)->format(static::get_settings()->format_datetime);}
 
-  static function format_persent($number, $precision = 2) {
-    return static::format_number(floatval($number), $precision).'%';
-  }
-
-  static function format_msecond($number, $precision = 6) {
-    return static::format_number(floatval($number), $precision);
-  }
-
-  static function format_version($number) {
-    return static::format_number(floatval($number), 2);
-  }
+  static function format_persent($number, $precision = 2) {return static::format_number(floatval($number), $precision).'%';}
+  static function format_msecond($number, $precision = 6) {return static::format_number(floatval($number), $precision);}
+  static function format_version($number)                 {return static::format_number(floatval($number), 2);}
 
   static function format_number($number, $precision = 0, $decimal_point = null, $thousands_separator = null) {
     $current = static::get_settings();

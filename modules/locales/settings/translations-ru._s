@@ -177,6 +177,7 @@ translations
   - Text: Текст
   - Textarea: Текстовая область
   - Time: Время
+  - Timezone: Часовой пояс
   - Title: Заголовок
   - to front: на главную
   - Total build time: Общее время сборки

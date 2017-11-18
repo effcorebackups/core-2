@@ -5,3 +5,4 @@ current
   format_date: d.m.Y
   format_time: H:i:s
   format_datetime: d.m.Y H:i:s
+  timezone: Europe/Minsk

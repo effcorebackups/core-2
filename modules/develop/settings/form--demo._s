@@ -199,6 +199,12 @@ forms
                 - min: 01:00:00
                 - max: 23:08:00
                 - step: 60
+      # field select timezone
+        - select_timezone|form_field_select_timezone
+            title: Timezone
+            select_attributes
+            - name: select_timezone
+            - required: required
       # field color
         - color|form_field
             title: Color
