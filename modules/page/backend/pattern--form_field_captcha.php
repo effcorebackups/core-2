@@ -46,9 +46,10 @@ namespace effectivecore {
     $captcha = new instance('captcha', [
       'id'          => static::id_get(),
       'characters'  => $characters,
+      'created'     => factory::datetime_get(),
+      'attempts'    => $this->attempts,
       'canvas'      => $canvas,
-      'canvas_data' => $canvas->clmask_to_hexstr(),
-      'attempts'    => $this->attempts
+      'canvas_data' => $canvas->clmask_to_hexstr()
     ]);
     return $captcha;
   }
