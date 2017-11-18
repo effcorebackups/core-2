@@ -50,36 +50,33 @@ entities
         type: primary key
         fields
         - id: id
-- demo_pkey|entity
-    name: demo_pkey
+- demo_constraints|entity
+    name: demo_constraints
     storage_id: main
     fields
-      id
+      f_integer_1
         type: integer
         not_null: true
+        default: 0
+      f_integer_2
+        type: integer
+        not_null: true
+        default: 0
     constraints
-    - key_id
-      # ─────────────────────────────────────────────────────────────────────
-      # CONSTRAINT name PRIMARY KEY (field_1, ...)
-      # ─────────────────────────────────────────────────────────────────────
+    # ─────────────────────────────────────────────────────────────────────
+    # CONSTRAINT name PRIMARY KEY (field_1, ...)
+    # ─────────────────────────────────────────────────────────────────────
+    - key_f_integer_1
         type: primary key
         fields
-        - id: id
-- demo_cstr_uniq|entity
-    name: demo_cstr_uniq
-    storage_id: main
-    fields
-      id
-        type: integer
-        not_null: true
-    constraints
-    - key_id
-      # ─────────────────────────────────────────────────────────────────────
-      # CONSTRAINT name UNIQUE (field_1, ...)
-      # ─────────────────────────────────────────────────────────────────────
+        - f_integer_1: f_integer_1
+    # ─────────────────────────────────────────────────────────────────────
+    # CONSTRAINT name UNIQUE (field_1, ...)
+    # ─────────────────────────────────────────────────────────────────────
+    - key_f_integer_2
         type: unique
         fields
-        - id: id
+        - f_integer_2: f_integer_2
 - demo_indexes|entity
     name: demo_indexes
     storage_id: main
