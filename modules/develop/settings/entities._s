@@ -34,22 +34,22 @@ entities
       f_blob
         type: blob
         null: true
-- demo_auto|entity
-    name: demo_auto
+- demo_autoincrement|entity
+    name: demo_autoincrement
     storage_id: main
     fields
-      id
+      f_integer_1
         type: autoincrement
         not_null: true
     constraints
-    - key_id
-      # ─────────────────────────────────────────────────────────────────────
-      # mysql  | id integer ... primary key auto_increment
-      # sqlite | id integer ... primary key autoincrement
-      # ─────────────────────────────────────────────────────────────────────
+    # ─────────────────────────────────────────────────────────────────────
+    # mysql  | field_1 integer ... primary key auto_increment
+    # sqlite | field_1 integer ... primary key autoincrement
+    # ─────────────────────────────────────────────────────────────────────
+    - key_f_integer_1
         type: primary key
         fields
-        - id: id
+        - f_integer_1: f_integer_1
 - demo_constraints|entity
     name: demo_constraints
     storage_id: main
