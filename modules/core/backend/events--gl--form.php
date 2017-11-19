@@ -361,8 +361,8 @@ namespace effectivecore {
         return;
       }
 
-      $c_min = $element->attribute_select('min') ?: '1970-01-01';
-      $c_max = $element->attribute_select('max') ?: '2038-01-01';
+      $c_min = $element->attribute_select('min') ?: '0001-01-01';
+      $c_max = $element->attribute_select('max') ?: '9999-31-12';
 
     # check min
       if ($c_min > $new_value) {
