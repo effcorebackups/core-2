@@ -195,9 +195,9 @@ forms
                 - type: time
                 - name: time
                 - required: required
-                - value: 00:00:00
-                - min: 01:00:00
-                - max: 23:08:00
+                - value: 03:04:00
+                - min: 01:02:00
+                - max: 05:06:00
                 - step: 60
       # field select timezone
         - select_timezone|form_field_select_timezone
