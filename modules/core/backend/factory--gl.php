@@ -172,6 +172,14 @@ namespace effectivecore {
     return unserialize(serialize($array));
   }
 
+  static function in_array_string_compare($value, $array) {
+    foreach ($array as $c_item) {
+      if ((string)$c_item === (string)$value) {
+        return true;
+      }
+    }
+  }
+
   #######################
   ### npath functions ###
   #######################
