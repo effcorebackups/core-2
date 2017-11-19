@@ -5,6 +5,7 @@
   #############################################################
 
 namespace effectivecore\modules\core {
+          use const \effectivecore\br;
           use \effectivecore\url_factory as url;
           use \effectivecore\event_factory as event;
           use \effectivecore\message_factory as message;
@@ -51,8 +52,9 @@ namespace effectivecore\modules\core {
                 'file_name' => $values['file_name']
               ]);
               if ($test !== true) {
-                $form->add_error(null, translation::get('Storage is not available with these credentials! Message from storage: %%_message', ['message' => strtolower($test['message'])]));
                 $form->add_error('storage/sqlite/file_name/element');
+                $form->add_error(null, translation::get('Storage is not available with these credentials!').br.
+                                       translation::get('Message from storage: %%_message', ['message' => strtolower($test['message'])]));
               }
               break;
             default:
@@ -64,12 +66,13 @@ namespace effectivecore\modules\core {
                 'password'     => $values['password']
               ]);
               if ($test !== true) {
-                $form->add_error(null, translation::get('Storage is not available with these credentials! Message from storage: %%_message', ['message' => strtolower($test['message'])]));
                 $form->add_error('storage/mysql/storage_name/element');
                 $form->add_error('storage/mysql/host_name/element');
                 $form->add_error('storage/mysql/port/element');
                 $form->add_error('storage/mysql/user_name/element');
                 $form->add_error('storage/mysql/password/element');
+                $form->add_error(null, translation::get('Storage is not available with these credentials!').br.
+                                       translation::get('Message from storage: %%_message', ['message' => strtolower($test['message'])]));
               }
               break;
           }
