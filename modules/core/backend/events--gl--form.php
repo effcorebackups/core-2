@@ -152,7 +152,7 @@ namespace effectivecore {
             static::_validate_field_selector($form, $c_field, $c_element, $c_npath, $c_new_values, $c_allowed_values);
             foreach ($c_element->child_select_all() as $c_option) {
               if ($c_option instanceof node && $c_option->tag_name == 'option') {
-                if (in_array($c_option->attribute_select('value'), $c_new_values))
+                if (in_array($c_option->attribute_select('value'), $c_new_values, true))
                      $c_option->attribute_insert('selected', 'selected');
                 else $c_option->attribute_delete('selected');
               }
