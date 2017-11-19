@@ -44,9 +44,9 @@ namespace effectivecore {
     $parent_el = $grp_id ? $this->child_select('element')->child_select($grp_id) :
                            $this->child_select('element');
     $new_option = new markup('option', $attr, ['content' => $title]);
+    $new_option->attribute_insert('value', $value !== 'not_selected' ? $value : null);
     if (isset($this->selected[$value])) $new_option->attribute_insert('selected', 'selected');
     if (isset($this->disabled[$value])) $new_option->attribute_insert('disabled', 'disabled');
-                                        $new_option->attribute_insert('value', $value != 'not_selected' ? $value : null);
     $parent_el->child_insert($new_option, $value);
   }
 
