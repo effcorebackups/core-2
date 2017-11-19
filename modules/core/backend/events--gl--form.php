@@ -171,7 +171,7 @@ namespace effectivecore {
           if (($c_element->tag_name == 'input' && $c_type == 'checkbox') ||
               ($c_element->tag_name == 'input' && $c_type == 'radio')) {
           # delete default (from _init) and set new (from $_POST) CHECKED state
-            if (in_array($c_element->attribute_select('value'), $c_new_values))
+            if (factory::in_array_string_compare($c_element->attribute_select('value'), $c_new_values))
                  $c_element->attribute_insert('checked', 'checked');
             else $c_element->attribute_delete('checked');
           }
