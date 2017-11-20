@@ -62,6 +62,7 @@ translations
   - Events: События
   - Execute plan: План выполнения
   - Field "%%_title" can not be blank!: Поле "%%_title" не может быть пустым!
+  - Field "%%_title" contains an incorrect characters from image!: Поле "%%_title" содержит неверные символы с изображения!
   - Field "%%_title" contains an incorrect date!: Поле "%%_title" содержит неверную дату!
   - Field "%%_title" contains an incorrect email address!: Поле "%%_title" содержит неверный адрес электронной почты!
   - Field "%%_title" contains an incorrect time!: Поле "%%_title" содержит неверное время!

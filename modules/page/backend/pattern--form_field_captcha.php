@@ -54,9 +54,9 @@ namespace effectivecore {
     return $captcha;
   }
 
-  function captcha_load($id) {
+  function captcha_load() {
     $captcha = (new instance('captcha', [
-      'id' => $id
+      'id' => static::id_get()
     ]))->select();
     if ($captcha) {
       $captcha->canvas = new canvas_svg(5 * $this->length, 15, 5);
@@ -69,8 +69,18 @@ namespace effectivecore {
     }
   }
 
+  function captcha_check($characters) {
+    $captcha = (new instance('captcha', [
+      'id' => static::id_get()
+    ]))->select();
+    if ($captcha &&
+        $captcha->characters === $characters) {
+      return true;
+    }
+  }
+
   function build() {
-    $captcha = $this->captcha_load(static::id_get());
+    $captcha = $this->captcha_load();
     if (!$captcha) {
       $captcha = $this->captcha_generate();
       $captcha->insert();
