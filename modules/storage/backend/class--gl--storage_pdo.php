@@ -263,8 +263,9 @@ namespace effectivecore {
     if ($this->init()) {
       $entity = $instance->get_entity();
       $keys = array_intersect_key($instance->get_values(), $entity->get_keys(true, false));
+      $values = array_intersect_key($instance->get_values(), $entity->get_fields());
       $s_table_name = $this->prepare_name($entity->get_name());
-      $s_changes = $this->prepare_attributes($instance->get_values(), $entity);
+      $s_changes = $this->prepare_attributes($values, $entity);
       $s_where = $this->prepare_attributes($keys, $entity, null, ' and ');
       $row_count = $this->query('UPDATE '.$s_table_name.' SET '.$s_changes.' WHERE '.$s_where.';');
       if ($row_count === 1) {

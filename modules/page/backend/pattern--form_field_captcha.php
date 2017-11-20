@@ -14,7 +14,7 @@ namespace effectivecore {
   public $attributes = ['class' => ['captcha' => 'captcha']];
 
   public $length = 6;
-  public $attempts = 1;
+  public $attempts = 2;
   public static $glyphs;
 
   static function init() {
@@ -31,6 +31,29 @@ namespace effectivecore {
 
   static function id_get() {
     return md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']);
+  }
+
+  static function captcha_cleaning() {
+  }
+
+  function captcha_check($characters) {
+    $captcha = (new instance('captcha', [
+      'id' => static::id_get()
+    ]))->select();
+    if ($captcha &&
+        $captcha->characters === $characters) {
+      $captcha->delete();
+      return true;
+    } else {
+      if ($captcha->attempts > 1) {
+        $captcha->attempts--;
+        $captcha->update();
+      } else {
+        $captcha = $this->captcha_generate();
+        $captcha->update();
+        $this->child_change('canvas', $captcha->canvas);
+      }
+    }
   }
 
   function captcha_generate() {
@@ -66,16 +89,6 @@ namespace effectivecore {
         )
       );
       return $captcha;
-    }
-  }
-
-  function captcha_check($characters) {
-    $captcha = (new instance('captcha', [
-      'id' => static::id_get()
-    ]))->select();
-    if ($captcha &&
-        $captcha->characters === $characters) {
-      return true;
     }
   }
 

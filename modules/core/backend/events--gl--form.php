@@ -436,7 +436,7 @@ namespace effectivecore {
 
   # check captcha
   # ─────────────────────────────────────────────────────────────────────
-    if ($element->attribute_select('name') == 'captcha' && !form_field_captcha::captcha_check($new_value)) {
+    if ($element->attribute_select('name') == 'captcha' && !$field->captcha_check($new_value)) {
       $form->add_error($npath.'/element',
         translation::get('Field "%%_title" contains an incorrect characters from image!', ['title' => $title])
       );
