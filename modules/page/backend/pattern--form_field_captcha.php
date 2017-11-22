@@ -40,6 +40,7 @@ namespace effectivecore {
   }
 
   static function captcha_cleaning() {
+  # @todo: make functionality
   }
 
   function captcha_check($characters) {
