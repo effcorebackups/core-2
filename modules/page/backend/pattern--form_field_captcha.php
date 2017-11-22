@@ -46,18 +46,17 @@ namespace effectivecore {
     $captcha = (new instance('captcha', [
       'id' => static::id_get()
     ]))->select();
-    if ($captcha &&
-        $captcha->characters === $characters) {
-      $captcha->delete();
-      return true;
-    } else {
-      if ($captcha->attempts > 1) {
+    if ($captcha) {
+      if ($captcha->attempts > 0) {
         $captcha->attempts--;
         $captcha->update();
       } else {
         $captcha = $this->captcha_generate();
         $captcha->update();
         $this->child_change('canvas', $captcha->canvas);
+      }
+      if ($captcha->characters === $characters) {
+        return true;
       }
     }
   }

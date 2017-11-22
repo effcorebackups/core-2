@@ -44,6 +44,7 @@ forms
                 - minlength: 5
                 - maxlength: 255
                 - autocomplete: off
+        - captcha|form_field_captcha
     - button_register|markup
         tag_name: button
         attributes
