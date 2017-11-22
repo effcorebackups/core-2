@@ -158,8 +158,7 @@ namespace effectivecore\modules\user {
         $user = (new instance('user', [
           'email' => strtolower($values['email'])
         ]))->select();
-        if ($user     &&
-            $user->id &&
+        if ($user &&
             $user->password_hash === factory::hash_get($values['password'])) {
           session::init($user->id);
           url::go('/user/'.$user->id);

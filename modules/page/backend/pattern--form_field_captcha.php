@@ -15,6 +15,7 @@ namespace effectivecore {
 
   public $length = 6;
   public $attempts = 2;
+  public $noise = 1;
   public static $glyphs;
 
   static function init() {
@@ -30,7 +31,12 @@ namespace effectivecore {
   }
 
   static function id_get() {
-    return md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']);
+  # duplicates of captcha by IP is not an a problem - new captcha will generate again
+  # p.s. it's prevention for DOS attacks which can overflow the storage if we used
+  # more unique identifier than IP address, for example: IP + user_agent (in this situation
+  # client can falsify user_agent on each http request and this will create a great variety
+  # of unique client id)
+    return md5($_SERVER['REMOTE_ADDR']);
   }
 
   static function captcha_cleaning() {
@@ -60,7 +66,7 @@ namespace effectivecore {
     if (!static::$glyphs) static::init();
     $characters = '';
     $canvas = new canvas_svg(5 * $this->length, 15, 5);
-    $canvas->fill('#000000', 0, 0, null, null, 1);
+    $canvas->fill('#000000', 0, 0, null, null, $this->noise);
     for ($i = 0; $i < $this->length; $i++) {
       $c_glyph = array_rand(static::$glyphs);
       $characters.= static::$glyphs[$c_glyph];
