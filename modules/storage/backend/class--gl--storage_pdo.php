@@ -166,12 +166,14 @@ namespace effectivecore {
   }
 
   function fields(...$fields) {
-    return implode(', ', $fields);
+    return implode(', ', is_array($fields[0]) ?
+                                  $fields[0] : $fields);
   }
 
   function values(...$values) {
     $return = [];
-    foreach ($values as $c_value) {
+    foreach (is_array($values[0]) ?
+                      $values[0] : $values as $c_value) {
       $return[] = "'".$this->value_quote($c_value)."'";
     }
     return implode(', ', $return);
@@ -306,7 +308,8 @@ namespace effectivecore {
       $entity = $instance->get_entity();
       $keys = array_intersect_key($instance->get_values(), $entity->get_keys());
       $result = $this->query(
-        'SELECT', '*', 'FROM', $this->tables($entity->get_name()),
+        'SELECT', '*',
+        'FROM', $this->tables($entity->get_name()),
         'WHERE', $this->_where($keys),
         'LIMIT', 1);
       if (isset($result[0])) {
@@ -322,11 +325,12 @@ namespace effectivecore {
     if ($this->init()) {
       $entity = $instance->get_entity();
       $values = array_intersect_key($instance->get_values(), $entity->get_fields());
+      $fields = array_keys($values);
       $auto_name = $entity->get_auto_name();
-      $s_table_name = $this->prepare_name($entity->get_name());
-      $s_fields = $this->prepare_attributes($values, $entity, 'fields');
-      $s_values = $this->prepare_attributes($values, $entity, 'values');
-      $new_id = $this->query_old('INSERT INTO '.$s_table_name.' ('.$s_fields.') VALUES ('.$s_values.');');
+      $new_id = $this->query(
+        'INSERT', 'INTO', $this->tables($entity->get_name()), '(',
+                          $this->fields($fields), ')',
+        'VALUES', '(',    $this->values($values), ')');
       if ($new_id !== null && $auto_name == null) return $instance;
       if ($new_id !== null && $auto_name != null) {
         $instance->{$auto_name} = $new_id;
