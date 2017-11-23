@@ -14,8 +14,8 @@ namespace effectivecore {
   public $driver;
   public $credentials;
   public $table_prefix = '';
-  protected $connection;
   protected $queries = [];
+  protected $connection;
 
   function init() {
     if ($this->connection) return
@@ -84,6 +84,15 @@ namespace effectivecore {
     }
   }
 
+  function get_id()           {return $this->id;}
+  function get_driver()       {return $this->driver;}
+  function get_table_prefix() {return $this->table_prefix;}
+  function get_queries()      {return $this->queries;}
+
+  function transaction_begin()     {if ($this->init()) return $this->connection->beginTransaction();}
+  function transaction_roll_back() {if ($this->init()) return $this->connection->rollBack();}
+  function transaction_commit()    {if ($this->init()) return $this->connection->commit();}
+
   function prepare_name($name) {
     switch ($this->driver) {
       case 'mysql' : return '`'.$this->table_prefix.$name.'`';
@@ -96,8 +105,8 @@ namespace effectivecore {
   }
 
   function prepare_field_value($data, $type) {
-    if ($type == 'blob') return "X'".bin2hex($this->quote($data))."'";
-    return "'".$this->quote($data)."'";
+    if ($type == 'blob') return "X'".bin2hex($this->value_quote($data))."'";
+    return "'".$this->value_quote($data)."'";
   }
 
   function prepare_attributes($data, $entity, $mode = null, $delimiter = ', ') {
@@ -114,15 +123,82 @@ namespace effectivecore {
     return implode($delimiter, $return);
   }
 
-  function quote($data) {
-    return str_replace("'", "''", $data);
+  function query(...$query) {
+    if (is_array($query[0])) $query = $query[0];
+    if ($this->init()) {
+      $this->queries[] = $query;
+    # event::start('on_query_before', 'pdo', [&$this, &$query]);
+      $result = $this->connection->query(implode(' ', $query).';');
+      $errors = $this->connection->errorInfo();
+    # event::start('on_query_after', 'pdo', [&$this, &$query, &$result, &$errors]);
+      if ($errors[0] !== '00000') {
+        message::add_new(
+          'Query error! '.br.
+          'SQLState: '.$errors[0].br.
+          'Driver error code: '.$errors[1].br.
+          'Driver error text: '.$errors[2], 'error'
+        );
+        return null;
+      }
+      switch ($query[0]) {
+        case 'SELECT': return $result ? $result->fetchAll(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE, '\effectivecore\instance') : null;
+        case 'INSERT': return $this->connection->lastInsertId();
+        case 'UPDATE': return $result->rowCount();
+        case 'DELETE': return $result->rowCount();
+        default      : return $result;
+      }
+    }
   }
 
-  function transaction_begin()     {if ($this->init()) return $this->connection->beginTransaction();}
-  function transaction_roll_back() {if ($this->init()) return $this->connection->rollBack();}
-  function transaction_commit()    {if ($this->init()) return $this->connection->commit();}
+  function value_quote($value) {
+    return str_replace("'", "''", $value);
+  }
 
-  function query($query) {
+  function tables(...$tables) {
+    $return = [];
+    foreach ($tables as $c_table) {
+      switch ($this->driver) {
+        case 'mysql' : $return[] = '`'.$this->table_prefix.$c_table.'`'; break;
+        case 'sqlite': $return[] = '"'.$this->table_prefix.$c_table.'"'; break;
+      }
+    }
+    return implode(', ', $return);
+  }
+
+  function fields(...$fields) {
+    return implode(', ', $fields);
+  }
+
+  function values(...$values) {
+    $return = [];
+    foreach ($values as $c_value) {
+      $return[] = "'".$this->value_quote($c_value)."'";
+    }
+    return implode(', ', $return);
+  }
+
+  function condition($field, $value, $op = '=') {
+    return $this->fields($field).' '.$op.' '.
+           $this->values($value);
+  }
+
+  function op($op) {
+    return $op;
+  }
+
+  function _where($data, $op = 'and') {
+    $return = [];
+    foreach ($data as $field => $value) {
+      $return[] = $this->condition($field, $value);
+    }
+    return implode(' '.$this->op($op).' ', $return);
+  }
+
+
+
+
+
+  function query_old($query) {
     if ($this->init()) {
       $this->queries[] = $query;
       event::start('on_query_before', 'pdo', [&$this, &$query]);
@@ -148,9 +224,9 @@ namespace effectivecore {
     }
   }
 
-  function get_queries() {
-    return $this->queries;
-  }
+  ################
+  ### entities ###
+  ################
 
   function install_entity($entity) {
     if ($this->init()) {
@@ -190,14 +266,14 @@ namespace effectivecore {
       $s_table_name = $this->prepare_name($entity->get_name());
       $s_fields = implode(', ', $fields);
       $this->transaction_begin();
-      $this->query('DROP TABLE IF EXISTS '.$s_table_name.';');
-      $this->query('CREATE TABLE '.$s_table_name.' ('.$s_fields.');');
+      $this->query_old('DROP TABLE IF EXISTS '.$s_table_name.';');
+      $this->query_old('CREATE TABLE '.$s_table_name.' ('.$s_fields.');');
     # create indexes
       foreach ($entity->get_indexes_info() as $suffix => $c_info) {
         $s_idx_type = $c_info->type;
         $s_idx_name = $this->prepare_name($entity->get_name().'_'.$suffix);
         $s_idx_flds = implode(', ', $c_info->fields);
-        $this->query('CREATE '.$s_idx_type.' '.$s_idx_name.' ON '.$s_table_name.' ('.$s_idx_flds.');');
+        $this->query_old('CREATE '.$s_idx_type.' '.$s_idx_name.' ON '.$s_table_name.' ('.$s_idx_flds.');');
       }
       return $this->transaction_commit();
     }
@@ -206,7 +282,7 @@ namespace effectivecore {
   function uninstall_entity($entity) {
     if ($this->init()) {
       $s_table_name = $this->prepare_name($entity->get_name());
-      $this->query('DROP TABLE '.$s_table_name.';');
+      $this->query_old('DROP TABLE '.$s_table_name.';');
     }
   }
 
@@ -217,7 +293,7 @@ namespace effectivecore {
       $s_order = count($order) ? ' ORDER BY '.$this->prepare_attributes($order, $entity, 'order') : '';
       $s_limit = $limit ? ' LIMIT ' .$limit : '';
       $s_offset = $offset ? ' OFFSET '.$offset : '';
-      $result = $this->query('SELECT * FROM '.$s_table_name.$s_conditions.$s_order.$s_limit.$s_offset.';');
+      $result = $this->query_old('SELECT * FROM '.$s_table_name.$s_conditions.$s_order.$s_limit.$s_offset.';');
       foreach ($result as $c_instance) {
         $c_instance->set_entity_name($entity->get_name());
       }
@@ -229,12 +305,12 @@ namespace effectivecore {
     if ($this->init()) {
       $entity = $instance->get_entity();
       $keys = array_intersect_key($instance->get_values(), $entity->get_keys());
-      $s_table_name = $this->prepare_name($entity->get_name());
-      $s_where = $this->prepare_attributes($keys, $entity, null, ' and ');
-      $result = $this->query('SELECT * FROM '.$s_table_name.' WHERE '.$s_where.' LIMIT 1;');
+      $result = $this->query(
+        'SELECT', '*', 'FROM', $this->tables($entity->get_name()),
+        'WHERE', $this->_where($keys),
+        'LIMIT', 1);
       if (isset($result[0])) {
         foreach ($result[0]->values as $c_name => $c_value) {
-          $c_type = $entity->get_field_info($c_name)->type;
           $instance->{$c_name} = $c_value;
         }
         return $instance;
@@ -250,7 +326,7 @@ namespace effectivecore {
       $s_table_name = $this->prepare_name($entity->get_name());
       $s_fields = $this->prepare_attributes($values, $entity, 'fields');
       $s_values = $this->prepare_attributes($values, $entity, 'values');
-      $new_id = $this->query('INSERT INTO '.$s_table_name.' ('.$s_fields.') VALUES ('.$s_values.');');
+      $new_id = $this->query_old('INSERT INTO '.$s_table_name.' ('.$s_fields.') VALUES ('.$s_values.');');
       if ($new_id !== null && $auto_name == null) return $instance;
       if ($new_id !== null && $auto_name != null) {
         $instance->{$auto_name} = $new_id;
@@ -267,7 +343,7 @@ namespace effectivecore {
       $s_table_name = $this->prepare_name($entity->get_name());
       $s_changes = $this->prepare_attributes($values, $entity);
       $s_where = $this->prepare_attributes($keys, $entity, null, ' and ');
-      $row_count = $this->query('UPDATE '.$s_table_name.' SET '.$s_changes.' WHERE '.$s_where.';');
+      $row_count = $this->query_old('UPDATE '.$s_table_name.' SET '.$s_changes.' WHERE '.$s_where.';');
       if ($row_count === 1) {
         return $instance;
       }
@@ -280,7 +356,7 @@ namespace effectivecore {
       $keys = array_intersect_key($instance->get_values(), $entity->get_keys(true, false));
       $s_table_name = $this->prepare_name($entity->get_name());
       $s_where = $this->prepare_attributes($keys, $entity, null, ' and ');
-      $row_count = $this->query('DELETE FROM '.$s_table_name.' WHERE '.$s_where.';');
+      $row_count = $this->query_old('DELETE FROM '.$s_table_name.' WHERE '.$s_where.';');
       if ($row_count === 1) {
         $instance->set_values([]);
         return $instance;
