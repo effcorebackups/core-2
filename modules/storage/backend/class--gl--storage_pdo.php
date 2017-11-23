@@ -306,12 +306,12 @@ namespace effectivecore {
   function select_instance($instance) { # return: null | instance
     if ($this->init()) {
       $entity = $instance->get_entity();
-      $keys = array_intersect_key($instance->get_values(), $entity->get_keys());
+      $idkeys = array_intersect_key($instance->get_values(), $entity->get_keys());
+      $fields = $entity->get_fields();
       $result = $this->query(
-        'SELECT', '*',
-        'FROM',  $this->tables($entity->get_name()),
-        'WHERE', $this->attributes($keys),
-        'LIMIT', 1);
+        'SELECT', $this->fields($fields),
+        'FROM',   $this->tables($entity->get_name()),
+        'WHERE',  $this->attributes($idkeys), 'LIMIT', 1);
       if (isset($result[0])) {
         foreach ($result[0]->values as $c_name => $c_value) {
           $instance->{$c_name} = $c_value;
