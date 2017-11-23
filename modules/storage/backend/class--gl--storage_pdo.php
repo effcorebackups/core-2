@@ -357,10 +357,10 @@ namespace effectivecore {
   function delete_instance($instance) { # return: null | instance + empty(values)
     if ($this->init()) {
       $entity = $instance->get_entity();
-      $keys = array_intersect_key($instance->get_values(), $entity->get_keys(true, false));
-      $s_table_name = $this->prepare_name($entity->get_name());
-      $s_where = $this->prepare_attributes($keys, $entity, null, ' and ');
-      $row_count = $this->query_old('DELETE FROM '.$s_table_name.' WHERE '.$s_where.';');
+      $idkeys = array_intersect_key($instance->get_values(), $entity->get_keys(true, false));
+      $row_count = $this->query(
+        'DELETE', 'FROM', $this->tables($entity->get_name()),
+        'WHERE',          $this->attributes($idkeys));
       if ($row_count === 1) {
         $instance->set_values([]);
         return $instance;
