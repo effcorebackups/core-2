@@ -188,7 +188,7 @@ namespace effectivecore {
     return $op;
   }
 
-  function _where($data, $op = 'and') {
+  function attributes($data, $op = 'and') {
     $return = [];
     foreach ($data as $field => $value) {
       $return[] = $this->condition($field, $value);
@@ -309,8 +309,8 @@ namespace effectivecore {
       $keys = array_intersect_key($instance->get_values(), $entity->get_keys());
       $result = $this->query(
         'SELECT', '*',
-        'FROM', $this->tables($entity->get_name()),
-        'WHERE', $this->_where($keys),
+        'FROM',  $this->tables($entity->get_name()),
+        'WHERE', $this->attributes($keys),
         'LIMIT', 1);
       if (isset($result[0])) {
         foreach ($result[0]->values as $c_name => $c_value) {
@@ -342,12 +342,12 @@ namespace effectivecore {
   function update_instance($instance) { # return: null | instance
     if ($this->init()) {
       $entity = $instance->get_entity();
-      $keys = array_intersect_key($instance->get_values(), $entity->get_keys(true, false));
+      $idkeys = array_intersect_key($instance->get_values(), $entity->get_keys(true, false));
       $values = array_intersect_key($instance->get_values(), $entity->get_fields());
-      $s_table_name = $this->prepare_name($entity->get_name());
-      $s_changes = $this->prepare_attributes($values, $entity);
-      $s_where = $this->prepare_attributes($keys, $entity, null, ' and ');
-      $row_count = $this->query_old('UPDATE '.$s_table_name.' SET '.$s_changes.' WHERE '.$s_where.';');
+      $row_count = $this->query(
+        'UPDATE', $this->tables($entity->get_name()),
+        'SET',    $this->attributes($values, ','),
+        'WHERE',  $this->attributes($idkeys));
       if ($row_count === 1) {
         return $instance;
       }
