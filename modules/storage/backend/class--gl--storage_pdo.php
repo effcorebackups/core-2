@@ -283,8 +283,7 @@ namespace effectivecore {
 
   function uninstall_entity($entity) {
     if ($this->init()) {
-      $s_table_name = $this->prepare_name($entity->get_name());
-      $this->query_old('DROP TABLE '.$s_table_name.';');
+      return $this->query('DROP', 'TABLE', $this->tables($entity->get_name()));
     }
   }
 
