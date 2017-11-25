@@ -97,10 +97,10 @@ namespace effectivecore {
     if (is_array($query[0])) $query = $query[0];
     if ($this->init()) {
       $this->queries[] = $query;
-    # event::start('on_query_before', 'pdo', [&$this, &$query]);
+      event::start('on_query_before', 'pdo', [&$this, &$query]);
       $result = $this->connection->query(implode(' ', factory::array_flatten($query)).';');
       $errors = $this->connection->errorInfo();
-    # event::start('on_query_after', 'pdo', [&$this, &$query, &$result, &$errors]);
+      event::start('on_query_after', 'pdo', [&$this, &$query, &$result, &$errors]);
       if ($errors[0] !== '00000') {
         message::add_new(
           'Query error! '.br.

@@ -5,7 +5,6 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\entity_factory as entity;
           use \effectivecore\message_factory as message;
           use \effectivecore\modules\storage\storage_factory as storage;
           class form_field_captcha extends \effectivecore\form_field {
@@ -41,7 +40,7 @@ namespace effectivecore {
   }
 
   static function captcha_cleaning() {
-    $storage = storage::get(entity::get('captcha')->get_storage_id());
+    $storage = storage::get(entity_factory::get('captcha')->get_storage_id());
   # @todo: make functionality
   }
 

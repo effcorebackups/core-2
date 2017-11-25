@@ -5,6 +5,7 @@
   #############################################################
 
 namespace effectivecore\modules\storage {
+          use \effectivecore\factory as factory;
           use \effectivecore\timer_factory as timer;
           use \effectivecore\console_factory as console;
           abstract class events_storage {
@@ -21,13 +22,15 @@ namespace effectivecore\modules\storage {
   }
 
   static function on_query_before($instance, $query) {
-    timer::tap('storage query: '.$query);
+    $s_query = implode(' ', factory::array_flatten($query)).';';
+    timer::tap('storage query: '.$s_query);
   }
 
   static function on_query_after($instance, $query, $result, $errors) {
-    timer::tap('storage query: '.$query);
+    $s_query = implode(' ', factory::array_flatten($query)).';';
+    timer::tap('storage query: '.$s_query);
     console::add_log(
-      'storage', 'query', wordwrap($query, 50, ' ', true), $errors[0] == '00000' ? 'ok' : 'error', timer::get_period('storage query: '.$query, -1, -2)
+      'storage', 'query', wordwrap($s_query, 50, ' ', true), $errors[0] == '00000' ? 'ok' : 'error', timer::get_period('storage query: '.$s_query, -1, -2)
     );
   }
 
