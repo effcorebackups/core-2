@@ -172,6 +172,14 @@ namespace effectivecore {
     return unserialize(serialize($array));
   }
 
+  static function array_flatten($array) {
+    $return = [];
+    array_walk_recursive($array, function($item) use (&$return) {
+      $return[] = $item;
+    });
+    return $return;
+  }
+
   static function in_array_string_compare($value, $array) {
     foreach ($array as $c_item) {
       if ((string)$c_item === (string)$value) {

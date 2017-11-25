@@ -98,7 +98,7 @@ namespace effectivecore {
     if ($this->init()) {
       $this->queries[] = $query;
     # event::start('on_query_before', 'pdo', [&$this, &$query]);
-      $result = $this->connection->query(implode(' ', $query).';');
+      $result = $this->connection->query(implode(' ', factory::array_flatten($query)).';');
       $errors = $this->connection->errorInfo();
     # event::start('on_query_after', 'pdo', [&$this, &$query, &$result, &$errors]);
       if ($errors[0] !== '00000') {
@@ -176,14 +176,15 @@ namespace effectivecore {
       $fields = [];
       foreach ($entity->get_fields_info() as $c_name => $c_info) {
       # prepare field type
+        $c_properties = [$c_name];
         switch ($c_info->type) {
           case 'autoincrement':
-            if ($this->driver == 'mysql')  $c_properties = ['integer primary key auto_increment'];
-            if ($this->driver == 'sqlite') $c_properties = ['integer primary key autoincrement'];
+            if ($this->driver == 'mysql')  $c_properties[] = 'integer primary key auto_increment';
+            if ($this->driver == 'sqlite') $c_properties[] = 'integer primary key autoincrement';
             break;
           default:
-            $c_properties = [$c_info->type.(isset($c_info->size) ?
-                                              '('.$c_info->size.')' : '')];
+            $c_properties[] = $c_info->type.(isset($c_info->size) ?
+                                               '('.$c_info->size.')' : '');
         }
       # prepare field properties
         if (property_exists($c_info, 'not_null') && $c_info->not_null) $c_properties[] = 'not null';
@@ -193,24 +194,24 @@ namespace effectivecore {
           elseif ($c_info->default === null) $c_properties[] = 'default null';
           else                               $c_properties[] = 'default \''.$c_info->default.'\'';
         }
-        $fields[] = $c_name.' '.implode(' ', $c_properties);
+        $fields[] = $c_properties;
       }
     # prepare constraints
       $auto_name = $entity->get_auto_name();
-      foreach ($entity->get_constraints_info() as $suffix => $c_info) {
-        if ($c_info->fields != [$auto_name => $auto_name]) {
-          $s_cstr_type = $c_info->type;
+      foreach ($entity->get_constraints_info() as $suffix => $c_cstr) {
+        if ($c_cstr->fields != [$auto_name => $auto_name]) {
           $s_cstr_name = $this->tables($entity->get_name().'_'.$suffix);
-          $s_cstr_flds = implode(', ', $c_info->fields);
-          $fields[] = 'CONSTRAINT '.$s_cstr_name.' '.$s_cstr_type.' ('.$s_cstr_flds.')';
+          $fields[] = ['CONSTRAINT', $s_cstr_name, $c_cstr->type, '(', $c_cstr->fields, ')'];
         }
       }
     # create entity
       $s_table_name = $this->tables($entity->get_name());
-      $s_fields = implode(', ', $fields);
+      foreach ($fields as &$c_field) {
+        if ($c_field !== end($fields)) $c_field[] = ',';
+      }
       $this->transaction_begin();
       $this->query('DROP', 'TABLE', 'IF EXISTS', $s_table_name);
-      $this->query('CREATE', 'TABLE', $s_table_name, '(', $s_fields, ')');
+      $this->query('CREATE', 'TABLE', $s_table_name, '(', $fields, ')');
     # create indexes
       foreach ($entity->get_indexes_info() as $suffix => $c_info) {
         $s_idx_type = $c_info->type;
