@@ -136,8 +136,13 @@ namespace effectivecore {
   }
 
   function fields(...$fields) {
-    return is_array($fields[0]) ?
-                    $fields[0] : $fields;
+    $return = [];
+    foreach (is_array($fields[0]) ?
+                      $fields[0] : $fields as $field) {
+      $return[] = $field;
+      $return[] = $this->op(',');}
+    array_pop($return);
+    return $return;
   }
 
   function values(...$values) {
@@ -162,7 +167,7 @@ namespace effectivecore {
   function attributes($data, $op = 'and') {
     $return = [];
     foreach ($data as $field => $value) {
-      $return[] = $this->condition($field, $value);
+      $return[] = is_array($value) ? $value : $this->condition($field, $value);
       $return[] = $this->op($op);}
     array_pop($return);
     return $return;
@@ -230,12 +235,12 @@ namespace effectivecore {
 
   function select_instances($entity, $conditions = [], $order = [], $limit = 0, $offset = 0) {
     if ($this->init()) {
-      $s_table_name = $this->tables($entity->get_name());
-      $s_conditions = count($conditions) ? ' WHERE '.$this->prepare_attributes($conditions, $entity, null, ' and ') : '';
-      $s_order = count($order) ? ' ORDER BY '.       $this->prepare_attributes($order,      $entity, 'order') : '';
-      $s_limit = $limit ? ' LIMIT ' .$limit : '';
-      $s_offset = $offset ? ' OFFSET '.$offset : '';
-      $result = $this->query_old('SELECT * FROM '.$s_table_name.$s_conditions.$s_order.$s_limit.$s_offset.';');
+      $query = ['SELECT', '*', 'FROM', $this->tables($entity->get_name())];
+      if (count($conditions)) array_push($query, 'WHERE',       $this->attributes($conditions));
+      if (count($order))      array_push($query, 'ORDER', 'BY', $this->fields($order));
+      if ($limit)             array_push($query, 'LIMIT', $limit);
+      if ($offset)            array_push($query, 'OFFSET', $offset);
+      $result = $this->query($query);
       foreach ($result as $c_instance) {
         $c_instance->set_entity_name($entity->get_name());
       }
@@ -306,57 +311,6 @@ namespace effectivecore {
         return $instance;
       }
     }
-  }
-
-  ###########
-  ### old ###
-  ###########
-
-  function query_old($query) {
-    if ($this->init()) {
-      $this->queries[] = $query;
-      event::start('on_query_before', 'pdo', [&$this, &$query]);
-      $result = $this->connection->query($query);
-      $errors = $this->connection->errorInfo();
-      event::start('on_query_after', 'pdo', [&$this, &$query, &$result, &$errors]);
-      if ($errors[0] !== '00000') {
-        message::add_new(
-          'Query error! '.br.
-          'SQLState: '.$errors[0].br.
-          'Driver error code: '.$errors[1].br.
-          'Driver error text: '.$errors[2], 'error'
-        );
-        return null;
-      }
-      switch (substr($query, 0, 6)) {
-        case 'SELECT': return $result ? $result->fetchAll(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE, '\effectivecore\instance') : null;
-        case 'INSERT': return $this->connection->lastInsertId();
-        case 'UPDATE': return $result->rowCount();
-        case 'DELETE': return $result->rowCount();
-        default      : return $result;
-      }
-    }
-  }
-
-  function prepare_field_name($name) {
-    return $name;
-  }
-
-  function prepare_field_value($data, $type) {
-    if ($type == 'blob') return "X'".bin2hex($this->value_quote($data))."'";
-    return "'".$this->value_quote($data)."'";
-  }
-
-  function prepare_attributes($data, $entity, $mode = null, $delimiter = ', ') {
-    $return = [];
-    foreach ($data as $c_name => $c_value) {
-      $c_type = $entity->get_field_info($c_name)->type;
-      switch ($mode) {
-        case 'order': $return[] = $this->prepare_field_name($c_name).' '.$c_value; break;
-        default     : $return[] = $this->prepare_field_name($c_name).' = '.$this->prepare_field_value($c_value, $c_type); break;
-      }
-    }
-    return implode($delimiter, $return);
   }
 
 }}
