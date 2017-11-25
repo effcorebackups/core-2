@@ -151,7 +151,9 @@ namespace effectivecore {
                       $values[0] : $values as $c_value) {
     # if ($type == 'blob') $return[] = "X'".bin2hex($this->value_quote($data))."'";
       $return[] = "'".$this->value_quote($c_value)."'";
+      $return[] = $this->op(',');
     }
+    array_pop($return);
     return $return;
   }
 
@@ -208,7 +210,7 @@ namespace effectivecore {
       foreach ($entity->get_constraints_info() as $suffix => $c_cstr) {
         if ($c_cstr->fields != [$auto_name => $auto_name]) {
           $s_cstr_name = $this->tables($entity->get_name().'_'.$suffix);
-          $fields[] = ['CONSTRAINT', $s_cstr_name, $c_cstr->type, '(', $c_cstr->fields, ')'];
+          $fields[] = ['CONSTRAINT', $s_cstr_name, $c_cstr->type, '(', $this->fields($c_cstr->fields), ')'];
           $fields[] = ',';
         }
       }
@@ -221,7 +223,7 @@ namespace effectivecore {
     # create indexes
       foreach ($entity->get_indexes_info() as $suffix => $c_idx) {
         $s_idx_name = $this->tables($entity->get_name().'_'.$suffix);
-        $this->query('CREATE', $c_idx->type, $s_idx_name, 'ON', $s_table_name, '(', $c_idx->fields, ')');
+        $this->query('CREATE', $c_idx->type, $s_idx_name, 'ON', $s_table_name, '(', $this->fields($c_idx->fields), ')');
       }
       return $this->transaction_commit();
     }
