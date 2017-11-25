@@ -132,12 +132,12 @@ namespace effectivecore {
         case 'sqlite': $return[] = '"'.$this->table_prefix.$c_table.'"'; break;
       }
     }
-    return implode(', ', $return);
+    return $return;
   }
 
   function fields(...$fields) {
-    return implode(', ', is_array($fields[0]) ?
-                                  $fields[0] : $fields);
+    return is_array($fields[0]) ?
+                    $fields[0] : $fields;
   }
 
   function values(...$values) {
@@ -147,12 +147,12 @@ namespace effectivecore {
     # if ($type == 'blob') $return[] = "X'".bin2hex($this->value_quote($data))."'";
       $return[] = "'".$this->value_quote($c_value)."'";
     }
-    return implode(', ', $return);
+    return $return;
   }
 
   function condition($field, $value, $op = '=') {
-    return $this->fields($field).' '.$op.' '.
-           $this->values($value);
+    return [$this->fields($field), $op,
+            $this->values($value)];
   }
 
   function op($op) {
@@ -163,8 +163,9 @@ namespace effectivecore {
     $return = [];
     foreach ($data as $field => $value) {
       $return[] = $this->condition($field, $value);
-    }
-    return implode(' '.$this->op($op).' ', $return);
+      $return[] = $this->op($op);}
+    array_pop($return);
+    return $return;
   }
 
   ################
@@ -195,28 +196,27 @@ namespace effectivecore {
           else                               $c_properties[] = 'default \''.$c_info->default.'\'';
         }
         $fields[] = $c_properties;
+        $fields[] = ',';
       }
     # prepare constraints
       $auto_name = $entity->get_auto_name();
       foreach ($entity->get_constraints_info() as $suffix => $c_cstr) {
         if ($c_cstr->fields != [$auto_name => $auto_name]) {
-          $s_cstr->name = $this->tables($entity->get_name().'_'.$suffix);
-          $fields[] = ['CONSTRAINT', $s_cstr->name, $c_cstr->type, '(', $c_cstr->fields, ')'];
+          $s_cstr_name = $this->tables($entity->get_name().'_'.$suffix);
+          $fields[] = ['CONSTRAINT', $s_cstr_name, $c_cstr->type, '(', $c_cstr->fields, ')'];
+          $fields[] = ',';
         }
       }
+      array_pop($fields);
     # create entity
       $s_table_name = $this->tables($entity->get_name());
-      foreach ($fields as &$c_field) {
-        if ($c_field !== end($fields)) $c_field[] = ',';
-      }
       $this->transaction_begin();
       $this->query('DROP', 'TABLE', 'IF EXISTS', $s_table_name);
       $this->query('CREATE', 'TABLE', $s_table_name, '(', $fields, ')');
     # create indexes
       foreach ($entity->get_indexes_info() as $suffix => $c_idx) {
-        $s_idx->name = $this->tables($entity->get_name().'_'.$suffix);
-        $this->query('CREATE', $c_idx->type,
-                               $s_idx->name, 'ON', $s_table_name, '(', $c_idx->fields, ')');
+        $s_idx_name = $this->tables($entity->get_name().'_'.$suffix);
+        $this->query('CREATE', $c_idx->type, $s_idx_name, 'ON', $s_table_name, '(', $c_idx->fields, ')');
       }
       return $this->transaction_commit();
     }
@@ -232,7 +232,7 @@ namespace effectivecore {
     if ($this->init()) {
       $s_table_name = $this->tables($entity->get_name());
       $s_conditions = count($conditions) ? ' WHERE '.$this->prepare_attributes($conditions, $entity, null, ' and ') : '';
-      $s_order = count($order) ? ' ORDER BY '.$this->prepare_attributes($order, $entity, 'order') : '';
+      $s_order = count($order) ? ' ORDER BY '.       $this->prepare_attributes($order,      $entity, 'order') : '';
       $s_limit = $limit ? ' LIMIT ' .$limit : '';
       $s_offset = $offset ? ' OFFSET '.$offset : '';
       $result = $this->query_old('SELECT * FROM '.$s_table_name.$s_conditions.$s_order.$s_limit.$s_offset.';');
@@ -352,9 +352,8 @@ namespace effectivecore {
     foreach ($data as $c_name => $c_value) {
       $c_type = $entity->get_field_info($c_name)->type;
       switch ($mode) {
-        case 'order' : $return[] = $this->prepare_field_name($c_name).' '.$c_value; break;
-        case 'fields': $return[] = $this->prepare_field_name($c_name); break;
-        default      : $return[] = $this->prepare_field_name($c_name).' = '.$this->prepare_field_value($c_value, $c_type); break;
+        case 'order': $return[] = $this->prepare_field_name($c_name).' '.$c_value; break;
+        default     : $return[] = $this->prepare_field_name($c_name).' = '.$this->prepare_field_value($c_value, $c_type); break;
       }
     }
     return implode($delimiter, $return);
