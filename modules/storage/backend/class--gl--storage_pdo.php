@@ -93,12 +93,16 @@ namespace effectivecore {
   function transaction_roll_back() {if ($this->init()) return $this->connection->rollBack();}
   function transaction_commit()    {if ($this->init()) return $this->connection->commit();}
 
+  function query_to_string(...$query) {
+    return implode(' ', factory::array_flatten($query)).';';
+  }
+
   function query(...$query) {
     if (is_array($query[0])) $query = $query[0];
     if ($this->init()) {
       $this->queries[] = $query;
       event::start('on_query_before', 'pdo', [&$this, &$query]);
-      $result = $this->connection->query(implode(' ', factory::array_flatten($query)).';');
+      $result = $this->connection->query($this->query_to_string($query));
       $errors = $this->connection->errorInfo();
       event::start('on_query_after', 'pdo', [&$this, &$query, &$result, &$errors]);
       if ($errors[0] !== '00000') {

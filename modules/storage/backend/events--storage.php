@@ -10,27 +10,27 @@ namespace effectivecore\modules\storage {
           use \effectivecore\console_factory as console;
           abstract class events_storage {
 
-  static function on_storage_init_before($instance) {
+  static function on_storage_init_before($storage) {
     timer::tap('storage init');
   }
 
-  static function on_storage_init_after($instance) {
+  static function on_storage_init_after($storage) {
     timer::tap('storage init');
     console::add_log(
-      'storage', 'init.', 'storage %%_id was initialized', 'ok', timer::get_period('storage init', 0, 1), ['id' => $instance->id]
+      'storage', 'init.', 'storage %%_id was initialized', 'ok', timer::get_period('storage init', 0, 1), ['id' => $storage->id]
     );
   }
 
-  static function on_query_before($instance, $query) {
-    $s_query = implode(' ', factory::array_flatten($query)).';';
-    timer::tap('storage query: '.$s_query);
+  static function on_query_before($storage, $query) {
+    timer::tap('storage query: '.$storage->query_to_string($query));
   }
 
-  static function on_query_after($instance, $query, $result, $errors) {
-    $s_query = implode(' ', factory::array_flatten($query)).';';
+  static function on_query_after($storage, $query, $result, $errors) {
+    $s_query = $storage->query_to_string($query);
+    $s_query_beautiful = wordwrap(str_replace(' , ', ', ', $s_query), 50, ' ', true);
     timer::tap('storage query: '.$s_query);
     console::add_log(
-      'storage', 'query', wordwrap($s_query, 50, ' ', true), $errors[0] == '00000' ? 'ok' : 'error', timer::get_period('storage query: '.$s_query, -1, -2)
+      'storage', 'query', $s_query_beautiful, $errors[0] == '00000' ? 'ok' : 'error', timer::get_period('storage query: '.$s_query, -1, -2)
     );
   }
 
