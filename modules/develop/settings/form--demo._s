@@ -109,7 +109,7 @@ forms
                 - type: email
                 - name: email
                 - required: required
-                - value: test@example.com
+                - value: test1@example.com,test2@example.com
                 - minlength: 5
                 - maxlength: 64
                 - multiple: multiple

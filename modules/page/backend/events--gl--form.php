@@ -29,7 +29,7 @@ namespace effectivecore {
   # - input[type=search]         : disabled, readonly, required, minlength, maxlength, PATTERN, name[]
   # - input[type=url]            : disabled, readonly, required, minlength, maxlength, PATTERN, name[]
   # - input[type=tel]            : disabled, readonly, required, minlength, maxlength, PATTERN, name[]
-  # - input[type=email]          : disabled, readonly, required, minlength, maxlength, PATTERN, MULTIPLE, NAME[]
+  # - input[type=email]          : disabled, readonly, required, minlength, maxlength, PATTERN, multiple, NAME[]
   # - select                     : disabled,           required, multiple, name[]
   # - select::option             : disabled
   # - input[type=file]           : DISABLED,           REQUIRED, MULTIPLE, NAME[]
@@ -426,12 +426,23 @@ namespace effectivecore {
 
   # check email field
   # ─────────────────────────────────────────────────────────────────────
-    if ($element->attribute_select('type') == 'email' &&
-        filter_var($new_value, FILTER_VALIDATE_EMAIL) == false) {
-      $form->add_error($npath.'/element',
-        translation::get('Field "%%_title" contains an incorrect email address!', ['title' => $title])
-      );
-      return;
+    if ($element->attribute_select('type') == 'email') {
+      $emails = explode(',', $new_value);
+      if (!$element->attribute_select('multiple') && count($emails) > 1) {
+        $new_values = $emails[0];
+        $form->add_error($npath.'/element',
+          translation::get('Field "%%_title" is not support multiple select!', ['title' => $title])
+        );
+        return;
+      }
+      foreach ($emails as $c_email) {
+        if (filter_var($c_email, FILTER_VALIDATE_EMAIL) == false) {
+          $form->add_error($npath.'/element',
+            translation::get('Field "%%_title" contains an incorrect email address!', ['title' => $title])
+          );
+          return;
+        }
+      }
     }
 
   # check captcha
