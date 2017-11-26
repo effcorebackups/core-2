@@ -29,7 +29,7 @@ namespace effectivecore {
   # - input[type=search]         : disabled, readonly, required, minlength, maxlength, PATTERN, name[]
   # - input[type=url]            : disabled, readonly, required, minlength, maxlength, PATTERN, name[]
   # - input[type=tel]            : disabled, readonly, required, minlength, maxlength, PATTERN, name[]
-  # - input[type=email]          : disabled, readonly, required, minlength, maxlength, PATTERN, multiple, NAME[]
+  # - input[type=email]          : disabled, readonly, required, minlength, maxlength, PATTERN, multiple, name[]
   # - select                     : disabled,           required, multiple, name[]
   # - select::option             : disabled
   # - input[type=file]           : DISABLED,           REQUIRED, MULTIPLE, NAME[]
