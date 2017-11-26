@@ -78,8 +78,7 @@ namespace effectivecore {
       $connection = null;
       return true;
     } catch (\PDOException $e) {
-      return ['message' => $e->getMessage(), 'code' => $e->getCode()];
-    } catch (\Exception $e) {
+      return ['message' => $e->getMessage(), 'code' => $e->getCode()]; } catch (\Exception $e) {
       return ['message' => $e->getMessage(), 'code' => $e->getCode()];
     }
   }
@@ -130,20 +129,28 @@ namespace effectivecore {
 
   function tables(...$tables) {
     $return = [];
-    foreach ($tables as $c_table) {
+    foreach (is_array($tables[0]) ?
+                      $tables[0] : $tables as $c_table) {
       switch ($this->driver) {
-        case 'mysql' : $return[] = '`'.$this->table_prefix.$c_table.'`'; break;
-        case 'sqlite': $return[] = '"'.$this->table_prefix.$c_table.'"'; break;
+        case 'mysql' :
+          $return[] = '`'.$this->table_prefix.$c_table.'`';
+          $return[] = $this->op(','); 
+          break;
+        case 'sqlite':
+          $return[] = '"'.$this->table_prefix.$c_table.'"';
+          $return[] = $this->op(',');
+          break;
       }
     }
+    array_pop($return);
     return $return;
   }
 
   function fields(...$fields) {
     $return = [];
     foreach (is_array($fields[0]) ?
-                      $fields[0] : $fields as $field) {
-      $return[] = $field;
+                      $fields[0] : $fields as $c_field) {
+      $return[] = $c_field;
       $return[] = $this->op(',');}
     array_pop($return);
     return $return;
@@ -172,8 +179,8 @@ namespace effectivecore {
 
   function attributes($data, $op = 'and') {
     $return = [];
-    foreach ($data as $field => $value) {
-      $return[] = is_array($value) ? $value : $this->condition($field, $value);
+    foreach ($data as $c_field => $c_value) {
+      $return[] = is_array($c_value) ? $c_value : $this->condition($c_field, $c_value);
       $return[] = $this->op($op);}
     array_pop($return);
     return $return;
