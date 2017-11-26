@@ -27,10 +27,15 @@ namespace effectivecore\modules\storage {
 
   static function on_query_after($storage, $query, $result, $errors) {
     $s_query = $storage->query_to_string($query);
+    $s_query_args = '['.implode(', ', $storage->args).']';
     $s_query_beautiful = wordwrap(str_replace([' ,', '( ', ' )'], [',', '(', ')'], $s_query), 50, ' ', true);
     timer::tap('storage query: '.$s_query);
     console::add_log(
-      'storage', 'query', $s_query_beautiful, $errors[0] == '00000' ? 'ok' : 'error', timer::get_period('storage query: '.$s_query, -1, -2)
+      'storage', 'query',
+        $s_query_beautiful.' args = '.
+        $s_query_args,
+        $errors[0] == '00000' ? 'ok' : 'error',
+        timer::get_period('storage query: '.$s_query, -1, -2)
     );
   }
 

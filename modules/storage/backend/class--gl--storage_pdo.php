@@ -14,6 +14,7 @@ namespace effectivecore {
   public $driver;
   public $credentials;
   public $table_prefix = '';
+  public $args = [];
   protected $queries = [];
   protected $connection;
 
@@ -101,13 +102,15 @@ namespace effectivecore {
     if ($this->init()) {
       $this->queries[] = $query;
       event::start('on_query_before', 'pdo', [&$this, &$query]);
-      $result = $this->connection->query($this->query_to_string($query));
-      $errors = $this->connection->errorInfo();
+      $result = $this->connection->prepare($this->query_to_string($query));
+      $result->execute($this->args);
+      $errors = $result->errorInfo();
       event::start('on_query_after', 'pdo', [&$this, &$query, &$result, &$errors]);
-      if ($errors[0] !== '00000') {
+      $this->args = [];
+      if ($errors !== ['00000', null, null]) {
         message::add_new(
           'Query error! '.br.
-          'SQLState: '.$errors[0].br.
+          'SQLState: '.         $errors[0].br.
           'Driver error code: '.$errors[1].br.
           'Driver error text: '.$errors[2], 'error'
         );
@@ -121,10 +124,6 @@ namespace effectivecore {
         default      : return $result;
       }
     }
-  }
-
-  function value_quote($value) {
-    return str_replace("'", "''", $value);
   }
 
   function tables(...$tables) {
@@ -160,8 +159,8 @@ namespace effectivecore {
     $return = [];
     foreach (is_array($values[0]) ?
                       $values[0] : $values as $c_value) {
-    # if ($type == 'blob') $return[] = "X'".bin2hex($this->value_quote($data))."'";
-      $return[] = "'".$this->value_quote($c_value)."'";
+      $this->args[] = $c_value;
+      $return[] = '?';
       $return[] = $this->op(',');
     }
     array_pop($return);
