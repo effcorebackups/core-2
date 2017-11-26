@@ -110,9 +110,9 @@ namespace effectivecore {
       if ($errors !== ['00000', null, null]) {
         message::add_new(
           'Query error! '.br.
-          'SQLState: '.         $errors[0].br.
-          'Driver error code: '.$errors[1].br.
-          'Driver error text: '.$errors[2], 'error'
+          'sqlstate: '.         $errors[0].br.
+          'driver error code: '.$errors[1].br.
+          'driver error text: '.$errors[2], 'error'
         );
         return null;
       }
@@ -168,8 +168,8 @@ namespace effectivecore {
   }
 
   function condition($field, $value, $op = '=') {
-    return [$this->fields($field), $op,
-            $this->values($value)];
+    return ['field' => $this->fields($field), 'op' => $op,
+            'value' => $this->values($value)];
   }
 
   function op($op) {
