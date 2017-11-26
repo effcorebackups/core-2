@@ -40,8 +40,8 @@ namespace effectivecore {
   }
 
   static function captcha_cleaning() {
-    $storage = storage::get(entity_factory::get('captcha')->get_storage_id());
-  # @todo: make functionality
+    $storage = $s = storage::get(entity_factory::get('captcha')->get_storage_id());
+    $storage->query('DELETE', 'FROM', $s->tables('captcha'), 'WHERE', $s->condition('created', factory::datetime_get('-1 hour'), '<'));
   }
 
   function captcha_check($characters) {

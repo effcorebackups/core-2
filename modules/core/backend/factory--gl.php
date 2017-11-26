@@ -218,8 +218,10 @@ namespace effectivecore {
   # see: locale_factory::format_date(...);
   # see: locale_factory::format_datetime(...);
 
-  static function datetime_get() {
-    return (new \DateTime('now', new \DateTimeZone('UTC')))->format('Y-m-d H:i:s');
+  static function datetime_get($offset = '') {
+    $datetime = new \DateTime('now', new \DateTimeZone('UTC'));
+    if ($offset) $datetime->modify($offset);
+    return $datetime->format('Y-m-d H:i:s');
   }
 
   ########################
