@@ -65,7 +65,7 @@ namespace effectivecore {
   }
 
   function build() {
-    $values = $_POST;
+    $values = $_POST + static::files_get();
     $id = $this->attribute_select('id');
   # build all form elements
     $elements = $this->child_select_all();
@@ -123,6 +123,24 @@ namespace effectivecore {
     foreach ($this->child_select_all() as $c_npath => $c_child) {
       if ($c_child instanceof \effectivecore\form_container) {
         $return[$c_npath] = $c_child;
+      }
+    }
+    return $return;
+  }
+
+  static function files_get() {
+    $return = [];
+    foreach ($_FILES as $c_field => $c_info) {
+      if ($c_info['tmp_name'] !== '' &&
+          $c_info['tmp_name'] !== [''] &&
+          $c_info['error']    !== '0') {
+        foreach ($c_info as $c_prop => $c_values) {
+          foreach (is_array($c_values) ? $c_values : [$c_values] as $c_index => $c_value) {
+            if (!isset($return[$c_field][$c_index]))
+                       $return[$c_field][$c_index] = new \stdClass();
+            $return[$c_field][$c_index]->{$c_prop} = $c_value;
+          }
+        }
       }
     }
     return $return;

@@ -3,6 +3,7 @@ forms
     attributes
     - id: demo
     - novalidate: novalidate
+    - enctype: multipart/form-data
     - method: post
     children
     - form_elements|form_container
@@ -125,7 +126,7 @@ forms
                 tag_name: input
                 attributes
                 - type: file
-                - name: file
+                - name: file[]
                 - accept: image/*,audio/*,video/*
                 - multiple: multiple
       # field number
