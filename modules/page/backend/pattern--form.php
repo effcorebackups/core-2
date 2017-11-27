@@ -65,7 +65,7 @@ namespace effectivecore {
   }
 
   function build() {
-    $values = $_POST + static::files_get();
+    $values = static::values_get() + static::files_get();
     $id = $this->attribute_select('id');
   # build all form elements
     $elements = $this->child_select_all();
@@ -124,6 +124,25 @@ namespace effectivecore {
       if ($c_child instanceof \effectivecore\form_container) {
         $return[$c_npath] = $c_child;
       }
+    }
+    return $return;
+  }
+
+  static function values_get() {
+    $return = [];
+    # conversion matrix (expected: string|array):
+    # ─────────────────────────────────────────────────────────────────────
+    # - $_POST[name] == ''                  -> return [0 => '']
+    # - $_POST[name] == 'value'             -> return [0 => 'value']
+    # ─────────────────────────────────────────────────────────────────────
+    # - $_POST[name] == [0 => '']           -> return [0 => '']
+    # - $_POST[name] == [0 => '', ...]      -> return [0 => '', ...]
+    # - $_POST[name] == [0 => 'value']      -> return [0 => 'value']
+    # - $_POST[name] == [0 => 'value', ...] -> return [0 => 'value', ...]
+    # ─────────────────────────────────────────────────────────────────────
+    foreach ($_POST as $c_field => $c_value) {
+      $return[$c_field] = is_array($c_value) ?
+                                   $c_value : [$c_value];
     }
     return $return;
   }

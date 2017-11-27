@@ -122,21 +122,9 @@ namespace effectivecore {
                            ($indexes[$c_name] = 0) :
                           ++$indexes[$c_name];
 
-        # conversion matrix (expected: undefined|string|array):
-        # ─────────────────────────────────────────────────────────────────────
-        # - unset($_POST[name])                 -> []
-        # - $_POST[name] == ''                  -> [0 => '']
-        # - $_POST[name] == 'value'             -> [0 => 'value']
-        # ─────────────────────────────────────────────────────────────────────
-        # - $_POST[name] == [0 => '']           -> [0 => '']
-        # - $_POST[name] == [0 => '', ...]      -> [0 => '', ...]
-        # - $_POST[name] == [0 => 'value']      -> [0 => 'value']
-        # - $_POST[name] == [0 => 'value', ...] -> [0 => 'value', ...]
-        # ─────────────────────────────────────────────────────────────────────
-          $c_new_values = !isset($values[$c_name]) ? [] :
-                       (is_array($values[$c_name]) ?
-                                 $values[$c_name]  :
-                                [$values[$c_name]]);
+        # define value
+          $c_new_values = isset($values[$c_name]) ?
+                                $values[$c_name] : [];
 
         # select validation:
         # ─────────────────────────────────────────────────────────────────────
