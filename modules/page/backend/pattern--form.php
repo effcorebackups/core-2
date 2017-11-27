@@ -149,12 +149,25 @@ namespace effectivecore {
 
   static function files_get() {
     $return = [];
+    # conversion matrix (expected: string|array):
+    # ─────────────────────────────────────────────────────────────────────
+    # - $_FILES[name] == '',                 -> ignored empty
+    # - $_FILES[name] == 'value'             -> return [name => [0 => 'value']]
+    # ─────────────────────────────────────────────────────────────────────
+    # - $_FILES[name] == [0 => '']           -> ignored empty
+    # - $_FILES[name] == [0 => '', ...]      -> ignored empty
+    # - $_FILES[name] == [0 => 'value']      -> return [name => [0 => 'value']]
+    # - $_FILES[name] == [0 => 'value', ...] -> return [name => [0 => 'value', ...]]
+    # ─────────────────────────────────────────────────────────────────────
     foreach ($_FILES as $c_field => $c_info) {
-      if ($c_info['tmp_name'] !== '' &&
-          $c_info['tmp_name'] !== [''] &&
-          $c_info['error']    !== '0') {
-        foreach ($c_info as $c_prop => $c_values) {
-          foreach (is_array($c_values) ? $c_values : [$c_values] as $c_index => $c_value) {
+      if (!is_array($c_info['name']))     $c_info['name']     = [$c_info['name']];
+      if (!is_array($c_info['type']))     $c_info['type']     = [$c_info['type']];
+      if (!is_array($c_info['size']))     $c_info['size']     = [$c_info['size']];
+      if (!is_array($c_info['tmp_name'])) $c_info['tmp_name'] = [$c_info['tmp_name']];
+      if (!is_array($c_info['error']))    $c_info['error']    = [$c_info['error']];
+      foreach ($c_info as $c_prop => $c_values) {
+        foreach ($c_values as $c_index => $c_value) {
+          if ($c_info['error'][$c_index] === 0) {
             if (!isset($return[$c_field][$c_index]))
                        $return[$c_field][$c_index] = new \stdClass();
             $return[$c_field][$c_index]->{$c_prop} = $c_value;
