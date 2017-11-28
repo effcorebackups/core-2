@@ -32,7 +32,7 @@ namespace effectivecore {
   # - input[type=email]          : disabled, readonly, required, minlength, maxlength, PATTERN, multiple, name[]
   # - select                     : disabled,           required, multiple, name[]
   # - select::option             : disabled
-  # - input[type=file]           : DISABLED,           REQUIRED, MULTIPLE, name[]
+  # - input[type=file]           : disabled,           REQUIRED, multiple, name[]
   # - input[type=checkbox]       : disabled,           REQUIRED, checked, name[]
   # - input[type=radio]          : disabled,           REQUIRED, checked, name[]
   # - input[type=number]         : disabled, readonly, required, min, max, step, name[]
@@ -168,7 +168,7 @@ namespace effectivecore {
         # ─────────────────────────────────────────────────────────────────────
           if ($c_element->tag_name == 'input' &&
               $c_type == 'file') {
-            # @todo: make functionality
+            static::_validate_field_file($form, $c_field, $c_element, $c_npath, $c_new_values);
           }
 
         # input[type=checkbox|radio] validation:
@@ -245,6 +245,24 @@ namespace effectivecore {
   # ─────────────────────────────────────────────────────────────────────
     if (!$element->attribute_select('multiple') && count($new_values) > 1) {
       $new_values = array_slice($new_values, -1);
+      $form->add_error($npath.'/element',
+        translation::get('Field "%%_title" is not support multiple select!', ['title' => $title])
+      );
+    }
+  }
+
+  ############################
+  ### _validate_field_file ###
+  ############################
+
+  static function _validate_field_file($form, $field, $element, $npath, &$new_values) {
+    $title = translation::get(
+      $field->title
+    );
+
+  # check if field is multiple or singular
+  # ─────────────────────────────────────────────────────────────────────
+    if (!$element->attribute_select('multiple') && count($new_values) > 1) {
       $form->add_error($npath.'/element',
         translation::get('Field "%%_title" is not support multiple select!', ['title' => $title])
       );
