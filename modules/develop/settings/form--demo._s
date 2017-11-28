@@ -206,6 +206,8 @@ forms
             select_attributes
             - name: select_timezone
             - required: required
+            selected
+            - 424: 424
       # field color
         - color|form_field
             title: Color

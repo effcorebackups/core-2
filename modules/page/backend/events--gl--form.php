@@ -423,12 +423,14 @@ namespace effectivecore {
         );
         return;
       }
-      foreach ($emails as $c_email) {
-        if (filter_var($c_email, FILTER_VALIDATE_EMAIL) == false) {
-          $form->add_error($npath.'/element',
-            translation::get('Field "%%_title" contains an incorrect email address!', ['title' => $title])
-          );
-          return;
+      if (strlen($new_value)) {
+        foreach ($emails as $c_email) {
+          if (filter_var($c_email, FILTER_VALIDATE_EMAIL) == false) {
+            $form->add_error($npath.'/element',
+              translation::get('Field "%%_title" contains an incorrect email address!', ['title' => $title])
+            );
+            return;
+          }
         }
       }
     }
