@@ -32,7 +32,7 @@ namespace effectivecore {
   # - input[type=email]          : disabled, readonly, required, minlength, maxlength, PATTERN, multiple, name[]
   # - select                     : disabled,           required, multiple, name[]
   # - select::option             : disabled
-  # - input[type=file]           : DISABLED,           REQUIRED, MULTIPLE, NAME[]
+  # - input[type=file]           : DISABLED,           REQUIRED, MULTIPLE, name[]
   # - input[type=checkbox]       : disabled,           REQUIRED, checked, name[]
   # - input[type=radio]          : disabled,           REQUIRED, checked, name[]
   # - input[type=number]         : disabled, readonly, required, min, max, step, name[]

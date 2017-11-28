@@ -80,14 +80,14 @@ namespace effectivecore {
   # call init handlers
     event::start('on_form_init', $id, [$this, $fields]);
   # if current user click the button
-    if (isset($values['form_id']) &&
-              $values['form_id'] === $id && isset($values['button'])) {
+    if (isset($values['form_id'][0]) &&
+              $values['form_id'][0] === $id && isset($values['button'][0])) {
     # get more info about clicked button
       foreach ($elements as $c_element) {
         if ($c_element instanceof markup &&
             $c_element->tag_name == 'button' &&
             $c_element->attribute_select('type') == 'submit' &&
-            $c_element->attribute_select('value') === $values['button']) {
+            $c_element->attribute_select('value') === $values['button'][0]) {
           $this->clicked_button      = $c_element;
           $this->clicked_button_name = $c_element->attribute_select('value');
           break;
