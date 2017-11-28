@@ -32,7 +32,7 @@ namespace effectivecore {
   # - input[type=email]          : disabled, readonly, required, minlength, maxlength, PATTERN, multiple, name[]
   # - select                     : disabled,           required, multiple, name[]
   # - select::option             : disabled
-  # - input[type=file]           : disabled,           REQUIRED, multiple, name[]
+  # - input[type=file]           : disabled,           required, multiple, name[]
   # - input[type=checkbox]       : disabled,           REQUIRED, checked, name[]
   # - input[type=radio]          : disabled,           REQUIRED, checked, name[]
   # - input[type=number]         : disabled, readonly, required, min, max, step, name[]
@@ -259,6 +259,15 @@ namespace effectivecore {
     $title = translation::get(
       $field->title
     );
+
+  # check required
+  # ─────────────────────────────────────────────────────────────────────
+    if ($element->attribute_select('required') && count($new_values) == 0) {
+      $form->add_error($npath.'/element',
+        translation::get('Field "%%_title" must be selected!', ['title' => $title])
+      );
+      return;
+    }
 
   # check if field is multiple or singular
   # ─────────────────────────────────────────────────────────────────────
