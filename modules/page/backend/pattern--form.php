@@ -167,7 +167,7 @@ namespace effectivecore {
       if (!is_array($c_info['error']))    $c_info['error']    = [$c_info['error']];
       foreach ($c_info as $c_prop => $c_values) {
         foreach ($c_values as $c_index => $c_value) {
-          if ($c_info['error'][$c_index] === 0) {
+          if ($c_info['error'][$c_index] !== UPLOAD_ERR_NO_FILE) {
             if (!isset($return[$c_field][$c_index]))
                        $return[$c_field][$c_index] = new \stdClass();
             $return[$c_field][$c_index]->{$c_prop} = $c_value;

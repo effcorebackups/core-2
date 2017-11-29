@@ -1,6 +1,7 @@
 translations
   ru
   - - select -: - выбрать -
+  - a php extension stopped the file upload: расширение php остановило загрузку файла
   - action: действие
   - Action: Действие
   - actions: действия
@@ -61,6 +62,8 @@ translations
   - events: события
   - Events: События
   - Execute plan: План выполнения
+  - failed to write file to disk: не удалось записать файл на диск
+  - Field "%%_title" after trying to upload the file returned an error\: %%_error!: Поле "%%_title" после попытки загрузить файл вернуло ошибку: %%_error!
   - Field "%%_title" can not be blank!: Поле "%%_title" не может быть пустым!
   - Field "%%_title" contains an incorrect characters from image!: Поле "%%_title" содержит неверные символы с изображения!
   - Field "%%_title" contains an incorrect date!: Поле "%%_title" содержит неверную дату!
@@ -113,6 +116,7 @@ translations
   - Memory for php (bytes): Память для php (байт)
   - Message from storage\: %%_message: Сообщение от хранилища: %%_message
   - Minimal field value\: %%_value.: Минимальное значение поля: %%_value.
+  - missing a temporary directory: отсутствует временный каталог
   - Moderators: Модераторы
   - Module for demonstrating capabilities.: Модуль для демонстрации возможностей.
   - Module for development.: Модуль для разработки.
@@ -178,6 +182,9 @@ translations
   - Telephone: Телефон
   - Text: Текст
   - Textarea: Текстовая область
+  - the size of uploaded file is exceeds of value from MAX_FILE_SIZE: размер загруженного файла превышает значение MAX_FILE_SIZE
+  - the size of uploaded file is exceeds of value from upload_max_filesize: размер загруженного файла превышает значение upload_max_filesize
+  - the uploaded file was only partially uploaded: загружаемый файл был загружен только частично
   - Time: Время
   - Timezone: Часовой пояс
   - Title: Заголовок

@@ -260,6 +260,18 @@ namespace effectivecore {
       $field->title
     );
 
+  # break processing if some file from set of files is broken
+    foreach ($new_values as $c_new_value) {
+      switch ($c_new_value->error) {
+        case UPLOAD_ERR_INI_SIZE   : $form->add_error($npath.'/element', translation::get('Field "%%_title" after trying to upload the file returned an error: %%_error!', ['title' => $title, 'error' => translation::get('the size of uploaded file is exceeds of value from upload_max_filesize')])); return;
+        case UPLOAD_ERR_FORM_SIZE  : $form->add_error($npath.'/element', translation::get('Field "%%_title" after trying to upload the file returned an error: %%_error!', ['title' => $title, 'error' => translation::get('the size of uploaded file is exceeds of value from MAX_FILE_SIZE')]));       return;
+        case UPLOAD_ERR_PARTIAL    : $form->add_error($npath.'/element', translation::get('Field "%%_title" after trying to upload the file returned an error: %%_error!', ['title' => $title, 'error' => translation::get('the uploaded file was only partially uploaded')]));                          return;
+        case UPLOAD_ERR_NO_TMP_DIR : $form->add_error($npath.'/element', translation::get('Field "%%_title" after trying to upload the file returned an error: %%_error!', ['title' => $title, 'error' => translation::get('missing a temporary directory')]));                                          return;
+        case UPLOAD_ERR_CANT_WRITE : $form->add_error($npath.'/element', translation::get('Field "%%_title" after trying to upload the file returned an error: %%_error!', ['title' => $title, 'error' => translation::get('failed to write file to disk')]));                                           return;
+        case UPLOAD_ERR_EXTENSION  : $form->add_error($npath.'/element', translation::get('Field "%%_title" after trying to upload the file returned an error: %%_error!', ['title' => $title, 'error' => translation::get('a php extension stopped the file upload')]));                                return;
+      }
+    }
+
   # check required
   # ─────────────────────────────────────────────────────────────────────
     if ($element->attribute_select('required') && count($new_values) == 0) {
@@ -276,6 +288,12 @@ namespace effectivecore {
         translation::get('Field "%%_title" is not support multiple select!', ['title' => $title])
       );
     }
+
+  # move the file/files
+  # ─────────────────────────────────────────────────────────────────────
+    # @todo: make functionality
+    # $c_new_value->error == UPLOAD_ERR_OK
+
   }
 
   ############################
