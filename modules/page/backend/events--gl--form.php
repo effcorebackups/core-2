@@ -270,6 +270,10 @@ namespace effectivecore {
         case UPLOAD_ERR_CANT_WRITE : $form->add_error($npath.'/element', translation::get('Field "%%_title" after trying to upload the file returned an error: %%_error!', ['title' => $title, 'error' => translation::get('failed to write file to disk')]));                                           return;
         case UPLOAD_ERR_EXTENSION  : $form->add_error($npath.'/element', translation::get('Field "%%_title" after trying to upload the file returned an error: %%_error!', ['title' => $title, 'error' => translation::get('a php extension stopped the file upload')]));                                return;
       }
+      if ($c_new_value->error !== UPLOAD_ERR_OK) {
+        $form->add_error($npath.'/element', translation::get('Field "%%_title" after trying to upload the file returned an error: %%_error!', ['title' => $title, 'error' => $c_new_value->error]));
+        return;
+      }
     }
 
   # check required
@@ -292,7 +296,6 @@ namespace effectivecore {
   # move the file/files
   # ─────────────────────────────────────────────────────────────────────
     # @todo: make functionality
-    # $c_new_value->error == UPLOAD_ERR_OK
 
   }
 
