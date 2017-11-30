@@ -122,6 +122,12 @@ forms
               args
               - info: &lt;input type="file"&gt;
             children
+            - max_file_size|markup_simple
+                tag_name: input
+                attributes
+                - type: hidden
+                - name: MAX_FILE_SIZE
+                - value: 20971520
             - element|markup_simple
                 tag_name: input
                 attributes
