@@ -274,6 +274,10 @@ namespace effectivecore {
         $form->add_error($npath.'/element', translation::get('Field "%%_title" after trying to upload the file returned an error: %%_error!', ['title' => $title, 'error' => $c_new_value->error]));
         return;
       }
+      if ($c_new_value->size === 0) {
+        $form->add_error($npath.'/element', translation::get('Field "%%_title" after trying to upload the file returned an error: %%_error!', ['title' => $title, 'error' => translation::get('file is empty')]));
+        return;
+      }
     }
 
   # check required

@@ -80,6 +80,7 @@ translations
   - Field value is more than %%_value.: Значение поля больше чем %%_value.
   - Field value is not a valid number.: Значение поля не является допустимым числом.
   - Field value is not in valid range.: Значение поля не соответствует допустимому диапазону.
+  - file is empty: файл пуст
   - File: Файл
   - file: файл
   - Form elements: Элементы формы
