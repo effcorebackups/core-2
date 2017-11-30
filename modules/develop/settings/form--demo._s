@@ -115,19 +115,14 @@ forms
                 - maxlength: 64
                 - multiple: multiple
       # field file
-        - file|form_field
+        - file|form_field_file
             title: File
+            max_file_size: 1048576
             description|text
               text: Element %%_info.
               args
               - info: &lt;input type="file"&gt;
             children
-            - max_file_size|markup_simple
-                tag_name: input
-                attributes
-                - type: hidden
-                - name: MAX_FILE_SIZE
-                - value: 20971520
             - element|markup_simple
                 tag_name: input
                 attributes
