@@ -228,6 +228,18 @@ namespace effectivecore {
   ### shared functions ###
   ########################
 
+  static function format_number($number, $precision = 0, $dec_point = '.', $thousands = '', $no_zeros = true) {
+    $precision = $precision ? $precision + 5 : 0; # disable the rounding effect
+    $return = $precision ? substr(
+      number_format($number, $precision, $dec_point, $thousands), 0, -5) :
+      number_format($number, $precision, $dec_point, $thousands);
+    if ($no_zeros) {
+      $return = rtrim($return, '0');
+      $return = rtrim($return, $dec_point);
+    }
+    return $return;
+  }
+
   static function send_header_and_exit($header, $message = '', $p = '') {
     switch ($header) {
       case 'redirect'      : header('Location: '.$p);          break;
@@ -265,6 +277,13 @@ namespace effectivecore {
       $binstr.= str_pad(base_convert($c_chunk, 16, 2), 8, '0', STR_PAD_LEFT);
     }
     return $binstr;
+  }
+
+  static function bytes_to_human($bytes, $decimals = 2, $dec_point = '.') {
+    $pow = $bytes == 0 ? 0 : (int)log($bytes, 1024);
+    $character = ['B', 'K', 'M', 'G', 'T'][$pow];
+    $value = $bytes >= 1024 ? $bytes / pow(1024, $pow) : $bytes;
+    return static::format_number($value, $decimals, $dec_point).$character;
   }
 
 }}

@@ -42,24 +42,13 @@ namespace effectivecore {
   static function format_version($number)                 {return static::format_number(floatval($number), 2);}
 
   static function format_number($number, $precision = 0, $dec_point = null, $thousands = null, $no_zeros = true) {
-    $current = static::get_settings();
-    $precision = $precision ? $precision + 5 : 0; # disable the rounding effect
-    $dec_point = is_null($dec_point) ? $current->decimal_point       : $dec_point;
-    $thousands = is_null($thousands) ? $current->thousands_separator : $thousands;
-    $return = $precision ? substr(number_format($number, $precision, $dec_point, $thousands), 0, -5) :
-                                  number_format($number, $precision, $dec_point, $thousands);
-    if ($no_zeros) {
-      $return = rtrim($return, '0');
-      $return = rtrim($return, $dec_point);
-    }
-    return $return;
+    $dec_point = is_null($dec_point) ? static::get_settings()->decimal_point       : $dec_point;
+    $thousands = is_null($thousands) ? static::get_settings()->thousands_separator : $thousands;
+    return factory::format_number($number, $precision, $dec_point, $thousands, $no_zeros);
   }
 
   static function format_human_bytes($bytes, $decimals = 2) {
-    $pow = $bytes == 0 ? 0 : (int)log($bytes, 1024);
-    $character = ['B', 'K', 'M', 'G', 'T'][$pow];
-    $value = $bytes >= 1024 ? $bytes / pow(1024, $pow) : $bytes;
-    return static::format_number($value, $decimals).$character;
+    return factory::bytes_to_human($bytes, $decimals, static::get_settings()->decimal_point);
   }
 
 }}
