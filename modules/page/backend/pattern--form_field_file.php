@@ -12,11 +12,13 @@ namespace effectivecore {
   public $max_file_size;
 
   function build() {
-    $this->description = translation::get('Maximal file size: %%_value.', ['value' => $this->get_max_file_size()]);
+    $this->description = translation::get('Maximal file size: %%_value.', [
+      'value' => locale::format_human_bytes($this->get_max_file_size())
+    ]);
   }
 
   function get_max_file_size() {
-    return $this->max_file_size ? locale::format_human_bytes($this->max_file_size) : ini_get('upload_max_filesize');
+    return $this->max_file_size ?: ini_get('upload_max_filesize');
   }
 
 }}

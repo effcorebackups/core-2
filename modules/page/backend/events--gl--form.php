@@ -6,6 +6,7 @@
 
 namespace effectivecore {
           use \effectivecore\markup as markup;
+          use \effectivecore\locale_factory as locale;
           use \effectivecore\markup_simple as markup_simple;
           use \effectivecore\translation_factory as translation;
           abstract class events_form {
@@ -264,18 +265,22 @@ namespace effectivecore {
     foreach ($new_values as $c_new_value) {
       switch ($c_new_value->error) {
         case UPLOAD_ERR_INI_SIZE   : $form->add_error($npath.'/element', translation::get('Field "%%_title" after trying to upload the file returned an error: %%_error!', ['title' => $title, 'error' => translation::get('the size of uploaded file is exceeds of value from upload_max_filesize')])); return;
-        case UPLOAD_ERR_FORM_SIZE  : $form->add_error($npath.'/element', translation::get('Field "%%_title" after trying to upload the file returned an error: %%_error!', ['title' => $title, 'error' => translation::get('the size of uploaded file is exceeds of value from MAX_FILE_SIZE')]));       return;
         case UPLOAD_ERR_PARTIAL    : $form->add_error($npath.'/element', translation::get('Field "%%_title" after trying to upload the file returned an error: %%_error!', ['title' => $title, 'error' => translation::get('the uploaded file was only partially uploaded')]));                          return;
         case UPLOAD_ERR_NO_TMP_DIR : $form->add_error($npath.'/element', translation::get('Field "%%_title" after trying to upload the file returned an error: %%_error!', ['title' => $title, 'error' => translation::get('missing a temporary directory')]));                                          return;
         case UPLOAD_ERR_CANT_WRITE : $form->add_error($npath.'/element', translation::get('Field "%%_title" after trying to upload the file returned an error: %%_error!', ['title' => $title, 'error' => translation::get('failed to write file to disk')]));                                           return;
         case UPLOAD_ERR_EXTENSION  : $form->add_error($npath.'/element', translation::get('Field "%%_title" after trying to upload the file returned an error: %%_error!', ['title' => $title, 'error' => translation::get('a php extension stopped the file upload')]));                                return;
       }
-      if ($c_new_value->error !== UPLOAD_ERR_OK) {
-        $form->add_error($npath.'/element', translation::get('Field "%%_title" after trying to upload the file returned an error: %%_error!', ['title' => $title, 'error' => $c_new_value->error]));
-        return;
-      }
+
       if ($c_new_value->size === 0) {
         $form->add_error($npath.'/element', translation::get('Field "%%_title" after trying to upload the file returned an error: %%_error!', ['title' => $title, 'error' => translation::get('file is empty')]));
+        return;
+      }
+      if ($c_new_value->size > $field->get_max_file_size()) {
+        $form->add_error($npath.'/element', translation::get('Field "%%_title" after trying to upload the file returned an error: %%_error!', ['title' => $title, 'error' => translation::get('the size of uploaded file more than %%_size', ['size' => locale::format_human_bytes($field->get_max_file_size())])]));
+        return;
+      }
+      if ($c_new_value->error !== UPLOAD_ERR_OK) {
+        $form->add_error($npath.'/element', translation::get('Field "%%_title" after trying to upload the file returned an error: %%_error!', ['title' => $title, 'error' => $c_new_value->error]));
         return;
       }
     }

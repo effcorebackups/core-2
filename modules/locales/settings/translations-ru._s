@@ -184,7 +184,7 @@ translations
   - Telephone: Телефон
   - Text: Текст
   - Textarea: Текстовая область
-  - the size of uploaded file is exceeds of value from MAX_FILE_SIZE: размер загруженного файла превышает значение MAX_FILE_SIZE
+  - the size of uploaded file more than %%_size: размер загруженного файла больше чем %%_size
   - the size of uploaded file is exceeds of value from upload_max_filesize: размер загруженного файла превышает значение upload_max_filesize
   - the uploaded file was only partially uploaded: загружаемый файл был загружен только частично
   - Time: Время
