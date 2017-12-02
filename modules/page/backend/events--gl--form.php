@@ -307,7 +307,14 @@ namespace effectivecore {
 
   # move the file/files
   # ─────────────────────────────────────────────────────────────────────
-    # @todo: make functionality
+    foreach ($new_values as $c_new_value) {
+      $file = new file($c_new_value->tmp_name);
+      $file->rename($file->get_hash());
+      $field->tmp_file_push_to_wait_list($file->get_file_full());
+      if ($file->is_exist()) {
+        # @todo: make functionality (use sys_get_temp_dir())
+      }
+    }
 
   }
 

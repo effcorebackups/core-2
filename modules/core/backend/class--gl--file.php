@@ -55,6 +55,14 @@ namespace effectivecore {
     $this->data = $data;
   }
 
+  function rename($new_name) {
+    $path_old = $this->get_path_full();
+    $path_new = $this->get_dirs_full().'/'.$new_name;
+    $return = rename($path_old, $path_new);
+    $this->__construct($path_new);
+    return $return;
+  }
+
   function is_exist()          {return file_exists($this->get_path_full());}
 
   function get_dirs_info()     {return $this->dirs;}
@@ -65,6 +73,6 @@ namespace effectivecore {
   function get_path_full()     {return $this->dirs->full.'/'.$this->file->full;}
   function get_path_relative() {return $this->dirs->relative.'/'.$this->file->full;}
   function get_dir_parent()    {return ltrim(strrchr($this->dirs->full, '/'), '/');}
-  function get_hash()          {return md5_file($this->get_path_relative());}
+  function get_hash()          {return md5_file($this->get_path_full());}
 
 }}

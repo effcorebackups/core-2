@@ -23,4 +23,12 @@ namespace effectivecore {
                                  factory::human_to_bytes(ini_get('upload_max_filesize'));
   }
 
+  function tmp_file_push_to_wait_list($file_name) {
+    $this->child_insert(new markup_simple('input', [
+      'type'  => 'hidden',
+      'name'  => 'wait_list[]',
+      'value' => $file_name
+    ]));
+  }
+
 }}
