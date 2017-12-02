@@ -286,4 +286,9 @@ namespace effectivecore {
     return static::format_number($value, $decimals, $dec_point).$character;
   }
 
+  static function human_to_bytes($human) {
+  # @todo: make functionality
+    return $human;
+  }
+
 }}

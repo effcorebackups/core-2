@@ -18,7 +18,7 @@ namespace effectivecore {
   }
 
   function get_max_file_size() {
-    return $this->max_file_size ?: ini_get('upload_max_filesize');
+    return $this->max_file_size ?: factory::human_to_bytes(ini_get('upload_max_filesize'));
   }
 
 }}
