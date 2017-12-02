@@ -117,7 +117,7 @@ forms
       # field file
         - file|form_field_file
             title: File
-            max_file_size: 1536
+            max_file_size: 1048576
             description|text
               text: Element %%_info.
               args
