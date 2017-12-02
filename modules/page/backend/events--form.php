@@ -27,8 +27,8 @@ namespace effectivecore\modules\page {
   static function on_submit_decoration($form, $fields, &$values) {
     switch ($form->clicked_button_name) {
       case 'save':
-        storage::get('settings')->changes_register_action('page', 'update', 'decoration/page/color_id',    $values['color_id'], false);
-        storage::get('settings')->changes_register_action('page', 'update', 'decoration/page/color_bg_id', $values['color_bg_id']);
+        storage::get('settings')->changes_register_action('page', 'update', 'decoration/page/color_id',    $values['color_id'][0], false);
+        storage::get('settings')->changes_register_action('page', 'update', 'decoration/page/color_bg_id', $values['color_bg_id'][0]);
         message::add_new('Changes was saved.');
         break;
       case 'restore':
