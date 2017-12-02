@@ -282,7 +282,7 @@ namespace effectivecore {
   static function bytes_to_human($bytes, $decimals = 2, $dec_point = '.') {
     $power = $bytes == 0 ? 0 : (int)log($bytes, 1024);
     $character = ['B', 'K', 'M', 'G', 'T'][$power];
-    $value = $bytes >= 1024 ? $bytes / pow(1024, $power) : $bytes;
+    $value = $bytes >= 1024 ? $bytes / (1024 ** $power) : $bytes;
     return static::format_number($value, $decimals, $dec_point).$character;
   }
 
@@ -290,7 +290,7 @@ namespace effectivecore {
     $powers = array_flip(['B', 'K', 'M', 'G', 'T']);
     $character = strtoupper($human[strlen($human)-1]);
     $value = (int)substr($human, 0, -1);
-    return $value * pow(1024, $powers[$character]);
+    return $value * (1024 ** $powers[$character]);
   }
 
 }}
