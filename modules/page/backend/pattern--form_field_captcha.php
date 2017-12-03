@@ -14,7 +14,7 @@ namespace effectivecore {
   public $attributes = ['class' => ['captcha' => 'captcha']];
 
   public $length = 6;
-  public $attempts = 2;
+  public $attempts = 3;
   public $noise = 1;
   public static $glyphs;
 
