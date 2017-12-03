@@ -138,11 +138,11 @@ namespace effectivecore\modules\user {
       case 'login':
         if (count($form->errors) == 0) {
           $user = (new instance('user', [
-            'email' => strtolower($values['email'])
+            'email' => strtolower($values['email'][0])
           ]))->select();
           if (!$user || (
                $user->password_hash &&
-               $user->password_hash !== factory::hash_get($values['password']))) {
+               $user->password_hash !== factory::hash_get($values['password'][0]))) {
             $form->add_error('credentials/email/element');
             $form->add_error('credentials/password/element');
             message::add_new('Incorrect email or password!', 'error');
@@ -156,10 +156,10 @@ namespace effectivecore\modules\user {
     switch ($form->clicked_button_name) {
       case 'login':
         $user = (new instance('user', [
-          'email' => strtolower($values['email'])
+          'email' => strtolower($values['email'][0])
         ]))->select();
         if ($user &&
-            $user->password_hash === factory::hash_get($values['password'])) {
+            $user->password_hash === factory::hash_get($values['password'][0])) {
           session::init($user->id);
           url::go('/user/'.$user->id);
         }
