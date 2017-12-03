@@ -41,15 +41,15 @@ namespace effectivecore\modules\core {
     static::on_validate($form, $fields, $values);
     switch ($form->clicked_button_name) {
       case 'install':
-        if (empty($values['driver'])) {
+        if (empty($values['driver'][0])) {
           $form->add_error(null, 'Driver is not selected!');
           return;
         }
         if (count($form->errors) == 0) {
-          switch ($values['driver']) {
+          switch ($values['driver'][0]) {
             case 'sqlite':
-              $test = storage::get('main')->test($values['driver'], (object)[
-                'file_name' => $values['file_name']
+              $test = storage::get('main')->test($values['driver'][0], (object)[
+                'file_name' => $values['file_name'][0]
               ]);
               if ($test !== true) {
                 $form->add_error('storage/sqlite/file_name/element');
@@ -58,12 +58,12 @@ namespace effectivecore\modules\core {
               }
               break;
             default:
-              $test = storage::get('main')->test($values['driver'], (object)[
-                'host_name'    => $values['host_name'],
-                'port'         => $values['port'],
-                'storage_name' => $values['storage_name'],
-                'user_name'    => $values['user_name'],
-                'password'     => $values['password']
+              $test = storage::get('main')->test($values['driver'][0], (object)[
+                'host_name'    => $values['host_name'][0],
+                'port'         => $values['port'][0],
+                'storage_name' => $values['storage_name'][0],
+                'user_name'    => $values['user_name'][0],
+                'password'     => $values['password'][0]
               ]);
               if ($test !== true) {
                 $form->add_error('storage/mysql/storage_name/element');
@@ -84,24 +84,24 @@ namespace effectivecore\modules\core {
   static function on_submit_installation($form, $fields, &$values) {
     switch ($form->clicked_button_name) {
       case 'install':
-        switch ($values['driver']) {
+        switch ($values['driver'][0]) {
           case 'sqlite':
             $params = new \stdClass;
-            $params->driver = $values['driver'];
+            $params->driver = $values['driver'][0];
             $params->credentials = new \stdClass;
-            $params->credentials->file_name = $values['file_name'];
-            $params->table_prefix           = $values['table_prefix'];
+            $params->credentials->file_name    = $values['file_name'][0];
+            $params->table_prefix              = $values['table_prefix'][0];
             break;
           default:
             $params = new \stdClass;
-            $params->driver = $values['driver'];
+            $params->driver = $values['driver'][0];
             $params->credentials = new \stdClass;
-            $params->credentials->host_name    = $values['host_name'];
-            $params->credentials->port         = $values['port'];
-            $params->credentials->storage_name = $values['storage_name'];
-            $params->credentials->user_name    = $values['user_name'];
-            $params->credentials->password     = $values['password'];
-            $params->table_prefix              = $values['table_prefix'];
+            $params->credentials->host_name    = $values['host_name'][0];
+            $params->credentials->port         = $values['port'][0];
+            $params->credentials->storage_name = $values['storage_name'][0];
+            $params->credentials->user_name    = $values['user_name'][0];
+            $params->credentials->password     = $values['password'][0];
+            $params->table_prefix              = $values['table_prefix'][0];
             break;
         }
         storage::get('settings')->changes_register_action('core', 'insert', 'storages/storage/storage_sql_dpo', $params);
