@@ -177,12 +177,12 @@ namespace effectivecore\modules\user {
       case 'register':
         if (count($form->errors) == 0) {
         # test email
-          if ((new instance('user', ['email' => strtolower($values['email'])]))->select()) {
+          if ((new instance('user', ['email' => strtolower($values['email'][0])]))->select()) {
             $form->add_error('credentials/email/element', 'User with this EMail was already registered!');
             return;
           }
         # test nick
-          if ((new instance('user', ['nick' => strtolower($values['nick'])]))->select()) {
+          if ((new instance('user', ['nick' => strtolower($values['nick'][0])]))->select()) {
             $form->add_error('credentials/nick/element', 'User with this Nick was already registered!');
             return;
           }
@@ -195,9 +195,9 @@ namespace effectivecore\modules\user {
     switch ($form->clicked_button_name) {
       case 'register':
         $user = (new instance('user', [
-          'email'         => strtolower($values['email']),
-          'nick'          => strtolower($values['nick']),
-          'password_hash' => factory::hash_get($values['password']),
+          'email'         => strtolower($values['email'][0]),
+          'nick'          => strtolower($values['nick'][0]),
+          'password_hash' => factory::hash_get($values['password'][0]),
           'created'       => factory::datetime_get()
         ]))->insert();
         if ($user) {
