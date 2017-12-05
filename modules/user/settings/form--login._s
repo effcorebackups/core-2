@@ -33,6 +33,21 @@ forms
                 - minlength: 5
                 - maxlength: 255
                 - autocomplete: off
+        - is_remember|form_field
+            title: remember me
+            title_position: bottom
+            attributes
+            - class
+              - boxes: boxes
+              - checkboxes: checkboxes
+            children
+            - element|markup_simple
+                tag_name: input
+                attributes
+                - type: checkbox
+                - name: is_remember
+                - value: 1
+                - checked: checked
         - captcha|form_field_captcha
     - button_login|markup
         tag_name: button

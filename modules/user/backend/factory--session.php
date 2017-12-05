@@ -10,10 +10,10 @@ namespace effectivecore\modules\user {
           use \effectivecore\message_factory as message;
           abstract class session_factory {
 
-  static function id_regenerate($sign) {
+  static function id_regenerate($sign, $expire = 60 * 60 * 24 * 30) {
     $session_id = md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT'].rand(0, PHP_INT_MAX));
     $session_id[0] = $sign; # a - anonymous user | f - authenticated user
-    setcookie('sid', ($_COOKIE['sid'] = $session_id), time() + 60 * 60 * 24 * 30, '/');
+    setcookie('sid', ($_COOKIE['sid'] = $session_id), $expire ? time() + $expire : 0, '/');
     return $session_id;
   }
 
@@ -40,8 +40,9 @@ namespace effectivecore\modules\user {
     }
   }
 
-  static function insert($id_user) {
-    static::id_regenerate('f');
+  static function insert($id_user, $is_remember) {
+    if ($is_remember) static::id_regenerate('f');
+    else              static::id_regenerate('f', 0);
     (new instance('session', [
       'id'              => static::id_get(),
       'id_user'         => $id_user,
