@@ -5,6 +5,7 @@
   #############################################################
 
 namespace effectivecore\modules\user {
+          use const \effectivecore\br;
           use \effectivecore\factory as factory;
           use \effectivecore\url_factory as url;
           use \effectivecore\instance as instance;
@@ -131,6 +132,14 @@ namespace effectivecore\modules\user {
   ###################
   ### form: login ###
   ###################
+
+  static function on_init_login($form, $fields) {
+    if (!isset($_COOKIE['cie'])) {
+      message::add_new(
+        translation::get('Cookies are disabled. You can not log in!').br.
+        translation::get('Enable cookies before login.'), 'warning');
+    }
+  }
 
   static function on_validate_login($form, $fields, &$values) {
     static::on_validate($form, $fields, $values);

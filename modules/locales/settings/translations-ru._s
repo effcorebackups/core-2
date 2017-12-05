@@ -1,6 +1,5 @@
 translations
   ru
-  - - select -: - выбрать -
   - a php extension stopped the file upload: расширение php остановило загрузку файла
   - action: действие
   - Action: Действие
@@ -30,6 +29,7 @@ translations
   - Colors: Цвета
   - Console: Консоль
   - Control elements: Элементы управления
+  - Cookies are disabled. You can not log in!: Cookies отключены. Вы не можете войти в систему!
   - Core: Ядро
   - created: создано
   - Created: Создано
@@ -54,6 +54,7 @@ translations
   - Element %%_info.: Элемент %%_info.
   - Elements: Элементы
   - EMail: Адрес электронной почты
+  - Enable cookies before login.: Включите cookies до начала входа в систему.
   - Entity %%_name was installed.: Сущность %%_name была установлена.
   - Entity %%_name was not installed!: Сущность %%_name не была установлена!
   - event system was initialized: система событий была инициализирована
@@ -225,3 +226,4 @@ translations
   - Wellcome to our site!: Добро пожаловать на наш сайт!
   - Write the characters from the picture.: Напишите символы с картинки.
   - Yes: Да
+  - - select -: - выбрать -

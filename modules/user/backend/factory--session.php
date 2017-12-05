@@ -14,6 +14,7 @@ namespace effectivecore\modules\user {
     $session_id = md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT'].rand(0, PHP_INT_MAX));
     $session_id[0] = $sign; # a - anonymous user | f - authenticated user
     setcookie('sid', ($_COOKIE['sid'] = $session_id), $expire ? time() + $expire : 0, '/');
+    setcookie('cie', 'true', $expire ? time() + $expire : 0, '/');
     return $session_id;
   }
 
