@@ -25,9 +25,14 @@ namespace effectivecore\modules\user {
   static function select() {
     $session_id = static::id_get();
     if ($session_id[0] == 'f') {
-      return (new instance('session', [
+      $session = (new instance('session', [
         'id' => $session_id
       ]))->select();
+      if (!$session) {
+        static::id_regenerate('a');
+        message::add_new('invalid session was deleted!', 'warning');
+      }
+      return $session;
     }
   }
 
