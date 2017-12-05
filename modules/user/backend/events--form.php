@@ -160,7 +160,7 @@ namespace effectivecore\modules\user {
         ]))->select();
         if ($user &&
             $user->password_hash === factory::hash_get($values['password'][0])) {
-          session::init($user->id);
+          session::insert($user->id);
           url::go('/user/'.$user->id);
         }
         break;
@@ -201,7 +201,7 @@ namespace effectivecore\modules\user {
           'created'       => factory::datetime_get()
         ]))->insert();
         if ($user) {
-          session::init($user->id);
+          session::insert($user->id);
           url::go('/user/'.$user->id);
         } else {
           message::add_new('User was not registered!', 'error');
@@ -217,7 +217,7 @@ namespace effectivecore\modules\user {
   static function on_submit_logout($form, $fields, &$values) {
     switch ($form->clicked_button_name) {
       case 'logout':
-        session::destroy(user::get_current()->id);
+        session::delete(user::get_current()->id);
         url::go('/');
       case 'cancel':
         url::go(url::get_back_url() ?: '/');

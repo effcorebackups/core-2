@@ -17,7 +17,9 @@ namespace effectivecore\modules\user {
     static::$data->roles = ['anonymous' => 'anonymous'];
   # load user from storage
     if ($id !== null) {
-      $user = (new instance('user', ['id' => $id]))->select();
+      $user = (new instance('user', [
+        'id' => $id
+      ]))->select();
       if ($user) {
         static::$data = (object)($user->get_values());
         static::$data->roles = ['registered' => 'registered'];
