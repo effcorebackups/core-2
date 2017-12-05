@@ -36,7 +36,7 @@ namespace effectivecore {
   # more unique identifier than IP address, for example: IP + user_agent (in this situation
   # client can falsify user_agent on each http request and this will create a great variety
   # of unique client id)
-    return md5($_SERVER['REMOTE_ADDR']);
+    return $_SERVER['REMOTE_ADDR'];
   }
 
   static function captcha_cleaning() {
@@ -46,7 +46,7 @@ namespace effectivecore {
 
   function captcha_check($characters) {
     $captcha = (new instance('captcha', [
-      'id' => static::id_get()
+      'ip_address' => static::id_get()
     ]))->select();
     if ($captcha) {
       if ($captcha->attempts > 0) {
@@ -74,7 +74,7 @@ namespace effectivecore {
       $canvas->glyph_set($c_glyph, rand(0, 2) - 1 + ($i * 5), rand(1, 5));
     }
     $captcha = new instance('captcha', [
-      'id'          => static::id_get(),
+      'ip_address'  => static::id_get(),
       'characters'  => $characters,
       'created'     => factory::datetime_get(),
       'attempts'    => $this->attempts,
@@ -86,7 +86,7 @@ namespace effectivecore {
 
   function captcha_load() {
     $captcha = (new instance('captcha', [
-      'id' => static::id_get()
+      'ip_address' => static::id_get()
     ]))->select();
     if ($captcha) {
       $captcha->canvas = new canvas_svg(5 * $this->length, 15, 5);

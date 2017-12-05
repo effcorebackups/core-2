@@ -3,9 +3,9 @@ entities
     name: captcha
     storage_id: main
     fields
-      id
+      ip_address
         type: varchar
-        size: 32
+        size: 15
         not_null: true
       characters
         type: varchar
@@ -24,7 +24,7 @@ entities
     - key_id
         type: primary key
         fields
-        - id: id
+        - ip_address: ip_address
     indexes
     - idx_created
         type: index
