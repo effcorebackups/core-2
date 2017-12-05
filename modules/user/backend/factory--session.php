@@ -28,7 +28,9 @@ namespace effectivecore\modules\user {
       $session = (new instance('session', [
         'id' => $session_id
       ]))->select();
-      if (!$session) {
+      if (!$session ||
+          ($session && $session->ip_address !== $_SERVER['REMOTE_ADDR']) ||
+          ($session && $session->user_agent_hash !== md5($_SERVER['HTTP_USER_AGENT']))) {
         static::id_regenerate('a');
         message::add_new('invalid session was deleted!', 'warning');
       }
@@ -39,9 +41,11 @@ namespace effectivecore\modules\user {
   static function insert($id_user) {
     static::id_regenerate('f');
     (new instance('session', [
-      'id'      => static::id_get(),
-      'id_user' => $id_user,
-      'created' => factory::datetime_get()
+      'id'              => static::id_get(),
+      'id_user'         => $id_user,
+      'created'         => factory::datetime_get(),
+      'ip_address'      => $_SERVER['REMOTE_ADDR'],
+      'user_agent_hash' => md5($_SERVER['HTTP_USER_AGENT'])
     ]))->insert();
   }
 
