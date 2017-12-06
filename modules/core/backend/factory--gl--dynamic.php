@@ -32,7 +32,7 @@ namespace effectivecore {
     static::$data[$name] = $data;
     $file = new file(static::$directory.static::$type.'--'.$name.'.php');
     if ($info) static::$info[$name] = $info;
-    if (is_writable($file->get_dirs_full()) && ((
+    if (is_writable($file->get_dirs()) && ((
         is_writable($file->get_path_full()) && $file->is_exist()) ||
                     $file->is_exist() == false)) {
       $file->set_data(
@@ -49,7 +49,7 @@ namespace effectivecore {
       message::add_new(
         'Can not write file "'.$file->get_file_full().'" to the directory "'.$file->get_dirs_relative().'"!'.br.
         'The system cannot save dynamic file and will work slowly!'.br.
-        (!is_writable($file->get_dirs_full()) ? 'Directory "'.$file->get_dirs_relative().'" should be writable!'.br : '').
+        (!is_writable($file->get_dirs()) ? 'Directory "'.$file->get_dirs_relative().'" should be writable!'.br : '').
         (!is_writable($file->get_path_full()) && $file->is_exist() ? 'File "'.$file->get_file_full().'" should be writable!' : ''), 'warning'
       );
     }

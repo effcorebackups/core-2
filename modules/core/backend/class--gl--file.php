@@ -7,18 +7,57 @@
 namespace effectivecore {
           use \effectivecore\timer_factory as timer;
           use \effectivecore\console_factory as console;
-          use \effectivecore\file_factory as file_factory;
           class file {
+
+  # note:
+  # ─────────────────────────────────────────────────────────────────────
+  # 1. if the first letter in the path is '/' - it's a full path, оtherwise - relative path
+  # 2. if the last letter in the path is '/' - it's a directory, оtherwise - file
+  # 3. path components like '../' is ignored!
+  # 4. path components like './' is ignored!
+  # 5. windows files naming rules is ignored!
+  # ─────────────────────────────────────────────────────────────────────
 
   static private $cache;
 
-  public $file;
   public $dirs;
-  public $original;
+  public $name;
+  public $type;
   public $data;
 
   function __construct($path) {
-    file_factory::parse_path($path, $this);
+    $this->parse($path);
+  }
+
+  function parse($path) {
+    $matches = [];
+    preg_match('%^(?<dirs>.*/|)'.
+                 '(?<name>.+?|)'.
+                 '(?<type>[.][^.]+|)$%S', $path, $matches);
+    $this->dirs = isset($matches['dirs']) ? $matches['dirs'] : '';
+    $this->name = isset($matches['name']) ? $matches['name'] : '';
+    $this->type = isset($matches['type']) ? ltrim($matches['type'], '.') : '';
+  }
+
+  function get_dirs() {return $this->dirs;}
+  function get_name() {return $this->name;}
+  function get_type() {return $this->type;}
+
+  function get_path_relative() {return $this->get_dirs_relative().$this->get_file_full();}
+  function get_dirs_relative() {return isset($this->dirs[0]) && $this->dirs[0] == '/' ? substr($this->dirs, strlen(dir_root)) : $this->dirs;}
+  function get_path_full()     {return $this->type ? $this->dirs.$this->name.'.'.$this->type : $this->dirs.$this->name;}
+  function get_file_full()     {return $this->type ? $this->name.'.'.$this->type : $this->name;}
+  function get_parent()        {return ltrim(strrchr(rtrim($this->dirs, '/'), '/'), '/');}
+
+  function is_exist() {return file_exists($this->get_path_full());}
+
+  function get_data() {
+    if (empty($this->data)) $this->load(true);
+    return $this->data;
+  }
+
+  function set_data($data) {
+    $this->data = $data;
   }
 
   function load($reset = false) {
@@ -46,33 +85,24 @@ namespace effectivecore {
     return $return;
   }
 
-  function get_data() {
-    if (empty($this->data)) $this->load(true);
-    return $this->data;
+  ######################
+  ### static methods ###
+  ######################
+
+  static function get_all($parent_dir, $filter = '') {
+    $files = [];
+    foreach (scandir($parent_dir) as $c_name) {
+      if ($c_name != '.' && $c_name != '..') {
+        if (is_file($parent_dir.$c_name)) {
+          if (!$filter || ($filter && preg_match($filter, $parent_dir.$c_name))) {
+            $files[$parent_dir.$c_name] = new static($parent_dir.$c_name);
+          }
+        } elseif (is_dir($parent_dir.$c_name)) {
+          $files += static::get_all($parent_dir.$c_name.'/', $filter);
+        }
+      }
+    }
+    return $files;
   }
-
-  function set_data($data) {
-    $this->data = $data;
-  }
-
-  function rename($new_name) {
-    $path_old = $this->get_path_full();
-    $path_new = $this->get_dirs_full().'/'.$new_name;
-    $return = rename($path_old, $path_new);
-    $this->__construct($path_new);
-    return $return;
-  }
-
-  function is_exist()          {return file_exists($this->get_path_full());}
-
-  function get_dirs_info()     {return $this->dirs;}
-  function get_dirs_full()     {return $this->dirs->full;}
-  function get_dirs_relative() {return $this->dirs->relative;}
-  function get_file_info()     {return $this->file;}
-  function get_file_full()     {return $this->file->full;}
-  function get_path_full()     {return $this->dirs->full.'/'.$this->file->full;}
-  function get_path_relative() {return $this->dirs->relative.'/'.$this->file->full;}
-  function get_dir_parent()    {return ltrim(strrchr($this->dirs->full, '/'), '/');}
-  function get_hash()          {return md5_file($this->get_path_full());}
 
 }}
