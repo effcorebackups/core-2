@@ -79,7 +79,8 @@ namespace effectivecore {
   function get_dirs_relative() {return isset($this->dirs[0]) && $this->dirs[0] == '/' ? substr($this->dirs, strlen(dir_root)) : $this->dirs;}
   function get_path_full()     {return $this->type ? $this->dirs.$this->name.'.'.$this->type : $this->dirs.$this->name;}
   function get_file_full()     {return $this->type ? $this->name.'.'.$this->type : $this->name;}
-  function get_parent()        {return ltrim(strrchr(rtrim($this->dirs, '/'), '/'), '/');}
+  function get_name_parent()   {return ltrim(strrchr(rtrim($this->dirs, '/'), '/'), '/');}
+  function get_hash()          {return md5_file($this->get_path_full());}
 
   function is_exist() {return file_exists($this->get_path_full());}
 
@@ -135,6 +136,15 @@ namespace effectivecore {
       }
     }
     return $files;
+  }
+
+  static function name_make_safe($file_name) {
+    return preg_replace_callback('%(?<char>[^a-z0-9_.\-])%uiS', function($matches) {
+      switch ($matches['char']) {
+        case ' ': return '-';
+        default : return dechex(ord($matches['char']));
+      }
+    }, $file_name);
   }
 
 }}

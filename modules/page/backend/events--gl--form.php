@@ -305,15 +305,12 @@ namespace effectivecore {
       );
     }
 
-  # move the file/files
+  # process the file/files
   # ─────────────────────────────────────────────────────────────────────
+    $tmp_data = [];
     foreach ($new_values as $c_new_value) {
-      $file = new file($c_new_value->tmp_name);
-      $file->rename($file->get_hash());
-      $field->tmp_file_push_to_wait_list($file->get_file_full());
-      if ($file->is_exist()) {
-        # @todo: make functionality (use sys_get_temp_dir())
-      }
+      $c_new_value->name = file::name_make_safe($c_new_value->name);
+      $tmp_data[] = $c_new_value;
     }
 
   }

@@ -38,7 +38,7 @@ namespace effectivecore {
                               '(?<type>class|trait|interface)\\s*'.
                               '(?<name>[a-z0-9_]+)\\s*'.
                    '(?:extends (?<extends>[a-z0-9_\\\\]+)|)\\s*'.
-                '(?:implements (?<implements>[a-z0-9_,\\\\ ]+)|)%sS', $c_file->load(), $matches);
+                '(?:implements (?<implements>[a-z0-9_,\\\\ ]+)|)%isS', $c_file->load(), $matches);
         if (!empty($matches['namespace']) &&
             !empty($matches['name'])) {
           $c_info = new \stdClass();

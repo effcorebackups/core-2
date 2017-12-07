@@ -71,7 +71,7 @@ namespace effectivecore {
     $modules_path = [];
     foreach ($files as $c_file) {
       if ($c_file->get_file_full() == 'module._s') {
-        $modules_path[$c_file->get_parent()] = $c_file->get_dirs_relative();
+        $modules_path[$c_file->get_name_parent()] = $c_file->get_dirs_relative();
       }
     }
     foreach ($files as $c_file) {
