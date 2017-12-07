@@ -1,5 +1,6 @@
 translations
   ru
+  - - select -: - выбрать -
   - a php extension stopped the file upload: расширение php остановило загрузку файла
   - action: действие
   - Action: Действие
@@ -41,6 +42,7 @@ translations
   - Data was not updated!: Данные не были обновлены!
   - Date: Дата
   - Decoration: Оформление
+  - delete file\: %%_name: удалить файл: %%_name
   - Delete user %%_nick_context{4}?: Удалить пользователя %%_nick_context{4}?
   - delete: удалить
   - Demo: Демо
@@ -226,4 +228,3 @@ translations
   - Wellcome to our site!: Добро пожаловать на наш сайт!
   - Write the characters from the picture.: Напишите символы с картинки.
   - Yes: Да
-  - - select -: - выбрать -
