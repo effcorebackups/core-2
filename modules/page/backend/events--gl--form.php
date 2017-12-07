@@ -6,9 +6,11 @@
 
 namespace effectivecore {
           use \effectivecore\markup as markup;
+          use \effectivecore\temporary_factory as tmp;
           use \effectivecore\locale_factory as locale;
           use \effectivecore\markup_simple as markup_simple;
           use \effectivecore\translation_factory as translation;
+          use \effectivecore\modules\user\session_factory as session;
           abstract class events_form {
 
   ###############
@@ -310,8 +312,11 @@ namespace effectivecore {
     $tmp_data = [];
     foreach ($new_values as $c_new_value) {
       $c_new_value->name = file::name_make_safe($c_new_value->name);
+      $c_new_value->name = substr($c_new_value->name, strlen($c_new_value->name) - 255);
       $tmp_data[] = $c_new_value;
     }
+    $session_id = session::id_get();
+    tmp::set('upload-'.$session_id, $tmp_data);
 
   }
 
