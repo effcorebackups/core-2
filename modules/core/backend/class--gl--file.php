@@ -13,9 +13,41 @@ namespace effectivecore {
   # ─────────────────────────────────────────────────────────────────────
   # 1. if the first letter in the path is '/' - it's a full path, оtherwise - relative path
   # 2. if the last letter in the path is '/' - it's a directory, оtherwise - file
-  # 3. path components like '../' is ignored!
-  # 4. path components like './' is ignored!
-  # 5. windows files naming rules is ignored!
+  # 3. path components like '../' should be ignored!
+  # 4. path components like './' should be ignored!
+  # 5. windows files naming rules should be ignored!
+  # ─────────────────────────────────────────────────────────────────────
+
+  # path                      | dirs          | name    | type | relative
+  # ─────────────────────────────────────────────────────────────────────
+  # - .fiLe                   |               | .fiLe   |      | -
+  # - .fiLe.eXt               |               | .fiLe   | eXt  | -
+  # - fiLe                    |               | fiLe    |      | -
+  # - fiLe.eXt                |               | fiLe    | eXt  | -
+  # - fiLe.0.eXt              |               | fiLe.0  | eXt  | -
+  # - diR.1/                  | diR.1/        |         |      | yes
+  # - diR.1/диР.2/            | diR.1/диР.2/  |         |      | yes
+  # - diR.1/диР.2/.fiLe       | diR.1/диР.2/  | .fiLe   |      | yes
+  # - diR.1/диР.2/.fiLe.eXt   | diR.1/диР.2/  | .fiLe   | eXt  | yes
+  # - diR.1/диР.2/fiLe        | diR.1/диР.2/  | fiLe    |      | yes
+  # - diR.1/диР.2/fiLe.eXt    | diR.1/диР.2/  | fiLe    | eXt  | yes
+  # - diR.1/диР.2/fiLe.0.eXt  | diR.1/диР.2/  | fiLe.0  | eXt  | yes
+  # - /diR.1/                 | /diR.1/       |         |      | no
+  # - /diR.1/диР.2/           | /diR.1/диР.2/ |         |      | no
+  # - /diR.1/диР.2/.fiLe      | /diR.1/диР.2/ | .fiLe   |      | no
+  # - /diR.1/диР.2/.fiLe.eXt  | /diR.1/диР.2/ | .fiLe   | eXt  | no
+  # - /diR.1/диР.2/fiLe       | /diR.1/диР.2/ | fiLe    |      | no
+  # - /diR.1/диР.2/fiLe.eXt   | /diR.1/диР.2/ | fiLe    | eXt  | no
+  # - /diR.1/диР.2/fiLe.0.eXt | /diR.1/диР.2/ | fiLe.0  | eXt  | no
+  # ─────────────────────────────────────────────────────────────────────
+  # - c:\dir1                 | should be ignored
+  # - \dir1                   | should be ignored
+  # - dir1\                   | should be ignored
+  # - ./dir1                  | should be ignored
+  # - ../dir1/                | should be ignored
+  # - /dir1/../dir3/          | should be ignored
+  # - dir1                    | should be ignored (interpret as: file1)
+  # - dir1/dir2               | should be ignored (interpret as: dir1/file2)
   # ─────────────────────────────────────────────────────────────────────
 
   static private $cache;
