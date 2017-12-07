@@ -312,7 +312,6 @@ namespace effectivecore {
     $tmp_data = [];
     foreach ($new_values as $c_new_value) {
       $c_new_value->name = file::name_make_safe($c_new_value->name);
-      $c_new_value->name = substr($c_new_value->name, strlen($c_new_value->name) - 255);
       $tmp_data[] = $c_new_value;
       $field->file_push_to_manager($c_new_value->name);
     }

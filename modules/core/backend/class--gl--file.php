@@ -139,12 +139,13 @@ namespace effectivecore {
   }
 
   static function name_make_safe($file_name) {
-    return preg_replace_callback('%(?<char>[^a-z0-9_.\-])%uiS', function($matches) {
+    $return = preg_replace_callback('%(?<char>[^a-z0-9_.\-])%uiS', function($matches) {
       switch ($matches['char']) {
         case ' ': return '-';
         default : return dechex(ord($matches['char']));
       }
     }, $file_name);
+    return substr($return, strlen($return) - 255);
   }
 
 }}
