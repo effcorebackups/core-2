@@ -35,7 +35,7 @@ namespace effectivecore\modules\page {
         storage::get('settings')->changes_unregister_action('page', 'update', 'decoration/page/color_id');
         storage::get('settings')->changes_unregister_action('page', 'update', 'decoration/page/color_bg_id');
       # message::add_new('Changes was removed.');
-        message::add_new('UNDER CONSTRUCTION'); # @todo: make workable
+        message::add_new('UNDER CONSTRUCTION'); # @todo: make functionality
         break;
     }
   }

@@ -309,14 +309,23 @@ namespace effectivecore {
 
   # process the file/files
   # ─────────────────────────────────────────────────────────────────────
-    $tmp_data = [];
-    foreach ($new_values as $c_new_value) {
-      $c_new_value->name = file::name_make_safe($c_new_value->name);
-      $tmp_data[] = $c_new_value;
-      $field->file_push_to_manager($c_new_value->name);
-    }
     $session_id = session::id_get();
+    $tmp_data = tmp::get('upload-'.$session_id) ?: [];
+  # add new files to tmp_data
+    foreach ($new_values as $c_new_value) {
+      $c_hash = (new file($c_new_value->tmp_name))->get_hash();
+      $c_new_value->name = file::name_make_safe($c_new_value->name);
+      $tmp_data[$c_hash] = $c_new_value;
+    }
+  # delete unnecessary files from tmp_data
+    # @todo: make functionality
+
+  # save tmp_data
     tmp::set('upload-'.$session_id, $tmp_data);
+  # build manager
+    foreach ($tmp_data as $c_hash => $c_file) {
+      $field->file_push_to_manager($c_file, $c_hash);
+    }
 
   }
 

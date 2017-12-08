@@ -25,9 +25,9 @@ namespace effectivecore {
                                  factory::human_to_bytes(ini_get('upload_max_filesize'));
   }
 
-  function file_push_to_manager($file_name) {
+  function file_push_to_manager($info, $hash) {
     $this->child_select('manager')->input_insert(
-      translation::get('delete file: %%_name', ['name' => $file_name]), ['name' => 'manager[]', 'value' => $file_name]
+      translation::get('delete file: %%_name', ['name' => $info->name]), ['name' => 'manager[]', 'value' => $hash]
     );
   }
 
