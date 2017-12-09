@@ -115,7 +115,7 @@ namespace effectivecore {
     $this->child_insert(new markup_simple('input', [
       'type'  => 'hidden',
       'name'  => 'validation_id',
-      'value' => static::validation_id_get($values),
+      'value' => static::validation_id_get(),
       ]), 'hidden_validation_id');
     $this->child_insert(new markup_simple('input', [
       'type'  => 'hidden',
@@ -138,9 +138,9 @@ namespace effectivecore {
     return time().md5(session::id_get().rand(0, PHP_INT_MAX));
   }
 
-  static function validation_id_get($values) {
-    $c_value = filter_var(isset($values['validation_id'][0]) ?
-                                $values['validation_id'][0] : '', FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '%^[0-9]{10}[0-9a-f]{32}$%']]);
+  static function validation_id_get() {
+    $c_value = filter_var(isset($_POST['validation_id']) ?
+                                $_POST['validation_id'] : '', FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '%^[0-9]{10}[0-9a-f]{32}$%']]);
     if ($c_value == false) return static::validation_id_generate();
     if ((int)substr($c_value, 0, 10) < time() - 60 * 60 ||
         (int)substr($c_value, 0, 10) > time()) {

@@ -10,7 +10,6 @@ namespace effectivecore {
           use \effectivecore\locale_factory as locale;
           use \effectivecore\markup_simple as markup_simple;
           use \effectivecore\translation_factory as translation;
-          use \effectivecore\modules\user\session_factory as session;
           abstract class events_form {
 
   ###############
@@ -310,8 +309,8 @@ namespace effectivecore {
 
   # process the file/files
   # ─────────────────────────────────────────────────────────────────────
-    $session_id = session::id_get();
-    $tmp_data = tmp::get('upload-'.$session_id) ?: [];
+    $validation_id = form::validation_id_get();
+    $tmp_data = tmp::get('upload-'.$validation_id) ?: [];
   # add new files to tmp_data
     foreach ($new_values as $c_new_value) {
       $c_hash = (new file($c_new_value->tmp_name))->get_hash();
@@ -326,7 +325,7 @@ namespace effectivecore {
     }
   # save tmp_data
     if (count($tmp_data)) {
-      tmp::set('upload-'.$session_id, $tmp_data);
+      tmp::set('upload-'.$validation_id, $tmp_data);
     }
   # build manager
     foreach ($tmp_data as $c_hash => $c_file) {
