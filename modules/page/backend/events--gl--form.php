@@ -171,7 +171,8 @@ namespace effectivecore {
         # ─────────────────────────────────────────────────────────────────────
           if ($c_element->tag_name == 'input' &&
               $c_type == 'file') {
-            static::_validate_field_file($form, $c_field, $c_element, $c_npath, $c_new_values);
+            $manager = isset($values['manager']) ? factory::array_values_map_to_keys($values['manager']) : [];
+            static::_validate_field_file($form, $c_field, $c_element, $c_npath, $c_new_values, $manager);
           }
 
         # input[type=checkbox|radio] validation:
@@ -258,7 +259,7 @@ namespace effectivecore {
   ### _validate_field_file ###
   ############################
 
-  static function _validate_field_file($form, $field, $element, $npath, &$new_values) {
+  static function _validate_field_file($form, $field, $element, $npath, &$new_values, $manager) {
     $title = translation::get(
       $field->title
     );
@@ -318,8 +319,11 @@ namespace effectivecore {
       $tmp_data[$c_hash] = $c_new_value;
     }
   # delete unnecessary files from tmp_data
-    # @todo: make functionality
-
+    foreach ($tmp_data as $c_hash => $c_file) {
+      if (isset($manager[$c_hash])) {
+        unset($tmp_data[$c_hash]);
+      }
+    }
   # save tmp_data
     tmp::set('upload-'.$session_id, $tmp_data);
   # build manager
