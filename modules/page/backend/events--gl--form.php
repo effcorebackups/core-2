@@ -170,8 +170,8 @@ namespace effectivecore {
         # ─────────────────────────────────────────────────────────────────────
           if ($c_element->tag_name == 'input' &&
               $c_type == 'file') {
-            $manager_values = isset($values['manager']) ? factory::array_values_map_to_keys($values['manager']) : [];
-            static::_validate_field_file($form, $c_field, $c_element, $c_npath, $c_new_values, $manager_values);
+            $delete_values = isset($values['manager_delete_'.$c_name]) ? factory::array_values_map_to_keys($values['manager_delete_'.$c_name]) : [];
+            static::_validate_field_file($form, $c_field, $c_element, $c_npath, $c_new_values, $delete_values);
           }
 
         # input[type=checkbox|radio] validation:
@@ -258,7 +258,7 @@ namespace effectivecore {
   ### _validate_field_file ###
   ############################
 
-  static function _validate_field_file($form, $field, $element, $npath, &$new_values, $manager_values) {
+  static function _validate_field_file($form, $field, $element, $npath, &$new_values, $delete_values) {
     $title = translation::get(
       $field->title
     );
@@ -316,7 +316,7 @@ namespace effectivecore {
     }
   # delete unnecessary files from tmp_files
     foreach ($tmp_files as $c_hash => $c_file) {
-      if (isset($manager_values[$c_hash])) {
+      if (isset($delete_values[$c_hash])) {
         unset($tmp_files[$c_hash]);
       }
     }
@@ -327,7 +327,7 @@ namespace effectivecore {
     }
   # fill the manager
     foreach ($tmp_files as $c_hash => $c_file) {
-      $field->manager_insert_file($c_file, $c_hash);
+      $field->manager_insert_action($c_file, $c_hash);
     }
 
   # check required

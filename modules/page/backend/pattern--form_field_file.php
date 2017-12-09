@@ -29,9 +29,10 @@ namespace effectivecore {
     $this->child_select('manager')->build();
   }
 
-  function manager_insert_file($info, $hash) {
+  function manager_insert_action($info, $hash) {
+    $full_name = $this->child_select('element')->attribute_select('name');
     $this->child_select('manager')->input_insert(
-      translation::get('delete file: %%_name', ['name' => $info->name]), ['name' => 'manager[]', 'value' => $hash]
+      translation::get('delete file: %%_name', ['name' => $info->name]), ['name' => 'manager_delete_'.$full_name, 'value' => $hash]
     );
   }
 
