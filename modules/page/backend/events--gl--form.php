@@ -290,15 +290,6 @@ namespace effectivecore {
       }
     }
 
-  # check required
-  # ─────────────────────────────────────────────────────────────────────
-    if ($element->attribute_select('required') && count($new_values) == 0) {
-      $form->add_error($npath.'/element',
-        translation::get('Field "%%_title" must be selected!', ['title' => $title])
-      );
-      return;
-    }
-
   # check if field is multiple or singular
   # ─────────────────────────────────────────────────────────────────────
     if (!$element->attribute_select('multiple') && count($new_values) > 1) {
@@ -332,6 +323,15 @@ namespace effectivecore {
   # build manager
     foreach ($tmp_data as $c_hash => $c_file) {
       $field->file_push_to_manager($c_file, $c_hash);
+    }
+
+  # check required
+  # ─────────────────────────────────────────────────────────────────────
+    if ($element->attribute_select('required') && count($tmp_data) == 0) {
+      $form->add_error($npath.'/element',
+        translation::get('Field "%%_title" must be selected!', ['title' => $title])
+      );
+      return;
     }
 
   }
