@@ -114,9 +114,9 @@ namespace effectivecore {
   # add form_id to the form markup
     $this->child_insert(new markup_simple('input', [
       'type'  => 'hidden',
-      'name'  => 'validation_hash',
-      'value' => static::validation_hash_get($values),
-      ]), 'hidden_validation_hash');
+      'name'  => 'validation_id',
+      'value' => static::validation_id_get($values),
+      ]), 'hidden_validation_id');
     $this->child_insert(new markup_simple('input', [
       'type'  => 'hidden',
       'name'  => 'form_id',
@@ -134,15 +134,15 @@ namespace effectivecore {
     return $return;
   }
 
-  static function validation_hash_generate() {
+  static function validation_id_generate() {
     return md5(session::id_get().rand(0, PHP_INT_MAX));
   }
 
-  static function validation_hash_get($values) {
-    $c_value = filter_var(isset($values['validation_hash'][0]) ?
-                                $values['validation_hash'][0] : '', FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '%^[0-9a-f]{32}$%']]);
+  static function validation_id_get($values) {
+    $c_value = filter_var(isset($values['validation_id'][0]) ?
+                                $values['validation_id'][0] : '', FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '%^[0-9a-f]{32}$%']]);
     if ($c_value) return $c_value;
-    else          return static::validation_hash_generate();
+    else          return static::validation_id_generate();
   }
 
   static function values_get() {
