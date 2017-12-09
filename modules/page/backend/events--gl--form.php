@@ -170,8 +170,8 @@ namespace effectivecore {
         # ─────────────────────────────────────────────────────────────────────
           if ($c_element->tag_name == 'input' &&
               $c_type == 'file') {
-            $manager = isset($values['manager']) ? factory::array_values_map_to_keys($values['manager']) : [];
-            static::_validate_field_file($form, $c_field, $c_element, $c_npath, $c_new_values, $manager);
+            $manager_values = isset($values['manager']) ? factory::array_values_map_to_keys($values['manager']) : [];
+            static::_validate_field_file($form, $c_field, $c_element, $c_npath, $c_new_values, $manager_values);
           }
 
         # input[type=checkbox|radio] validation:
@@ -258,7 +258,7 @@ namespace effectivecore {
   ### _validate_field_file ###
   ############################
 
-  static function _validate_field_file($form, $field, $element, $npath, &$new_values, $manager) {
+  static function _validate_field_file($form, $field, $element, $npath, &$new_values, $manager_values) {
     $title = translation::get(
       $field->title
     );
@@ -301,38 +301,38 @@ namespace effectivecore {
   # process the file/files
   # ─────────────────────────────────────────────────────────────────────
     $validation_id = form::validation_id_get();
-    $tmp_data = tmp::get('upload-'.$validation_id) ?: [];
-    $tmp_data_count_0 = count($tmp_data);
-  # add new files to tmp_data
+    $tmp_files = tmp::get('files-'.$validation_id) ?: [];
+    $tmp_files_count_0 = count($tmp_files);
+  # add new files to tmp_files
     foreach ($new_values as $c_new_value) {
       if (is_uploaded_file($c_new_value->tmp_name)) {
         $c_file = new file($c_new_value->tmp_name);
         if ($c_file->move_uploaded(dir_dynamic.'tmp/', $c_file->get_hash())) {
           $c_new_value->tmp_name = $c_file->get_path_full();
           $c_new_value->name = file::name_make_safe($c_new_value->name);
-          $tmp_data[$c_file->get_hash()] = $c_new_value;
+          $tmp_files[$c_file->get_hash()] = $c_new_value;
         }
       }
     }
-  # delete unnecessary files from tmp_data
-    foreach ($tmp_data as $c_hash => $c_file) {
-      if (isset($manager[$c_hash])) {
-        unset($tmp_data[$c_hash]);
+  # delete unnecessary files from tmp_files
+    foreach ($tmp_files as $c_hash => $c_file) {
+      if (isset($manager_values[$c_hash])) {
+        unset($tmp_files[$c_hash]);
       }
     }
-  # save tmp_data
-    if (count($tmp_data) ||
-       (count($tmp_data) == 0 && $tmp_data_count_0 > 0)) {
-      tmp::set('upload-'.$validation_id, $tmp_data);
+  # save tmp_files
+    if (count($tmp_files) ||
+       (count($tmp_files) == 0 && $tmp_files_count_0 > 0)) {
+      tmp::set('files-'.$validation_id, $tmp_files);
     }
-  # build manager
-    foreach ($tmp_data as $c_hash => $c_file) {
-      $field->file_push_to_manager($c_file, $c_hash);
+  # fill the manager
+    foreach ($tmp_files as $c_hash => $c_file) {
+      $field->manager_insert_file($c_file, $c_hash);
     }
 
   # check required
   # ─────────────────────────────────────────────────────────────────────
-    if ($element->attribute_select('required') && count($tmp_data) == 0) {
+    if ($element->attribute_select('required') && count($tmp_files) == 0) {
       $form->add_error($npath.'/element',
         translation::get('Field "%%_title" must be selected!', ['title' => $title])
       );
@@ -559,12 +559,13 @@ namespace effectivecore {
 
   static function on_submit($form, $fields, &$values) {
     $validation_id = form::validation_id_get();
-    $tmp_data = tmp::get('upload-'.$validation_id) ?: [];
-    foreach ($tmp_data as $c_hash => $c_tmp) {
-      $c_file = new file($c_tmp->tmp_name);
-      if ($c_file->get_hash() == $c_hash &&
-          $c_file->move(dir_dynamic.'files/', $c_tmp->name)) {
-        $c_tmp->new_path = $c_file->get_path_full();
+    $tmp_files = tmp::get('files-'.$validation_id) ?: [];
+    foreach ($tmp_files as $c_hash => $c_tmp_info) {
+      $c_file = new file($c_tmp_info->tmp_name);
+      if ($c_file->is_exist() &&
+          $c_file->get_hash() == $c_hash &&
+          $c_file->move(dir_dynamic.'files/', $c_tmp_info->name)) {
+        $c_tmp_info->new_path = $c_file->get_path_full();
       }
     }
   }

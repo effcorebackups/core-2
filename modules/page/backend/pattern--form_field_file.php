@@ -12,8 +12,7 @@ namespace effectivecore {
   public $max_file_size;
 
   function build() {
-    $this->child_insert(new form_container_checkboxes(), 'manager');
-    $this->child_select('manager')->build();
+    $this->manager_build();
     $this->description = translation::get('Maximal file size: %%_value.', [
       'value' => locale::format_human_bytes($this->get_max_file_size())
     ]);
@@ -25,10 +24,19 @@ namespace effectivecore {
                                  factory::human_to_bytes(ini_get('upload_max_filesize'));
   }
 
-  function file_push_to_manager($info, $hash) {
+  function manager_build() {
+    $this->child_insert(new form_container_checkboxes(), 'manager');
+    $this->child_select('manager')->build();
+  }
+
+  function manager_insert_file($info, $hash) {
     $this->child_select('manager')->input_insert(
       translation::get('delete file: %%_name', ['name' => $info->name]), ['name' => 'manager[]', 'value' => $hash]
     );
+  }
+
+  function manager_clean() {
+    $this->manager_build();
   }
 
 }}
