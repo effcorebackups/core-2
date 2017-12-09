@@ -7,6 +7,7 @@
 namespace effectivecore {
           use \effectivecore\event_factory as event;
           use \effectivecore\message_factory as message;
+          use \effectivecore\modules\user\session_factory as session;
           class form extends \effectivecore\markup {
 
   # elements support:
@@ -113,6 +114,11 @@ namespace effectivecore {
   # add form_id to the form markup
     $this->child_insert(new markup_simple('input', [
       'type'  => 'hidden',
+      'name'  => 'validation_hash',
+      'value' => static::validation_hash_get($values),
+      ]), 'hidden_validation_hash');
+    $this->child_insert(new markup_simple('input', [
+      'type'  => 'hidden',
       'name'  => 'form_id',
       'value' => $id,
     ]), 'hidden_form_id');
@@ -126,6 +132,17 @@ namespace effectivecore {
       }
     }
     return $return;
+  }
+
+  static function validation_hash_generate() {
+    return md5(session::id_get().rand(0, PHP_INT_MAX));
+  }
+
+  static function validation_hash_get($values) {
+    $c_value = filter_var(isset($values['validation_hash'][0]) ?
+                                $values['validation_hash'][0] : '', FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '%^[0-9a-f]{32}$%']]);
+    if ($c_value) return $c_value;
+    else          return static::validation_hash_generate();
   }
 
   static function values_get() {

@@ -325,7 +325,9 @@ namespace effectivecore {
       }
     }
   # save tmp_data
-    tmp::set('upload-'.$session_id, $tmp_data);
+    if (count($tmp_data)) {
+      tmp::set('upload-'.$session_id, $tmp_data);
+    }
   # build manager
     foreach ($tmp_data as $c_hash => $c_file) {
       $field->file_push_to_manager($c_file, $c_hash);
