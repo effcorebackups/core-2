@@ -141,8 +141,12 @@ namespace effectivecore {
   static function validation_id_get($values) {
     $c_value = filter_var(isset($values['validation_id'][0]) ?
                                 $values['validation_id'][0] : '', FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '%^[0-9]{10}[0-9a-f]{32}$%']]);
-    if ($c_value) return $c_value;
-    else          return static::validation_id_generate();
+    if ($c_value == false) return static::validation_id_generate();
+    if ((int)substr($c_value, 0, 10) < time() - 60 * 60 ||
+        (int)substr($c_value, 0, 10) > time()) {
+      return static::validation_id_generate();
+    }
+    return $c_value;
   }
 
   static function values_get() {
