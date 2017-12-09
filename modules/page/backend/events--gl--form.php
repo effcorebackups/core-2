@@ -553,6 +553,13 @@ namespace effectivecore {
   #################
 
   static function on_submit($form, $fields, &$values) {
+    $validation_id = form::validation_id_get();
+    $tmp_data = tmp::get('upload-'.$validation_id) ?: [];
+    foreach ($tmp_data as $c_hash => $c_tmp) {
+      if (is_uploaded_file($c_tmp->tmp_name) && md5_file($c_tmp->tmp_name) == $c_hash) {
+        move_uploaded_file($c_tmp->tmp_name, dir_dynamic.'files/'.$c_tmp->name);
+      }
+    }
   }
 
 }}

@@ -26,6 +26,7 @@ namespace effectivecore\modules\develop {
   }
 
   static function on_submit_demo($form, $fields, &$values) {
+    static::on_submit($form, $fields, $values);
     message::add_new('Call \effectivecore\modules\develop\events_form::on_submit_demo.');
   }
 
