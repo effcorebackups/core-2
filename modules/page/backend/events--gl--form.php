@@ -311,6 +311,7 @@ namespace effectivecore {
   # ─────────────────────────────────────────────────────────────────────
     $validation_id = form::validation_id_get();
     $tmp_data = tmp::get('upload-'.$validation_id) ?: [];
+    $tmp_data_count_0 = count($tmp_data);
   # add new files to tmp_data
     foreach ($new_values as $c_new_value) {
       $c_hash = (new file($c_new_value->tmp_name))->get_hash();
@@ -324,7 +325,8 @@ namespace effectivecore {
       }
     }
   # save tmp_data
-    if (count($tmp_data)) {
+    if (count($tmp_data) ||
+       (count($tmp_data) == 0 && $tmp_data_count_0 > 0)) {
       tmp::set('upload-'.$validation_id, $tmp_data);
     }
   # build manager
