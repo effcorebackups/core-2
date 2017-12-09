@@ -135,7 +135,7 @@ namespace effectivecore {
   }
 
   static function validation_id_generate() {
-      return dechex(time()).factory::ip_to_hex($_SERVER['REMOTE_ADDR']).md5(rand(0, PHP_INT_MAX));
+    return dechex(time()).factory::ip_to_hex($_SERVER['REMOTE_ADDR']).md5(rand(0, PHP_INT_MAX));
   }
 
   static function validation_id_get() {

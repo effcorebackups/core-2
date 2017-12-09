@@ -308,6 +308,7 @@ namespace effectivecore {
       if (is_uploaded_file($c_new_value->tmp_name)) {
         $c_file = new file($c_new_value->tmp_name);
         if ($c_file->move_uploaded(dir_dynamic.'tmp/', $c_file->get_hash())) {
+          $c_new_value->element_name = rtrim($element->attribute_select('name'), '[]');
           $c_new_value->tmp_name = $c_file->get_path_full();
           $c_new_value->name = file::name_make_safe($c_new_value->name);
           $tmp_files[$c_file->get_hash()] = $c_new_value;
