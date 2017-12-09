@@ -262,7 +262,7 @@ namespace effectivecore {
     return sha1($data);
   }
 
-  static function binstr2hexstr($binstr) {
+  static function binstr_to_hexstr($binstr) {
     $hexstr = '';
     foreach (str_split($binstr, 8) as $c_chunk) {
       $hexstr.= str_pad(base_convert(str_pad($c_chunk, 8, '0'), 2, 16), 2, '0', STR_PAD_LEFT);
@@ -270,7 +270,7 @@ namespace effectivecore {
     return $hexstr;
   }
 
-  static function hexstr2binstr($hexstr) {
+  static function hexstr_to_binstr($hexstr) {
     $binstr = '';
     foreach (str_split($hexstr, 2) as $c_chunk) {
       $binstr.= str_pad(base_convert($c_chunk, 16, 2), 8, '0', STR_PAD_LEFT);
@@ -291,6 +291,22 @@ namespace effectivecore {
     $character = strtoupper($human[strlen($human)-1]);
     $value = (int)substr($human, 0, -1);
     return $value * 1024 ** $powers[$character];
+  }
+
+  static function ip_to_hex($ip) {
+    $ip_parts_int = explode('.', $ip);
+    return str_pad(dechex($ip_parts_int[0]), 2, '0', STR_PAD_LEFT).
+           str_pad(dechex($ip_parts_int[1]), 2, '0', STR_PAD_LEFT).
+           str_pad(dechex($ip_parts_int[2]), 2, '0', STR_PAD_LEFT).
+           str_pad(dechex($ip_parts_int[3]), 2, '0', STR_PAD_LEFT);
+  }
+
+  static function hex_to_ip($ip_hex) {
+    $ip_parts_hex = str_split($ip_hex, 2);
+    return hexdec($ip_parts_hex[0]).'.'.
+           hexdec($ip_parts_hex[1]).'.'.
+           hexdec($ip_parts_hex[2]).'.'.
+           hexdec($ip_parts_hex[3]);
   }
 
 }}
