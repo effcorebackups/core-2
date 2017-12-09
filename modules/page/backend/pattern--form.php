@@ -135,12 +135,12 @@ namespace effectivecore {
   }
 
   static function validation_id_generate() {
-    return md5(session::id_get().rand(0, PHP_INT_MAX));
+    return time().md5(session::id_get().rand(0, PHP_INT_MAX));
   }
 
   static function validation_id_get($values) {
     $c_value = filter_var(isset($values['validation_id'][0]) ?
-                                $values['validation_id'][0] : '', FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '%^[0-9a-f]{32}$%']]);
+                                $values['validation_id'][0] : '', FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '%^[0-9]{10}[0-9a-f]{32}$%']]);
     if ($c_value) return $c_value;
     else          return static::validation_id_generate();
   }
