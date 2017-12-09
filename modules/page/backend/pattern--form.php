@@ -135,15 +135,19 @@ namespace effectivecore {
   }
 
   static function validation_id_generate() {
-    return time().md5(session::id_get().rand(0, PHP_INT_MAX));
+    $ip_parts = explode('.', $_SERVER['REMOTE_ADDR']);
+    return dechex(time()).str_pad(dechex($ip_parts[0]), 2, '0', STR_PAD_LEFT).
+                          str_pad(dechex($ip_parts[1]), 2, '0', STR_PAD_LEFT).
+                          str_pad(dechex($ip_parts[2]), 2, '0', STR_PAD_LEFT).
+                          str_pad(dechex($ip_parts[3]), 2, '0', STR_PAD_LEFT).md5(rand(0, PHP_INT_MAX));
   }
 
   static function validation_id_get() {
     $c_value = filter_var(isset($_POST['validation_id']) ?
-                                $_POST['validation_id'] : '', FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '%^[0-9]{10}[0-9a-f]{32}$%']]);
+                                $_POST['validation_id'] : '', FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '%^[0-9a-f]{48}$%']]);
     if ($c_value == false) return static::validation_id_generate();
-    if ((int)substr($c_value, 0, 10) < time() - 60 * 60 ||
-        (int)substr($c_value, 0, 10) > time()) {
+    if (hexdec(substr($c_value, 0, 8)) < time() - 60 * 60 ||
+        hexdec(substr($c_value, 0, 8)) > time()) {
       return static::validation_id_generate();
     }
     return $c_value;
