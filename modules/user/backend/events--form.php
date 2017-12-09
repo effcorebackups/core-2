@@ -134,7 +134,7 @@ namespace effectivecore\modules\user {
   ###################
 
   static function on_init_login($form, $fields) {
-    if (!isset($_COOKIE['cie'])) {
+    if (!isset($_COOKIE['cookies_is_on'])) {
       message::add_new(
         translation::get('Cookies are disabled. You can not log in!').br.
         translation::get('Enable cookies before login.'), 'warning');

@@ -13,14 +13,14 @@ namespace effectivecore\modules\user {
   static function id_regenerate($sign, $expire = 60 * 60 * 24 * 30) {
     $session_id = md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT'].rand(0, PHP_INT_MAX));
     $session_id[0] = $sign; # a - anonymous user | f - authenticated user
-    setcookie('sid', ($_COOKIE['sid'] = $session_id), $expire ? time() + $expire : 0, '/');
-    setcookie('cie', 'true', $expire ? time() + $expire : 0, '/');
+    setcookie('session_id', ($_COOKIE['session_id'] = $session_id), $expire ? time() + $expire : 0, '/');
+    setcookie('cookies_is_on', 'true', $expire ? time() + $expire : 0, '/');
     return $session_id;
   }
 
   static function id_get() {
-    if (isset($_COOKIE['sid'])) return $_COOKIE['sid'];
-    else                        return static::id_regenerate('a');
+    if (isset($_COOKIE['session_id'])) return $_COOKIE['session_id'];
+    else                               return static::id_regenerate('a');
   }
 
   static function select() {
