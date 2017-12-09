@@ -108,6 +108,33 @@ namespace effectivecore {
     return file_put_contents($this->get_path_full(), $this->data);
   }
 
+  function move($new_dirs, $new_name = null) {
+    $path_old = $this->get_path_full();
+    $path_new = $new_dirs.($new_name ?: $this->get_name());
+    if (rename($path_old, $path_new)) {
+      $this->__construct($path_new);
+      return true;
+    }
+  }
+
+  function move_uploaded($new_dirs, $new_name = null) {
+    $path_old = $this->get_path_full();
+    $path_new = $new_dirs.($new_name ?: $this->get_name());
+    if (move_uploaded_file($path_old, $path_new)) {
+      $this->__construct($path_new);
+      return true;
+    }
+  }
+
+  function rename($new_name) {
+    $path_old = $this->get_path_full();
+    $path_new = $this->get_dirs().$new_name;
+    if (rename($path_old, $path_new)) {
+      $this->__construct($path_new);
+      return true;
+    }
+  }
+
   function insert($once = true) {
     $relative = $this->get_path_relative();
     timer::tap('file insert: '.$relative);

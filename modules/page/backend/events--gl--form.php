@@ -305,9 +305,14 @@ namespace effectivecore {
     $tmp_data_count_0 = count($tmp_data);
   # add new files to tmp_data
     foreach ($new_values as $c_new_value) {
-      $c_hash = (new file($c_new_value->tmp_name))->get_hash();
-      $c_new_value->name = file::name_make_safe($c_new_value->name);
-      $tmp_data[$c_hash] = $c_new_value;
+      if (is_uploaded_file($c_new_value->tmp_name)) {
+        $c_file = new file($c_new_value->tmp_name);
+        if ($c_file->move_uploaded(dir_dynamic.'tmp/', $c_file->get_hash())) {
+          $c_new_value->tmp_name = $c_file->get_path_full();
+          $c_new_value->name = file::name_make_safe($c_new_value->name);
+          $tmp_data[$c_file->get_hash()] = $c_new_value;
+        }
+      }
     }
   # delete unnecessary files from tmp_data
     foreach ($tmp_data as $c_hash => $c_file) {
@@ -556,8 +561,10 @@ namespace effectivecore {
     $validation_id = form::validation_id_get();
     $tmp_data = tmp::get('upload-'.$validation_id) ?: [];
     foreach ($tmp_data as $c_hash => $c_tmp) {
-      if (is_uploaded_file($c_tmp->tmp_name) && md5_file($c_tmp->tmp_name) == $c_hash) {
-        move_uploaded_file($c_tmp->tmp_name, dir_dynamic.'files/'.$c_tmp->name);
+      $c_file = new file($c_tmp->tmp_name);
+      if ($c_file->get_hash() == $c_hash &&
+          $c_file->move(dir_dynamic.'files/', $c_tmp->name)) {
+        $c_tmp->new_path = $c_file->get_path_full();
       }
     }
   }
