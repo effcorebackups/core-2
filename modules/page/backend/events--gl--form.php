@@ -317,6 +317,7 @@ namespace effectivecore {
   # delete unnecessary files from tmp_files
     foreach ($tmp_files as $c_hash => $c_file) {
       if (isset($delete_values[$c_hash])) {
+        unlink($tmp_files[$c_hash]->tmp_name);
         unset($tmp_files[$c_hash]);
       }
     }
