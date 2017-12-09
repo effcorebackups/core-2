@@ -19,8 +19,10 @@ namespace effectivecore\modules\user {
   }
 
   static function id_get() {
-    if (isset($_COOKIE['session_id'])) return $_COOKIE['session_id'];
-    else                               return static::id_regenerate('a');
+    $c_value = filter_var(isset($_COOKIE['session_id']) ?
+                                $_COOKIE['session_id'] : '', FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '%^[0-9a-f]{32}$%']]);
+    if ($c_value) return $c_value;
+    else          return static::id_regenerate('a');
   }
 
   static function select() {
