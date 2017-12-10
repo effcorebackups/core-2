@@ -169,8 +169,7 @@ namespace effectivecore {
 
         # input[type=file] validation:
         # ─────────────────────────────────────────────────────────────────────
-          if ($c_element->tag_name == 'input' &&
-              $c_type == 'file') {
+        if ($c_field instanceof form_field_file) {
             $delete_values = isset($values['manager_delete_'.$c_name]) ? factory::array_values_map_to_keys($values['manager_delete_'.$c_name]) : [];
             static::_validate_field_file($form, $c_field, $c_element, $c_npath, $c_name, $values[$c_name], $delete_values);
           }
@@ -313,6 +312,7 @@ namespace effectivecore {
         if ($c_file->move_uploaded(dir_dynamic.'tmp/', $c_file->get_hash())) {
           $c_new_value->tmp_name = $c_file->get_path_full();
           $c_new_value->name = file::name_make_safe($c_new_value->name);
+          $c_new_value->type = filter_var($c_new_value->type, FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '%^[a-z]{1,20}/[a-z0-9\-\+\.]{1,100}$%i']]);
           $stack[$name][$c_file->get_hash()] = $c_new_value;
         }
       }
@@ -585,8 +585,7 @@ namespace effectivecore {
 
         # input[type=file] validation:
         # ─────────────────────────────────────────────────────────────────────
-          if ($c_element->tag_name == 'input' &&
-              $c_type == 'file') {
+          if ($c_field instanceof form_field_file) {
           # final copying of files
             foreach ($values[$c_name] as $c_hash => $c_file_info) {
               $c_file = new file($c_file_info->tmp_name);
