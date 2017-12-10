@@ -603,6 +603,9 @@ namespace effectivecore {
         }
       }
     }
+  # delete the stack
+    $validation_id = form::validation_id_get();
+    tmp::delete('files-'.$validation_id);
   }
 
 }}
