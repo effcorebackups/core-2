@@ -302,7 +302,7 @@ namespace effectivecore {
   # process the file/files
   # ─────────────────────────────────────────────────────────────────────
     $validation_id = form::validation_id_get();
-    $stack = tmp::get('files-'.$validation_id) ?: [];
+    $stack = tmp::select('files-'.$validation_id) ?: [];
     if (!isset($stack[$name]))
                $stack[$name] = [];
     $stack_count_0 = count($stack[$name]);
@@ -327,7 +327,7 @@ namespace effectivecore {
   # save stack
     if (count($stack[$name]) ||
        (count($stack[$name]) == 0 && $stack_count_0 > 0)) {
-      tmp::set('files-'.$validation_id, $stack);
+      tmp::update('files-'.$validation_id, $stack);
     }
   # fill the manager
     foreach ($stack[$name] as $c_hash => $c_file_info) {

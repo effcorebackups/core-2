@@ -26,7 +26,7 @@ namespace effectivecore {
   }
 
   static function get_classes_map() {
-    $cache = cache::get('classes_map');
+    $cache = cache::select('classes_map');
     if ($cache) {
       return $cache;
     } else {
@@ -52,7 +52,7 @@ namespace effectivecore {
                        $matches['name']] = $c_info;
         }
       }
-      cache::set('classes_map', $classes_map, ['build' => static::datetime_get()]);
+      cache::update('classes_map', $classes_map, ['build' => static::datetime_get()]);
       return $classes_map;
     }
   }

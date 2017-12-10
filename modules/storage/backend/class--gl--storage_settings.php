@@ -17,7 +17,7 @@ namespace effectivecore {
 
   static function init($group) {
     console::add_log('storage', 'cache', 'storage %%_id cache for group %%_group will be load', 'ok', 0, ['id' => 'settings', 'group' => $group]);
-    $cache = cache::get('settings--'.$group);
+    $cache = cache::select('settings--'.$group);
     if ($cache) static::$data[$group] = $cache;
     else        static::settings_cache_rebuild();
   }
@@ -45,13 +45,13 @@ namespace effectivecore {
 
   static function settings_cache_rebuild() {
   # init original settings
-    $data_orig = cache::get('settings_original');
+    $data_orig = cache::select('settings_original');
     if (!$data_orig) {
       static::$data_orig = $data_orig = static::settings_find_static();
-      cache::set('settings_original', $data_orig, ['build' => factory::datetime_get()]);
+      cache::update('settings_original', $data_orig, ['build' => factory::datetime_get()]);
     }
   # init dynamic and static changes
-    $changes_d = dynamic::get('changes') ?: [];
+    $changes_d = dynamic::select('changes') ?: [];
     $changes_s = isset($data_orig['changes']) ? $data_orig['changes'] : [];
   # apply all changes to original settings and get final settings
     $data = factory::array_deep_clone($data_orig);
@@ -60,7 +60,7 @@ namespace effectivecore {
     unset($data['changes']);
   # save cache
     foreach ($data as $group => $slice) {
-      cache::set('settings--'.$group, $slice);
+      cache::update('settings--'.$group, $slice);
       static::$data[$group] = $slice;
     }
   }
@@ -103,9 +103,9 @@ namespace effectivecore {
 
   function changes_register_action($module_id, $action, $npath, $value = null, $rebuild = true) {
   # add new action
-    $changes_d = dynamic::get('changes') ?: [];
+    $changes_d = dynamic::select('changes') ?: [];
     $changes_d[$module_id]->{$action}[$npath] = $value;
-    dynamic::set('changes', $changes_d, ['build' => factory::datetime_get()]);
+    dynamic::update('changes', $changes_d, ['build' => factory::datetime_get()]);
   # prevent opcache work
     static::$changes_dynamic['changes'] = $changes_d;
     if ($rebuild) {

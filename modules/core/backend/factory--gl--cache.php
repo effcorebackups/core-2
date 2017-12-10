@@ -11,8 +11,8 @@ namespace effectivecore {
   static $type = 'cache';
   static $directory = dir_dynamic.'cache/';
 
-  static function set($name, $data, $info = null) {
-    if (parent::set($name, $data, $info)) {
+  static function update($name, $data, $info = null) {
+    if (parent::update($name, $data, $info)) {
       console::add_log('storage', 'cache', 'Cache for "'.$name.'" was rebuilded.', 'ok', 0);
     }
   }

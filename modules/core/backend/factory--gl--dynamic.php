@@ -13,11 +13,11 @@ namespace effectivecore {
   static $info = [];
   static $data = [];
 
-  static function get_info() {
+  static function select_info() {
     return static::$info;
   }
 
-  static function get($name) {
+  static function select($name) {
     if (!isset(static::$data[$name])) {
       $file = new file(static::$directory.static::$type.'--'.$name.'.php');
       if ($file->is_exist()) {
@@ -28,7 +28,7 @@ namespace effectivecore {
                  static::$data[$name] : null;
   }
 
-  static function set($name, $data, $info = null) {
+  static function update($name, $data, $info = null) {
     static::$data[$name] = $data;
     $file = new file(static::$directory.static::$type.'--'.$name.'.php');
     if ($info) static::$info[$name] = $info;
