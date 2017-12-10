@@ -141,9 +141,10 @@ namespace effectivecore {
                            ($indexes[$c_name] = 0) :
                           ++$indexes[$c_name];
 
-        # define value
-          $c_new_values = isset($values[$c_name]) ?
-                                $values[$c_name] : [];
+        # prepare value
+          if (!isset($values[$c_name])) {
+            $values[$c_name] = [];
+          }
 
         # select validation:
         # ─────────────────────────────────────────────────────────────────────
@@ -156,10 +157,10 @@ namespace effectivecore {
                 }
               }
             }
-            static::_validate_field_selector($form, $c_field, $c_element, $c_npath, $c_new_values, $c_allowed_values);
+            static::_validate_field_selector($form, $c_field, $c_element, $c_npath, $c_name, $values[$c_name], $c_allowed_values);
             foreach ($c_element->child_select_all() as $c_option) {
               if ($c_option instanceof node && $c_option->tag_name == 'option') {
-                if (factory::in_array_string_compare($c_option->attribute_select('value'), $c_new_values))
+                if (factory::in_array_string_compare($c_option->attribute_select('value'), $values[$c_name]))
                      $c_option->attribute_insert('selected', 'selected');
                 else $c_option->attribute_delete('selected');
               }
@@ -171,7 +172,7 @@ namespace effectivecore {
           if ($c_element->tag_name == 'input' &&
               $c_type == 'file') {
             $delete_values = isset($values['manager_delete_'.$c_name]) ? factory::array_values_map_to_keys($values['manager_delete_'.$c_name]) : [];
-            static::_validate_field_file($form, $c_field, $c_element, $c_npath, $c_new_values, $delete_values);
+            static::_validate_field_file($form, $c_field, $c_element, $c_npath, $c_name, $values[$c_name], $delete_values);
           }
 
         # input[type=checkbox|radio] validation:
@@ -179,7 +180,7 @@ namespace effectivecore {
           if (($c_element->tag_name == 'input' && $c_type == 'checkbox') ||
               ($c_element->tag_name == 'input' && $c_type == 'radio')) {
           # delete default (from _init) and set new (from $_POST) CHECKED state
-            if (factory::in_array_string_compare($c_element->attribute_select('value'), $c_new_values))
+            if (factory::in_array_string_compare($c_element->attribute_select('value'), $values[$c_name]))
                  $c_element->attribute_insert('checked', 'checked');
             else $c_element->attribute_delete('checked');
           }
@@ -187,9 +188,9 @@ namespace effectivecore {
         # textarea validation:
         # ─────────────────────────────────────────────────────────────────────
           if ($c_element->tag_name == 'textarea') {
-            static::_validate_field_text($form, $c_field, $c_element, $c_npath, $c_new_values[$c_index]);
+            static::_validate_field_text($form, $c_field, $c_element, $c_npath, $c_name, $values[$c_name][$c_index]);
             $content = $c_element->child_select('content');
-            $content->text = $c_new_values[$c_index];
+            $content->text = $values[$c_name][$c_index];
           }
 
         # input[type=text|password|search|email|url|tel|number|range|date|time|color] validation:
@@ -206,8 +207,8 @@ namespace effectivecore {
               $c_type == 'date'     ||
               $c_type == 'time'     ||
               $c_type == 'color')) {
-            static::_validate_field_text($form, $c_field, $c_element, $c_npath, $c_new_values[$c_index]);
-            $c_element->attribute_insert('value', $c_new_values[$c_index]);
+            static::_validate_field_text($form, $c_field, $c_element, $c_npath, $c_name, $values[$c_name][$c_index]);
+            $c_element->attribute_insert('value', $values[$c_name][$c_index]);
           }
 
         }
@@ -219,7 +220,7 @@ namespace effectivecore {
   ### _validate_field_selector ###
   ################################
 
-  static function _validate_field_selector($form, $field, $element, $npath, &$new_values, $allowed_values) {
+  static function _validate_field_selector($form, $field, $element, $npath, $name, &$new_values, $allowed_values) {
     $title = translation::get(
       $field->title
     );
@@ -258,7 +259,7 @@ namespace effectivecore {
   ### _validate_field_file ###
   ############################
 
-  static function _validate_field_file($form, $field, $element, $npath, &$new_values, $delete_values) {
+  static function _validate_field_file($form, $field, $element, $npath, $name, &$new_values, $delete_values) {
     $title = translation::get(
       $field->title
     );
@@ -301,40 +302,41 @@ namespace effectivecore {
   # process the file/files
   # ─────────────────────────────────────────────────────────────────────
     $validation_id = form::validation_id_get();
-    $tmp_files = tmp::get('files-'.$validation_id) ?: [];
-    $tmp_files_count_0 = count($tmp_files);
-  # add new files to tmp_files
+    $stack = tmp::get('files-'.$validation_id) ?: [];
+    $stack_count_0 = isset($stack[$name]) ? count($stack[$name]) : 0;
+  # add new files to stack
     foreach ($new_values as $c_new_value) {
       if (is_uploaded_file($c_new_value->tmp_name)) {
         $c_file = new file($c_new_value->tmp_name);
         if ($c_file->move_uploaded(dir_dynamic.'tmp/', $c_file->get_hash())) {
-          $c_new_value->element_name = rtrim($element->attribute_select('name'), '[]');
           $c_new_value->tmp_name = $c_file->get_path_full();
           $c_new_value->name = file::name_make_safe($c_new_value->name);
-          $tmp_files[$c_file->get_hash()] = $c_new_value;
+          $stack[$name][$c_file->get_hash()] = $c_new_value;
         }
       }
     }
-  # delete unnecessary files from tmp_files
-    foreach ($tmp_files as $c_hash => $c_file) {
+  # delete old files from stack
+    foreach ($stack[$name] as $c_hash => $c_file) {
       if (isset($delete_values[$c_hash])) {
-        unlink($tmp_files[$c_hash]->tmp_name);
-        unset($tmp_files[$c_hash]);
+        unlink($stack[$name][$c_hash]->tmp_name);
+         unset($stack[$name][$c_hash]);
       }
     }
-  # save tmp_files
-    if (count($tmp_files) ||
-       (count($tmp_files) == 0 && $tmp_files_count_0 > 0)) {
-      tmp::set('files-'.$validation_id, $tmp_files);
+  # save stack
+    if (count($stack[$name]) ||
+       (count($stack[$name]) == 0 && $stack_count_0 > 0)) {
+      tmp::set('files-'.$validation_id, $stack);
     }
   # fill the manager
-    foreach ($tmp_files as $c_hash => $c_file) {
+    foreach ($stack[$name] as $c_hash => $c_file) {
       $field->manager_insert_action($c_file, $c_hash);
     }
+  # reflect stack to new_values
+    $new_values = $stack[$name];
 
   # check required
   # ─────────────────────────────────────────────────────────────────────
-    if ($element->attribute_select('required') && count($tmp_files) == 0) {
+    if ($element->attribute_select('required') && count($new_values) == 0) {
       $form->add_error($npath.'/element',
         translation::get('Field "%%_title" must be selected!', ['title' => $title])
       );
@@ -347,7 +349,7 @@ namespace effectivecore {
   ### _validate_field_text ###
   ############################
 
-  static function _validate_field_text($form, $field, $element, $npath, &$new_value) {
+  static function _validate_field_text($form, $field, $element, $npath, $name, &$new_value) {
     $title = translation::get(
       $field->title
     );
@@ -546,7 +548,7 @@ namespace effectivecore {
 
   # check captcha
   # ─────────────────────────────────────────────────────────────────────
-    if ($element->attribute_select('name') == 'captcha' && !$field->captcha_check($new_value)) {
+    if ($name == 'captcha' && !$field->captcha_check($new_value)) {
       $form->add_error($npath.'/element',
         translation::get('Field "%%_title" contains an incorrect characters from image!', ['title' => $title])
       );
@@ -561,13 +563,13 @@ namespace effectivecore {
 
   static function on_submit($form, $fields, &$values) {
     $validation_id = form::validation_id_get();
-    $tmp_files = tmp::get('files-'.$validation_id) ?: [];
-    foreach ($tmp_files as $c_hash => $c_tmp_info) {
-      $c_file = new file($c_tmp_info->tmp_name);
+    $stack = tmp::get('files-'.$validation_id) ?: [];
+    foreach ($stack as $c_hash => $c_file_info) {
+      $c_file = new file($c_file_info->tmp_name);
       if ($c_file->is_exist() &&
           $c_file->get_hash() == $c_hash &&
-          $c_file->move(dir_dynamic.'files/', $c_tmp_info->name)) {
-        $c_tmp_info->new_path = $c_file->get_path_full();
+          $c_file->move(dir_dynamic.'files/', $c_file_info->name)) {
+        $c_file_info->new_path = $c_file->get_path_full();
       }
     }
   }
