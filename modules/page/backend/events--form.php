@@ -29,13 +29,13 @@ namespace effectivecore\modules\page {
       case 'save':
         storage::get('settings')->changes_register_action('page', 'update', 'decoration/page/color_id',    $values['color_id'][0], false);
         storage::get('settings')->changes_register_action('page', 'update', 'decoration/page/color_bg_id', $values['color_bg_id'][0]);
-        message::add_new('Changes was saved.');
+        message::insert('Changes was saved.');
         break;
       case 'restore':
         storage::get('settings')->changes_unregister_action('page', 'update', 'decoration/page/color_id');
         storage::get('settings')->changes_unregister_action('page', 'update', 'decoration/page/color_bg_id');
-      # message::add_new('Changes was removed.');
-        message::add_new('UNDER CONSTRUCTION'); # @todo: make functionality
+      # message::insert('Changes was removed.');
+        message::insert('UNDER CONSTRUCTION'); # @todo: make functionality
         break;
     }
   }

@@ -44,12 +44,12 @@ namespace effectivecore {
           event::start('on_storage_init_after', 'pdo', [&$this]);
           return $this->connection;
         } catch (\PDOException $e) {
-          message::add_new(
+          message::insert(
             translation::get('Storage %%_id is not available!', ['id' => $this->id]), 'warning'
           );
         }
       } else {
-        message::add_new(
+        message::insert(
           translation::get('Credentials for storage %%_id was not setted!', ['id' => $this->id]), 'warning'
         );
       }
@@ -108,7 +108,7 @@ namespace effectivecore {
       event::start('on_query_after', 'pdo', [&$this, &$query, &$result, &$errors]);
       $this->args = [];
       if ($errors !== ['00000', null, null]) {
-        message::add_new(
+        message::insert(
           'Query error! '.br.
           'sqlstate: '.         $errors[0].br.
           'driver error code: '.$errors[1].br.

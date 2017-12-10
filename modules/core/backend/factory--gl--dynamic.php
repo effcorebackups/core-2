@@ -46,7 +46,7 @@ namespace effectivecore {
       }
       return true;
     } else {
-      message::add_new(
+      message::insert(
         'Can not write file "'.$file->get_file_full().'" to the directory "'.$file->get_dirs_relative().'"!'.br.
         'The system cannot save dynamic file and will work slowly!'.br.
         (!is_writable($file->get_dirs()) ? 'Directory "'.$file->get_dirs_relative().'" should be writable!'.br : '').

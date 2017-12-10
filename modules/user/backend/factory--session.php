@@ -35,7 +35,7 @@ namespace effectivecore\modules\user {
           ($session && $session->ip_address !== $_SERVER['REMOTE_ADDR']) ||
           ($session && $session->user_agent_hash !== md5($_SERVER['HTTP_USER_AGENT']))) {
         static::id_regenerate('a');
-        message::add_new('invalid session was deleted!', 'warning');
+        message::insert('invalid session was deleted!', 'warning');
         return null;
       } else {
         return $session;

@@ -19,21 +19,21 @@ namespace effectivecore\modules\core {
 
   static function on_init_installation($form, $fields) {
     if (!extension_loaded('pdo')) {
-      message::add_new('PHP PDO extension is not available.', 'warning');
+      message::insert('PHP PDO extension is not available.', 'warning');
     }
     if (!extension_loaded('pdo_mysql')) {
       $fields['storage/is_mysql']->child_select('element')->attribute_insert('disabled', 'disabled');
-      message::add_new(translation::get('PHP PDO driver for %%_name is not available.', ['name' => 'MySQL']), 'warning');
+      message::insert(translation::get('PHP PDO driver for %%_name is not available.', ['name' => 'MySQL']), 'warning');
     }
     if (!extension_loaded('pdo_sqlite')) {
       $fields['storage/is_sqlite']->child_select('element')->attribute_insert('disabled', 'disabled');
-      message::add_new(translation::get('PHP PDO driver for %%_name is not available.', ['name' => 'SQLite']), 'warning');
+      message::insert(translation::get('PHP PDO driver for %%_name is not available.', ['name' => 'SQLite']), 'warning');
     }
     $main = storage::get('main');
     if (isset($main->driver)) {
       $form->child_delete('storage');
       $form->child_delete('button_install');
-      message::add_new('Installation is not available because storage credentials was setted!', 'warning');
+      message::insert('Installation is not available because storage credentials was setted!', 'warning');
     }
   }
 
@@ -107,7 +107,7 @@ namespace effectivecore\modules\core {
         storage::get('settings')->changes_register_action('core', 'insert', 'storages/storage/storage_sql_dpo', $params);
         storage::rebuild();
         event::start('on_module_install');
-        message::add_new('Modules was installed.');
+        message::insert('Modules was installed.');
         $form->child_delete('storage');
         $form->child_delete('button_install');
         break;

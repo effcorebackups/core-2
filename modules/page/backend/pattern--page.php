@@ -34,7 +34,7 @@ namespace effectivecore {
 
   # check https (@todo: enable this message)
     if (false && !empty($this->https) && url_factory::get_current()->get_protocol() != 'https') {
-      message::add_new('This page should be use HTTPS protocol!', 'warning');
+      message::insert('This page should be use HTTPS protocol!', 'warning');
     }
 
   # render frontend items: icons, styles, script

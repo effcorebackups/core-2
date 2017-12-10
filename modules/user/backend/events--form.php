@@ -37,8 +37,8 @@ namespace effectivecore\modules\user {
                 $c_session->delete();
               }
             }
-               message::add_new(translation::get('User %%_nick was deleted.',     ['nick' => $nick]));}
-          else message::add_new(translation::get('User %%_nick was not deleted!', ['nick' => $nick]), 'error');
+               message::insert(translation::get('User %%_nick was deleted.',     ['nick' => $nick]));}
+          else message::insert(translation::get('User %%_nick was not deleted!', ['nick' => $nick]), 'error');
         }
         url::go(url::get_back_url() ?: '/admin/users');
         break;
@@ -113,12 +113,12 @@ namespace effectivecore\modules\user {
           $user->password_hash = factory::hash_get($values['password_new'][0]);
         }
         if ($user->update()) {
-          message::add_new(
+          message::insert(
             translation::get('User %%_nick was updated.', ['nick' => $user->nick])
           );
           url::go(url::get_back_url() ?: '/user/'.$id);
         } else {
-          message::add_new(
+          message::insert(
             translation::get('User %%_nick was not updated.', ['nick' => $user->nick]), 'warning'
           );
         }
@@ -135,7 +135,7 @@ namespace effectivecore\modules\user {
 
   static function on_init_login($form, $fields) {
     if (!isset($_COOKIE['cookies_is_on'])) {
-      message::add_new(
+      message::insert(
         translation::get('Cookies are disabled. You can not log in!').br.
         translation::get('Enable cookies before login.'), 'warning');
     }
@@ -154,7 +154,7 @@ namespace effectivecore\modules\user {
                $user->password_hash !== factory::hash_get($values['password'][0]))) {
             $form->add_error('credentials/email/element');
             $form->add_error('credentials/password/element');
-            message::add_new('Incorrect email or password!', 'error');
+            message::insert('Incorrect email or password!', 'error');
           }
         }
         break;
@@ -213,7 +213,7 @@ namespace effectivecore\modules\user {
           session::insert($user->id);
           url::go('/user/'.$user->id);
         } else {
-          message::add_new('User was not registered!', 'error');
+          message::insert('User was not registered!', 'error');
         }
         break;
     }

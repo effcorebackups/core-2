@@ -16,6 +16,7 @@ translations
   - Background color: Цвет фона
   - button: кнопка
   - cache: кэш
+  - Call %%_name: Вызов %%_name
   - call: вызов
   - Cancel: Отмена
   - cancel: отмена
@@ -83,6 +84,7 @@ translations
   - Field value is more than %%_value.: Значение поля больше чем %%_value.
   - Field value is not a valid number.: Значение поля не является допустимым числом.
   - Field value is not in valid range.: Значение поля не соответствует допустимому диапазону.
+  - File %%_name was uploaded.: Файл %%_name был загружен.
   - file is empty: файл пуст
   - File: Файл
   - file: файл

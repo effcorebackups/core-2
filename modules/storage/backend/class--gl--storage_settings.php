@@ -242,7 +242,7 @@ namespace effectivecore {
       } else {
         $messages = ['Function: settings_to_code', 'Wrong syntax in settings data at line: '.$line_num];
         if ($file_name) $messages[] = 'File name: '.$file_name;
-        message::add_new(implode(br, $messages), 'error');
+        message::insert(implode(br, $messages), 'error');
       }
     }
   # call required functions
