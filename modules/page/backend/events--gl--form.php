@@ -303,7 +303,9 @@ namespace effectivecore {
   # ─────────────────────────────────────────────────────────────────────
     $validation_id = form::validation_id_get();
     $stack = tmp::get('files-'.$validation_id) ?: [];
-    $stack_count_0 = isset($stack[$name]) ? count($stack[$name]) : 0;
+    if (!isset($stack[$name]))
+               $stack[$name] = [];
+    $stack_count_0 = count($stack[$name]);
   # add new files to stack
     foreach ($new_values as $c_new_value) {
       if (is_uploaded_file($c_new_value->tmp_name)) {
@@ -316,7 +318,7 @@ namespace effectivecore {
       }
     }
   # delete old files from stack
-    foreach ($stack[$name] as $c_hash => $c_file) {
+    foreach ($stack[$name] as $c_hash => $c_file_info) {
       if (isset($delete_values[$c_hash])) {
         unlink($stack[$name][$c_hash]->tmp_name);
          unset($stack[$name][$c_hash]);
@@ -328,8 +330,8 @@ namespace effectivecore {
       tmp::set('files-'.$validation_id, $stack);
     }
   # fill the manager
-    foreach ($stack[$name] as $c_hash => $c_file) {
-      $field->manager_insert_action($c_file, $c_hash);
+    foreach ($stack[$name] as $c_hash => $c_file_info) {
+      $field->manager_insert_action($c_file_info, $c_hash);
     }
   # reflect stack to new_values
     $new_values = $stack[$name];
@@ -562,14 +564,40 @@ namespace effectivecore {
   #################
 
   static function on_submit($form, $fields, &$values) {
-    $validation_id = form::validation_id_get();
-    $stack = tmp::get('files-'.$validation_id) ?: [];
-    foreach ($stack as $c_hash => $c_file_info) {
-      $c_file = new file($c_file_info->tmp_name);
-      if ($c_file->is_exist() &&
-          $c_file->get_hash() == $c_hash &&
-          $c_file->move(dir_dynamic.'files/', $c_file_info->name)) {
-        $c_file_info->new_path = $c_file->get_path_full();
+    foreach ($fields as $c_npath => $c_field) {
+      $c_element = $c_field->child_select('element');
+      if ($c_element instanceof markup ||
+          $c_element instanceof markup_simple) {
+        $c_name = rtrim($c_element->attribute_select('name'), '[]');
+        $c_type =       $c_element->attribute_select('type');
+        if ($c_name) {
+
+        # disable processing if element disabled or readonly
+          if ($c_element->attribute_select('disabled') ||
+              $c_element->attribute_select('readonly')) {
+            continue;
+          }
+
+        # prepare value
+          if (!isset($values[$c_name])) {
+            $values[$c_name] = [];
+          }
+
+        # input[type=file] validation:
+        # ─────────────────────────────────────────────────────────────────────
+          if ($c_element->tag_name == 'input' &&
+              $c_type == 'file') {
+            foreach ($values[$c_name] as $c_hash => $c_file_info) {
+              $c_file = new file($c_file_info->tmp_name);
+              if ($c_file->is_exist() &&
+                  $c_file->get_hash() == $c_hash &&
+                  $c_file->move(dir_dynamic.'files/', $c_file_info->name)) {
+                $c_file_info->new_path = $c_file->get_path_full();
+              }
+            }
+          }
+
+        }
       }
     }
   }
