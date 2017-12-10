@@ -587,6 +587,7 @@ namespace effectivecore {
         # ─────────────────────────────────────────────────────────────────────
           if ($c_element->tag_name == 'input' &&
               $c_type == 'file') {
+          # final copying of files
             foreach ($values[$c_name] as $c_hash => $c_file_info) {
               $c_file = new file($c_file_info->tmp_name);
               if ($c_file->is_exist() &&
@@ -595,6 +596,8 @@ namespace effectivecore {
                 $c_file_info->new_path = $c_file->get_path_full();
               }
             }
+          # cleaning the manager
+            $c_field->manager_clean();
           }
 
         }
