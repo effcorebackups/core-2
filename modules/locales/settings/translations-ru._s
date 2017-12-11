@@ -196,6 +196,7 @@ translations
   - Timezone: Часовой пояс
   - Title: Заголовок
   - to front: на главную
+  - to home: домой
   - Total build time: Общее время сборки
   - Total load: Общая загрука
   - Total: Всего

@@ -1,13 +1,4 @@
 tree_items
-- home|tree_item
-    id: home
-    id_parent: main
-    parent_is_tree: true
-    title: Home
-    attributes
-    - href: /
-    - class
-      - home: home
 - admin|tree_item
     id: admin
     id_parent: main

@@ -12,19 +12,28 @@ pages
       - admins: admins
       - registered: registered
     content
+    - check_access_user_edit
+        region: region_1_1
+        type: code
+        handler: \effectivecore\modules\user\events_access::on_check_access_user_edit
+    # ─────────────────────────────────────────────────────────────────────
     - block_tree_main
         region: nav
         type: link
         npath: trees/core/main
+    - block_logo
+        region: region_1_1
+        type: code
+        handler: \effectivecore\modules\core\events_page::on_show_block_logo
     - block_tree_user
-        region: nav
+        region: region_1_1
         type: link
         npath: trees/user/user
-    - check_access_user_edit
-        region: content_1_1
+    - block_title
+        region: region_1_1
         type: code
-        handler: \effectivecore\modules\user\events_access::on_check_access_user_edit
+        handler: \effectivecore\modules\core\events_page::on_show_block_title
     - form_user_edit
-        region: content_1_1
+        region: region_1_1
         type: link
         npath: forms/user/user_edit

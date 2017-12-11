@@ -10,7 +10,7 @@ namespace effectivecore\modules\user {
           use \effectivecore\modules\user\user as user;
           abstract class events_access extends \effectivecore\events_access {
 
-  static function on_check_access_user_delete($id) {
+  static function on_check_access_user_delete($page, $id) {
     $user = (new instance('user', ['id' => $id]))->select();
     if ($user) {
       if ($user->is_embed == 1) {
@@ -25,7 +25,7 @@ namespace effectivecore\modules\user {
     }
   }
 
-  static function on_check_access_user_edit($id) {
+  static function on_check_access_user_edit($page, $id) {
     $user = (new instance('user', ['id' => $id]))->select();
     if ($user) {
       if (!($user->id == user::get_current()->id ||                # not owner or

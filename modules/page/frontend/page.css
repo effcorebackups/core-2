@@ -36,6 +36,8 @@
 
   /* blocks */
   x-block {display: block}
+  x-block#logo {}
+  x-block#logo a#home {display: block; width: 150px; height: 70px; background: url('logo.svg')}
 
   /* control elements */
   x-actions-control {display: inline-block; cursor: default}

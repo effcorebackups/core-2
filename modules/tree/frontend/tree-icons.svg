@@ -32,9 +32,9 @@
     </rdf:RDF>
   </metadata>
   <path
-     id="ico_home"
+     id="ico_empty"
      style="shape-rendering:auto;fill:#ffffff;fill-opacity:0.2;stroke:#ffffff"
-     d="m 19.5,19.5 23,0 0,23 -23,0 z" />
+     d="m 20.5,20.5 23,0 0,23 -23,0 z" />
   <path
      id="ico_settings"
      style="shape-rendering:auto;fill:#ffffff;fill-opacity:0.2;stroke:#ffffff"

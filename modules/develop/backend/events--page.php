@@ -11,7 +11,7 @@ namespace effectivecore\modules\develop {
           use \effectivecore\table_body_row_cell as table_body_row_cell;
           abstract class events_page extends \effectivecore\events_page {
 
-  static function on_show_block_demo_dynamic() {
+  static function on_show_block_demo_dynamic($page) {
     $block = new markup('x-block', ['id' => 'demo_dynamic']);
   # title
     $block->child_insert(

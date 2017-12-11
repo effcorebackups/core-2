@@ -28,10 +28,6 @@ namespace effectivecore {
   }
 
   function render() {
-    $template = new template('page');
-    $template->set_var('title',
-      token::replace(translation::get($this->title))
-    );
 
   # check https (@todo: enable this message)
     if (false && !empty($this->https) && url::get_current()->get_protocol() != 'https') {
@@ -108,13 +104,14 @@ namespace effectivecore {
                         $c_block->region : 'content_1_1';
       switch ($c_block->type) {
         case 'text': $contents[$c_region][] = new text($c_block->content); break;
-        case 'code': $contents[$c_region][] = call_user_func_array($c_block->handler, static::$args); break;
+        case 'code': $contents[$c_region][] = call_user_func_array($c_block->handler, ['page' => $this] + static::$args); break;
         case 'link': $contents[$c_region][] = storage::get('settings')->select_by_npath($c_block->npath); break;
         default    : $contents[$c_region][] = $c_block;
       }
     }
 
   # render each block
+    $template = new template('page');
     foreach ($contents as $c_region_name => $c_blocks) {
       $rendered_c_region = '';
       foreach ($c_blocks as $c_block) {
@@ -139,6 +136,7 @@ namespace effectivecore {
     $template->set_var('meta', implode(nl, $rendered_meta));
     $template->set_var('styles', implode(nl, $rendered_styles));
     $template->set_var('script', implode(nl, $rendered_script));
+    $template->set_var('title', token::replace(translation::get($this->title)));
 
     return $template->render();
   }

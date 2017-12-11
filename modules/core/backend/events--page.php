@@ -11,7 +11,7 @@ namespace effectivecore\modules\core {
           use \effectivecore\modules\storage\storage as storage;
           abstract class events_page extends \effectivecore\events_page {
 
-  static function on_show_modules() {
+  static function on_show_modules($page) {
     $thead = [['Title', 'ID', 'Path', 'Description', 'Ver.', 'State.']];
     $tbody = [];
     foreach (storage::get('settings')->select_group('module') as $c_module) {

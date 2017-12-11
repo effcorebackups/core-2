@@ -4,9 +4,8 @@
   nav x-tree ul, nav x-tree li {margin: 0; padding: 0; list-style: none}
   nav x-tree > ul > li {float: left; cursor: default}
   nav x-tree > ul > li > a {display: block; padding: 21px}
-  nav x-tree > ul > li > ul {position: absolute; padding: 21px}
+  nav x-tree > ul > li > ul {position: absolute; padding: 21px; z-index: 10}
   nav x-tree > ul > li > ul > li {}
-  nav x-tree.user > ul > li {float: right}
 
   /* tree colors */
   nav x-tree > ul > li:hover {background: %%_color_hover_bg}

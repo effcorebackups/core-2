@@ -16,7 +16,7 @@ namespace effectivecore\modules\user {
           use \effectivecore\modules\user\user as user;
           abstract class events_page extends \effectivecore\events_page {
 
-  static function on_show_block_roles() {
+  static function on_show_block_roles($page) {
     $block = new markup('x-block', ['id' => 'admin_roles']);
     $thead = [['ID', 'Title', 'Is embed']];
     $tbody = entity::get('role')->select_instances();
@@ -27,7 +27,7 @@ namespace effectivecore\modules\user {
     return $block;
   }
 
-  static function on_show_block_users() {
+  static function on_show_block_users($page) {
     $pager = new pager();
     if ($pager->has_error) {
       factory::send_header_and_exit('not_found',
@@ -56,7 +56,7 @@ namespace effectivecore\modules\user {
     }
   }
 
-  static function on_show_block_user($id) {
+  static function on_show_block_user($page, $id) {
     $user = (new instance('user', ['id' => $id]))->select();
     if ($user) {
       if ($user->id == user::get_current()->id ||               # owner
