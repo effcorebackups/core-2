@@ -6,7 +6,7 @@
 
 namespace effectivecore {
           use \effectivecore\modules\storage\storage as storage;
-          abstract class language_factory {
+          abstract class language {
 
   protected static $data;
 
