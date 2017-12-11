@@ -7,8 +7,8 @@
 namespace effectivecore\modules\core {
           use const \effectivecore\br;
           use \effectivecore\url as url;
+          use \effectivecore\event as event;
           use \effectivecore\translation as translation;
-          use \effectivecore\event_factory as event;
           use \effectivecore\message_factory as message;
           use \effectivecore\modules\storage\storage as storage;
           abstract class events_form extends \effectivecore\events_form {

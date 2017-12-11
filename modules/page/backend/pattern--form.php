@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\event_factory as event;
+          use \effectivecore\event as event;
           use \effectivecore\message_factory as message;
           use \effectivecore\modules\user\session_factory as session;
           class form extends \effectivecore\markup {

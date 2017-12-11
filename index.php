@@ -22,8 +22,8 @@ namespace effectivecore {
 
   use \effectivecore\url as url;
   use \effectivecore\timer as timer;
+  use \effectivecore\event as event;
   use \effectivecore\token_factory as token;
-  use \effectivecore\event_factory as event;
   use \effectivecore\modules\storage\storage as storage;
   timer::tap('total');
 
