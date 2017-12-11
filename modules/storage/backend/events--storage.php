@@ -6,8 +6,8 @@
 
 namespace effectivecore\modules\storage {
           use const \effectivecore\br;
+          use \effectivecore\timer as timer;
           use \effectivecore\factory as factory;
-          use \effectivecore\timer_factory as timer;
           use \effectivecore\console_factory as console;
           abstract class events_storage {
 
@@ -18,7 +18,7 @@ namespace effectivecore\modules\storage {
   static function on_storage_init_after($storage) {
     timer::tap('storage init');
     console::add_log(
-      'storage', 'init.', 'storage %%_id was initialized', 'ok', timer::select_period('storage init', 0, 1), ['id' => $storage->id]
+      'storage', 'init.', 'storage %%_id was initialized', 'ok', timer::get_period('storage init', 0, 1), ['id' => $storage->id]
     );
   }
 
@@ -36,7 +36,7 @@ namespace effectivecore\modules\storage {
         $s_query_beautiful.
         $s_query_args,
         $errors[0] == '00000' ? 'ok' : 'error',
-        timer::select_period('storage query: '.$s_query, -1, -2)
+        timer::get_period('storage query: '.$s_query, -1, -2)
     );
   }
 
