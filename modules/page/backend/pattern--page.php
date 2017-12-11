@@ -47,7 +47,7 @@ namespace effectivecore {
         $used_links[] = $c_block->npath;
       }
     }
-    foreach (storage::get('settings')->select_group('frontend') as $module_id => $c_frontend_items) {
+    foreach (storage::select('settings')->select_group('frontend') as $module_id => $c_frontend_items) {
       foreach ($c_frontend_items as $c_item) {
         if (    (isset($c_item->display->url->match) &&
             preg_match($c_item->display->url->match, url_factory::select_current()->path)) ||
@@ -108,7 +108,7 @@ namespace effectivecore {
       switch ($c_block->type) {
         case 'text': $contents[$c_region][] = new text($c_block->content); break;
         case 'code': $contents[$c_region][] = call_user_func_array($c_block->handler, page_factory::$args); break;
-        case 'link': $contents[$c_region][] = storage::get('settings')->select_by_npath($c_block->npath); break;
+        case 'link': $contents[$c_region][] = storage::select('settings')->select_by_npath($c_block->npath); break;
         default    : $contents[$c_region][] = $c_block;
       }
     }

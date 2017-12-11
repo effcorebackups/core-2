@@ -32,22 +32,22 @@ namespace effectivecore {
   function set_entity_name($entity_name) {$this->entity_name = $entity_name;}
 
   function select($custom_ids = []) {
-    $storage = storage::get($this->get_entity()->get_storage_id());
+    $storage = storage::select($this->get_entity()->get_storage_id());
     return $storage->select_instance($this, $custom_ids);
   }
 
   function insert() {
-    $storage = storage::get($this->get_entity()->get_storage_id());
+    $storage = storage::select($this->get_entity()->get_storage_id());
     return $storage->insert_instance($this);
   }
 
   function update() {
-    $storage = storage::get($this->get_entity()->get_storage_id());
+    $storage = storage::select($this->get_entity()->get_storage_id());
     return $storage->update_instance($this);
   }
 
   function delete() {
-    $storage = storage::get($this->get_entity()->get_storage_id());
+    $storage = storage::select($this->get_entity()->get_storage_id());
     return $storage->delete_instance($this);
   }
 

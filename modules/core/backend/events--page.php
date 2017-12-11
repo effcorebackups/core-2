@@ -14,7 +14,7 @@ namespace effectivecore\modules\core {
   static function on_show_modules() {
     $thead = [['Title', 'ID', 'Path', 'Description', 'Ver.', 'State.']];
     $tbody = [];
-    foreach (storage::get('settings')->select_group('module') as $c_module) {
+    foreach (storage::select('settings')->select_group('module') as $c_module) {
       $tbody[] = [
         $c_module->title,
         $c_module->id,

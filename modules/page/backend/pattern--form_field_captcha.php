@@ -19,7 +19,7 @@ namespace effectivecore {
   public static $glyphs;
 
   static function init() {
-    foreach (storage::get('settings')->select_group('captcha') as $c_settings) {
+    foreach (storage::select('settings')->select_group('captcha') as $c_settings) {
       foreach ($c_settings as $c_characters) {
         foreach ($c_characters as $c_character) {
           foreach ($c_character->glyphs as $c_glyph) {
@@ -40,7 +40,7 @@ namespace effectivecore {
   }
 
   static function captcha_cleaning() {
-    $storage = $s = storage::get(entity_factory::select('captcha')->get_storage_id());
+    $storage = $s = storage::select(entity_factory::select('captcha')->get_storage_id());
     $storage->query('DELETE', 'FROM', $s->tables('captcha'), 'WHERE', $s->condition('created', factory::datetime_get('-1 hour'), '<'));
   }
 

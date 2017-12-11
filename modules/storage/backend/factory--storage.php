@@ -24,7 +24,7 @@ namespace effectivecore\modules\storage {
     static::init();
   }
 
-  static function get($storage_id) {
+  static function select($storage_id) {
     if (!static::$data) static::init();
     return static::$data[$storage_id];
   }
