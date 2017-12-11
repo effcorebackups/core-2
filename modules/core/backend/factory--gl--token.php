@@ -29,7 +29,7 @@ namespace effectivecore {
         switch (static::$data[$name]->type) {
           case 'code': return call_user_func(static::$data[$name]->handler, $name, $args);
           case 'text': return static::$data[$name]->value;
-          case 'translated_text': return translation::get(static::$data[$name]->value);
+          case 'translated_text': return translation::select(static::$data[$name]->value);
         }
       } else {
         return '';

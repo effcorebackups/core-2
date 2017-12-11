@@ -46,7 +46,7 @@ namespace effectivecore {
       }
     }
     return (new markup('a', $this->attribute_select(),
-      token::replace(translation::get($this->title))
+      token::replace(translation::select($this->title))
     ))->render();
   }
 

@@ -19,7 +19,7 @@ namespace effectivecore {
   }
 
   function render() {
-    return translation::get($this->text, $this->args);
+    return translation::select($this->text, $this->args);
   }
 
 }}

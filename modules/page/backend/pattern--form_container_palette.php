@@ -15,7 +15,7 @@ namespace effectivecore {
       foreach ($c_colors as $c_color_id => $c_color_info) {
         $this->input_insert(null, [
           'value' => $c_color_id,
-          'title' => translation::get('Color ID = %%_id (value = %%_value)', ['id' => $c_color_id, 'value' => $c_color_info->value]),
+          'title' => translation::select('Color ID = %%_id (value = %%_value)', ['id' => $c_color_id, 'value' => $c_color_info->value]),
           'style' => ['background-color: '.$c_color_info->value]
         ], $c_color_id);
       }

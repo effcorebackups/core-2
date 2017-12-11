@@ -23,11 +23,11 @@ namespace effectivecore\modules\core {
     }
     if (!extension_loaded('pdo_mysql')) {
       $fields['storage/is_mysql']->child_select('element')->attribute_insert('disabled', 'disabled');
-      message::insert(translation::get('PHP PDO driver for %%_name is not available.', ['name' => 'MySQL']), 'warning');
+      message::insert(translation::select('PHP PDO driver for %%_name is not available.', ['name' => 'MySQL']), 'warning');
     }
     if (!extension_loaded('pdo_sqlite')) {
       $fields['storage/is_sqlite']->child_select('element')->attribute_insert('disabled', 'disabled');
-      message::insert(translation::get('PHP PDO driver for %%_name is not available.', ['name' => 'SQLite']), 'warning');
+      message::insert(translation::select('PHP PDO driver for %%_name is not available.', ['name' => 'SQLite']), 'warning');
     }
     $main = storage::get('main');
     if (isset($main->driver)) {
@@ -53,8 +53,8 @@ namespace effectivecore\modules\core {
               ]);
               if ($test !== true) {
                 $form->add_error('storage/sqlite/file_name/element');
-                $form->add_error(null, translation::get('Storage is not available with these credentials!').br.
-                                       translation::get('Message from storage: %%_message', ['message' => strtolower($test['message'])]));
+                $form->add_error(null, translation::select('Storage is not available with these credentials!').br.
+                                       translation::select('Message from storage: %%_message', ['message' => strtolower($test['message'])]));
               }
               break;
             default:
@@ -71,8 +71,8 @@ namespace effectivecore\modules\core {
                 $form->add_error('storage/mysql/port/element');
                 $form->add_error('storage/mysql/user_name/element');
                 $form->add_error('storage/mysql/password/element');
-                $form->add_error(null, translation::get('Storage is not available with these credentials!').br.
-                                       translation::get('Message from storage: %%_message', ['message' => strtolower($test['message'])]));
+                $form->add_error(null, translation::select('Storage is not available with these credentials!').br.
+                                       translation::select('Message from storage: %%_message', ['message' => strtolower($test['message'])]));
               }
               break;
           }

@@ -29,7 +29,7 @@ namespace effectivecore {
   function render() {
     $template = new template('page');
     $template->set_var('title',
-      token::replace(translation::get($this->title))
+      token::replace(translation::select($this->title))
     );
 
   # check https (@todo: enable this message)

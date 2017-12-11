@@ -13,7 +13,7 @@ namespace effectivecore {
 
   function build() {
     $this->manager_build();
-    $this->description = translation::get('Maximal file size: %%_value.', [
+    $this->description = translation::select('Maximal file size: %%_value.', [
       'value' => locale::format_human_bytes($this->get_max_file_size())
     ]);
   }
@@ -32,7 +32,7 @@ namespace effectivecore {
   function manager_insert_action($info, $hash) {
     $full_name = $this->child_select('element')->attribute_select('name');
     $this->child_select('manager')->input_insert(
-      translation::get('delete file: %%_name', ['name' => $info->name]), ['name' => 'manager_delete_'.$full_name, 'value' => $hash]
+      translation::select('delete file: %%_name', ['name' => $info->name]), ['name' => 'manager_delete_'.$full_name, 'value' => $hash]
     );
   }
 

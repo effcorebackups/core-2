@@ -45,12 +45,12 @@ namespace effectivecore {
           return $this->connection;
         } catch (\PDOException $e) {
           message::insert(
-            translation::get('Storage %%_id is not available!', ['id' => $this->id]), 'warning'
+            translation::select('Storage %%_id is not available!', ['id' => $this->id]), 'warning'
           );
         }
       } else {
         message::insert(
-          translation::get('Credentials for storage %%_id was not setted!', ['id' => $this->id]), 'warning'
+          translation::select('Credentials for storage %%_id was not setted!', ['id' => $this->id]), 'warning'
         );
       }
     }

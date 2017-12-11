@@ -37,8 +37,8 @@ namespace effectivecore\modules\user {
                 $c_session->delete();
               }
             }
-               message::insert(translation::get('User %%_nick was deleted.',     ['nick' => $nick]));}
-          else message::insert(translation::get('User %%_nick was not deleted!', ['nick' => $nick]), 'error');
+               message::insert(translation::select('User %%_nick was deleted.',     ['nick' => $nick]));}
+          else message::insert(translation::select('User %%_nick was not deleted!', ['nick' => $nick]), 'error');
         }
         url::go(url::get_back_url() ?: '/admin/users');
         break;
@@ -69,8 +69,8 @@ namespace effectivecore\modules\user {
           $test_pass = (new instance('user', ['id' => $id]))->select();
           if ($test_pass->password_hash !== factory::hash_get($values['password'][0])) {
             $form->add_error('credentials/password/element',
-              translation::get('Field "%%_title" contains incorrect value!', [
-                'title' => translation::get($fields['credentials/password']->title)
+              translation::select('Field "%%_title" contains incorrect value!', [
+                'title' => translation::select($fields['credentials/password']->title)
               ])
             );
             return;
@@ -114,12 +114,12 @@ namespace effectivecore\modules\user {
         }
         if ($user->update()) {
           message::insert(
-            translation::get('User %%_nick was updated.', ['nick' => $user->nick])
+            translation::select('User %%_nick was updated.', ['nick' => $user->nick])
           );
           url::go(url::get_back_url() ?: '/user/'.$id);
         } else {
           message::insert(
-            translation::get('User %%_nick was not updated.', ['nick' => $user->nick]), 'warning'
+            translation::select('User %%_nick was not updated.', ['nick' => $user->nick]), 'warning'
           );
         }
         break;
@@ -136,8 +136,8 @@ namespace effectivecore\modules\user {
   static function on_init_login($form, $fields) {
     if (!isset($_COOKIE['cookies_is_on'])) {
       message::insert(
-        translation::get('Cookies are disabled. You can not log in!').br.
-        translation::get('Enable cookies before login.'), 'warning');
+        translation::select('Cookies are disabled. You can not log in!').br.
+        translation::select('Enable cookies before login.'), 'warning');
     }
   }
 

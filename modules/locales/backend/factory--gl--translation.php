@@ -21,7 +21,7 @@ namespace effectivecore {
     }
   }
 
-  static function get($string, $args = [], $code = '') {
+  static function select($string, $args = [], $code = '') {
     if (!static::$data) static::init();
     $string = isset(static::$data[$code ?: locale::get_settings()->lang_code][$string]) ?
                     static::$data[$code ?: locale::get_settings()->lang_code][$string] : $string;
