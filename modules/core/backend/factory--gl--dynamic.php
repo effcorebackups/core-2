@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\message_factory as message;
+          use \effectivecore\message as message;
           abstract class dynamic {
 
   static $type = 'data';

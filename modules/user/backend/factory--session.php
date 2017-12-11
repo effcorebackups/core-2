@@ -6,8 +6,8 @@
 
 namespace effectivecore\modules\user {
           use \effectivecore\factory as factory;
+          use \effectivecore\message as message;
           use \effectivecore\instance as instance;
-          use \effectivecore\message_factory as message;
           abstract class session_factory {
 
   static function id_regenerate($sign, $expire = 60 * 60 * 24 * 30) {

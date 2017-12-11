@@ -9,9 +9,9 @@ namespace effectivecore {
           use \effectivecore\timer as timer;
           use \effectivecore\locale as locale;
           use \effectivecore\console as console;
+          use \effectivecore\message as message;
           use \effectivecore\translation as translation;
           use \effectivecore\token_factory as token;
-          use \effectivecore\message_factory as message;
           use \effectivecore\modules\user\user as user;
           use \effectivecore\modules\storage\storage as storage;
           use \effectivecore\modules\page\page_factory as page_factory;

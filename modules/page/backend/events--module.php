@@ -6,7 +6,7 @@
 
 namespace effectivecore\modules\page {
           use \effectivecore\entity as entity;
-          use \effectivecore\message_factory as message;
+          use \effectivecore\message as message;
           use \effectivecore\translation as translation;
           use \effectivecore\modules\page\page_factory as page;
           abstract class events_module extends \effectivecore\events_module {

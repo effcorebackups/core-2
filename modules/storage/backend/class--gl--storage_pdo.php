@@ -6,8 +6,8 @@
 
 namespace effectivecore {
           use \effectivecore\event as event;
+          use \effectivecore\message as message;
           use \effectivecore\translation as translation;
-          use \effectivecore\message_factory as message;
           class storage_pdo {
 
   public $id;

@@ -6,9 +6,9 @@
 
 namespace effectivecore\modules\develop {
           use \effectivecore\entity as entity;
+          use \effectivecore\message as message;
           use \effectivecore\instance as instance;
           use \effectivecore\translation as translation;
-          use \effectivecore\message_factory as message;
           abstract class events_module extends \effectivecore\events_module {
 
   static function on_start() {

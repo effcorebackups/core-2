@@ -8,7 +8,7 @@ namespace effectivecore\modules\tree {
           use \effectivecore\tree as tree;
           use \effectivecore\entity as entity;
           use \effectivecore\factory as factory;
-          use \effectivecore\message_factory as message;
+          use \effectivecore\message as message;
           use \effectivecore\translation as translation;
           abstract class events_module extends \effectivecore\events_module {
 

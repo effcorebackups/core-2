@@ -8,7 +8,7 @@ namespace effectivecore {
           use \effectivecore\cache as cache;
           use \effectivecore\console as console;
           use \effectivecore\dynamic as dynamic;
-          use \effectivecore\message_factory as message;
+          use \effectivecore\message as message;
           class storage_settings {
 
   static $data_orig;

@@ -7,7 +7,6 @@
 namespace effectivecore {
           use \effectivecore\entity as entity;
           use \effectivecore\instance as instance;
-          use \effectivecore\message_factory as message;
           use \effectivecore\modules\storage\storage as storage;
           class form_field_captcha extends \effectivecore\form_field {
 
