@@ -17,7 +17,7 @@
   nav x-tree > ul > li > ul a {color: white}
   nav x-tree > ul > li > ul a.active,
   nav x-tree > ul > li > ul a:hover {color: %%_color_hover}
-  nav x-tree > ul > li > ul {border-radius: 0 0 5px 5px; background: %%_color_hover_bg}
+  nav x-tree > ul > li > ul {background: %%_color_hover_bg}
 
   /* tree dynamic */
   nav x-tree > ul > li > ul {display: none}
