@@ -5,20 +5,20 @@
   #############################################################
 
 namespace effectivecore\modules\tree {
+          use \effectivecore\tree as tree;
           use \effectivecore\entity as entity;
           use \effectivecore\factory as factory;
-          use \effectivecore\tree_factory as tree;
           use \effectivecore\message_factory as message;
           use \effectivecore\translation as translation;
           abstract class events_module extends \effectivecore\events_module {
 
   static function on_start() {
     tree::init();
-    foreach(tree::select_tree_items() as $c_item) {
+    foreach(tree::get_tree_items() as $c_item) {
       if ($c_item->id_parent) {
         $c_parent = !empty($c_item->parent_is_tree) ?
-           tree::select_tree($c_item->id_parent) :
-           tree::select_tree_item($c_item->id_parent);
+           tree::get_tree($c_item->id_parent) :
+           tree::get_tree_item($c_item->id_parent);
         $c_parent->child_insert($c_item, $c_item->id);
       }
     };
