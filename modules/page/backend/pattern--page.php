@@ -14,7 +14,7 @@ namespace effectivecore {
           use \effectivecore\factory as factory;
           use \effectivecore\translation as translation;
           use \effectivecore\modules\user\user as user;
-          use \effectivecore\modules\user\access_factory as access;
+          use \effectivecore\modules\user\access as access;
           use \effectivecore\modules\storage\storage as storage;
           class page {
 
