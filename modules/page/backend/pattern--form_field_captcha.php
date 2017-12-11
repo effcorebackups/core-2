@@ -40,7 +40,7 @@ namespace effectivecore {
   }
 
   static function captcha_cleaning() {
-    $storage = $s = storage::get(entity_factory::get('captcha')->get_storage_id());
+    $storage = $s = storage::get(entity_factory::select('captcha')->get_storage_id());
     $storage->query('DELETE', 'FROM', $s->tables('captcha'), 'WHERE', $s->condition('created', factory::datetime_get('-1 hour'), '<'));
   }
 

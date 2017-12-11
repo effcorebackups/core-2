@@ -20,7 +20,7 @@ namespace effectivecore {
     }
   }
 
-  static function get($name) {
+  static function select($name) {
     if (!static::$data) static::init();
     return static::$data[$name];
   }
