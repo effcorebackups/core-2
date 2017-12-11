@@ -50,8 +50,6 @@ namespace effectivecore {
   # - dir1/dir2               | should be ignored (interpret as: dir1/file2)
   # ─────────────────────────────────────────────────────────────────────
 
-  static private $cache;
-
   public $dirs;
   public $name;
   public $type;
@@ -148,6 +146,8 @@ namespace effectivecore {
   ######################
   ### static methods ###
   ######################
+
+  static private $cache;
 
   static function select_all($parent_dir, $filter = '') {
     $files = [];
