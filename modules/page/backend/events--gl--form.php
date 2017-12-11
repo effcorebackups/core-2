@@ -7,8 +7,8 @@
 namespace effectivecore {
           use \effectivecore\markup as markup;
           use \effectivecore\locale as locale;
+          use \effectivecore\temporary as temporary;
           use \effectivecore\translation as translation;
-          use \effectivecore\temporary_factory as tmp;
           use \effectivecore\markup_simple as markup_simple;
           abstract class events_form {
 
@@ -301,7 +301,7 @@ namespace effectivecore {
   # process the file/files
   # ─────────────────────────────────────────────────────────────────────
     $validation_id = form::validation_id_get();
-    $stack = tmp::select('files-'.$validation_id) ?: [];
+    $stack = temporary::select('files-'.$validation_id) ?: [];
     if (!isset($stack[$name]))
                $stack[$name] = [];
     $stack_count_0 = count($stack[$name]);
@@ -327,7 +327,7 @@ namespace effectivecore {
   # save stack
     if (count($stack[$name]) ||
        (count($stack[$name]) == 0 && $stack_count_0 > 0)) {
-      tmp::update('files-'.$validation_id, $stack);
+      temporary::update('files-'.$validation_id, $stack);
     }
   # fill the manager
     foreach ($stack[$name] as $c_hash => $c_file_info) {
@@ -604,7 +604,7 @@ namespace effectivecore {
     }
   # delete the stack
     $validation_id = form::validation_id_get();
-    tmp::delete('files-'.$validation_id);
+    temporary::delete('files-'.$validation_id);
   }
 
 }}
