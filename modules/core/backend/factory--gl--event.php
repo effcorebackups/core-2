@@ -28,15 +28,15 @@ namespace effectivecore {
     }
   }
 
-  static function get() {
+  static function select_all() {
     if (!static::$data) static::init();
     return static::$data;
   }
 
   static function start($type, $id = null, $args = []) {
     $return = [];
-    if (!empty(static::get()[$type])) {
-      foreach (static::get()[$type] as $c_event) {
+    if (!empty(static::select_all()[$type])) {
+      foreach (static::select_all()[$type] as $c_event) {
         if ($id == $c_event->for || $id == null) {
           timer::tap('event call: '.$c_event->for);
           $return[$c_event->handler][] = $c_return = call_user_func_array($c_event->handler, $args);
