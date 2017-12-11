@@ -28,8 +28,8 @@ namespace effectivecore\modules\user {
   static function on_check_access_user_edit($id) {
     $user = (new instance('user', ['id' => $id]))->select();
     if ($user) {
-      if (!($user->id == user::get_current()->id ||                # not owner or
-                   isset(user::get_current()->roles['admins']))) { # not admin
+      if (!($user->id == user::select_current()->id ||                # not owner or
+                   isset(user::select_current()->roles['admins']))) { # not admin
         factory::send_header_and_exit('access_denided',
           'Access denided!'
         );

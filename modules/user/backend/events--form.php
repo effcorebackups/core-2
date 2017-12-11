@@ -226,7 +226,7 @@ namespace effectivecore\modules\user {
   static function on_submit_logout($form, $fields, &$values) {
     switch ($form->clicked_button_name) {
       case 'logout':
-        session::delete(user::get_current()->id);
+        session::delete(user::select_current()->id);
         url::go('/');
       case 'cancel':
         url::go(url::select_back_url() ?: '/');

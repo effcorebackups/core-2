@@ -11,11 +11,11 @@ namespace effectivecore\modules\user {
           abstract class events_token extends \effectivecore\events_token {
 
   static function on_replace($match, $args = []) {
-    if (!empty(user::get_current()->id)) {
+    if (!empty(user::select_current()->id)) {
       switch ($match) {
-        case '%%_id_user': return user::get_current()->id;
-        case '%%_email'  : return user::get_current()->email;
-        case '%%_nick'   : return user::get_current()->nick;
+        case '%%_id_user': return user::select_current()->id;
+        case '%%_email'  : return user::select_current()->email;
+        case '%%_nick'   : return user::select_current()->nick;
         case '%%_id_user_context':
         case '%%_email_context':
         case '%%_nick_context':

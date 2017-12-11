@@ -30,7 +30,7 @@ namespace effectivecore\modules\user {
     }
   }
 
-  static function get_current() {
+  static function select_current() {
     if (!static::$data) static::init();
     return static::$data;
   }

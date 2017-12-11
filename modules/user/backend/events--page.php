@@ -60,8 +60,8 @@ namespace effectivecore\modules\user {
   static function on_show_block_user($id) {
     $user = (new instance('user', ['id' => $id]))->select();
     if ($user) {
-      if ($user->id == user::get_current()->id ||               # owner
-                 isset(user::get_current()->roles['admins'])) { # admin
+      if ($user->id == user::select_current()->id ||               # owner
+                 isset(user::select_current()->roles['admins'])) { # admin
         $block = new markup('x-block', ['id' => 'user']);
       # get roles
         $roles = [];
