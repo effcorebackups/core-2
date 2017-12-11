@@ -25,7 +25,7 @@ namespace effectivecore {
     return static::$data[$name];
   }
 
-  static function get_all_by_module($name) {
+  static function select_all_by_module($name) {
     if (!static::$data_raw) static::init();
     return static::$data_raw[$name];
   }

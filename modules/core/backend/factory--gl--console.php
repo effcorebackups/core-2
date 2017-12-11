@@ -27,8 +27,8 @@ namespace effectivecore {
     static::$information[$param] = $value;
   }
 
-  static function get_all_logs()        {return static::$data;}
-  static function get_all_information() {return static::$information;}
+  static function select_all_logs()        {return static::$data;}
+  static function select_all_information() {return static::$information;}
 
   static function render() {
     return (new markup('x-console', [], [
@@ -41,7 +41,7 @@ namespace effectivecore {
   static function render_logs() {
     $thead = [['Time', 'Object', 'Action', 'Description', 'Val.']];
     $tbody = [];
-    foreach (static::get_all_logs() as $c_log) {
+    foreach (static::select_all_logs() as $c_log) {
       $row_class = factory::to_css_class($c_log['object']);
       $tbody[] = new table_body_row(['class' => [$row_class => $row_class]], [
         new table_body_row_cell(['class' => ['time'        => 'time']],        locale::format_msecond($c_log['time'])),
@@ -84,7 +84,7 @@ namespace effectivecore {
 
   static function render_information() {
     $info = new markup('dl', ['class' => ['info' => 'info']]);
-    foreach (static::get_all_information() as $c_param => $c_value) {
+    foreach (static::select_all_information() as $c_param => $c_value) {
       $info->child_insert(new markup('dt', [], $c_param));
       $info->child_insert(new markup('dd', [], $c_value));
     }

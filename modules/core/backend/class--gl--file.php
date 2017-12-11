@@ -149,7 +149,7 @@ namespace effectivecore {
   ### static methods ###
   ######################
 
-  static function get_all($parent_dir, $filter = '') {
+  static function select_all($parent_dir, $filter = '') {
     $files = [];
     foreach (scandir($parent_dir) as $c_name) {
       if ($c_name != '.' && $c_name != '..') {
@@ -158,7 +158,7 @@ namespace effectivecore {
             $files[$parent_dir.$c_name] = new static($parent_dir.$c_name);
           }
         } elseif (is_dir($parent_dir.$c_name)) {
-          $files += static::get_all($parent_dir.$c_name.'/', $filter);
+          $files += static::select_all($parent_dir.$c_name.'/', $filter);
         }
       }
     }
