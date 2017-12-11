@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\modules\storage\storage_factory as storage;
+          use \effectivecore\modules\storage\storage as storage;
           class entity {
 
   public $name;
@@ -46,17 +46,17 @@ namespace effectivecore {
   }
 
   function install() {
-    $storage = storage::select($this->storage_id);
+    $storage = storage::get($this->storage_id);
     return $storage->install_entity($this);
   }
 
   function uninstall() {
-    $storage = storage::select($this->storage_id);
+    $storage = storage::get($this->storage_id);
     return $storage->uninstall_entity($this);
   }
 
   function select_instances($conditions = [], $order = [], $count = 0, $offset = 0) {
-    $storage = storage::select($this->storage_id);
+    $storage = storage::get($this->storage_id);
     return $storage->select_instances($this, $conditions, $order, $count, $offset);
   }
 
@@ -76,7 +76,7 @@ namespace effectivecore {
   protected static $data_raw;
 
   static function init() {
-    static::$data_raw = storage::select('settings')->select_group('entities');
+    static::$data_raw = storage::get('settings')->select_group('entities');
     foreach (static::$data_raw as $c_entities) {
       foreach ($c_entities as $c_entity) {
         static::$data[$c_entity->name] = $c_entity;

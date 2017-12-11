@@ -5,13 +5,13 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\modules\storage\storage_factory as storage;
+          use \effectivecore\modules\storage\storage as storage;
           abstract class language_factory {
 
   protected static $data;
 
   static function init() {
-    foreach (storage::select('settings')->select_group('languages') as $languages) {
+    foreach (storage::get('settings')->select_group('languages') as $languages) {
       foreach ($languages as $c_language) {
         static::$data[$c_language->code] = $c_language;
       }

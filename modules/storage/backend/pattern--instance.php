@@ -6,7 +6,7 @@
 
 namespace effectivecore {
           use \effectivecore\entity as entity;
-          use \effectivecore\modules\storage\storage_factory as storage;
+          use \effectivecore\modules\storage\storage as storage;
           class instance {
 
   public $entity_name;
@@ -33,22 +33,22 @@ namespace effectivecore {
   function set_entity_name($entity_name) {$this->entity_name = $entity_name;}
 
   function select($custom_ids = []) {
-    $storage = storage::select($this->get_entity()->get_storage_id());
+    $storage = storage::get($this->get_entity()->get_storage_id());
     return $storage->select_instance($this, $custom_ids);
   }
 
   function insert() {
-    $storage = storage::select($this->get_entity()->get_storage_id());
+    $storage = storage::get($this->get_entity()->get_storage_id());
     return $storage->insert_instance($this);
   }
 
   function update() {
-    $storage = storage::select($this->get_entity()->get_storage_id());
+    $storage = storage::get($this->get_entity()->get_storage_id());
     return $storage->update_instance($this);
   }
 
   function delete() {
-    $storage = storage::select($this->get_entity()->get_storage_id());
+    $storage = storage::get($this->get_entity()->get_storage_id());
     return $storage->delete_instance($this);
   }
 
@@ -63,7 +63,7 @@ namespace effectivecore {
   protected static $data_raw;
 
   static function init() {
-    static::$data_raw = storage::select('settings')->select_group('instances');
+    static::$data_raw = storage::get('settings')->select_group('instances');
     foreach (static::$data_raw as $c_instances) {
       foreach ($c_instances as $row_id => $c_instance) {
         static::$data[$row_id] = $c_instance;

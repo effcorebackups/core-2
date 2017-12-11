@@ -5,15 +5,15 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\modules\storage\storage_factory as storage;
+          use \effectivecore\modules\storage\storage as storage;
           abstract class tree_factory {
 
   protected static $trees;
   protected static $tree_items;
 
   static function init() {
-    $trees      = storage::select('settings')->select_group('trees');
-    $tree_items = storage::select('settings')->select_group('tree_items');
+    $trees      = storage::get('settings')->select_group('trees');
+    $tree_items = storage::get('settings')->select_group('tree_items');
     foreach ($trees as $c_trees_by_module) {
       foreach ($c_trees_by_module as $c_tree) {
         static::$trees[$c_tree->id] = $c_tree;

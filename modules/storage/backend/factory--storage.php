@@ -6,7 +6,7 @@
 
 namespace effectivecore\modules\storage {
           use \effectivecore\storage_settings as settings;
-          abstract class storage_factory {
+          abstract class storage {
 
   protected static $data;
 
@@ -24,7 +24,7 @@ namespace effectivecore\modules\storage {
     static::init();
   }
 
-  static function select($storage_id) {
+  static function get($storage_id) {
     if (!static::$data) static::init();
     return static::$data[$storage_id];
   }

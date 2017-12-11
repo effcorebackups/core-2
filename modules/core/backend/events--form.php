@@ -10,7 +10,7 @@ namespace effectivecore\modules\core {
           use \effectivecore\translation as translation;
           use \effectivecore\event_factory as event;
           use \effectivecore\message_factory as message;
-          use \effectivecore\modules\storage\storage_factory as storage;
+          use \effectivecore\modules\storage\storage as storage;
           abstract class events_form extends \effectivecore\events_form {
 
   ##########################
@@ -29,7 +29,7 @@ namespace effectivecore\modules\core {
       $fields['storage/is_sqlite']->child_select('element')->attribute_insert('disabled', 'disabled');
       message::insert(translation::get('PHP PDO driver for %%_name is not available.', ['name' => 'SQLite']), 'warning');
     }
-    $main = storage::select('main');
+    $main = storage::get('main');
     if (isset($main->driver)) {
       $form->child_delete('storage');
       $form->child_delete('button_install');
@@ -48,7 +48,7 @@ namespace effectivecore\modules\core {
         if (count($form->errors) == 0) {
           switch ($values['driver'][0]) {
             case 'sqlite':
-              $test = storage::select('main')->test($values['driver'][0], (object)[
+              $test = storage::get('main')->test($values['driver'][0], (object)[
                 'file_name' => $values['file_name'][0]
               ]);
               if ($test !== true) {
@@ -58,7 +58,7 @@ namespace effectivecore\modules\core {
               }
               break;
             default:
-              $test = storage::select('main')->test($values['driver'][0], (object)[
+              $test = storage::get('main')->test($values['driver'][0], (object)[
                 'host_name'    => $values['host_name'][0],
                 'port'         => $values['port'][0],
                 'storage_name' => $values['storage_name'][0],
@@ -104,7 +104,7 @@ namespace effectivecore\modules\core {
             $params->table_prefix              = $values['table_prefix'][0];
             break;
         }
-        storage::select('settings')->changes_register_action('core', 'insert', 'storages/storage/storage_sql_dpo', $params);
+        storage::get('settings')->changes_register_action('core', 'insert', 'storages/storage/storage_sql_dpo', $params);
         storage::rebuild();
         event::start('on_module_install');
         message::insert('Modules was installed.');

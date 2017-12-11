@@ -6,13 +6,13 @@
 
 namespace effectivecore {
           use \effectivecore\translation as translation;
-          use \effectivecore\modules\storage\storage_factory as storage;
+          use \effectivecore\modules\storage\storage as storage;
           abstract class token_factory {
 
   protected static $data;
 
   static function init() {
-    foreach (storage::select('settings')->select_group('tokens') as $c_tokens) {
+    foreach (storage::get('settings')->select_group('tokens') as $c_tokens) {
       foreach ($c_tokens as $c_token) {
         static::$data[$c_token->match] = $c_token;
       }
