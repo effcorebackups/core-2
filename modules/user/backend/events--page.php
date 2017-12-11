@@ -10,17 +10,17 @@ namespace effectivecore\modules\user {
           use \effectivecore\table;
           use \effectivecore\pager;
           use \effectivecore\factory;
+          use \effectivecore\entity as entity;
           use \effectivecore\instance as instance;
           use \effectivecore\locale_factory as locale;
           use \effectivecore\url_factory as url_factory;
-          use \effectivecore\entity_factory as entity;
           use \effectivecore\modules\user\user_factory as user;
           abstract class events_page extends \effectivecore\events_page {
 
   static function on_show_block_roles() {
     $block = new markup('x-block', ['id' => 'admin_roles']);
     $thead = [['ID', 'Title', 'Is embed']];
-    $tbody = entity::select('role')->select_instances();
+    $tbody = entity::get('role')->select_instances();
     foreach ($tbody as $c_row) {
       $c_row->is_embed = $c_row->is_embed ? 'Yes' : 'No';
     }
@@ -38,7 +38,7 @@ namespace effectivecore\modules\user {
       $block = new markup('x-block', ['id' => 'admin_users']);
       $thead = [['ID', 'EMail', 'Nick', 'Created', 'Is embed', 'Actions']];
       $tbody = [];
-      foreach (entity::select('user')->select_instances() as $c_user) {
+      foreach (entity::get('user')->select_instances() as $c_user) {
         $c_actions = new markup('ul', ['class' => ['actions' => 'actions']]);
                                     $c_actions->child_insert( new markup('li', [], new markup('a', ['href' => (new url('/user/'.$c_user->id))->get_full()], 'view') ) );
                                     $c_actions->child_insert( new markup('li', [], new markup('a', ['href' => (new url('/user/'.$c_user->id.'/edit?'.url_factory::make_back_part()))->get_full()], 'edit') ) );
@@ -65,7 +65,7 @@ namespace effectivecore\modules\user {
         $block = new markup('x-block', ['id' => 'user']);
       # get roles
         $roles = [];
-        $storage_roles = entity::select('relation_role_ws_user')->select_instances(['id_user' => $id]);
+        $storage_roles = entity::get('relation_role_ws_user')->select_instances(['id_user' => $id]);
         if ($storage_roles) {
           foreach ($storage_roles as $c_role) {
             $roles[] = $c_role->id_role;

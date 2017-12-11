@@ -5,6 +5,7 @@
   #############################################################
 
 namespace effectivecore {
+          use \effectivecore\entity as entity;
           use \effectivecore\instance as instance;
           use \effectivecore\message_factory as message;
           use \effectivecore\modules\storage\storage_factory as storage;
@@ -41,7 +42,7 @@ namespace effectivecore {
   }
 
   static function captcha_cleaning() {
-    $storage = $s = storage::select(entity_factory::select('captcha')->get_storage_id());
+    $storage = $s = storage::select(entity::get('captcha')->get_storage_id());
     $storage->query('DELETE', 'FROM', $s->tables('captcha'), 'WHERE', $s->condition('created', factory::datetime_get('-1 hour'), '<'));
   }
 

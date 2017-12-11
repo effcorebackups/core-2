@@ -5,9 +5,9 @@
   #############################################################
 
 namespace effectivecore\modules\user {
+          use \effectivecore\entity as entity;
           use \effectivecore\factory as factory;
           use \effectivecore\instance as instance;
-          use \effectivecore\entity_factory as entity;
           use \effectivecore\message_factory as message;
           use \effectivecore\modules\user\user_factory as user;
           use \effectivecore\translation_factory as translation;
@@ -24,7 +24,7 @@ namespace effectivecore\modules\user {
 
   static function on_install() {
   # install entities
-    foreach (entity::select_all_by_module('user') as $c_entity) {
+    foreach (entity::get_all_by_module('user') as $c_entity) {
       if ($c_entity->install()) message::insert(translation::select('Entity %%_name was installed.',     ['name' => $c_entity->get_name()]));
       else                      message::insert(translation::select('Entity %%_name was not installed!', ['name' => $c_entity->get_name()]), 'error');
     }

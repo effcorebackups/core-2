@@ -5,6 +5,7 @@
   #############################################################
 
 namespace effectivecore {
+          use \effectivecore\entity as entity;
           use \effectivecore\modules\storage\storage_factory as storage;
           class instance {
 
@@ -28,7 +29,7 @@ namespace effectivecore {
     }
   }
 
-  function get_entity() {return entity_factory::select($this->entity_name);}
+  function get_entity() {return entity::get($this->entity_name);}
   function set_entity_name($entity_name) {$this->entity_name = $entity_name;}
 
   function select($custom_ids = []) {

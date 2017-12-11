@@ -6,10 +6,10 @@
 
 namespace effectivecore\modules\user {
           use const \effectivecore\br;
+          use \effectivecore\entity as entity;
+          use \effectivecore\instance as instance;
           use \effectivecore\factory as factory;
           use \effectivecore\url_factory as url;
-          use \effectivecore\instance as instance;
-          use \effectivecore\entity_factory as entity;
           use \effectivecore\message_factory as message;
           use \effectivecore\modules\user\user_factory as user;
           use \effectivecore\modules\page\page_factory as page;
@@ -31,7 +31,7 @@ namespace effectivecore\modules\user {
         if ($user) {
           $nick = $user->nick;
           if ($user->delete()) {
-            $sessions = entity::select('session')->select_instances(['id_user' => $id]);
+            $sessions = entity::get('session')->select_instances(['id_user' => $id]);
             if ($sessions) {
               foreach ($sessions as $c_session) {
                 $c_session->delete();

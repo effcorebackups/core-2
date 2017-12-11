@@ -5,10 +5,10 @@
   #############################################################
 
 namespace effectivecore\modules\tree {
-          use \effectivecore\factory;
+          use \effectivecore\entity as entity;
+          use \effectivecore\factory as factory;
           use \effectivecore\tree_factory as tree;
           use \effectivecore\message_factory as message;
-          use \effectivecore\entity_factory as entity;
           use \effectivecore\translation_factory as translation;
           abstract class events_module extends \effectivecore\events_module {
 
@@ -26,7 +26,7 @@ namespace effectivecore\modules\tree {
 
   static function on_install() {
   # install entities
-    foreach (entity::select_all_by_module('tree') as $c_entity) {
+    foreach (entity::get_all_by_module('tree') as $c_entity) {
       if ($c_entity->install()) message::insert(translation::select('Entity %%_name was installed.',     ['name' => $c_entity->get_name()]));
       else                      message::insert(translation::select('Entity %%_name was not installed!', ['name' => $c_entity->get_name()]), 'error');
     }

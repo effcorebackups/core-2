@@ -5,8 +5,8 @@
   #############################################################
 
 namespace effectivecore\modules\user {
+          use \effectivecore\entity as entity;
           use \effectivecore\instance as instance;
-          use \effectivecore\entity_factory as entity;
           abstract class user_factory {
 
   static $data;
@@ -23,7 +23,7 @@ namespace effectivecore\modules\user {
       if ($user) {
         static::$data = (object)($user->get_values());
         static::$data->roles = ['registered' => 'registered'];
-        foreach (entity::select('relation_role_ws_user')->select_instances(['id_user' => $user->id]) as $c_role) {
+        foreach (entity::get('relation_role_ws_user')->select_instances(['id_user' => $user->id]) as $c_role) {
           static::$data->roles[$c_role->id_role] = $c_role->id_role;
         }
       }
