@@ -23,8 +23,8 @@ namespace effectivecore {
 
   static function select($string, $args = [], $code = '') {
     if (!static::$data) static::init();
-    $string = isset(static::$data[$code ?: locale::get_settings()->lang_code][$string]) ?
-                    static::$data[$code ?: locale::get_settings()->lang_code][$string] : $string;
+    $string = isset(static::$data[$code ?: locale::select_settings()->lang_code][$string]) ?
+                    static::$data[$code ?: locale::select_settings()->lang_code][$string] : $string;
     foreach ($args as $c_key => $c_value) {
       $string = str_replace('%%_'.$c_key, $c_value, $string);
     }
