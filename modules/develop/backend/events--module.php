@@ -21,7 +21,7 @@ namespace effectivecore\modules\develop {
       else                      message::insert(translation::get('Entity %%_name was not installed!', ['name' => $c_entity->get_name()]), 'error');
     }
   # insert instances
-    foreach (instance::get_by_module('develop') as $c_instance) {
+    foreach (instance::select_by_module('develop') as $c_instance) {
       if ($c_instance->insert()) message::insert(translation::get('Instances of entity %%_name was added.',     ['name' => $c_entity->get_name()]));
       else                       message::insert(translation::get('Instances of entity %%_name was not added!', ['name' => $c_entity->get_name()]), 'error');
     }
