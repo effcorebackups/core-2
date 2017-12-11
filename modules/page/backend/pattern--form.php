@@ -7,7 +7,6 @@
 namespace effectivecore {
           use \effectivecore\event as event;
           use \effectivecore\message as message;
-          use \effectivecore\modules\user\session_factory as session;
           class form extends \effectivecore\markup {
 
   # elements support:

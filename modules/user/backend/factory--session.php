@@ -8,7 +8,7 @@ namespace effectivecore\modules\user {
           use \effectivecore\factory as factory;
           use \effectivecore\message as message;
           use \effectivecore\instance as instance;
-          abstract class session_factory {
+          abstract class session {
 
   static function id_regenerate($sign, $expire = 60 * 60 * 24 * 30) {
     $session_id = md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT'].rand(0, PHP_INT_MAX));
