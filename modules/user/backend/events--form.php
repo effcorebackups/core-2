@@ -7,13 +7,13 @@
 namespace effectivecore\modules\user {
           use const \effectivecore\br;
           use \effectivecore\url as url;
+          use \effectivecore\page as page;
           use \effectivecore\entity as entity;
           use \effectivecore\factory as factory;
           use \effectivecore\message as message;
           use \effectivecore\instance as instance;
           use \effectivecore\translation as translation;
           use \effectivecore\modules\user\user as user;
-          use \effectivecore\modules\page\page_factory as page;
           use \effectivecore\modules\user\session_factory as session;
           abstract class events_form extends \effectivecore\events_form {
 

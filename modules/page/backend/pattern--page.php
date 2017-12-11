@@ -11,10 +11,11 @@ namespace effectivecore {
           use \effectivecore\locale as locale;
           use \effectivecore\console as console;
           use \effectivecore\message as message;
+          use \effectivecore\factory as factory;
           use \effectivecore\translation as translation;
           use \effectivecore\modules\user\user as user;
+          use \effectivecore\modules\user\access_factory as access;
           use \effectivecore\modules\storage\storage as storage;
-          use \effectivecore\modules\page\page_factory as page_factory;
           class page {
 
   public $title = '';
@@ -96,7 +97,7 @@ namespace effectivecore {
   # collect page arguments
     if (isset($this->display->url->args)) {
       foreach ($this->display->url->args as $c_name => $c_num) {
-        page_factory::$args[$c_name] = url::get_current()->get_args($c_num);
+        static::$args[$c_name] = url::get_current()->get_args($c_num);
       }
     }
 
@@ -107,7 +108,7 @@ namespace effectivecore {
                         $c_block->region : 'content_1_1';
       switch ($c_block->type) {
         case 'text': $contents[$c_region][] = new text($c_block->content); break;
-        case 'code': $contents[$c_region][] = call_user_func_array($c_block->handler, page_factory::$args); break;
+        case 'code': $contents[$c_region][] = call_user_func_array($c_block->handler, static::$args); break;
         case 'link': $contents[$c_region][] = storage::get('settings')->select_by_npath($c_block->npath); break;
         default    : $contents[$c_region][] = $c_block;
       }
@@ -140,6 +141,36 @@ namespace effectivecore {
     $template->set_var('script', implode(nl, $rendered_script));
 
     return $template->render();
+  }
+
+  ######################
+  ### static methods ###
+  ######################
+
+  static $data = [];
+  static $args = [];
+
+  static function find_and_render() {
+  # render page
+    foreach (storage::get('settings')->select_group('pages') as $c_pages) {
+      foreach ($c_pages as $c_page) {
+        if (   isset($c_page->display->url->match) &&
+          preg_match($c_page->display->url->match, url::get_current()->path)) {
+          if (!isset($c_page->access) ||
+              (isset($c_page->access) && access::check($c_page->access))) {
+            return $c_page->render();
+          } else {
+            factory::send_header_and_exit('access_denided',
+              'Access denided!'
+            );
+          }
+        }
+      }
+    }
+  # no matches case
+    factory::send_header_and_exit('not_found',
+      'Page not found!'
+    );
   }
 
 }}
