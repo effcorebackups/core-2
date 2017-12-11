@@ -28,9 +28,9 @@ namespace effectivecore {
   timer::tap('total');
 
   # redirect from '/any_path/' to '/any_path'
-  if (            url::get_current()->path != '/' &&
-           substr(url::get_current()->path, -1) == '/') {
-    url::go(rtrim(url::get_current()->path, '/'));
+  if (            url::select_current()->path != '/' &&
+           substr(url::select_current()->path, -1) == '/') {
+    url::go(rtrim(url::select_current()->path, '/'));
   }
 
   ##########################
@@ -43,7 +43,7 @@ namespace effectivecore {
       $file_types[$c_name] = $c_info;
     }
   }
-  $extension = url::get_current()->get_extension();
+  $extension = url::select_current()->get_extension();
   if ($extension) {
   # case for protected files
     if (!empty($file_types[$extension]->protected)) {
@@ -52,7 +52,7 @@ namespace effectivecore {
       );
     }
   # case for media files
-    $path = dir_root.ltrim(url::get_current()->path, '/');
+    $path = dir_root.ltrim(url::select_current()->path, '/');
     if (is_file($path) && is_readable($path)) {
       $file = new file($path);
       $data = $file->load();

@@ -112,7 +112,7 @@ namespace effectivecore\modules\core {
         $form->child_delete('button_install');
         break;
       case 'to_front':
-        url::go(url::get_back_url() ?: '/');
+        url::go(url::select_back_url() ?: '/');
         break;
     }
   }
