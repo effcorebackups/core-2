@@ -10,7 +10,7 @@ namespace effectivecore\modules\user {
           use \effectivecore\instance as instance;
           use \effectivecore\translation as translation;
           use \effectivecore\message_factory as message;
-          use \effectivecore\modules\user\user_factory as user;
+          use \effectivecore\modules\user\user as user;
           use \effectivecore\modules\user\session_factory as session;
           abstract class events_module extends \effectivecore\events_module {
 

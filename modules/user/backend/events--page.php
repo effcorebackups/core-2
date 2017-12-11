@@ -13,7 +13,7 @@ namespace effectivecore\modules\user {
           use \effectivecore\instance as instance;
           use \effectivecore\factory as factory;
           use \effectivecore\locale_factory as locale;
-          use \effectivecore\modules\user\user_factory as user;
+          use \effectivecore\modules\user\user as user;
           abstract class events_page extends \effectivecore\events_page {
 
   static function on_show_block_roles() {
@@ -59,8 +59,8 @@ namespace effectivecore\modules\user {
   static function on_show_block_user($id) {
     $user = (new instance('user', ['id' => $id]))->select();
     if ($user) {
-      if ($user->id == user::select_current()->id ||               # owner
-                 isset(user::select_current()->roles['admins'])) { # admin
+      if ($user->id == user::get_current()->id ||               # owner
+                 isset(user::get_current()->roles['admins'])) { # admin
         $block = new markup('x-block', ['id' => 'user']);
       # get roles
         $roles = [];

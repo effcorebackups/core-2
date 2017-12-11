@@ -7,7 +7,7 @@
 namespace effectivecore\modules\user {
           use \effectivecore\entity as entity;
           use \effectivecore\instance as instance;
-          abstract class user_factory {
+          abstract class user {
 
   static $data;
 
@@ -30,7 +30,7 @@ namespace effectivecore\modules\user {
     }
   }
 
-  static function select_current() {
+  static function get_current() {
     if (!static::$data) static::init();
     return static::$data;
   }
