@@ -6,7 +6,7 @@
 
 namespace effectivecore\modules\core {
           use const \effectivecore\br;
-          use \effectivecore\url_factory as url;
+          use \effectivecore\url as url;
           use \effectivecore\event_factory as event;
           use \effectivecore\message_factory as message;
           use \effectivecore\translation_factory as translation;

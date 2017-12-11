@@ -6,10 +6,10 @@
 
 namespace effectivecore\modules\user {
           use const \effectivecore\br;
+          use \effectivecore\url as url;
           use \effectivecore\entity as entity;
           use \effectivecore\instance as instance;
           use \effectivecore\factory as factory;
-          use \effectivecore\url_factory as url;
           use \effectivecore\message_factory as message;
           use \effectivecore\modules\user\user_factory as user;
           use \effectivecore\modules\page\page_factory as page;

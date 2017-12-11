@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore\modules\user {
-          use \effectivecore\url_factory as url;
+          use \effectivecore\url as url;
           use \effectivecore\instance as instance;
           use \effectivecore\modules\user\user_factory as user;
           abstract class events_token extends \effectivecore\events_token {
@@ -20,7 +20,7 @@ namespace effectivecore\modules\user {
         case '%%_email_context':
         case '%%_nick_context':
           $arg_num = $args[0];
-          $id_user = url::select_current()->get_args($arg_num);
+          $id_user = url::get_current()->get_args($arg_num);
           $user = (new instance('user', ['id' => $id_user]))->select();
           if ($user && $match == '%%_id_user_context') return $user->id;
           if ($user && $match == '%%_email_context')   return $user->email;
