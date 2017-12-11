@@ -6,7 +6,7 @@
 
 namespace effectivecore {
           use \effectivecore\message_factory as message;
-          abstract class dynamic_factory {
+          abstract class dynamic {
 
   static $type = 'data';
   static $directory = dir_dynamic.'data/';

@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          abstract class temporary_factory extends \effectivecore\dynamic_factory {
+          abstract class temporary_factory extends \effectivecore\dynamic {
 
   static $type = 'tmp';
   static $directory = dir_dynamic.'tmp/';
