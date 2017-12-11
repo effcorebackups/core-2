@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\cache_factory as cache;
+          use \effectivecore\cache as cache;
           use \effectivecore\console_factory as console;
           abstract class factory {
 

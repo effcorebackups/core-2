@@ -6,7 +6,7 @@
 
 namespace effectivecore {
           use \effectivecore\console_factory as console;
-          abstract class cache_factory extends \effectivecore\dynamic_factory {
+          abstract class cache extends \effectivecore\dynamic_factory {
 
   static $type = 'cache';
   static $directory = dir_dynamic.'cache/';
