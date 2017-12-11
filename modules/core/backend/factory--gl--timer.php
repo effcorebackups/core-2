@@ -13,7 +13,7 @@ namespace effectivecore {
     static::$data[$name][] = microtime(true);
   }
 
-  static function get_period($name, $a, $b) {
+  static function select_period($name, $a, $b) {
     if ($a < 0) $a = count(static::$data[$name]) + $a;
     if ($b < 0) $b = count(static::$data[$name]) + $b;
     $result = abs(static::$data[$name][$b] -

@@ -126,7 +126,7 @@ namespace effectivecore {
       );
     }
     timer::tap('total');
-    console::add_information('Total build time', locale::format_msecond(timer::get_period('total', 0, 1)));
+    console::add_information('Total build time', locale::format_msecond(timer::select_period('total', 0, 1)));
     console::add_information('User roles', implode(', ', user::select_current()->roles));
     console::add_information('Server load (sys_getloadavg)', locale::format_msecond(sys_getloadavg()[0]));
     console::add_information('Memory for php (bytes)', locale::format_number(memory_get_usage(true), 0, null, ' '));

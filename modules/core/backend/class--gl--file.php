@@ -100,7 +100,7 @@ namespace effectivecore {
            $this->data = static::$cache[$relative];
     else   $this->data = static::$cache[$relative] = file_get_contents($this->get_path_full());
     timer::tap('file load: '.$relative);
-    console::add_log('file', 'load', $relative, 'ok', timer::get_period('file load: '.$relative, -1, -2));
+    console::add_log('file', 'load', $relative, 'ok', timer::select_period('file load: '.$relative, -1, -2));
     return $this->data;
   }
 
@@ -141,7 +141,7 @@ namespace effectivecore {
     $return = $once ? require_once($this->get_path_full()) :
                            require($this->get_path_full());
     timer::tap('file insert: '.$relative);
-    console::add_log('file', 'insertion', $relative, 'ok', timer::get_period('file insert: '.$relative, -1, -2));
+    console::add_log('file', 'insertion', $relative, 'ok', timer::select_period('file insert: '.$relative, -1, -2));
     return $return;
   }
 
