@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\translation_factory as translation;
+          use \effectivecore\translation as translation;
           class text {
 
   public $text = '';
@@ -19,7 +19,7 @@ namespace effectivecore {
   }
 
   function render() {
-    return translation::select($this->text, $this->args);
+    return translation::get($this->text, $this->args);
   }
 
 }}

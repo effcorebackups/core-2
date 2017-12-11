@@ -10,10 +10,10 @@ namespace effectivecore\modules\user {
           use \effectivecore\entity as entity;
           use \effectivecore\instance as instance;
           use \effectivecore\factory as factory;
+          use \effectivecore\translation as translation;
           use \effectivecore\message_factory as message;
           use \effectivecore\modules\user\user_factory as user;
           use \effectivecore\modules\page\page_factory as page;
-          use \effectivecore\translation_factory as translation;
           use \effectivecore\modules\user\session_factory as session;
           abstract class events_form extends \effectivecore\events_form {
 
@@ -37,8 +37,8 @@ namespace effectivecore\modules\user {
                 $c_session->delete();
               }
             }
-               message::insert(translation::select('User %%_nick was deleted.',     ['nick' => $nick]));}
-          else message::insert(translation::select('User %%_nick was not deleted!', ['nick' => $nick]), 'error');
+               message::insert(translation::get('User %%_nick was deleted.',     ['nick' => $nick]));}
+          else message::insert(translation::get('User %%_nick was not deleted!', ['nick' => $nick]), 'error');
         }
         url::go(url::get_back_url() ?: '/admin/users');
         break;
@@ -69,8 +69,8 @@ namespace effectivecore\modules\user {
           $test_pass = (new instance('user', ['id' => $id]))->select();
           if ($test_pass->password_hash !== factory::hash_get($values['password'][0])) {
             $form->add_error('credentials/password/element',
-              translation::select('Field "%%_title" contains incorrect value!', [
-                'title' => translation::select($fields['credentials/password']->title)
+              translation::get('Field "%%_title" contains incorrect value!', [
+                'title' => translation::get($fields['credentials/password']->title)
               ])
             );
             return;
@@ -114,12 +114,12 @@ namespace effectivecore\modules\user {
         }
         if ($user->update()) {
           message::insert(
-            translation::select('User %%_nick was updated.', ['nick' => $user->nick])
+            translation::get('User %%_nick was updated.', ['nick' => $user->nick])
           );
           url::go(url::get_back_url() ?: '/user/'.$id);
         } else {
           message::insert(
-            translation::select('User %%_nick was not updated.', ['nick' => $user->nick]), 'warning'
+            translation::get('User %%_nick was not updated.', ['nick' => $user->nick]), 'warning'
           );
         }
         break;
@@ -136,8 +136,8 @@ namespace effectivecore\modules\user {
   static function on_init_login($form, $fields) {
     if (!isset($_COOKIE['cookies_is_on'])) {
       message::insert(
-        translation::select('Cookies are disabled. You can not log in!').br.
-        translation::select('Enable cookies before login.'), 'warning');
+        translation::get('Cookies are disabled. You can not log in!').br.
+        translation::get('Enable cookies before login.'), 'warning');
     }
   }
 

@@ -5,15 +5,15 @@
   #############################################################
 
 namespace effectivecore {
+          use \effectivecore\translation as translation;
           use \effectivecore\locale_factory as locale;
-          use \effectivecore\translation_factory as translation;
           class form_field_file extends \effectivecore\form_field {
 
   public $max_file_size;
 
   function build() {
     $this->manager_build();
-    $this->description = translation::select('Maximal file size: %%_value.', [
+    $this->description = translation::get('Maximal file size: %%_value.', [
       'value' => locale::format_human_bytes($this->get_max_file_size())
     ]);
   }
@@ -32,7 +32,7 @@ namespace effectivecore {
   function manager_insert_action($info, $hash) {
     $full_name = $this->child_select('element')->attribute_select('name');
     $this->child_select('manager')->input_insert(
-      translation::select('delete file: %%_name', ['name' => $info->name]), ['name' => 'manager_delete_'.$full_name, 'value' => $hash]
+      translation::get('delete file: %%_name', ['name' => $info->name]), ['name' => 'manager_delete_'.$full_name, 'value' => $hash]
     );
   }
 

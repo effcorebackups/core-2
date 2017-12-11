@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\translation_factory as translation;
+          use \effectivecore\translation as translation;
           class form_container extends \effectivecore\markup {
 
   public $tag_name = 'x-container';

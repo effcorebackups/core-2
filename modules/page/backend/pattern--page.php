@@ -6,13 +6,13 @@
 
 namespace effectivecore {
           use \effectivecore\url as url;
+          use \effectivecore\translation as translation;
           use \effectivecore\timer_factory as timer;
           use \effectivecore\token_factory as token;
           use \effectivecore\locale_factory as locale;
           use \effectivecore\console_factory as console;
           use \effectivecore\message_factory as message;
           use \effectivecore\modules\user\user_factory as user;
-          use \effectivecore\translation_factory as translation;
           use \effectivecore\modules\page\page_factory as page_factory;
           use \effectivecore\modules\storage\storage_factory as storage;
           class page {
@@ -29,7 +29,7 @@ namespace effectivecore {
   function render() {
     $template = new template('page');
     $template->set_var('title',
-      token::replace(translation::select($this->title))
+      token::replace(translation::get($this->title))
     );
 
   # check https (@todo: enable this message)

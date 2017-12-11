@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\translation_factory as translation;
+          use \effectivecore\translation as translation;
           use \effectivecore\modules\storage\storage_factory as storage;
           class form_container_palette extends \effectivecore\form_container_radios {
 
@@ -15,7 +15,7 @@ namespace effectivecore {
       foreach ($c_colors as $c_color_id => $c_color_info) {
         $this->input_insert(null, [
           'value' => $c_color_id,
-          'title' => translation::select('Color ID = %%_id (value = %%_value)', ['id' => $c_color_id, 'value' => $c_color_info->value]),
+          'title' => translation::get('Color ID = %%_id (value = %%_value)', ['id' => $c_color_id, 'value' => $c_color_info->value]),
           'style' => ['background-color: '.$c_color_info->value]
         ], $c_color_id);
       }

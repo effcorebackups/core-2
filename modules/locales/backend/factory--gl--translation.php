@@ -7,7 +7,7 @@
 namespace effectivecore {
           use \effectivecore\locale_factory as locale;
           use \effectivecore\modules\storage\storage_factory as storage;
-          abstract class translation_factory {
+          abstract class translation {
 
   protected static $data;
 
@@ -21,7 +21,7 @@ namespace effectivecore {
     }
   }
 
-  static function select($string, $args = [], $code = '') {
+  static function get($string, $args = [], $code = '') {
     if (!static::$data) static::init();
     $string = isset(static::$data[$code ?: locale::select_settings()->lang_code][$string]) ?
                     static::$data[$code ?: locale::select_settings()->lang_code][$string] : $string;

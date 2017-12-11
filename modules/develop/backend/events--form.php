@@ -5,8 +5,8 @@
   #############################################################
 
 namespace effectivecore\modules\develop {
+          use \effectivecore\translation as translation;
           use \effectivecore\message_factory as message;
-          use \effectivecore\translation_factory as translation;
           abstract class events_form extends \effectivecore\events_form {
 
   ##################
@@ -28,10 +28,10 @@ namespace effectivecore\modules\develop {
 
   static function on_submit_demo($form, $fields, &$values) {
     static::on_submit($form, $fields, $values);
-    message::insert(translation::select('Call %%_name', ['name' => '\\'.__METHOD__]));
+    message::insert(translation::get('Call %%_name', ['name' => '\\'.__METHOD__]));
     if (count($values['file'])) {
       foreach ($values['file'] as $hash => $c_file_info) {
-        message::insert(translation::select('File %%_name was uploaded.', ['name' => $c_file_info->name]));
+        message::insert(translation::get('File %%_name was uploaded.', ['name' => $c_file_info->name]));
       }
     }
   }
