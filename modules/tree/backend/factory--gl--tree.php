@@ -26,9 +26,9 @@ namespace effectivecore {
     }
   }
 
-  static function get_tree($id)      {return static::$trees[$id];}
-  static function get_tree_item($id) {return static::$tree_items[$id];}
-  static function get_trees()        {return static::$trees;}
-  static function get_tree_items()   {return static::$tree_items;}
+  static function select_trees()        {return static::$trees;}
+  static function select_tree_items()   {return static::$tree_items;}
+  static function select_tree($id)      {return static::$trees[$id];}
+  static function select_tree_item($id) {return static::$tree_items[$id];}
 
 }}
