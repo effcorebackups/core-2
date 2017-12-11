@@ -40,10 +40,10 @@ namespace effectivecore\modules\user {
                message::insert(translation::select('User %%_nick was deleted.',     ['nick' => $nick]));}
           else message::insert(translation::select('User %%_nick was not deleted!', ['nick' => $nick]), 'error');
         }
-        url::go(url::select_back_url() ?: '/admin/users');
+        url::go(url::get_back_url() ?: '/admin/users');
         break;
       case 'cancel':
-        url::go(url::select_back_url() ?: '/admin/users');
+        url::go(url::get_back_url() ?: '/admin/users');
         break;
     }
   }
@@ -116,7 +116,7 @@ namespace effectivecore\modules\user {
           message::insert(
             translation::select('User %%_nick was updated.', ['nick' => $user->nick])
           );
-          url::go(url::select_back_url() ?: '/user/'.$id);
+          url::go(url::get_back_url() ?: '/user/'.$id);
         } else {
           message::insert(
             translation::select('User %%_nick was not updated.', ['nick' => $user->nick]), 'warning'
@@ -124,7 +124,7 @@ namespace effectivecore\modules\user {
         }
         break;
       case 'cancel':
-        url::go(url::select_back_url() ?: '/user/'.$id);
+        url::go(url::get_back_url() ?: '/user/'.$id);
         break;
     }
   }
@@ -229,7 +229,7 @@ namespace effectivecore\modules\user {
         session::delete(user::select_current()->id);
         url::go('/');
       case 'cancel':
-        url::go(url::select_back_url() ?: '/');
+        url::go(url::get_back_url() ?: '/');
         break;
     }
   }

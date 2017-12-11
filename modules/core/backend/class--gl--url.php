@@ -110,7 +110,7 @@ namespace effectivecore {
     return static::$data;
   }
 
-  static function select_back_url() {
+  static function get_back_url() {
     $back_url = static::get_current()->get_args('back', 'query');
     return $back_url ? urldecode($back_url) : '';
   }
