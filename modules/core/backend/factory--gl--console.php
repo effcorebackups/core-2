@@ -7,7 +7,7 @@
 namespace effectivecore {
           use \effectivecore\locale as locale;
           use \effectivecore\translation as translation;
-          abstract class console_factory {
+          abstract class console {
 
   static $data = [];
   static $information = [];

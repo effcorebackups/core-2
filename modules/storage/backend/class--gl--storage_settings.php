@@ -6,8 +6,8 @@
 
 namespace effectivecore {
           use \effectivecore\cache as cache;
+          use \effectivecore\console as console;
           use \effectivecore\dynamic_factory as dynamic;
-          use \effectivecore\console_factory as console;
           use \effectivecore\message_factory as message;
           class storage_settings {
 

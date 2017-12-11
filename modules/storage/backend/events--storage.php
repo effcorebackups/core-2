@@ -8,7 +8,7 @@ namespace effectivecore\modules\storage {
           use const \effectivecore\br;
           use \effectivecore\timer as timer;
           use \effectivecore\factory as factory;
-          use \effectivecore\console_factory as console;
+          use \effectivecore\console as console;
           abstract class events_storage {
 
   static function on_storage_init_before($storage) {

@@ -5,7 +5,6 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\console_factory as console;
           abstract class temporary_factory extends \effectivecore\dynamic_factory {
 
   static $type = 'tmp';

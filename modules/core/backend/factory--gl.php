@@ -6,7 +6,7 @@
 
 namespace effectivecore {
           use \effectivecore\cache as cache;
-          use \effectivecore\console_factory as console;
+          use \effectivecore\console as console;
           abstract class factory {
 
   static $cache;

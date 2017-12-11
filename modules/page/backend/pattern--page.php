@@ -8,9 +8,9 @@ namespace effectivecore {
           use \effectivecore\url as url;
           use \effectivecore\timer as timer;
           use \effectivecore\locale as locale;
+          use \effectivecore\console as console;
           use \effectivecore\translation as translation;
           use \effectivecore\token_factory as token;
-          use \effectivecore\console_factory as console;
           use \effectivecore\message_factory as message;
           use \effectivecore\modules\user\user as user;
           use \effectivecore\modules\storage\storage as storage;
