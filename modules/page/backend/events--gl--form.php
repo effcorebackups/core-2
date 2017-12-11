@@ -6,9 +6,9 @@
 
 namespace effectivecore {
           use \effectivecore\markup as markup;
+          use \effectivecore\locale as locale;
           use \effectivecore\translation as translation;
           use \effectivecore\temporary_factory as tmp;
-          use \effectivecore\locale_factory as locale;
           use \effectivecore\markup_simple as markup_simple;
           abstract class events_form {
 

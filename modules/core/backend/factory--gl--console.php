@@ -5,7 +5,7 @@
   #############################################################
 
 namespace effectivecore {
-          use \effectivecore\locale_factory as locale;
+          use \effectivecore\locale as locale;
           use \effectivecore\translation as translation;
           abstract class console_factory {
 

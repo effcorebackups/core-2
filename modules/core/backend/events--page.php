@@ -6,7 +6,7 @@
 
 namespace effectivecore\modules\core {
           use \effectivecore\table as table;
-          use \effectivecore\locale_factory as locale;
+          use \effectivecore\locale as locale;
           use \effectivecore\control_switcher as switcher;
           use \effectivecore\modules\storage\storage as storage;
           abstract class events_page extends \effectivecore\events_page {

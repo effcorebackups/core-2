@@ -8,11 +8,11 @@ namespace effectivecore\modules\user {
           use \effectivecore\url as url;
           use \effectivecore\table as table;
           use \effectivecore\pager as pager;
+          use \effectivecore\locale as locale;
           use \effectivecore\markup as markup;
           use \effectivecore\entity as entity;
           use \effectivecore\instance as instance;
           use \effectivecore\factory as factory;
-          use \effectivecore\locale_factory as locale;
           use \effectivecore\modules\user\user as user;
           abstract class events_page extends \effectivecore\events_page {
 

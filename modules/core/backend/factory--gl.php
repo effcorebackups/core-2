@@ -213,9 +213,9 @@ namespace effectivecore {
   ### date/time functions ###
   ###########################
 
-  # see: locale_factory::format_time(...);
-  # see: locale_factory::format_date(...);
-  # see: locale_factory::format_datetime(...);
+  # see: locale::format_time(...);
+  # see: locale::format_date(...);
+  # see: locale::format_datetime(...);
 
   static function datetime_get($offset = '') {
     $datetime = new \DateTime('now', new \DateTimeZone('UTC'));
