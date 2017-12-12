@@ -3,7 +3,7 @@
   body {margin: 0; padding: 0 40px; font-family: 'Arial'; font-size: 15px; line-height: 1.5em; color: %%_color; background: white}
 
   /* page sizes */
-  nav        {display: block; max-width: 800px; margin: 0 auto; background: %%_color_bg}
+  nav        {display: block; max-width: 800px; margin: 0 auto 20px auto; background: %%_color_bg}
   h1         {display: block; max-width: 800px}
   main       {display: block; max-width: 800px; margin: 0 auto; min-height: 200px}
   x-messages {display: block; max-width: 800px; margin: 50px auto}
@@ -36,8 +36,11 @@
 
   /* blocks */
   x-block {display: block}
-  x-block#logo {}
   x-block#logo a#home {display: block; width: 150px; height: 70px; background: url('logo.svg')}
+  x-block#user_menu {float: right}
+  x-block#user_menu #avatar {width: 48px; height: 48px; vertical-align: middle}
+  x-block#user_menu x-tree {display: inline-block}
+  x-block#user_menu x-tree ul {margin: 0}
 
   /* control elements */
   x-actions-control {display: inline-block; cursor: default}

@@ -56,12 +56,12 @@ namespace effectivecore\modules\user {
     }
   }
 
-  static function on_show_block_user($page, $id) {
+  static function on_show_block_user_info($page, $id) {
     $user = (new instance('user', ['id' => $id]))->select();
     if ($user) {
       if ($user->id == user::get_current()->id ||               # owner
                  isset(user::get_current()->roles['admins'])) { # admin
-        $block = new markup('x-block', ['id' => 'user']);
+        $block = new markup('x-block', ['id' => 'user_info']);
       # get roles
         $roles = [];
         $storage_roles = entity::get('relation_role_ws_user')->select_instances(['id_user' => $id]);

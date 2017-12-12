@@ -9,18 +9,18 @@ pages
       roles
       - admins: admins
     content
-    - block_tree_main
+    - block_menu_main
         region: nav
         type: link
         npath: trees/core/main
+    - block_menu_user
+        region: region_1_1
+        type: code
+        handler: \effectivecore\modules\core\events_page::on_show_block_menu_user
     - block_logo
         region: region_1_1
         type: code
         handler: \effectivecore\modules\core\events_page::on_show_block_logo
-    - block_tree_user
-        region: region_1_1
-        type: link
-        npath: trees/user/user
     - block_title
         region: region_1_1
         type: code
