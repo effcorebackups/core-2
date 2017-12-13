@@ -1,14 +1,17 @@
 
-  /* tree sizes and orientation */
-  x-tree.main {display: block; margin: 0 auto 20px auto; padding: 0; max-width: 800px}
-  x-tree.main ul, nav x-tree li {margin: 0; padding: 0; list-style: none}
+  x-tree {display: block}
+
+  /* menu Main: sizes and orientation */
+  x-tree.main {margin-bottom: 20px}
+  x-tree.main ul,
+  x-tree.main li {margin: 0; padding: 0; list-style: none}
   x-tree.main > ul > li {float: left; cursor: default}
   x-tree.main > ul > li > a {display: block; padding: 21px}
   x-tree.main > ul > li > ul {position: absolute; padding: 21px; z-index: 10}
   x-tree.main > ul > li > ul > li {}
   x-tree.main:after {content: ''; clear: both; display: block}
 
-  /* tree colors */
+  /* menu Main: colors */
   x-tree.main {background: %%_color_bg}
   x-tree.main > ul > li:hover {background: %%_color_hover_bg}
   x-tree.main > ul > li > a {color: white}
@@ -20,10 +23,10 @@
   x-tree.main > ul > li > ul a:hover {color: %%_color_hover}
   x-tree.main > ul > li > ul {background: %%_color_hover_bg}
 
-  /* tree dynamic */
+  /* menu Main: dynamic */
   x-tree.main > ul > li > ul {display: none}
   x-tree.main > ul > li:hover > ul {display: block}
 
-  /* tree icons */
+  /* menu Main: icons */
   x-tree.main a.admin   {padding-left: 64px; background: url('tree-icons.svg') no-repeat 0 -64px}
   x-tree.main a.develop {padding-left: 64px; background: url('tree-icons.svg') no-repeat 0 -128px}
