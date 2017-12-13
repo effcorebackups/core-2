@@ -19,13 +19,13 @@ namespace effectivecore {
     $user = user::get_current();
     if (empty($user->id)) {
       return new markup('x-block', ['id' => 'user_menu'], [
-        new markup('img', ['id' => 'avatar', 'src' => '/modules/page/frontend/avatar-anonymous.svg']),
-        storage::get('settings')->select_by_npath('trees/user/user_anonymous')
+        storage::get('settings')->select_by_npath('trees/user/user_anonymous'),
+        new markup('img', ['id' => 'avatar', 'src' => '/modules/page/frontend/avatar-anonymous.svg'])
       ]);
     } else {
       return new markup('x-block', ['id' => 'user_menu'], [
-        new markup('a', ['href' => '/user/'.$user->id], new markup('img', ['id' => 'avatar', 'src' => '/modules/page/frontend/avatar-logged_in.svg'])),
-        storage::get('settings')->select_by_npath('trees/user/user_logged_in')
+        storage::get('settings')->select_by_npath('trees/user/user_logged_in'),
+        new markup('a', ['href' => '/user/'.$user->id], new markup('img', ['id' => 'avatar', 'src' => '/modules/page/frontend/avatar-logged_in.svg']))
       ]);
     }
   }

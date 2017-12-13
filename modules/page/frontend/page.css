@@ -38,9 +38,10 @@
   x-block {display: block}
   x-block#logo a#home {display: block; width: 150px; height: 70px; background: url('logo.svg')}
   x-block#user_menu {float: right}
-  x-block#user_menu #avatar {width: 48px; height: 48px; vertical-align: middle}
-  x-block#user_menu x-tree {display: inline-block}
-  x-block#user_menu x-tree ul {margin: 0}
+  x-block#user_menu #avatar {width: 48px; height: 48px; margin: 0 0 0 10px; vertical-align: top}
+  x-block#user_menu x-tree {display: inline-block; text-align: right}
+  x-block#user_menu x-tree ul,
+  x-block#user_menu x-tree ul li {list-style: none; margin: 0}
 
   /* control elements */
   x-actions-control {display: inline-block; cursor: default}
@@ -62,8 +63,9 @@
   main table thead {border-bottom: 5px solid %%_color_bg}
   main table thead th {padding: 12px 15px; font-weight: normal; font-size: 1.2em; text-align: left}
   main table tbody {background: white}
-  main table td {padding: 12px 15px; border: 1px solid %%_color_border}
+  main table td {padding: 12px 15px}
   main table tr:nth-child(even) td {background-color: %%_color_table_even_bg}
+  main table tr:nth-last-child(1) td {border-bottom: 1px solid %%_color_border}
   main table tr td:empty {color: %%_color_table_noitems}
   main table tr td:empty:after {content: "%%_text_no_items"}
 
