@@ -33,8 +33,14 @@
 
   /* blocks */
   x-block {display: block}
+
   /* block logo */
-  x-block#logo a#home {display: block; width: 150px; height: 70px; background: url('logo.svg')}
+  x-block#logo a#home {
+    display: block;
+    width: 150px;
+    height: 48px;
+    background: url('logo.svg')}
+
   /* block user menu */
   x-block#user_menu {float: right}
   x-block#user_menu #avatar {width: 48px; height: 48px; margin: 0 0 0 10px; vertical-align: top}

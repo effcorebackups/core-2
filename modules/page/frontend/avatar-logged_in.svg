@@ -5,9 +5,9 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   width="96"
-   height="96"
-   viewBox="0 0 96 96"
+   width="48"
+   height="48"
+   viewBox="0 0 48 48"
    style="shape-rendering:crispEdges">
   <metadata>
     <rdf:RDF>
@@ -16,7 +16,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
         <dc:rights>
           <cc:Agent>
             <dc:title>Copyright © 2017 Maxim Rysevets. All rights reserved.</dc:title>
@@ -32,13 +32,13 @@
   </metadata>
   <rect
      id="bg"
-     style="shape-rendering:auto;fill:#f5f5f5;fill-opacity:1"
-     width="96"
-     height="96"
+     style="fill:#f5f5f5;shape-rendering:auto"
+     width="48"
+     height="48"
      x="0"
      y="0" />
   <path
      id="human"
-     style="shape-rendering:auto;fill:#216ce4"
-     d="M 48,10 A 25,25 0 0 0 23,35 25,25 0 0 0 48,60 25,25 0 0 0 73,35 25,25 0 0 0 48,10 Z m 0,56 A 48,30 0 0 0 0,96 l 96,0 A 48,30 0 0 0 48,66 Z" />
+     style="fill:#216ce4;shape-rendering:auto"
+     d="M 24,5 A 12.5,12.5 0 0 0 11.5,17.5 12.5,12.5 0 0 0 24,30 12.5,12.5 0 0 0 36.5,17.5 12.5,12.5 0 0 0 24,5 Z m 0,28 A 24,15 0 0 0 0,48 l 48,0 A 24,15 0 0 0 24,33 Z" />
 </svg>
