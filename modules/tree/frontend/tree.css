@@ -1,27 +1,29 @@
 
   /* tree sizes and orientation */
-  nav x-tree {margin: 0; padding: 0}
-  nav x-tree ul, nav x-tree li {margin: 0; padding: 0; list-style: none}
-  nav x-tree > ul > li {float: left; cursor: default}
-  nav x-tree > ul > li > a {display: block; padding: 21px}
-  nav x-tree > ul > li > ul {position: absolute; padding: 21px; z-index: 10}
-  nav x-tree > ul > li > ul > li {}
+  x-tree.main {display: block; margin: 0 auto 20px auto; padding: 0; max-width: 800px}
+  x-tree.main ul, nav x-tree li {margin: 0; padding: 0; list-style: none}
+  x-tree.main > ul > li {float: left; cursor: default}
+  x-tree.main > ul > li > a {display: block; padding: 21px}
+  x-tree.main > ul > li > ul {position: absolute; padding: 21px; z-index: 10}
+  x-tree.main > ul > li > ul > li {}
+  x-tree.main:after {content: ''; clear: both; display: block}
 
   /* tree colors */
-  nav x-tree > ul > li:hover {background: %%_color_hover_bg}
-  nav x-tree > ul > li > a {color: white}
-  nav x-tree > ul > li > a.active,
-  nav x-tree > ul > li > a[href]:hover {color: %%_color_hover}
-  nav x-tree > ul > li > a:hover {color: white}
-  nav x-tree > ul > li > ul a {color: white}
-  nav x-tree > ul > li > ul a.active,
-  nav x-tree > ul > li > ul a:hover {color: %%_color_hover}
-  nav x-tree > ul > li > ul {background: %%_color_hover_bg}
+  x-tree.main {background: %%_color_bg}
+  x-tree.main > ul > li:hover {background: %%_color_hover_bg}
+  x-tree.main > ul > li > a {color: white}
+  x-tree.main > ul > li > a.active,
+  x-tree.main > ul > li > a[href]:hover {color: %%_color_hover}
+  x-tree.main > ul > li > a:hover {color: white}
+  x-tree.main > ul > li > ul a {color: white}
+  x-tree.main > ul > li > ul a.active,
+  x-tree.main > ul > li > ul a:hover {color: %%_color_hover}
+  x-tree.main > ul > li > ul {background: %%_color_hover_bg}
 
   /* tree dynamic */
-  nav x-tree > ul > li > ul {display: none}
-  nav x-tree > ul > li:hover > ul {display: block}
+  x-tree.main > ul > li > ul {display: none}
+  x-tree.main > ul > li:hover > ul {display: block}
 
-  /* icons */
-  nav x-tree.main a.admin   {padding-left: 64px; background: url('tree-icons.svg') no-repeat 0 -64px}
-  nav x-tree.main a.develop {padding-left: 64px; background: url('tree-icons.svg') no-repeat 0 -128px}
+  /* tree icons */
+  x-tree.main a.admin   {padding-left: 64px; background: url('tree-icons.svg') no-repeat 0 -64px}
+  x-tree.main a.develop {padding-left: 64px; background: url('tree-icons.svg') no-repeat 0 -128px}

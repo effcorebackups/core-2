@@ -10,7 +10,7 @@ pages
       - admins: admins
     content
     - block_menu_main
-        region: nav
+        region: menu_main
         type: link
         npath: trees/core/main
     - block_menu_user

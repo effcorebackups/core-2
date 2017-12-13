@@ -17,7 +17,7 @@ pages
         handler: \effectivecore\modules\user\events_access::on_check_access_user_delete
     # ─────────────────────────────────────────────────────────────────────
     - block_menu_main
-        region: nav
+        region: menu_main
         type: link
         npath: trees/core/main
     - block_menu_user
