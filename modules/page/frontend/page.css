@@ -58,10 +58,10 @@
 
   /* block user menu */
   x-block#user_menu {float: right}
-  x-block#user_menu #avatar {width: 48px; height: 48px; margin: 0 0 0 10px; vertical-align: top}
-  x-block#user_menu x-tree {display: none; text-align: right}
+  x-block#user_menu #avatar {width: 48px; height: 48px; margin: 0 0 0 5px; vertical-align: top}
+  x-block#user_menu x-tree {display: none; padding: 2px; text-align: right}
   x-block#user_menu x-tree ul,
-  x-block#user_menu x-tree ul li {list-style: none; margin: 0}
+  x-block#user_menu x-tree li {list-style: none; margin: 0; padding: 0}
   x-block#user_menu:hover x-tree {display: inline-block}
 
   /* control elements */

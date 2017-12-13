@@ -1,5 +1,5 @@
 
-  x-tree {display: block}
+  x-tree {display: block; position: relative}
 
   /* menu Main: sizes and orientation */
   x-tree.main {margin-bottom: 20px}
