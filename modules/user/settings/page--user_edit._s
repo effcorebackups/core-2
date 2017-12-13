@@ -37,3 +37,8 @@ pages
         region: region_1_1
         type: link
         npath: forms/user/user_edit
+    # ─────────────────────────────────────────────────────────────────────
+    - block_copyright
+        region: copyright
+        type: code
+        handler: \effectivecore\modules\core\events_page::on_show_block_copyright

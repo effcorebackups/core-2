@@ -29,3 +29,8 @@ pages
         region: region_1_1
         type: code
         handler: \effectivecore\modules\core\events_page::on_show_modules
+    # ─────────────────────────────────────────────────────────────────────
+    - block_copyright
+        region: copyright
+        type: code
+        handler: \effectivecore\modules\core\events_page::on_show_block_copyright

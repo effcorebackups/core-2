@@ -1,8 +1,8 @@
 <?php
 
-  #############################################################
-  ### Copyright © 2017 Maxim Rysevets. All rights reserved. ###
-  #############################################################
+  ##################################################################
+  ### Copyright © 2017—2018 Maxim Rysevets. All rights reserved. ###
+  ##################################################################
 
 namespace effectivecore {
           class markup_simple extends \effectivecore\node_simple {

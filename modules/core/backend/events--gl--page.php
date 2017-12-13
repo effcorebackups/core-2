@@ -1,8 +1,8 @@
 <?php
 
-  #############################################################
-  ### Copyright © 2017 Maxim Rysevets. All rights reserved. ###
-  #############################################################
+  ##################################################################
+  ### Copyright © 2017—2018 Maxim Rysevets. All rights reserved. ###
+  ##################################################################
 
 namespace effectivecore {
           use \effectivecore\translation as translation;
@@ -34,6 +34,14 @@ namespace effectivecore {
     return new markup('h1', ['id' => 'title'],
       token::replace(translation::get($page->title))
     );
+  }
+
+  static function on_show_block_copyright($page) {
+    return new markup('x-copyright', [], [
+      translation::get('Valid HTML5 markup | Valid CSS').br.
+      translation::get('Copyright © %%_years %%_right_holder.', ['years' => '2017—2018', 'right_holder' => 'Maxim Rysevets']).br.
+      translation::get('All rights reserved.')
+    ]);
   }
 
 }}

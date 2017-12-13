@@ -8,6 +8,7 @@ translations
   - Actions: Действия
   - Administer: Администрирование
   - Administrators: Администраторы
+  - All rights reserved.: Все права защищены.
   - Allowable characters\: %%_chars. Examples\: %%_examples.: Допустимые символы: %%_chars. Примеры: %%_examples.
   - Allowable characters\: %%_chars.: Допустимые символы: %%_chars.
   - always_enabled: всегда_вкл
@@ -32,6 +33,7 @@ translations
   - Console: Консоль
   - Control elements: Элементы управления
   - Cookies are disabled. You can not log in!: Cookies отключены. Вы не можете войти в систему!
+  - Copyright © %%_years %%_right_holder.: Авторские права © %%_years %%_right_holder.
   - Core: Ядро
   - created: создано
   - Created: Создано
@@ -221,6 +223,7 @@ translations
   - Users: Пользователи
   - val.: знач.
   - Val.: Знач.
+  - Valid HTML5 markup \| Valid CSS: Действительная HTML5 разметка | Действительный CSS
   - Value was trimmed to the required length!: Значение было обрезано до требуемой длинны!
   - Value: Значение
   - Value: Значение
