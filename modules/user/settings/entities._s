@@ -24,6 +24,9 @@ entities
         type: integer
         not_null: true
         default: 0
+      avatar_path
+        type: varchar
+        size: 1024
     constraints
     - key_id
         type: primary key
