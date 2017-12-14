@@ -36,7 +36,7 @@
   form x-field select {cursor: pointer}
   form x-field textarea {width: 70%; min-width: 100px}
   form x-field input[type="range"] {border-radius: 20px}
-  form x-field input[type="file"] {border-radius: 30px}
+  form x-field input[type="file"] {border-radius: 15px}
   form x-field input[type="email"],
   form x-field input[name="nick"] {text-transform: lowercase}
 

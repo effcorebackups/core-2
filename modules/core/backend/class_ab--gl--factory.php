@@ -223,6 +223,30 @@ namespace effectivecore {
     return $datetime->format('Y-m-d H:i:s');
   }
 
+  ##############################
+  ### bytes/human conversion ###
+  ##############################
+
+  static function is_human_bytes($number) {
+    $character = substr($number, -1);
+    return in_array($character, ['B', 'K', 'M', 'G', 'T']);
+  }
+
+  static function bytes_to_human($bytes) {
+    if ($bytes && $bytes % 1024 ** 4 === 0) return ($bytes / 1024 ** 4).'T';
+    if ($bytes && $bytes % 1024 ** 3 === 0) return ($bytes / 1024 ** 3).'G';
+    if ($bytes && $bytes % 1024 ** 2 === 0) return ($bytes / 1024 ** 2).'M';
+    if ($bytes && $bytes % 1024 ** 1 === 0) return ($bytes / 1024 ** 1).'K';
+    else return $bytes.'B';
+  }
+
+  static function human_to_bytes($human) {
+    $powers = array_flip(['B', 'K', 'M', 'G', 'T']);
+    $character = strtoupper(substr($human, -1));
+    $value = (int)substr($human, 0, -1);
+    return $value * 1024 ** $powers[$character];
+  }
+
   ########################
   ### shared functions ###
   ########################
@@ -276,21 +300,6 @@ namespace effectivecore {
       $binstr.= str_pad(base_convert($c_chunk, 16, 2), 8, '0', STR_PAD_LEFT);
     }
     return $binstr;
-  }
-
-  static function bytes_to_human($bytes) {
-    if ($bytes && $bytes % 1024 ** 4 === 0) return ($bytes / 1024 ** 4).'T';
-    if ($bytes && $bytes % 1024 ** 3 === 0) return ($bytes / 1024 ** 3).'G';
-    if ($bytes && $bytes % 1024 ** 2 === 0) return ($bytes / 1024 ** 2).'M';
-    if ($bytes && $bytes % 1024 ** 1 === 0) return ($bytes / 1024 ** 1).'K';
-    else return $bytes.'B';
-  }
-
-  static function human_to_bytes($human) {
-    $powers = array_flip(['B', 'K', 'M', 'G', 'T']);
-    $character = strtoupper($human[strlen($human)-1]);
-    $value = (int)substr($human, 0, -1);
-    return $value * 1024 ** $powers[$character];
   }
 
   static function ip_to_hex($ip) {
