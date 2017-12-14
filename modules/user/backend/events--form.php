@@ -103,6 +103,8 @@ namespace effectivecore\modules\user {
   }
 
   static function on_submit_user_edit($form, $fields, &$values) {
+    $fields['credentials/avatar']->new_name = 'avatar';
+    parent::on_submit($form, $fields, $values);
     $id = page::$args['id_user'];
     switch ($form->clicked_button_name) {
       case 'save':

@@ -3,6 +3,7 @@ forms
     attributes
     - id: user_edit
     - novalidate: novalidate
+    - enctype: multipart/form-data
     - method: post
     children
     - credentials|form_container
@@ -32,6 +33,18 @@ forms
                 - required: required
                 - minlength: 4
                 - maxlength: 32
+        - avatar|form_field_file
+            title: Avatar
+            max_file_size: 10K
+            upload_subdir: avatar/
+            children
+            - element|markup_simple
+                tag_name: input
+                attributes
+                - type: file
+                - name: avatar
+                - accept: image/*
+                - disabled: disabled
         - password_new|form_field
             title: New password
             description: Leave the field blank if you do not want to change its value.

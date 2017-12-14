@@ -589,9 +589,10 @@ namespace effectivecore {
           # final copying of files
             foreach ($values[$c_name] as $c_hash => $c_file_info) {
               $c_file = new file($c_file_info->tmp_name);
+              $c_name = $c_field->new_name ?: $c_file_info->name;
               if ($c_file->is_exist() &&
                   $c_file->get_hash() == $c_hash &&
-                  $c_file->move(dir_dynamic.'files/'.$c_field->upload_subdir, $c_file_info->name)) {
+                  $c_file->move(dir_dynamic.'files/'.$c_field->upload_subdir, $c_name)) {
                 $c_file_info->new_path = $c_file->get_path_full();
               }
             }

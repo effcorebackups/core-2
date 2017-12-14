@@ -118,7 +118,7 @@ forms
         - file|form_field_file
             title: File
             max_file_size: 1M
-            upload_subdir: test/
+            upload_subdir: demo/
             description|text
               text: Element %%_info.
               args
