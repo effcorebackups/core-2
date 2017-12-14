@@ -44,7 +44,6 @@ forms
                 - type: file
                 - name: avatar
                 - accept: image/*
-                - disabled: disabled
         - password_new|form_field
             title: New password
             description: Leave the field blank if you do not want to change its value.

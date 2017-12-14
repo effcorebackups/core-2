@@ -27,7 +27,7 @@ namespace effectivecore\modules\develop {
   }
 
   static function on_submit_demo($form, $fields, &$values) {
-    static::on_submit($form, $fields, $values);
+    static::on_submit_files($form, $fields, $values);
     message::insert(translation::get('Call %%_name', ['name' => '\\'.__METHOD__]));
     if (count($values['file'])) {
       foreach ($values['file'] as $hash => $c_file_info) {

@@ -559,11 +559,11 @@ namespace effectivecore {
 
   }
 
-  #################
-  ### on_submit ###
-  #################
+  #######################
+  ### on_submit_files ###
+  #######################
 
-  static function on_submit($form, $fields, &$values) {
+  static function on_submit_files($form, $fields, &$values) {
     foreach ($fields as $c_npath => $c_field) {
       $c_element = $c_field->child_select('element');
       if ($c_element instanceof markup ||
@@ -588,12 +588,12 @@ namespace effectivecore {
           if ($c_field instanceof form_field_file) {
           # final copying of files
             foreach ($values[$c_name] as $c_hash => $c_file_info) {
-              $c_file = new file($c_file_info->tmp_name);
+              $c_tmp_file = new file($c_file_info->tmp_name);
               $c_name = $c_field->new_name ?: $c_file_info->name;
-              if ($c_file->is_exist() &&
-                  $c_file->get_hash() == $c_hash &&
-                  $c_file->move(dir_dynamic.'files/'.$c_field->upload_subdir, $c_name)) {
-                $c_file_info->new_path = $c_file->get_path_full();
+              if ($c_tmp_file->is_exist() &&
+                  $c_tmp_file->get_hash() == $c_hash &&
+                  $c_tmp_file->move(dir_dynamic.'files/'.$c_field->upload_subdir, $c_name)) {
+                $c_file_info->new_path = $c_tmp_file->get_path_full();
               }
             }
           # cleaning the manager

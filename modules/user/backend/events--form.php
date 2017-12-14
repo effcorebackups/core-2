@@ -8,6 +8,7 @@ namespace effectivecore\modules\user {
           use const \effectivecore\br;
           use \effectivecore\url as url;
           use \effectivecore\page as page;
+          use \effectivecore\file as file;
           use \effectivecore\entity as entity;
           use \effectivecore\factory as factory;
           use \effectivecore\message as message;
@@ -103,8 +104,6 @@ namespace effectivecore\modules\user {
   }
 
   static function on_submit_user_edit($form, $fields, &$values) {
-    $fields['credentials/avatar']->new_name = 'avatar';
-    parent::on_submit($form, $fields, $values);
     $id = page::$args['id_user'];
     switch ($form->clicked_button_name) {
       case 'save':
@@ -113,6 +112,13 @@ namespace effectivecore\modules\user {
         $user->nick  = strtolower($values['nick'][0]);
         if ($values['password_new'][0]) {
           $user->password_hash = factory::hash_get($values['password_new'][0]);
+        }
+        if (count($values['avatar'])) {
+          $fields['credentials/avatar']->new_name = $user->nick;
+          parent::on_submit_files($form, $fields, $values);
+          $c_file = new file(reset($values['avatar'])->new_path);
+          $user->avatar_path = $c_file->get_path_relative(); } else {
+          $user->avatar_path = '';
         }
         if ($user->update()) {
           message::insert(
