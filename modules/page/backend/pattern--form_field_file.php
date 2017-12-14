@@ -10,6 +10,7 @@ namespace effectivecore {
           class form_field_file extends \effectivecore\form_field {
 
   public $max_file_size;
+  public $upload_subdir = '';
 
   function build() {
     $this->manager_build();

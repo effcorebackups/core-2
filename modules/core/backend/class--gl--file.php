@@ -108,7 +108,8 @@ namespace effectivecore {
 
   function move($new_dirs, $new_name = null) {
     $path_old = $this->get_path_full();
-    $path_new = $new_dirs.($new_name ?: $this->get_name());
+    $path_new = $new_dirs.($new_name ?: $this->get_file_full());
+    static::mkdir_if_not_exist($new_dirs);
     if (rename($path_old, $path_new)) {
       $this->__construct($path_new);
       return true;
@@ -117,7 +118,8 @@ namespace effectivecore {
 
   function move_uploaded($new_dirs, $new_name = null) {
     $path_old = $this->get_path_full();
-    $path_new = $new_dirs.($new_name ?: $this->get_name());
+    $path_new = $new_dirs.($new_name ?: $this->get_file_full());
+    static::mkdir_if_not_exist($new_dirs);
     if (move_uploaded_file($path_old, $path_new)) {
       $this->__construct($path_new);
       return true;
@@ -148,6 +150,12 @@ namespace effectivecore {
   ######################
 
   static private $cache;
+
+  static function mkdir_if_not_exist($dirs) {
+    if (!file_exists($dirs)) {
+      return mkdir($dirs);
+    }
+  }
 
   static function select_all($parent_dir, $filter = '') {
     $files = [];
