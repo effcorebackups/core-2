@@ -7,6 +7,7 @@
 namespace effectivecore {
           use \effectivecore\timer as timer;
           use \effectivecore\console as console;
+          use \effectivecore\modules\storage\storage as storage;
           class file {
 
   # note:
@@ -150,6 +151,16 @@ namespace effectivecore {
   ######################
 
   static private $cache;
+
+  static function get_file_types() {
+    $return = [];
+    foreach (storage::get('settings')->select_group('file_types') as $c_types) {
+      foreach ($c_types as $c_name => $c_info) {
+        $return[$c_name] = $c_info;
+      }
+    }
+    return $return;
+  }
 
   static function mkdir_if_not_exist($dirs) {
     if (!file_exists($dirs)) {

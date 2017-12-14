@@ -24,7 +24,6 @@ namespace effectivecore {
   use \effectivecore\timer as timer;
   use \effectivecore\event as event;
   use \effectivecore\token as token;
-  use \effectivecore\modules\storage\storage as storage;
   timer::tap('total');
 
   # redirect from '/any_path/' to '/any_path'
@@ -37,12 +36,7 @@ namespace effectivecore {
   ### single entry point ###
   ##########################
 
-  $file_types = [];
-  foreach (storage::get('settings')->select_group('file_types') as $c_types) {
-    foreach ($c_types as $c_name => $c_info) {
-      $file_types[$c_name] = $c_info;
-    }
-  }
+  $file_types = file::get_file_types();
   $extension = url::get_current()->get_extension();
   if ($extension) {
   # case for protected files
