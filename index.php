@@ -51,7 +51,7 @@ namespace effectivecore {
       $file = new file($path);
       $data = $file->load();
     # replace tokens
-      if (isset($file_types[$extension]->use_tokens)) {
+      if (!empty($file_types[$extension]->use_tokens)) {
         $data = token::replace($data);
       }
     # if get header HTTP_IF_NONE_MATCH
@@ -64,7 +64,7 @@ namespace effectivecore {
     # send headers
       header('Cache-Control: must-revalidate, private', true);
       header('Etag: '.$etag, true);
-      if (is_array($file_types[$extension]->headers)) {
+      if (!empty($file_types[$extension]->headers)) {
         foreach ($file_types[$extension]->headers as $c_key => $c_value) {
           header($c_key.': '.$c_value, true);
         }

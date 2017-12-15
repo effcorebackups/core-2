@@ -26,7 +26,12 @@ namespace effectivecore {
     } else {
       return new markup('x-block', ['id' => 'user_menu'], [
         storage::get('settings')->select_by_npath('trees/user/user_logged_in'),
-        new markup('a', ['href' => '/user/'.$user->id], new markup('img', ['id' => 'avatar', 'src' => '/modules/page/frontend/avatar-logged_in.svg']))
+        new markup('a', ['href' => '/user/'.$user->id],
+          new markup('img', [
+            'id' => 'avatar',
+            'src' => $user->avatar_path_relative ?
+                 '/'.$user->avatar_path_relative : '/modules/page/frontend/avatar-logged_in.svg']
+        ))
       ]);
     }
   }

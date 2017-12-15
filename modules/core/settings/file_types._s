@@ -27,6 +27,9 @@ file_types
     headers
     - Content-type: text/plain
 # images
+- image
+    headers
+    - Content-type: image/*
 - svg
     use_tokens: 1
     headers
