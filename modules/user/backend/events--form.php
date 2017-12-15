@@ -104,6 +104,7 @@ namespace effectivecore\modules\user {
   }
 
   static function on_submit_user_edit($form, $fields, &$values) {
+    parent::on_submit_files($form, $fields, $values);
     $id = page::$args['id_user'];
     switch ($form->clicked_button_name) {
       case 'save':
@@ -113,12 +114,12 @@ namespace effectivecore\modules\user {
         if ($values['password_new'][0]) {
           $user->password_hash = factory::hash_get($values['password_new'][0]);
         }
-        if (count($values['avatar'])) {
-          $fields['credentials/avatar']->new_name = $user->nick;
-          parent::on_submit_files($form, $fields, $values);
-          $c_file = new file(reset($values['avatar'])->new_path);
-          $user->avatar_path = $c_file->get_path_relative(); } else {
-          $user->avatar_path = '';
+        $avatar_info = reset($values['avatar']);
+        if ($avatar_info &&
+            $avatar_info->new_path) {
+          $c_file = new file($avatar_info->new_path);
+          $user->avatar_path_relative = $c_file->get_path_relative(); } else {
+          $user->avatar_path_relative = '';
         }
         if ($user->update()) {
           message::insert(

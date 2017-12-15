@@ -24,7 +24,7 @@ entities
         type: integer
         not_null: true
         default: 0
-      avatar_path
+      avatar_path_relative
         type: varchar
         size: 1024
     constraints

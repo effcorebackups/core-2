@@ -33,7 +33,7 @@ namespace effectivecore {
     $file = new file(static::$directory.static::$type.'--'.$name.'.php');
     if ($info) static::$info[$name] = $info;
     if (is_writable($file->get_dirs()) && ((
-        is_writable($file->get_path_full()) && $file->is_exist()) ||
+        is_writable($file->get_path()) && $file->is_exist()) ||
                     $file->is_exist() == false)) {
       $file->set_data(
         "<?php".nl.nl."namespace effectivecore { # ".static::$type." for ".$name.nl.nl.($info ?
@@ -42,15 +42,15 @@ namespace effectivecore {
         "}");
       $file->save();
       if (function_exists('opcache_invalidate')) {
-        opcache_invalidate($file->get_path_full());
+        opcache_invalidate($file->get_path());
       }
       return true;
     } else {
       message::insert(
-        'Can not write file "'.$file->get_file_full().'" to the directory "'.$file->get_dirs_relative().'"!'.br.
+        'Can not write file "'.$file->get_file().'" to the directory "'.$file->get_dirs_relative().'"!'.br.
         'The system cannot save dynamic file and will work slowly!'.br.
         (!is_writable($file->get_dirs()) ? 'Directory "'.$file->get_dirs_relative().'" should be writable!'.br : '').
-        (!is_writable($file->get_path_full()) && $file->is_exist() ? 'File "'.$file->get_file_full().'" should be writable!' : ''), 'warning'
+        (!is_writable($file->get_path()) && $file->is_exist() ? 'File "'.$file->get_file().'" should be writable!' : ''), 'warning'
       );
     }
   }
@@ -60,7 +60,7 @@ namespace effectivecore {
         unset(static::$data[$name]);
     $file = new file(static::$directory.static::$type.'--'.$name.'.php'); 
     if ($file->is_exist()) {
-      return unlink($file->get_path_full());
+      return unlink($file->get_path());
     }
   }
 

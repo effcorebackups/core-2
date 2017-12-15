@@ -37,6 +37,8 @@ forms
             title: Avatar
             max_file_size: 10K
             upload_subdir: avatar/
+            fixed_name: %%_id_user
+            fixed_type: image
             children
             - element|markup_simple
                 tag_name: input

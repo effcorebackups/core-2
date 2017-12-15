@@ -12,14 +12,15 @@ namespace effectivecore {
 
   # note:
   # ─────────────────────────────────────────────────────────────────────
-  # 1. if the first letter in the path is '/' - it's a full path, оtherwise - relative path
-  # 2. if the last letter in the path is '/' - it's a directory, оtherwise - file
-  # 3. path components like '../' should be ignored!
-  # 4. path components like './' should be ignored!
-  # 5. windows files naming rules should be ignored!
+  # 1. path = dirs/ + name + '.' + type
+  # 2. if the first letter in the path is '/' - it's a full path, оtherwise - relative path
+  # 3. if the last letter in the path is '/' - it's a directory, оtherwise - file
+  # 4. path components like '../' should be ignored!
+  # 5. path components like './' should be ignored!
+  # 6. windows files naming rules should be ignored!
   # ─────────────────────────────────────────────────────────────────────
 
-  # path                      | dirs          | name    | type | relative
+  # path                      | dirs/         | name    | type | relative
   # ─────────────────────────────────────────────────────────────────────
   # - .fiLe                   |               | .fiLe   |      | -
   # - .fiLe.eXt               |               | .fiLe   | eXt  | -
@@ -70,46 +71,48 @@ namespace effectivecore {
     $this->type = isset($matches['type']) ? ltrim($matches['type'], '.') : '';
   }
 
-  function get_dirs() {return $this->dirs;}
-  function get_name() {return $this->name;}
-  function get_type() {return $this->type;}
+  function set_dirs($dirs) {$this->dirs = $dirs;}
+  function set_name($name) {$this->name = $name;}
+  function set_type($type) {$this->type = $type;}
+  function set_data($data) {$this->data = $data;}
 
-  function get_path_relative() {return $this->get_dirs_relative().$this->get_file_full();}
+  function get_dirs()          {return $this->dirs;}
   function get_dirs_relative() {return isset($this->dirs[0]) && $this->dirs[0] == '/' ? substr($this->dirs, strlen(dir_root)) : $this->dirs;}
-  function get_path_full()     {return $this->type ? $this->dirs.$this->name.'.'.$this->type : $this->dirs.$this->name;}
-  function get_file_full()     {return $this->type ? $this->name.'.'.$this->type : $this->name;}
+# ─────────────────────────────────────────────────────────────────────
+  function get_name()          {return $this->name;}
+  function get_type()          {return $this->type;}
+  function get_file()          {return $this->type ? $this->name.'.'.$this->type : $this->name;}
+# ─────────────────────────────────────────────────────────────────────
+  function get_path()          {return $this->type ? $this->dirs.$this->name.'.'.$this->type : $this->dirs.$this->name;}
+  function get_path_relative() {return $this->get_dirs_relative().$this->get_file();}
+# ─────────────────────────────────────────────────────────────────────
   function get_name_parent()   {return ltrim(strrchr(rtrim($this->dirs, '/'), '/'), '/');}
-  function get_hash()          {return md5_file($this->get_path_full());}
-
-  function is_exist() {return file_exists($this->get_path_full());}
-
+  function get_hash()          {return md5_file($this->get_path());}
   function get_data() {
     if (empty($this->data)) $this->load(true);
     return $this->data;
   }
 
-  function set_data($data) {
-    $this->data = $data;
-  }
+  function is_exist() {return file_exists($this->get_path());}
 
   function load($reset = false) {
     $relative = $this->get_path_relative();
     timer::tap('file load: '.$relative);
     if (!$reset && isset(static::$cache[$relative]))
            $this->data = static::$cache[$relative];
-    else   $this->data = static::$cache[$relative] = file_get_contents($this->get_path_full());
+    else   $this->data = static::$cache[$relative] = file_get_contents($this->get_path());
     timer::tap('file load: '.$relative);
     console::add_log('file', 'load', $relative, 'ok', timer::get_period('file load: '.$relative, -1, -2));
     return $this->data;
   }
 
   function save() {
-    return file_put_contents($this->get_path_full(), $this->data);
+    return file_put_contents($this->get_path(), $this->data);
   }
 
   function move($new_dirs, $new_name = null) {
-    $path_old = $this->get_path_full();
-    $path_new = $new_dirs.($new_name ?: $this->get_file_full());
+    $path_old = $this->get_path();
+    $path_new = $new_dirs.($new_name ?: $this->get_file());
     static::mkdir_if_not_exist($new_dirs);
     if (rename($path_old, $path_new)) {
       $this->__construct($path_new);
@@ -118,8 +121,8 @@ namespace effectivecore {
   }
 
   function move_uploaded($new_dirs, $new_name = null) {
-    $path_old = $this->get_path_full();
-    $path_new = $new_dirs.($new_name ?: $this->get_file_full());
+    $path_old = $this->get_path();
+    $path_new = $new_dirs.($new_name ?: $this->get_file());
     static::mkdir_if_not_exist($new_dirs);
     if (move_uploaded_file($path_old, $path_new)) {
       $this->__construct($path_new);
@@ -128,7 +131,7 @@ namespace effectivecore {
   }
 
   function rename($new_name) {
-    $path_old = $this->get_path_full();
+    $path_old = $this->get_path();
     $path_new = $this->get_dirs().$new_name;
     if (rename($path_old, $path_new)) {
       $this->__construct($path_new);
@@ -139,8 +142,8 @@ namespace effectivecore {
   function insert($once = true) {
     $relative = $this->get_path_relative();
     timer::tap('file insert: '.$relative);
-    $return = $once ? require_once($this->get_path_full()) :
-                           require($this->get_path_full());
+    $return = $once ? require_once($this->get_path()) :
+                           require($this->get_path());
     timer::tap('file insert: '.$relative);
     console::add_log('file', 'insertion', $relative, 'ok', timer::get_period('file insert: '.$relative, -1, -2));
     return $return;

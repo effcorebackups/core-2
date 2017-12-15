@@ -11,7 +11,8 @@ namespace effectivecore {
 
   public $max_file_size;
   public $upload_subdir = '';
-  public $new_name;
+  public $fixed_name;
+  public $fixed_type;
 
   function build() {
     $this->manager_build();
