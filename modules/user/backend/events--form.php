@@ -68,7 +68,7 @@ namespace effectivecore\modules\user {
           $id = page::$args['id_user'];
         # check security
           $test_pass = (new instance('user', ['id' => $id]))->select();
-          if ($test_pass->password_hash !== factory::hash_get($values['password'][0])) {
+          if ($test_pass->password_hash !== factory::hash_password_get($values['password'][0])) {
             $form->add_error('credentials/password/element',
               translation::get('Field "%%_title" contains incorrect value!', [
                 'title' => translation::get($fields['credentials/password']->title)
@@ -112,7 +112,7 @@ namespace effectivecore\modules\user {
         $user->email = strtolower($values['email'][0]);
         $user->nick  = strtolower($values['nick'][0]);
         if ($values['password_new'][0]) {
-          $user->password_hash = factory::hash_get($values['password_new'][0]);
+          $user->password_hash = factory::hash_password_get($values['password_new'][0]);
         }
         $avatar_info = reset($values['avatar']);
         if ($avatar_info &&
@@ -160,7 +160,7 @@ namespace effectivecore\modules\user {
           ]))->select();
           if (!$user || (
                $user->password_hash &&
-               $user->password_hash !== factory::hash_get($values['password'][0]))) {
+               $user->password_hash !== factory::hash_password_get($values['password'][0]))) {
             $form->add_error('credentials/email/element');
             $form->add_error('credentials/password/element');
             message::insert('Incorrect email or password!', 'error');
@@ -177,7 +177,7 @@ namespace effectivecore\modules\user {
           'email' => strtolower($values['email'][0])
         ]))->select();
         if ($user &&
-            $user->password_hash === factory::hash_get($values['password'][0])) {
+            $user->password_hash === factory::hash_password_get($values['password'][0])) {
           session::insert($user->id, !empty($values['is_remember'][0]));
           url::go('/user/'.$user->id);
         }
@@ -215,7 +215,7 @@ namespace effectivecore\modules\user {
         $user = (new instance('user', [
           'email'         => strtolower($values['email'][0]),
           'nick'          => strtolower($values['nick'][0]),
-          'password_hash' => factory::hash_get($values['password'][0]),
+          'password_hash' => factory::hash_password_get($values['password'][0]),
           'created'       => factory::datetime_get()
         ]))->insert();
         if ($user) {

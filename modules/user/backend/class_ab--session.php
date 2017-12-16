@@ -19,8 +19,9 @@ namespace effectivecore\modules\user {
   }
 
   static function id_get() {
-    $c_value = filter_var(isset($_COOKIE['session_id']) ?
-                                $_COOKIE['session_id'] : '', FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '%^[0-9a-f]{32}$%']]);
+    $c_value = factory::filter_session_id(
+      isset($_COOKIE['session_id']) ?
+            $_COOKIE['session_id'] : '');
     if ($c_value) return $c_value;
     else          return static::id_regenerate('a');
   }

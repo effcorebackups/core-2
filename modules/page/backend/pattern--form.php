@@ -7,6 +7,7 @@
 namespace effectivecore {
           use \effectivecore\event as event;
           use \effectivecore\message as message;
+          use \effectivecore\factory as factory;
           class form extends \effectivecore\markup {
 
   # elements support:
@@ -138,8 +139,9 @@ namespace effectivecore {
   }
 
   static function validation_id_get() {
-    $c_value = filter_var(isset($_POST['validation_id']) ?
-                                $_POST['validation_id'] : '', FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '%^[0-9a-f]{48}$%']]);
+    $c_value = factory::filter_validation_id(
+      isset($_POST['validation_id']) ?
+            $_POST['validation_id'] : '');
     if ($c_value == false ||
         factory::hex_to_ip(substr($c_value, 8, 8)) != $_SERVER['REMOTE_ADDR'] ||
                     hexdec(substr($c_value, 0, 8)) < time() - 60 * 60 ||

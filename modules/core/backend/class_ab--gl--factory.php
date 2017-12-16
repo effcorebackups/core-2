@@ -11,9 +11,9 @@ namespace effectivecore {
 
   static $cache;
 
-  #############################
-  ### classes manipulations ###
-  #############################
+  #########################
+  ### classes functions ###
+  #########################
 
   static function autoload($name) {
     console::add_log('autoload', 'search', $name, 'ok');
@@ -83,9 +83,9 @@ namespace effectivecore {
                               $reflection->newInstanceWithoutConstructor();
   }
 
-  ##########################
-  ### data manipulations ###
-  ##########################
+  ######################
+  ### data functions ###
+  ######################
 
   static function data_to_attr($data, $join_part = ' ', $key_wrapper = '', $value_wrapper = '"') {
     $return = [];
@@ -136,9 +136,9 @@ namespace effectivecore {
     return $return;
   }
 
-  ###########################
-  ### array manipulations ###
-  ###########################
+  #######################
+  ### array functions ###
+  #######################
 
   static function array_rotate($data) {
     $return = [];
@@ -223,6 +223,53 @@ namespace effectivecore {
     return $datetime->format('Y-m-d H:i:s');
   }
 
+  ###############
+  ### filters ###
+  ###############
+
+  static function filter_email($value) {
+    return filter_var($value, FILTER_VALIDATE_EMAIL);
+  }
+
+  static function filter_url($value) {
+    return filter_var($value, FILTER_SANITIZE_URL);
+  }
+
+  static function filter_mime_type($value) {
+    return filter_var($value, FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '%^[a-z]{1,20}/[a-z0-9\-\+\.]{1,100}$%i']]);
+  }
+
+  static function filter_hash($value, $lenght = 32) { # 32 - md5 | 40 - sha1 | ...
+    return filter_var($value, FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '%^[0-9a-f]{'.$lenght.'}$%']]);
+  }
+
+  static function filter_session_id($value) {
+    return static::filter_hash($value);
+  }
+
+  static function filter_validation_id($value) {
+    return static::filter_hash($value, 48);
+  }
+
+  static function filter_file_name($value) {
+    $return = preg_replace_callback('%(?<char>[^a-z0-9_.\-])%uiS', function($m) {
+      if ($m['char'] == ' ') return '-';
+      if (strlen($m['char']) == 1) return dechex(ord($m['char'][0]));
+      if (strlen($m['char']) == 2) return dechex(ord($m['char'][0])).dechex(ord($m['char'][1]));
+      if (strlen($m['char']) == 3) return dechex(ord($m['char'][0])).dechex(ord($m['char'][1])).dechex(ord($m['char'][2]));
+      return '-';
+    }, $value);
+    return substr($return, strlen($return) - 255);
+  }
+
+  ######################
+  ### hash functions ###
+  ######################
+
+  static function hash_password_get($data) {
+    return sha1($data);
+  }
+
   ##############################
   ### bytes/human conversion ###
   ##############################
@@ -245,6 +292,47 @@ namespace effectivecore {
     $character = strtoupper(substr($human, -1));
     $value = (int)substr($human, 0, -1);
     return $value * 1024 ** $powers[$character];
+  }
+
+  ####################
+  ### ip functions ###
+  ####################
+
+  static function ip_to_hex($ip) {
+    $ip_parts_int = explode('.', $ip);
+    return str_pad(dechex($ip_parts_int[0]), 2, '0', STR_PAD_LEFT).
+           str_pad(dechex($ip_parts_int[1]), 2, '0', STR_PAD_LEFT).
+           str_pad(dechex($ip_parts_int[2]), 2, '0', STR_PAD_LEFT).
+           str_pad(dechex($ip_parts_int[3]), 2, '0', STR_PAD_LEFT);
+  }
+
+  static function hex_to_ip($ip_hex) {
+    $ip_parts_hex = str_split($ip_hex, 2);
+    return hexdec($ip_parts_hex[0]).'.'.
+           hexdec($ip_parts_hex[1]).'.'.
+           hexdec($ip_parts_hex[2]).'.'.
+           hexdec($ip_parts_hex[3]);
+  }
+
+
+  ########################
+  ### binary functions ###
+  ########################
+
+  static function binstr_to_hexstr($binstr) {
+    $hexstr = '';
+    foreach (str_split($binstr, 8) as $c_chunk) {
+      $hexstr.= str_pad(base_convert(str_pad($c_chunk, 8, '0'), 2, 16), 2, '0', STR_PAD_LEFT);
+    }
+    return $hexstr;
+  }
+
+  static function hexstr_to_binstr($hexstr) {
+    $binstr = '';
+    foreach (str_split($hexstr, 2) as $c_chunk) {
+      $binstr.= str_pad(base_convert($c_chunk, 16, 2), 8, '0', STR_PAD_LEFT);
+    }
+    return $binstr;
   }
 
   ########################
@@ -280,42 +368,6 @@ namespace effectivecore {
 
   static function to_css_class($string) {
     return str_replace(['/', ' '], '-', strtolower($string));
-  }
-
-  static function hash_get($data) {
-    return sha1($data);
-  }
-
-  static function binstr_to_hexstr($binstr) {
-    $hexstr = '';
-    foreach (str_split($binstr, 8) as $c_chunk) {
-      $hexstr.= str_pad(base_convert(str_pad($c_chunk, 8, '0'), 2, 16), 2, '0', STR_PAD_LEFT);
-    }
-    return $hexstr;
-  }
-
-  static function hexstr_to_binstr($hexstr) {
-    $binstr = '';
-    foreach (str_split($hexstr, 2) as $c_chunk) {
-      $binstr.= str_pad(base_convert($c_chunk, 16, 2), 8, '0', STR_PAD_LEFT);
-    }
-    return $binstr;
-  }
-
-  static function ip_to_hex($ip) {
-    $ip_parts_int = explode('.', $ip);
-    return str_pad(dechex($ip_parts_int[0]), 2, '0', STR_PAD_LEFT).
-           str_pad(dechex($ip_parts_int[1]), 2, '0', STR_PAD_LEFT).
-           str_pad(dechex($ip_parts_int[2]), 2, '0', STR_PAD_LEFT).
-           str_pad(dechex($ip_parts_int[3]), 2, '0', STR_PAD_LEFT);
-  }
-
-  static function hex_to_ip($ip_hex) {
-    $ip_parts_hex = str_split($ip_hex, 2);
-    return hexdec($ip_parts_hex[0]).'.'.
-           hexdec($ip_parts_hex[1]).'.'.
-           hexdec($ip_parts_hex[2]).'.'.
-           hexdec($ip_parts_hex[3]);
   }
 
 }}

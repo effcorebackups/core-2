@@ -6,6 +6,8 @@
 
 namespace effectivecore {
           use \effectivecore\locale as locale;
+          use \effectivecore\factory as factory;
+          use \effectivecore\temporary as temporary;
           use \effectivecore\translation as translation;
           class form_field_file extends \effectivecore\form_field {
 
@@ -15,7 +17,7 @@ namespace effectivecore {
   public $fixed_type;
 
   function build() {
-    $this->manager_build();
+    $this->pool_manager_build();
     $this->description = translation::get('Maximal file size: %%_value.', [
       'value' => locale::format_human_bytes($this->get_max_file_size())
     ]);
@@ -29,20 +31,70 @@ namespace effectivecore {
     return min($bytes_1, $bytes_2);
   }
 
-  function manager_build() {
+  ############
+  ### pool ###
+  ############
+
+  function pool_build(&$new_values) {
+    $validation_id = form::validation_id_get();
+    $pool = temporary::select('files-'.$validation_id) ?: [];
+    $name = rtrim($this->child_select('element')->attribute_select('name'), '[]');
+    if (!isset($pool[$name]))
+               $pool[$name] = [];
+    $pool_count_0 = count($pool[$name]);
+  # move uploaded files to "dynamic/tmp" directory and adding to the pool
+    foreach ($new_values as $c_new_value) {
+      if (is_uploaded_file($c_new_value->tmp_name)) {
+        $c_file = new file($c_new_value->tmp_name);
+        $c_hash = $c_file->get_hash();
+        if ($c_file->move_uploaded(dir_dynamic.'tmp/', $c_hash)) {
+          $c_new_value->tmp_name = $c_file->get_path();
+          $c_new_value->name = factory::filter_file_name($c_new_value->name);
+          $c_new_value->type = factory::filter_mime_type($c_new_value->type);
+          $pool[$name][$c_hash] = $c_new_value;
+        }
+      }
+    }
+  # deleting selected files
+    $delete_items = isset($_POST['manager_delete_'.rtrim($name, '[]')]) ? factory::array_values_map_to_keys(
+                          $_POST['manager_delete_'.rtrim($name, '[]')]) : [];
+    foreach ($pool[$name] as $c_hash => $c_file_info) {
+      if (isset($delete_items[$c_hash])) {
+        unlink($pool[$name][$c_hash]->tmp_name);
+         unset($pool[$name][$c_hash]);
+      }
+    }
+  # save the pool
+    if (count($pool[$name]) ||
+       (count($pool[$name]) == 0 && $pool_count_0 > 0)) {
+      temporary::update('files-'.$validation_id, $pool);
+    }
+  # organize the pool manager
+    foreach ($pool[$name] as $c_hash => $c_file_info) {
+      $this->pool_manager_insert_action($c_file_info, $c_hash);
+    }
+  # reflect pool to new_values
+    $new_values = $pool[$name];
+  }
+
+  ####################
+  ### pool manager ###
+  ####################
+
+  function pool_manager_build() {
     $this->child_insert(new form_container_checkboxes(), 'manager');
     $this->child_select('manager')->build();
   }
 
-  function manager_insert_action($info, $hash) {
-    $full_name = $this->child_select('element')->attribute_select('name');
+  function pool_manager_insert_action($info, $hash) {
+    $element_name = $this->child_select('element')->attribute_select('name');
     $this->child_select('manager')->input_insert(
-      translation::get('delete file: %%_name', ['name' => $info->name]), ['name' => 'manager_delete_'.$full_name, 'value' => $hash]
+      translation::get('delete file: %%_name', ['name' => $info->name]), ['name' => 'manager_delete_'.$element_name, 'value' => $hash]
     );
   }
 
-  function manager_clean() {
-    $this->manager_build();
+  function pool_manager_clean() {
+    $this->pool_manager_build();
   }
 
 }}

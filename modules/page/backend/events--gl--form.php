@@ -171,8 +171,7 @@ namespace effectivecore {
         # input[type=file] validation:
         # ─────────────────────────────────────────────────────────────────────
         if ($c_field instanceof form_field_file) {
-            $delete_values = isset($values['manager_delete_'.$c_name]) ? factory::array_values_map_to_keys($values['manager_delete_'.$c_name]) : [];
-            static::_validate_field_file($form, $c_field, $c_element, $c_npath, $c_name, $values[$c_name], $delete_values);
+            static::_validate_field_file($form, $c_field, $c_element, $c_npath, $c_name, $values[$c_name]);
           }
 
         # input[type=checkbox|radio] validation:
@@ -259,7 +258,7 @@ namespace effectivecore {
   ### _validate_field_file ###
   ############################
 
-  static function _validate_field_file($form, $field, $element, $npath, $name, &$new_values, $delete_values) {
+  static function _validate_field_file($form, $field, $element, $npath, $name, &$new_values) {
     $title = translation::get(
       $field->title
     );
@@ -299,43 +298,9 @@ namespace effectivecore {
       );
     }
 
-  # process the file/files
+  # build the pool with pool manager
   # ─────────────────────────────────────────────────────────────────────
-    $validation_id = form::validation_id_get();
-    $stack = temporary::select('files-'.$validation_id) ?: [];
-    if (!isset($stack[$name]))
-               $stack[$name] = [];
-    $stack_count_0 = count($stack[$name]);
-  # add new files to stack
-    foreach ($new_values as $c_new_value) {
-      if (is_uploaded_file($c_new_value->tmp_name)) {
-        $c_file = new file($c_new_value->tmp_name);
-        if ($c_file->move_uploaded(dir_dynamic.'tmp/', $c_file->get_hash())) {
-          $c_new_value->tmp_name = $c_file->get_path();
-          $c_new_value->name = file::name_make_safe($c_new_value->name);
-          $c_new_value->type = filter_var($c_new_value->type, FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '%^[a-z]{1,20}/[a-z0-9\-\+\.]{1,100}$%i']]);
-          $stack[$name][$c_file->get_hash()] = $c_new_value;
-        }
-      }
-    }
-  # delete old files from stack
-    foreach ($stack[$name] as $c_hash => $c_file_info) {
-      if (isset($delete_values[$c_hash])) {
-        unlink($stack[$name][$c_hash]->tmp_name);
-         unset($stack[$name][$c_hash]);
-      }
-    }
-  # save stack
-    if (count($stack[$name]) ||
-       (count($stack[$name]) == 0 && $stack_count_0 > 0)) {
-      temporary::update('files-'.$validation_id, $stack);
-    }
-  # fill the manager
-    foreach ($stack[$name] as $c_hash => $c_file_info) {
-      $field->manager_insert_action($c_file_info, $c_hash);
-    }
-  # reflect stack to new_values
-    $new_values = $stack[$name];
+    $field->pool_build($new_values);
 
   # check required
   # ─────────────────────────────────────────────────────────────────────
@@ -539,7 +504,7 @@ namespace effectivecore {
       }
       if (strlen($new_value)) {
         foreach ($emails as $c_email) {
-          if (filter_var($c_email, FILTER_VALIDATE_EMAIL) == false) {
+          if (factory::filter_email($c_email) == false) {
             $form->add_error($npath.'/element',
               translation::get('Field "%%_title" contains an incorrect email address!', ['title' => $title])
             );
@@ -600,7 +565,7 @@ namespace effectivecore {
               }
             }
           # cleaning the manager
-            $c_field->manager_clean();
+            $c_field->pool_manager_clean();
           }
 
         }
