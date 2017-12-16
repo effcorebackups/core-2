@@ -11,6 +11,12 @@ namespace effectivecore {
   public $tag_name = 'x-field';
   public $title_tag_name = 'label';
 
+  function get_element_name($trim = true) {
+    $element = $this->child_select('element');
+    return $trim ? rtrim($element->attribute_select('name'), '[]') :
+                         $element->attribute_select('name');
+  }
+
   function render() {
     $element = $this->child_select('element');
     if ($element instanceof node_simple && $element->attribute_select('disabled')) $this->attribute_insert('class', ['disabled' => 'disabled']);

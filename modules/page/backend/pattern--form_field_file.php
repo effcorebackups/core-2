@@ -38,7 +38,7 @@ namespace effectivecore {
   function pool_build(&$new_values) {
     $validation_id = form::validation_id_get();
     $pool = temporary::select('files-'.$validation_id) ?: [];
-    $name = rtrim($this->child_select('element')->attribute_select('name'), '[]');
+    $name = $this->get_element_name();
     if (!isset($pool[$name]))
                $pool[$name] = [];
     $pool_count_0 = count($pool[$name]);
@@ -56,8 +56,8 @@ namespace effectivecore {
       }
     }
   # deleting selected files
-    $delete_items = isset($_POST['manager_delete_'.rtrim($name, '[]')]) ? factory::array_values_map_to_keys(
-                          $_POST['manager_delete_'.rtrim($name, '[]')]) : [];
+    $delete_items = isset($_POST['manager_delete_'.$name]) ? factory::array_values_map_to_keys(
+                          $_POST['manager_delete_'.$name]) : [];
     foreach ($pool[$name] as $c_hash => $c_file_info) {
       if (isset($delete_items[$c_hash])) {
         unlink($pool[$name][$c_hash]->tmp_name);
