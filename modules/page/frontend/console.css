@@ -8,7 +8,7 @@
 
   x-console table.logs tr.autoload {background-color: papayawhip}
   x-console table.logs tr.file     {background-color: aliceblue}
-  x-console table.logs tr.event    {background-color: mistyrose}
+  x-console table.logs tr.event    {background-color: lavender}
   x-console table.logs tr.storage  {background-color: honeydew}
   
   x-console table.logs tr.query td.name {font-size: .9em}

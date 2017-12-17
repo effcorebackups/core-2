@@ -44,6 +44,7 @@
   x-messages ul.warning {background-color: %%_color_warning}
   x-messages ul li {margin: 0 0 0 15px; padding: 0}
   x-messages ul li:only-child {margin: 0; list-style: none}
+  x-messages a {color: white}
 
   /* blocks */
   x-block {display: block}

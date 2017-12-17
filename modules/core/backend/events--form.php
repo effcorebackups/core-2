@@ -42,6 +42,8 @@ namespace effectivecore\modules\core {
     switch ($form->clicked_button_name) {
       case 'install':
         if (empty($values['driver'][0])) {
+          $form->add_error('storage/is_mysql/element');
+          $form->add_error('storage/is_sqlite/element');
           $form->add_error(null, 'Driver is not selected!');
           return;
         }
@@ -57,7 +59,7 @@ namespace effectivecore\modules\core {
                                        translation::get('Message from storage: %%_message', ['message' => strtolower($test['message'])]));
               }
               break;
-            default:
+            case 'mysql':
               $test = storage::get('main')->test($values['driver'][0], (object)[
                 'host_name'    => $values['host_name'][0],
                 'port'         => $values['port'][0],
@@ -92,7 +94,7 @@ namespace effectivecore\modules\core {
             $params->credentials->file_name    = $values['file_name'][0];
             $params->table_prefix              = $values['table_prefix'][0];
             break;
-          default:
+          case 'mysql':
             $params = new \stdClass;
             $params->driver = $values['driver'][0];
             $params->credentials = new \stdClass;
