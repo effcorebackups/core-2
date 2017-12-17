@@ -5,7 +5,6 @@
   ##################################################################
 
 namespace effectivecore {
-          use \effectivecore\console as console;
           abstract class cache extends \effectivecore\dynamic {
 
   static $type = 'cache';

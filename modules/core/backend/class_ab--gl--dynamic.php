@@ -5,7 +5,6 @@
   ##################################################################
 
 namespace effectivecore {
-          use \effectivecore\message as message;
           abstract class dynamic {
 
   static $type = 'data';
@@ -34,7 +33,7 @@ namespace effectivecore {
     if ($info) static::$info[$name] = $info;
     if (is_writable($file->get_dirs()) && ((
         is_writable($file->get_path()) && $file->is_exist()) ||
-                    $file->is_exist() == false)) {
+                                          $file->is_exist() == false)) {
       $file->set_data(
         "<?php".nl.nl."namespace effectivecore { # ".static::$type." for ".$name.nl.nl.($info ?
            factory::data_export($info, '  '.factory::class_get_short_name(static::class).'::$info[\''.$name.'\']') : '').

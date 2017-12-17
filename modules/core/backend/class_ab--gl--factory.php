@@ -5,8 +5,6 @@
   ##################################################################
 
 namespace effectivecore {
-          use \effectivecore\cache as cache;
-          use \effectivecore\console as console;
           abstract class factory {
 
   static $cache;
@@ -239,16 +237,16 @@ namespace effectivecore {
     return filter_var($value, FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '%^[a-z]{1,20}/[a-z0-9\-\+\.]{1,100}$%i']]);
   }
 
-  static function filter_hash($value, $lenght = 32) { # 32 - md5 | 40 - sha1 | ...
-    return filter_var($value, FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '%^[0-9a-f]{'.$lenght.'}$%']]);
+  static function filter_hash($value, $lenght = 32) {
+    return filter_var($value, FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '%^[0-9a-f]{'.$lenght.'}$%']]); # 32 - md5 | 40 - sha1 | ...
   }
 
   static function filter_session_id($value) {
-    return static::filter_hash($value);
+    return filter_var($value, FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '%^[0-9a-f]{32}$%']]);
   }
 
   static function filter_validation_id($value) {
-    return static::filter_hash($value, 48);
+    return filter_var($value, FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '%^[0-9a-f]{48}$%']]);
   }
 
   static function filter_file_name($value) {

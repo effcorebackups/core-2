@@ -5,8 +5,6 @@
   ##################################################################
 
 namespace effectivecore {
-          use \effectivecore\locale as locale;
-          use \effectivecore\translation as translation;
           abstract class console {
 
   static $data = [];

@@ -49,8 +49,11 @@ namespace effectivecore {
           );
         }
       } else {
+        $path = (new file(dynamic::$directory))->get_path_relative();
+        $link = (new markup('a', ['href' => '/installation'], 'Installation'))->render();
         message::insert(
-          translation::get('Credentials for storage %%_id was not setted!', ['id' => $this->id]), 'warning'
+          translation::get('Credentials for storage %%_id was not setted!', ['id' => $this->id]).br.
+          translation::get('Restore the storage credentials in "%%_path" dirrectory or reinstall this system on the page: %%_link', ['path' => $path, 'link' => $link]), 'warning'
         );
       }
     }

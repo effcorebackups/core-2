@@ -5,8 +5,6 @@
   ##################################################################
 
 namespace effectivecore {
-          use \effectivecore\timer as timer;
-          use \effectivecore\console as console;
           use \effectivecore\modules\storage\storage as storage;
           abstract class event {
 

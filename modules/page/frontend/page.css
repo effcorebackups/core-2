@@ -3,8 +3,7 @@
   body {margin: 0; padding: 0 40px; font-family: 'Arial'; font-size: 15px; line-height: 1.5em; color: %%_color; background: white}
 
   /* page sizes */
-  x-head      {display: block; max-width: 800px; margin: 0 auto}
-  x-body      {display: block; max-width: 800px; margin: 0 auto; min-height: 200px}
+  x-grid      {display: block; max-width: 800px; margin: 0 auto; min-height: 200px}
   x-copyright {display: block; max-width: 800px; margin: 0 auto; padding: 50px 0; text-align: center; font-size: .8em; font-style: normal}
 
   /* headers */
@@ -22,20 +21,20 @@
   .hidden {display: none}
 
   /* table */
-  table {border-collapse: collapse; width: 100%; margin: 20px 0}
-  table thead {border-bottom: 5px solid %%_color_bg}
-  table thead th {padding: 12px 15px; font-weight: normal; font-size: 1.2em; text-align: left}
-  table tbody {background: white}
-  table td {padding: 12px 15px}
-  table tr:nth-child(even) td {background-color: %%_color_table_even_bg}
-  table tr:nth-last-child(1) td {border-bottom: 1px solid %%_color_border}
-  table tr td:empty {color: %%_color_table_noitems}
-  table tr td:empty:after {content: "%%_text_no_items"}
+  x-grid table {border-collapse: collapse; width: 100%; margin: 20px 0}
+  x-grid table thead {border-bottom: 5px solid %%_color_bg}
+  x-grid table thead th {padding: 12px 15px; font-weight: normal; font-size: 1.2em; text-align: left}
+  x-grid table tbody {background: white}
+  x-grid table td {padding: 12px 15px}
+  x-grid table tr:nth-child(even) td {background-color: %%_color_table_even_bg}
+  x-grid table tr:nth-last-child(1) td {border-bottom: 1px solid %%_color_border}
+  x-grid table tr td:empty {color: %%_color_table_noitems}
+  x-grid table tr td:empty:after {content: "%%_text_no_items"}
 
   /* actions */
-  ul.actions,
-  ul.actions li {margin: 0; padding: 0; list-style: none}
-  ul.actions li {font-size: .9em}
+  x-grid ul.actions,
+  x-grid ul.actions li {margin: 0; padding: 0; list-style: none}
+  x-grid ul.actions li {font-size: .9em}
 
   /* messages */
   x-messages {display: block; margin: 50px auto}
