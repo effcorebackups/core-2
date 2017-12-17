@@ -10,12 +10,12 @@ namespace effectivecore {
   static $data = [];
   static $information = [];
 
-  static function add_log($object, $action, $description = '', $values = '', $time = 0, $args = []) {
+  static function add_log($object, $action, $description = '', $value = '', $time = 0, $args = []) {
     static::$data[] = [
       'object'      => $object,
       'action'      => $action,
       'description' => $description,
-      'values'      => $values,
+      'value'       => $value,
       'time'        => $time,
       'args'        => $args,
     ];
@@ -40,13 +40,16 @@ namespace effectivecore {
     $thead = [['Time', 'Object', 'Action', 'Description', 'Val.']];
     $tbody = [];
     foreach (static::select_all_logs() as $c_log) {
-      $row_class = factory::to_css_class($c_log['object']);
-      $tbody[] = new table_body_row(['class' => [$row_class => $row_class]], [
+      $c_row_class = factory::to_css_class($c_log['object']);
+      $c_value_class = $c_log['value'] === 'error' ?
+        ['value' => 'value', 'value-error' => 'value-error'] :
+        ['value' => 'value'];
+      $tbody[] = new table_body_row(['class' => [$c_row_class => $c_row_class]], [
         new table_body_row_cell(['class' => ['time'        => 'time']],        locale::format_msecond($c_log['time'])),
         new table_body_row_cell(['class' => ['object'      => 'object']],      translation::get($c_log['object'],      $c_log['args'])),
         new table_body_row_cell(['class' => ['action'      => 'action']],      translation::get($c_log['action'],      $c_log['args'])),
         new table_body_row_cell(['class' => ['description' => 'description']], translation::get($c_log['description'], $c_log['args'])),
-        new table_body_row_cell(['class' => ['values'      => 'values']],      $c_log['values'])
+        new table_body_row_cell(['class' => $c_value_class],                   translation::get($c_log['value']))
       ]);
     }
     return (

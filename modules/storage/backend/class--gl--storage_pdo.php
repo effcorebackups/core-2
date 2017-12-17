@@ -106,16 +106,16 @@ namespace effectivecore {
       $this->queries[] = $query;
       event::start('on_query_before', 'pdo', [&$this, &$query]);
       $result = $this->connection->prepare($this->query_to_string($query));
-      $result->execute($this->args);
-      $errors = $result->errorInfo();
+      if ($result) $result->execute($this->args);
+      $errors = $result ? $result->errorInfo() : ['pdo prepare return the false', 'no', 'no'];
       event::start('on_query_after', 'pdo', [&$this, &$query, &$result, &$errors]);
       $this->args = [];
       if ($errors !== ['00000', null, null]) {
         message::insert(
-          'Query error! '.br.
-          'sqlstate: '.         $errors[0].br.
-          'driver error code: '.$errors[1].br.
-          'driver error text: '.$errors[2], 'error'
+          translation::get('Query error!').br.
+          translation::get('sql state: %%_state', ['state' => translation::get($errors[0])]).br.
+          translation::get('driver error code: %%_code', ['code' => translation::get($errors[1])]).br.
+          translation::get('driver error text: %%_text', ['text' => translation::get($errors[2])]), 'error'
         );
         return null;
       }

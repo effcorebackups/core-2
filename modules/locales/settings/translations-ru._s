@@ -53,6 +53,8 @@ translations
   - Demo: Демо
   - Description: Описание
   - Develop: Разработка
+  - driver error code\: %%_code: код ошибки драйвера: %%_code
+  - driver error text\: %%_text: текст ошибки драйвера: %%_text
   - Driver is not selected!: Драйвер не выбран!
   - Driver: Драйвер
   - Dynamic block: Динамический блок
@@ -64,6 +66,7 @@ translations
   - Enable cookies before login.: Включите cookies до начала входа в систему.
   - Entity %%_name was installed.: Сущность %%_name была установлена.
   - Entity %%_name was not installed!: Сущность %%_name не была установлена!
+  - error: ошибка
   - event system was initialized: система событий была инициализирована
   - event: событие
   - Event: Событие
@@ -144,17 +147,21 @@ translations
   - Nick: Ник
   - no items: нет элементов
   - No: Нет
+  - no: нет
   - Number: Число
   - Object: Объект
+  - ok: ок
   - Page: Страница
   - Parameter: Параметр
   - Password hash: Хеш пароля
   - Password: Пароль
   - Path to file: Путь к файлу
   - Path: Путь
+  - pdo prepare return the false: pdo prepare вернул false
   - PHP PDO driver for %%_name is not available.: PHP PDO драйвер для %%_name не доступен.
   - PHP PDO extension is not available.: PHP PDO расширение не доступно.
   - Queries: Запросы
+  - Query error!: Ошибка запроса!
   - query: запрос
   - Radios (macro): Переключатели (макро)
   - Radios: Переключатели
@@ -177,6 +184,7 @@ translations
   - Server load (sys_getloadavg): Загр. серв. (sys_getloadavg)
   - set: установка
   - Settings cache was rebuilded.: Кэш настроек был перестроен.
+  - sql state\: %%_state: sql состояние: %%_state
   - state: состояние
   - State: Состояние
   - State.: Сост.
@@ -237,3 +245,4 @@ translations
   - Wellcome to our site!: Добро пожаловать на наш сайт!
   - Write the characters from the picture.: Напишите символы с картинки.
   - Yes: Да
+  - yes: да
