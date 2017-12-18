@@ -5,6 +5,7 @@
   ##################################################################
 
 namespace effectivecore {
+          const session_id_expire = 60 * 60 * 24 * 30;
           abstract class session {
 
   static function select() {
@@ -13,9 +14,7 @@ namespace effectivecore {
       $session = (new instance('session', [
         'id' => $session_id
       ]))->select();
-      if (!$session ||
-          ($session && $session->ip_address !== $_SERVER['REMOTE_ADDR']) ||
-          ($session && $session->user_agent_hash !== md5($_SERVER['HTTP_USER_AGENT']))) {
+      if (!$session) {
         static::id_regenerate('a');
         message::insert('invalid session was deleted!', 'warning');
         return null;
@@ -49,7 +48,8 @@ namespace effectivecore {
   ### session_id functions ###
   ############################
 
-  static function id_regenerate($type, $expire = 60 * 60 * 24 * 30) {
+  static function id_regenerate($type, $expire = null) {
+    $expire = $expire !== null ? $expire : session_id_expire;
     $hex_type = $type; # 'a' - anonymous user | 'f' - authenticated user
     $hex_expire = dechex(time() + $expire);
     $hex_ip = factory::ip_to_hex($_SERVER['REMOTE_ADDR']);
@@ -78,10 +78,12 @@ namespace effectivecore {
     if (factory::filter_hash($value, 33)) {
       $type = substr($value, 0, 1);
       $expire = hexdec(substr($value, 1, 8));
-      $ip = factory::hex_to_ip(substr($value, 9, 8));
-      $uagent_hash_8 = substr($value, 17, 8);
-      $random = hexdec(substr($value, 25, 8));
-      if ($ip === $_SERVER['REMOTE_ADDR'] &&
+      $ip = factory::hex_to_ip(substr($value, 8 + 1, 8));
+      $uagent_hash_8 = substr($value, 16 + 1, 8);
+      $random = hexdec(substr($value, 24 + 1, 8));
+      if ($expire > time()                         &&
+          $expire < time() + session_id_expire + 1 &&
+          $ip === $_SERVER['REMOTE_ADDR']          &&
           $uagent_hash_8 === substr(md5($_SERVER['HTTP_USER_AGENT']), 0, 8)) {
         return true;
       }
