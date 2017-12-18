@@ -75,7 +75,7 @@ namespace effectivecore {
   }
 
   static function id_check($value) {
-    if (factory::filter_session_id($value)) {
+    if (factory::filter_hash($value, 33)) {
       return true;
     }
   }

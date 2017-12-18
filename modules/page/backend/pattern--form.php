@@ -144,7 +144,7 @@ namespace effectivecore {
   }
 
   static function validation_id_check($value) {
-    if (factory::filter_validation_id($value)) {
+    if (factory::filter_hash($value, 24)) {
       $created = hexdec(substr($value, 0, 8));
       $ip = factory::hex_to_ip(substr($value, 8, 8));
       $random = hexdec(substr($value, 16));

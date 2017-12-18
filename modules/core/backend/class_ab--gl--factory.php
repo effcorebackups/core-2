@@ -241,14 +241,6 @@ namespace effectivecore {
     return filter_var($value, FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '%^[0-9a-f]{'.$lenght.'}$%']]); # 32 - md5 | 40 - sha1 | ...
   }
 
-  static function filter_session_id($value) {
-    return filter_var($value, FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '%^[0-9a-f]{33}$%']]);
-  }
-
-  static function filter_validation_id($value) {
-    return filter_var($value, FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '%^[0-9a-f]{24}$%']]);
-  }
-
   static function filter_file_name($value) {
     $return = preg_replace_callback('%(?<char>[^a-z0-9_.\-])%uiS', function($m) {
       if ($m['char'] == ' ') return '-';
