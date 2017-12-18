@@ -128,10 +128,12 @@ namespace effectivecore {
   static function validation_id_generate() {
     $hex_created = dechex(time());
     $hex_ip = factory::ip_to_hex($_SERVER['REMOTE_ADDR']);
+    $hex_uagent_hash_8 = substr(md5($_SERVER['HTTP_USER_AGENT']), 0, 8);
     $hex_random = str_pad(dechex(rand(0, 0xffffffff)), 8, '0', STR_PAD_LEFT);
-    return $hex_created. # strlen == 8
-           $hex_ip.      # strlen == 8
-           $hex_random;  # strlen == 8
+    return $hex_created.       # strlen == 8
+           $hex_ip.            # strlen == 8
+           $hex_uagent_hash_8. # strlen == 8
+           $hex_random;        # strlen == 8
   }
 
   static function validation_id_get() {
@@ -144,13 +146,15 @@ namespace effectivecore {
   }
 
   static function validation_id_check($value) {
-    if (factory::filter_hash($value, 24)) {
+    if (factory::filter_hash($value, 32)) {
       $created = hexdec(substr($value, 0, 8));
       $ip = factory::hex_to_ip(substr($value, 8, 8));
-      $random = hexdec(substr($value, 16, 8));
-      if ($created < time()           &&
-          $created > time() - 60 * 60 &&
-          $ip === $_SERVER['REMOTE_ADDR']) {
+      $uagent_hash_8 = substr($value, 16, 8);
+      $random = hexdec(substr($value, 24, 8));
+      if ($created < time()               &&
+          $created > time() - 60 * 60     &&
+          $ip === $_SERVER['REMOTE_ADDR'] &&
+          $uagent_hash_8 === substr(md5($_SERVER['HTTP_USER_AGENT']), 0, 8)) {
         return true;
       }
     }
