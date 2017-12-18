@@ -5,9 +5,9 @@
   ##################################################################
 
 namespace effectivecore\modules\user {
+          use \effectivecore\user as user;
           use \effectivecore\factory as factory;
           use \effectivecore\instance as instance;
-          use \effectivecore\modules\user\user as user;
           abstract class events_access extends \effectivecore\events_access {
 
   static function on_check_access_user_delete($page, $id) {

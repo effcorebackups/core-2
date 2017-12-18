@@ -6,8 +6,8 @@
 
 namespace effectivecore\modules\user {
           use \effectivecore\url as url;
+          use \effectivecore\user as user;
           use \effectivecore\instance as instance;
-          use \effectivecore\modules\user\user as user;
           abstract class events_token extends \effectivecore\events_token {
 
   static function on_replace($match, $args = []) {

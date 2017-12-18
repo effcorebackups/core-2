@@ -7,6 +7,7 @@
 namespace effectivecore\modules\user {
           use const \effectivecore\br;
           use \effectivecore\url as url;
+          use \effectivecore\user as user;
           use \effectivecore\page as page;
           use \effectivecore\file as file;
           use \effectivecore\entity as entity;
@@ -15,7 +16,6 @@ namespace effectivecore\modules\user {
           use \effectivecore\message as message;
           use \effectivecore\instance as instance;
           use \effectivecore\translation as translation;
-          use \effectivecore\modules\user\user as user;
           abstract class events_form extends \effectivecore\events_form {
 
   #########################

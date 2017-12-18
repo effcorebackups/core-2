@@ -4,9 +4,7 @@
   ### Copyright © 2017—2018 Maxim Rysevets. All rights reserved. ###
   ##################################################################
 
-namespace effectivecore\modules\user {
-          use \effectivecore\entity as entity;
-          use \effectivecore\instance as instance;
+namespace effectivecore {
           abstract class user {
 
   static $data;

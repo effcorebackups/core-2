@@ -5,7 +5,6 @@
   ##################################################################
 
 namespace effectivecore {
-          use \effectivecore\modules\user\user as user;
           abstract class access {
 
   static function check($access) {

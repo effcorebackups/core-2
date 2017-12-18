@@ -6,6 +6,7 @@
 
 namespace effectivecore\modules\user {
           use \effectivecore\url as url;
+          use \effectivecore\user as user;
           use \effectivecore\table as table;
           use \effectivecore\pager as pager;
           use \effectivecore\locale as locale;
@@ -13,7 +14,6 @@ namespace effectivecore\modules\user {
           use \effectivecore\entity as entity;
           use \effectivecore\factory as factory;
           use \effectivecore\instance as instance;
-          use \effectivecore\modules\user\user as user;
           abstract class events_page extends \effectivecore\events_page {
 
   static function on_show_block_roles($page) {
