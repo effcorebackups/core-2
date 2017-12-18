@@ -6,7 +6,6 @@
 
 namespace effectivecore {
           use \effectivecore\modules\user\user as user;
-          use \effectivecore\modules\user\access as access;
           use \effectivecore\modules\storage\storage as storage;
           class page {
 

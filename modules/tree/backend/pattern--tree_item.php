@@ -5,7 +5,6 @@
   ##################################################################
 
 namespace effectivecore {
-          use \effectivecore\modules\user\access as access;
           class tree_item extends \effectivecore\node {
 
   public $id;

@@ -4,7 +4,7 @@
   ### Copyright © 2017—2018 Maxim Rysevets. All rights reserved. ###
   ##################################################################
 
-namespace effectivecore\modules\user {
+namespace effectivecore {
           use \effectivecore\modules\user\user as user;
           abstract class access {
 
