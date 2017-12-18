@@ -4,15 +4,14 @@
   ### Copyright © 2017—2018 Maxim Rysevets. All rights reserved. ###
   ##################################################################
 
-namespace effectivecore\modules\storage {
-          use \effectivecore\storage_settings as settings;
+namespace effectivecore {
           abstract class storage {
 
   protected static $data;
 
   static function init() {
-    settings::init('storages');
-    foreach (settings::$data['storages'] as $c_storages) {
+    storage_settings::init('storages');
+    foreach (storage_settings::$data['storages'] as $c_storages) {
       foreach ($c_storages as $c_storage) {
         static::$data[$c_storage->id] = $c_storage;
       }

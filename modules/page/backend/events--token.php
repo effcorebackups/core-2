@@ -5,7 +5,7 @@
   ##################################################################
 
 namespace effectivecore\modules\page {
-          use \effectivecore\modules\storage\storage as storage;
+          use \effectivecore\storage as storage;
           abstract class events_token extends \effectivecore\events_token {
 
   static function on_color_get($match, $arg_1_num = null) {

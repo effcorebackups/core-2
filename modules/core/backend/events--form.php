@@ -9,8 +9,8 @@ namespace effectivecore\modules\core {
           use \effectivecore\url as url;
           use \effectivecore\event as event;
           use \effectivecore\message as message;
+          use \effectivecore\storage as storage;
           use \effectivecore\translation as translation;
-          use \effectivecore\modules\storage\storage as storage;
           abstract class events_form extends \effectivecore\events_form {
 
   ##########################

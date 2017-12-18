@@ -5,7 +5,6 @@
   ##################################################################
 
 namespace effectivecore {
-          use \effectivecore\modules\storage\storage as storage;
           class form_field_captcha extends \effectivecore\form_field {
 
   public $title = 'Captcha';

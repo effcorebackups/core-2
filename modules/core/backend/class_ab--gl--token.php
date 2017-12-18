@@ -5,7 +5,6 @@
   ##################################################################
 
 namespace effectivecore {
-          use \effectivecore\modules\storage\storage as storage;
           abstract class token {
 
   protected static $data;

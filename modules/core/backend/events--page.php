@@ -7,8 +7,8 @@
 namespace effectivecore\modules\core {
           use \effectivecore\table as table;
           use \effectivecore\locale as locale;
+          use \effectivecore\storage as storage;
           use \effectivecore\control_switcher as switcher;
-          use \effectivecore\modules\storage\storage as storage;
           abstract class events_page extends \effectivecore\events_page {
 
   static function on_show_modules($page) {
