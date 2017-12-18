@@ -76,7 +76,14 @@ namespace effectivecore {
 
   static function id_check($value) {
     if (factory::filter_hash($value, 33)) {
-      return true;
+      $type = substr($value, 0, 1);
+      $expire = hexdec(substr($value, 1, 8));
+      $ip = factory::hex_to_ip(substr($value, 9, 8));
+      $uagent_hash_8 = substr($value, 17, 8);
+      $random = hexdec(substr($value, 25, 8));
+      if ($ip === $_SERVER['REMOTE_ADDR']) {
+        return true;
+      }
     }
   }
 

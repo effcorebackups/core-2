@@ -147,7 +147,7 @@ namespace effectivecore {
     if (factory::filter_hash($value, 24)) {
       $created = hexdec(substr($value, 0, 8));
       $ip = factory::hex_to_ip(substr($value, 8, 8));
-      $random = hexdec(substr($value, 16));
+      $random = hexdec(substr($value, 16, 8));
       if ($created < time()           &&
           $created > time() - 60 * 60 &&
           $ip === $_SERVER['REMOTE_ADDR']) {
