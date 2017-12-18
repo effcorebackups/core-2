@@ -138,7 +138,7 @@ namespace effectivecore {
     if (static::validation_id_check(
           isset($_POST['validation_id']) ?
                 $_POST['validation_id'] : '')) {
-      return $_POST['validation_id']; } else {
+      return    $_POST['validation_id']; } else {
       return static::validation_id_generate();
     }
   }
