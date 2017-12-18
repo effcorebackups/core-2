@@ -5,7 +5,6 @@
   ##################################################################
 
 namespace effectivecore {
-          use \effectivecore\translation as translation;
           use \effectivecore\modules\storage\storage as storage;
           class form_container_palette extends \effectivecore\form_container_radios {
 

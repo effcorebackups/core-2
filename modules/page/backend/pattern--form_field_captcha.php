@@ -5,8 +5,6 @@
   ##################################################################
 
 namespace effectivecore {
-          use \effectivecore\entity as entity;
-          use \effectivecore\instance as instance;
           use \effectivecore\modules\storage\storage as storage;
           class form_field_captcha extends \effectivecore\form_field {
 
@@ -38,7 +36,7 @@ namespace effectivecore {
   #    user can overflow the storage if captcha_id will be a complex value
   #    for example: IP + user_agent (in this case user can falsify user_agent
   #    on each submit and this action will create a great variety of unique
-  #    captcha_id in the storage and make it overflowed)
+  #    captcha_id in the storage and will make it overflowed)
   # ─────────────────────────────────────────────────────────────────────
 
   static function id_get() {

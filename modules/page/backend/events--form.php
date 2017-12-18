@@ -5,7 +5,6 @@
   ##################################################################
 
 namespace effectivecore\modules\page {
-          use \effectivecore\markup;
           use \effectivecore\message as message;
           use \effectivecore\modules\storage\storage as storage;
           abstract class events_form extends \effectivecore\events_form {

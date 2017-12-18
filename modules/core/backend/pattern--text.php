@@ -5,7 +5,6 @@
   ##################################################################
 
 namespace effectivecore {
-          use \effectivecore\translation as translation;
           class text {
 
   public $text = '';

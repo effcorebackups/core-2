@@ -5,12 +5,6 @@
   ##################################################################
 
 namespace effectivecore {
-          use \effectivecore\token as token;
-          use \effectivecore\markup as markup;
-          use \effectivecore\locale as locale;
-          use \effectivecore\temporary as temporary;
-          use \effectivecore\translation as translation;
-          use \effectivecore\markup_simple as markup_simple;
           abstract class events_form {
 
   ###############

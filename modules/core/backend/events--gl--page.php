@@ -5,8 +5,6 @@
   ##################################################################
 
 namespace effectivecore {
-          use \effectivecore\token as token;
-          use \effectivecore\translation as translation;
           use \effectivecore\modules\user\user as user;
           use \effectivecore\modules\storage\storage as storage;
           abstract class events_page {
