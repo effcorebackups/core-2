@@ -81,7 +81,8 @@ namespace effectivecore {
       $ip = factory::hex_to_ip(substr($value, 9, 8));
       $uagent_hash_8 = substr($value, 17, 8);
       $random = hexdec(substr($value, 25, 8));
-      if ($ip === $_SERVER['REMOTE_ADDR']) {
+      if ($ip === $_SERVER['REMOTE_ADDR'] &&
+          $uagent_hash_8 === substr(md5($_SERVER['HTTP_USER_AGENT']), 0, 8)) {
         return true;
       }
     }
