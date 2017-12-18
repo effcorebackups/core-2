@@ -4,10 +4,7 @@
   ### Copyright © 2017—2018 Maxim Rysevets. All rights reserved. ###
   ##################################################################
 
-namespace effectivecore\modules\user {
-          use \effectivecore\factory as factory;
-          use \effectivecore\message as message;
-          use \effectivecore\instance as instance;
+namespace effectivecore {
           abstract class session {
 
   static function id_regenerate($sign, $expire = 60 * 60 * 24 * 30) {

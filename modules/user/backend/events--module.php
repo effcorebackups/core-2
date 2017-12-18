@@ -6,12 +6,12 @@
 
 namespace effectivecore\modules\user {
           use \effectivecore\entity as entity;
+          use \effectivecore\session as session;
           use \effectivecore\factory as factory;
           use \effectivecore\message as message;
           use \effectivecore\instance as instance;
           use \effectivecore\translation as translation;
           use \effectivecore\modules\user\user as user;
-          use \effectivecore\modules\user\session as session;
           abstract class events_module extends \effectivecore\events_module {
 
   static function on_start() {
