@@ -5,9 +5,6 @@
   ##################################################################
 
 namespace effectivecore {
-          use \effectivecore\event as event;
-          use \effectivecore\message as message;
-          use \effectivecore\factory as factory;
           class form extends \effectivecore\markup {
 
   # elements support:

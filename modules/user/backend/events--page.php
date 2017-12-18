@@ -11,8 +11,8 @@ namespace effectivecore\modules\user {
           use \effectivecore\locale as locale;
           use \effectivecore\markup as markup;
           use \effectivecore\entity as entity;
-          use \effectivecore\instance as instance;
           use \effectivecore\factory as factory;
+          use \effectivecore\instance as instance;
           use \effectivecore\modules\user\user as user;
           abstract class events_page extends \effectivecore\events_page {
 

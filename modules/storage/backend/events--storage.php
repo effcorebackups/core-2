@@ -7,7 +7,6 @@
 namespace effectivecore\modules\storage {
           use const \effectivecore\br;
           use \effectivecore\timer as timer;
-          use \effectivecore\factory as factory;
           use \effectivecore\console as console;
           abstract class events_storage {
 

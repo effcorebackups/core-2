@@ -5,14 +5,6 @@
   ##################################################################
 
 namespace effectivecore {
-          use \effectivecore\url as url;
-          use \effectivecore\timer as timer;
-          use \effectivecore\token as token;
-          use \effectivecore\locale as locale;
-          use \effectivecore\console as console;
-          use \effectivecore\message as message;
-          use \effectivecore\factory as factory;
-          use \effectivecore\translation as translation;
           use \effectivecore\modules\user\user as user;
           use \effectivecore\modules\user\access as access;
           use \effectivecore\modules\storage\storage as storage;

@@ -5,7 +5,6 @@
   ##################################################################
 
 namespace effectivecore {
-          use \effectivecore\translation as translation;
           class form_field extends \effectivecore\form_container {
 
   public $tag_name = 'x-field';

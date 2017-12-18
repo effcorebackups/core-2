@@ -5,10 +5,6 @@
   ##################################################################
 
 namespace effectivecore {
-          use \effectivecore\locale as locale;
-          use \effectivecore\factory as factory;
-          use \effectivecore\temporary as temporary;
-          use \effectivecore\translation as translation;
           class form_field_file extends \effectivecore\form_field {
 
   public $max_file_size;
