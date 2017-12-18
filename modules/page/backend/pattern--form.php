@@ -121,6 +121,45 @@ namespace effectivecore {
     ]), 'hidden_form_id');
   }
 
+  ###############################
+  ### validation_id functions ###
+  ###############################
+
+  static function validation_id_generate() {
+    $hex_created = dechex(time());
+    $hex_ip = factory::ip_to_hex($_SERVER['REMOTE_ADDR']);
+    $hex_random = str_pad(dechex(rand(0, 0xffffffff)), 8, '0', STR_PAD_LEFT);
+    return $hex_created. # strlen == 8
+           $hex_ip.      # strlen == 8
+           $hex_random;  # strlen == 8
+  }
+
+  static function validation_id_get() {
+    if (static::validation_id_check(
+          isset($_POST['validation_id']) ?
+                $_POST['validation_id'] : '')) {
+      return $_POST['validation_id']; } else {
+      return static::validation_id_generate();
+    }
+  }
+
+  static function validation_id_check($value) {
+    if (factory::filter_validation_id($value)) {
+      $created = hexdec(substr($value, 0, 8));
+      $ip = factory::hex_to_ip(substr($value, 8, 8));
+      $random = hexdec(substr($value, 16));
+      if ($created < time()           &&
+          $created > time() - 60 * 60 &&
+          $ip === $_SERVER['REMOTE_ADDR']) {
+        return true;
+      }
+    }
+  }
+
+  #######################################
+  ### get fields, $_POST, $_FILES ... ###
+  #######################################
+
   function fields_get() {
     $return = [];
     foreach ($this->child_select_all() as $c_npath => $c_child) {
@@ -129,23 +168,6 @@ namespace effectivecore {
       }
     }
     return $return;
-  }
-
-  static function validation_id_generate() {
-    return dechex(time()).factory::ip_to_hex($_SERVER['REMOTE_ADDR']).md5(rand(0, PHP_INT_MAX));
-  }
-
-  static function validation_id_get() {
-    $c_value = factory::filter_validation_id(
-      isset($_POST['validation_id']) ?
-            $_POST['validation_id'] : '');
-    if ($c_value == false ||
-        factory::hex_to_ip(substr($c_value, 8, 8)) != $_SERVER['REMOTE_ADDR'] ||
-                    hexdec(substr($c_value, 0, 8)) < time() - 60 * 60 ||
-                    hexdec(substr($c_value, 0, 8)) > time()) {
-      return static::validation_id_generate();
-    }
-    return $c_value;
   }
 
   static function values_get() {

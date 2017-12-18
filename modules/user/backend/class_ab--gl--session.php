@@ -7,9 +7,17 @@
 namespace effectivecore {
           abstract class session {
 
-  static function id_regenerate($sign, $expire = 60 * 60 * 24 * 30) {
-    $session_id = md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT'].rand(0, PHP_INT_MAX));
-    $session_id[0] = $sign; # a - anonymous user | f - authenticated user
+  static function id_regenerate($type, $expire = 60 * 60 * 24 * 30) {
+    $hex_type = $type; # 'a' - anonymous user | 'f' - authenticated user
+    $hex_expire = dechex(time() + $expire);
+    $hex_ip = factory::ip_to_hex($_SERVER['REMOTE_ADDR']);
+    $hex_uagent_hash_8 = substr(md5($_SERVER['HTTP_USER_AGENT']), 0, 8);
+    $hex_random = str_pad(dechex(rand(0, 0xffffffff)), 8, '0', STR_PAD_LEFT);
+    $session_id = $hex_type.          # strlen == 1
+                  $hex_expire.        # strlen == 8
+                  $hex_ip.            # strlen == 8
+                  $hex_uagent_hash_8. # strlen == 8
+                  $hex_random;        # strlen == 8
     setcookie('session_id', ($_COOKIE['session_id'] = $session_id), $expire ? time() + $expire : 0, '/');
     setcookie('cookies_is_on', 'true', $expire ? time() + $expire : 0, '/');
     return $session_id;
