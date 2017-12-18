@@ -31,12 +31,17 @@ namespace effectivecore {
     }
   }
 
+  # note:
+  # ─────────────────────────────────────────────────────────────────────
+  # 1. function id_get:
+  #    duplicates of captcha by IP - it's prevention from DDOS attacks -
+  #    user can overflow the storage if captcha_id will be a complex value
+  #    for example: IP + user_agent (in this case user can falsify user_agent
+  #    on each submit and this action will create a great variety of unique
+  #    captcha_id in the storage and make it overflowed)
+  # ─────────────────────────────────────────────────────────────────────
+
   static function id_get() {
-  # duplicates of captcha by IP is not an a problem - new captcha will generate again
-  # p.s. it's prevention for DOS attacks which can overflow the storage if we used
-  # more unique identifier than IP address, for example: IP + user_agent (in this situation
-  # client can falsify user_agent on each http request and this will create a great variety
-  # of unique client id)
     return $_SERVER['REMOTE_ADDR'];
   }
 
