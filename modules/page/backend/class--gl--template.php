@@ -18,10 +18,10 @@ namespace effectivecore {
       static::set_var($c_name, $c_value);
     }
   # find template
-    foreach (storage::get('settings')->select_group('templates') as $c_module_id => $c_templates) {
+    foreach (storage::get('files')->select_group('templates') as $c_module_id => $c_templates) {
       foreach ($c_templates as $c_name => $c_path) {
         if ($name == $c_name) {
-          $path = storage::get('settings')->select_group('module')[$c_module_id]->path.$c_path;
+          $path = storage::get('files')->select_group('module')[$c_module_id]->path.$c_path;
           $file = new file($path);
           $this->markup = $file->load(false);
           return $this;

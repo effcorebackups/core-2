@@ -10,7 +10,7 @@ namespace effectivecore {
   protected static $data;
 
   static function init() {
-    foreach (storage::get('settings')->select_group('languages') as $languages) {
+    foreach (storage::get('files')->select_group('languages') as $languages) {
       foreach ($languages as $c_language) {
         static::$data[$c_language->code] = $c_language;
       }

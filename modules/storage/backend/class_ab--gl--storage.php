@@ -10,8 +10,8 @@ namespace effectivecore {
   protected static $data;
 
   static function init() {
-    storage_settings::init('storages');
-    foreach (storage_settings::$data['storages'] as $c_storages) {
+    storage_files::init('storages');
+    foreach (storage_files::$data['storages'] as $c_storages) {
       foreach ($c_storages as $c_storage) {
         static::$data[$c_storage->id] = $c_storage;
       }

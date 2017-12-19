@@ -1,5 +1,5 @@
 storages
-- storage_sql_dpo|storage_pdo
+- storage_pdo_sql|storage_pdo
     id: main
-- storage_nosql_settings|storage_settings
-    id: settings
+- storage_files_nosql|storage_files
+    id: files

@@ -75,7 +75,7 @@ namespace effectivecore {
   protected static $data_raw;
 
   static function init() {
-    static::$data_raw = storage::get('settings')->select_group('entities');
+    static::$data_raw = storage::get('files')->select_group('entities');
     foreach (static::$data_raw as $c_entities) {
       foreach ($c_entities as $c_entity) {
         static::$data[$c_entity->name] = $c_entity;

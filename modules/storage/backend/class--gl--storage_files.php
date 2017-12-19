@@ -5,7 +5,7 @@
   ##################################################################
 
 namespace effectivecore {
-          class storage_settings {
+          class storage_files {
 
   static $data_orig;
   static $data = [];

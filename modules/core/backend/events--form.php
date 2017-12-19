@@ -106,8 +106,8 @@ namespace effectivecore\modules\core {
             $params->table_prefix              = $values['table_prefix'][0];
             break;
         }
-        storage::get('settings')->changes_register_action('core', 'insert', 'storages/storage/storage_sql_dpo', $params, false);
-        storage::get('settings')->changes_register_action('core', 'update', 'settings/core/key', sha1(rand(0, PHP_INT_MAX)));
+        storage::get('files')->changes_register_action('core', 'insert', 'storages/storage/storage_pdo_sql', $params, false);
+        storage::get('files')->changes_register_action('core', 'update', 'settings/core/key', sha1(rand(0, PHP_INT_MAX)));
         storage::rebuild();
         event::start('on_module_install');
         message::insert('Modules was installed.');

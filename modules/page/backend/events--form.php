@@ -14,7 +14,7 @@ namespace effectivecore\modules\page {
   ########################
 
   static function on_init_decoration($form, $fields) {
-    $decoration = storage::get('settings')->select_group('decoration');
+    $decoration = storage::get('files')->select_group('decoration');
     $fields['colors/color_id'   ]->default_set($decoration['page']->color_id);
     $fields['colors/color_bg_id']->default_set($decoration['page']->color_bg_id);
   }
@@ -26,13 +26,13 @@ namespace effectivecore\modules\page {
   static function on_submit_decoration($form, $fields, &$values) {
     switch ($form->clicked_button_name) {
       case 'save':
-        storage::get('settings')->changes_register_action('page', 'update', 'decoration/page/color_id',    $values['color_id'][0], false);
-        storage::get('settings')->changes_register_action('page', 'update', 'decoration/page/color_bg_id', $values['color_bg_id'][0]);
+        storage::get('files')->changes_register_action('page', 'update', 'decoration/page/color_id',    $values['color_id'][0], false);
+        storage::get('files')->changes_register_action('page', 'update', 'decoration/page/color_bg_id', $values['color_bg_id'][0]);
         message::insert('Changes was saved.');
         break;
       case 'restore':
-        storage::get('settings')->changes_unregister_action('page', 'update', 'decoration/page/color_id');
-        storage::get('settings')->changes_unregister_action('page', 'update', 'decoration/page/color_bg_id');
+        storage::get('files')->changes_unregister_action('page', 'update', 'decoration/page/color_id');
+        storage::get('files')->changes_unregister_action('page', 'update', 'decoration/page/color_bg_id');
       # message::insert('Changes was removed.');
         message::insert('UNDER CONSTRUCTION'); # @todo: make functionality
         break;
