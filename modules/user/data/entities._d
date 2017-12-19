@@ -51,7 +51,7 @@ entities
       id_user
         type: integer
         not_null: true
-      is_ip_check
+      remember_mode
         type: integer
         not_null: true
         default: 0

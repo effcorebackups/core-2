@@ -206,7 +206,7 @@ namespace effectivecore {
                    '(?<name>.+?)'.
                    '(?<delimiter>(?<!\\\\): |(?<!\\\\)\\||$)'.
                    '(?<value>.*)$%S', $c_line, $matches);
-      if ($matches['name']) {
+      if (strlen($matches['name'])) {
         $c_depth = intval(strlen($matches['indent'].$matches['prefix']) / 2);
         $matches['name'] = str_replace(['\\:', '\\|'], [':', '|'], $matches['name']);
       # define each value
