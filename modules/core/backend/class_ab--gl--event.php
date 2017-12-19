@@ -38,8 +38,8 @@ namespace effectivecore {
           timer::tap('event call: '.$c_event->for);
           $return[$c_event->handler][] = $c_return = call_user_func_array($c_event->handler, $args);
           timer::tap('event call: '.$c_event->for);
-          console::add_log(
-            'event', 'call', ltrim($c_event->handler, '\\'), $c_return ? 'ok' : '-', timer::get_period('event call: '.$c_event->for, -1, -2)
+          console::add_log('event', 'call', ltrim($c_event->handler, '\\'), $c_return ? 'ok' : '-',
+            timer::get_period('event call: '.$c_event->for, -1, -2)
           );
         }
       }

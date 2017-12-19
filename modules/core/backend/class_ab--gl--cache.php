@@ -12,7 +12,7 @@ namespace effectivecore {
 
   static function update($name, $data, $info = null) {
     if (parent::update($name, $data, $info)) {
-      console::add_log('storage', 'cache', 'Cache for "'.$name.'" was rebuilded.', 'ok', 0);
+      console::add_log('storage', 'cache', 'cache for '.$name.' was rebuilded', 'ok', 0);
     }
   }
 

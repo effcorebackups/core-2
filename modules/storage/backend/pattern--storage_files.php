@@ -12,10 +12,17 @@ namespace effectivecore {
   static $changes_dynamic;
 
   static function init($group) {
-    console::add_log('storage', 'cache', 'storage %%_id cache for group %%_group will be load', 'ok', 0, ['id' => 'settings', 'group' => $group]);
-    $cache = cache::select('settings--'.$group);
+    timer::tap('storage init');
+    $cache = cache::select('data--'.$group);
     if ($cache) static::$data[$group] = $cache;
-    else        static::settings_cache_rebuild();
+    else        static::data_cache_rebuild();
+    timer::tap('storage init');
+    console::add_log(
+      'storage',
+      'init',
+      'storage %%_id was initialized',
+      'ok', timer::get_period('storage init', -1, -2), ['id' => $group.'|storage_files']
+    );
   }
 
   ########################
@@ -35,33 +42,33 @@ namespace effectivecore {
     return factory::npath_get_object(implode('/', $npath_parts), $group_data);
   }
 
-  ################
-  ### settings ###
-  ################
+  ######################
+  ### data functions ###
+  ######################
 
-  static function settings_cache_rebuild() {
-  # init original settings
-    $data_orig = cache::select('settings_original');
+  static function data_cache_rebuild() {
+  # init original data
+    $data_orig = cache::select('data_original');
     if (!$data_orig) {
-      static::$data_orig = $data_orig = static::settings_find_static();
-      cache::update('settings_original', $data_orig, ['build' => factory::datetime_get()]);
+      static::$data_orig = $data_orig = static::data_find_static();
+      cache::update('data_original', $data_orig, ['build' => factory::datetime_get()]);
     }
   # init dynamic and static changes
     $changes_d = dynamic::select('changes') ?: [];
     $changes_s = isset($data_orig['changes']) ? $data_orig['changes'] : [];
-  # apply all changes to original settings and get final settings
+  # apply all changes to original data and get final data
     $data = factory::array_deep_clone($data_orig);
-    static::changes_apply_to_settings($changes_d, $data);
-    static::changes_apply_to_settings($changes_s, $data);
+    static::changes_apply_to_data($changes_d, $data);
+    static::changes_apply_to_data($changes_s, $data);
     unset($data['changes']);
   # save cache
     foreach ($data as $group => $slice) {
-      cache::update('settings--'.$group, $slice);
+      cache::update('data--'.$group, $slice);
       static::$data[$group] = $slice;
     }
   }
 
-  static function settings_find_static() {
+  static function data_find_static() {
     $return = [];
     $files = file::select_all(dir_modules, '%^.*\._s$%');
     $modules_path = [];
@@ -78,7 +85,7 @@ namespace effectivecore {
           break;
         }
       }
-      $c_parsed = static::settings_to_code($c_file->load(), $c_file->get_path_relative());
+      $c_parsed = static::data_to_code($c_file->load(), $c_file->get_path_relative());
       foreach ($c_parsed as $c_type => $c_data) {
         if (is_object($c_data)) {
           if ($c_type == 'module') $c_data->path = $modules_path[$c_scope];
@@ -93,9 +100,9 @@ namespace effectivecore {
     return $return;
   }
 
-  ###############################
-  ### operations with changes ###
-  ###############################
+  #########################
+  ### changes functions ###
+  #########################
 
   function changes_register_action($module_id, $action, $npath, $value = null, $rebuild = true) {
   # add new action
@@ -105,14 +112,14 @@ namespace effectivecore {
   # prevent opcache work
     static::$changes_dynamic['changes'] = $changes_d;
     if ($rebuild) {
-      static::settings_cache_rebuild();
+      static::data_cache_rebuild();
     }
   }
 
   function changes_unregister_action($module_id, $action, $npath) {
   }
 
-  static function changes_apply_to_settings($changes, &$data) {
+  static function changes_apply_to_data($changes, &$data) {
     foreach ($changes as $module_id => $c_module_changes) {
       foreach ($c_module_changes as $c_action_id => $c_changes) {
         foreach ($c_changes as $c_npath => $c_value) {
@@ -152,25 +159,25 @@ namespace effectivecore {
   ### parsing ###
   ###############
 
-  static function code_to_settings($data, $entity_name = '', $entity_prefix = '  ', $depth = 0) {
+  static function code_to_data($code, $entity_name = '', $entity_prefix = '  ', $depth = 0) {
     $return = [];
     if ($entity_name) {
       $return[] = str_repeat('  ', $depth-1).($depth ? $entity_prefix : '').$entity_name;
     }
-    foreach ($data as $key => $value) {
+    foreach ($code as $key => $value) {
       if (is_array($value)  && !count($value))           continue;
       if (is_object($value) && !get_object_vars($value)) continue;
-      if (is_array($value))       $return[] = static::code_to_settings($value, $key, is_array($data) ? '- ' : '  ', $depth + 1);
-      else if (is_object($value)) $return[] = static::code_to_settings($value, $key, is_array($data) ? '- ' : '  ', $depth + 1);
-      else if ($value === null)   $return[] = str_repeat('  ', $depth).(is_array($data) ? '- ' : '  ').$key.': null';
-      else if ($value === false)  $return[] = str_repeat('  ', $depth).(is_array($data) ? '- ' : '  ').$key.': false';
-      else if ($value === true)   $return[] = str_repeat('  ', $depth).(is_array($data) ? '- ' : '  ').$key.': true';
-      else                        $return[] = str_repeat('  ', $depth).(is_array($data) ? '- ' : '  ').$key.': '.$value;
+      if (is_array($value))       $return[] = static::code_to_data($value, $key, is_array($code) ? '- ' : '  ', $depth + 1);
+      else if (is_object($value)) $return[] = static::code_to_data($value, $key, is_array($code) ? '- ' : '  ', $depth + 1);
+      else if ($value === null)   $return[] = str_repeat('  ', $depth).(is_array($code) ? '- ' : '  ').$key.': null';
+      else if ($value === false)  $return[] = str_repeat('  ', $depth).(is_array($code) ? '- ' : '  ').$key.': false';
+      else if ($value === true)   $return[] = str_repeat('  ', $depth).(is_array($code) ? '- ' : '  ').$key.': true';
+      else                        $return[] = str_repeat('  ', $depth).(is_array($code) ? '- ' : '  ').$key.': '.$value;
     }
     return implode(nl, $return);
   }
 
-  static function settings_to_code($data, $file_name = '') {
+  static function data_to_code($data, $file_name = '') {
     $return = new \stdClass();
     $p = [-1 => &$return];
     $pc_objects = [];
@@ -236,7 +243,7 @@ namespace effectivecore {
           $p[$c_depth-1] = (array)$p[$c_depth-1];
         }
       } else {
-        $messages = ['Function: settings_to_code', 'Wrong syntax in settings data at line: '.$line_num];
+        $messages = ['Function: data_to_code', 'Wrong syntax in data at line: '.$line_num];
         if ($file_name) $messages[] = 'File name: '.$file_name;
         message::insert(implode(br, $messages), 'error');
       }
