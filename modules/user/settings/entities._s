@@ -51,16 +51,12 @@ entities
       id_user
         type: integer
         not_null: true
-      ip_address
-        type: varchar
-        size: 15
+      is_ip_check
+        type: integer
         not_null: true
-      user_agent_hash
-        type: varchar
-        size: 255
-      created
+        default: 0
+      expire
         type: datetime
-        not_null: true
       data
         type: blob
         null: true

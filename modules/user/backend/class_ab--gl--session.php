@@ -28,11 +28,10 @@ namespace effectivecore {
     if ($is_remember) static::id_regenerate('f');
     else              static::id_regenerate('f', 0);
     (new instance('session', [
-      'id'              => static::id_get(),
-      'id_user'         => $id_user,
-      'created'         => factory::datetime_get(),
-      'ip_address'      => $_SERVER['REMOTE_ADDR'],
-      'user_agent_hash' => md5($_SERVER['HTTP_USER_AGENT'])
+      'id'          => static::id_get(),
+      'id_user'     => $id_user,
+      'is_ip_check' => 0,
+      'expire'      => factory::datetime_get('+'.session_id_expire.' second'),
     ]))->insert();
   }
 
