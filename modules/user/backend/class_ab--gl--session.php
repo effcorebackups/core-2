@@ -74,11 +74,15 @@ namespace effectivecore {
     }
   }
 
+  static function id_decode_type($id)   {return substr($id, 0, 1);}
+  static function id_decode_expire($id) {return hexdec(substr($id, 1, 8));}
+  static function id_decode_ip($id)     {return factory::hex_to_ip(substr($id, 8 + 1, 8));}
+
   static function id_check($value) {
     if (factory::filter_hash($value, 41)) {
-      $type = substr($value, 0, 1);
-      $expire = hexdec(substr($value, 1, 8));
-      $ip = factory::hex_to_ip(substr($value, 8 + 1, 8));
+      $type = static::id_decode_type($value);
+      $expire = static::id_decode_expire($value);
+      $ip = static::id_decode_ip($value);
       $uagent_hash_8 = substr($value, 16 + 1, 8);
       $random = hexdec(substr($value, 24 + 1, 8));
       $signature = substr($value, 32 + 1, 8);
