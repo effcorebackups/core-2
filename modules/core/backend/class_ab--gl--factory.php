@@ -305,6 +305,15 @@ namespace effectivecore {
   }
 
 
+  ############################
+  ### signatures functions ###
+  ############################
+
+  static function signature_get($string, $length = 40) {
+    $key = storage::get('settings')->select_group('settings')['core']->key;
+    return substr(sha1($string.$key), 0, $length);
+  }
+
   ########################
   ### binary functions ###
   ########################

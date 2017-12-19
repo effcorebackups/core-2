@@ -77,7 +77,7 @@ namespace effectivecore {
     $fields   = $this->fields_get();
   # call init handlers
     event::start('on_form_init', $id, [$this, $fields]);
-  # if current user click the button
+  # if user click the button
     if (isset($values['form_id'][0]) &&
               $values['form_id'][0] === $id && isset($values['button'][0])) {
     # get more info about clicked button

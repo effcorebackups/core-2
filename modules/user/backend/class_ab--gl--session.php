@@ -59,6 +59,7 @@ namespace effectivecore {
                   $hex_ip.            # strlen == 8
                   $hex_uagent_hash_8. # strlen == 8
                   $hex_random;        # strlen == 8
+    $session_id.= factory::signature_get($session_id, 8);
     setcookie('session_id', ($_COOKIE['session_id'] = $session_id), $expire ? time() + $expire : 0, '/');
     setcookie('cookies_is_on', 'true', $expire ? time() + $expire : 0, '/');
     return $session_id;
@@ -74,16 +75,18 @@ namespace effectivecore {
   }
 
   static function id_check($value) {
-    if (factory::filter_hash($value, 33)) {
+    if (factory::filter_hash($value, 41)) {
       $type = substr($value, 0, 1);
       $expire = hexdec(substr($value, 1, 8));
       $ip = factory::hex_to_ip(substr($value, 8 + 1, 8));
       $uagent_hash_8 = substr($value, 16 + 1, 8);
       $random = hexdec(substr($value, 24 + 1, 8));
+      $signature = substr($value, 32 + 1, 8);
       if ($expire > time()                         &&
           $expire < time() + session_id_expire + 1 &&
           $ip === $_SERVER['REMOTE_ADDR']          &&
-          $uagent_hash_8 === substr(md5($_SERVER['HTTP_USER_AGENT']), 0, 8)) {
+          $uagent_hash_8 === substr(md5($_SERVER['HTTP_USER_AGENT']), 0, 8) &&
+          $signature === factory::signature_get(substr($value, 0, 33), 8)) {
         return true;
       }
     }

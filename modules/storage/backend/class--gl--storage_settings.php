@@ -202,7 +202,7 @@ namespace effectivecore {
       if ($matches['name']) {
         $c_depth = intval(strlen($matches['indent'].$matches['prefix']) / 2);
         $matches['name'] = str_replace(['\\:', '\\|'], [':', '|'], $matches['name']);
-      # define current value
+      # define each value
         if ($matches['delimiter'] == ': ') {
           $c_value = $matches['value'];
           if (is_numeric($c_value)) $c_value += 0;

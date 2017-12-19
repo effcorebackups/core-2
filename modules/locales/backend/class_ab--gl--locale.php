@@ -11,7 +11,7 @@ namespace effectivecore {
   protected static $settings;
 
   static function init() {
-    static::$settings = storage::get('settings')->select_group('current')['locales'];
+    static::$settings = storage::get('settings')->select_group('settings')['locales'];
     foreach (storage::get('settings')->select_group('countries') as $c_countries) {
       foreach ($c_countries as $c_country) {
         static::$countries[$c_country->code] = $c_country;
