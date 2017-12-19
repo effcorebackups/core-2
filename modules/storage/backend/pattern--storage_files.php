@@ -70,10 +70,10 @@ namespace effectivecore {
 
   static function data_find_static() {
     $return = [];
-    $files = file::select_all(dir_modules, '%^.*\._s$%');
+    $files = file::select_all(dir_modules, '%^.*\._d$%');
     $modules_path = [];
     foreach ($files as $c_file) {
-      if ($c_file->get_file() == 'module._s') {
+      if ($c_file->get_file() == 'module._d') {
         $modules_path[$c_file->get_name_parent()] = $c_file->get_dirs_relative();
       }
     }

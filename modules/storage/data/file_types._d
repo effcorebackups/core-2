@@ -1,5 +1,5 @@
 file_types
-- _s
+- _d
     protected: 1
     headers
-    - Content-type: text/settings
+    - Content-type: text/data
