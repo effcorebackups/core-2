@@ -6,6 +6,10 @@
 
 namespace effectivecore {
 
+  ##########################
+  ### single entry point ###
+  ##########################
+
   const dir_root        = __DIR__.'/';
   const dir_dynamic     = __DIR__.'/dynamic/';
   const dir_modules     = __DIR__.'/modules/';
@@ -26,15 +30,25 @@ namespace effectivecore {
   use \effectivecore\token as token;
   timer::tap('total');
 
-  # redirect from '/any_path/' to '/any_path'
+  #######################
+  ### return the file ###
+  #######################
+
+  # note:
+  # ─────────────────────────────────────────────────────────────────────
+  # 1. url /           | is page 'home'
+  # 2. url /page       | is page 'page'
+  # 3. url /file.type  | is file 'file.type' (p.s. any file defined by type)
+  # ─────────────────────────────────────────────────────────────────────
+  # 4. url /page/      | is wrong notation - redirect to /page and interpreted as a page 'page'
+  # 5. url /file/      | is wrong notation - redirect to /file and interpreted as a page 'file'
+  # 6. url /file.type/ | is wrong notation - redirect to /file.type
+  # ─────────────────────────────────────────────────────────────────────
+
   if (            url::get_current()->path != '/' &&
            substr(url::get_current()->path, -1) == '/') {
     url::go(rtrim(url::get_current()->path, '/'));
   }
-
-  ##########################
-  ### single entry point ###
-  ##########################
 
   $file_types = file::get_file_types();
   $extension = url::get_current()->get_extension();
@@ -74,7 +88,10 @@ namespace effectivecore {
     }
   }
 
-  # case for page (non file)
+  #######################
+  ### return the page ###
+  #######################
+
   ob_start();
   foreach (event::start('on_module_start') as $c_results) {
     foreach ($c_results as $c_result) {
