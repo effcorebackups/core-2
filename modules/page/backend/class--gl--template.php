@@ -18,7 +18,7 @@ namespace effectivecore {
       static::set_var($c_name, $c_value);
     }
   # find template
-    foreach (storage::get('files')->select_group('templates') as $c_module_id => $c_templates) {
+    foreach (storage::get('files')->select_group('template_files') as $c_module_id => $c_templates) {
       foreach ($c_templates as $c_name => $c_path) {
         if ($name == $c_name) {
           $path = storage::get('files')->select_group('module')[$c_module_id]->path.$c_path;

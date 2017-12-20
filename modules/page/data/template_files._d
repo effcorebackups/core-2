@@ -1,4 +1,4 @@
-templates
+template_files
 - markup_html: frontend/template--markup.html
 - markup_html_simple: frontend/template--markup_simple.html
 - markup_xml: frontend/template--markup.xml
