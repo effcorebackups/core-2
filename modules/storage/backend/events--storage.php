@@ -16,28 +16,28 @@ namespace effectivecore\modules\storage {
 
   static function on_storage_init_after($storage) {
     timer::tap('storage init');
-    console::add_log(
-      'storage',
-      'init.',
-      'storage %%_id was initialized',
-      'ok', timer::get_period('storage init', -1, -2), ['id' => $storage->id.'|storage_pdo']
+    console::add_log('storage', 'init.', 'storage %%_id was initialized', 'ok',
+      timer::get_period('storage init', -1, -2), ['id' => $storage->id.' | storage_pdo']
     );
   }
 
   static function on_query_before($storage, $query) {
-    timer::tap('storage query: '.$storage->query_to_string($query));
+    $s_query = $storage->query_to_string($query);
+    timer::tap('storage query: '.$s_query);
   }
 
   static function on_query_after($storage, $query, $result, $errors) {
-    $s_query = 'query = "'.str_replace([' ,', '( ', ' )'], [',', '(', ')'], $storage->query_to_string($query)).'"';
-    $s_query_args = count($storage->args) ? br.'args = [\''.implode('\', \'', $storage->args).'\']' : '';
-    $s_query_args_beautiful = wordwrap($s_query_args, 50, ' ', true);
-    timer::tap('storage query: '.$storage->query_to_string($query));
+    $s_query = $storage->query_to_string($query);
+    $s_query_beautiful = str_replace([' ,', '( ', ' )'], [',', '(', ')'], $s_query);
+    $s_query_args = wordwrap('\''.implode('\', \'', $storage->args).'\'', 50, ' ', true);
+    timer::tap('storage query: '.$s_query);
     console::add_log('storage', 'query',
-      $s_query.
-      $s_query_args_beautiful,
+      count($storage->args) ? 'query = "%%_query"'.br.'args = [%%_args]' :
+                              'query = "%%_query"',
       $errors[0] == '00000' ? 'ok' : 'error',
-      timer::get_period('storage query: '.$storage->query_to_string($query), -1, -2)
+      timer::get_period('storage query: '.$s_query, -1, -2),
+      ['query' => $s_query_beautiful,
+        'args' => $s_query_args]
     );
   }
 

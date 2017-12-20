@@ -163,6 +163,8 @@ translations
   - PHP PDO driver for %%_name is not available.: PHP PDO драйвер для %%_name не доступен.
   - PHP PDO extension is not available.: PHP PDO расширение не доступно.
   - Queries: Запросы
+  - query = "%%_query": запрос = "%%_query"
+  - query = "%%_query"<br/>args = [%%_args]: запрос = "%%_query"<br/>аргументы = [%%_args]
   - Query error!: Ошибка запроса!
   - query: запрос
   - Radios (macro): Переключатели (макро)
@@ -193,6 +195,7 @@ translations
   - Static block: Статический блок
   - Storage %%_id is not available!: Хранилище %%_id не доступно!
   - storage %%_id was initialized: хранилище %%_id было инициализировано
+  - storage %%_id will be initialized: хранилище %%_id будет инициализировано
   - Storage is not available with these credentials!: Хранилище не доступно с этими учетными данными!
   - Storage name: Имя хранилища
   - Storage params: Параметры хранилища

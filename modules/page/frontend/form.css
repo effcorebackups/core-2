@@ -43,7 +43,6 @@
   /* checkboxes and radios */
   form x-field input[type="checkbox"],
   form x-field input[type="radio"] {display: inline-block; vertical-align: middle; cursor: pointer; background-color: white}
-  form x-field input[type="checkbox"] {border-radius: 6px}
   form x-field input[type="radio"] {border-radius: 13px}
   form .boxes x-field {margin: 10px 0}
   form .boxes label {font-size: 1em}

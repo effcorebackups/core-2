@@ -12,17 +12,10 @@ namespace effectivecore {
   static $changes_dynamic;
 
   static function init($group) {
-    timer::tap('storage init');
+    console::add_log('storage', 'init', 'storage %%_id will be initialized', 'ok', 0, ['id' => $group.' | storage_files']);
     $cache = cache::select('data--'.$group);
     if ($cache) static::$data[$group] = $cache;
     else        static::data_cache_rebuild();
-    timer::tap('storage init');
-    console::add_log(
-      'storage',
-      'init',
-      'storage %%_id was initialized',
-      'ok', timer::get_period('storage init', -1, -2), ['id' => $group.'|storage_files']
-    );
   }
 
   ########################
