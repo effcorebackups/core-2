@@ -26,7 +26,7 @@ namespace effectivecore {
   }
 
   static function get_all() {
-    if (!static::$data) static::init();
+    if   (!static::$data) static::init();
     return static::$data;
   }
 

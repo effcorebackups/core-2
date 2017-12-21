@@ -5,21 +5,17 @@
   ##################################################################
 
 namespace effectivecore {
-          abstract class language {
+          abstract class module {
 
   protected static $data;
 
   static function init() {
-    foreach (storage::get('files')->select_group('languages') as $languages) {
-      foreach ($languages as $c_language) {
-        static::$data[$c_language->code] = $c_language;
-      }
-    }
+    static::$data = storage::get('files')->select_group('module');
   }
 
-  static function get($code) {
+  static function get_all() {
     if   (!static::$data) static::init();
-    return static::$data[$code];
+    return static::$data;
   }
 
 }}

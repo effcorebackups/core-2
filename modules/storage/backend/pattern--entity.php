@@ -84,12 +84,12 @@ namespace effectivecore {
   }
 
   static function get($name) {
-    if (!static::$data) static::init();
+    if   (!static::$data) static::init();
     return static::$data[$name];
   }
 
   static function get_all_by_module($name) {
-    if (!static::$data_raw) static::init();
+    if   (!static::$data_raw) static::init();
     return static::$data_raw[$name];
   }
 

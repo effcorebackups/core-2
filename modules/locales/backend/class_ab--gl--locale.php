@@ -20,12 +20,12 @@ namespace effectivecore {
   }
 
   static function get_countries() {
-    if (!static::$countries) static::init();
+    if   (!static::$countries) static::init();
     return static::$countries;
   }
 
   static function get_settings() {
-    if (!static::$settings) static::init();
+    if   (!static::$settings) static::init();
     return static::$settings;
   }
 

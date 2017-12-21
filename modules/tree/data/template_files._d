@@ -1,4 +1,10 @@
-template_files
-- tree: frontend/template--tree.html
-- tree_item: frontend/template--tree_item.html
-- tree_item_children: frontend/template--tree_item_children.html
+template
+- tree
+    type: file
+    path: frontend/template--tree.html
+- tree_item
+    type: file
+    path: frontend/template--tree_item.html
+- tree_item_children
+    type: file
+    path: frontend/template--tree_item_children.html

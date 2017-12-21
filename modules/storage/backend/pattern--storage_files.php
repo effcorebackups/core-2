@@ -78,14 +78,17 @@ namespace effectivecore {
           break;
         }
       }
-      $c_parsed = static::data_to_code($c_file->load(), $c_file->get_path_relative());
+      $c_parsed = static::data_to_code(
+        $c_file->load(),
+        $c_file->get_path_relative());
       foreach ($c_parsed as $c_type => $c_data) {
         if (is_object($c_data)) {
           if ($c_type == 'module') $c_data->path = $modules_path[$c_scope];
           $return[$c_type][$c_scope] = $c_data;
         }
         if (is_array($c_data)) {
-          if (!isset($return[$c_type][$c_scope])) $return[$c_type][$c_scope] = [];
+          if (!isset($return[$c_type][$c_scope]))
+                     $return[$c_type][$c_scope] = [];
           $return[$c_type][$c_scope] += $c_data;
         }
       }

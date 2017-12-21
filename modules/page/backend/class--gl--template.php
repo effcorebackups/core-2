@@ -18,13 +18,15 @@ namespace effectivecore {
       static::set_var($c_name, $c_value);
     }
   # find template
-    foreach (storage::get('files')->select_group('template_files') as $c_module_id => $c_templates) {
-      foreach ($c_templates as $c_name => $c_path) {
+    foreach (static::get_templates() as $c_module_id => $c_templates) {
+      foreach ($c_templates as $c_name => $c_info) {        
         if ($name == $c_name) {
-          $path = storage::get('files')->select_group('module')[$c_module_id]->path.$c_path;
-          $file = new file($path);
-          $this->markup = $file->load(false);
-          return $this;
+          if ($c_info->type == 'file') {
+            $path = module::get_all()[$c_module_id]->path.$c_info->path;
+            $file = new file($path);
+            $this->markup = $file->load(false);
+            return $this;
+          }
         }
       }
     }
@@ -47,6 +49,21 @@ namespace effectivecore {
                    $this->vars[$matches['name']] : '';
     }, $rendered);
     return $rendered;
+  }
+
+  ######################
+  ### static methods ###
+  ######################
+
+  protected static $data;
+
+  static function init() {
+    static::$data['files'] = storage::get('files')->select_group('template');
+  }
+
+  static function get_templates() {
+    if   (!static::$data['files']) static::init();
+    return static::$data['files'];
   }
 
 }}

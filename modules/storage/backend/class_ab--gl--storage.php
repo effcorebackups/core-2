@@ -24,7 +24,7 @@ namespace effectivecore {
   }
 
   static function get($storage_id) {
-    if (!static::$data) static::init();
+    if   (!static::$data) static::init();
     return static::$data[$storage_id];
   }
 

@@ -29,7 +29,7 @@ namespace effectivecore {
   }
 
   static function get_current() {
-    if (!static::$data) static::init();
+    if   (!static::$data) static::init();
     return static::$data;
   }
 

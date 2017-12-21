@@ -6,6 +6,7 @@
 
 namespace effectivecore\modules\core {
           use \effectivecore\table as table;
+          use \effectivecore\module as module;
           use \effectivecore\locale as locale;
           use \effectivecore\storage as storage;
           use \effectivecore\control_switcher as switcher;
@@ -14,7 +15,7 @@ namespace effectivecore\modules\core {
   static function on_show_modules($page) {
     $thead = [['Title', 'ID', 'Path', 'Description', 'Ver.', 'State.']];
     $tbody = [];
-    foreach (storage::get('files')->select_group('module') as $c_module) {
+    foreach (module::get_all() as $c_module) {
       $tbody[] = [
         $c_module->title,
         $c_module->id,

@@ -70,12 +70,12 @@ namespace effectivecore {
   }
 
   static function get($row_id) {
-    if (!static::$data) static::init();
+    if   (!static::$data) static::init();
     return static::$data[$row_id];
   }
 
   static function get_by_module($name) {
-    if (!static::$data_raw) static::init();
+    if   (!static::$data_raw) static::init();
     return static::$data_raw[$name];
   }
 

@@ -1,9 +1,25 @@
-template_files
-- markup_html: frontend/template--markup.html
-- markup_html_simple: frontend/template--markup_simple.html
-- markup_xml: frontend/template--markup.xml
-- markup_xml_simple: frontend/template--markup_simple.xml
-- page: frontend/template--page.html
-- page_simple: frontend/template--page_simple.html
-- form_container: frontend/template--form_container.html
-- canvas_svg: frontend/template--canvas_svg.xml
+template
+- markup_html
+    type: file
+    path: frontend/template--markup.html
+- markup_html_simple
+    type: file
+    path: frontend/template--markup_simple.html
+- markup_xml
+    type: file
+    path: frontend/template--markup.xml
+- markup_xml_simple
+    type: file
+    path: frontend/template--markup_simple.xml
+- page
+    type: file
+    path: frontend/template--page.html
+- page_simple
+    type: file
+    path: frontend/template--page_simple.html
+- form_container
+    type: file
+    path: frontend/template--form_container.html
+- canvas_svg
+    type: file
+    path: frontend/template--canvas_svg.xml
