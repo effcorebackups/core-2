@@ -221,7 +221,9 @@ namespace effectivecore\modules\user {
           'created'       => factory::datetime_get()
         ]))->insert();
         if ($user) {
-          session::insert($user->id);
+          session::insert($user->id,
+            isset($values['session_params']) ? factory::array_values_map_to_keys(
+                  $values['session_params']) : []);
           url::go('/user/'.$user->id);
         } else {
           message::insert('User was not registered!', 'error');

@@ -44,6 +44,15 @@ forms
                 - minlength: 5
                 - maxlength: 255
                 - autocomplete: off
+        - session_params|form_container_checkboxes
+            input_attributes
+            - name: session_params[]
+            values
+            - remember: remember me
+            - fixed_ip: on this ip
+            checked
+            - remember: remember
+            - fixed_ip: fixed_ip
         - captcha|form_field_captcha
     - button_register|markup
         tag_name: button

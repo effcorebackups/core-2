@@ -34,7 +34,6 @@ translations
   - Colors: Цвета
   - Console: Консоль
   - Control elements: Элементы управления
-  - Cookie expiration date: Дата окончания Cookie
   - Cookies are disabled. You can not log in!: Cookies отключены. Вы не можете войти в систему!
   - Copyright © %%_years %%_right_holder.: Авторские права © %%_years %%_right_holder.
   - Core: Ядро
@@ -184,6 +183,7 @@ translations
   - Select (macro): Список (макро)
   - Select: Список
   - Server load (sys_getloadavg): Загр. серв. (sys_getloadavg)
+  - Session expiration date: Дата окончания сессии
   - set: установка
   - sql state\: %%_state: sql состояние: %%_state
   - state: состояние
