@@ -5,8 +5,9 @@
   ##################################################################
 
 namespace effectivecore {
-          const seance_period     = 60 * 60 * 24;
-          const session_id_period = 60 * 60 * 24 * 30;
+          const empty_ip = '0.0.0.0';
+          const period_expire = 60 * 60 * 24 * 30;
+          const period_seance = 60 * 60 * 24;
           abstract class session {
 
   static function select() {
@@ -32,7 +33,7 @@ namespace effectivecore {
       'id_user'  => $id_user,
       'remember' => isset($session_params['remember']) ? 1 : 0,
       'fixed_ip' => isset($session_params['fixed_ip']) ? 1 : 0,
-      'expire'   => factory::datetime_get('+'.session_id_period.' second'),
+      'expire'   => factory::datetime_get('+'.period_expire.' second'),
     ]))->insert();
   }
 
@@ -52,20 +53,22 @@ namespace effectivecore {
   # ──────────────────────────────────────────────────────────────────────────────────
   # yes       | no        | no     | a--000000--00-- | yes            | no       | -
   # yes       | no        | yes    | a--000000--ip-- | no             | no       | -
-  # yes       | yes       | no     | a--expire--00-- | no             | no       | +
+  # yes       | yes       | no     | a--expire--00-- | no             | no       | -
   # yes       | yes       | yes    | a--expire--ip-- | no             | on https | +
   # ──────────────────────────────────────────────────────────────────────────────────
-  # no        | no        | no     | f--000000--00-- | no (logged in) | no       | +
-  # no        | no        | yes    | f--000000--ip-- | no (logged in) | no       | +
-  # no        | yes       | no     | f--expire--00-- | no (logged in) | no       | +
-  # no        | yes       | yes    | f--expire--ip-- | no (logged in) | on https | +
+  # no        | no        | no     | f--000000--00-- | no - logged in | no       | +
+  # no        | no        | yes    | f--000000--ip-- | no - logged in | no       | +
+  # no        | yes       | no     | f--expire--00-- | no - logged in | no       | +
+  # no        | yes       | yes    | f--expire--ip-- | no - logged in | on https | +
   # ──────────────────────────────────────────────────────────────────────────────────
 
   static function id_regenerate($type, $session_params = []) {
-    $period = $type == 'a' ? seance_period : session_id_period;
+    $is_remember = isset($session_params['remember']);
+    $is_fixed_ip = isset($session_params['fixed_ip']);
+    $period = $type == 'a' ? period_seance : period_expire;
     $hex_type = $type; # 'a' - anonymous user | 'f' - authenticated user
-    $hex_expire = dechex(time() + session_id_period);
-    $hex_ip = factory::ip_to_hex($_SERVER['REMOTE_ADDR']);
+    $hex_expire = dechex(time() + period_expire);
+    $hex_ip = factory::ip_to_hex($type == 'f' && !$is_fixed_ip ? empty_ip : $_SERVER['REMOTE_ADDR']);
     $hex_uagent_hash_8 = substr(md5($_SERVER['HTTP_USER_AGENT']), 0, 8);
     $hex_random = str_pad(dechex(rand(0, 0xffffffff)), 8, '0', STR_PAD_LEFT);
     $session_id = $hex_type.          # strlen == 1
@@ -103,12 +106,15 @@ namespace effectivecore {
       $uagent_hash_8 = static::id_decode_uagent_hash_8($value);
       $random        = static::id_decode_random($value);
       $signature     = static::id_decode_signature($value);
-      if ($expire >= time()                     &&
-          $expire <= time() + session_id_period &&
-          $ip === $_SERVER['REMOTE_ADDR']       &&
+      if ($expire >= time()                 &&
+          $expire <= time() + period_expire &&
           $uagent_hash_8 === substr(md5($_SERVER['HTTP_USER_AGENT']), 0, 8) &&
           $signature === factory::signature_get(substr($value, 0, 33), 8)) {
-        return true;
+        if (($type === 'a' && $ip === $_SERVER['REMOTE_ADDR']) ||
+            ($type === 'f' && $ip === $_SERVER['REMOTE_ADDR']) ||
+            ($type === 'f' && $ip === empty_ip)) {
+          return true;
+        }
       }
     }
   }
