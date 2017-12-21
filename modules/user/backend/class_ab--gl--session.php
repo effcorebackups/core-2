@@ -48,18 +48,18 @@ namespace effectivecore {
   ### session_id functions ###
   ############################
 
-  # anonymous | remember me? | on my ip? | session id      | do not track me? | secure?  | use
-  # ──────────────────────────────────────────────────────────────────────────────────────────
-  # yes       | no           | no        | a--000000--00-- | yes              | no       | -
-  # yes       | no           | yes       | a--000000--ip-- | no               | no       | -
-  # yes       | yes          | no        | a--expire--00-- | no               | no       | +
-  # yes       | yes          | yes       | a--expire--ip-- | no               | on https | +
-  # ──────────────────────────────────────────────────────────────────────────────────────────
-  # no        | no           | no        | f--000000--00-- | no (logged in)   | no       | +
-  # no        | no           | yes       | f--000000--ip-- | no (logged in)   | no       | +
-  # no        | yes          | no        | f--expire--00-- | no (logged in)   | no       | +
-  # no        | yes          | yes       | f--expire--ip-- | no (logged in)   | on https | +
-  # ──────────────────────────────────────────────────────────────────────────────────────────
+  # anonymous | remember? | on ip? | session id      | do not track?  | secure?  | use
+  # ──────────────────────────────────────────────────────────────────────────────────
+  # yes       | no        | no     | a--000000--00-- | yes            | no       | -
+  # yes       | no        | yes    | a--000000--ip-- | no             | no       | -
+  # yes       | yes       | no     | a--expire--00-- | no             | no       | +
+  # yes       | yes       | yes    | a--expire--ip-- | no             | on https | +
+  # ──────────────────────────────────────────────────────────────────────────────────
+  # no        | no        | no     | f--000000--00-- | no (logged in) | no       | +
+  # no        | no        | yes    | f--000000--ip-- | no (logged in) | no       | +
+  # no        | yes       | no     | f--expire--00-- | no (logged in) | no       | +
+  # no        | yes       | yes    | f--expire--ip-- | no (logged in) | on https | +
+  # ──────────────────────────────────────────────────────────────────────────────────
 
   static function id_regenerate($type, $session_params = []) {
     $period = $type == 'a' ? seance_period : session_id_period;

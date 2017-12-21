@@ -38,7 +38,7 @@ forms
             - name: session_params[]
             values
             - remember: remember me
-            - fixed_ip: on my ip
+            - fixed_ip: on this ip
             checked
             - remember: remember
             - fixed_ip: fixed_ip
