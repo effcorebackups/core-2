@@ -1,25 +1,25 @@
 template
 - markup_html
     type: inline
-    markup: <%%_tag_name %%_attributes>%%_content</%%_tag_name>
+    markup: <%%_tag_name %%_attributes> %%_content </%%_tag_name>
 - markup_html_simple
     type: inline
     markup: <%%_tag_name %%_attributes>
 - markup_xml
     type: inline
-    markup: <%%_tag_name %%_attributes>%%_content</%%_tag_name>
+    markup: <%%_tag_name %%_attributes> %%_content </%%_tag_name>
 - markup_xml_simple
     type: inline
     markup: <%%_tag_name %%_attributes />
+- form_container
+    type: inline
+    markup: <%%_tag_name %%_attributes> %%_title_t %%_content %%_title_b %%_description </%%_tag_name>
 - page
     type: file
     path: frontend/template--page.html
 - page_simple
     type: file
     path: frontend/template--page_simple.html
-- form_container
-    type: file
-    path: frontend/template--form_container.html
 - canvas_svg
     type: file
     path: frontend/template--canvas_svg.xml

@@ -1,10 +1,10 @@
 template
 - tree
-    type: file
-    path: frontend/template--tree.html
+    type: inline
+    markup: <x-tree %%_attributes> <h3 class="hidden">%%_self</h3> <ul>%%_children</ul> </x-tree>
 - tree_item
-    type: file
-    path: frontend/template--tree_item.html
+    type: inline
+    markup: <li %%_attributes> %%_self %%_children </li>
 - tree_item_children
-    type: file
-    path: frontend/template--tree_item_children.html
+    type: inline
+    markup: <ul> %%_children </ul>
