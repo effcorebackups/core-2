@@ -9,7 +9,7 @@ namespace effectivecore {
 
   static function on_show_block_logo($page) {
     return new markup('x-block', ['id' => 'logo'],
-           new markup('a',       ['id' => 'home', 'href'  => '/', 'title' => translation::get('to home')]));
+           new markup('a',       ['id' => 'to_front', 'href'  => '/', 'title' => translation::get('to front page')]));
   }
 
   static function on_show_block_menu_user($page) {

@@ -33,15 +33,15 @@ forms
                 - minlength: 5
                 - maxlength: 255
                 - autocomplete: off
-        - remember_mode|form_container_radios
+        - session_params|form_container_checkboxes
             input_attributes
-            - name: remember_mode
+            - name: session_params[]
             values
-            - 0: do not remember me
-            - 1: remember me
-            - 2: remember me (on this ip)
+            - remember: remember me
+            - fixed_ip: on my ip
             checked
-            - 2: 2
+            - remember: remember
+            - fixed_ip: fixed_ip
         - captcha|form_field_captcha
     - button_login|markup
         tag_name: button

@@ -1,6 +1,6 @@
 pages
 - logout|page
-    title: Loggin out
+    title: Logout
     https: true
     display
       url

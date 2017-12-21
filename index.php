@@ -36,7 +36,7 @@ namespace effectivecore {
 
   # note:
   # ─────────────────────────────────────────────────────────────────────
-  # 1. url /           | is page 'home'
+  # 1. url /           | is page 'page_front'
   # 2. url /page       | is page 'page'
   # 3. url /file.type  | is file 'file.type' (p.s. any file defined by type)
   # ─────────────────────────────────────────────────────────────────────

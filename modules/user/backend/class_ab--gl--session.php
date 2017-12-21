@@ -5,6 +5,7 @@
   ##################################################################
 
 namespace effectivecore {
+          const seance_period     = 60 * 60 * 24;
           const session_id_period = 60 * 60 * 24 * 30;
           abstract class session {
 
@@ -15,7 +16,7 @@ namespace effectivecore {
         'id' => $session_id
       ]))->select();
       if (!$session) {
-        static::id_regenerate('a', session_id_period);
+        static::id_regenerate('a');
         message::insert('invalid session was deleted!', 'warning');
         return null;
       } else {
@@ -24,15 +25,14 @@ namespace effectivecore {
     }
   }
 
-  static function insert($id_user, $remember_mode) {
-    if ($remember_mode == 0)
-         static::id_regenerate('f', 0);
-    else static::id_regenerate('f', session_id_period);
+  static function insert($id_user, $session_params = []) {
+    static::id_regenerate('f', $session_params);
     (new instance('session', [
-      'id'            => static::id_get(),
-      'id_user'       => $id_user,
-      'remember_mode' => $remember_mode,
-      'expire'        => factory::datetime_get('+'.session_id_period.' second'),
+      'id'       => static::id_get(),
+      'id_user'  => $id_user,
+      'remember' => isset($session_params['remember']) ? 1 : 0,
+      'fixed_ip' => isset($session_params['fixed_ip']) ? 1 : 0,
+      'expire'   => factory::datetime_get('+'.session_id_period.' second'),
     ]))->insert();
   }
 
@@ -41,14 +41,28 @@ namespace effectivecore {
       'id'      => static::id_get(),
       'id_user' => $id_user
     ]))->delete();
-    static::id_regenerate('a', session_id_period);
+    static::id_regenerate('a');
   }
 
   ############################
   ### session_id functions ###
   ############################
 
-  static function id_regenerate($type, $period) {
+  # anonymous | remember me? | on my ip? | session id      | do not track me? | secure?  | use
+  # ──────────────────────────────────────────────────────────────────────────────────────────
+  # yes       | no           | no        | a--000000--00-- | yes              | no       | -
+  # yes       | no           | yes       | a--000000--ip-- | no               | no       | -
+  # yes       | yes          | no        | a--expire--00-- | no               | no       | +
+  # yes       | yes          | yes       | a--expire--ip-- | no               | on https | +
+  # ──────────────────────────────────────────────────────────────────────────────────────────
+  # no        | no           | no        | f--000000--00-- | no (logged in)   | no       | +
+  # no        | no           | yes       | f--000000--ip-- | no (logged in)   | no       | +
+  # no        | yes          | no        | f--expire--00-- | no (logged in)   | no       | +
+  # no        | yes          | yes       | f--expire--ip-- | no (logged in)   | on https | +
+  # ──────────────────────────────────────────────────────────────────────────────────────────
+
+  static function id_regenerate($type, $session_params = []) {
+    $period = $type == 'a' ? seance_period : session_id_period;
     $hex_type = $type; # 'a' - anonymous user | 'f' - authenticated user
     $hex_expire = dechex(time() + session_id_period);
     $hex_ip = factory::ip_to_hex($_SERVER['REMOTE_ADDR']);
@@ -70,22 +84,25 @@ namespace effectivecore {
           isset($_COOKIE['session_id']) ?
                 $_COOKIE['session_id'] : '')) {
       return    $_COOKIE['session_id']; } else {
-      return static::id_regenerate('a', session_id_period);
+      return static::id_regenerate('a');
     }
   }
 
-  static function id_decode_type($id)   {return substr($id, 0, 1);}
-  static function id_decode_expire($id) {return hexdec(substr($id, 1, 8));}
-  static function id_decode_ip($id)     {return factory::hex_to_ip(substr($id, 8 + 1, 8));}
+  static function id_decode_type($id)          {return substr($id, 0, 1);}
+  static function id_decode_expire($id)        {return hexdec(substr($id, 1, 8));}
+  static function id_decode_ip($id)            {return factory::hex_to_ip(substr($id, 8 + 1, 8));}
+  static function id_decode_uagent_hash_8($id) {return substr($id, 16 + 1, 8);}
+  static function id_decode_random($id)        {return hexdec(substr($id, 24 + 1, 8));}
+  static function id_decode_signature($id)     {return substr($id, 32 + 1, 8);}
 
   static function id_check($value) {
     if (factory::filter_hash($value, 41)) {
-      $type = static::id_decode_type($value);
-      $expire = static::id_decode_expire($value);
-      $ip = static::id_decode_ip($value);
-      $uagent_hash_8 = substr($value, 16 + 1, 8);
-      $random = hexdec(substr($value, 24 + 1, 8));
-      $signature = substr($value, 32 + 1, 8);
+      $type          = static::id_decode_type($value);
+      $expire        = static::id_decode_expire($value);
+      $ip            = static::id_decode_ip($value);
+      $uagent_hash_8 = static::id_decode_uagent_hash_8($value);
+      $random        = static::id_decode_random($value);
+      $signature     = static::id_decode_signature($value);
       if ($expire >= time()                     &&
           $expire <= time() + session_id_period &&
           $ip === $_SERVER['REMOTE_ADDR']       &&

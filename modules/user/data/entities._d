@@ -51,7 +51,11 @@ entities
       id_user
         type: integer
         not_null: true
-      remember_mode
+      remember
+        type: integer
+        not_null: true
+        default: 0
+      fixed_ip
         type: integer
         not_null: true
         default: 0

@@ -50,7 +50,7 @@
   x-block {display: block}
 
   /* block logo */
-  x-block#logo a#home {
+  x-block#logo a#to_front {
     display: block;
     width: 150px;
     height: 48px;

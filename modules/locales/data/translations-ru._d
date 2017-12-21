@@ -34,7 +34,7 @@ translations
   - Colors: Цвета
   - Console: Консоль
   - Control elements: Элементы управления
-  - Cookie expiration date: Дата окончания Cookie
+  - Cookie expiration date: Дата истекания Cookie
   - Cookies are disabled. You can not log in!: Cookies отключены. Вы не можете войти в систему!
   - Copyright © %%_years %%_right_holder.: Авторские права © %%_years %%_right_holder.
   - Core: Ядро
@@ -54,7 +54,6 @@ translations
   - Demo: Демо
   - Description: Описание
   - Develop: Разработка
-  - do not remember me: не запоминать меня
   - driver error code\: %%_code: код ошибки драйвера: %%_code
   - driver error text\: %%_text: текст ошибки драйвера: %%_text
   - Driver is not selected!: Драйвер не выбран!
@@ -103,7 +102,6 @@ translations
   - Host name: Имя хоста
   - Incorrect email or password!: Неверный адрес электронной почты или пароль!
   - Information: Информация
-  - init: инициализация
   - init.: инициал.
   - initialization: инициализация
   - insertion: вставка
@@ -120,7 +118,6 @@ translations
   - Leave the field blank if you do not want to change its value.: Оставьте поле пустым если не хотите менять его значение.
   - load: загрузка
   - Locales: Локализации
-  - Loggin out: Выход
   - login: вход
   - Login: Вход
   - logout: выход
@@ -153,19 +150,20 @@ translations
   - Number: Число
   - Object: Объект
   - ok: ок
+  - on my ip: на моём ip
   - Page: Страница
   - Parameter: Параметр
   - Password hash: Хеш пароля
   - Password: Пароль
   - Path to file: Путь к файлу
   - Path: Путь
-  - pdo prepare return the false: pdo prepare вернул false
   - PHP PDO driver for %%_name is not available.: PHP PDO драйвер для %%_name не доступен.
   - PHP PDO extension is not available.: PHP PDO расширение не доступно.
   - Queries: Запросы
   - query = "%%_query": запрос = "%%_query"
   - query = "%%_query"<br/>args = [%%_args]: запрос = "%%_query"<br/>аргументы = [%%_args]
   - Query error!: Ошибка запроса!
+  - query prepare return the false: подготовка запроса вернула false
   - query: запрос
   - Radios (macro): Переключатели (макро)
   - Radios: Переключатели
@@ -174,7 +172,6 @@ translations
   - Registered: Зарегистрированные
   - registration: регистрация
   - Registration: Регистрация
-  - remember me (on this ip): запомнить меня (на этом ip)
   - remember me: запомнить меня
   - reset: сбросить
   - Restore the storage credentials in "%%_path" dirrectory or reinstall this system on the page\: %%_link: Восстановите учетные данные хранилища в каталоге "%%_path" или переустановите эту систему на странице: %%_link
@@ -212,8 +209,7 @@ translations
   - Time: Время
   - Timezone: Часовой пояс
   - Title: Заголовок
-  - to front: на главную
-  - to home: домой
+  - to front page: на главную страницу
   - Total build time: Общее время сборки
   - Total load: Общая загрука
   - Total: Всего

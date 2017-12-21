@@ -179,8 +179,8 @@ namespace effectivecore\modules\user {
         if ($user &&
             $user->password_hash === factory::hash_password_get($values['password'][0])) {
           session::insert($user->id,
-            isset($values['remember_mode'][0]) ?
-                  $values['remember_mode'][0] : 2);
+            isset($values['session_params']) ? factory::array_values_map_to_keys(
+                  $values['session_params']) : []);
           url::go('/user/'.$user->id);
         }
         break;

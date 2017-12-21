@@ -182,4 +182,4 @@ forms
         - value: to_front
         children
         - label|text
-            text: to front
+            text: to front page

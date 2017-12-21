@@ -104,7 +104,7 @@ namespace effectivecore {
       event::start('on_query_before', 'pdo', [&$this, &$query]);
       $result = $this->connection->prepare($this->query_to_string($query));
       if ($result) $result->execute($this->args);
-      $errors = $result ? $result->errorInfo() : ['pdo prepare return the false', 'no', 'no'];
+      $errors = $result ? $result->errorInfo() : ['query prepare return the false', 'no', 'no'];
       event::start('on_query_after', 'pdo', [&$this, &$query, &$result, &$errors]);
       $this->args = [];
       if ($errors !== ['00000', null, null]) {
