@@ -41,6 +41,12 @@ colors
 - color_original_blue
     value: #216ce4
     is_dark: true
+- color_darkslateblue
+    value: darkslateblue
+    is_dark: true
+- color_indigo
+    value: indigo
+    is_dark: true
 - color_original_darkblue
     value: #28334a
     is_dark: true
