@@ -27,6 +27,10 @@ namespace effectivecore {
             $this->markup = $file->load(false);
             return $this;
           }
+          if ($c_info->type == 'inline') {
+            $this->markup = $c_info->markup;
+            return $this;
+          }
         }
       }
     }

@@ -1,16 +1,16 @@
 template
 - markup_html
-    type: file
-    path: frontend/template--markup.html
+    type: inline
+    markup: <%%_tag_name %%_attributes>%%_content</%%_tag_name>
 - markup_html_simple
-    type: file
-    path: frontend/template--markup_simple.html
+    type: inline
+    markup: <%%_tag_name %%_attributes>
 - markup_xml
-    type: file
-    path: frontend/template--markup.xml
+    type: inline
+    markup: <%%_tag_name %%_attributes>%%_content</%%_tag_name>
 - markup_xml_simple
-    type: file
-    path: frontend/template--markup_simple.xml
+    type: inline
+    markup: <%%_tag_name %%_attributes />
 - page
     type: file
     path: frontend/template--page.html
