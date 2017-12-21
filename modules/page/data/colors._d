@@ -29,11 +29,8 @@ colors
 - color_limegreen
     value: limegreen
     is_dark: true
-- color_springgreen
-    value: springgreen
-    is_dark: false
-- color_paleturquoise
-    value: paleturquoise
+- color_mediumaquamarine
+    value: mediumaquamarine
     is_dark: false
 - color_lightseagreen
     value: lightseagreen
