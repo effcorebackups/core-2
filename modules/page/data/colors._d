@@ -53,3 +53,12 @@ colors
 - color_black
     value: black
     is_dark: true
+- color_dimgray
+    value: dimgray
+    is_dark: true
+- color_silver
+    value: silver
+    is_dark: true
+- color_white
+    value: white
+    is_dark: true
