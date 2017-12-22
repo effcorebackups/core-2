@@ -12,7 +12,7 @@ pages
     - block_menu_main
         region: head_1
         type: link
-        npath: trees/core/main
+        datapath: trees/core/main
     - block_menu_user
         region: head_2
         type: code
@@ -29,11 +29,11 @@ pages
     - form_demo
         region: main_1
         type: link
-        npath: forms/develop/demo
+        datapath: forms/develop/demo
     - block_demo_static
         region: main_1
         type: link
-        npath: blocks/develop/demo
+        datapath: blocks/develop/demo
     - block_demo_dynamic
         region: main_1
         type: code

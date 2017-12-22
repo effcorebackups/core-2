@@ -117,7 +117,7 @@ namespace effectivecore {
 
   static function on_validate($form, $fields, &$values) {
     $indexes = [];
-    foreach ($fields as $c_npath => $c_field) {
+    foreach ($fields as $c_datapath => $c_field) {
       $c_element = $c_field->child_select('element');
       if ($c_element instanceof markup ||
           $c_element instanceof markup_simple) {
@@ -152,7 +152,7 @@ namespace effectivecore {
                 }
               }
             }
-            static::_validate_field_selector($form, $c_field, $c_element, $c_npath, $c_name, $values[$c_name], $c_allowed_values);
+            static::_validate_field_selector($form, $c_field, $c_element, $c_datapath, $c_name, $values[$c_name], $c_allowed_values);
             foreach ($c_element->child_select_all() as $c_option) {
               if ($c_option instanceof node && $c_option->tag_name == 'option') {
                 if (factory::in_array_string_compare($c_option->attribute_select('value'), $values[$c_name]))
@@ -165,7 +165,7 @@ namespace effectivecore {
         # input[type=file] validation:
         # ─────────────────────────────────────────────────────────────────────
         if ($c_field instanceof form_field_file) {
-            static::_validate_field_file($form, $c_field, $c_element, $c_npath, $c_name, $values[$c_name]);
+            static::_validate_field_file($form, $c_field, $c_element, $c_datapath, $c_name, $values[$c_name]);
           }
 
         # input[type=checkbox|radio] validation:
@@ -181,7 +181,7 @@ namespace effectivecore {
         # textarea validation:
         # ─────────────────────────────────────────────────────────────────────
           if ($c_element->tag_name == 'textarea') {
-            static::_validate_field_text($form, $c_field, $c_element, $c_npath, $c_name, $values[$c_name][$c_index]);
+            static::_validate_field_text($form, $c_field, $c_element, $c_datapath, $c_name, $values[$c_name][$c_index]);
             $content = $c_element->child_select('content');
             $content->text = $values[$c_name][$c_index];
           }
@@ -200,7 +200,7 @@ namespace effectivecore {
               $c_type == 'date'     ||
               $c_type == 'time'     ||
               $c_type == 'color')) {
-            static::_validate_field_text($form, $c_field, $c_element, $c_npath, $c_name, $values[$c_name][$c_index]);
+            static::_validate_field_text($form, $c_field, $c_element, $c_datapath, $c_name, $values[$c_name][$c_index]);
             $c_element->attribute_insert('value', $values[$c_name][$c_index]);
           }
 
@@ -213,7 +213,7 @@ namespace effectivecore {
   ### _validate_field_selector ###
   ################################
 
-  static function _validate_field_selector($form, $field, $element, $npath, $name, &$new_values, $allowed_values) {
+  static function _validate_field_selector($form, $field, $element, $datapath, $name, &$new_values, $allowed_values) {
     $title = translation::get(
       $field->title
     );
@@ -225,7 +225,7 @@ namespace effectivecore {
   # check required
   # ─────────────────────────────────────────────────────────────────────
     if ($element->attribute_select('required') && empty(array_filter($new_values, 'strlen'))) {
-      $form->add_error($npath.'/element',
+      $form->add_error($datapath.'/element',
         translation::get('Field "%%_title" must be selected!', ['title' => $title])
       );
       return;
@@ -242,7 +242,7 @@ namespace effectivecore {
   # ─────────────────────────────────────────────────────────────────────
     if (!$element->attribute_select('multiple') && count($new_values) > 1) {
       $new_values = array_slice($new_values, -1);
-      $form->add_error($npath.'/element',
+      $form->add_error($datapath.'/element',
         translation::get('Field "%%_title" is not support multiple select!', ['title' => $title])
       );
     }
@@ -252,7 +252,7 @@ namespace effectivecore {
   ### _validate_field_file ###
   ############################
 
-  static function _validate_field_file($form, $field, $element, $npath, $name, &$new_values) {
+  static function _validate_field_file($form, $field, $element, $datapath, $name, &$new_values) {
     $title = translation::get(
       $field->title
     );
@@ -263,23 +263,23 @@ namespace effectivecore {
   # break processing if some file from set of files is broken
     foreach ($new_values as $c_new_value) {
       switch ($c_new_value->error) {
-        case UPLOAD_ERR_INI_SIZE   : $form->add_error($npath.'/element', translation::get('Field "%%_title" after trying to upload the file returned an error: %%_error!', ['title' => $title, 'error' => translation::get('the size of uploaded file more than %%_size', ['size' => locale::format_human_bytes($max_size)])])); return;
-        case UPLOAD_ERR_PARTIAL    : $form->add_error($npath.'/element', translation::get('Field "%%_title" after trying to upload the file returned an error: %%_error!', ['title' => $title, 'error' => translation::get('the uploaded file was only partially uploaded')]));                                                  return;
-        case UPLOAD_ERR_NO_TMP_DIR : $form->add_error($npath.'/element', translation::get('Field "%%_title" after trying to upload the file returned an error: %%_error!', ['title' => $title, 'error' => translation::get('missing a temporary directory')]));                                                                  return;
-        case UPLOAD_ERR_CANT_WRITE : $form->add_error($npath.'/element', translation::get('Field "%%_title" after trying to upload the file returned an error: %%_error!', ['title' => $title, 'error' => translation::get('failed to write file to disk')]));                                                                   return;
-        case UPLOAD_ERR_EXTENSION  : $form->add_error($npath.'/element', translation::get('Field "%%_title" after trying to upload the file returned an error: %%_error!', ['title' => $title, 'error' => translation::get('a php extension stopped the file upload')]));                                                        return;
+        case UPLOAD_ERR_INI_SIZE   : $form->add_error($datapath.'/element', translation::get('Field "%%_title" after trying to upload the file returned an error: %%_error!', ['title' => $title, 'error' => translation::get('the size of uploaded file more than %%_size', ['size' => locale::format_human_bytes($max_size)])])); return;
+        case UPLOAD_ERR_PARTIAL    : $form->add_error($datapath.'/element', translation::get('Field "%%_title" after trying to upload the file returned an error: %%_error!', ['title' => $title, 'error' => translation::get('the uploaded file was only partially uploaded')]));                                                  return;
+        case UPLOAD_ERR_NO_TMP_DIR : $form->add_error($datapath.'/element', translation::get('Field "%%_title" after trying to upload the file returned an error: %%_error!', ['title' => $title, 'error' => translation::get('missing a temporary directory')]));                                                                  return;
+        case UPLOAD_ERR_CANT_WRITE : $form->add_error($datapath.'/element', translation::get('Field "%%_title" after trying to upload the file returned an error: %%_error!', ['title' => $title, 'error' => translation::get('failed to write file to disk')]));                                                                   return;
+        case UPLOAD_ERR_EXTENSION  : $form->add_error($datapath.'/element', translation::get('Field "%%_title" after trying to upload the file returned an error: %%_error!', ['title' => $title, 'error' => translation::get('a php extension stopped the file upload')]));                                                        return;
       }
 
       if ($c_new_value->size === 0) {
-        $form->add_error($npath.'/element', translation::get('Field "%%_title" after trying to upload the file returned an error: %%_error!', ['title' => $title, 'error' => translation::get('file is empty')]));
+        $form->add_error($datapath.'/element', translation::get('Field "%%_title" after trying to upload the file returned an error: %%_error!', ['title' => $title, 'error' => translation::get('file is empty')]));
         return;
       }
       if ($c_new_value->size > $max_size) {
-        $form->add_error($npath.'/element', translation::get('Field "%%_title" after trying to upload the file returned an error: %%_error!', ['title' => $title, 'error' => translation::get('the size of uploaded file more than %%_size', ['size' => locale::format_human_bytes($max_size)])]));
+        $form->add_error($datapath.'/element', translation::get('Field "%%_title" after trying to upload the file returned an error: %%_error!', ['title' => $title, 'error' => translation::get('the size of uploaded file more than %%_size', ['size' => locale::format_human_bytes($max_size)])]));
         return;
       }
       if ($c_new_value->error !== UPLOAD_ERR_OK) {
-        $form->add_error($npath.'/element', translation::get('Field "%%_title" after trying to upload the file returned an error: %%_error!', ['title' => $title, 'error' => $c_new_value->error]));
+        $form->add_error($datapath.'/element', translation::get('Field "%%_title" after trying to upload the file returned an error: %%_error!', ['title' => $title, 'error' => $c_new_value->error]));
         return;
       }
     }
@@ -287,7 +287,7 @@ namespace effectivecore {
   # check if field is multiple or singular
   # ─────────────────────────────────────────────────────────────────────
     if (!$element->attribute_select('multiple') && count($new_values) > 1) {
-      $form->add_error($npath.'/element',
+      $form->add_error($datapath.'/element',
         translation::get('Field "%%_title" is not support multiple select!', ['title' => $title])
       );
     }
@@ -299,7 +299,7 @@ namespace effectivecore {
   # check required
   # ─────────────────────────────────────────────────────────────────────
     if ($element->attribute_select('required') && count($new_values) == 0) {
-      $form->add_error($npath.'/element',
+      $form->add_error($datapath.'/element',
         translation::get('Field "%%_title" must be selected!', ['title' => $title])
       );
       return;
@@ -311,7 +311,7 @@ namespace effectivecore {
   ### _validate_field_text ###
   ############################
 
-  static function _validate_field_text($form, $field, $element, $npath, $name, &$new_value) {
+  static function _validate_field_text($form, $field, $element, $datapath, $name, &$new_value) {
     $title = translation::get(
       $field->title
     );
@@ -319,7 +319,7 @@ namespace effectivecore {
   # check required
   # ─────────────────────────────────────────────────────────────────────
     if ($element->attribute_select('required') && strlen($new_value) == 0) {
-      $form->add_error($npath.'/element',
+      $form->add_error($datapath.'/element',
         translation::get('Field "%%_title" can not be blank!', ['title' => $title])
       );
       return;
@@ -329,7 +329,7 @@ namespace effectivecore {
   # ─────────────────────────────────────────────────────────────────────
     if ($element->attribute_select('minlength') && strlen($new_value) &&
         $element->attribute_select('minlength')  > strlen($new_value)) {
-      $form->add_error($npath.'/element',
+      $form->add_error($datapath.'/element',
         translation::get('Field "%%_title" must contain a minimum of %%_num characters!', ['title' => $title, 'num' => $element->attribute_select('minlength')])
       );
       return;
@@ -339,7 +339,7 @@ namespace effectivecore {
   # ─────────────────────────────────────────────────────────────────────
     if ($element->attribute_select('maxlength') &&
         $element->attribute_select('maxlength') < strlen($new_value)) {
-      $form->add_error($npath.'/element',
+      $form->add_error($datapath.'/element',
         translation::get('Field "%%_title" must contain a maximum of %%_num characters!', ['title' => $title, 'num' => $element->attribute_select('maxlength')]).br.
         translation::get('Value was trimmed to the required length!').br.
         translation::get('Check field again before submit.')
@@ -363,7 +363,7 @@ namespace effectivecore {
       if (!preg_match('%^(?<integer>[-]?[1-9][0-9]*|0)$|'.
                        '^(?<float_s>[-]?[0-9][.][0-9]{1,3})$|'.
                        '^(?<float_l>[-]?[1-9][0-9]+[.][0-9]{1,3})$%S', $new_value)) {
-        $form->add_error($npath.'/element',
+        $form->add_error($datapath.'/element',
           translation::get('Field "%%_title" contains incorrect value!', ['title' => $title]).br.
           translation::get('Field value is not a valid number.')
         );
@@ -380,7 +380,7 @@ namespace effectivecore {
 
     # check min
       if ($c_min > $new_value) {
-        $form->add_error($npath.'/element',
+        $form->add_error($datapath.'/element',
           translation::get('Field "%%_title" contains incorrect value!', ['title' => $title]).br.
           translation::get('Field value is less than %%_value.', ['value' => $c_min])
         );
@@ -389,7 +389,7 @@ namespace effectivecore {
     
     # check max
       if ($c_max < $new_value) {
-        $form->add_error($npath.'/element',
+        $form->add_error($datapath.'/element',
           translation::get('Field "%%_title" contains incorrect value!', ['title' => $title]).br.
           translation::get('Field value is more than %%_value.', ['value' => $c_max])
         );
@@ -398,7 +398,7 @@ namespace effectivecore {
 
       if ((int)round(($c_min - $new_value) / $c_step, 5) !=
                round(($c_min - $new_value) / $c_step, 5)) {
-        $form->add_error($npath.'/element',
+        $form->add_error($datapath.'/element',
           translation::get('Field "%%_title" contains incorrect value!', ['title' => $title]).br.
           translation::get('Field value is not in valid range.')
         );
@@ -416,7 +416,7 @@ namespace effectivecore {
             checkdate($matches['m'],
                       $matches['d'],
                       $matches['Y']))) {
-        $form->add_error($npath.'/element',
+        $form->add_error($datapath.'/element',
           translation::get('Field "%%_title" contains an incorrect date!', ['title' => $title])
         );
         return;
@@ -427,7 +427,7 @@ namespace effectivecore {
 
     # check min
       if ($c_min > $new_value) {
-        $form->add_error($npath.'/element',
+        $form->add_error($datapath.'/element',
           translation::get('Field "%%_title" contains incorrect value!', ['title' => $title]).br.
           translation::get('Field value is less than %%_value.', ['value' => $c_min])
         );
@@ -436,7 +436,7 @@ namespace effectivecore {
 
     # check max
       if ($c_max < $new_value) {
-        $form->add_error($npath.'/element',
+        $form->add_error($datapath.'/element',
           translation::get('Field "%%_title" contains incorrect value!', ['title' => $title]).br.
           translation::get('Field value is more than %%_value.', ['value' => $c_max])
         );
@@ -453,7 +453,7 @@ namespace effectivecore {
       if (!preg_match('%^(?<H>[0-1][0-9]|20|21|22|23)'.
                     '(?::(?<i>[0-5][0-9]))'.
                     '(?::(?<s>[0-5][0-9])|)$%S', $new_value, $matches)) {
-        $form->add_error($npath.'/element',
+        $form->add_error($datapath.'/element',
           translation::get('Field "%%_title" contains an incorrect time!', ['title' => $title])
         );
         return;
@@ -467,7 +467,7 @@ namespace effectivecore {
 
     # check min
       if ($c_min > $new_value) {
-        $form->add_error($npath.'/element',
+        $form->add_error($datapath.'/element',
           translation::get('Field "%%_title" contains incorrect value!', ['title' => $title]).br.
           translation::get('Field value is less than %%_value.', ['value' => $c_min])
         );
@@ -476,7 +476,7 @@ namespace effectivecore {
 
     # check max
       if ($c_max < $new_value) {
-        $form->add_error($npath.'/element',
+        $form->add_error($datapath.'/element',
           translation::get('Field "%%_title" contains incorrect value!', ['title' => $title]).br.
           translation::get('Field value is more than %%_value.', ['value' => $c_max])
         );
@@ -491,7 +491,7 @@ namespace effectivecore {
       $emails = explode(',', $new_value);
       if (!$element->attribute_select('multiple') && count($emails) > 1) {
         $new_values = $emails[0];
-        $form->add_error($npath.'/element',
+        $form->add_error($datapath.'/element',
           translation::get('Field "%%_title" is not support multiple select!', ['title' => $title])
         );
         return;
@@ -499,7 +499,7 @@ namespace effectivecore {
       if (strlen($new_value)) {
         foreach ($emails as $c_email) {
           if (factory::filter_email($c_email) == false) {
-            $form->add_error($npath.'/element',
+            $form->add_error($datapath.'/element',
               translation::get('Field "%%_title" contains an incorrect email address!', ['title' => $title])
             );
             return;
@@ -511,7 +511,7 @@ namespace effectivecore {
   # check captcha
   # ─────────────────────────────────────────────────────────────────────
     if ($name == 'captcha' && !$field->captcha_check($new_value)) {
-      $form->add_error($npath.'/element',
+      $form->add_error($datapath.'/element',
         translation::get('Field "%%_title" contains an incorrect characters from image!', ['title' => $title])
       );
       return;
@@ -524,7 +524,7 @@ namespace effectivecore {
   #######################
 
   static function on_submit_files($form, $fields, &$values) {
-    foreach ($fields as $c_npath => $c_field) {
+    foreach ($fields as $c_datapath => $c_field) {
       $c_element = $c_field->child_select('element');
       if ($c_element instanceof markup ||
           $c_element instanceof markup_simple) {

@@ -52,7 +52,7 @@ frontend
         file: frontend/page.js
 - frontend_form_n
     display
-      npath
+      datapath
         match: %^forms/.*$%
         where: block
     styles

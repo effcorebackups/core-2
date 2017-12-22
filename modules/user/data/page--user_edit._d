@@ -20,7 +20,7 @@ pages
     - block_menu_main
         region: head_1
         type: link
-        npath: trees/core/main
+        datapath: trees/core/main
     - block_menu_user
         region: head_2
         type: code
@@ -37,7 +37,7 @@ pages
     - form_user_edit
         region: main_1
         type: link
-        npath: forms/user/user_edit
+        datapath: forms/user/user_edit
     # ─────────────────────────────────────────────────────────────────────
     - block_copyright
         region: copyright

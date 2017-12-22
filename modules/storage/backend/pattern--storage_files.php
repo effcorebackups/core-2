@@ -28,11 +28,11 @@ namespace effectivecore {
                  static::$data[$group] : null;
   }
 
-  function select_by_npath($npath) {
-    $npath_parts = explode('/', $npath);
-    $group = array_shift($npath_parts);
-    $group_data = $this->select_group($group);
-    return factory::npath_get_object(implode('/', $npath_parts), $group_data);
+  function select_by_datapath($datapath) {
+    $datapath_parts = explode('/', $datapath);
+    $group_name = array_shift($datapath_parts);
+    $group_data = $this->select_group($group_name);
+    return factory::datapath_get_object(implode('/', $datapath_parts), $group_data);
   }
 
   ######################
@@ -100,10 +100,10 @@ namespace effectivecore {
   ### changes functions ###
   #########################
 
-  function changes_register_action($module_id, $action, $npath, $value = null, $rebuild = true) {
+  function changes_register_action($module_id, $action, $datapath, $value = null, $rebuild = true) {
   # add new action
     $changes_d = dynamic::select('changes') ?: [];
-    $changes_d[$module_id]->{$action}[$npath] = $value;
+    $changes_d[$module_id]->{$action}[$datapath] = $value;
     dynamic::update('changes', $changes_d, ['build' => factory::datetime_get()]);
   # prevent opcache work
     static::$changes_dynamic['changes'] = $changes_d;
@@ -112,21 +112,21 @@ namespace effectivecore {
     }
   }
 
-  function changes_unregister_action($module_id, $action, $npath) {
+  function changes_unregister_action($module_id, $action, $datapath) {
   }
 
   static function changes_apply_to_data($changes, &$data) {
     foreach ($changes as $module_id => $c_module_changes) {
       foreach ($c_module_changes as $c_action_id => $c_changes) {
-        foreach ($c_changes as $c_npath => $c_value) {
-          $path_parts = explode('/', $c_npath);
-          $child_name = array_pop($path_parts);
-          $parent_obj = &factory::npath_get_pointer(implode('/', $path_parts), $data);
+        foreach ($c_changes as $c_datapath => $c_value) {
+          $c_datapath_parts = explode('/', $c_datapath);
+          $c_child_name = array_pop($c_datapath_parts);
+          $c_parent_obj = &factory::datapath_get_pointer(implode('/', $c_datapath_parts), $data);
           switch ($c_action_id) {
             case 'insert': # only structured types support (array|object)
-              switch (gettype($parent_obj)) {
-                case 'array' : $destination_obj = &$parent_obj[$child_name];   break;
-                case 'object': $destination_obj = &$parent_obj->{$child_name}; break;
+              switch (gettype($c_parent_obj)) {
+                case 'array' : $destination_obj = &$c_parent_obj[$c_child_name];   break;
+                case 'object': $destination_obj = &$c_parent_obj->{$c_child_name}; break;
               }
               switch (gettype($destination_obj)) {
                 case 'array' : foreach ($c_value as $key => $value) $destination_obj[$key]   = $value; break;
@@ -134,15 +134,15 @@ namespace effectivecore {
               }
               break;
             case 'update': # only scalar types support (string|numeric) @todo: test bool|null
-              switch (gettype($parent_obj)) {
-                case 'array' : $parent_obj[$child_name]   = $c_value; break;
-                case 'object': $parent_obj->{$child_name} = $c_value; break;
+              switch (gettype($c_parent_obj)) {
+                case 'array' : $c_parent_obj[$c_child_name]   = $c_value; break;
+                case 'object': $c_parent_obj->{$c_child_name} = $c_value; break;
               }
               break;
             case 'delete':
-              switch (gettype($parent_obj)) {
-                case 'array' : unset($parent_obj[$child_name]);   break;
-                case 'object': unset($parent_obj->{$child_name}); break;
+              switch (gettype($c_parent_obj)) {
+                case 'array' : unset($c_parent_obj[$c_child_name]);   break;
+                case 'object': unset($c_parent_obj->{$c_child_name}); break;
               }
               break;
             }
