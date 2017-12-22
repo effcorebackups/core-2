@@ -7,7 +7,7 @@
 namespace effectivecore {
           abstract class temporary extends \effectivecore\dynamic {
 
-  static $type = 'tmp';
-  static $directory = dir_dynamic.'tmp/';
+  static public $type = 'tmp';
+  static public $directory = dir_dynamic.'tmp/';
 
 }}

@@ -7,7 +7,7 @@
 namespace effectivecore {
           abstract class module {
 
-  protected static $data;
+  static protected $data;
 
   static function init() {
     static::$data = storage::get('files')->select_group('module');

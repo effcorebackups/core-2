@@ -7,8 +7,8 @@
 namespace effectivecore {
           abstract class locale {
 
-  protected static $countries;
-  protected static $settings;
+  static protected $countries;
+  static protected $settings;
 
   static function init() {
     static::$settings = storage::get('files')->select_group('settings')['locales'];

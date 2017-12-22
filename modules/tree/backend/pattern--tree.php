@@ -20,8 +20,8 @@ namespace effectivecore {
   ### static methods ###
   ######################
 
-  protected static $trees;
-  protected static $tree_items;
+  static protected $trees;
+  static protected $tree_items;
 
   static function init() {
     $trees      = storage::get('files')->select_group('trees');

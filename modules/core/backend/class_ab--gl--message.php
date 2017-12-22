@@ -7,7 +7,7 @@
 namespace effectivecore {
           abstract class message {
 
-  protected static $data = [];
+  static protected $data = [];
 
   static function init() {
   }

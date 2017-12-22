@@ -7,7 +7,7 @@
 namespace effectivecore {
           abstract class translation {
 
-  protected static $data;
+  static protected $data;
 
   static function init() {
     foreach (storage::get('files')->select_group('translations') as $c_module) {

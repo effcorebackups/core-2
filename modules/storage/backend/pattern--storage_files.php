@@ -7,9 +7,9 @@
 namespace effectivecore {
           class storage_files {
 
-  static $data_orig;
-  static $data = [];
-  static $changes_dynamic;
+  static public $data_orig;
+  static public $data = [];
+  static public $changes_dynamic;
 
   static function init($group) {
     console::add_log('storage', 'init.', 'storage %%_id will be initialized', 'ok', 0, ['id' => $group.' | storage_files']);

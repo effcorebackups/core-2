@@ -135,8 +135,8 @@ namespace effectivecore {
   ### static methods ###
   ######################
 
-  static $data = [];
-  static $args = [];
+  static public $data = [];
+  static public $args = [];
 
   static function find_and_render() {
   # render page

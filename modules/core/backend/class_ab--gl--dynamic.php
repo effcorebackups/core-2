@@ -7,10 +7,10 @@
 namespace effectivecore {
           abstract class dynamic {
 
-  static $type = 'data';
-  static $directory = dir_dynamic.'data/';
-  static $info = [];
-  static $data = [];
+  static public $type = 'data';
+  static public $directory = dir_dynamic.'data/';
+  static public $info = [];
+  static public $data = [];
 
   static function select_info() {
     return static::$info;
@@ -35,10 +35,10 @@ namespace effectivecore {
         is_writable($file->get_path()) && $file->is_exist()) ||
                                           $file->is_exist() == false)) {
       $file->set_data(
-        "<?php".nl.nl."namespace effectivecore { # ".static::$type." for ".$name.nl.nl.($info ?
+        '<?php'.nl.nl.'namespace effectivecore { # '.static::$type.' for '.$name.nl.nl.($info ?
            factory::data_export($info, '  '.factory::class_get_short_name(static::class).'::$info[\''.$name.'\']') : '').
            factory::data_export($data, '  '.factory::class_get_short_name(static::class).'::$data[\''.$name.'\']').nl.
-        "}");
+        '}');
       $file->save();
       if (function_exists('opcache_invalidate')) {
         opcache_invalidate($file->get_path());

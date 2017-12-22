@@ -7,7 +7,7 @@
 namespace effectivecore {
           abstract class timer {
 
-  protected static $data;
+  static protected $data;
 
   static function tap($name) {
     static::$data[$name][] = microtime(true);

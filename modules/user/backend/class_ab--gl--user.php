@@ -7,7 +7,7 @@
 namespace effectivecore {
           abstract class user {
 
-  static $data;
+  static public $data;
 
   static function init($id = null) {
     static::$data = new \stdClass();

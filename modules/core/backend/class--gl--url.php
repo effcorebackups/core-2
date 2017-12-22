@@ -99,7 +99,7 @@ namespace effectivecore {
   ### static methods ###
   ######################
 
-  protected static $data;
+  static protected $data;
 
   static function init() {
     static::$data = new url($_SERVER['REQUEST_URI']);

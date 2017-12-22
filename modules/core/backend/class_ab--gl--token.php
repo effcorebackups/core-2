@@ -7,7 +7,7 @@
 namespace effectivecore {
           abstract class token {
 
-  protected static $data;
+  static protected $data;
 
   static function init() {
     foreach (storage::get('files')->select_group('tokens') as $c_tokens) {

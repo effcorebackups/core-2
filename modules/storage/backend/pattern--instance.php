@@ -57,8 +57,8 @@ namespace effectivecore {
   ### static methods ###
   ######################
 
-  protected static $data;
-  protected static $data_raw;
+  static protected $data;
+  static protected $data_raw;
 
   static function init() {
     static::$data_raw = storage::get('files')->select_group('instances');

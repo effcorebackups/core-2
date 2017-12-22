@@ -7,7 +7,7 @@
 namespace effectivecore {
           abstract class event {
 
-  protected static $data;
+  static protected $data;
 
   static function init() {
     console::add_log('event', 'init.', 'event system was initialized', '-');

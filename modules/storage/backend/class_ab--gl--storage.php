@@ -7,7 +7,7 @@
 namespace effectivecore {
           abstract class storage {
 
-  protected static $data;
+  static protected $data;
 
   static function init() {
     storage_files::init('storages');

@@ -7,7 +7,7 @@
 namespace effectivecore {
           abstract class language {
 
-  protected static $data;
+  static protected $data;
 
   static function init() {
     foreach (storage::get('files')->select_group('languages') as $languages) {
