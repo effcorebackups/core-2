@@ -5,12 +5,15 @@ colors
 - color_thistle
     value: thistle
     is_dark: false
-- color_lightcoral
-    value: lightcoral
+- color_pink
+    value: pink
     is_dark: false
 - color_salmon
     value: salmon
     is_dark: true
+- color_salmon
+    value: salmon
+    is_dark: false
 - color_tomato
     value: tomato
     is_dark: true
@@ -26,39 +29,48 @@ colors
 - color_yellowgreen
     value: yellowgreen
     is_dark: true
-- color_limegreen
-    value: limegreen
-    is_dark: true
+- color_forestgreen
+    value: forestgreen
+    is_dark: false
 - color_mediumaquamarine
     value: mediumaquamarine
     is_dark: false
 - color_lightseagreen
     value: lightseagreen
     is_dark: true
+- color_lightseagreen
+    value: lightseagreen
+    is_dark: false
 - color_darkcyan
     value: darkcyan
     is_dark: true
+- color_steelblue
+    value: steelblue
+    is_dark: false
 - color_original_blue
     value: #216ce4
     is_dark: true
 - color_darkslateblue
     value: darkslateblue
-    is_dark: true
-- color_indigo
-    value: indigo
+    is_dark: false
+- color_darkslateblue
+    value: darkslateblue
     is_dark: true
 - color_original_darkblue
     value: #28334a
     is_dark: true
-- color_black
-    value: black
-    is_dark: true
-- color_dimgray
-    value: dimgray
+- color_slategray
+    value: slategray
+    is_dark: false
+- color_white
+    value: white
     is_dark: true
 - color_silver
     value: silver
     is_dark: true
-- color_white
-    value: white
+- color_dimgray
+    value: dimgray
+    is_dark: true
+- color_black
+    value: black
     is_dark: true
