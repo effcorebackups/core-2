@@ -8,6 +8,10 @@ namespace effectivecore {
           class form extends \effectivecore\markup
           implements \effectivecore\has_different_cache {
 
+  static function get_non_different_properties() {
+    return [];
+  }
+
   # elements support:
   # ─────────────────────────────────────────────────────────────────────
   # - textarea

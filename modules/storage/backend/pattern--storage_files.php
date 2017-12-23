@@ -5,11 +5,16 @@
   ##################################################################
 
 namespace effectivecore {
-          class storage_files {
+          class storage_files
+          implements \effectivecore\has_different_cache {
 
   static public $data_orig;
   static public $data = [];
   static public $changes_dynamic;
+
+  static function get_non_different_properties() {
+    return ['id' => 'id'];
+  }
 
   static function init($group) {
     console::add_log('storage', 'init.', 'storage %%_id will be initialized', 'ok', 0, ['id' => $group.' | storage_files']);
@@ -37,9 +42,7 @@ namespace effectivecore {
       foreach ($c_module_data as $c_row_id => $c_item) {
         if ($c_item instanceof different_cache &&
             $datapath_parts[1] === $c_row_id) {
-          $group_data[$c_module_id][$c_row_id] = cache::select(
-            $c_item->get_cache_name()
-          );
+          $group_data[$c_module_id][$c_row_id] = $c_item->get_different_cache();
         }
       }
     }
@@ -73,9 +76,12 @@ namespace effectivecore {
       foreach ($c_data as $c_module_id => $c_items) {
         foreach ($c_items as $c_row_id => $c_item) {
           if ($c_item instanceof has_different_cache) {
-            $c_cache_id = 'data--'.$c_group.'--'.$c_module_id.'--'.$c_row_id;
-            cache::update($c_cache_id, $c_item);
-            $c_data[$c_module_id][$c_row_id] = new different_cache($c_cache_id);
+            $c_diff_cache_id = 'data--'.$c_group.'--'.$c_module_id.'--'.$c_row_id;
+            cache::update($c_diff_cache_id, $c_item);
+            $c_data[$c_module_id][$c_row_id] = new different_cache($c_diff_cache_id);
+            foreach ($c_item::get_non_different_properties() as $c_prop) {
+              $c_data[$c_module_id][$c_row_id]->{$c_prop} = $c_item->{$c_prop};
+            }
           }
         }
       }

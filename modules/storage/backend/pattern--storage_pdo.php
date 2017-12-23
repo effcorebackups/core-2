@@ -5,7 +5,8 @@
   ##################################################################
 
 namespace effectivecore {
-          class storage_pdo {
+          class storage_pdo
+          implements \effectivecore\has_different_cache {
 
   public $id;
   public $driver;
@@ -14,6 +15,10 @@ namespace effectivecore {
   public $args = [];
   protected $queries = [];
   protected $connection;
+
+  static function get_non_different_properties() {
+    return ['id' => 'id'];
+  }
 
   function init() {
     if ($this->connection) return

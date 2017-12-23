@@ -17,4 +17,10 @@ namespace effectivecore {
     return $this->cache_name;
   }
 
+  function get_different_cache() {
+    return cache::select(
+      $this->get_cache_name()
+    );
+  }
+
 }}
