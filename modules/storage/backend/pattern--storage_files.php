@@ -30,9 +30,22 @@ namespace effectivecore {
 
   function select_by_datapath($datapath) {
     $datapath_parts = explode('/', $datapath);
+    if (count($datapath_parts) < 3) return null;
     $group_name = array_shift($datapath_parts);
     $group_data = $this->select_group($group_name);
-    return factory::datapath_get_object(implode('/', $datapath_parts), $group_data);
+    foreach ($group_data as $c_module_id => $c_module_data) {
+      foreach ($c_module_data as $c_row_id => $c_item) {
+        if ($c_item instanceof different_cache &&
+            $datapath_parts[1] === $c_row_id) {
+          $group_data[$c_module_id][$c_row_id] = cache::select(
+            $c_item->get_cache_name()
+          );
+        }
+      }
+    }
+    return factory::datapath_get_object(
+      implode('/', $datapath_parts), $group_data
+    );
   }
 
   ######################
