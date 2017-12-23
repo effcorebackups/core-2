@@ -158,9 +158,9 @@ namespace effectivecore {
 
   static function get_file_types() {
     $return = [];
-    foreach (storage::get('files')->select_group('file_types') as $c_types) {
-      foreach ($c_types as $c_name => $c_info) {
-        $return[$c_name] = $c_info;
+    foreach (storage::get('files')->select_group('file_types') as $c_module_id => $c_module_file_types) {
+      foreach ($c_module_file_types as $c_row_id => $c_info) {
+        $return[$c_row_id] = $c_info;
       }
     }
     return $return;

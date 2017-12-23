@@ -55,9 +55,18 @@ namespace effectivecore {
     static::changes_apply_to_data($changes_s, $data);
     unset($data['changes']);
   # save cache
-    foreach ($data as $group => $slice) {
-      cache::update('data--'.$group, $slice);
-      static::$data[$group] = $slice;
+    foreach ($data as $c_group => $c_data) {
+      static::$data[$c_group] = $c_data;
+      foreach ($c_data as $c_module_id => $c_items) {
+        foreach ($c_items as $c_row_id => $c_item) {
+          if ($c_item instanceof has_different_cache) {
+            $c_cache_id = 'data--'.$c_group.'--'.$c_module_id.'--'.$c_row_id;
+            cache::update($c_cache_id, $c_item);
+            $c_data[$c_module_id][$c_row_id] = new different_cache($c_cache_id);
+          }
+        }
+      }
+      cache::update('data--'.$c_group, $c_data);
     }
   }
 

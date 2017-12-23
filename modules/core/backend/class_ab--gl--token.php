@@ -10,8 +10,8 @@ namespace effectivecore {
   static protected $data;
 
   static function init() {
-    foreach (storage::get('files')->select_group('tokens') as $c_tokens) {
-      foreach ($c_tokens as $c_token) {
+    foreach (storage::get('files')->select_group('tokens') as $c_module_id => $c_module_tokens) {
+      foreach ($c_module_tokens as $c_row_id => $c_token) {
         static::$data[$c_token->match] = $c_token;
       }
     }

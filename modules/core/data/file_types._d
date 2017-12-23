@@ -4,8 +4,6 @@ file_types
     protected: 1
     headers
     - Content-type: text/html
-- sqlite
-    protected: 1
 # text files
 - css
     use_tokens: 1

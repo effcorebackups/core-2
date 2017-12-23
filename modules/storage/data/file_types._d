@@ -3,3 +3,5 @@ file_types
     protected: 1
     headers
     - Content-type: text/data
+- sqlite
+    protected: 1

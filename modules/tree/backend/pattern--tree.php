@@ -26,13 +26,13 @@ namespace effectivecore {
   static function init() {
     $trees      = storage::get('files')->select_group('trees');
     $tree_items = storage::get('files')->select_group('tree_items');
-    foreach ($trees as $c_trees_by_module) {
-      foreach ($c_trees_by_module as $c_tree) {
+    foreach ($trees as $c_module_id => $c_module_trees) {
+      foreach ($c_module_trees as $c_row_id => $c_tree) {
         static::$trees[$c_tree->id] = $c_tree;
       }
     }
-    foreach ($tree_items as $c_items_by_module) {
-      foreach ($c_items_by_module as $c_item) {
+    foreach ($tree_items as $c_module_id => $c_module_tree_items) {
+      foreach ($c_module_tree_items as $c_row_id => $c_item) {
         static::$tree_items[$c_item->id] = $c_item;
       }
     }

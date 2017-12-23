@@ -62,9 +62,9 @@ namespace effectivecore {
 
   static function init() {
     static::$data_raw = storage::get('files')->select_group('instances');
-    foreach (static::$data_raw as $c_instances) {
-      foreach ($c_instances as $row_id => $c_instance) {
-        static::$data[$row_id] = $c_instance;
+    foreach (static::$data_raw as $c_module_id => $c_module_instances) {
+      foreach ($c_module_instances as $c_row_id => $c_instance) {
+        static::$data[$c_row_id] = $c_instance;
       }
     }
   }

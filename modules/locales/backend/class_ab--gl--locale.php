@@ -12,8 +12,8 @@ namespace effectivecore {
 
   static function init() {
     static::$settings = storage::get('files')->select_group('settings')['locales'];
-    foreach (storage::get('files')->select_group('countries') as $c_countries) {
-      foreach ($c_countries as $c_country) {
+    foreach (storage::get('files')->select_group('countries') as $c_module_id => $c_module_countries) {
+      foreach ($c_module_countries as $c_row_id => $c_country) {
         static::$countries[$c_country->code] = $c_country;
       }
     }

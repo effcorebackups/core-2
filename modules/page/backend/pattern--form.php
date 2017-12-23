@@ -5,7 +5,8 @@
   ##################################################################
 
 namespace effectivecore {
-          class form extends \effectivecore\markup {
+          class form extends \effectivecore\markup
+          implements \effectivecore\has_different_cache {
 
   # elements support:
   # ─────────────────────────────────────────────────────────────────────

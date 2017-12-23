@@ -9,13 +9,13 @@ namespace effectivecore {
 
   function build() {
     $this->attribute_insert('class', ['palette' => 'palette']);
-    foreach (storage::get('files')->select_group('colors') as $module_id => $c_colors) {
-      foreach ($c_colors as $c_color_id => $c_color_info) {
+    foreach (storage::get('files')->select_group('colors') as $c_module_id => $c_module_colors) {
+      foreach ($c_module_colors as $c_row_id => $c_color_info) {
         $this->input_insert(null, [
-          'value' => $c_color_id,
-          'title' => translation::get('Color ID = %%_id (value = %%_value)', ['id' => $c_color_id, 'value' => $c_color_info->value]),
+          'value' => $c_row_id,
+          'title' => translation::get('Color ID = %%_id (value = %%_value)', ['id' => $c_row_id, 'value' => $c_color_info->value]),
           'style' => ['background-color: '.$c_color_info->value]
-        ], $c_color_id);
+        ], $c_row_id);
       }
     }
   }

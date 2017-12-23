@@ -33,8 +33,8 @@ namespace effectivecore {
         $used_links[] = $c_block->datapath;
       }
     }
-    foreach (storage::get('files')->select_group('frontend') as $module_id => $c_frontend_items) {
-      foreach ($c_frontend_items as $c_item) {
+    foreach (storage::get('files')->select_group('frontend') as $module_id => $c_module_frontend) {
+      foreach ($c_module_frontend as $c_row_id => $c_item) {
         if (    (isset($c_item->display->url->match) &&
             preg_match($c_item->display->url->match, url::get_current()->path)) ||
                 (isset($c_item->display->datapath->match) && $c_item->display->datapath->where == 'block' &&
@@ -140,8 +140,8 @@ namespace effectivecore {
 
   static function find_and_render() {
   # render page
-    foreach (storage::get('files')->select_group('pages') as $c_pages) {
-      foreach ($c_pages as $c_page) {
+    foreach (storage::get('files')->select_group('pages') as $c_module_id => $c_module_pages) {
+      foreach ($c_module_pages as $c_row_id => $c_page) {
         if (   isset($c_page->display->url->match) &&
           preg_match($c_page->display->url->match, url::get_current()->path)) {
           if (!isset($c_page->access) ||
