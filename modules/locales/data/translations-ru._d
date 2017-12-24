@@ -1,248 +1,250 @@
 translations
-  ru
-  - - select -: - выбрать -
-  - a php extension stopped the file upload: расширение php остановило загрузку файла
-  - action: действие
-  - Action: Действие
-  - actions: действия
-  - Actions: Действия
-  - Administer: Администрирование
-  - Administrators: Администраторы
-  - All rights reserved.: Все права защищены.
-  - Allowable characters\: %%_chars. Examples\: %%_examples.: Допустимые символы: %%_chars. Примеры: %%_examples.
-  - Allowable characters\: %%_chars.: Допустимые символы: %%_chars.
-  - always_enabled: всегда_вкл
-  - Anonymous: Аноним
-  - autoload: автозагрузка
-  - Avatar: Аватар
-  - avatar: аватар
-  - Background color: Цвет фона
-  - button: кнопка
-  - cache: кэш
-  - Call %%_name: Вызов %%_name
-  - call: вызов
-  - Cancel: Отмена
-  - cancel: отмена
-  - Captcha: Защитный код
-  - Changes was removed.: Изменения были удалены.
-  - Changes was saved.: Изменения были сохранены.
-  - Check field again before submit.: Проверьте поле снова перед отправкой.
-  - Checkboxes (macro): Флажки (макро)
-  - Checkboxes: Флажки
-  - Color ID = %%_id (value = %%_value): ID цвета = %%_id (значение = %%_value)
-  - Color: Цвет
-  - Colors: Цвета
-  - Console: Консоль
-  - Control elements: Элементы управления
-  - Cookies are disabled. You can not log in!: Cookies отключены. Вы не можете войти в систему!
-  - Copyright © %%_years %%_right_holder.: Авторские права © %%_years %%_right_holder.
-  - Core: Ядро
-  - created: создано
-  - Created: Создано
-  - Credentials for storage %%_id was not setted!: Учётные данные для хранилища %%_id не были заданы!
-  - Credentials: Учётные данные
-  - credentials: учётные данные
-  - Current field value\: %%_value.: Текущее значение поля: %%_value.
-  - Current language: Текущий язык
-  - Data was not updated!: Данные не были обновлены!
-  - Date: Дата
-  - Decoration: Оформление
-  - delete file\: %%_name: удалить файл: %%_name
-  - Delete user %%_nick_context{4}?: Удалить пользователя %%_nick_context{4}?
-  - delete: удалить
-  - Demo: Демо
-  - Description: Описание
-  - Develop: Разработка
-  - driver error code\: %%_code: код ошибки драйвера: %%_code
-  - driver error text\: %%_text: текст ошибки драйвера: %%_text
-  - Driver is not selected!: Драйвер не выбран!
-  - Driver: Драйвер
-  - Dynamic block: Динамический блок
-  - Edit user %%_nick_context{2}: Редактировать пользователя %%_nick_context{2}
-  - edit: редактировать
-  - Element %%_info.: Элемент %%_info.
-  - Elements: Элементы
-  - EMail: Адрес электронной почты
-  - Enable cookies before login.: Включите cookies до начала входа в систему.
-  - Entity %%_name was installed.: Сущность %%_name была установлена.
-  - Entity %%_name was not installed!: Сущность %%_name не была установлена!
-  - error: ошибка
-  - event system was initialized: система событий была инициализирована
-  - event: событие
-  - Event: Событие
-  - events: события
-  - Events: События
-  - Execute plan: План выполнения
-  - failed to write file to disk: не удалось записать файл на диск
-  - Field "%%_title" after trying to upload the file returned an error\: %%_error!: Поле "%%_title" после попытки загрузить файл вернуло ошибку: %%_error!
-  - Field "%%_title" can not be blank!: Поле "%%_title" не может быть пустым!
-  - Field "%%_title" contains an incorrect characters from image!: Поле "%%_title" содержит неверные символы с изображения!
-  - Field "%%_title" contains an incorrect date!: Поле "%%_title" содержит неверную дату!
-  - Field "%%_title" contains an incorrect email address!: Поле "%%_title" содержит неверный адрес электронной почты!
-  - Field "%%_title" contains an incorrect time!: Поле "%%_title" содержит неверное время!
-  - Field "%%_title" contains incorrect value!: Поле "%%_title" содержит неверное значение!
-  - Field "%%_title" is not support multiple select!: Поле "%%_title" не поддерживает множественный выбор!
-  - Field "%%_title" must be selected!: Поле "%%_title" должно быть выбрано!
-  - Field "%%_title" must contain a maximum of %%_num characters!: Поле "%%_title" должно содержать максимум %%_num символов!
-  - Field "%%_title" must contain a minimum of %%_num characters!: Поле "%%_title" должно содержать минимум %%_num символов!
-  - Field must contain a maximum of %%_num characters.: Поле должно содержать максимум %%_num символов.
-  - Field must contain a minimum of %%_num characters.: Поле должно содержать минимум %%_num символов.
-  - Field value is less than %%_value.: Значение поля меньше чем %%_value.
-  - Field value is more than %%_value.: Значение поля больше чем %%_value.
-  - Field value is not a valid number.: Значение поля не является допустимым числом.
-  - Field value is not in valid range.: Значение поля не соответствует допустимому диапазону.
-  - File %%_name was uploaded.: Файл %%_name был загружен.
-  - file is empty: файл пуст
-  - File: Файл
-  - file: файл
-  - Form elements: Элементы формы
-  - Front page: Главная страница
-  - Home: Дом
-  - Host name: Имя хоста
-  - Incorrect email or password!: Неверный адрес электронной почты или пароль!
-  - Information: Информация
-  - init.: инициал.
-  - initialization: инициализация
-  - insertion: вставка
-  - Install: Установить
-  - install: установить
-  - Installation is not available because storage credentials was setted!: Установка недоступна потому, что учетные данные хранилища уже были установлены.
-  - Installation: Установка
-  - installation: установка
-  - Instances of entity %%_name was added.: Экземпляры сущности %%_name были добавлены.
-  - Instances of entity %%_name was not added!: Экземпляры сущности %%_name не были добавлены!
-  - invalid session was deleted!: Недействительный сеанс был удален!
-  - Is always on: Всегда включен
-  - Is embed: Встроенный
-  - Leave the field blank if you do not want to change its value.: Оставьте поле пустым если не хотите менять его значение.
-  - load: загрузка
-  - Locales: Локализации
-  - login: вход
-  - Login: Вход
-  - logout: выход
-  - Logout: Выход
-  - Main menu: Главное меню
-  - Main system module.: Основной модуль системы.
-  - Maximal field value\: %%_value.: Максимальное значение поля: %%_value.
-  - Maximal file size\: %%_value.: Максимальный размер файла: %%_value.
-  - Memory for php (bytes): Память для php (байт)
-  - Message from storage\: %%_message: Сообщение от хранилища: %%_message
-  - Minimal field value\: %%_value.: Минимальное значение поля: %%_value.
-  - missing a temporary directory: отсутствует временный каталог
-  - Moderators: Модераторы
-  - Module for demonstrating capabilities.: Модуль для демонстрации возможностей.
-  - Module for development.: Модуль для разработки.
-  - Module for internationalization.: Модуль для интернационализации.
-  - Module for storages support.: Модуль поддержки хранилищ данных.
-  - Module for working with pages.: Модуль работы со страницами.
-  - Module for working with trees (hierarchical structures).: Модуль работы с деревьями (иерархическими структурами).
-  - Module for working with user accounts and permissions.: Модуль работы с пользовательскими аккаунтами и разрешениями.
-  - Modules was installed.: Модули были установлены.
-  - Modules: Модули
-  - Name: Имя
-  - New password must be different from the current password!: Новый пароль должен отличаться от текущего!
-  - New password: Новый пароль
-  - Nick: Ник
-  - no items: нет элементов
-  - No: Нет
-  - no: нет
-  - Number: Число
-  - Object: Объект
-  - ok: ок
-  - on this ip: на этом ip
-  - Page: Страница
-  - Parameter: Параметр
-  - Password hash: Хеш пароля
-  - Password: Пароль
-  - Path to file: Путь к файлу
-  - Path: Путь
-  - PHP PDO driver for %%_name is not available.: PHP PDO драйвер для %%_name не доступен.
-  - PHP PDO extension is not available.: PHP PDO расширение не доступно.
-  - Queries: Запросы
-  - query = "%%_query": запрос = "%%_query"
-  - query = "%%_query"<br/>args = [%%_args]: запрос = "%%_query"<br/>аргументы = [%%_args]
-  - Query error!: Ошибка запроса!
-  - query prepare return the false: подготовка запроса вернула false
-  - query: запрос
-  - Radios (macro): Переключатели (макро)
-  - Radios: Переключатели
-  - Range: Диапазон
-  - register: зарегистрировать
-  - Registered: Зарегистрированные
-  - registration: регистрация
-  - Registration: Регистрация
-  - remember me: запомнить меня
-  - reset: сбросить
-  - Restore the storage credentials in "%%_path" dirrectory or reinstall this system on the page\: %%_link: Восстановите учетные данные хранилища в каталоге "%%_path" или переустановите эту систему на странице: %%_link
-  - restore: восстановить
-  - return: возврат
-  - Roles: Роли
-  - save: сохранить
-  - search: поиск
-  - Search: Поиск
-  - Select (macro): Список (макро)
-  - Select: Список
-  - Server load (sys_getloadavg): Загр. серв. (sys_getloadavg)
-  - Session expiration date: Дата окончания сессии
-  - set: установка
-  - sql state\: %%_state: sql состояние: %%_state
-  - state: состояние
-  - State: Состояние
-  - State.: Сост.
-  - Static block: Статический блок
-  - Storage %%_id is not available!: Хранилище %%_id не доступно!
-  - storage %%_id was initialized: хранилище %%_id было инициализировано
-  - storage %%_id will be initialized: хранилище %%_id будет инициализировано
-  - Storage is not available with these credentials!: Хранилище не доступно с этими учетными данными!
-  - Storage name: Имя хранилища
-  - Storage params: Параметры хранилища
-  - storage: хранилище
-  - Storage: Хранилище
-  - submit: отправить
-  - System: Система
-  - Table prefix: Префикс таблиц
-  - Telephone: Телефон
-  - Text: Текст
-  - Textarea: Текстовая область
-  - the size of uploaded file more than %%_size: размер загруженного файла больше чем %%_size
-  - the uploaded file was only partially uploaded: загружаемый файл был загружен только частично
-  - Time: Время
-  - Timezone: Часовой пояс
-  - Title: Заголовок
-  - to front page: на главную страницу
-  - Total build time: Общее время сборки
-  - Total load: Общая загрука
-  - Total: Всего
-  - Translate: Перевод
-  - Tree: Дерево
-  - UNDER CONSTRUCTION: В РАЗРАБОТКЕ
-  - Use international format of mobile phone numbers.: Используйте международный формат номеров мобильных телефонов.
-  - User %%_nick was deleted.: Пользователь %%_nick был удален.
-  - User %%_nick was not deleted!: Пользователь %%_nick не был удален.
-  - User %%_nick was not updated.: Пользователь %%_nick не был обновлен.
-  - User %%_nick was updated.: Пользователь %%_nick был обновлен.
-  - User %%_nick_context{2}: Пользователь %%_nick_context{2}
-  - User %%_nick: Пользователь %%_nick
-  - User menu: Меню пользователя
-  - User name: Имя пользователя
-  - User roles: Роли пользователя
-  - User was not deleted!: Пользователь не был удален!
-  - User was not registered!: Пользователь не был зарегистрирован!
-  - User with this EMail was already registered!: Пользователь с таким Адресом электронной почты уже был зарегистрирован!
-  - User with this Nick was already registered!: Пользователь с таким Ником уже был зарегистрирован!
-  - User: Пользователь
-  - Users: Пользователи
-  - val.: знач.
-  - Val.: Знач.
-  - Valid HTML5 markup \| Valid CSS: Действительная разметка HTML5 | Действительный CSS
-  - Value was trimmed to the required length!: Значение было обрезано до требуемой длинны!
-  - Value: Значение
-  - Value: Значение
-  - Values: Значения
-  - Ver.: Вер.
-  - Version: Версия
-  - view: просмотреть
-  - Wellcome to our site!: Добро пожаловать на наш сайт!
-  - Write the characters from the picture.: Напишите символы с картинки.
-  - Yes: Да
-  - yes: да
+- ru|translation
+    code: ru
+    data
+    - - select -: - выбрать -
+    - a php extension stopped the file upload: расширение php остановило загрузку файла
+    - action: действие
+    - Action: Действие
+    - actions: действия
+    - Actions: Действия
+    - Administer: Администрирование
+    - Administrators: Администраторы
+    - All rights reserved.: Все права защищены.
+    - Allowable characters\: %%_chars. Examples\: %%_examples.: Допустимые символы: %%_chars. Примеры: %%_examples.
+    - Allowable characters\: %%_chars.: Допустимые символы: %%_chars.
+    - always_enabled: всегда_вкл
+    - Anonymous: Аноним
+    - autoload: автозагрузка
+    - Avatar: Аватар
+    - avatar: аватар
+    - Background color: Цвет фона
+    - button: кнопка
+    - cache: кэш
+    - Call %%_name: Вызов %%_name
+    - call: вызов
+    - Cancel: Отмена
+    - cancel: отмена
+    - Captcha: Защитный код
+    - Changes was removed.: Изменения были удалены.
+    - Changes was saved.: Изменения были сохранены.
+    - Check field again before submit.: Проверьте поле снова перед отправкой.
+    - Checkboxes (macro): Флажки (макро)
+    - Checkboxes: Флажки
+    - Color ID = %%_id (value = %%_value): ID цвета = %%_id (значение = %%_value)
+    - Color: Цвет
+    - Colors: Цвета
+    - Console: Консоль
+    - Control elements: Элементы управления
+    - Cookies are disabled. You can not log in!: Cookies отключены. Вы не можете войти в систему!
+    - Copyright © %%_years %%_right_holder.: Авторские права © %%_years %%_right_holder.
+    - Core: Ядро
+    - created: создано
+    - Created: Создано
+    - Credentials for storage %%_id was not setted!: Учётные данные для хранилища %%_id не были заданы!
+    - Credentials: Учётные данные
+    - credentials: учётные данные
+    - Current field value\: %%_value.: Текущее значение поля: %%_value.
+    - Current language: Текущий язык
+    - Data was not updated!: Данные не были обновлены!
+    - Date: Дата
+    - Decoration: Оформление
+    - delete file\: %%_name: удалить файл: %%_name
+    - Delete user %%_nick_context{4}?: Удалить пользователя %%_nick_context{4}?
+    - delete: удалить
+    - Demo: Демо
+    - Description: Описание
+    - Develop: Разработка
+    - driver error code\: %%_code: код ошибки драйвера: %%_code
+    - driver error text\: %%_text: текст ошибки драйвера: %%_text
+    - Driver is not selected!: Драйвер не выбран!
+    - Driver: Драйвер
+    - Dynamic block: Динамический блок
+    - Edit user %%_nick_context{2}: Редактировать пользователя %%_nick_context{2}
+    - edit: редактировать
+    - Element %%_info.: Элемент %%_info.
+    - Elements: Элементы
+    - EMail: Адрес электронной почты
+    - Enable cookies before login.: Включите cookies до начала входа в систему.
+    - Entity %%_name was installed.: Сущность %%_name была установлена.
+    - Entity %%_name was not installed!: Сущность %%_name не была установлена!
+    - error: ошибка
+    - event system was initialized: система событий была инициализирована
+    - event: событие
+    - Event: Событие
+    - events: события
+    - Events: События
+    - Execute plan: План выполнения
+    - failed to write file to disk: не удалось записать файл на диск
+    - Field "%%_title" after trying to upload the file returned an error\: %%_error!: Поле "%%_title" после попытки загрузить файл вернуло ошибку: %%_error!
+    - Field "%%_title" can not be blank!: Поле "%%_title" не может быть пустым!
+    - Field "%%_title" contains an incorrect characters from image!: Поле "%%_title" содержит неверные символы с изображения!
+    - Field "%%_title" contains an incorrect date!: Поле "%%_title" содержит неверную дату!
+    - Field "%%_title" contains an incorrect email address!: Поле "%%_title" содержит неверный адрес электронной почты!
+    - Field "%%_title" contains an incorrect time!: Поле "%%_title" содержит неверное время!
+    - Field "%%_title" contains incorrect value!: Поле "%%_title" содержит неверное значение!
+    - Field "%%_title" is not support multiple select!: Поле "%%_title" не поддерживает множественный выбор!
+    - Field "%%_title" must be selected!: Поле "%%_title" должно быть выбрано!
+    - Field "%%_title" must contain a maximum of %%_num characters!: Поле "%%_title" должно содержать максимум %%_num символов!
+    - Field "%%_title" must contain a minimum of %%_num characters!: Поле "%%_title" должно содержать минимум %%_num символов!
+    - Field must contain a maximum of %%_num characters.: Поле должно содержать максимум %%_num символов.
+    - Field must contain a minimum of %%_num characters.: Поле должно содержать минимум %%_num символов.
+    - Field value is less than %%_value.: Значение поля меньше чем %%_value.
+    - Field value is more than %%_value.: Значение поля больше чем %%_value.
+    - Field value is not a valid number.: Значение поля не является допустимым числом.
+    - Field value is not in valid range.: Значение поля не соответствует допустимому диапазону.
+    - File %%_name was uploaded.: Файл %%_name был загружен.
+    - file is empty: файл пуст
+    - File: Файл
+    - file: файл
+    - Form elements: Элементы формы
+    - Front page: Главная страница
+    - Home: Дом
+    - Host name: Имя хоста
+    - Incorrect email or password!: Неверный адрес электронной почты или пароль!
+    - Information: Информация
+    - init.: инициал.
+    - initialization: инициализация
+    - insertion: вставка
+    - Install: Установить
+    - install: установить
+    - Installation is not available because storage credentials was setted!: Установка недоступна потому, что учетные данные хранилища уже были установлены.
+    - Installation: Установка
+    - installation: установка
+    - Instances of entity %%_name was added.: Экземпляры сущности %%_name были добавлены.
+    - Instances of entity %%_name was not added!: Экземпляры сущности %%_name не были добавлены!
+    - invalid session was deleted!: Недействительный сеанс был удален!
+    - Is always on: Всегда включен
+    - Is embed: Встроенный
+    - Leave the field blank if you do not want to change its value.: Оставьте поле пустым если не хотите менять его значение.
+    - load: загрузка
+    - Locales: Локализации
+    - login: вход
+    - Login: Вход
+    - logout: выход
+    - Logout: Выход
+    - Main menu: Главное меню
+    - Main system module.: Основной модуль системы.
+    - Maximal field value\: %%_value.: Максимальное значение поля: %%_value.
+    - Maximal file size\: %%_value.: Максимальный размер файла: %%_value.
+    - Memory for php (bytes): Память для php (байт)
+    - Message from storage\: %%_message: Сообщение от хранилища: %%_message
+    - Minimal field value\: %%_value.: Минимальное значение поля: %%_value.
+    - missing a temporary directory: отсутствует временный каталог
+    - Moderators: Модераторы
+    - Module for demonstrating capabilities.: Модуль для демонстрации возможностей.
+    - Module for development.: Модуль для разработки.
+    - Module for internationalization.: Модуль для интернационализации.
+    - Module for storages support.: Модуль поддержки хранилищ данных.
+    - Module for working with pages.: Модуль работы со страницами.
+    - Module for working with trees (hierarchical structures).: Модуль работы с деревьями (иерархическими структурами).
+    - Module for working with user accounts and permissions.: Модуль работы с пользовательскими аккаунтами и разрешениями.
+    - Modules was installed.: Модули были установлены.
+    - Modules: Модули
+    - Name: Имя
+    - New password must be different from the current password!: Новый пароль должен отличаться от текущего!
+    - New password: Новый пароль
+    - Nick: Ник
+    - no items: нет элементов
+    - No: Нет
+    - no: нет
+    - Number: Число
+    - Object: Объект
+    - ok: ок
+    - on this ip: на этом ip
+    - Page: Страница
+    - Parameter: Параметр
+    - Password hash: Хеш пароля
+    - Password: Пароль
+    - Path to file: Путь к файлу
+    - Path: Путь
+    - PHP PDO driver for %%_name is not available.: PHP PDO драйвер для %%_name не доступен.
+    - PHP PDO extension is not available.: PHP PDO расширение не доступно.
+    - Queries: Запросы
+    - query = "%%_query": запрос = "%%_query"
+    - query = "%%_query"<br/>args = [%%_args]: запрос = "%%_query"<br/>аргументы = [%%_args]
+    - Query error!: Ошибка запроса!
+    - query prepare return the false: подготовка запроса вернула false
+    - query: запрос
+    - Radios (macro): Переключатели (макро)
+    - Radios: Переключатели
+    - Range: Диапазон
+    - register: зарегистрировать
+    - Registered: Зарегистрированные
+    - registration: регистрация
+    - Registration: Регистрация
+    - remember me: запомнить меня
+    - reset: сбросить
+    - Restore the storage credentials in "%%_path" dirrectory or reinstall this system on the page\: %%_link: Восстановите учетные данные хранилища в каталоге "%%_path" или переустановите эту систему на странице: %%_link
+    - restore: восстановить
+    - return: возврат
+    - Roles: Роли
+    - save: сохранить
+    - search: поиск
+    - Search: Поиск
+    - Select (macro): Список (макро)
+    - Select: Список
+    - Server load (sys_getloadavg): Загр. серв. (sys_getloadavg)
+    - Session expiration date: Дата окончания сессии
+    - set: установка
+    - sql state\: %%_state: sql состояние: %%_state
+    - state: состояние
+    - State: Состояние
+    - State.: Сост.
+    - Static block: Статический блок
+    - Storage %%_id is not available!: Хранилище %%_id не доступно!
+    - storage %%_id was initialized: хранилище %%_id было инициализировано
+    - storage %%_id will be initialized: хранилище %%_id будет инициализировано
+    - Storage is not available with these credentials!: Хранилище не доступно с этими учетными данными!
+    - Storage name: Имя хранилища
+    - Storage params: Параметры хранилища
+    - storage: хранилище
+    - Storage: Хранилище
+    - submit: отправить
+    - System: Система
+    - Table prefix: Префикс таблиц
+    - Telephone: Телефон
+    - Text: Текст
+    - Textarea: Текстовая область
+    - the size of uploaded file more than %%_size: размер загруженного файла больше чем %%_size
+    - the uploaded file was only partially uploaded: загружаемый файл был загружен только частично
+    - Time: Время
+    - Timezone: Часовой пояс
+    - Title: Заголовок
+    - to front page: на главную страницу
+    - Total build time: Общее время сборки
+    - Total load: Общая загрука
+    - Total: Всего
+    - Translate: Перевод
+    - Tree: Дерево
+    - UNDER CONSTRUCTION: В РАЗРАБОТКЕ
+    - Use international format of mobile phone numbers.: Используйте международный формат номеров мобильных телефонов.
+    - User %%_nick was deleted.: Пользователь %%_nick был удален.
+    - User %%_nick was not deleted!: Пользователь %%_nick не был удален.
+    - User %%_nick was not updated.: Пользователь %%_nick не был обновлен.
+    - User %%_nick was updated.: Пользователь %%_nick был обновлен.
+    - User %%_nick_context{2}: Пользователь %%_nick_context{2}
+    - User %%_nick: Пользователь %%_nick
+    - User menu: Меню пользователя
+    - User name: Имя пользователя
+    - User roles: Роли пользователя
+    - User was not deleted!: Пользователь не был удален!
+    - User was not registered!: Пользователь не был зарегистрирован!
+    - User with this EMail was already registered!: Пользователь с таким Адресом электронной почты уже был зарегистрирован!
+    - User with this Nick was already registered!: Пользователь с таким Ником уже был зарегистрирован!
+    - User: Пользователь
+    - Users: Пользователи
+    - val.: знач.
+    - Val.: Знач.
+    - Valid HTML5 markup \| Valid CSS: Действительная разметка HTML5 | Действительный CSS
+    - Value was trimmed to the required length!: Значение было обрезано до требуемой длинны!
+    - Value: Значение
+    - Value: Значение
+    - Values: Значения
+    - Ver.: Вер.
+    - Version: Версия
+    - view: просмотреть
+    - Wellcome to our site!: Добро пожаловать на наш сайт!
+    - Write the characters from the picture.: Напишите символы с картинки.
+    - Yes: Да
+    - yes: да
