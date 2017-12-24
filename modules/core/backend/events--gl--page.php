@@ -16,12 +16,12 @@ namespace effectivecore {
     $user = user::get_current();
     if (empty($user->id)) {
       return new markup('x-block', ['id' => 'user_menu'], [
-        storage::get('files')->select_by_datapath('trees/user/user_anonymous'),
+        storage::get('files')->select_by_dpath('trees/user/user_anonymous'),
         new markup('img', ['id' => 'avatar', 'src' => '/modules/page/frontend/avatar-anonymous.svg'])
       ]);
     } else {
       return new markup('x-block', ['id' => 'user_menu'], [
-        storage::get('files')->select_by_datapath('trees/user/user_logged_in'),
+        storage::get('files')->select_by_dpath('trees/user/user_logged_in'),
         new markup('a', ['href' => '/user/'.$user->id],
           new markup('img', [
             'id' => 'avatar',

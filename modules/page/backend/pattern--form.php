@@ -101,9 +101,9 @@ namespace effectivecore {
         event::start('on_form_validate', $id, [$this, $fields, &$values]);
       }
     # show errors and set error class
-      foreach ($this->errors as $c_datapath => $c_errors) {
+      foreach ($this->errors as $c_dpath => $c_errors) {
         foreach ($c_errors as $c_error) {
-          if ($c_datapath) $elements[$c_datapath]->attribute_insert('class', ['error' => 'error']);
+          if ($c_dpath) $elements[$c_dpath]->attribute_insert('class', ['error' => 'error']);
           if ($c_error) message::insert($c_error, 'error');
         }
       }
@@ -171,9 +171,9 @@ namespace effectivecore {
 
   function fields_get() {
     $return = [];
-    foreach ($this->child_select_all() as $c_datapath => $c_child) {
+    foreach ($this->child_select_all() as $c_dpath => $c_child) {
       if ($c_child instanceof \effectivecore\form_container) {
-        $return[$c_datapath] = $c_child;
+        $return[$c_dpath] = $c_child;
       }
     }
     return $return;

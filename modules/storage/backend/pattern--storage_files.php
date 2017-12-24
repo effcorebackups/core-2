@@ -33,21 +33,21 @@ namespace effectivecore {
                  static::$data[$group] : null;
   }
 
-  function select_by_datapath($datapath) {
-    $datapath_parts = explode('/', $datapath);
-    if (count($datapath_parts) < 3) return null;
-    $group_name = array_shift($datapath_parts);
+  function select_by_dpath($dpath) {
+    $dpath_parts = explode('/', $dpath);
+    if (count($dpath_parts) < 3) return null;
+    $group_name = array_shift($dpath_parts);
     $group_data = $this->select_group($group_name);
     foreach ($group_data as $c_module_id => $c_module_data) {
       foreach ($c_module_data as $c_row_id => $c_item) {
         if ($c_item instanceof different_cache &&
-            $datapath_parts[1] === $c_row_id) {
+            $dpath_parts[1] === $c_row_id) {
           $group_data[$c_module_id][$c_row_id] = $c_item->get_different_cache();
         }
       }
     }
-    return factory::datapath_get_object(
-      implode('/', $datapath_parts), $group_data
+    return factory::dpath_get_object(
+      implode('/', $dpath_parts), $group_data
     );
   }
 
@@ -128,10 +128,10 @@ namespace effectivecore {
   ### changes functions ###
   #########################
 
-  function changes_register_action($module_id, $action, $datapath, $value = null, $rebuild = true) {
+  function changes_register_action($module_id, $action, $dpath, $value = null, $rebuild = true) {
   # add new action
     $changes_d = dynamic::select('changes') ?: [];
-    $changes_d[$module_id]->{$action}[$datapath] = $value;
+    $changes_d[$module_id]->{$action}[$dpath] = $value;
     dynamic::update('changes', $changes_d, ['build' => factory::datetime_get()]);
   # prevent opcache work
     static::$changes_dynamic['changes'] = $changes_d;
@@ -140,16 +140,16 @@ namespace effectivecore {
     }
   }
 
-  function changes_unregister_action($module_id, $action, $datapath) {
+  function changes_unregister_action($module_id, $action, $dpath) {
   }
 
   static function changes_apply_to_data($changes, &$data) {
     foreach ($changes as $module_id => $c_module_changes) {
       foreach ($c_module_changes as $c_action_id => $c_changes) {
-        foreach ($c_changes as $c_datapath => $c_value) {
-          $c_datapath_parts = explode('/', $c_datapath);
-          $c_child_name = array_pop($c_datapath_parts);
-          $c_parent_obj = &factory::datapath_get_pointer(implode('/', $c_datapath_parts), $data);
+        foreach ($c_changes as $c_dpath => $c_value) {
+          $c_dpath_parts = explode('/', $c_dpath);
+          $c_child_name = array_pop($c_dpath_parts);
+          $c_parent_obj = &factory::dpath_get_pointer(implode('/', $c_dpath_parts), $data);
           switch ($c_action_id) {
             case 'insert': # only structured types support (array|object)
               switch (gettype($c_parent_obj)) {

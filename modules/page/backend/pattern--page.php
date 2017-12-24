@@ -30,15 +30,15 @@ namespace effectivecore {
     $used_links = [];
     foreach ($this->content as $c_block) {
       if ($c_block->type == 'link') {
-        $used_links[] = $c_block->datapath;
+        $used_links[] = $c_block->dpath;
       }
     }
     foreach (storage::get('files')->select_group('frontend') as $module_id => $c_module_frontend) {
       foreach ($c_module_frontend as $c_row_id => $c_item) {
         if (    (isset($c_item->display->url->match) &&
             preg_match($c_item->display->url->match, url::get_current()->path)) ||
-                (isset($c_item->display->datapath->match) && $c_item->display->datapath->where == 'block' &&
-            preg_match($c_item->display->datapath->match.'m', implode(nl, $used_links)))) {
+                (isset($c_item->display->dpath->match) && $c_item->display->dpath->where == 'block' &&
+            preg_match($c_item->display->dpath->match.'m', implode(nl, $used_links)))) {
 
         # render meta
           if (isset($c_item->favicons)) {
@@ -94,7 +94,7 @@ namespace effectivecore {
       switch ($c_block->type) {
         case 'text': $contents[$c_region][] = new text($c_block->content); break;
         case 'code': $contents[$c_region][] = call_user_func_array($c_block->handler, ['page' => $this] + static::$args); break;
-        case 'link': $contents[$c_region][] = storage::get('files')->select_by_datapath($c_block->datapath); break;
+        case 'link': $contents[$c_region][] = storage::get('files')->select_by_dpath($c_block->dpath); break;
         default    : $contents[$c_region][] = $c_block;
       }
     }

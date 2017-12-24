@@ -1,7 +1,7 @@
 frontend
 - frontend_block_tree
     display
-      datapath
+      dpath
         match: %^trees/.*$%
         where: block
     styles

@@ -31,13 +31,13 @@ namespace effectivecore {
                  $this->children[$id] : null;
   }
 
-  function child_select_all($children = null, $datapath = '') {
+  function child_select_all($children = null, $dpath = '') {
     $return = [];
     foreach ($children ?: $this->children as $c_id => $c_child) {
-      $c_datapath = ltrim($datapath.'/'.$c_id, '/');
-      $return[$c_datapath] = $c_child;
+      $c_dpath = ltrim($dpath.'/'.$c_id, '/');
+      $return[$c_dpath] = $c_child;
       if (!empty($c_child->children)) {
-        $return += $this->child_select_all($c_child->children, $c_datapath);
+        $return += $this->child_select_all($c_child->children, $c_dpath);
       }
     }
     return $return;

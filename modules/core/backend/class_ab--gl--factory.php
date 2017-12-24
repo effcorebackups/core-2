@@ -185,22 +185,22 @@ namespace effectivecore {
     }
   }
 
-  ##########################
-  ### datapath functions ###
-  ##########################
+  #######################
+  ### dpath functions ###
+  #######################
 
-  static function &datapath_get_pointer($datapath, &$data) {
+  static function &dpath_get_pointer($dpath, &$data) {
     $pointer = $data;
-    foreach (explode('/', $datapath) as $c_part) {
+    foreach (explode('/', $dpath) as $c_part) {
       if     (gettype($pointer) == 'array')  $pointer = &$pointer[$c_part];
       elseif (gettype($pointer) == 'object') $pointer = &$pointer->{$c_part};
     }
     return $pointer;
   }
 
-  static function datapath_get_object($datapath, $data) {
+  static function dpath_get_object($dpath, $data) {
     $pointer = $data;
-    foreach (explode('/', $datapath) as $c_part) {
+    foreach (explode('/', $dpath) as $c_part) {
       if     (gettype($pointer) == 'array')  $pointer = &$pointer[$c_part];
       elseif (gettype($pointer) == 'object') $pointer = &$pointer->{$c_part};
     }
