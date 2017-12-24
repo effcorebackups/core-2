@@ -108,7 +108,7 @@ namespace effectivecore\modules\core {
         }
         storage::get('files')->changes_register_action('core', 'insert', 'storages/storage/storage_pdo_sql', $params, false);
         storage::get('files')->changes_register_action('core', 'update', 'settings/core/key', sha1(rand(0, PHP_INT_MAX)));
-        storage::rebuild();
+        storage::reset_cache();
         event::start('on_module_install');
         message::insert('Modules was installed.');
         $form->child_delete('storage');

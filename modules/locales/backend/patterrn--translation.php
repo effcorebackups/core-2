@@ -25,11 +25,13 @@ namespace effectivecore {
     $translations = storage::get('files')->select_group('translations');
     foreach ($translations as $c_module_id => $c_module_translations) {
       foreach ($c_module_translations as $c_row_id => $c_translation) {
-        if ($c_translation instanceof different_cache)
-            $c_translation = $c_translation->get_different_cache();
-        if (!isset(static::$cache[$c_translation->code]))
-                   static::$cache[$c_translation->code] = [];
-        static::$cache[$c_translation->code] += $c_translation->data;
+        if ($c_translation->code === $code) {
+          if ($c_translation instanceof different_cache)
+              $c_translation = $c_translation->get_different_cache();
+          if (!isset(static::$cache[$c_translation->code]))
+                     static::$cache[$c_translation->code] = [];
+          static::$cache[$c_translation->code] += $c_translation->data;
+        }
       }
     }
   }
