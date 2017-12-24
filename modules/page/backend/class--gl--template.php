@@ -59,15 +59,15 @@ namespace effectivecore {
   ### static methods ###
   ######################
 
-  static protected $data;
+  static protected $cache;
 
   static function init() {
-    static::$data['files'] = storage::get('files')->select_group('template');
+    static::$cache['files'] = storage::get('files')->select_group('template');
   }
 
   static function get_templates() {
-    if   (!static::$data['files']) static::init();
-    return static::$data['files'];
+    if   (!static::$cache['files']) static::init();
+    return static::$cache['files'];
   }
 
 }}

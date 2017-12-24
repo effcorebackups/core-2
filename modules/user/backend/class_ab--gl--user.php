@@ -7,30 +7,30 @@
 namespace effectivecore {
           abstract class user {
 
-  static public $data;
+  static protected $cache;
 
   static function init($id = null) {
-    static::$data = new \stdClass();
-    static::$data->id = 0;
-    static::$data->roles = ['anonymous' => 'anonymous'];
+    static::$cache = new \stdClass();
+    static::$cache->id = 0;
+    static::$cache->roles = ['anonymous' => 'anonymous'];
   # load user from storage
     if ($id !== null) {
       $user = (new instance('user', [
         'id' => $id
       ]))->select();
       if ($user) {
-        static::$data = (object)($user->get_values());
-        static::$data->roles = ['registered' => 'registered'];
+        static::$cache = (object)($user->get_values());
+        static::$cache->roles = ['registered' => 'registered'];
         foreach (entity::get('relation_role_ws_user')->select_instances(['id_user' => $user->id]) as $c_role) {
-          static::$data->roles[$c_role->id_role] = $c_role->id_role;
+          static::$cache->roles[$c_role->id_role] = $c_role->id_role;
         }
       }
     }
   }
 
   static function get_current() {
-    if   (!static::$data) static::init();
-    return static::$data;
+    if   (!static::$cache) static::init();
+    return static::$cache;
   }
 
 }}

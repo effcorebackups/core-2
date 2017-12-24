@@ -99,15 +99,15 @@ namespace effectivecore {
   ### static methods ###
   ######################
 
-  static protected $data;
+  static protected $cache;
 
   static function init() {
-    static::$data = new url($_SERVER['REQUEST_URI']);
+    static::$cache = new url($_SERVER['REQUEST_URI']);
   }
 
   static function get_current() {
-    if   (!static::$data) static::init();
-    return static::$data;
+    if   (!static::$cache) static::init();
+    return static::$cache;
   }
 
   static function get_back_url() {

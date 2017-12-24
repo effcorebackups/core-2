@@ -7,18 +7,18 @@
 namespace effectivecore {
           abstract class event {
 
-  static protected $data;
+  static protected $cache;
 
   static function init() {
     console::add_log('event', 'init.', 'event system was initialized', '-');
     foreach (storage::get('files')->select_group('events') as $c_module_id => $c_module_events) {
       foreach ($c_module_events as $c_row_id => $c_events) {
         foreach ($c_events as $c_event) {
-          static::$data[$c_row_id][] = $c_event;
+          static::$cache[$c_row_id][] = $c_event;
         }
       }
     }
-    foreach (static::$data as &$c_events) {
+    foreach (static::$cache as &$c_events) {
       if (count($c_events) > 1) {
         factory::array_sort_by_weight($c_events);
       }
@@ -26,8 +26,8 @@ namespace effectivecore {
   }
 
   static function get_all() {
-    if   (!static::$data) static::init();
-    return static::$data;
+    if   (!static::$cache) static::init();
+    return static::$cache;
   }
 
   static function start($type, $id = null, $args = []) {

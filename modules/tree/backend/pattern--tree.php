@@ -20,27 +20,27 @@ namespace effectivecore {
   ### static methods ###
   ######################
 
-  static protected $trees;
-  static protected $tree_items;
+  static protected $cache_trees;
+  static protected $cache_tree_items;
 
   static function init() {
     $trees      = storage::get('files')->select_group('trees');
     $tree_items = storage::get('files')->select_group('tree_items');
     foreach ($trees as $c_module_id => $c_module_trees) {
       foreach ($c_module_trees as $c_row_id => $c_tree) {
-        static::$trees[$c_tree->id] = $c_tree;
+        static::$cache_trees[$c_tree->id] = $c_tree;
       }
     }
     foreach ($tree_items as $c_module_id => $c_module_tree_items) {
       foreach ($c_module_tree_items as $c_row_id => $c_item) {
-        static::$tree_items[$c_item->id] = $c_item;
+        static::$cache_tree_items[$c_item->id] = $c_item;
       }
     }
   }
 
-  static function get_trees()        {return static::$trees;}
-  static function get_tree_items()   {return static::$tree_items;}
-  static function get_tree($id)      {return static::$trees[$id];}
-  static function get_tree_item($id) {return static::$tree_items[$id];}
+  static function get_trees()        {return static::$cache_trees;}
+  static function get_tree_items()   {return static::$cache_tree_items;}
+  static function get_tree($id)      {return static::$cache_trees[$id];}
+  static function get_tree_item($id) {return static::$cache_tree_items[$id];}
 
 }}

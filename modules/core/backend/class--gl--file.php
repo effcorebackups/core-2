@@ -154,7 +154,7 @@ namespace effectivecore {
   ### static methods ###
   ######################
 
-  static private $cache;
+  static protected $cache;
 
   static function get_file_types() {
     $return = [];

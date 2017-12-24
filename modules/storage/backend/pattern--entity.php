@@ -71,26 +71,26 @@ namespace effectivecore {
   ### static methods ###
   ######################
 
-  static protected $data;
-  static protected $data_raw;
+  static protected $cache;
+  static protected $cache_raw;
 
   static function init() {
-    static::$data_raw = storage::get('files')->select_group('entities');
-    foreach (static::$data_raw as $c_module_id => $c_module_entities) {
+    static::$cache_raw = storage::get('files')->select_group('entities');
+    foreach (static::$cache_raw as $c_module_id => $c_module_entities) {
       foreach ($c_module_entities as $c_row_id => $c_entity) {
-        static::$data[$c_entity->name] = $c_entity;
+        static::$cache[$c_entity->name] = $c_entity;
       }
     }
   }
 
   static function get($name) {
-    if   (!static::$data) static::init();
-    return static::$data[$name];
+    if   (!static::$cache) static::init();
+    return static::$cache[$name];
   }
 
   static function get_all_by_module($name) {
-    if   (!static::$data_raw) static::init();
-    return static::$data_raw[$name];
+    if   (!static::$cache_raw) static::init();
+    return static::$cache_raw[$name];
   }
 
 }}

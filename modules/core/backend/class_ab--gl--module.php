@@ -7,15 +7,15 @@
 namespace effectivecore {
           abstract class module {
 
-  static protected $data;
+  static protected $cache;
 
   static function init() {
-    static::$data = storage::get('files')->select_group('module');
+    static::$cache = storage::get('files')->select_group('module');
   }
 
   static function get_all() {
-    if   (!static::$data) static::init();
-    return static::$data;
+    if   (!static::$cache) static::init();
+    return static::$cache;
   }
 
 }}

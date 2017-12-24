@@ -7,21 +7,22 @@
 namespace effectivecore {
           abstract class message {
 
-  static protected $data = [];
+  static protected $cache = [];
 
   static function init() {
   }
 
   static function select_all() {
-    if (!static::$data) static::init();
-    return static::$data;
+    if   (!static::$cache) static::init();
+    return static::$cache;
   }
 
   static function insert($message, $type = 'notice') {
-    if (!static::$data) static::init();
-    if (!isset(static::$data[$type])) static::$data[$type] = [];
-    if (!in_array($message, static::$data[$type])) {
-      static::$data[$type][] = $message;
+    if (!static::$cache) static::init();
+    if (!isset(static::$cache[$type]))
+               static::$cache[$type] = [];
+    if (!in_array($message, static::$cache[$type])) {
+      static::$cache[$type][] = $message;
     }
   }
 

@@ -14,7 +14,7 @@ namespace effectivecore {
   public $length = 6;
   public $attempts = 3;
   public $noise = 1;
-  static public $glyphs;
+  static protected $glyphs;
 
   static function init() {
     foreach (storage::get('files')->select_group('captcha_characters') as $c_module_id => $c_module_characters) {

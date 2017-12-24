@@ -7,7 +7,7 @@
 namespace effectivecore {
           abstract class factory {
 
-  static public $cache;
+  static protected $cache;
 
   #########################
   ### classes functions ###
