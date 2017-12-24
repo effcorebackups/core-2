@@ -21,22 +21,24 @@ namespace effectivecore {
     return ['code' => 'code'];
   }
 
-  static function init() {
-    foreach (storage::get('files')->select_group('translations') as $c_module_id => $c_module_translations) {
+  static function init($code) {
+    $translations = storage::get('files')->select_group('translations');
+    foreach ($translations as $c_module_id => $c_module_translations) {
       foreach ($c_module_translations as $c_row_id => $c_translation) {
-        static::$cache[$c_translation->code] = $c_translation;
+        if ($c_translation instanceof different_cache)
+            $c_translation = $c_translation->get_different_cache();
+        if (!isset(static::$cache[$c_translation->code]))
+                   static::$cache[$c_translation->code] = [];
+        static::$cache[$c_translation->code] += $c_translation->data;
       }
     }
   }
 
   static function get($string, $args = [], $code = '') {
     $c_code = $code ?: locale::get_settings()->lang_code;
-    if (static::$cache == null) static::init();
-    if (static::$cache[$c_code] instanceof different_cache)
-        static::$cache[$c_code] =
-        static::$cache[$c_code]->get_different_cache();
-    $string = isset(static::$cache[$c_code]->data[$string]) ?
-                    static::$cache[$c_code]->data[$string] : $string;
+    if (!isset(static::$cache[$c_code])) static::init($c_code);
+    $string = isset(static::$cache[$c_code][$string]) ?
+                    static::$cache[$c_code][$string] : $string;
     foreach ($args as $c_key => $c_value) {
       $string = str_replace('%%_'.$c_key, $c_value, $string);
     }
