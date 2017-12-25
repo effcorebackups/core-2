@@ -1,11 +1,11 @@
 languages
-- en
+- en|language
+    code: en
     title
       en: English
       native: English
-    code: en
-- ru
+- ru|language
+    code: ru
     title
       en: Russian
       native: Русский
-    code: ru

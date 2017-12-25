@@ -5,7 +5,14 @@
   ##################################################################
 
 namespace effectivecore {
-          abstract class language {
+          class language {
+
+  public $code;
+  public $title;
+
+  ######################
+  ### static methods ###
+  ######################
 
   static protected $cache;
 
