@@ -1,9 +1,9 @@
 frontend
 - frontend_block_tree
     display
-      dpath
-        match: %^trees/.*$%
-        where: block
+      check: dpath
+      match: %^trees/.*$%
+      where: block
     styles
     - style_tree
         file: frontend/tree.css

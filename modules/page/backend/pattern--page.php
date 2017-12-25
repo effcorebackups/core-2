@@ -24,60 +24,13 @@ namespace effectivecore {
     }
 
   # render frontend items: icons, styles, script
-    $rendered_meta = [(new markup_simple('meta', ['charset' => 'utf-8']))->render()];
-    $rendered_styles = [];
-    $rendered_script = [];
-    $used_links = [];
+    $used_dpaths = [];
     foreach ($this->content as $c_block) {
       if ($c_block->type == 'link') {
-        $used_links[] = $c_block->dpath;
+        $used_dpaths[] = $c_block->dpath;
       }
     }
-    foreach (storage::get('files')->select_group('frontend') as $module_id => $c_module_frontend) {
-      foreach ($c_module_frontend as $c_row_id => $c_item) {
-        if (    (isset($c_item->display->url->match) &&
-            preg_match($c_item->display->url->match, url::get_current()->path)) ||
-                (isset($c_item->display->dpath->match) && $c_item->display->dpath->where == 'block' &&
-            preg_match($c_item->display->dpath->match.'m', implode(nl, $used_links)))) {
-
-        # render meta
-          if (isset($c_item->favicons)) {
-            foreach ($c_item->favicons as $c_icon) {
-              $c_url = new url('/modules/'.$module_id.'/'.$c_icon->file);
-              $rendered_meta[] = (new markup_simple('link', [
-                'rel'   => $c_icon->rel,
-                'type'  => $c_icon->type,
-                'href'  => $c_url->get_full(),
-                'sizes' => $c_icon->sizes
-              ]))->render();
-            }
-          }
-
-        # render styles
-          if (isset($c_item->styles)) {
-            foreach ($c_item->styles as $c_style) {
-              $c_url = new url('/modules/'.$module_id.'/'.$c_style->file);
-              $rendered_styles[] = (new markup_simple('link', [
-                'rel'   => 'stylesheet',
-                'media' => $c_style->media,
-                'href'  => $c_url->get_full()
-              ]))->render();
-            }
-          }
-
-        # render script
-          if (isset($c_item->script)) {
-            foreach ($c_item->script as $c_script) {
-              $c_url = new url('/modules/'.$module_id.'/'.$c_script->file);
-              $rendered_script[] = (new markup('script', [
-                'src' => $c_url->get_full()
-              ]))->render();
-            }
-          }
-
-        }
-      }
-    }
+    $frontend = $this->get_frontend($used_dpaths);
 
   # collect page arguments
     if (isset($this->display->url->args)) {
@@ -123,12 +76,68 @@ namespace effectivecore {
     $template->set_var('attributes', factory::data_to_attr(['lang' => locale::get_settings()->lang_code]));
     $template->set_var('console', console::render()); # @todo: only for admins
     $template->set_var('messages', message::render_all());
-    $template->set_var('meta', implode(nl, $rendered_meta));
-    $template->set_var('styles', implode(nl, $rendered_styles));
-    $template->set_var('script', implode(nl, $rendered_script));
+    $template->set_var('meta',   $frontend->meta->render());
+    $template->set_var('styles', $frontend->styles->render());
+    $template->set_var('script', $frontend->script->render());
     $template->set_var('title', token::replace(translation::get($this->title)));
 
     return $template->render();
+  }
+
+  function get_frontend($used_dpaths) {
+    $return = new \stdClass();
+    $return->meta = new node();
+    $return->styles = new node();
+    $return->script = new node();
+    $return->meta->child_insert(new markup_simple('meta', ['charset' => 'utf-8']));
+    $frontend = storage::get('files')->select_group('frontend');
+    foreach ($frontend as $module_id => $c_module_frontend) {
+      foreach ($c_module_frontend as $c_row_id => $c_item) {
+        if ( ($c_item->display->check === 'url' && preg_match(
+              $c_item->display->match, url::get_current()->path)) ||
+             ($c_item->display->check === 'dpath' &&
+              $c_item->display->where === 'block' && preg_match(
+              $c_item->display->match.'m', implode(nl, $used_dpaths)))) {
+
+        # render meta
+          if (isset($c_item->favicons)) {
+            foreach ($c_item->favicons as $c_icon) {
+              $c_url = new url('/modules/'.$module_id.'/'.$c_icon->file);
+              $return->meta->child_insert(new markup_simple('link', [
+                'rel'   => $c_icon->rel,
+                'type'  => $c_icon->type,
+                'href'  => $c_url->get_full(),
+                'sizes' => $c_icon->sizes
+              ]));  
+            }
+          }
+
+        # render styles
+          if (isset($c_item->styles)) {
+            foreach ($c_item->styles as $c_style) {
+              $c_url = new url('/modules/'.$module_id.'/'.$c_style->file);
+              $return->styles->child_insert(new markup_simple('link', [
+                'rel'   => 'stylesheet',
+                'media' => $c_style->media,
+                'href'  => $c_url->get_full()
+              ]));
+            }
+          }
+
+        # render script
+          if (isset($c_item->script)) {
+            foreach ($c_item->script as $c_script) {
+              $c_url = new url('/modules/'.$module_id.'/'.$c_script->file);
+              $return->script->child_insert(new markup('script', [
+                'src' => $c_url->get_full()
+              ]));
+            }
+          }
+
+        }
+      }
+    }
+    return $return;
   }
 
   ######################
