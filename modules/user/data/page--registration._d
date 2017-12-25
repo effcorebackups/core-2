@@ -3,8 +3,8 @@ pages
     title: Registration
     https: true
     display
-      url
-        match: %^/user/registration$%
+      check: url
+      match: %^/user/registration$%
     access
       roles
       - anonymous: anonymous

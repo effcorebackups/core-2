@@ -3,10 +3,10 @@ pages
     title: User %%_nick_context{2}
     https: true
     display
-      url
-        match: %^/user/[0-9]+$%
-        args
-        - id_user: 2
+      check: url
+      match: %^/user/[0-9]+$%
+    args
+    - id_user: 2
     access
       roles
       - admins: admins

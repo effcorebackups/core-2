@@ -3,8 +3,8 @@ pages
     title: Modules
     https: true
     display
-      url
-        match: %^/admin/modules$%
+      check: url
+      match: %^/admin/modules$%
     access
       roles
       - admins: admins

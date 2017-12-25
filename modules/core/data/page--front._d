@@ -2,8 +2,8 @@ pages
 - front|page
     title: Front page
     display
-      url
-        match: %^/$%
+      check: url
+      match: %^/$%
     content
     - block_menu_main
         region: head_1

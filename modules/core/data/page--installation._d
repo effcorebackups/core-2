@@ -3,8 +3,8 @@ pages
     title: Installation
     https: true
     display
-      url
-        match: %^/installation$%
+      check: url
+      match: %^/installation$%
     access
       roles
       - anonymous: anonymous

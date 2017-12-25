@@ -3,8 +3,8 @@ pages
     title: Roles
     https: true
     display
-      url
-        match: %^/admin/roles$%
+      check: url
+      match: %^/admin/roles$%
     access
       roles
       - admins: admins

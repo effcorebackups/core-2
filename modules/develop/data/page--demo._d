@@ -3,8 +3,8 @@ pages
     title: Demo
     https: true
     display
-      url
-        match: %^/develop/demo$%
+      check: url
+      match: %^/develop/demo$%
     access
       roles
       - admins: admins

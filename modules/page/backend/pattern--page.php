@@ -5,15 +5,19 @@
   ##################################################################
 
 namespace effectivecore {
-          class page {
+          class page
+          implements \effectivecore\has_different_cache {
 
-  public $title = '';
-  public $url = null;
-  public $access = null;
+  public $title;
+  public $https;
+  public $display;
+  public $access;
+  public $args = [];
   public $constants = [];
   public $content = [];
 
-  function __construct() {
+  static function get_non_different_properties() {
+    return ['display' => 'display', 'access' => 'access'];
   }
 
   function render() {
@@ -33,8 +37,8 @@ namespace effectivecore {
     $frontend = $this->get_frontend($used_dpaths);
 
   # collect page arguments
-    if (isset($this->display->url->args)) {
-      foreach ($this->display->url->args as $c_name => $c_num) {
+    if (isset($this->args)) {
+      foreach ($this->args as $c_name => $c_num) {
         static::args_set($c_name, url::get_current()->get_args($c_num));
       }
     }
@@ -144,20 +148,23 @@ namespace effectivecore {
   ### static methods ###
   ######################
 
-  static protected $args = [];
+  static protected $cache_args = [];
 
-  static function args_get()             {return static::$args;}
-  static function args_set($key, $value) {static::$args[$key] = $value;}
+  static function args_get()             {return static::$cache_args;}
+  static function args_set($key, $value) {static::$cache_args[$key] = $value;}
 
   static function find_and_render() {
   # render page
-    foreach (storage::get('files')->select_group('pages') as $c_module_id => $c_module_pages) {
+    $pages = storage::get('files')->select_group('pages');
+    foreach ($pages as $c_module_id => $c_module_pages) {
       foreach ($c_module_pages as $c_row_id => $c_page) {
-        if (   isset($c_page->display->url->match) &&
-          preg_match($c_page->display->url->match, url::get_current()->path)) {
+        if (($c_page->display->check === 'url' && preg_match(
+             $c_page->display->match, url::get_current()->path))) {
           if (!isset($c_page->access) ||
               (isset($c_page->access) && access::check($c_page->access))) {
-            return $c_page->render();
+            if ($c_page instanceof different_cache)
+              return $c_page->get_different_cache()->render(); else
+              return $c_page->render();
           } else {
             factory::send_header_and_exit('access_denided',
               'Access denided!'

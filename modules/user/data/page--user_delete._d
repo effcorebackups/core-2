@@ -3,10 +3,10 @@ pages
     title: Delete user %%_nick_context{4}?
     https: true
     display
-      url
-        match: %^/admin/users/delete/[0-9]+$%
-        args
-        - id_user: 4
+      check: url
+      match: %^/admin/users/delete/[0-9]+$%
+    args
+    - id_user: 4
     access
       roles
       - admins: admins

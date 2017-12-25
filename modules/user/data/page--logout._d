@@ -3,8 +3,8 @@ pages
     title: Logout
     https: true
     display
-      url
-        match: %^/user/logout$%
+      check: url
+      match: %^/user/logout$%
     access
       roles
       - registered: registered

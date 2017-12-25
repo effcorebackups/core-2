@@ -3,8 +3,8 @@ pages
     title: Login
     https: true
     display
-      url
-        match: %^/user/login$%
+      check: url
+      match: %^/user/login$%
     access
       roles
       - anonymous: anonymous
