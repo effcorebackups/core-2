@@ -5,7 +5,15 @@
   ##################################################################
 
 namespace effectivecore {
-          abstract class event {
+          class event {
+
+  public $for;
+  public $handler;
+  public $weight = 0;
+
+  ######################
+  ### static methods ###
+  ######################
 
   static protected $cache;
 
