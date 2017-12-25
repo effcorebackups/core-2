@@ -7,9 +7,10 @@
 namespace effectivecore {
           abstract class message {
 
-  static protected $cache = [];
+  static protected $cache;
 
   static function init() {
+    static::$cache = [];
   }
 
   static function select_all() {

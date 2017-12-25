@@ -7,8 +7,8 @@
 namespace effectivecore {
           abstract class console {
 
-  static public $data = [];
-  static public $information = [];
+  static protected $data = [];
+  static protected $information = [];
 
   static function add_log($object, $action, $description = '', $value = '', $time = 0, $args = []) {
     static::$data[] = [

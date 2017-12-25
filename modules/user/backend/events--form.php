@@ -23,7 +23,7 @@ namespace effectivecore\modules\user {
   #########################
 
   static function on_submit_user_delete($form, $fields, &$values) {
-    $id = page::$args['id_user'];
+    $id = page::args_get()['id_user'];
     switch ($form->clicked_button_name) {
       case 'delete':
         $user = (new instance('user', [
@@ -54,7 +54,7 @@ namespace effectivecore\modules\user {
   #######################
 
   static function on_init_user_edit($form, $fields) {
-    $id = page::$args['id_user'];
+    $id = page::args_get()['id_user'];
     $user = (new instance('user', ['id' => $id]))->select();
     $fields['credentials/email']->child_select('element')->attribute_insert('value', $user->email);
     $fields['credentials/nick']->child_select('element')->attribute_insert('value', $user->nick);
@@ -65,7 +65,7 @@ namespace effectivecore\modules\user {
     switch ($form->clicked_button_name) {
       case 'save':
         if (count($form->errors) == 0) {
-          $id = page::$args['id_user'];
+          $id = page::args_get()['id_user'];
         # check security
           $test_pass = (new instance('user', ['id' => $id]))->select();
           if ($test_pass->password_hash !== factory::hash_password_get($values['password'][0])) {
@@ -105,7 +105,7 @@ namespace effectivecore\modules\user {
 
   static function on_submit_user_edit($form, $fields, &$values) {
     parent::on_submit_files($form, $fields, $values);
-    $id = page::$args['id_user'];
+    $id = page::args_get()['id_user'];
     switch ($form->clicked_button_name) {
       case 'save':
         $user = (new instance('user', ['id' => $id]))->select();

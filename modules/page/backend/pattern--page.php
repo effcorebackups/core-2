@@ -82,7 +82,7 @@ namespace effectivecore {
   # collect page arguments
     if (isset($this->display->url->args)) {
       foreach ($this->display->url->args as $c_name => $c_num) {
-        static::$args[$c_name] = url::get_current()->get_args($c_num);
+        static::args_set($c_name, url::get_current()->get_args($c_num));
       }
     }
 
@@ -93,7 +93,7 @@ namespace effectivecore {
                         $c_block->region : 'content_1_1';
       switch ($c_block->type) {
         case 'text': $contents[$c_region][] = new text($c_block->content); break;
-        case 'code': $contents[$c_region][] = call_user_func_array($c_block->handler, ['page' => $this] + static::$args); break;
+        case 'code': $contents[$c_region][] = call_user_func_array($c_block->handler, ['page' => $this] + static::args_get()); break;
         case 'link': $contents[$c_region][] = storage::get('files')->select_by_dpath($c_block->dpath); break;
         default    : $contents[$c_region][] = $c_block;
       }
@@ -135,8 +135,10 @@ namespace effectivecore {
   ### static methods ###
   ######################
 
-  static public $data = [];
-  static public $args = [];
+  static protected $args = [];
+
+  static function args_get()             {return static::$args;}
+  static function args_set($key, $value) {static::$args[$key] = $value;}
 
   static function find_and_render() {
   # render page
