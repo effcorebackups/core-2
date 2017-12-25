@@ -1,4 +1,4 @@
-module
+module|module
   id: user
   title: User
   description: Module for working with user accounts and permissions.

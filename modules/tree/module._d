@@ -1,4 +1,4 @@
-module
+module|module
   id: tree
   title: Tree
   description: Module for working with trees (hierarchical structures).

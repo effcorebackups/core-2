@@ -1,4 +1,4 @@
-module
+module|module
   id: locales
   title: Locales
   description: Module for internationalization.

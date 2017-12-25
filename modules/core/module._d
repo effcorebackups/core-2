@@ -1,4 +1,4 @@
-module
+module|module
   id: core
   title: Core
   description: Main system module.

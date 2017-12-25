@@ -1,4 +1,4 @@
-module
+module|module
   id: storage
   title: Storage
   description: Module for storages support.

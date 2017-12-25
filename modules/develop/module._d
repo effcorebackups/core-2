@@ -1,4 +1,4 @@
-module
+module|module
   id: develop
   title: Develop
   description: Module for development.

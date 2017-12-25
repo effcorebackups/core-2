@@ -5,7 +5,17 @@
   ##################################################################
 
 namespace effectivecore {
-          abstract class module {
+          class module {
+
+  public $id;
+  public $title;
+  public $description;
+  public $version;
+  public $state;
+
+  ######################
+  ### static methods ###
+  ######################
 
   static protected $cache;
 
