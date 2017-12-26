@@ -189,7 +189,7 @@ namespace effectivecore {
   ### dpath functions ###
   #######################
 
-  static function get_child(&$data, $name) {
+  static function &objarr_get_value(&$data, $name) {
     if (gettype($data) == 'array')  return $data[$name];
     if (gettype($data) == 'object') return $data->{$name};
   }
@@ -197,8 +197,7 @@ namespace effectivecore {
   static function &dpath_get_pointer($dpath, &$data) {
     $pointer = $data;
     foreach (explode('/', $dpath) as $c_part) {
-      if     (gettype($pointer) == 'array')  $pointer = &$pointer[$c_part];
-      elseif (gettype($pointer) == 'object') $pointer = &$pointer->{$c_part};
+      $pointer = &static::objarr_get_value($pointer, $c_part);
     }
     return $pointer;
   }
@@ -206,8 +205,7 @@ namespace effectivecore {
   static function dpath_get_object($dpath, $data) {
     $pointer = $data;
     foreach (explode('/', $dpath) as $c_part) {
-      if     (gettype($pointer) == 'array')  $pointer = &$pointer[$c_part];
-      elseif (gettype($pointer) == 'object') $pointer = &$pointer->{$c_part};
+      $pointer = static::objarr_get_value($pointer, $c_part);
     }
     return $pointer;
   }
