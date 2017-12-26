@@ -1,13 +1,13 @@
 template
 - markup_html
     type: inline
-    markup: <%%_tag_name %%_attributes> %%_content </%%_tag_name>
+    markup: <%%_tag_name %%_attributes>%%_content</%%_tag_name>
 - markup_html_simple
     type: inline
     markup: <%%_tag_name %%_attributes>
 - markup_xml
     type: inline
-    markup: <%%_tag_name %%_attributes> %%_content </%%_tag_name>
+    markup: <%%_tag_name %%_attributes>%%_content</%%_tag_name>
 - markup_xml_simple
     type: inline
     markup: <%%_tag_name %%_attributes />

@@ -5,7 +5,12 @@
   ##################################################################
 
 namespace effectivecore {
-          class entity {
+          class entity
+          implements \effectivecore\has_different_cache {
+
+  static function get_non_different_properties() {
+    return ['name' => 'name', 'storage_id' => 'storage_id'];
+  }
 
   public $name;
   public $storage_id;
@@ -72,25 +77,30 @@ namespace effectivecore {
   ######################
 
   static protected $cache;
-  static protected $cache_raw;
+  static protected $cache_orig;
 
-  static function init() {
-    static::$cache_raw = storage::get('files')->select_group('entities');
-    foreach (static::$cache_raw as $c_module_id => $c_module_entities) {
+  static function init($name = '') {
+    static::$cache_orig = storage::get('files')->select_group('entities');
+    foreach (static::$cache_orig as $c_module_id => $c_module_entities) {
       foreach ($c_module_entities as $c_row_id => $c_entity) {
-        static::$cache[$c_entity->name] = $c_entity;
+        if ($name == '' || (
+            $name && $name == $c_entity->name)) {
+          if ($c_entity instanceof different_cache)
+              $c_entity = $c_entity->get_different_cache();
+          static::$cache[$c_entity->name] = $c_entity;
+        }
       }
     }
   }
 
   static function get($name) {
-    if   (!static::$cache) static::init();
-    return static::$cache[$name];
+    if (!isset(static::$cache[$name])) static::init($name);
+    return     static::$cache[$name];
   }
 
   static function get_all_by_module($name) {
-    if   (!static::$cache_raw) static::init();
-    return static::$cache_raw[$name];
+    if   (!static::$cache_orig) static::init();
+    return static::$cache_orig[$name];
   }
 
 }}

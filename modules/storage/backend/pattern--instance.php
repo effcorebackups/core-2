@@ -58,11 +58,11 @@ namespace effectivecore {
   ######################
 
   static protected $cache;
-  static protected $cache_raw;
+  static protected $cache_orig;
 
   static function init() {
-    static::$cache_raw = storage::get('files')->select_group('instances');
-    foreach (static::$cache_raw as $c_module_id => $c_module_instances) {
+    static::$cache_orig = storage::get('files')->select_group('instances');
+    foreach (static::$cache_orig as $c_module_id => $c_module_instances) {
       foreach ($c_module_instances as $c_row_id => $c_instance) {
         static::$cache[$c_row_id] = $c_instance;
       }
@@ -75,8 +75,8 @@ namespace effectivecore {
   }
 
   static function get_by_module($name) {
-    if   (!static::$cache_raw) static::init();
-    return static::$cache_raw[$name];
+    if   (!static::$cache_orig) static::init();
+    return static::$cache_orig[$name];
   }
 
 }}
