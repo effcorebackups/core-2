@@ -51,14 +51,8 @@ namespace effectivecore {
       switch ($c_block->type) {
         case 'text': $contents[$c_region][] = new text($c_block->content); break;
         case 'code': $contents[$c_region][] = call_user_func_array($c_block->handler, ['page' => $this] + static::args_get()); break;
-        case 'link':
-          $data = storage::get('files')->select($c_block->dpath);
-          if ($data instanceof different_cache)
-              $data = $data->get_different_cache();
-          $contents[$c_region][] = $data;
-          break;
-        default:
-          $contents[$c_region][] = $c_block;
+        case 'link': $contents[$c_region][] = storage::get('files')->select($c_block->dpath, true); break;
+        default: $contents[$c_region][] = $c_block;
       }
     }
 
