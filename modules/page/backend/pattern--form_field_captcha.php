@@ -17,7 +17,7 @@ namespace effectivecore {
   static protected $glyphs;
 
   static function init() {
-    foreach (storage::get('files')->select_group('captcha_characters') as $c_module_id => $c_module_characters) {
+    foreach (storage::get('files')->select('captcha_characters') as $c_module_id => $c_module_characters) {
       foreach ($c_module_characters as $c_row_id => $c_character) {
         foreach ($c_character->glyphs as $c_glyph) {
           static::$glyphs[$c_glyph] = $c_character->character;

@@ -189,6 +189,11 @@ namespace effectivecore {
   ### dpath functions ###
   #######################
 
+  static function get_child(&$data, $name) {
+    if (gettype($data) == 'array')  return $data[$name];
+    if (gettype($data) == 'object') return $data->{$name};
+  }
+
   static function &dpath_get_pointer($dpath, &$data) {
     $pointer = $data;
     foreach (explode('/', $dpath) as $c_part) {
@@ -310,7 +315,7 @@ namespace effectivecore {
   ############################
 
   static function signature_get($string, $length = 40) {
-    $key = storage::get('files')->select_group('settings')['core']->key;
+    $key = storage::get('files')->select('settings/core/key');
     return substr(sha1($string.$key), 0, $length);
   }
 

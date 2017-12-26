@@ -14,7 +14,7 @@ namespace effectivecore\modules\page {
   ########################
 
   static function on_init_decoration($form, $fields) {
-    $settings = storage::get('files')->select_group('settings');
+    $settings = storage::get('files')->select('settings');
     $fields['colors/color_id'   ]->default_set($settings['page']->color_id);
     $fields['colors/color_bg_id']->default_set($settings['page']->color_bg_id);
   }

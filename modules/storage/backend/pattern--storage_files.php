@@ -27,28 +27,15 @@ namespace effectivecore {
   ### shared functions ###
   ########################
 
-  function select_group($group) {
-    if   (!isset(static::$data[$group])) static::init($group);
-    return isset(static::$data[$group]) ?
-                 static::$data[$group] : null;
-  }
-
-  function select_by_dpath($dpath) {
+  function select($dpath) {
+    $return = [];
     $dpath_parts = explode('/', $dpath);
-    if (count($dpath_parts) < 3) return null;
-    $group_name = array_shift($dpath_parts);
-    $group_data = $this->select_group($group_name);
-    foreach ($group_data as $c_module_id => $c_module_data) {
-      foreach ($c_module_data as $c_row_id => $c_item) {
-        if ($c_item instanceof different_cache &&
-            $dpath_parts[1] === $c_row_id) {
-          $group_data[$c_module_id][$c_row_id] = $c_item->get_different_cache();
-        }
-      }
+    $group = array_shift($dpath_parts);
+    if (isset(static::$data[$group]) == false) static::init($group);
+    if (isset(static::$data[$group])) {
+      if (count($dpath_parts)) return factory::dpath_get_object(implode('/', $dpath_parts), static::$data[$group]);
+      else                     return static::$data[$group];
     }
-    return factory::dpath_get_object(
-      implode('/', $dpath_parts), $group_data
-    );
   }
 
   ######################

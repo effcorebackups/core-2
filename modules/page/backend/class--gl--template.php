@@ -62,7 +62,7 @@ namespace effectivecore {
   static protected $cache;
 
   static function init() {
-    static::$cache['files'] = storage::get('files')->select_group('template');
+    static::$cache['files'] = storage::get('files')->select('template');
   }
 
   static function get_templates() {

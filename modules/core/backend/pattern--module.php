@@ -20,7 +20,7 @@ namespace effectivecore {
   static protected $cache;
 
   static function init() {
-    static::$cache = storage::get('files')->select_group('module');
+    static::$cache = storage::get('files')->select('module');
   }
 
   static function get_all() {

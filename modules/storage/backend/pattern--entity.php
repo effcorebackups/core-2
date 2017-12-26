@@ -80,7 +80,7 @@ namespace effectivecore {
   static protected $cache_orig;
 
   static function init($name = '') {
-    static::$cache_orig = storage::get('files')->select_group('entities');
+    static::$cache_orig = storage::get('files')->select('entities');
     foreach (static::$cache_orig as $c_module_id => $c_module_entities) {
       foreach ($c_module_entities as $c_row_id => $c_entity) {
         if ($name == '' || (

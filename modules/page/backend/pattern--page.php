@@ -51,8 +51,14 @@ namespace effectivecore {
       switch ($c_block->type) {
         case 'text': $contents[$c_region][] = new text($c_block->content); break;
         case 'code': $contents[$c_region][] = call_user_func_array($c_block->handler, ['page' => $this] + static::args_get()); break;
-        case 'link': $contents[$c_region][] = storage::get('files')->select_by_dpath($c_block->dpath); break;
-        default    : $contents[$c_region][] = $c_block;
+        case 'link':
+          $data = storage::get('files')->select($c_block->dpath);
+          if ($data instanceof different_cache)
+              $data = $data->get_different_cache();
+          $contents[$c_region][] = $data;
+          break;
+        default:
+          $contents[$c_region][] = $c_block;
       }
     }
 
@@ -94,7 +100,7 @@ namespace effectivecore {
     $return->styles = new node();
     $return->script = new node();
     $return->meta->child_insert(new markup_simple('meta', ['charset' => 'utf-8']));
-    $frontend = storage::get('files')->select_group('frontend');
+    $frontend = storage::get('files')->select('frontend');
     foreach ($frontend as $module_id => $c_module_frontend) {
       foreach ($c_module_frontend as $c_row_id => $c_item) {
         if ( ($c_item->display->check === 'url' && preg_match(
@@ -155,7 +161,7 @@ namespace effectivecore {
 
   static function find_and_render() {
   # render page
-    $pages = storage::get('files')->select_group('pages');
+    $pages = storage::get('files')->select('pages');
     foreach ($pages as $c_module_id => $c_module_pages) {
       foreach ($c_module_pages as $c_row_id => $c_page) {
         if (($c_page->display->check === 'url' && preg_match(
