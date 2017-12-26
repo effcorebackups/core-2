@@ -33,7 +33,7 @@ namespace effectivecore {
     $group = array_shift($dpath_parts);
     if (isset(static::$data[$group]) == false) static::init($group);
     if (isset(static::$data[$group])) {
-      if (count($dpath_parts)) return factory::dpath_get_object(implode('/', $dpath_parts), static::$data[$group]);
+      if (count($dpath_parts)) return factory::dpath_get_pointer(static::$data[$group], implode('/', $dpath_parts));
       else                     return static::$data[$group];
     }
   }
@@ -136,7 +136,7 @@ namespace effectivecore {
         foreach ($c_changes as $c_dpath => $c_value) {
           $c_dpath_parts = explode('/', $c_dpath);
           $c_child_name = array_pop($c_dpath_parts);
-          $c_parent_obj = &factory::dpath_get_pointer(implode('/', $c_dpath_parts), $data);
+          $c_parent_obj = &factory::dpath_get_pointer($data, implode('/', $c_dpath_parts));
           switch ($c_action_id) {
             case 'insert': # only structured types support (array|object)
               switch (gettype($c_parent_obj)) {

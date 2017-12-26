@@ -194,20 +194,12 @@ namespace effectivecore {
     if (gettype($data) == 'object') return $data->{$name};
   }
 
-  static function &dpath_get_pointer($dpath, &$data) {
-    $pointer = $data;
+  static function &dpath_get_pointer(&$data, $dpath) {
+    $return = $data;
     foreach (explode('/', $dpath) as $c_part) {
-      $pointer = &static::objarr_get_value($pointer, $c_part);
+      $return = &static::objarr_get_value($return, $c_part);
     }
-    return $pointer;
-  }
-
-  static function dpath_get_object($dpath, $data) {
-    $pointer = $data;
-    foreach (explode('/', $dpath) as $c_part) {
-      $pointer = static::objarr_get_value($pointer, $c_part);
-    }
-    return $pointer;
+    return $return;
   }
 
   ###########################
