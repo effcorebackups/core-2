@@ -230,13 +230,8 @@ namespace effectivecore {
           }
         }
       # add new item to tree
-        if (is_array($p[$c_depth-1])) {
-          $p[$c_depth-1][$matches['name']] = $c_value;
-          $p[$c_depth] = &$p[$c_depth-1][$matches['name']];
-        } else {
-          $p[$c_depth-1]->{$matches['name']} = $c_value;
-          $p[$c_depth] = &$p[$c_depth-1]->{$matches['name']};
-        }
+        factory::objarr_insert_value($p[$c_depth-1], $matches['name'], $c_value);
+        $p[$c_depth] = &factory::objarr_select_value($p[$c_depth-1], $matches['name']);
       # convert parent item to array
         if ($matches['prefix'] == '- ' && !is_array($p[$c_depth-1])) {
           $p[$c_depth-1] = (array)$p[$c_depth-1];
