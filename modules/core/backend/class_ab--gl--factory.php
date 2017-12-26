@@ -185,19 +185,29 @@ namespace effectivecore {
     }
   }
 
-  #######################
-  ### dpath functions ###
-  #######################
+  ##################################
+  ### objarr and dpath functions ###
+  ##################################
 
-  static function &objarr_get_value(&$data, $name) {
-    if (gettype($data) == 'array')  return $data[$name];
+  static function &objarr_select_value(&$data, $name) {
+    if (gettype($data) == 'array')  return $data  [$name];
     if (gettype($data) == 'object') return $data->{$name};
+  }
+
+  static function objarr_insert_value(&$data, $name, $value) {
+    if (gettype($data) == 'array')  $data  [$name] = $value;
+    if (gettype($data) == 'object') $data->{$name} = $value;
+  }
+
+  static function objarr_delete_child(&$data, $name) {
+    if (gettype($data) == 'array')  unset($data  [$name]);
+    if (gettype($data) == 'object') unset($data->{$name});
   }
 
   static function &dpath_get_pointer(&$data, $dpath) {
     $return = $data;
     foreach (explode('/', $dpath) as $c_part) {
-      $return = &static::objarr_get_value($return, $c_part);
+      $return = &static::objarr_select_value($return, $c_part);
     }
     return $return;
   }

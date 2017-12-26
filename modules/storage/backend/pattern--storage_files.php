@@ -138,29 +138,17 @@ namespace effectivecore {
           $c_child_name = array_pop($c_dpath_parts);
           $c_parent_obj = &factory::dpath_get_pointer($data, implode('/', $c_dpath_parts));
           switch ($c_action_id) {
-            case 'insert': # only structured types support (array|object)
-              switch (gettype($c_parent_obj)) {
-                case 'array' : $destination_obj = &$c_parent_obj[$c_child_name];   break;
-                case 'object': $destination_obj = &$c_parent_obj->{$c_child_name}; break;
-              }
-              switch (gettype($destination_obj)) {
-                case 'array' : foreach ($c_value as $key => $value) $destination_obj[$key]   = $value; break;
-                case 'object': foreach ($c_value as $key => $value) $destination_obj->{$key} = $value; break;
+          # only structured types support (array|object)
+            case 'insert':
+              $c_destination_obj = &factory::objarr_select_value($c_parent_obj, $c_child_name);
+              foreach ($c_value as $c_key => $c_value) {
+                factory::objarr_insert_value($c_destination_obj, $c_key, $c_value);
               }
               break;
-            case 'update': # only scalar types support (string|numeric) @todo: test bool|null
-              switch (gettype($c_parent_obj)) {
-                case 'array' : $c_parent_obj[$c_child_name]   = $c_value; break;
-                case 'object': $c_parent_obj->{$c_child_name} = $c_value; break;
-              }
-              break;
-            case 'delete':
-              switch (gettype($c_parent_obj)) {
-                case 'array' : unset($c_parent_obj[$c_child_name]);   break;
-                case 'object': unset($c_parent_obj->{$c_child_name}); break;
-              }
-              break;
-            }
+          # only scalar types support (string|numeric) @todo: test bool|null
+            case 'update': factory::objarr_insert_value($c_parent_obj, $c_child_name, $c_value); break;
+            case 'delete': factory::objarr_delete_child($c_parent_obj, $c_child_name);           break;
+          }
         }
       }
     }
