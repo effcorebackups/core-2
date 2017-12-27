@@ -14,14 +14,10 @@ namespace effectivecore\modules\user {
     $user = (new instance('user', ['id' => $id]))->select();
     if ($user) {
       if ($user->is_embed == 1) {
-        factory::send_header_and_exit('access_denided',
-          'This user is embed!'
-        );
+        factory::send_header_and_exit('access_denided');
       }
     } else {
-      factory::send_header_and_exit('not_found',
-        'User not found!'
-      );
+      factory::send_header_and_exit('not_found');
     }
   }
 
@@ -30,14 +26,10 @@ namespace effectivecore\modules\user {
     if ($user) {
       if (!($user->id == user::get_current()->id ||                # not owner or
                    isset(user::get_current()->roles['admins']))) { # not admin
-        factory::send_header_and_exit('access_denided',
-          'Access denided!'
-        );
+        factory::send_header_and_exit('access_denided');
       }
     } else {
-      factory::send_header_and_exit('not_found',
-        'User not found!'
-      );
+      factory::send_header_and_exit('not_found');
     }
   }
 

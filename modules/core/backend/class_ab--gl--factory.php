@@ -362,14 +362,9 @@ namespace effectivecore {
       case 'access_denided': header('HTTP/1.1 403 Forbidden'); break;
       case 'not_found'     : header('HTTP/1.0 404 Not Found'); break;
     }
-    if ($message)                  $template = 'page_simple';
-    if ($type == 'access_denided') $template = 'page_access_denided';
-    if ($type == 'not_found')      $template = 'page_not_found';
-    if (isset($template)) {
-      print (new template($template, [
-        'message' => $message
-      ]))->render();
-    }
+    if ($type == 'access_denided') {print (new template('page_access_denided', ['message' => $message ?: 'go to <a href="/">front page</a>']))->render(); exit();}
+    if ($type == 'not_found')      {print (new template('page_not_found',      ['message' => $message ?: 'go to <a href="/">front page</a>']))->render(); exit();}
+    if ($message)                  {print (new template('page_simple',         ['message' => $message]))->render();                                       exit();}
     exit();
   }
 

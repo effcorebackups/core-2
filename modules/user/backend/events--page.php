@@ -83,9 +83,7 @@ namespace effectivecore\modules\user {
         factory::send_header_and_exit('access_denided');
       }
     } else {
-      factory::send_header_and_exit('not_found',
-        'This user is not found!'
-      );
+      factory::send_header_and_exit('not_found');
     }
   }
 
