@@ -30,9 +30,7 @@ namespace effectivecore\modules\user {
   static function on_show_block_users($page) {
     $pager = new pager();
     if ($pager->has_error) {
-      factory::send_header_and_exit('not_found',
-        'Page not found!'
-      );
+      factory::send_header_and_exit('not_found');
     } else {
       $block = new markup('x-block', ['id' => 'admin_users']);
       $thead = [['ID', 'EMail', 'Nick', 'Created', 'Is embed', 'Actions']];
@@ -82,13 +80,11 @@ namespace effectivecore\modules\user {
         $block->child_insert(new table([], $tbody, $thead));
         return $block;
       } else {
-        factory::send_header_and_exit('access_denided',
-          'Access denided!'
-        );
+        factory::send_header_and_exit('access_denided');
       }
     } else {
       factory::send_header_and_exit('not_found',
-        'User not found!'
+        'This user is not found!'
       );
     }
   }

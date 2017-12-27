@@ -166,17 +166,13 @@ namespace effectivecore {
               return $c_page->get_different_cache()->render(); else
               return $c_page->render();
           } else {
-            factory::send_header_and_exit('access_denided',
-              'Access denided!'
-            );
+            factory::send_header_and_exit('access_denided');
           }
         }
       }
     }
   # no matches case
-    factory::send_header_and_exit('not_found',
-      'Page not found!'
-    );
+    factory::send_header_and_exit('not_found');
   }
 
 }}

@@ -355,15 +355,18 @@ namespace effectivecore {
     return $return;
   }
 
-  static function send_header_and_exit($header, $message = '', $p = '') {
-    switch ($header) {
+  static function send_header_and_exit($type, $message = '', $p = '') {
+    switch ($type) {
       case 'redirect'      : header('Location: '.$p);          break;
       case 'page_refresh'  : header('Refresh: ' .$p);          break;
       case 'access_denided': header('HTTP/1.1 403 Forbidden'); break;
       case 'not_found'     : header('HTTP/1.0 404 Not Found'); break;
     }
-    if ($message) {
-      print (new template('page_simple', [
+    if ($message)                  $template = 'page_simple';
+    if ($type == 'access_denided') $template = 'page_access_denided';
+    if ($type == 'not_found')      $template = 'page_not_found';
+    if (isset($template)) {
+      print (new template($template, [
         'message' => $message
       ]))->render();
     }

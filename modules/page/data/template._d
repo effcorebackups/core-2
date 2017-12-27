@@ -17,6 +17,12 @@ template
 - page
     type: file
     path: frontend/template--page.html
+- page_access_denided
+    type: file
+    path: frontend/template--page--access_denided.html
+- page_not_found
+    type: file
+    path: frontend/template--page--not_found.html
 - page_simple
     type: file
     path: frontend/template--page_simple.html
