@@ -169,11 +169,25 @@ namespace effectivecore {
     return unserialize(serialize($array));
   }
 
-  static function array_flatten($array) {
+  static function array_values_recursive(&$array, $dpath = '') {
     $return = [];
-    array_walk_recursive($array, function($item) use (&$return) {
-      $return[] = $item;
-    });
+    foreach ($array as $c_key => &$c_value) {
+      $c_dpath = $dpath ? $dpath.'/'.$c_key : $c_key;
+      if (is_array($c_value)) $return += static::array_values_recursive($c_value, $c_dpath);
+      else                    $return[$c_dpath] = &$c_value;
+    }
+    return $return;
+  }
+
+  static function array_values_recursive_all(&$array, $dpath = '') {
+    $return = [];
+    foreach ($array as $c_key => &$c_value) {
+      $c_dpath = $dpath ? $dpath.'/'.$c_key : $c_key;
+      $return[$c_dpath] = &$c_value;
+      if (is_array($c_value)) {
+        $return += static::array_values_recursive_all($c_value, $c_dpath);
+      }
+    }
     return $return;
   }
 
@@ -204,12 +218,14 @@ namespace effectivecore {
     if (gettype($data) == 'object') unset($data->{$name});
   }
 
-  static function &dpath_get_pointer(&$data, $dpath) {
-    $return = $data;
+  static function &dpath_get_chain(&$data, $dpath) {
+    $chain = [];
+    $c_pointer = $data;
     foreach (explode('/', $dpath) as $c_part) {
-      $return = &static::objarr_select_value($return, $c_part);
+      $c_pointer = &static::objarr_select_value($c_pointer, $c_part);
+      $chain[$c_part] = &$c_pointer;
     }
-    return $return;
+    return $chain;
   }
 
   ###########################

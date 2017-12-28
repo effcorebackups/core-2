@@ -99,7 +99,7 @@ namespace effectivecore {
   function transaction_commit()    {if ($this->init()) return $this->connection->commit();}
 
   function query_to_string(...$query) {
-    return implode(' ', factory::array_flatten($query)).';';
+    return implode(' ', factory::array_values_recursive($query)).';';
   }
 
   function query(...$query) {

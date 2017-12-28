@@ -138,21 +138,22 @@ namespace effectivecore {
   static function changes_apply_to_data($changes, &$data) {
     foreach ($changes as $module_id => $c_module_changes) {
       foreach ($c_module_changes as $c_action_id => $c_changes) {
-        foreach ($c_changes as $c_dpath => $c_value) {
-          $c_dpath_parts = explode('/', $c_dpath);
-          $c_child_name = array_pop($c_dpath_parts);
-          $c_parent_obj = &factory::dpath_get_pointer($data, implode('/', $c_dpath_parts));
+        foreach ($c_changes as $c_dpath => $c_data) {
+          $c_chain = factory::dpath_get_chain($data, $c_dpath);
+          $c_child_name = array_keys($c_chain)[count($c_chain)-1];
+          $c_parent_name = array_keys($c_chain)[count($c_chain)-2];
+          $c_child = &$c_chain[$c_child_name];
+          $c_parent = &$c_chain[$c_parent_name];
           switch ($c_action_id) {
           # only structured types support (array|object)
             case 'insert':
-              $c_destination_obj = &factory::objarr_select_value($c_parent_obj, $c_child_name);
-              foreach ($c_value as $c_key => $c_value) {
-                factory::objarr_insert_value($c_destination_obj, $c_key, $c_value);
+              foreach ($c_data as $c_key => $c_value) {
+                factory::objarr_insert_value($c_child, $c_key, $c_value);
               }
               break;
           # only scalar types support (string|numeric) @todo: test bool|null
-            case 'update': factory::objarr_insert_value($c_parent_obj, $c_child_name, $c_value); break;
-            case 'delete': factory::objarr_delete_child($c_parent_obj, $c_child_name);           break;
+            case 'update': factory::objarr_insert_value($c_parent, $c_child_name, $c_data); break;
+            case 'delete': factory::objarr_delete_child($c_parent, $c_child_name);          break;
           }
         }
       }
