@@ -169,24 +169,12 @@ namespace effectivecore {
     return unserialize(serialize($array));
   }
 
-  static function array_values_recursive(&$array, $dpath = '') {
+  static function array_values_recursive(&$array, $all = false, $dpath = '') {
     $return = [];
     foreach ($array as $c_key => &$c_value) {
       $c_dpath = $dpath ? $dpath.'/'.$c_key : $c_key;
-      if (is_array($c_value)) $return += static::array_values_recursive($c_value, $c_dpath);
-      else                    $return[$c_dpath] = &$c_value;
-    }
-    return $return;
-  }
-
-  static function array_values_recursive_all(&$array, $dpath = '') {
-    $return = [];
-    foreach ($array as $c_key => &$c_value) {
-      $c_dpath = $dpath ? $dpath.'/'.$c_key : $c_key;
-      $return[$c_dpath] = &$c_value;
-      if (is_array($c_value)) {
-        $return += static::array_values_recursive_all($c_value, $c_dpath);
-      }
+      if (is_array($c_value)) $return += static::array_values_recursive($c_value, $all, $c_dpath);
+      if (is_array($c_value) == false || $all) $return[$c_dpath] = &$c_value;
     }
     return $return;
   }
@@ -218,7 +206,7 @@ namespace effectivecore {
     if (gettype($data) == 'object') unset($data->{$name});
   }
 
-  static function &dpath_get_chain(&$data, $dpath) {
+  static function dpath_get_chain(&$data, $dpath) {
     $chain = [];
     $c_pointer = $data;
     foreach (explode('/', $dpath) as $c_part) {
