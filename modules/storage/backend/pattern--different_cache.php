@@ -9,8 +9,11 @@ namespace effectivecore {
 
   public $cache_name;
 
-  function __construct($cache_name = '') {
+  function __construct($cache_name = '', $properties = []) {
     if ($cache_name) $this->cache_name = $cache_name;
+    foreach ($properties as $c_key => $c_value) {
+      $this->{$c_key} = $c_value;
+    }
   }
 
   function get_cache_name() {

@@ -65,16 +65,15 @@ namespace effectivecore {
   # save cache
     foreach ($data as $c_group => $c_data) {
       static::$data[$c_group] = $c_data;
-      foreach ($c_data as $c_module_id => $c_items) {
-        foreach ($c_items as $c_row_id => $c_item) {
-          if ($c_item instanceof has_different_cache) {
-            $c_diff_cache_id = 'data--'.$c_group.'--'.$c_module_id.'--'.$c_row_id;
-            cache::update($c_diff_cache_id, $c_item);
-            $c_data[$c_module_id][$c_row_id] = new different_cache($c_diff_cache_id);
-            foreach ($c_item::get_non_different_properties() as $c_prop) {
-              $c_data[$c_module_id][$c_row_id]->{$c_prop} = $c_item->{$c_prop};
-            }
-          }
+      foreach (factory::arrobj_values_recursive($c_data, true) as $c_dpath => &$c_value) {
+        if ($c_value instanceof has_different_cache) {
+          $c_cache_id = 'data--'.$c_group.'--'.str_replace('/', '--', $c_dpath);
+          $c_different_properties = array_intersect_key((array)$c_value, $c_value::get_non_different_properties());
+          cache::update($c_cache_id, $c_value);
+          $c_value = new different_cache(
+            $c_cache_id,
+            $c_different_properties
+          );
         }
       }
       cache::update('data--'.$c_group, $c_data);
