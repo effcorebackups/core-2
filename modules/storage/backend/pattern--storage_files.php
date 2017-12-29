@@ -34,7 +34,7 @@ namespace effectivecore {
     if (isset(static::$data[$group])) {
       $c_pointer = static::$data[$group];
       foreach ($dpath_parts as $c_part) {
-        $c_pointer = &factory::objarr_select_value($c_pointer, $c_part);
+        $c_pointer = &factory::arrobj_select_value($c_pointer, $c_part);
         if ($expand_cache && $c_pointer instanceof different_cache) {
           $c_pointer = $c_pointer->get_different_cache();
         }
@@ -148,12 +148,12 @@ namespace effectivecore {
           # only structured types support (array|object)
             case 'insert':
               foreach ($c_data as $c_key => $c_value) {
-                factory::objarr_insert_value($c_child, $c_key, $c_value);
+                factory::arrobj_insert_value($c_child, $c_key, $c_value);
               }
               break;
           # only scalar types support (string|numeric) @todo: test bool|null
-            case 'update': factory::objarr_insert_value($c_parent, $c_child_name, $c_data); break;
-            case 'delete': factory::objarr_delete_child($c_parent, $c_child_name);          break;
+            case 'update': factory::arrobj_insert_value($c_parent, $c_child_name, $c_data); break;
+            case 'delete': factory::arrobj_delete_child($c_parent, $c_child_name);          break;
           }
         }
       }
@@ -236,8 +236,8 @@ namespace effectivecore {
           }
         }
       # add new item to tree
-        factory::objarr_insert_value($p[$c_depth-1], $matches['name'], $c_value);
-        $p[$c_depth] = &factory::objarr_select_value($p[$c_depth-1], $matches['name']);
+        factory::arrobj_insert_value($p[$c_depth-1], $matches['name'], $c_value);
+        $p[$c_depth] = &factory::arrobj_select_value($p[$c_depth-1], $matches['name']);
       # convert parent item to array
         if ($matches['prefix'] == '- ' && !is_array($p[$c_depth-1])) {
           $p[$c_depth-1] = (array)$p[$c_depth-1];

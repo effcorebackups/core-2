@@ -187,30 +187,44 @@ namespace effectivecore {
     }
   }
 
-  ##################################
-  ### objarr and dpath functions ###
-  ##################################
+  #####################################
+  ### mix of array/object functions ###
+  #####################################
 
-  static function &objarr_select_value(&$data, $name) {
+  static function &arrobj_select_value(&$data, $name) {
     if (gettype($data) == 'array')  return $data  [$name];
     if (gettype($data) == 'object') return $data->{$name};
   }
 
-  static function objarr_insert_value(&$data, $name, $value) {
+  static function arrobj_insert_value(&$data, $name, $value) {
     if (gettype($data) == 'array')  $data  [$name] = $value;
     if (gettype($data) == 'object') $data->{$name} = $value;
   }
 
-  static function objarr_delete_child(&$data, $name) {
+  static function arrobj_delete_child(&$data, $name) {
     if (gettype($data) == 'array')  unset($data  [$name]);
     if (gettype($data) == 'object') unset($data->{$name});
   }
+
+  static function arrobj_values_recursive(&$data, $all = false, $dpath = '') {
+    $return = [];
+    foreach ($data as $c_key => &$c_value) {
+      $c_dpath = $dpath ? $dpath.'/'.$c_key : $c_key;
+      if ((is_array($c_value) || is_object($c_value))) $return += static::arrobj_values_recursive($c_value, $all, $c_dpath);
+      if ((is_array($c_value) || is_object($c_value)) == false || $all) $return[$c_dpath] = &$c_value;
+    }
+    return $return;
+  }
+
+  #######################
+  ### dpath functions ###
+  #######################
 
   static function dpath_get_chain(&$data, $dpath) {
     $chain = [];
     $c_pointer = $data;
     foreach (explode('/', $dpath) as $c_part) {
-      $c_pointer = &static::objarr_select_value($c_pointer, $c_part);
+      $c_pointer = &static::arrobj_select_value($c_pointer, $c_part);
       $chain[$c_part] = &$c_pointer;
     }
     return $chain;
