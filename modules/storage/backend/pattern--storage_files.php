@@ -68,11 +68,11 @@ namespace effectivecore {
       foreach (factory::arrobj_values_recursive($c_data, true) as $c_dpath => &$c_value) {
         if ($c_value instanceof has_different_cache) {
           $c_cache_id = 'data--'.$c_group.'-'.str_replace('/', '-', $c_dpath);
-          $c_different_properties = array_intersect_key((array)$c_value, $c_value::get_non_different_properties());
+          $c_non_different_properties = array_intersect_key((array)$c_value, $c_value::get_non_different_properties());
           cache::update($c_cache_id, $c_value);
           $c_value = new different_cache(
             $c_cache_id,
-            $c_different_properties
+            $c_non_different_properties
           );
         }
       }
@@ -144,13 +144,13 @@ namespace effectivecore {
           $c_child = &$c_chain[$c_child_name];
           $c_parent = &$c_chain[$c_parent_name];
           switch ($c_action_id) {
-          # only structured types support (array|object)
+          # only structured types is supported: array|object
             case 'insert':
               foreach ($c_data as $c_key => $c_value) {
                 factory::arrobj_insert_value($c_child, $c_key, $c_value);
               }
               break;
-          # only scalar types support (string|numeric) @todo: test bool|null
+          # only scalar types is supported: string|numeric @todo: test bool|null
             case 'update': factory::arrobj_insert_value($c_parent, $c_child_name, $c_data); break;
             case 'delete': factory::arrobj_delete_child($c_parent, $c_child_name);          break;
           }
