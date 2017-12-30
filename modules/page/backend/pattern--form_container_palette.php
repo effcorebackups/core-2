@@ -9,7 +9,7 @@ namespace effectivecore {
 
   function build() {
     $this->attribute_insert('class', ['palette' => 'palette']);
-    foreach (storage::get('files')->select('colors') as $c_module_id => $c_module_colors) {
+    foreach (storage::get('files')->select('color') as $c_module_id => $c_module_colors) {
       foreach ($c_module_colors as $c_row_id => $c_color_info) {
         $this->input_insert(null, [
           'value' => $c_row_id,
