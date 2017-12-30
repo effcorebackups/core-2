@@ -58,6 +58,7 @@ translation
     - Demo: Демо
     - Description: Описание
     - Develop: Разработка
+    - disable: выключить
     - driver error code\: %%_code: код ошибки драйвера: %%_code
     - driver error text\: %%_text: текст ошибки драйвера: %%_text
     - Driver is not selected!: Драйвер не выбран!
@@ -69,6 +70,7 @@ translation
     - Elements: Элементы
     - EMail: Адрес электронной почты
     - Enable cookies before login.: Включите cookies до начала входа в систему.
+    - enable: включить
     - Entity %%_name was installed.: Сущность %%_name была установлена.
     - Entity %%_name was not installed!: Сущность %%_name не была установлена!
     - error: ошибка
@@ -223,6 +225,7 @@ translation
     - Translate: Перевод
     - Tree: Дерево
     - UNDER CONSTRUCTION: В РАЗРАБОТКЕ
+    - uninstall: удалить
     - Use international format of mobile phone numbers.: Используйте международный формат номеров мобильных телефонов.
     - User %%_nick was deleted.: Пользователь %%_nick был удален.
     - User %%_nick was not deleted!: Пользователь %%_nick не был удален.

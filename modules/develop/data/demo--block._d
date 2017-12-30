@@ -114,7 +114,7 @@ blocks
                             attributes
                             - class
                               - demo-actions-list: demo-actions-list
-                            values
+                            actions
                             - edit: edit
                             - delete: delete
                             active
