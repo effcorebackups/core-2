@@ -17,14 +17,14 @@ namespace effectivecore\modules\user {
           abstract class events_page extends \effectivecore\events_page {
 
   static function on_show_block_roles($page) {
-    $block = new markup('x-block', ['id' => 'admin_roles']);
     $thead = [['ID', 'Title', 'Is embed']];
     $tbody = entity::get('role')->select_instances();
     foreach ($tbody as $c_row) {
       $c_row->is_embed = $c_row->is_embed ? 'Yes' : 'No';
     }
-    $block->child_insert(new table([], $tbody, $thead));
-    return $block;
+    return new markup('x-block', ['id' => 'roles_info'],
+      new table([], $tbody, $thead)
+    );
   }
 
   static function on_show_block_users($page) {
@@ -32,7 +32,6 @@ namespace effectivecore\modules\user {
     if ($pager->has_error) {
       factory::send_header_and_exit('not_found');
     } else {
-      $block = new markup('x-block', ['id' => 'admin_users']);
       $thead = [['ID', 'EMail', 'Nick', 'Created', 'Is embed', 'Actions']];
       $tbody = [];
       foreach (entity::get('user')->select_instances() as $c_user) {
@@ -49,8 +48,9 @@ namespace effectivecore\modules\user {
           $c_actions
         ];
       }
-      $block->child_insert(new table([], $tbody, $thead));
-      return $block;
+      return new markup('x-block', ['id' => 'users_admin'],
+        new table([], $tbody, $thead)
+      );
     }
   }
 
@@ -59,7 +59,6 @@ namespace effectivecore\modules\user {
     if ($user) {
       if ($user->id == user::get_current()->id ||               # owner
                  isset(user::get_current()->roles['admins'])) { # admin
-        $block = new markup('x-block', ['id' => 'user_info']);
       # get roles
         $roles = [];
         $storage_roles = entity::get('relation_role_ws_user')->select_instances(['id_user' => $id]);
@@ -77,8 +76,9 @@ namespace effectivecore\modules\user {
       # show table
         $thead = [['Parameter', 'Value']];
         $tbody = factory::array_rotate([array_keys($values), array_values($values)]);
-        $block->child_insert(new table([], $tbody, $thead));
-        return $block;
+        return new markup('x-block', ['id' => 'user_info'],
+          new table([], $tbody, $thead)
+        );
       } else {
         factory::send_header_and_exit('access_denided');
       }

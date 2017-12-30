@@ -12,11 +12,6 @@ namespace effectivecore\modules\develop {
           abstract class events_page extends \effectivecore\events_page {
 
   static function on_show_block_demo_dynamic($page) {
-    $block = new markup('x-block', ['id' => 'demo_dynamic']);
-  # title
-    $block->child_insert(
-      new markup('h2', [], 'Dynamic block')
-    );
   # table
     $thead = [['th 1', 'th 2', 'th 3']];
     $tbody = [
@@ -24,10 +19,10 @@ namespace effectivecore\modules\develop {
       ['td 2.1', 'td 2.2', new table_body_row_cell([], 'td 2.3')],
       new table_body_row([], ['td 3.1', 'td 3.2', new table_body_row_cell([], 'td 3.3')])
     ];
-    $block->child_insert(
+    return new markup('x-block', ['id' => 'demo_dynamic'], [
+      new markup('h2', [], 'Dynamic block'),
       new table(['class' => ['table' => 'table']], $tbody, $thead)
-    );
-    return $block;
+    ]);
   }
 
 }}
