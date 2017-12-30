@@ -1,4 +1,4 @@
-tree_items
+tree_item
 - login|tree_item
     id: login
     id_parent: user_anonymous

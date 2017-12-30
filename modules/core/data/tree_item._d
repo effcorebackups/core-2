@@ -1,4 +1,4 @@
-tree_items
+tree_item
 - admin|tree_item
     id: admin
     id_parent: main
