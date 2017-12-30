@@ -155,7 +155,7 @@ namespace effectivecore {
 
   static function find_and_render() {
   # render page
-    $pages = storage::get('files')->select('pages');
+    $pages = storage::get('files')->select('page');
     foreach ($pages as $c_module_id => $c_module_pages) {
       foreach ($c_module_pages as $c_row_id => $c_page) {
         if (($c_page->display->check === 'url' && preg_match(

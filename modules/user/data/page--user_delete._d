@@ -1,4 +1,4 @@
-pages
+page
 - user_delete|page
     title: Delete user %%_nick_context{4}?
     https: true
