@@ -1,4 +1,4 @@
-event
+events
   on_module_start
   - user|event
       for: user

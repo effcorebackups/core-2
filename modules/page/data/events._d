@@ -1,4 +1,4 @@
-event
+events
   on_module_install
   - page|event
       for: page

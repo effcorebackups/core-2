@@ -1,4 +1,4 @@
-event
+events
   on_form_init
   - installation|event
       for: installation
