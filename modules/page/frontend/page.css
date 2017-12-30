@@ -62,18 +62,17 @@
   x-block#user_menu x-tree li {list-style: none; margin: 0; padding: 0}
   x-block#user_menu:hover x-tree {display: inline-block}
 
-  x-block#modules_info .action {text-align: right}
+  x-block#modules_info td.action {}
   x-block#users_admin {}
   x-block#user_info {}
   x-block#roles_info {}
   x-block#demo_dynamic {}
 
   /* control elements */
-  x-actions-control {display: inline-block; cursor: default}
-  x-actions-control x-title {border-bottom: 1px dashed %%_color_bg}
-  x-actions-control x-action-list {position: absolute; display: none; padding: 5px 10px; border: 1px solid %%_color_bg; background: white}
-  x-actions-control:hover x-action-list {display: block; font-size: .85em}
-  x-actions-control:hover x-action {display: block}
+  x-actions-control {display: block}
+  x-actions-control x-title {}
+  x-actions-control x-action-list {display: block; font-size: .85em}
+  x-actions-control x-action {display: block}
 
   x-switcher-control {display: inline-block; vertical-align: middle; padding: 1px; border: 2px solid %%_color_bg; border-radius: 11px; background: white}
   x-switcher-control[x-state=off] {border-color: gray}

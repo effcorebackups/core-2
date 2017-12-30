@@ -21,7 +21,7 @@ namespace effectivecore\modules\core {
     $thead = [['Module information', '']];
     $tbody = [];
     foreach (module::get_all() as $c_module) {
-      $c_action_list = new control_actions_list();
+      $c_action_list = new control_actions_list([], [], null);
       $c_action_list->action_add('enable', 'enable');
       $c_action_list->action_add('disable', 'disable'); // if ($c_module->state != 'always_on')
       $c_action_list->action_add('install', 'install');

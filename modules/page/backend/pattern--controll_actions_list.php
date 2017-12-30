@@ -12,10 +12,10 @@ namespace effectivecore {
   public $actions = [];
   public $active = [];
 
-  function __construct($actions = [], $active = [], $title = null, $attributes = [], $weight = 0) {
+  function __construct($actions = [], $active = [], $title = 'actions', $attributes = [], $weight = 0) {
     $this->active = factory::array_values_map_to_keys($active);
     foreach ($actions as $id => $c_action) $this->action_add($id, $c_action);
-    if (!is_null($title)) $this->title = $title;
+    $this->title = $title;
     parent::__construct($this->tag_name, $attributes, [], $weight);
   }
 
@@ -24,7 +24,7 @@ namespace effectivecore {
   }
 
   function render() {
-    $this->child_insert(new markup('x-title', [], $this->title ?: 'actions'), 'title');
+    $this->child_insert(new markup('x-title', [], $this->title), 'title');
     $this->child_insert(new markup('x-action-list'), 'action_list');
     $list = $this->child_select('action_list');
     foreach ($this->actions as $c_action) {
