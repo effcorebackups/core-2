@@ -1,4 +1,4 @@
-events
+event
   on_storage_init_before
   - pdo|event
       for: pdo

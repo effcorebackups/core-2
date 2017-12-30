@@ -19,7 +19,7 @@ namespace effectivecore {
 
   static function init() {
     console::add_log('event', 'init.', 'event system was initialized', '-');
-    foreach (storage::get('files')->select('events') as $c_module_id => $c_module_events) {
+    foreach (storage::get('files')->select('event') as $c_module_id => $c_module_events) {
       foreach ($c_module_events as $c_row_id => $c_events) {
         foreach ($c_events as $c_event) {
           static::$cache[$c_row_id][] = $c_event;
