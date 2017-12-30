@@ -56,7 +56,7 @@ namespace effectivecore {
     }
   # init dynamic and static changes
     $changes_d = dynamic::select('changes') ?: [];
-    $changes_s = isset($data_orig['changes']) ? $data_orig['changes'] : [];
+    $changes_s = isset($data_orig['change']) ? $data_orig['change'] : [];
   # apply all changes to original data and get final data
     $data = factory::array_deep_clone($data_orig);
     static::changes_apply_to_data($changes_d, $data);

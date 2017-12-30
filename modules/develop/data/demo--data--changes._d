@@ -1,4 +1,4 @@
-changes
+change
 # only structured types is supported: array|object
   insert
   - demo_data/develop/demo_object
