@@ -1,4 +1,4 @@
-tokens
+token
 - text_no_items
     match: %%_text_no_items
     type: translated_text

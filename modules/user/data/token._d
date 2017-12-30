@@ -1,4 +1,4 @@
-tokens
+token
 # tokens for current user
 - id_user
     match: %%_id_user
