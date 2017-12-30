@@ -1,4 +1,4 @@
-instances
+instance
 - user_1|instance
     entity_name: user
     values
