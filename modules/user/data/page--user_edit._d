@@ -37,7 +37,7 @@ page
     - form_user_edit
         region: main_1
         type: link
-        dpath: form/user/user_edit
+        dpath: forms/user/user_edit
     # ─────────────────────────────────────────────────────────────────────
     - block_copyright
         region: copyright
