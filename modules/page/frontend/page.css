@@ -70,8 +70,8 @@
 
   /* control elements */
   x-actions-control {display: block}
-  x-actions-control x-title {}
-  x-actions-control x-action-list {display: block; font-size: .85em}
+  x-actions-control x-title {display: block}
+  x-actions-control x-action-list {display: block}
   x-actions-control x-action {display: block}
 
   x-switcher-control {display: inline-block; vertical-align: middle; padding: 1px; border: 2px solid %%_color_bg; border-radius: 11px; background: white}
