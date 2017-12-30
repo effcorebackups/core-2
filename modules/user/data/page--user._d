@@ -1,4 +1,4 @@
-page
+pages
 - user|page
     title: User %%_nick_context{2}
     https: true

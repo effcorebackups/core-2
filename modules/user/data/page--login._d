@@ -1,4 +1,4 @@
-page
+pages
 - login|page
     title: Login
     https: true

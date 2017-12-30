@@ -1,4 +1,4 @@
-page
+pages
 - user_edit|page
     title: Edit user %%_nick_context{2}
     https: true

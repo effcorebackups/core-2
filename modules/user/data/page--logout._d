@@ -1,4 +1,4 @@
-page
+pages
 - logout|page
     title: Logout
     https: true

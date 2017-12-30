@@ -148,15 +148,24 @@ namespace effectivecore {
   ### static methods ###
   ######################
 
+  static protected $cache;
   static protected $cache_args = [];
+
+  static function init() {
+    static::$cache = storage::get('files')->select('pages');
+  }
+
+  static function get_all() {
+    if   (!static::$cache) static::init();
+    return static::$cache;
+  }
 
   static function args_get()             {return static::$cache_args;}
   static function args_set($key, $value) {static::$cache_args[$key] = $value;}
 
   static function find_and_render() {
   # render page
-    $pages = storage::get('files')->select('page');
-    foreach ($pages as $c_module_id => $c_module_pages) {
+    foreach (static::get_all() as $c_module_id => $c_module_pages) {
       foreach ($c_module_pages as $c_row_id => $c_page) {
         if (($c_page->display->check === 'url' && preg_match(
              $c_page->display->match, url::get_current()->path))) {
