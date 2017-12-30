@@ -53,6 +53,8 @@ translations
     - delete file\: %%_name: удалить файл: %%_name
     - Delete user %%_nick_context{4}?: Удалить пользователя %%_nick_context{4}?
     - delete: удалить
+    - Demo sub module description.: Описание демонстрационного подмодуля
+    - Demo sub module title: Заголовок демонстрационного подмодуля
     - Demo: Демо
     - Description: Описание
     - Develop: Разработка
@@ -141,6 +143,7 @@ translations
     - Module for working with pages.: Модуль работы со страницами.
     - Module for working with trees (hierarchical structures).: Модуль работы с деревьями (иерархическими структурами).
     - Module for working with user accounts and permissions.: Модуль работы с пользовательскими аккаунтами и разрешениями.
+    - Module information: Информация о модуле
     - Modules was installed.: Модули были установлены.
     - Modules: Модули
     - Name: Имя
@@ -193,7 +196,6 @@ translations
     - sql state\: %%_state: sql состояние: %%_state
     - state: состояние
     - State: Состояние
-    - State.: Сост.
     - Static block: Статический блок
     - Storage %%_id is not available!: Хранилище %%_id не доступно!
     - storage %%_id was initialized: хранилище %%_id было инициализировано
@@ -244,7 +246,6 @@ translations
     - Value: Значение
     - Value: Значение
     - Values: Значения
-    - Ver.: Вер.
     - Version: Версия
     - view: просмотреть
     - Wellcome to our site!: Добро пожаловать на наш сайт!

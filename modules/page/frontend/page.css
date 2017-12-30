@@ -63,6 +63,8 @@
   x-block#user_menu x-tree li {list-style: none; margin: 0; padding: 0}
   x-block#user_menu:hover x-tree {display: inline-block}
 
+  x-block#modules_info .action {text-align: right}
+
   /* control elements */
   x-actions-control {display: inline-block; cursor: default}
   x-actions-control x-title {border-bottom: 1px dashed %%_color_bg}
