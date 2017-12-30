@@ -1,4 +1,4 @@
-forms
+form
 - logout|form
     attributes
     - id: logout

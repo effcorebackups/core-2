@@ -36,7 +36,7 @@ page
     - form_user_delete
         region: main_1
         type: link
-        dpath: forms/user/user_delete
+        dpath: form/user/user_delete
     # ─────────────────────────────────────────────────────────────────────
     - block_copyright
         region: copyright

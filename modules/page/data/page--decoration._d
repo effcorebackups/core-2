@@ -29,7 +29,7 @@ page
     - form_decoration
         region: main_1
         type: link
-        dpath: forms/page/decoration
+        dpath: form/page/decoration
     # ─────────────────────────────────────────────────────────────────────
     - block_copyright
         region: copyright

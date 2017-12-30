@@ -29,7 +29,7 @@ page
     - form_login
         region: main_1
         type: link
-        dpath: forms/user/login
+        dpath: form/user/login
     # ─────────────────────────────────────────────────────────────────────
     - block_copyright
         region: copyright

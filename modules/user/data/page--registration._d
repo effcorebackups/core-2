@@ -29,7 +29,7 @@ page
     - form_registration
         region: main_1
         type: link
-        dpath: forms/user/registration
+        dpath: form/user/registration
     # ─────────────────────────────────────────────────────────────────────
     - block_copyright
         region: copyright

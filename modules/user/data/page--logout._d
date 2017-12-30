@@ -29,7 +29,7 @@ page
     - form_logout
         region: main_1
         type: link
-        dpath: forms/user/logout
+        dpath: form/user/logout
     # ─────────────────────────────────────────────────────────────────────
     - block_copyright
         region: copyright

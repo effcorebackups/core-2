@@ -29,7 +29,7 @@ page
     - form_demo
         region: main_1
         type: link
-        dpath: forms/develop/demo
+        dpath: form/develop/demo
     - block_demo_static
         region: main_1
         type: link

@@ -29,7 +29,7 @@ page
     - form_installation
         region: main_1
         type: link
-        dpath: forms/core/installation
+        dpath: form/core/installation
     # ─────────────────────────────────────────────────────────────────────
     - block_copyright
         region: copyright

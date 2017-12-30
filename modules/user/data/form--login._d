@@ -1,4 +1,4 @@
-forms
+form
 - login|form
     attributes
     - id: login
