@@ -2,7 +2,7 @@ frontend
 - frontend_block_tree
     display
       check: dpath
-      match: %^trees/.*$%
+      match: %^tree/.*$%
       where: block
     styles
     - style_tree

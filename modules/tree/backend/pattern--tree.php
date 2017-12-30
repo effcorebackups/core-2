@@ -24,7 +24,7 @@ namespace effectivecore {
   static protected $cache_tree_items;
 
   static function init() {
-    $trees      = storage::get('files')->select('trees');
+    $trees      = storage::get('files')->select('tree');
     $tree_items = storage::get('files')->select('tree_items');
     foreach ($trees as $c_module_id => $c_module_trees) {
       foreach ($c_module_trees as $c_row_id => $c_tree) {
