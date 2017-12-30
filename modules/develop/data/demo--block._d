@@ -11,7 +11,7 @@ blocks
         - content|text
             text: Static block
   # table
-    - table_demo|table
+    - demo_table|table
         children
         - head|table_head
             children
@@ -82,7 +82,7 @@ blocks
                     - content|text
                         text: 
   # pagers
-    - pager_1_demo|pager
+    - demo_pager_1|pager
         id: 1
   # title
     - controls_title|markup
@@ -107,13 +107,13 @@ blocks
                 - td_1|table_body_row_cell
                     children
                   # actions list
-                    - actions_list_demo_wrapper|markup
+                    - demo_actions_list_wrapper|markup
                         tag_name: div
                         children
-                        - actions_list_demo|control_actions_list
+                        - demo_actions_list|control_actions_list
                             attributes
                             - class
-                              - actions-list-demo: actions-list-demo
+                              - demo-actions-list: demo-actions-list
                             values
                             - edit: edit
                             - delete: delete
@@ -124,11 +124,11 @@ blocks
                 - td_1|table_body_row_cell
                     children
                   # switcher
-                    - switcher_demo_wrapper|markup
+                    - demo_switcher_wrapper|markup
                         tag_name: div
                         children
-                        - switcher_demo|control_switcher
+                        - demo_switcher|control_switcher
                             attributes
                             - class
-                              - switcher-demo: switcher-demo
+                              - demo-switcher: demo-switcher
                             state: on
