@@ -1,4 +1,4 @@
-template
+templates
 - tree
     type: inline
     markup: <x-tree %%_attributes> <h3 class="hidden">%%_self</h3> <ul>%%_children</ul> </x-tree>

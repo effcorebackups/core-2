@@ -1,4 +1,4 @@
-template
+templates
 - markup_html
     type: inline
     markup: <%%_tag_name %%_attributes>%%_content</%%_tag_name>
