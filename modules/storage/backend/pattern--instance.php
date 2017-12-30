@@ -61,7 +61,7 @@ namespace effectivecore {
   static protected $cache_orig;
 
   static function init() {
-    static::$cache_orig = storage::get('files')->select('instance');
+    static::$cache_orig = storage::get('files')->select('instances');
     foreach (static::$cache_orig as $c_module_id => $c_module_instances) {
       foreach ($c_module_instances as $c_row_id => $c_instance) {
         static::$cache[$c_row_id] = $c_instance;

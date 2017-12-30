@@ -1,4 +1,4 @@
-instance
+instances
 - demo_types_example_1|instance
     entity_name: demo_types
     values
