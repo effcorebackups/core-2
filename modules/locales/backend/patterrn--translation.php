@@ -22,7 +22,7 @@ namespace effectivecore {
   }
 
   static function init($code) {
-    $translations = storage::get('files')->select('translation');
+    $translations = storage::get('files')->select('translations');
     foreach ($translations as $c_module_id => $c_module_translations) {
       foreach ($c_module_translations as $c_row_id => $c_translation) {
         if ($c_translation->code === $code) {
