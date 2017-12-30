@@ -4,6 +4,7 @@ translations
     data
     - - select -: - выбрать -
     - a php extension stopped the file upload: расширение php остановило загрузку файла
+    - Access denided: Доступ запрещен
     - action: действие
     - Action: Действие
     - actions: действия
@@ -99,6 +100,7 @@ translations
     - file: файл
     - Form elements: Элементы формы
     - Front page: Главная страница
+    - go to <a href="/">front page</a>: перейти на <a href="/">главную страницу</a>
     - Home: Дом
     - Host name: Имя хоста
     - Incorrect email or password!: Неверный адрес электронной почты или пароль!
@@ -152,6 +154,7 @@ translations
     - Object: Объект
     - ok: ок
     - on this ip: на этом ip
+    - Page not found: Страница не найдена
     - Page: Страница
     - Parameter: Параметр
     - Password hash: Хеш пароля

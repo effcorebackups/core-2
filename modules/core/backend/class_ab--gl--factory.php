@@ -373,16 +373,17 @@ namespace effectivecore {
     return $return;
   }
 
-  static function send_header_and_exit($type, $message = '', $p = '') {
+  static function send_header_and_exit($type, $title = '', $message = '', $p = '') {
     switch ($type) {
       case 'redirect'      : header('Location: '.$p);          break;
       case 'page_refresh'  : header('Refresh: ' .$p);          break;
       case 'access_denided': header('HTTP/1.1 403 Forbidden'); break;
       case 'not_found'     : header('HTTP/1.0 404 Not Found'); break;
     }
-    if ($type == 'access_denided') {print (new template('page_access_denided', ['message' => $message ?: 'go to <a href="/">front page</a>']))->render(); exit();}
-    if ($type == 'not_found')      {print (new template('page_not_found',      ['message' => $message ?: 'go to <a href="/">front page</a>']))->render(); exit();}
-    if ($message)                  {print (new template('page_simple',         ['message' => $message]))->render();                                       exit();}
+    $front_page_link = translation::get('go to <a href="/">front page</a>');
+    if ($type == 'access_denided') {print (new template('page_access_denided', ['message' => $message ?: $front_page_link, 'title' => translation::get('Access denided')]))->render(); exit();}
+    if ($type == 'not_found')      {print (new template('page_not_found',      ['message' => $message ?: $front_page_link, 'title' => translation::get('Page not found')]))->render(); exit();}
+    if ($message)                  {print (new template('page_simple',         ['message' => $message ?: $front_page_link, 'title' => translation::get($title)]))->render();           exit();}
     exit();
   }
 

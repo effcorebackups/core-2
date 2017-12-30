@@ -128,7 +128,7 @@ namespace effectivecore {
   }
 
   static function go($url) {
-    factory::send_header_and_exit('redirect', '',
+    factory::send_header_and_exit('redirect', '', '',
       (new url($url))->get_full()
     );
   }
