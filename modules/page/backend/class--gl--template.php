@@ -21,15 +21,15 @@ namespace effectivecore {
     foreach (static::get_templates() as $c_module_id => $c_templates) {
       foreach ($c_templates as $c_name => $c_info) {        
         if ($name == $c_name) {
-          if ($c_info->type == 'file') {
-            $path = module::get_all()[$c_module_id]->path.$c_info->path;
-            $file = new file($path);
-            $this->markup = $file->load(false);
-            return $this;
-          }
-          if ($c_info->type == 'inline') {
-            $this->markup = $c_info->markup;
-            return $this;
+          switch ($c_info->type) {
+            case 'file':
+              $path = module::get_all()[$c_module_id]->path.$c_info->path;
+              $file = new file($path);
+              $this->markup = $file->load(false);
+              return $this;
+            case 'inline':
+              $this->markup = $c_info->markup;
+              return $this;
           }
         }
       }
@@ -62,12 +62,12 @@ namespace effectivecore {
   static protected $cache;
 
   static function init() {
-    static::$cache['files'] = storage::get('files')->select('template');
+    static::$cache = storage::get('files')->select('template');
   }
 
   static function get_templates() {
-    if   (!static::$cache['files']) static::init();
-    return static::$cache['files'];
+    if   (!static::$cache) static::init();
+    return static::$cache;
   }
 
 }}
