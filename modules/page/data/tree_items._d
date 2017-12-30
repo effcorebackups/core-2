@@ -1,4 +1,4 @@
-tree_item
+tree_items
 - decoration|tree_item
     id: decoration
     id_parent: admin

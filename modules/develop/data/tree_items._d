@@ -1,4 +1,4 @@
-tree_item
+tree_items
 - develop|tree_item
     id: develop
     id_parent: main
