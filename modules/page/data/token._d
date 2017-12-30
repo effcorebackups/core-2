@@ -1,4 +1,4 @@
-token
+tokens
 # colors for page
 - color
     match: %%_color
