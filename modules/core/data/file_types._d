@@ -1,4 +1,4 @@
-file_type
+file_types
 # protected files
 - php
     protected: 1
