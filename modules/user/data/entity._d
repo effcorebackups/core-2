@@ -1,4 +1,4 @@
-entities
+entity
 - user|entity
     name: user
     storage_id: main

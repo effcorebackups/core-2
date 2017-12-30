@@ -1,4 +1,4 @@
-entities
+entity
 - tree|entity
     name: tree
     storage_id: main

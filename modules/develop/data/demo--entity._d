@@ -1,4 +1,4 @@
-entities
+entity
 - demo_types|entity
     name: demo_types
     storage_id: main

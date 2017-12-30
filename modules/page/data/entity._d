@@ -1,4 +1,4 @@
-entities
+entity
 - captcha|entity
     name: captcha
     storage_id: main
