@@ -10,8 +10,8 @@ namespace effectivecore {
   static protected $cache;
 
   static function init($storage_id) {
-    storage_files::init('storage');
-    foreach (storage_files::$data['storage'] as $c_module_id => $c_module_storages) {
+    storage_files::init('storages');
+    foreach (storage_files::$data['storages'] as $c_module_id => $c_module_storages) {
       foreach ($c_module_storages as $c_row_id => $c_storage) {
         if ($c_storage->id === $storage_id) {
           if ($c_storage instanceof different_cache)

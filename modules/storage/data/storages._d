@@ -1,4 +1,4 @@
-storage
+storages
 - storage_pdo_sql|storage_pdo
     id: main
 - storage_files_nosql|storage_files

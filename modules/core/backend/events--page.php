@@ -10,7 +10,6 @@ namespace effectivecore\modules\core {
           use \effectivecore\markup as markup;
           use \effectivecore\module as module;
           use \effectivecore\locale as locale;
-          use \effectivecore\storage as storage;
           use \effectivecore\translation as translation;
           use \effectivecore\control_switcher as switcher;
           use \effectivecore\table_head_row_cell as table_head_row_cell;
