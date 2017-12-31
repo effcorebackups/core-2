@@ -35,7 +35,7 @@ namespace effectivecore\modules\core {
         new table_body_row_cell(['class' => ['actions' => 'actions']], $c_action_list)
       ];
     }
-    return new markup('x-block', ['id' => 'modules_info'], [
+    return new markup('x-block', ['id' => 'modules_admin'], [
       new table([], $tbody, $thead)
     ]);
   }
