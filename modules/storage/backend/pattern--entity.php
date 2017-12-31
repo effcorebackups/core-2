@@ -9,17 +9,23 @@ namespace effectivecore {
           implements \effectivecore\has_different_cache {
 
   static function get_non_different_properties() {
-    return ['name' => 'name', 'storage_id' => 'storage_id'];
+    return [
+      'name'       => 'name',
+      'storage_id' => 'storage_id',
+      'catalog_id' => 'catalog_id'
+    ];
   }
 
   public $name;
   public $storage_id;
+  public $catalog_id;
   public $fields = [];
   public $constraints = [];
   public $indexes = [];
 
   function get_name()             {return $this->name;}
   function get_storage_id()       {return $this->storage_id;}
+  function get_catalog_id()       {return $this->catalog_id;}
   function get_field_info($name)  {return $this->fields->{$name};}
   function get_fields_info()      {return $this->fields;}
   function get_indexes_info()     {return $this->indexes;}
@@ -50,27 +56,22 @@ namespace effectivecore {
   }
 
   function install() {
-    $storage = storage::get($this->storage_id);
+    $storage = storage::get($this->get_storage_id());
     return $storage->install_entity($this);
   }
 
   function uninstall() {
-    $storage = storage::get($this->storage_id);
+    $storage = storage::get($this->get_storage_id());
     return $storage->uninstall_entity($this);
   }
 
   function select_instances($conditions = [], $order = [], $count = 0, $offset = 0) {
-    $storage = storage::get($this->storage_id);
+    $storage = storage::get($this->get_storage_id());
     return $storage->select_instances($this, $conditions, $order, $count, $offset);
   }
 
-  function insert_instances() {
-  # todo: make functionality
-  }
-
-  function delete_instances() {
-  # todo: make functionality
-  }
+  function insert_instances() {} # todo: make functionality
+  function delete_instances() {} # todo: make functionality
 
   ######################
   ### static methods ###

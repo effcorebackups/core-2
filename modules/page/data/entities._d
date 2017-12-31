@@ -2,6 +2,7 @@ entities
 - captcha|entity
     name: captcha
     storage_id: main
+    catalog_id: captcha
     fields
       ip_address
         type: varchar

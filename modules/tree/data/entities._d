@@ -2,6 +2,7 @@ entities
 - tree|entity
     name: tree
     storage_id: main
+    catalog_id: trees
     fields
       id
         type: autoincrement
@@ -18,6 +19,7 @@ entities
 - tree_item|entity
     name: tree_item
     storage_id: main
+    catalog_id: tree_items
     fields
       id
         type: autoincrement
