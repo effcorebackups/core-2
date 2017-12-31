@@ -61,14 +61,14 @@ namespace effectivecore\modules\core {
               break;
             case 'mysql':
               $test = storage::get('main')->test($values['driver'][0], (object)[
-                'host_name'    => $values['host_name'][0],
-                'port'         => $values['port'][0],
-                'storage_name' => $values['storage_name'][0],
-                'user_name'    => $values['user_name'][0],
-                'password'     => $values['password'][0]
+                'host_name'  => $values['host_name'][0],
+                'port'       => $values['port'][0],
+                'storage_id' => $values['storage_id'][0],
+                'user_name'  => $values['user_name'][0],
+                'password'   => $values['password'][0]
               ]);
               if ($test !== true) {
-                $form->add_error('storage/mysql/storage_name/element');
+                $form->add_error('storage/mysql/storage_id/element');
                 $form->add_error('storage/mysql/host_name/element');
                 $form->add_error('storage/mysql/port/element');
                 $form->add_error('storage/mysql/user_name/element');
@@ -91,19 +91,19 @@ namespace effectivecore\modules\core {
             $params = new \stdClass;
             $params->driver = $values['driver'][0];
             $params->credentials = new \stdClass;
-            $params->credentials->file_name    = $values['file_name'][0];
-            $params->table_prefix              = $values['table_prefix'][0];
+            $params->credentials->file_name = $values['file_name'][0];
+            $params->table_prefix           = $values['table_prefix'][0];
             break;
           case 'mysql':
             $params = new \stdClass;
             $params->driver = $values['driver'][0];
             $params->credentials = new \stdClass;
-            $params->credentials->host_name    = $values['host_name'][0];
-            $params->credentials->port         = $values['port'][0];
-            $params->credentials->storage_name = $values['storage_name'][0];
-            $params->credentials->user_name    = $values['user_name'][0];
-            $params->credentials->password     = $values['password'][0];
-            $params->table_prefix              = $values['table_prefix'][0];
+            $params->credentials->host_name  = $values['host_name'][0];
+            $params->credentials->port       = $values['port'][0];
+            $params->credentials->storage_id = $values['storage_id'][0];
+            $params->credentials->user_name  = $values['user_name'][0];
+            $params->credentials->password   = $values['password'][0];
+            $params->table_prefix            = $values['table_prefix'][0];
             break;
         }
         storage::get('files')->changes_register_action('core', 'insert', 'storages/storage/storage_pdo_sql', $params, false);

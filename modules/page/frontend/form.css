@@ -57,7 +57,7 @@
 
   /* checked elements */
   form x-field input[type="checkbox"]:checked,
-  form x-field input[type="radio"]:checked {border-color: black; background-color: silver; box-shadow: inset 0 0 0 1px white}
+  form x-field input[type="radio"]:checked {border-color: black; background-color: silver; box-shadow: inset 0 0 0 2px white}
 
   /* disabled + checked elements */
   form x-field.disabled input[type="checkbox"]:checked,
@@ -87,7 +87,7 @@
   form x-container.palette x-field {display: inline-block; margin: 0 4px 0 0}
   form x-container.palette x-field input[type="radio"] {margin: 0; border-color: white}
   form x-container.palette x-field input[type="radio"]:checked {border-color: black}
-  form x-container.palette x-field input[value="color_white"] {box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.3)}
+  form x-container.palette x-field input[value="color_white"] {box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.3)}
 
   /* captcha */
   form x-field.captcha svg {display: block; margin: 20px 0}

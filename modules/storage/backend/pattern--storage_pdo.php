@@ -33,7 +33,7 @@ namespace effectivecore {
                 $this->driver.':host='.
                 $this->credentials->host_name.';port='.
                 $this->credentials->port.';dbname='.
-                $this->credentials->storage_name,
+                $this->credentials->storage_id,
                 $this->credentials->user_name,
                 $this->credentials->password);
               break;
@@ -69,7 +69,7 @@ namespace effectivecore {
             $driver.':host='.
             $params->host_name.';port='.
             $params->port.';dbname='.
-            $params->storage_name,
+            $params->storage_id,
             $params->user_name,
             $params->password);
           break;

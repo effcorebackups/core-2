@@ -29,9 +29,9 @@ forms
         - mysql|form_container
             tag_name: fieldset
             children
-          # storage name
-            - storage_name|form_field
-                title: Storage name
+          # storage id (database name)
+            - storage_id|form_field
+                title: Storage ID
                 description|text
                   text: Allowable characters: %%_chars.
                   args
@@ -41,7 +41,7 @@ forms
                     tag_name: input
                     attributes
                     - type: text
-                    - name: storage_name
+                    - name: storage_id
                     - required: required
                     - value: main
                     - minlength: 1
