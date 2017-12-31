@@ -224,20 +224,20 @@ namespace effectivecore {
       $auto_name = $entity->get_auto_name();
       foreach ($entity->get_constraints_info() as $suffix => $c_cstr) {
         if ($c_cstr->fields != [$auto_name => $auto_name]) {
-          $s_cstr_name = $this->tables($entity->get_name().'_'.$suffix);
+          $s_cstr_name = $this->tables($entity->get_catalog_id().'_'.$suffix);
           $fields[] = ['CONSTRAINT', $s_cstr_name, $c_cstr->type, '(', $this->fields($c_cstr->fields), ')'];
           $fields[] = ',';
         }
       }
       array_pop($fields);
     # create entity
-      $s_table_name = $this->tables($entity->get_name());
+      $s_table_name = $this->tables($entity->get_catalog_id());
       $this->transaction_begin();
       $this->query('DROP', 'TABLE', 'IF EXISTS', $s_table_name);
       $this->query('CREATE', 'TABLE', $s_table_name, '(', $fields, ')');
     # create indexes
       foreach ($entity->get_indexes_info() as $suffix => $c_idx) {
-        $s_idx_name = $this->tables($entity->get_name().'_'.$suffix);
+        $s_idx_name = $this->tables($entity->get_catalog_id().'_'.$suffix);
         $this->query('CREATE', $c_idx->type, $s_idx_name, 'ON', $s_table_name, '(', $this->fields($c_idx->fields), ')');
       }
       return $this->transaction_commit();
@@ -246,13 +246,13 @@ namespace effectivecore {
 
   function uninstall_entity($entity) {
     if ($this->init()) {
-      return $this->query('DROP', 'TABLE', $this->tables($entity->get_name()));
+      return $this->query('DROP', 'TABLE', $this->tables($entity->get_catalog_id()));
     }
   }
 
   function select_instances($entity, $conditions = [], $order = [], $limit = 0, $offset = 0) {
     if ($this->init()) {
-      $query = ['SELECT', '*', 'FROM', $this->tables($entity->get_name())];
+      $query = ['SELECT', '*', 'FROM', $this->tables($entity->get_catalog_id())];
       if (count($conditions)) array_push($query, 'WHERE',       $this->attributes($conditions));
       if (count($order))      array_push($query, 'ORDER', 'BY', $this->fields($order));
       if ($limit)             array_push($query, 'LIMIT', $limit);
@@ -272,7 +272,7 @@ namespace effectivecore {
       $fields = $entity->get_fields();
       $result = $this->query(
         'SELECT', $this->fields($fields),
-        'FROM',   $this->tables($entity->get_name()),
+        'FROM',   $this->tables($entity->get_catalog_id()),
         'WHERE',  $this->attributes($idkeys), 'LIMIT', 1);
       if (isset($result[0])) {
         foreach ($result[0]->values as $c_name => $c_value) {
@@ -290,7 +290,7 @@ namespace effectivecore {
       $fields = array_keys($values);
       $auto_name = $entity->get_auto_name();
       $new_id = $this->query(
-        'INSERT', 'INTO', $this->tables($entity->get_name()), '(',
+        'INSERT', 'INTO', $this->tables($entity->get_catalog_id()), '(',
                           $this->fields($fields), ')',
         'VALUES', '(',    $this->values($values), ')');
       if ($new_id !== null && $auto_name == null) return $instance;
@@ -307,7 +307,7 @@ namespace effectivecore {
       $idkeys = array_intersect_key($instance->get_values(), $entity->get_keys(true, false));
       $values = array_intersect_key($instance->get_values(), $entity->get_fields());
       $row_count = $this->query(
-        'UPDATE', $this->tables($entity->get_name()),
+        'UPDATE', $this->tables($entity->get_catalog_id()),
         'SET',    $this->attributes($values, ','),
         'WHERE',  $this->attributes($idkeys));
       if ($row_count === 1) {
@@ -321,7 +321,7 @@ namespace effectivecore {
       $entity = $instance->get_entity();
       $idkeys = array_intersect_key($instance->get_values(), $entity->get_keys(true, false));
       $row_count = $this->query(
-        'DELETE', 'FROM', $this->tables($entity->get_name()),
+        'DELETE', 'FROM', $this->tables($entity->get_catalog_id()),
         'WHERE',          $this->attributes($idkeys));
       if ($row_count === 1) {
         $instance->set_values([]);
