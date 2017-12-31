@@ -119,16 +119,3 @@ blocks
                             - delete: delete
                             active
                             - edit: edit
-            - tr_2|table_body_row
-                children
-                - td_1|table_body_row_cell
-                    children
-                  # switcher
-                    - demo_switcher_wrapper|markup
-                        tag_name: div
-                        children
-                        - demo_switcher|control_switcher
-                            attributes
-                            - class
-                              - demo-switcher: demo-switcher
-                            state: on
