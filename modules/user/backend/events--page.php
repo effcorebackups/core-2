@@ -14,6 +14,8 @@ namespace effectivecore\modules\user {
           use \effectivecore\entity as entity;
           use \effectivecore\factory as factory;
           use \effectivecore\instance as instance;
+          use \effectivecore\table_body_row_cell as table_body_row_cell;
+          use \effectivecore\control_actions_list as control_actions_list;
           abstract class events_page extends \effectivecore\events_page {
 
   static function on_show_block_roles($page) {
@@ -32,20 +34,20 @@ namespace effectivecore\modules\user {
     if ($pager->has_error) {
       factory::send_header_and_exit('not_found');
     } else {
-      $thead = [['ID', 'EMail', 'Nick', 'Created', 'Is embed', 'Actions']];
+      $thead = [['ID', 'EMail', 'Nick', 'Created', 'Is embed', '']];
       $tbody = [];
       foreach (entity::get('user')->select_instances() as $c_user) {
-        $c_actions = new markup('ul', ['class' => ['actions' => 'actions']]);
-                                    $c_actions->child_insert( new markup('li', [], new markup('a', ['href' => (new url('/user/'.$c_user->id))->get_full()], 'view') ) );
-                                    $c_actions->child_insert( new markup('li', [], new markup('a', ['href' => (new url('/user/'.$c_user->id.'/edit?'.url::make_back_part()))->get_full()], 'edit') ) );
-        if ($c_user->is_embed != 1) $c_actions->child_insert( new markup('li', [], new markup('a', ['href' => (new url('/admin/users/delete/'.$c_user->id.'?'.url::make_back_part()))->get_full()], 'delete') ) );
+        $c_action_list = new control_actions_list([], [], null);
+        $c_action_list->action_add('/user/'.$c_user->id, 'view');
+        $c_action_list->action_add('/user/'.$c_user->id.'/edit?'.url::make_back_part(), 'edit');
+        $c_action_list->action_add('/admin/users/delete/'.$c_user->id.'?'.url::make_back_part(), 'delete', !$c_user->is_embed);
         $tbody[] = [
-          $c_user->id,
-          $c_user->email,
-          $c_user->nick.' ',
-          locale::format_datetime($c_user->created),
-          $c_user->is_embed ? 'Yes' : 'No',
-          $c_actions
+          new table_body_row_cell(['class' => ['id' => 'id']], $c_user->id),
+          new table_body_row_cell(['class' => ['email' => 'email']], $c_user->email),
+          new table_body_row_cell(['class' => ['nick' => 'nick']], $c_user->nick),
+          new table_body_row_cell(['class' => ['created' => 'created']], locale::format_datetime($c_user->created)),
+          new table_body_row_cell(['class' => ['is_embed' => 'is_embed']], $c_user->is_embed ? 'Yes' : 'No'),
+          new table_body_row_cell(['class' => ['actions' => 'actions']], $c_action_list)
         ];
       }
       return new markup('x-block', ['id' => 'users_admin'],

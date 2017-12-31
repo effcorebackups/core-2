@@ -29,11 +29,7 @@
   x-grid table tr:nth-last-child(1) td {border-bottom: 1px solid %%_color_border}
   x-grid table tr td:empty {color: %%_color_table_noitems}
   x-grid table tr td:empty:after {content: "%%_text_no_items"}
-
-  /* actions */
-  x-grid ul.actions,
-  x-grid ul.actions li {margin: 0; padding: 0; list-style: none}
-  x-grid ul.actions li {font-size: .9em}
+  x-grid table td.actions {font-size: .85em; vertical-align: top; text-align: right}
 
   /* messages */
   x-messages {display: block; margin: 50px auto}
@@ -62,7 +58,7 @@
   x-block#user_menu x-tree li {list-style: none; margin: 0; padding: 0}
   x-block#user_menu:hover x-tree {display: inline-block}
 
-  x-block#modules_info td.action {}
+  x-block#modules_info {}
   x-block#users_admin {}
   x-block#user_info {}
   x-block#roles_info {}
@@ -72,7 +68,7 @@
   x-actions-control {display: block}
   x-actions-control x-title {display: block}
   x-actions-control x-action-list {display: block}
-  x-actions-control x-action {display: block}
+  x-actions-control x-action-list x-action {display: block}
 
   x-switcher-control {display: inline-block; vertical-align: middle; padding: 1px; border: 2px solid %%_color_bg; border-radius: 11px; background: white}
   x-switcher-control[x-state=off] {border-color: gray}
