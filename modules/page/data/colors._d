@@ -1,76 +1,89 @@
 colors
-- color_lavender
+- lavender
+    id: lavender
     value: lavender
     is_dark: false
-- color_thistle
+- thistle
+    id: thistle
     value: thistle
     is_dark: false
-- color_pink
+- pink
+    id: pink
     value: pink
     is_dark: false
-- color_salmon
+- salmon
+    id: salmon
     value: salmon
     is_dark: true
-- color_salmon
-    value: salmon
-    is_dark: false
-- color_tomato
+- tomato
+    id: tomato
     value: tomato
     is_dark: true
-- color_crimson
+- crimson
+    id: crimson
     value: crimson
     is_dark: true
-- color_orange
+- orange
+    id: orange
     value: orange
     is_dark: true
-- color_gold
+- gold
+    id: gold
     value: gold
     is_dark: false
-- color_yellowgreen
+- yellowgreen
+    id: yellowgreen
     value: yellowgreen
     is_dark: true
-- color_forestgreen
+- forestgreen
+    id: forestgreen
     value: forestgreen
-    is_dark: false
-- color_mediumaquamarine
+    is_dark: true
+- mediumaquamarine
+    id: mediumaquamarine
     value: mediumaquamarine
     is_dark: false
-- color_lightseagreen
+- lightseagreen
+    id: lightseagreen
     value: lightseagreen
     is_dark: true
-- color_lightseagreen
-    value: lightseagreen
-    is_dark: false
-- color_darkcyan
+- darkcyan
+    id: darkcyan
     value: darkcyan
     is_dark: true
-- color_steelblue
+- steelblue
+    id: steelblue
     value: steelblue
-    is_dark: false
-- color_original_blue
+    is_dark: true
+- modernblue
+    id: modernblue
     value: #216ce4
     is_dark: true
-- color_darkslateblue
-    value: darkslateblue
-    is_dark: false
-- color_darkslateblue
+- darkslateblue
+    id: darkslateblue
     value: darkslateblue
     is_dark: true
-- color_original_darkblue
+- moderndarkblue
+    id: moderndarkblue
     value: #28334a
     is_dark: true
-- color_slategray
+- slategray
+    id: slategray
     value: slategray
-    is_dark: false
-- color_white
+    is_dark: true
+- white
+    id: white
     value: white
-    is_dark: true
-- color_silver
+    is_dark: false
+- silver
+    id: silver
     value: silver
-    is_dark: true
-- color_dimgray
+    is_dark: false
+- dimgray
+    id: dimgray
     value: dimgray
     is_dark: true
-- color_black
+- black
+    id: black
     value: black
     is_dark: true

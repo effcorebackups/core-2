@@ -10,12 +10,12 @@ namespace effectivecore {
   function build() {
     $this->attribute_insert('class', ['palette' => 'palette']);
     foreach (storage::get('files')->select('colors') as $c_module_id => $c_module_colors) {
-      foreach ($c_module_colors as $c_row_id => $c_color_info) {
+      foreach ($c_module_colors as $c_row_id => $c_color) {
         $this->input_insert(null, [
-          'value' => $c_row_id,
-          'title' => translation::get('Color ID = %%_id (value = %%_value)', ['id' => $c_row_id, 'value' => $c_color_info->value]),
-          'style' => ['background-color: '.$c_color_info->value]
-        ], $c_row_id);
+          'value' => $c_color->id,
+          'title' => translation::get('Color ID = %%_id (value = %%_value)', ['id' => $c_color->id, 'value' => $c_color->value]),
+          'style' => ['background-color: '.$c_color->value]
+        ], $c_color->id);
       }
     }
   }
