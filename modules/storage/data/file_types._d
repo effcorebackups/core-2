@@ -1,7 +1,9 @@
 file_types
-- _d
+- db_files
+    type: _d
     protected: 1
     headers
     - Content-type: text/data
-- sqlite
+- db_sqlite
+    type: sqlite
     protected: 1

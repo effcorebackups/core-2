@@ -1,46 +1,55 @@
 file_types
-# protected files
-- php
+- code_php
+    type: php
     protected: 1
     headers
     - Content-type: text/html
-# text files
-- css
+- styles
+    type: css
     use_tokens: 1
     headers
     - Content-type: text/css
-- js
+- javascript
+    type: js
     use_tokens: 1
     headers
     - Content-type: text/javascript
-- html
+- markup_html
+    type: html
     use_tokens: 1
     headers
     - Content-type: text/html
-- xml
+- markup_xml
+    type: xml
     use_tokens: 1
     headers
     - Content-type: text/xml
-- txt
+- text
+    type: txt
     headers
     - Content-type: text/plain
-# images
-- image
+- image_generic
+    type: image
     headers
     - Content-type: image/*
-- svg
+- image_svg
+    type: svg
     use_tokens: 1
     headers
     - Content-type: image/svg+xml
-- ico
+- image_ico
+    type: ico
     headers
     - Content-type: image/x-icon
-- gif
+- image_gif
+    type: gif
     headers
     - Content-type: image/gif
-- jpg
+- image_jpg
+    type: jpg
     headers
     - Content-type: image/jpeg
-- png
+- image_png
+    type: png
     headers
     - Content-type: image/png

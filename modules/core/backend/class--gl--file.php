@@ -156,14 +156,17 @@ namespace effectivecore {
 
   static protected $cache;
 
-  static function get_file_types() {
-    $return = [];
+  static function init() {
     foreach (storage::get('files')->select('file_types') as $c_module_id => $c_module_file_types) {
       foreach ($c_module_file_types as $c_row_id => $c_info) {
-        $return[$c_row_id] = $c_info;
+        static::$cache[$c_info->type] = $c_info;
       }
     }
-    return $return;
+  }
+
+  static function get_file_types() {
+    if   (!static::$cache) static::init();
+    return static::$cache;
   }
 
   static function mkdir_if_not_exist($dirs) {
