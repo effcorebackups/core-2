@@ -30,7 +30,8 @@ namespace effectivecore {
                        '(?<marker>[*+-]|[0-9]+(?<dot>.))'.
                        '(?:[ ]+)'.
                        '(?<data>[^ ].+)$%S', $c_string, $c_matches)) {
-        $c_level = floor(((strlen($c_matches['indent']) - 1) / 4) + 1.25);
+        $f_level = ((strlen($c_matches['indent']) - 1) / 4) + 1.25;
+        $c_level = $f_level < 2 && empty($p[1]) ? floor($f_level) : ceil($f_level); # magnetic magic
       # remove pointers to old list containers
         for ($c_i = $c_level + 1; $c_i < count($p) + 1; $c_i++) {
           unset($p[$c_i]);
