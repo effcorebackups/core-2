@@ -71,14 +71,14 @@ namespace effectivecore {
     $values = static::values_get() + static::files_get();
     $id = $this->attribute_select('id');
   # build all form elements
-    $elements = $this->child_select_all();
+    $elements = $this->child_select_all_recursive();
     foreach ($elements as $c_element) {
       if (method_exists($c_element, 'build')) {
         $c_element->build();
       }
     }
   # renew elements list after build and get all fields
-    $elements = $this->child_select_all();
+    $elements = $this->child_select_all_recursive();
     $fields   = $this->fields_get();
   # call init handlers
     event::start('on_form_init', $id, [$this, $fields]);
@@ -171,7 +171,7 @@ namespace effectivecore {
 
   function fields_get() {
     $return = [];
-    foreach ($this->child_select_all() as $c_dpath => $c_child) {
+    foreach ($this->child_select_all_recursive() as $c_dpath => $c_child) {
       if ($c_child instanceof \effectivecore\form_container) {
         $return[$c_dpath] = $c_child;
       }

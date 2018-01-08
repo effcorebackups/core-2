@@ -15,7 +15,7 @@ HARDWARE REQUIREMENTS FOR SERVERS WITH THE BEST PERFORMANCE
 
 - Memory: DDR4 ECC
 - Hard drive: SSD RAID on PCI-Express or faster
-- CPU: Intel Xeon/i7
+- CPU: Intel Xeon/i7/i9
 - Motherboard: server motherboard
 
 

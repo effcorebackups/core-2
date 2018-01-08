@@ -31,13 +31,21 @@ namespace effectivecore {
                  $this->children[$id] : null;
   }
 
-  function child_select_all($children = null, $dpath = '') {
+  function child_select_first() {
+    return reset($this->children);
+  }
+
+  function child_select_last() {
+    return end($this->children);
+  }
+
+  function child_select_all_recursive($children = null, $dpath = '') {
     $return = [];
     foreach ($children ?: $this->children as $c_id => $c_child) {
       $c_dpath = $dpath ? $dpath.'/'.$c_id : $c_id;
       $return[$c_dpath] = $c_child;
       if (!empty($c_child->children)) {
-        $return += $this->child_select_all($c_child->children, $c_dpath);
+        $return += $this->child_select_all_recursive($c_child->children, $c_dpath);
       }
     }
     return $return;
