@@ -24,6 +24,17 @@ namespace effectivecore {
         continue;
       }
 
+    # find horizontal rules
+    # ─────────────────────────────────────────────────────────────────────
+      if (preg_match('%^(?<indent>[ ]{0,3})'.
+                       '(?<marker>([*][ ]{0,2}){3,}|'.
+                                 '([-][ ]{0,2}){3,}|'.
+                                 '([_][ ]{0,2}){3,})'.
+                       '(?<noises>[ ]{0,})$%S', $c_string)) {
+        $stack->child_insert(new markup('hr', []));
+        continue;
+      }
+
     # find lists
     # ─────────────────────────────────────────────────────────────────────
       if (preg_match('%^(?<indent>[ ]*)'.
