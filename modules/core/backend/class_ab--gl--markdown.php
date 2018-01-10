@@ -14,7 +14,7 @@ namespace effectivecore {
       $c_string = str_replace(tb, '    ', $c_string);
       $c_matches = [];
 
-    # find headers
+    # headers
     # ─────────────────────────────────────────────────────────────────────
       if (preg_match('%^[=]+[ ]*$%S', $c_string)) {$stack->child_insert(new markup('h1', [], $strings[$c_num-1])); continue;}
       if (preg_match('%^[-]+[ ]*$%S', $c_string)) {$stack->child_insert(new markup('h2', [], $strings[$c_num-1])); continue;}
@@ -23,7 +23,7 @@ namespace effectivecore {
         continue;
       }
 
-    # find horizontal rules
+    # horizontal rules
     # ─────────────────────────────────────────────────────────────────────
       if (preg_match('%^(?<indent>[ ]{0,3})'.
                        '(?<marker>([*][ ]{0,2}){3,}|'.
@@ -34,7 +34,7 @@ namespace effectivecore {
         continue;
       }
 
-    # find lists
+    # lists
     # ─────────────────────────────────────────────────────────────────────
       if (preg_match('%^(?<indent>[ ]{0,})'.
                        '(?<marker>[*+-]|[0-9]+(?<dot>.))'.
@@ -42,8 +42,10 @@ namespace effectivecore {
                        '(?<return>[^ ].+)$%S', $c_string, $c_matches)) {
       # detect level and clear old pointers to containers
         $c_level = floor(((strlen($c_matches['indent']) - 1) / 4) + 1.25);
-        for ($i = $c_level + 1; $i < count($c_root->_p) + 1; $i++) {
-          unset($c_root->_p[$i]);
+        if (isset($c_root->_p)) {
+          for ($i = $c_level + 1; $i < count($c_root->_p) + 1; $i++) {
+            unset($c_root->_p[$i]);
+          }
         }
       # create new list container
         $c_root = $stack->child_select_last();
@@ -67,7 +69,7 @@ namespace effectivecore {
         continue;
       }
 
-    # find blockquotes
+    # blockquotes
     # ─────────────────────────────────────────────────────────────────────
       if (preg_match('%^(?<indent>[ ]{0,3})'.
                        '(?<marker>[>][ ]{0,1})'.
@@ -86,7 +88,7 @@ namespace effectivecore {
         continue;
       }
 
-    # find code
+    # code
     # ─────────────────────────────────────────────────────────────────────
       if (preg_match('%^(?<indent>[ ]{4})'.
                        '(?<return>.+)$%S', $c_string, $c_matches)) {
@@ -94,7 +96,7 @@ namespace effectivecore {
         $c_code = $stack->child_select_last();
         if (!($c_code instanceof markup &&
               $c_code->tag_name == 'code')) {
-          $c_code = new markup('code');
+          $c_code = new markup('code'); # @todo: add pre/code
           $stack->child_insert($c_code);
         }
       # insert new code string
@@ -104,7 +106,7 @@ namespace effectivecore {
         continue;
       }
 
-    # find paragraphs
+    # paragraphs
     # ─────────────────────────────────────────────────────────────────────
       if (preg_match('%^[^ ]+$%S', $c_string)) {
         $stack->child_insert(new markup('p', [], $c_string));
