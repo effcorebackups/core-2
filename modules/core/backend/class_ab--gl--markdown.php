@@ -17,8 +17,14 @@ namespace effectivecore {
 
     # headers
     # ─────────────────────────────────────────────────────────────────────
-      if (preg_match('%^[=]+[ ]*$%S', $c_string)) {$stack->child_insert(new markup('h1', [], $strings[$c_num-1])); continue;}
-      if (preg_match('%^[-]+[ ]*$%S', $c_string)) {$stack->child_insert(new markup('h2', [], $strings[$c_num-1])); continue;}
+      if (preg_match('%^(?<marker>[-=]+)[ ]*$%S', $c_string, $c_matches)) {
+        if ($c_last instanceof markup &&
+            $c_last->tag_name == 'p'  &&
+            $c_last->child_select_first() instanceof text)
+        $stack->child_delete($stack->child_select_last_id());
+        $stack->child_insert(new markup($c_matches['marker'] == '=' ? 'h1' : 'h2', [], $strings[$c_num-1]));
+        continue;
+      }
       if (preg_match('%^(?<marker>[#]{1,6})(?<return>.*)$%S', $c_string, $c_matches)) {
         $stack->child_insert(new markup('h'.strlen($c_matches['marker']), [], $c_matches['return']));
         continue;
@@ -115,19 +121,13 @@ namespace effectivecore {
       if (trim($c_string) != '') {
         if ($c_last instanceof markup && $c_last->tag_name == 'p') {$c_last->child_insert(new text($c_string)); continue;}
         if ($c_last instanceof markup && $c_last->tag_name == 'blockquote') {$c_last->child_insert(new text($c_string)); continue;}
-        if ($c_last instanceof markup && $c_last->tag_name == 'code') {}
+        if ($c_last instanceof markup && $c_last->tag_name == 'hr') {}
         if ($c_last instanceof markup && $c_last->tag_name == 'ul') {}
         if ($c_last instanceof markup && $c_last->tag_name == 'li') {}
-        if ($c_last instanceof markup && $c_last->tag_name == 'h1') {}
-        if ($c_last instanceof markup && $c_last->tag_name == 'h2') {}
-        if ($c_last instanceof markup && $c_last->tag_name == 'h3') {}
-        if ($c_last instanceof markup && $c_last->tag_name == 'h4') {}
-        if ($c_last instanceof markup && $c_last->tag_name == 'h5') {}
-        if ($c_last instanceof markup && $c_last->tag_name == 'h6') {}
-        if ($c_last instanceof markup && $c_last->tag_name == 'hr') {}
         $stack->child_insert(new markup('p', [], $c_string));
       }
     }
+
     return $stack;
   }
 

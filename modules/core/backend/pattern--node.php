@@ -31,13 +31,10 @@ namespace effectivecore {
                  $this->children[$id] : null;
   }
 
-  function child_select_first() {
-    return reset($this->children);
-  }
-
-  function child_select_last() {
-    return end($this->children);
-  }
+  function child_select_first()    {return reset($this->children);}
+  function child_select_last()     {return   end($this->children);}
+  function child_select_first_id() {$keys = array_keys($this->children); return reset($keys);}
+  function child_select_last_id()  {$keys = array_keys($this->children); return   end($keys);}
 
   function child_select_all_recursive($children = null, $dpath = '') {
     $return = [];
