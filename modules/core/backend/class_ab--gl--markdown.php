@@ -107,9 +107,26 @@ namespace effectivecore {
 
     # paragraphs
     # ─────────────────────────────────────────────────────────────────────
-      if ($c_last instanceof text && trim($c_string) === '' && trim($c_last->text_get()) === '') continue;
-      if ($c_last == false) {$stack->child_insert(new markup('p', [], $c_string)); continue;}
-      $stack->child_insert(new text($c_string.nl));
+      if (trim($c_string) == '') {
+        if (!($c_last instanceof text && $c_last->text_get() == '')) {
+          $stack->child_insert(new text(''));
+        }
+      }
+      if (trim($c_string) != '') {
+        if ($c_last instanceof markup && $c_last->tag_name == 'p') {$c_last->child_insert(new text($c_string)); continue;}
+        if ($c_last instanceof markup && $c_last->tag_name == 'blockquote') {$c_last->child_insert(new text($c_string)); continue;}
+        if ($c_last instanceof markup && $c_last->tag_name == 'code') {}
+        if ($c_last instanceof markup && $c_last->tag_name == 'ul') {}
+        if ($c_last instanceof markup && $c_last->tag_name == 'li') {}
+        if ($c_last instanceof markup && $c_last->tag_name == 'h1') {}
+        if ($c_last instanceof markup && $c_last->tag_name == 'h2') {}
+        if ($c_last instanceof markup && $c_last->tag_name == 'h3') {}
+        if ($c_last instanceof markup && $c_last->tag_name == 'h4') {}
+        if ($c_last instanceof markup && $c_last->tag_name == 'h5') {}
+        if ($c_last instanceof markup && $c_last->tag_name == 'h6') {}
+        if ($c_last instanceof markup && $c_last->tag_name == 'hr') {}
+        $stack->child_insert(new markup('p', [], $c_string));
+      }
     }
     return $stack;
   }
