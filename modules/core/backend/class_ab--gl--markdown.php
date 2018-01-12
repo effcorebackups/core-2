@@ -84,7 +84,7 @@ namespace effectivecore {
         $c_quote = $stack->child_select_last();
         if (!($c_quote instanceof markup &&
               $c_quote->tag_name == 'blockquote')) {
-          $c_quote = new markup('blockquote');
+          $c_quote = new markup('blockquote'); # @todo: add blockquote/p
           $stack->child_insert($c_quote);
         }
       # insert new blockquote string
