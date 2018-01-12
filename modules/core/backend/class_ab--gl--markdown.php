@@ -7,7 +7,7 @@
 namespace effectivecore {
           abstract class markdown {
 
-  static function simple_markdown_to_markup($markdown) {
+  static function markdown_to_markup($markdown) {
     $stack = new node();
     $strings = explode(nl, $markdown);
     foreach ($strings as $c_num => $c_string) {
@@ -121,7 +121,6 @@ namespace effectivecore {
       if (trim($c_string) != '') {
         if ($c_last instanceof markup && $c_last->tag_name == 'p') {$c_last->child_insert(new text($c_string)); continue;}
         if ($c_last instanceof markup && $c_last->tag_name == 'blockquote') {$c_last->child_insert(new text($c_string)); continue;}
-        if ($c_last instanceof markup && $c_last->tag_name == 'hr') {}
         if ($c_last instanceof markup && $c_last->tag_name == 'ul') {}
         if ($c_last instanceof markup && $c_last->tag_name == 'li') {}
         $stack->child_insert(new markup('p', [], $c_string));
