@@ -12,6 +12,8 @@ namespace effectivecore {
     $strings = explode(nl, $markdown);
     foreach ($strings as $c_num => $c_string) {
       $c_string = str_replace(tb, '    ', $c_string);
+      $c_indent = strspn($c_string, ' ');
+      $c_level = floor((($c_indent - 1) / 4) + 1.25);
       $c_last = $stack->child_select_last();
       $c_matches = [];
 
@@ -47,9 +49,7 @@ namespace effectivecore {
                        '(?<marker>[*+-]|[0-9]+(?<dot>[.]))'.
                        '(?<noises>[ ]{1,})'.
                        '(?<return>[^ ].+)$%S', $c_string, $c_matches)) {
-      # detect level and clear old pointers to containers
-        $c_level = floor(((strlen($c_matches['indent']) - 1) / 4) + 1.25);
-      # create new list container or select previous
+      # create new root list container (ol/ul) if $c_last is not a container
         if (!($c_last instanceof markup &&
              ($c_last->tag_name == 'ol' ||
               $c_last->tag_name == 'ul'))) {
@@ -57,16 +57,18 @@ namespace effectivecore {
           $c_last->_p[1] = $c_last;
           $stack->child_insert($c_last);
         }
+      # create new list sub container (ol/ul)
         if (empty($c_last->_p[$c_level-0]) &&
            !empty($c_last->_p[$c_level-1])) {
           $c_cont = new markup($c_matches['dot'] ? 'ol' : 'ul');
           $c_last->_p[$c_level-0] = $c_cont;
           $c_last->_p[$c_level-1]->child_select_last()->child_insert($c_cont);
         }
+      # remove old pointers to list containers (ol/ul)
         for ($i = $c_level + 1; $i < count($c_last->_p) + 1; $i++) {
           unset($c_last->_p[$i]);
         }
-      # insert new list item
+      # insert new list item (li)
         $c_last->_p[$c_level]->child_insert(
           new markup('li', [], $c_matches['return'])
         );
@@ -92,7 +94,29 @@ namespace effectivecore {
         continue;
       }
 
-    # code
+    # paragraphs
+    # ─────────────────────────────────────────────────────────────────────
+      if (trim($c_string) == '') {
+        if (!($c_last instanceof text && $c_last->text_get() == '')) {
+          $stack->child_insert(new text(''));
+        }
+      }
+      if (trim($c_string) != '') {
+        if ($c_last instanceof markup && $c_last->tag_name == 'p')          {$c_last->child_insert(new text($c_string)); continue;}
+        if ($c_last instanceof markup && $c_last->tag_name == 'blockquote') {$c_last->child_insert(new text($c_string)); continue;}
+        if ($c_last instanceof markup && (
+            $c_last->tag_name == 'ol' ||
+            $c_last->tag_name == 'ul')) {
+          if (!empty($c_last->_p[$c_level])) {
+            $c_last->_p[$c_level]->child_select_last()->child_insert(new text($c_string));
+            continue;
+          }
+        }
+        $stack->child_insert(new markup('p', [], $c_string));
+        continue;
+      }
+
+    # code (last prioruty)
     # ─────────────────────────────────────────────────────────────────────
       if (preg_match('%^(?<indent>[ ]{4})'.
                        '(?<noises>[ ]{0,})'.
@@ -111,20 +135,6 @@ namespace effectivecore {
         continue;
       }
 
-    # paragraphs
-    # ─────────────────────────────────────────────────────────────────────
-      if (trim($c_string) == '') {
-        if (!($c_last instanceof text && $c_last->text_get() == '')) {
-          $stack->child_insert(new text(''));
-        }
-      }
-      if (trim($c_string) != '') {
-        if ($c_last instanceof markup && $c_last->tag_name == 'p') {$c_last->child_insert(new text($c_string)); continue;}
-        if ($c_last instanceof markup && $c_last->tag_name == 'blockquote') {$c_last->child_insert(new text($c_string)); continue;}
-        if ($c_last instanceof markup && $c_last->tag_name == 'ul') {}
-        if ($c_last instanceof markup && $c_last->tag_name == 'li') {}
-        $stack->child_insert(new markup('p', [], $c_string));
-      }
     }
 
     return $stack;
