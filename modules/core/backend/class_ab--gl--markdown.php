@@ -102,18 +102,18 @@ namespace effectivecore {
         }
       }
       if (trim($c_string) != '') {
-        if ($c_last instanceof markup && $c_last->tag_name == 'p')          {$c_last->child_insert(new text($c_string)); continue;}
-        if ($c_last instanceof markup && $c_last->tag_name == 'blockquote') {$c_last->child_insert(new text($c_string)); continue;}
+        if ($c_last instanceof markup && $c_last->tag_name == 'p')          {$c_last->child_insert(new text(nl.$c_string)); continue;}
+        if ($c_last instanceof markup && $c_last->tag_name == 'blockquote') {$c_last->child_insert(new text(nl.$c_string)); continue;}
         if ($c_last instanceof markup && (
             $c_last->tag_name == 'ol' ||
             $c_last->tag_name == 'ul')) {
-          if (!empty($c_last->_p[$c_level])) {
-            $c_last->_p[$c_level]->child_select_last()->child_insert(new text($c_string));
-            continue;
-          }
+          if (!empty($c_last->_p[$c_level]))           {$c_last->_p[$c_level]          ->child_select_last()->child_insert(new text(nl.$c_string)); continue;}
+          if (!empty($c_last->_p[count($c_last->_p)])) {$c_last->_p[count($c_last->_p)]->child_select_last()->child_insert(new text(nl.$c_string)); continue;}
         }
-        $stack->child_insert(new markup('p', [], $c_string));
-        continue;
+        if ($c_indent < 4) {
+          $stack->child_insert(new markup('p', [], $c_string));
+          continue;
+        }
       }
 
     # code (last prioruty)
