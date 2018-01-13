@@ -8,13 +8,13 @@ namespace effectivecore {
           abstract class markdown {
 
   static function markdown_to_markup($markdown) {
-    $stack = new node();
+    $pool = new node();
     $strings = explode(nl, $markdown);
     foreach ($strings as $c_num => $c_string) {
       $c_string = str_replace(tb, '    ', $c_string);
       $c_indent = strspn($c_string, ' ');
       $c_level = floor((($c_indent - 1) / 4) + 1.25);
-      $c_last = $stack->child_select_last();
+      $c_last = $pool->child_select_last();
       $c_matches = [];
 
     # headers
@@ -23,12 +23,12 @@ namespace effectivecore {
         if ($c_last instanceof markup &&
             $c_last->tag_name == 'p'  &&
             $c_last->child_select_first() instanceof text)
-        $stack->child_delete($stack->child_select_last_id());
-        $stack->child_insert(new markup($c_matches['marker'] == '=' ? 'h1' : 'h2', [], $strings[$c_num-1]));
+        $pool->child_delete($pool->child_select_last_id());
+        $pool->child_insert(new markup($c_matches['marker'] == '=' ? 'h1' : 'h2', [], $strings[$c_num-1]));
         continue;
       }
       if (preg_match('%^(?<marker>[#]{1,6})(?<return>.*)$%S', $c_string, $c_matches)) {
-        $stack->child_insert(new markup('h'.strlen($c_matches['marker']), [], $c_matches['return']));
+        $pool->child_insert(new markup('h'.strlen($c_matches['marker']), [], $c_matches['return']));
         continue;
       }
 
@@ -39,7 +39,7 @@ namespace effectivecore {
                                  '([-][ ]{0,2}){3,}|'.
                                  '([_][ ]{0,2}){3,})'.
                        '(?<noises>[ ]{0,})$%S', $c_string)) {
-        $stack->child_insert(new markup_simple('hr', []));
+        $pool->child_insert(new markup_simple('hr', []));
         continue;
       }
 
@@ -55,7 +55,7 @@ namespace effectivecore {
               $c_last->tag_name == 'ul'))) {
           $c_last = new markup($c_matches['dot'] ? 'ol' : 'ul');
           $c_last->_p[1] = $c_last;
-          $stack->child_insert($c_last);
+          $pool->child_insert($c_last);
         }
       # create new list sub container (ol/ul)
         if (empty($c_last->_p[$c_level-0]) &&
@@ -81,14 +81,13 @@ namespace effectivecore {
                        '(?<marker>[>][ ]{0,1})'.
                        '(?<return>.+)$%S', $c_string, $c_matches)) {
       # create new blockquote container
-        $c_quote = $stack->child_select_last();
-        if (!($c_quote instanceof markup &&
-              $c_quote->tag_name == 'blockquote')) {
-          $c_quote = new markup('blockquote'); # @todo: add blockquote/p
-          $stack->child_insert($c_quote);
+        if (!($c_last instanceof markup &&
+              $c_last->tag_name == 'blockquote')) {
+          $c_last = new markup('blockquote'); # @todo: add blockquote/p
+          $pool->child_insert($c_last);
         }
       # insert new blockquote string
-        $c_quote->child_insert(
+        $c_last->child_insert(
           new text($c_matches['return'])
         );
         continue;
@@ -97,8 +96,12 @@ namespace effectivecore {
     # paragraphs
     # ─────────────────────────────────────────────────────────────────────
       if (trim($c_string) == '') {
-        if (!($c_last instanceof text && $c_last->text_get() == '')) {
-          $stack->child_insert(new text(''));
+        if ($c_last instanceof text && trim($c_last->text_get(), nl) == '') {
+          $c_last->text_set($c_last->text_get().nl);
+          continue;
+        } else {
+          $pool->child_insert(new text(nl));
+          continue;
         }
       }
       if (trim($c_string) != '') {
@@ -111,7 +114,7 @@ namespace effectivecore {
           if (!empty($c_last->_p[count($c_last->_p)])) {$c_last->_p[count($c_last->_p)]->child_select_last()->child_insert(new text(nl.$c_string)); continue;}
         }
         if ($c_indent < 4) {
-          $stack->child_insert(new markup('p', [], $c_string));
+          $pool->child_insert(new markup('p', [], $c_string));
           continue;
         }
       }
@@ -122,14 +125,14 @@ namespace effectivecore {
                        '(?<noises>[ ]{0,})'.
                        '(?<return>[^ ].*)$%S', $c_string, $c_matches)) {
       # create new code container
-        $c_code = $stack->child_select_last();
-        if (!($c_code instanceof markup &&
-              $c_code->tag_name == 'code')) {
-          $c_code = new markup('code'); # @todo: add pre/code
-          $stack->child_insert($c_code);
+        if (!($c_last instanceof markup &&
+              $c_last->tag_name == 'pre')) {
+          $c_last = new markup('pre');
+          $c_last->child_insert(new markup('code'), 'code');
+          $pool->child_insert($c_last);
         }
       # insert new code string
-        $c_code->child_insert(
+        $c_last->child_select('code')->child_insert(
           new text($c_matches['return'])
         );
         continue;
@@ -137,7 +140,7 @@ namespace effectivecore {
 
     }
 
-    return $stack;
+    return $pool;
   }
 
 }}
