@@ -15,20 +15,39 @@ namespace effectivecore {
       $c_indent = strspn($c_string, ' ');
       $c_level = floor((($c_indent - 1) / 4) + 1.25);
       $c_item = $pool->child_select_last();
+      $c_type = $c_item instanceof markup ? $c_item->tag_name : ($c_item instanceof text ? '__text__' : null);
+      $c_type = $c_type == 'ul' ? '__list__'   : $c_type;
+      $c_type = $c_type == 'ol' ? '__list__'   : $c_type;
+      $c_type = $c_type == 'h1' ? '__header__' : $c_type;
+      $c_type = $c_type == 'h2' ? '__header__' : $c_type;
+      $c_type = $c_type == 'h3' ? '__header__' : $c_type;
+      $c_type = $c_type == 'h4' ? '__header__' : $c_type;
+      $c_type = $c_type == 'h5' ? '__header__' : $c_type;
+      $c_type = $c_type == 'h6' ? '__header__' : $c_type;
       $c_matches = [];
 
     # headers
     # ─────────────────────────────────────────────────────────────────────
+      $n_header = null;
       if (preg_match('%^(?<marker>[-=]+)[ ]*$%S', $c_string, $c_matches)) {
-        if ($c_item instanceof markup &&
-            $c_item->tag_name == 'p'  &&
-            $c_item->child_select_first() instanceof text)
-        $pool->child_delete($pool->child_select_last_id());
-        $pool->child_insert(new markup($c_matches['marker'] == '=' ? 'h1' : 'h2', [], $strings[$c_num-1]));
-        continue;
+        if ($c_matches['marker'] == '=') $n_header = new markup('h1', [], $strings[$c_num-1]);
+        if ($c_matches['marker'] == '-') $n_header = new markup('h2', [], $strings[$c_num-1]);
+      # remove previous paragraph
+        if ($c_type == 'p' && $c_item->child_select_first() instanceof text) {
+          $pool->child_delete($pool->child_select_last_id());
+        }
       }
       if (preg_match('%^(?<marker>[#]{1,6})(?<return>.*)$%S', $c_string, $c_matches)) {
-        $pool->child_insert(new markup('h'.strlen($c_matches['marker']), [], $c_matches['return']));
+        $n_header = new markup('h'.strlen($c_matches['marker']), [], $c_matches['return']);
+      }
+      if ($n_header) {
+      # special cases: list near header
+        if ($c_type == '__list__') {
+          if (!empty($c_item->_p[$c_level]))           {$c_item->_p[$c_level]          ->child_select_last()->child_insert($n_header); continue;}
+          if (!empty($c_item->_p[count($c_item->_p)])) {$c_item->_p[count($c_item->_p)]->child_select_last()->child_insert($n_header); continue;}
+        }
+      # default case
+        $pool->child_insert($n_header);
         continue;
       }
 
@@ -50,13 +69,11 @@ namespace effectivecore {
                        '(?<noises>[ ]{1,})'.
                        '(?<return>[^ ].+)$%S', $c_string, $c_matches)) {
       # special cases: paragraph near list, blockquote near list, code near list
-        if ($c_item instanceof markup && $c_item->tag_name == 'p')          {$c_item->child_insert(new text(nl.$c_string));       continue;}
-        if ($c_item instanceof markup && $c_item->tag_name == 'blockquote') {$c_item->child_insert(new text(nl.$c_string));       continue;}
-        if ($c_item instanceof markup && $c_item->tag_name == 'pre')        {$pool->child_insert(new markup('p', [], $c_string)); continue;}
+        if ($c_type == 'p')          {$c_item->child_insert(new text(nl.$c_string));       continue;}
+        if ($c_type == 'blockquote') {$c_item->child_insert(new text(nl.$c_string));       continue;}
+        if ($c_type == 'pre')        {$pool->child_insert(new markup('p', [], $c_string)); continue;}
       # create new root list container (ol/ul) if $c_item is not a container
-        if (!($c_item instanceof markup &&
-             ($c_item->tag_name == 'ol' ||
-              $c_item->tag_name == 'ul'))) {
+        if ($c_type != '__list__') {
           $c_item = new markup($c_matches['dot'] ? 'ol' : 'ul');
           $c_item->_p[1] = $c_item;
           $pool->child_insert($c_item);
@@ -85,8 +102,7 @@ namespace effectivecore {
                        '(?<marker>[>][ ]{0,1})'.
                        '(?<return>.+)$%S', $c_string, $c_matches)) {
       # create new blockquote container
-        if (!($c_item instanceof markup &&
-              $c_item->tag_name == 'blockquote')) {
+        if ($c_type != 'blockquote') {
           $c_item = new markup('blockquote'); # @todo: add blockquote/p
           $pool->child_insert($c_item);
         }
@@ -100,7 +116,7 @@ namespace effectivecore {
     # paragraphs
     # ─────────────────────────────────────────────────────────────────────
       if (trim($c_string) == '') {
-        if ($c_item instanceof text && trim($c_item->text_get(), nl) == '') {
+        if ($c_type == '__text__' && trim($c_item->text_get(), nl) == '') {
           $c_item->text_set($c_item->text_get().nl);
           continue;
         } else {
@@ -109,11 +125,9 @@ namespace effectivecore {
         }
       }
       if (trim($c_string) != '') {
-        if ($c_item instanceof markup && $c_item->tag_name == 'p')          {$c_item->child_insert(new text(nl.$c_string)); continue;}
-        if ($c_item instanceof markup && $c_item->tag_name == 'blockquote') {$c_item->child_insert(new text(nl.$c_string)); continue;}
-        if ($c_item instanceof markup && (
-            $c_item->tag_name == 'ol' ||
-            $c_item->tag_name == 'ul')) {
+        if ($c_type == 'p')          {$c_item->child_insert(new text(nl.$c_string)); continue;}
+        if ($c_type == 'blockquote') {$c_item->child_insert(new text(nl.$c_string)); continue;}
+        if ($c_type == '__list__') {
           if (!empty($c_item->_p[$c_level]))           {$c_item->_p[$c_level]          ->child_select_last()->child_insert(new text(nl.$c_string)); continue;}
           if (!empty($c_item->_p[count($c_item->_p)])) {$c_item->_p[count($c_item->_p)]->child_select_last()->child_insert(new text(nl.$c_string)); continue;}
         }
@@ -129,8 +143,7 @@ namespace effectivecore {
                        '(?<noises>[ ]{0,})'.
                        '(?<return>[^ ].*)$%S', $c_string, $c_matches)) {
       # create new code container
-        if (!($c_item instanceof markup &&
-              $c_item->tag_name == 'pre')) {
+        if ($c_type != 'pre') {
           $c_item = new markup('pre');
           $c_item->child_insert(new markup('code'), 'code');
           $pool->child_insert($c_item);
