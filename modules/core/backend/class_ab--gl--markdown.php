@@ -41,7 +41,7 @@ namespace effectivecore {
         $n_header = new markup('h'.strlen($c_matches['marker']), [], $c_matches['return']);
       }
       if ($n_header) {
-      # special cases: list near header
+      # special case: list|header
         if ($c_type == '__list__') {
           if (!empty($c_item->_p[$c_level]))           {$c_item->_p[$c_level]          ->child_select_last()->child_insert($n_header); continue;}
           if (!empty($c_item->_p[count($c_item->_p)])) {$c_item->_p[count($c_item->_p)]->child_select_last()->child_insert($n_header); continue;}
@@ -68,7 +68,7 @@ namespace effectivecore {
                        '(?<marker>[*+-]|[0-9]+(?<dot>[.]))'.
                        '(?<noises>[ ]{1,})'.
                        '(?<return>[^ ].+)$%S', $c_string, $c_matches)) {
-      # special cases: paragraph near list, blockquote near list, code near list
+      # special cases: paragraph|list, blockquote|list, code|list
         if ($c_type == 'p')          {$c_item->child_insert(new text(nl.$c_string));       continue;}
         if ($c_type == 'blockquote') {$c_item->child_insert(new text(nl.$c_string));       continue;}
         if ($c_type == 'pre')        {$pool->child_insert(new markup('p', [], $c_string)); continue;}
@@ -103,7 +103,7 @@ namespace effectivecore {
                        '(?<return>.+)$%S', $c_string, $c_matches)) {
       # create new blockquote container
         if ($c_type != 'blockquote') {
-          $c_item = new markup('blockquote'); # @todo: add blockquote/p
+          $c_item = new markup('blockquote');
           $pool->child_insert($c_item);
         }
       # insert new blockquote string
@@ -125,12 +125,16 @@ namespace effectivecore {
         }
       }
       if (trim($c_string) != '') {
-        if ($c_type == 'p')          {$c_item->child_insert(new text(nl.$c_string)); continue;}
+      # special cases: blockquote|list, blockquote|paragraph
+        if ($c_type == '__list__' && !empty($c_item->_p[$c_level]))           {$c_item->_p[$c_level]          ->child_select_last()->child_insert(new text(nl.$c_string)); continue;}
+        if ($c_type == '__list__' && !empty($c_item->_p[count($c_item->_p)])) {$c_item->_p[count($c_item->_p)]->child_select_last()->child_insert(new text(nl.$c_string)); continue;}
         if ($c_type == 'blockquote') {$c_item->child_insert(new text(nl.$c_string)); continue;}
-        if ($c_type == '__list__') {
-          if (!empty($c_item->_p[$c_level]))           {$c_item->_p[$c_level]          ->child_select_last()->child_insert(new text(nl.$c_string)); continue;}
-          if (!empty($c_item->_p[count($c_item->_p)])) {$c_item->_p[count($c_item->_p)]->child_select_last()->child_insert(new text(nl.$c_string)); continue;}
+      # add text to paragraph
+        if ($c_type == 'p') {
+          $c_item->child_insert(new text(nl.$c_string));
+          continue;
         }
+      # default case - add new paragraph
         if ($c_indent < 4) {
           $pool->child_insert(new markup('p', [], $c_string));
           continue;
