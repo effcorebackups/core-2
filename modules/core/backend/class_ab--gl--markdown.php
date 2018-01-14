@@ -108,7 +108,7 @@ namespace effectivecore {
         }
       # insert new blockquote string
         $c_item->child_insert(
-          new text($c_matches['return'])
+          new text(nl.$c_matches['return'])
         );
         continue;
       }
@@ -154,7 +154,7 @@ namespace effectivecore {
         }
       # insert new code string
         $c_item->child_select('code')->child_insert(
-          new text($c_matches['return'])
+          new text(nl.$c_matches['return'])
         );
         continue;
       }
