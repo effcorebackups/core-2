@@ -13,7 +13,7 @@ namespace effectivecore {
     foreach ($strings as $c_num => $c_string) {
       $c_string = str_replace(tb, '    ', $c_string);
       $c_indent = strspn($c_string, ' ');
-      $c_level = floor((($c_indent - 1) / 4) + 1.25);
+      $c_level = (int)floor((($c_indent - 1) / 4) + 1.25);
       $c_item = $pool->child_select_last();
       $c_type = $c_item instanceof markup ? $c_item->tag_name : ($c_item instanceof text ? '__text__' : null);
       $c_type = $c_type == 'ul' ? '__list__'   : $c_type;
@@ -58,7 +58,7 @@ namespace effectivecore {
                                  '([-][ ]{0,2}){3,}|'.
                                  '([_][ ]{0,2}){3,})'.
                        '(?<noises>[ ]{0,})$%S', $c_string)) {
-        $pool->child_insert(new markup_simple('hr', []));
+        $pool->child_insert(new markup_simple('hr'));
         continue;
       }
 
@@ -81,9 +81,9 @@ namespace effectivecore {
       # create new list sub container (ol/ul)
         if (empty($c_item->_p[$c_level-0]) &&
            !empty($c_item->_p[$c_level-1])) {
-          $c_cont = new markup($c_matches['dot'] ? 'ol' : 'ul');
-          $c_item->_p[$c_level-0] = $c_cont;
-          $c_item->_p[$c_level-1]->child_select_last()->child_insert($c_cont);
+          $c_olul = new markup($c_matches['dot'] ? 'ol' : 'ul');
+          $c_item->_p[$c_level-0] = $c_olul;
+          $c_item->_p[$c_level-1]->child_select_last()->child_insert($c_olul);
         }
       # remove old pointers to list containers (ol/ul)
         for ($i = $c_level + 1; $i < count($c_item->_p) + 1; $i++) {
@@ -129,12 +129,12 @@ namespace effectivecore {
         if ($c_type == '__list__' && !empty($c_item->_p[$c_level]))           {$c_item->_p[$c_level]          ->child_select_last()->child_insert(new text(nl.$c_string)); continue;}
         if ($c_type == '__list__' && !empty($c_item->_p[count($c_item->_p)])) {$c_item->_p[count($c_item->_p)]->child_select_last()->child_insert(new text(nl.$c_string)); continue;}
         if ($c_type == 'blockquote') {$c_item->child_insert(new text(nl.$c_string)); continue;}
-      # add text to paragraph
+      # if previous paragraph was found - add text to paragraph
         if ($c_type == 'p') {
           $c_item->child_insert(new text(nl.$c_string));
           continue;
         }
-      # default case - add new paragraph
+      # when no previous paragraph was found - add new paragraph
         if ($c_indent < 4) {
           $pool->child_insert(new markup('p', [], $c_string));
           continue;
