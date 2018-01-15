@@ -12,14 +12,16 @@ namespace effectivecore {
   public $weight = 0;
 
   function __construct($text = '', $args = [], $weight = 0) {
-    if ($text !== '') $this->text_set($text);
+    if ($text !== '') $this->text_update($text);
     if ($args)        $this->args_set($args);
     if ($weight)      $this->weight = $weight;
   }
 
-  function text_get() {return $this->text;}
+  function text_select() {return $this->text;}
+  function text_update($text) {$this->text = $text;}
+  function text_append($text) {$this->text.= $text;}
+
   function args_get() {return $this->args;}
-  function text_set($text) {$this->text = $text;}
   function args_set($args) {$this->args = $args;}
 
   function render() {
