@@ -73,7 +73,7 @@ namespace effectivecore {
       # special cases: paragraph|list, blockquote|list, code|list
         if ($c_type == 'p')          {$c_item->child_insert(new text(nl.$c_string)); continue;}
         if ($c_type == 'blockquote') {$c_item->child_select('text')->text_append(nl.$c_string); continue;}
-        if ($c_type == 'pre')        {$pool->child_insert(new markup('p', [], $c_string)); continue;}
+        if ($c_type == 'pre')        {$pool->child_insert(new text(htmlspecialchars($c_string))); continue;}
       # create new root list container (ol/ul) if $c_item is not a container
         if ($c_type != '__list__' && $c_indent < 4) {
           $c_item = new markup($c_matches['dot'] ? 'ol' : 'ul');
@@ -161,7 +161,7 @@ namespace effectivecore {
         }
       # insert new code string
         $c_item->child_select('code')->child_insert(
-          new text(nl.$c_matches['return'])
+          new text(nl.htmlspecialchars($c_matches['return']))
         );
         continue;
       }
@@ -178,10 +178,7 @@ namespace effectivecore {
           if ($c_markup) {
             $c_item->child_delete('text');
             foreach (static::markdown_to_markup($c_markup)->child_select_all() as $c_new_child) {
-              if ($c_new_child instanceof markup ||
-                  $c_new_child instanceof markup_simple) {
-                $c_item->child_insert($c_new_child);
-              }
+              $c_item->child_insert($c_new_child);
             }
           }
         }
