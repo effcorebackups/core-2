@@ -32,6 +32,7 @@ namespace effectivecore\modules\core {
     $main = storage::get('main');
     if (isset($main->driver)) {
       $form->child_delete('storage');
+      $form->child_delete('license_agreement');
       $form->child_delete('button_install');
       message::insert('Installation is not available because storage credentials was setted!', 'warning');
     }
