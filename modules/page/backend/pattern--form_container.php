@@ -53,7 +53,7 @@ namespace effectivecore {
     if ($this->description) {
       return (
         new markup($this->description_tag_name, [],
-        new markup('p', [], $this->description)
+          new markup('p', [], $this->description)
       ))->render();
     }
   }
