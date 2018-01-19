@@ -409,6 +409,8 @@ forms
             - checkbox_2_2: Checkbox 2.2 (checked)
             - checkbox_2_3: Checkbox 2.3 (disabled)
             - checkbox_2_4: Checkbox 2.4 (disabled + checked)
+            required
+            - checkbox_2_1: checkbox_2_1
             disabled
             - checkbox_2_3: checkbox_2_3
             - checkbox_2_4: checkbox_2_4

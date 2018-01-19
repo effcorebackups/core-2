@@ -29,4 +29,8 @@ namespace effectivecore {
     return static::$cache[$code];
   }
 
+  static function get_current() {
+    return locale::get_settings()->lang_code;
+  }
+
 }}

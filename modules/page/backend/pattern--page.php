@@ -75,9 +75,9 @@ namespace effectivecore {
     console::add_information('Memory for php (bytes)', locale::format_number(memory_get_usage(true), 0, null, ' '));
     console::add_information('User roles', implode(', ', user::get_current()->roles));
     console::add_information('Session expiration date', locale::format_timestamp(session::id_decode_expire(session::id_get())));
-    console::add_information('Current language', locale::get_settings()->lang_code);
+    console::add_information('Current language', language::get_current());
 
-    $template->set_var('attributes', factory::data_to_attr(['lang' => locale::get_settings()->lang_code]));
+    $template->set_var('attributes', factory::data_to_attr(['lang' => language::get_current()]));
     $template->set_var('console', console::render()); # @todo: only for admins
     $template->set_var('messages', message::render_all());
     $template->set_var('meta',   $frontend->meta->render());

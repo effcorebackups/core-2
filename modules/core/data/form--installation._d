@@ -18,6 +18,7 @@ forms
             - class
               - boxes: boxes
               - radioboxes: radioboxes
+              - before-container: before-container
             children
             - element|markup_simple
                 tag_name: input
@@ -116,6 +117,7 @@ forms
             - class
               - boxes: boxes
               - radioboxes: radioboxes
+              - before-container: before-container
             children
             - element|markup_simple
                 tag_name: input
@@ -164,6 +166,7 @@ forms
                     - name: table_prefix
                     - maxlength: 10
                     - pattern: [a-zA-Z0-9-_]+
+    - license_agreement|form_container_license_agreement
     - button_install|markup
         tag_name: button
         attributes

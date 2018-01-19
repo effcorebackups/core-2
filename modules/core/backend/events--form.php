@@ -112,6 +112,7 @@ namespace effectivecore\modules\core {
         event::start('on_module_install');
         message::insert('Modules was installed.');
         $form->child_delete('storage');
+        $form->child_delete('license_agreement');
         $form->child_delete('button_install');
         break;
       case 'to_front':

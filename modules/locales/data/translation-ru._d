@@ -11,6 +11,7 @@ translations
     - Actions: Действия
     - Administer: Администрирование
     - Administrators: Администраторы
+    - agree: согласен(а)
     - All rights reserved.: Все права защищены.
     - Allowable characters\: %%_chars. Examples\: %%_examples.: Допустимые символы: %%_chars. Примеры: %%_examples.
     - Allowable characters\: %%_chars.: Допустимые символы: %%_chars.
@@ -124,6 +125,7 @@ translations
     - Is always on: Всегда включен
     - Is embed: Встроенный
     - Leave the field blank if you do not want to change its value.: Оставьте поле пустым если не хотите менять его значение.
+    - License agreement: Лицензионное соглашение
     - load: загрузка
     - Locales: Локализации
     - login: вход

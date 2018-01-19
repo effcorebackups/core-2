@@ -37,7 +37,7 @@ namespace effectivecore {
   }
 
   static function get($string, $args = [], $code = '') {
-    $c_code = $code ?: locale::get_settings()->lang_code;
+    $c_code = $code ?: language::get_current();
     if (!isset(static::$cache[$c_code])) static::init($c_code);
     $string = isset(static::$cache[$c_code][$string]) ?
                     static::$cache[$c_code][$string] : $string;
