@@ -30,8 +30,8 @@ namespace effectivecore {
   # - select                     : disabled,           required, multiple, name[]
   # - select::option             : disabled
   # - input[type=file]           : disabled,           required, multiple, name[]
-  # - input[type=checkbox]       : disabled,           REQUIRED, checked, name[]
-  # - input[type=radio]          : disabled,           REQUIRED, checked, name[]
+  # - input[type=checkbox]       : disabled,           required, checked, name[]
+  # - input[type=radio]          : disabled,           required, checked, name[]
   # - input[type=number]         : disabled, readonly, required, min, max, step, name[]
   # - input[type=range]          : disabled,           required, min, max, step, name[]
   # - input[type=date]           : disabled, readonly, required, min, max, name[]
@@ -172,10 +172,7 @@ namespace effectivecore {
         # ─────────────────────────────────────────────────────────────────────
           if (($c_element->tag_name == 'input' && $c_type == 'checkbox') ||
               ($c_element->tag_name == 'input' && $c_type == 'radio')) {
-          # delete default (from _init) and set new (from $_POST) CHECKED state
-            if (factory::in_array_string_compare($c_element->attribute_select('value'), $values[$c_name]))
-                 $c_element->attribute_insert('checked', 'checked');
-            else $c_element->attribute_delete('checked');
+            static::_validate_field_boxes($form, $c_field, $c_element, $c_dpath, $c_name, $values[$c_name]);
           }
 
         # textarea validation:
@@ -301,6 +298,32 @@ namespace effectivecore {
     if ($element->attribute_select('required') && count($new_values) == 0) {
       $form->add_error($dpath.'/element',
         translation::get('Field "%%_title" must be selected!', ['title' => $title])
+      );
+      return;
+    }
+
+  }
+
+  #############################
+  ### _validate_field_boxes ###
+  #############################
+
+  static function _validate_field_boxes($form, $field, $element, $dpath, $name, &$new_values) {
+    $title = translation::get(
+      $field->title
+    );
+
+  # delete default (from _init) and set new (from $_POST) CHECKED state
+  # ─────────────────────────────────────────────────────────────────────
+    if (factory::in_array_string_compare($element->attribute_select('value'), $new_values))
+         $element->attribute_insert('checked', 'checked');
+    else $element->attribute_delete('checked');
+
+  # check required
+  # ─────────────────────────────────────────────────────────────────────
+    if ($element->attribute_select('required') && !factory::in_array_string_compare($element->attribute_select('value'), $new_values)) {
+      $form->add_error($dpath.'/element',
+        translation::get('Field "%%_title" must be checked!', ['title' => $title])
       );
       return;
     }
