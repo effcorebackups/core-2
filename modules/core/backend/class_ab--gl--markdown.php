@@ -70,11 +70,11 @@ namespace effectivecore {
                        '(?<marker>[*+-]|[0-9]+(?<dot>[.]))'.
                        '(?<noises>[ ]{1,})'.
                        '(?<return>[^ ].+)$%S', $c_string, $c_matches)) {
-      # special cases: paragraph|list, blockquote|list, code|list
+      # cases: p|list, blockquote|list, code|list
         if ($last_type == 'p')          {$last_item->child_insert(new text(nl.$c_string)); continue;}
         if ($last_type == 'blockquote') {$last_item->child_select('text')->text_append(nl.$c_string); continue;}
         if ($last_type == 'pre')        {$pool->child_insert(new text(htmlspecialchars($c_string))); continue;}
-      # create new root list container (ol/ul) if $last_item is not a container
+      # create new list container
         if ($last_type != 'list' && $c_indent < 4) {
           $last_item = new markup($c_matches['dot'] ? 'ol' : 'ul');
           $last_item->_p[1] = $last_item;
@@ -83,12 +83,12 @@ namespace effectivecore {
         }
         if ($last_type == 'list') {
         # create new list sub container (ol/ul)
-          if (empty($last_item->_p[$c_level-0]) &&
+          if (empty($last_item->_p[$c_level]) &&
              !empty($last_item->_p[$c_level-1])) {
-            $c_olul = new markup($c_matches['dot'] ? 'ol' : 'ul');
-                      $last_item->_p[$c_level-0] = $c_olul;
-            $c_last = $last_item->_p[$c_level-1]->child_select_last();
-            if ($c_last) $c_last->child_insert($c_olul);
+            $c_new_sublist = new markup($c_matches['dot'] ? 'ol' : 'ul');
+            $last_item->_p[$c_level] = $c_new_sublist;
+            $last_item = $last_item->_p[$c_level-1]->child_select_last();
+            if ($last_item) $last_item->child_insert($c_new_sublist);
           }
         # remove old pointers to list containers (ol/ul)
           for ($i = $c_level + 1; $i < count($last_item->_p) + 1; $i++) {
@@ -124,15 +124,16 @@ namespace effectivecore {
     # ─────────────────────────────────────────────────────────────────────
       if (trim($c_string) == '') {
         if ($last_type == 'text') {$last_item->text_append(nl); continue;}
+        if ($last_type == 'list') {continue;}
         if ($last_type != 'text') {$pool->child_insert(new text(nl)); continue;}
       }
       if (trim($c_string) != '') {
-      # special cases: list|paragraph, blockquote|paragraph, paragraph|paragraph
+      # cases: list|p, blockquote|p, p|p
         if ($last_type == 'list' && !empty($last_item->_p[$c_level]))              {$last_item->_p[$c_level]             ->child_select_last()->child_insert(new text(nl.$c_string)); continue;}
         if ($last_type == 'list' && !empty($last_item->_p[count($last_item->_p)])) {$last_item->_p[count($last_item->_p)]->child_select_last()->child_insert(new text(nl.$c_string)); continue;}
         if ($last_type == 'blockquote')   {$last_item->child_select('text')->text_append(nl.$c_string); continue;}
         if ($last_type == 'p')            {$last_item->child_insert(new text(nl.$c_string)); continue;}
-      # add new paragraph
+      # cases: n/a|p, header|p, hr|p
         if ($c_indent < 4) {
           $pool->child_insert(new markup('p', [], $c_string));
           continue;
