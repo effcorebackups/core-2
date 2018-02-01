@@ -130,7 +130,6 @@ namespace effectivecore {
     # paragraphs
     # ─────────────────────────────────────────────────────────────────────
       if (trim($c_string) == '') {
-        if ($type_last == 'list') {continue;}
         if ($type_last == 'text') {$item_last->text_append(nl); continue;}
         if ($type_last != 'text') {$pool->child_insert(new text(nl)); continue;}
       }
