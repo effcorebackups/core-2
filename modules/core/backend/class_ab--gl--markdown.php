@@ -7,6 +7,21 @@
 namespace effectivecore {
           abstract class markdown {
 
+  static function _get_node_uni_type($node) {
+    $type = $node instanceof markup ||
+            $node instanceof markup_simple ? $node->tag_name : (
+            $node instanceof text ? 'text' : null);
+    if ($type == 'ul') return 'list';
+    if ($type == 'ol') return 'list';
+    if ($type == 'h1') return 'header';
+    if ($type == 'h2') return 'header';
+    if ($type == 'h3') return 'header';
+    if ($type == 'h4') return 'header';
+    if ($type == 'h5') return 'header';
+    if ($type == 'h6') return 'header';
+    return $type;
+  }
+
   static function markdown_to_markup($markdown) {
     $pool = new node();
     $strings = explode(nl, $markdown);
@@ -14,18 +29,10 @@ namespace effectivecore {
       $c_string = str_replace(tb, '    ', $c_string);
       $c_indent = strspn($c_string, ' ');
       $c_level = (int)floor((($c_indent - 1) / 4) + 1.25);
-      $last_item = $pool->child_select_last();
-      $last_type = $last_item instanceof markup ||
-                   $last_item instanceof markup_simple ? $last_item->tag_name : (
-                   $last_item instanceof text ? 'text' : null);
-      $last_type = $last_type == 'ul' ? 'list'   : $last_type;
-      $last_type = $last_type == 'ol' ? 'list'   : $last_type;
-      $last_type = $last_type == 'h1' ? 'header' : $last_type;
-      $last_type = $last_type == 'h2' ? 'header' : $last_type;
-      $last_type = $last_type == 'h3' ? 'header' : $last_type;
-      $last_type = $last_type == 'h4' ? 'header' : $last_type;
-      $last_type = $last_type == 'h5' ? 'header' : $last_type;
-      $last_type = $last_type == 'h6' ? 'header' : $last_type;
+      $item_last = $pool->child_select_last();
+      $item_prev = $pool->child_select_prev($item_last);
+      $type_last = static::_get_node_uni_type($item_last);
+      $type_prev = static::_get_node_uni_type($item_prev);
       $c_matches = [];
 
     # headers
@@ -35,18 +42,18 @@ namespace effectivecore {
         if ($c_matches['marker'][0] == '=') $n_header = new markup('h1', [], $strings[$c_num-1]);
         if ($c_matches['marker'][0] == '-') $n_header = new markup('h2', [], $strings[$c_num-1]);
       # remove previous insertion
-        if ($last_type == 'p' && $last_item->child_select_first() instanceof text) $pool->child_delete($pool->child_select_last_id());
-        if ($last_type == 'header')   $pool->child_delete($pool->child_select_last_id());
-        if ($last_type == 'hr')       $pool->child_delete($pool->child_select_last_id());
+        if ($type_last == 'p' && $item_last->child_select_first() instanceof text) $pool->child_delete($pool->child_select_last_id());
+        if ($type_last == 'header')   $pool->child_delete($pool->child_select_last_id());
+        if ($type_last == 'hr')       $pool->child_delete($pool->child_select_last_id());
       }
       if (preg_match('%^(?<marker>[#]{1,6})(?<return>.*)$%S', $c_string, $c_matches)) {
         $n_header = new markup('h'.strlen($c_matches['marker']), [], $c_matches['return']);
       }
       if ($n_header) {
       # special case: list|header
-        if ($last_type == 'list') {
-          if (!empty($last_item->_p[$c_level]))              {$last_item->_p[$c_level]             ->child_select_last()->child_insert($n_header); continue;}
-          if (!empty($last_item->_p[count($last_item->_p)])) {$last_item->_p[count($last_item->_p)]->child_select_last()->child_insert($n_header); continue;}
+        if ($type_last == 'list') {
+          if (!empty($item_last->_p[$c_level]))              {$item_last->_p[$c_level]             ->child_select_last()->child_insert($n_header); continue;}
+          if (!empty($item_last->_p[count($item_last->_p)])) {$item_last->_p[count($item_last->_p)]->child_select_last()->child_insert($n_header); continue;}
         }
       # default case
         $pool->child_insert($n_header);
@@ -71,31 +78,29 @@ namespace effectivecore {
                        '(?<noises>[ ]{1,})'.
                        '(?<return>[^ ].+)$%S', $c_string, $c_matches)) {
       # cases: p|list, blockquote|list, code|list
-        if ($last_type == 'p')          {$last_item->child_insert(new text(nl.$c_string)); continue;}
-        if ($last_type == 'blockquote') {$last_item->child_select('text')->text_append(nl.$c_string); continue;}
-        if ($last_type == 'pre')        {$pool->child_insert(new text(htmlspecialchars($c_string))); continue;}
+        if ($type_last == 'p')          {$item_last->child_insert(new text(nl.$c_string)); continue;}
+        if ($type_last == 'blockquote') {$item_last->child_select('text')->text_append(nl.$c_string); continue;}
+        if ($type_last == 'pre')        {$pool->child_insert(new text(htmlspecialchars($c_string))); continue;}
       # create new list container
-        if ($last_type != 'list' && $c_indent < 4) {
-          $last_item = new markup($c_matches['dot'] ? 'ol' : 'ul');
-          $last_item->_p[1] = $last_item;
-          $last_type = 'list';
-          $pool->child_insert($last_item);
+        if ($type_last != 'list' && $c_indent < 4) {
+          $item_last = new markup($c_matches['dot'] ? 'ol' : 'ul');
+          $item_last->_p[1] = $item_last;
+          $type_last = 'list';
+          $pool->child_insert($item_last);
         }
-        if ($last_type == 'list') {
+        if ($type_last == 'list') {
         # create new list sub container (ol/ul)
-          if (empty($last_item->_p[$c_level]) &&
-             !empty($last_item->_p[$c_level-1])) {
+          if (empty($item_last->_p[$c_level-0]) &&
+              empty($item_last->_p[$c_level-1]) == false) {
             $c_new_sublist = new markup($c_matches['dot'] ? 'ol' : 'ul');
-            $last_item->_p[$c_level] = $c_new_sublist;
-            $last_item = $last_item->_p[$c_level-1]->child_select_last();
-            if ($last_item) $last_item->child_insert($c_new_sublist);
+            $item_last->_p[$c_level] = $c_new_sublist;
           }
         # remove old pointers to list containers (ol/ul)
-          for ($i = $c_level + 1; $i < count($last_item->_p) + 1; $i++) {
-            unset($last_item->_p[$i]);
+          for ($i = $c_level + 1; $i < count($item_last->_p) + 1; $i++) {
+            unset($item_last->_p[$i]);
           }
         # insert new list item (li)
-          $last_item->_p[$c_level]->child_insert(
+          $item_last->_p[$c_level]->child_insert(
             new markup('li', [], $c_matches['return'])
           );
           continue;
@@ -108,13 +113,13 @@ namespace effectivecore {
                        '(?<marker>[>][ ]{0,1})'.
                        '(?<return>.+)$%S', $c_string, $c_matches)) {
       # create new blockquote container
-        if ($last_type != 'blockquote') {
-          $last_item = new markup('blockquote');
-          $last_item->child_insert(new text(''), 'text');
-          $pool->child_insert($last_item);
+        if ($type_last != 'blockquote') {
+          $item_last = new markup('blockquote');
+          $item_last->child_insert(new text(''), 'text');
+          $pool->child_insert($item_last);
         }
       # insert new blockquote string
-        $last_item->child_select('text')->text_append(
+        $item_last->child_select('text')->text_append(
           nl.$c_matches['return']
         );
         continue;
@@ -123,16 +128,16 @@ namespace effectivecore {
     # paragraphs
     # ─────────────────────────────────────────────────────────────────────
       if (trim($c_string) == '') {
-        if ($last_type == 'text') {$last_item->text_append(nl); continue;}
-        if ($last_type == 'list') {continue;}
-        if ($last_type != 'text') {$pool->child_insert(new text(nl)); continue;}
+        if ($type_last == 'list') {continue;}
+        if ($type_last == 'text') {$item_last->text_append(nl); continue;}
+        if ($type_last != 'text') {$pool->child_insert(new text(nl)); continue;}
       }
       if (trim($c_string) != '') {
       # cases: list|p, blockquote|p, p|p
-        if ($last_type == 'list' && !empty($last_item->_p[$c_level]))              {$last_item->_p[$c_level]             ->child_select_last()->child_insert(new text(nl.$c_string)); continue;}
-        if ($last_type == 'list' && !empty($last_item->_p[count($last_item->_p)])) {$last_item->_p[count($last_item->_p)]->child_select_last()->child_insert(new text(nl.$c_string)); continue;}
-        if ($last_type == 'blockquote')   {$last_item->child_select('text')->text_append(nl.$c_string); continue;}
-        if ($last_type == 'p')            {$last_item->child_insert(new text(nl.$c_string)); continue;}
+        if ($type_last == 'list' && !empty($item_last->_p[$c_level]))              {$item_last->_p[$c_level]             ->child_select_last()->child_insert(new text(nl.$c_string)); continue;}
+        if ($type_last == 'list' && !empty($item_last->_p[count($item_last->_p)])) {$item_last->_p[count($item_last->_p)]->child_select_last()->child_insert(new text(nl.$c_string)); continue;}
+        if ($type_last == 'blockquote')   {$item_last->child_select('text')->text_append(nl.$c_string); continue;}
+        if ($type_last == 'p')            {$item_last->child_insert(new text(nl.$c_string)); continue;}
       # cases: n/a|p, header|p, hr|p
         if ($c_indent < 4) {
           $pool->child_insert(new markup('p', [], $c_string));
@@ -146,13 +151,13 @@ namespace effectivecore {
                        '(?<noises>[ ]{0,})'.
                        '(?<return>[^ ].*)$%S', $c_string, $c_matches)) {
       # create new code container
-        if ($last_type != 'pre') {
-          $last_item = new markup('pre');
-          $last_item->child_insert(new markup('code'), 'code');
-          $pool->child_insert($last_item);
+        if ($type_last != 'pre') {
+          $item_last = new markup('pre');
+          $item_last->child_insert(new markup('code'), 'code');
+          $pool->child_insert($item_last);
         }
       # insert new code string
-        $last_item->child_select('code')->child_insert(
+        $item_last->child_select('code')->child_insert(
           new text(nl.htmlspecialchars($c_matches['return']))
         );
         continue;
