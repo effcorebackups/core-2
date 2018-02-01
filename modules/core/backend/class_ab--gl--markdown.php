@@ -123,13 +123,8 @@ namespace effectivecore {
     # paragraphs
     # ─────────────────────────────────────────────────────────────────────
       if (trim($c_string) == '') {
-        if ($last_type == 'text' && trim($last_item->text_select()) == '') {
-          $last_item->text_append(nl);
-          continue;
-        } else {
-          $pool->child_insert(new text(nl));
-          continue;
-        }
+        if ($last_type == 'text') {$last_item->text_append(nl); continue;}
+        if ($last_type != 'text') {$pool->child_insert(new text(nl)); continue;}
       }
       if (trim($c_string) != '') {
       # special cases: list|paragraph, blockquote|paragraph, paragraph|paragraph
@@ -137,7 +132,7 @@ namespace effectivecore {
         if ($last_type == 'list' && !empty($last_item->_p[count($last_item->_p)])) {$last_item->_p[count($last_item->_p)]->child_select_last()->child_insert(new text(nl.$c_string)); continue;}
         if ($last_type == 'blockquote')   {$last_item->child_select('text')->text_append(nl.$c_string); continue;}
         if ($last_type == 'p')            {$last_item->child_insert(new text(nl.$c_string)); continue;}
-      # when no previous paragraph was found - add new paragraph
+      # add new paragraph
         if ($c_indent < 4) {
           $pool->child_insert(new markup('p', [], $c_string));
           continue;
