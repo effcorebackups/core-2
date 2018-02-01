@@ -93,7 +93,9 @@ namespace effectivecore {
           if (empty($item_last->_p[$c_level-0]) &&
               empty($item_last->_p[$c_level-1]) == false) {
             $c_new_sublist = new markup($c_matches['dot'] ? 'ol' : 'ul');
-            $item_last->_p[$c_level] = $c_new_sublist;
+                       $item_last->_p[$c_level-0] = $c_new_sublist;
+            $last_li = $item_last->_p[$c_level-1]->child_select_last();
+            if ($last_li) $last_li->child_insert($c_new_sublist);
           }
         # remove old pointers to list containers (ol/ul)
           for ($i = $c_level + 1; $i < count($item_last->_p) + 1; $i++) {
@@ -166,6 +168,8 @@ namespace effectivecore {
     }
 
   # postprocess for blockquote
+  # ─────────────────────────────────────────────────────────────────────
+
     foreach ($pool->child_select_all_recursive() as $c_item) {
       if ($c_item instanceof markup &&
           $c_item->tag_name == 'blockquote') {
