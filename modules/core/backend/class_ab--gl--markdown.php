@@ -28,7 +28,8 @@ namespace effectivecore {
     foreach ($strings as $c_num => $c_string) {
       $c_string = str_replace(tb, '    ', $c_string);
       $c_indent = strspn($c_string, ' ');
-      $c_level = (int)floor((($c_indent - 1) / 4) + 1.25);
+      $l_level = (int)floor((($c_indent - 0) / 4) + 1) ?: 1;
+      $p_level = (int)floor((($c_indent - 1) / 4) + 1) ?: 1;
       $item_last = $pool->child_select_last();
       $item_prev = $pool->child_select_prev($item_last);
       $type_last = static::_get_node_uni_type($item_last);
@@ -52,7 +53,7 @@ namespace effectivecore {
       if ($n_header) {
       # special case: list|header
         if ($type_last == 'list') {
-          if (!empty($item_last->_p[$c_level]))              {$item_last->_p[$c_level]             ->child_select_last()->child_insert($n_header); continue;}
+          if (!empty($item_last->_p[$l_level]))              {$item_last->_p[$l_level]             ->child_select_last()->child_insert($n_header); continue;}
           if (!empty($item_last->_p[count($item_last->_p)])) {$item_last->_p[count($item_last->_p)]->child_select_last()->child_insert($n_header); continue;}
         }
       # default case
@@ -90,19 +91,19 @@ namespace effectivecore {
         }
         if ($type_last == 'list') {
         # create new list sub container (ol/ul)
-          if (empty($item_last->_p[$c_level-0]) &&
-              empty($item_last->_p[$c_level-1]) == false) {
+          if (empty($item_last->_p[$l_level-0]) &&
+              empty($item_last->_p[$l_level-1]) == false) {
             $c_new_sublist = new markup($c_matches['dot'] ? 'ol' : 'ul');
-                       $item_last->_p[$c_level-0] = $c_new_sublist;
-            $last_li = $item_last->_p[$c_level-1]->child_select_last();
+                       $item_last->_p[$l_level-0] = $c_new_sublist;
+            $last_li = $item_last->_p[$l_level-1]->child_select_last();
             if ($last_li) $last_li->child_insert($c_new_sublist);
           }
         # remove old pointers to list containers (ol/ul)
-          for ($i = $c_level + 1; $i < count($item_last->_p) + 1; $i++) {
+          for ($i = $l_level + 1; $i < count($item_last->_p) + 1; $i++) {
             unset($item_last->_p[$i]);
           }
         # insert new list item (li)
-          $item_last->_p[$c_level]->child_insert(
+          $item_last->_p[$l_level]->child_insert(
             new markup('li', [], $c_matches['return'])
           );
           continue;
@@ -135,7 +136,7 @@ namespace effectivecore {
       }
       if (trim($c_string) != '') {
       # cases: list|p, blockquote|p, p|p
-        if ($type_last == 'list' && !empty($item_last->_p[$c_level]))              {$item_last->_p[$c_level]             ->child_select_last()->child_insert(new text(nl.$c_string)); continue;}
+        if ($type_last == 'list' && !empty($item_last->_p[$l_level]))              {$item_last->_p[$l_level]             ->child_select_last()->child_insert(new text(nl.$c_string)); continue;}
         if ($type_last == 'list' && !empty($item_last->_p[count($item_last->_p)])) {$item_last->_p[count($item_last->_p)]->child_select_last()->child_insert(new text(nl.$c_string)); continue;}
         if ($type_last == 'blockquote')   {$item_last->child_select('text')->text_append(nl.$c_string); continue;}
         if ($type_last == 'p')            {$item_last->child_insert(new text(nl.$c_string)); continue;}
