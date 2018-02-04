@@ -29,7 +29,7 @@ namespace effectivecore {
       $c_string = str_replace(tb, '    ', $c_string);
       $c_indent = strspn($c_string, ' ');
       $l_level = (int)floor((($c_indent - 0) / 4) + 1) ?: 1;
-      $p_level = (int)floor((($c_indent - 1) / 4) + 1) ?: 1;
+      $p_level = (int)floor((($c_indent - 1) / 4) + 1) ?: 0;
       $item_last = $pool->child_select_last();
       $item_prev = $pool->child_select_prev($item_last);
       $type_last = static::_get_node_uni_type($item_last);
@@ -135,12 +135,18 @@ namespace effectivecore {
         if ($type_last != 'text') {$pool->child_insert(new text(nl)); continue;}
       }
       if (trim($c_string) != '') {
+      # cases: list||p
+        if ($type_prev == 'list' &&
+            $type_last == 'text' && trim($item_last->text_select()) == '') {
+          if (!empty($item_prev->_p[$p_level]))              {$item_prev->_p[$p_level]             ->child_select_last()->child_insert(new text(nl.$c_string)); continue;}
+          if (!empty($item_prev->_p[count($item_prev->_p)])) {$item_prev->_p[count($item_prev->_p)]->child_select_last()->child_insert(new text(nl.$c_string)); continue;}
+        }
       # cases: list|p, blockquote|p, p|p
         if ($type_last == 'list' && !empty($item_last->_p[$l_level]))              {$item_last->_p[$l_level]             ->child_select_last()->child_insert(new text(nl.$c_string)); continue;}
         if ($type_last == 'list' && !empty($item_last->_p[count($item_last->_p)])) {$item_last->_p[count($item_last->_p)]->child_select_last()->child_insert(new text(nl.$c_string)); continue;}
         if ($type_last == 'blockquote')   {$item_last->child_select('text')->text_append(nl.$c_string); continue;}
         if ($type_last == 'p')            {$item_last->child_insert(new text(nl.$c_string)); continue;}
-      # cases: n/a|p, header|p, hr|p
+      # cases: |p, header|p, hr|p
         if ($c_indent < 4) {
           $pool->child_insert(new markup('p', [], $c_string));
           continue;
