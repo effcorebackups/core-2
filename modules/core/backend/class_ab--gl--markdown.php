@@ -22,14 +22,14 @@ namespace effectivecore {
     return $type;
   }
 
-  static function _add_text_to_list($list, $string, $level) {
+  static function _add_text_to_list($list, $data, $level) {
     $container = !empty($list->_p[$level]) ?
                         $list->_p[$level] : (
                  !empty($list->_p[count($list->_p)]) ? 
                         $list->_p[count($list->_p)] : null);
     if ($container) {
       $container->child_select_last()->child_insert(
-        new text(nl.$string)
+        is_string($data) ? new text(nl.$data) : $data
       );
     }
   }
@@ -65,7 +65,7 @@ namespace effectivecore {
       if ($n_header) {
       # special case: list|header
         if ($type_last == 'list') {
-          static::_add_text_to_list($item_last, $c_string, $l_level);
+          static::_add_text_to_list($item_last, $n_header, $l_level);
           continue;
         }
       # default case
