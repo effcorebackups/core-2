@@ -7,7 +7,7 @@
 namespace effectivecore {
           abstract class markdown {
 
-  static function _get_node_uni_type($node) {
+  static function _node_get_universal_type($node) {
     $type = $node instanceof markup ||
             $node instanceof markup_simple ? $node->tag_name : (
             $node instanceof text ? 'text' : null);
@@ -22,15 +22,19 @@ namespace effectivecore {
     return $type;
   }
 
-  static function _add_text_to_list($list, $data, $level) {
+  static function _list_insert_data($list, $data, $level) {
     $container = !empty($list->_p[$level]) ?
                         $list->_p[$level] : (
                  !empty($list->_p[count($list->_p)]) ? 
                         $list->_p[count($list->_p)] : null);
     if ($container) {
-      $container->child_select_last()->child_insert(
-        is_string($data) ? new text(nl.$data) : $data
-      );
+      $last_li = $container->child_select_last();
+      $wr_data0     = $last_li->child_select('wr_data0');
+      $wr_container = $last_li->child_select('wr_container');
+      $wr_data1     = $last_li->child_select('wr_data1');
+      if ($wr_data0->child_count() == 0)
+           $wr_data0->child_insert(is_string($data) ? new text(nl.$data) : $data);
+      else $wr_data1->child_insert(is_string($data) ? new text(nl.$data) : $data);
     }
   }
 
@@ -44,8 +48,8 @@ namespace effectivecore {
       $p_level = (int)floor((($c_indent - 1) / 4) + 1) ?: 1;
       $item_last = $pool->child_select_last();
       $item_prev = $pool->child_select_prev($item_last);
-      $type_last = static::_get_node_uni_type($item_last);
-      $type_prev = static::_get_node_uni_type($item_prev);
+      $type_last = static::_node_get_universal_type($item_last);
+      $type_prev = static::_node_get_universal_type($item_prev);
       $c_matches = [];
 
     # headers
@@ -65,7 +69,7 @@ namespace effectivecore {
       if ($n_header) {
       # special case: list|header
         if ($type_last == 'list') {
-          static::_add_text_to_list($item_last, $n_header, $l_level);
+          static::_list_insert_data($item_last, $n_header, $l_level);
           continue;
         }
       # default case
@@ -105,19 +109,23 @@ namespace effectivecore {
         # create new list sub container (ol/ul)
           if (empty($item_last->_p[$l_level-0]) &&
               empty($item_last->_p[$l_level-1]) == false) {
-            $c_new_sublist = new markup($c_matches['dot'] ? 'ol' : 'ul');
-                       $item_last->_p[$l_level-0] = $c_new_sublist;
-            $last_li = $item_last->_p[$l_level-1]->child_select_last();
-            if ($last_li) $last_li->child_insert($c_new_sublist);
+            $new_container = new markup($c_matches['dot'] ? 'ol' : 'ul');
+                         $item_last->_p[$l_level-0] = $new_container;
+            $parent_li = $item_last->_p[$l_level-1]->child_select_last();
+            if ($parent_li) $parent_li->child_select('wr_container')
+                                      ->child_insert($new_container);
           }
         # remove old pointers to list containers (ol/ul)
           for ($i = $l_level + 1; $i < count($item_last->_p) + 1; $i++) {
             unset($item_last->_p[$i]);
           }
         # insert new list item (li)
-          $item_last->_p[$l_level]->child_insert(
-            new markup('li', [], $c_matches['return'])
-          );
+          $new_li = new markup('li');
+          $new_li->child_insert(new node(), 'wr_data0');
+          $new_li->child_insert(new node(), 'wr_container');
+          $new_li->child_insert(new node(), 'wr_data1');
+          $item_last->_p[$l_level]->child_insert($new_li);
+          static::_list_insert_data($item_last, $c_matches['return'], $l_level);
           continue;
         }
       }
@@ -150,11 +158,11 @@ namespace effectivecore {
       # cases: list||p, list|p
         if ($type_prev == 'list' &&
             $type_last == 'text' && trim($item_last->text_select()) == '') {
-          static::_add_text_to_list($item_prev, $c_string, $p_level);
+          static::_list_insert_data($item_prev, $c_string, $p_level);
           continue;
         }
         if ($type_last == 'list') {
-          static::_add_text_to_list($item_last, $c_string, $l_level);
+          static::_list_insert_data($item_last, $c_string, $l_level);
           continue;
         }
       # cases: blockquote|p, p|p

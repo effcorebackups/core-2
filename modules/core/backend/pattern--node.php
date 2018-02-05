@@ -26,6 +26,10 @@ namespace effectivecore {
   ### children ###
   ################
 
+  function child_count() {
+    return count($this->children);
+  }
+
   function child_select($id) {
     return isset($this->children[$id]) ?
                  $this->children[$id] : null;
