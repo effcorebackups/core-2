@@ -7,7 +7,7 @@
 namespace effectivecore {
           abstract class markdown {
 
-  static function _node_get_universal_type($node) {
+  static function _node_universal_type_get($node) {
     $type = $node instanceof markup ||
             $node instanceof markup_simple ? $node->tag_name : (
             $node instanceof text ? 'text' : null);
@@ -22,7 +22,7 @@ namespace effectivecore {
     return $type;
   }
 
-  static function _list_insert_data($list, $data, $level) {
+  static function _list_data_insert($list, $data, $level) {
     $container = !empty($list->_p[$level]) ?
                         $list->_p[$level] : (
                  !empty($list->_p[count($list->_p)]) ? 
@@ -48,8 +48,8 @@ namespace effectivecore {
       $p_level = (int)floor((($c_indent - 1) / 4) + 1) ?: 1;
       $item_last = $pool->child_select_last();
       $item_prev = $pool->child_select_prev($item_last);
-      $type_last = static::_node_get_universal_type($item_last);
-      $type_prev = static::_node_get_universal_type($item_prev);
+      $type_last = static::_node_universal_type_get($item_last);
+      $type_prev = static::_node_universal_type_get($item_prev);
       $c_matches = [];
 
     # headers
@@ -69,7 +69,7 @@ namespace effectivecore {
       if ($n_header) {
       # special case: list|header
         if ($type_last == 'list') {
-          static::_list_insert_data($item_last, $n_header, $l_level);
+          static::_list_data_insert($item_last, $n_header, $l_level);
           continue;
         }
       # default case
@@ -94,7 +94,7 @@ namespace effectivecore {
                        '(?<marker>[*+-]|[0-9]+(?<dot>[.]))'.
                        '(?<noises>[ ]{1,})'.
                        '(?<return>[^ ].+)$%S', $c_string, $c_matches)) {
-      # cases: p|list, blockquote|list, code|list
+      # special cases: p|list, blockquote|list, code|list
         if ($type_last == 'p')          {$item_last->child_insert(new text(nl.$c_string)); continue;}
         if ($type_last == 'blockquote') {$item_last->child_select('text')->text_append(nl.$c_string); continue;}
         if ($type_last == 'pre')        {$pool->child_insert(new text(htmlspecialchars($c_string))); continue;}
@@ -125,7 +125,7 @@ namespace effectivecore {
           $new_li->child_insert(new node(), 'wr_container');
           $new_li->child_insert(new node(), 'wr_data1');
           $item_last->_p[$l_level]->child_insert($new_li);
-          static::_list_insert_data($item_last, $c_matches['return'], $l_level);
+          static::_list_data_insert($item_last, $c_matches['return'], $l_level);
           continue;
         }
       }
@@ -155,20 +155,21 @@ namespace effectivecore {
         if ($type_last != 'text') {$pool->child_insert(new text(nl)); continue;}
       }
       if (trim($c_string) != '') {
-      # cases: list||p, list|p
+      # special case: list||p
         if ($type_prev == 'list' &&
             $type_last == 'text' && trim($item_last->text_select()) == '') {
-          static::_list_insert_data($item_prev, $c_string, $p_level);
+          static::_list_data_insert($item_prev, $c_string, $p_level);
           continue;
         }
+      # special case: list|p
         if ($type_last == 'list') {
-          static::_list_insert_data($item_last, $c_string, $l_level);
+          static::_list_data_insert($item_last, $c_string, $l_level);
           continue;
         }
-      # cases: blockquote|p, p|p
+      # special cases: blockquote|p, p|p
         if ($type_last == 'blockquote') {$item_last->child_select('text')->text_append(nl.$c_string); continue;}
         if ($type_last == 'p')          {$item_last->child_insert(new text(nl.$c_string)); continue;}
-      # cases: |p, header|p, hr|p
+      # special cases: |p, header|p, hr|p
         if ($c_indent < 4) {
           $pool->child_insert(new markup('p', [], $c_string));
           continue;
