@@ -153,17 +153,16 @@ namespace effectivecore {
       if (trim($c_string) == '') {
         if ($type_last == 'text') {$item_last->text_append(nl); continue;}
         if ($type_last != 'text') {$pool->child_insert(new text(nl)); continue;}
-      }
-      if (trim($c_string) != '') {
+      } else {
+      # special case: list|p
+        if ($type_last == 'list') {
+          static::_list_data_insert($item_last, $c_string, -1);
+          continue;
+        }
       # special case: list||p
         if ($type_prev == 'list' &&
             $type_last == 'text' && trim($item_last->text_select()) == '') {
           static::_list_data_insert($item_prev, $c_string, $p_level);
-          continue;
-        }
-      # special case: list|p
-        if ($type_last == 'list') {
-          static::_list_data_insert($item_last, $c_string, -1);
           continue;
         }
       # special cases: blockquote|p, p|p
