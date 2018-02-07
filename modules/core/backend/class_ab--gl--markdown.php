@@ -69,7 +69,7 @@ namespace effectivecore {
       if ($n_header) {
       # special case: list|header
         if ($type_last == 'list') {
-          static::_list_data_insert($item_last, $n_header, $l_level);
+          static::_list_data_insert($item_last, $n_header, -1);
           continue;
         }
       # default case
@@ -163,7 +163,7 @@ namespace effectivecore {
         }
       # special case: list|p
         if ($type_last == 'list') {
-          static::_list_data_insert($item_last, $c_string, $l_level);
+          static::_list_data_insert($item_last, $c_string, -1);
           continue;
         }
       # special cases: blockquote|p, p|p
