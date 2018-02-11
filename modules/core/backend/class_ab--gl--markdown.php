@@ -22,7 +22,7 @@ namespace effectivecore {
     return $type;
   }
 
-  static function _list_data_insert($list, $data, $level) {
+  static function _list_data_insert($list, $data, $level, $position = 1) {
     $container = !empty($list->_p[$level]) ?
                         $list->_p[$level] : (
                  !empty($list->_p[count($list->_p)]) ? 
@@ -32,7 +32,7 @@ namespace effectivecore {
       $wr_data0     = $last_li->child_select('wr_data0');
       $wr_container = $last_li->child_select('wr_container');
       $wr_data1     = $last_li->child_select('wr_data1');
-      if ($wr_data0->child_count() == 0)
+      if  ($position == 0)
            $wr_data0->child_insert(is_string($data) ? new text(nl.$data) : $data);
       else $wr_data1->child_insert(is_string($data) ? new text(nl.$data) : $data);
     }
@@ -125,7 +125,7 @@ namespace effectivecore {
           $new_li->child_insert(new node(), 'wr_container');
           $new_li->child_insert(new node(), 'wr_data1');
           $item_last->_p[$l_level]->child_insert($new_li);
-          static::_list_data_insert($item_last, $c_matches['return'], $l_level);
+          static::_list_data_insert($item_last, $c_matches['return'], $l_level, 0);
           continue;
         }
       }
@@ -154,21 +154,21 @@ namespace effectivecore {
         if ($type_last == 'text') {$item_last->text_append(nl); continue;}
         if ($type_last != 'text') {$pool->child_insert(new text(nl)); continue;}
       } else {
-      # special case: list|p
-        if ($type_last == 'list') {
-          static::_list_data_insert($item_last, $c_string, -1);
-          continue;
-        }
-      # special case: list||p
+      # special case: list||text
         if ($type_prev == 'list' &&
             $type_last == 'text' && trim($item_last->text_select()) == '') {
           static::_list_data_insert($item_prev, $c_string, $p_level);
           continue;
         }
-      # special cases: blockquote|p, p|p
+      # special case: list|text
+        if ($type_last == 'list') {
+          static::_list_data_insert($item_last, $c_string, -1, 0);
+          continue;
+        }
+      # special cases: blockquote|text, p|text
         if ($type_last == 'blockquote') {$item_last->child_select('text')->text_append(nl.$c_string); continue;}
         if ($type_last == 'p')          {$item_last->child_insert(new text(nl.$c_string)); continue;}
-      # special cases: |p, header|p, hr|p
+      # special cases: |text, header|text, hr|text
         if ($c_indent < 4) {
           $pool->child_insert(new markup('p', [], $c_string));
           continue;
