@@ -113,8 +113,10 @@ namespace effectivecore {
                                       ->child_insert($new_container);
           }
         # remove old pointers to list containers (ol/ul)
-          for ($i = $l_level + 1; $i < count($item_last->_p_list) + 1; $i++) {
-            unset($item_last->_p_list[$i]);
+          foreach ($item_last->_p_list as $c_level => $c_pointer) {
+            if ($c_level > $l_level) {
+              unset($item_last->_p_list[$c_level]);
+            }
           }
         # insert new list item (li)
           $new_li = new markup('li');
@@ -122,7 +124,7 @@ namespace effectivecore {
           $new_li->child_insert(new node(), 'wr_container');
           $new_li->child_insert(new node(), 'wr_data1');
           $item_last->_p_list[$l_level]->child_insert($new_li);
-          static::_list_data_insert($item_last, $c_matches['return'], $l_level);
+          static::_list_data_insert($item_last, $c_matches['return'], -1);
           continue;
         }
       }
