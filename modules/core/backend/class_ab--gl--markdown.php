@@ -30,9 +30,18 @@ namespace effectivecore {
                       $list->_p_list[$level];
     if ($acceptor) $acceptor = $acceptor->child_select_last();
     if ($acceptor) $acceptor = $acceptor->child_select($list->_wr_name);
-    if ($acceptor) $acceptor->child_insert(
-      is_string($data) ? new text(nl.$data) : $data
-    );
+    if ($acceptor) {
+      if ($list->_wr_name == 'wr_data0') {
+        $acceptor->child_insert(
+          is_string($data) ? new text(nl.$data) : $data
+        );
+      }
+      if ($list->_wr_name == 'wr_data1') {
+        $acceptor->child_insert(
+          is_string($data) ? new markup('p', [], new text(nl.$data)) : $data
+        );
+      }
+    }
   }
 
   static function markdown_to_markup($markdown) {
@@ -119,6 +128,7 @@ namespace effectivecore {
             }
           }
         # insert new list item (li)
+          unset($item_last->_wr_name);
           $new_li = new markup('li');
           $new_li->child_insert(new node(), 'wr_data0');
           $new_li->child_insert(new node(), 'wr_container');
