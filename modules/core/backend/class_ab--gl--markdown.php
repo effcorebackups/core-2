@@ -37,9 +37,18 @@ namespace effectivecore {
         );
       }
       if ($list->_wr_name == 'wr_data1') {
-        $acceptor->child_insert(
-          is_string($data) ? new markup('p', [], new text(nl.$data)) : $data
-        );
+        if (is_string($data) && trim($data) == '') {
+          $acceptor->child_insert(
+            new markup('p')
+          );
+        }
+        $p = $acceptor->child_select_last();
+        if ($p instanceof markup &&
+            $p->tag_name == 'p') {
+          $p->child_insert(
+            is_string($data) ? new text(nl.$data) : $data
+          );
+        }
       }
     }
   }
