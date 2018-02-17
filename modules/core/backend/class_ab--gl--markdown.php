@@ -22,11 +22,12 @@ namespace effectivecore {
     return $type;
   }
 
-  static function _list_data_insert($list, $data, $level = null) {
+  static function _list_data_insert($list, $data, $c_indent, $level = null) {
     if (empty($list->_wr_name))                $list->_wr_name = 'wr_data0';
     if (is_string($data) && trim($data) == '') $list->_wr_name = 'wr_data1';
     switch ($list->_wr_name) {
       case 'wr_data0':
+      # add data to the list
         $wr_data0_level = count($list->_p_list);
         $acceptor = empty($list->_p_list[$wr_data0_level]) ? null :
                           $list->_p_list[$wr_data0_level];
@@ -36,30 +37,35 @@ namespace effectivecore {
           $acceptor->child_insert(
             is_string($data) ? new text(nl.$data) : $data
           );
+          return true;
         }
         break;
       case 'wr_data1':
+      # remove old pointer to the current paragraph
         if (is_string($data) && trim($data) == '') {
           $list->_c_paragraph = null;
-        } else {
-          if (empty($list->_c_paragraph)) {
-            $wr_data1_level = min($level, count($list->_p_list));
-            $acceptor = empty($list->_p_list[$wr_data1_level]) ? null :
-                              $list->_p_list[$wr_data1_level];
-            if ($acceptor) $acceptor = $acceptor->child_select_last();
-            if ($acceptor) $acceptor = $acceptor->child_select('wr_data1');
-            if ($acceptor) {
-              $list->_c_paragraph = new markup('p');
-              $acceptor->child_insert(
-                $list->_c_paragraph
-              );
-            }
-          }
-          if (empty($list->_c_paragraph) == false) {
-            $list->_c_paragraph->child_insert(
-              is_string($data) ? new text(nl.$data) : $data
+          return true;
+        }
+      # add new paragraph to the list
+        if (empty($list->_c_paragraph) && $c_indent > 0) {
+          $wr_data1_level = min($level, count($list->_p_list));
+          $acceptor = empty($list->_p_list[$wr_data1_level]) ? null :
+                            $list->_p_list[$wr_data1_level];
+          if ($acceptor) $acceptor = $acceptor->child_select_last();
+          if ($acceptor) $acceptor = $acceptor->child_select('wr_data1');
+          if ($acceptor) {
+            $list->_c_paragraph = new markup('p');
+            $acceptor->child_insert(
+              $list->_c_paragraph
             );
           }
+        }
+      # add data to current paragraph
+        if (empty($list->_c_paragraph) == false) {
+          $list->_c_paragraph->child_insert(
+            is_string($data) ? new text(nl.$data) : $data
+          );
+          return true;
         }
         break;
     }
@@ -94,7 +100,7 @@ namespace effectivecore {
       if ($n_header) {
       # special case: list|header
         if ($type_last == 'list') {
-          static::_list_data_insert($item_last, $n_header);
+          static::_list_data_insert($item_last, $n_header, $c_indent);
           continue;
         }
       # default case
@@ -153,7 +159,7 @@ namespace effectivecore {
           $new_li->child_insert(new node(), 'wr_container');
           $new_li->child_insert(new node(), 'wr_data1');
           $item_last->_p_list[$l_level]->child_insert($new_li);
-          static::_list_data_insert($item_last, $c_matches['return']);
+          static::_list_data_insert($item_last, $c_matches['return'], $c_indent);
           continue;
         }
       }
@@ -180,8 +186,9 @@ namespace effectivecore {
     # ─────────────────────────────────────────────────────────────────────
     # special cases: list|text, list|nl
       if ($type_last == 'list') {
-        static::_list_data_insert($item_last, $c_string, $p_level);
-        continue;
+        if (static::_list_data_insert($item_last, $c_string, $c_indent, $p_level)) {
+          continue;
+        }
       }
       if (trim($c_string) == '') {
         if ($type_last == 'text') {$item_last->text_append(nl); continue;}
