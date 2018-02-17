@@ -22,34 +22,46 @@ namespace effectivecore {
     return $type;
   }
 
-  static function _list_data_insert($list, $data, $level) {
+  static function _list_data_insert($list, $data, $level = null) {
     if (empty($list->_wr_name))                $list->_wr_name = 'wr_data0';
     if (is_string($data) && trim($data) == '') $list->_wr_name = 'wr_data1';
-    $level = $level == -1 || $list->_wr_name == 'wr_data0' ? count($list->_p_list) : $level;
-    $acceptor = empty($list->_p_list[$level]) ? null :
-                      $list->_p_list[$level];
-    if ($acceptor) $acceptor = $acceptor->child_select_last();
-    if ($acceptor) $acceptor = $acceptor->child_select($list->_wr_name);
-    if ($acceptor) {
-      if ($list->_wr_name == 'wr_data0') {
-        $acceptor->child_insert(
-          is_string($data) ? new text(nl.$data) : $data
-        );
-      }
-      if ($list->_wr_name == 'wr_data1') {
-        if (is_string($data) && trim($data) == '') {
+    switch ($list->_wr_name) {
+      case 'wr_data0':
+        $wr_data0_level = count($list->_p_list);
+        $acceptor = empty($list->_p_list[$wr_data0_level]) ? null :
+                          $list->_p_list[$wr_data0_level];
+        if ($acceptor) $acceptor = $acceptor->child_select_last();
+        if ($acceptor) $acceptor = $acceptor->child_select('wr_data0');
+        if ($acceptor) {
           $acceptor->child_insert(
-            new markup('p')
-          );
-        }
-        $p = $acceptor->child_select_last();
-        if ($p instanceof markup &&
-            $p->tag_name == 'p') {
-          $p->child_insert(
             is_string($data) ? new text(nl.$data) : $data
           );
         }
-      }
+        break;
+      case 'wr_data1':
+        if (is_string($data) && trim($data) == '') {
+          $list->_c_paragraph = null;
+        } else {
+          if (empty($list->_c_paragraph)) {
+            $wr_data1_level = min($level, count($list->_p_list));
+            $acceptor = empty($list->_p_list[$wr_data1_level]) ? null :
+                              $list->_p_list[$wr_data1_level];
+            if ($acceptor) $acceptor = $acceptor->child_select_last();
+            if ($acceptor) $acceptor = $acceptor->child_select('wr_data1');
+            if ($acceptor) {
+              $list->_c_paragraph = new markup('p');
+              $acceptor->child_insert(
+                $list->_c_paragraph
+              );
+            }
+          }
+          if (empty($list->_c_paragraph) == false) {
+            $list->_c_paragraph->child_insert(
+              is_string($data) ? new text(nl.$data) : $data
+            );
+          }
+        }
+        break;
     }
   }
 
@@ -84,7 +96,7 @@ namespace effectivecore {
       if ($n_header) {
       # special case: list|header
         if ($type_last == 'list') {
-          static::_list_data_insert($item_last, $n_header, -1);
+          static::_list_data_insert($item_last, $n_header);
           continue;
         }
       # default case
@@ -143,7 +155,7 @@ namespace effectivecore {
           $new_li->child_insert(new node(), 'wr_container');
           $new_li->child_insert(new node(), 'wr_data1');
           $item_last->_p_list[$l_level]->child_insert($new_li);
-          static::_list_data_insert($item_last, $c_matches['return'], -1);
+          static::_list_data_insert($item_last, $c_matches['return']);
           continue;
         }
       }
