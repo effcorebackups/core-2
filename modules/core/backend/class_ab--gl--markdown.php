@@ -74,9 +74,7 @@ namespace effectivecore {
       $l_level = (int)floor((($c_indent - 0) / 4) + 1) ?: 1;
       $p_level = (int)floor((($c_indent - 1) / 4) + 1) ?: 1;
       $item_last = $pool->child_select_last();
-      $item_prev = $pool->child_select_prev($item_last);
       $type_last = static::_node_universal_type_get($item_last);
-      $type_prev = static::_node_universal_type_get($item_prev);
       $c_matches = [];
 
     # headers
@@ -180,7 +178,7 @@ namespace effectivecore {
 
     # paragraphs
     # ─────────────────────────────────────────────────────────────────────
-    # special case: list|text, list|nl
+    # special cases: list|text, list|nl
       if ($type_last == 'list') {
         static::_list_data_insert($item_last, $c_string, $p_level);
         continue;
