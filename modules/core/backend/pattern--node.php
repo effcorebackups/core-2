@@ -58,14 +58,6 @@ namespace effectivecore {
     return $return;
   }
 
-  function child_delete($id) {
-    unset($this->children[$id]);
-  }
-
-  function child_change($id, $new_child) {
-    $this->children[$id] = $new_child;
-  }
-
   function child_insert($child, $new_id = null) {
     $id = ($new_id !== null ?
            $new_id : count($this->children));
@@ -85,6 +77,14 @@ namespace effectivecore {
     }
     $this->children = $children;
     return $id;
+  }
+
+  function child_change($id, $new_child) {
+    $this->children[$id] = $new_child;
+  }
+
+  function child_delete($id) {
+    unset($this->children[$id]);
   }
 
   ##############

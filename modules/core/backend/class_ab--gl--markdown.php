@@ -30,8 +30,8 @@ namespace effectivecore {
       # add data to the list
         $wr_data0_level = count($list->_p_list);
         $acceptor = empty($list->_p_list[$wr_data0_level]) ? null :
-                          $list->_p_list[$wr_data0_level];
-        if ($acceptor) $acceptor = $acceptor->child_select_last();
+                          $list->_p_list[$wr_data0_level];         # get list container
+        if ($acceptor) $acceptor = $acceptor->child_select_last(); # get last li
         if ($acceptor) $acceptor = $acceptor->child_select('wr_data0');
         if ($acceptor) {
           $acceptor->child_insert(
@@ -50,14 +50,34 @@ namespace effectivecore {
         if (empty($list->_c_paragraph) && $c_indent > 0) {
           $wr_data1_level = min($level, count($list->_p_list));
           $acceptor = empty($list->_p_list[$wr_data1_level]) ? null :
-                            $list->_p_list[$wr_data1_level];
-          if ($acceptor) $acceptor = $acceptor->child_select_last();
+                            $list->_p_list[$wr_data1_level];         # get list container
+          if ($acceptor) $acceptor = $acceptor->child_select_last(); # get last li
           if ($acceptor) $acceptor = $acceptor->child_select('wr_data1');
           if ($acceptor) {
             $list->_c_paragraph = new markup('p');
             $acceptor->child_insert(
               $list->_c_paragraph
             );
+          }
+        # convert text in previous lists to paragraphs
+          foreach ($list->_p_list as $c_level => $c_pointer) {
+            if ($c_level <= $level) {
+              $acceptor = $list->_p_list[$c_level];
+              if ($acceptor) $acceptor = $acceptor->child_select_last();
+              if ($acceptor) $acceptor = $acceptor->child_select('wr_data0');
+              if ($acceptor) {
+                $new_p = new markup('p');
+                foreach ($acceptor->child_select_all() as $id => $c_child) {
+                  if ($c_child instanceof text) {
+                    $new_p->child_insert($c_child);
+                    $acceptor->child_delete($id);
+                  }
+                }
+                if ($new_p->child_count()) {
+                  $acceptor->child_insert($new_p);
+                }
+              }
+            }
           }
         }
       # add data to current paragraph
