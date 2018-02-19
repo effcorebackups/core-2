@@ -99,8 +99,8 @@ namespace effectivecore {
       $c_indent = strspn($c_string, ' ');
       $l_level = (int)floor((($c_indent - 0) / 4) + 1) ?: 1;
       $p_level = (int)floor((($c_indent - 1) / 4) + 1) ?: 1;
-      $item_last = $pool->child_select_last();
-      $type_last = static::_node_universal_type_get($item_last);
+      $last_item = $pool->child_select_last();
+      $last_type = static::_node_universal_type_get($last_item);
       $c_matches = [];
 
     # headers
@@ -110,17 +110,17 @@ namespace effectivecore {
         if ($c_matches['marker'][0] == '=') $n_header = new markup('h1', [], $strings[$c_num-1]);
         if ($c_matches['marker'][0] == '-') $n_header = new markup('h2', [], $strings[$c_num-1]);
       # remove previous insertion
-        if ($type_last == 'p' && $item_last->child_select_first() instanceof text) $pool->child_delete($pool->child_select_last_id());
-        if ($type_last == 'header')   $pool->child_delete($pool->child_select_last_id());
-        if ($type_last == 'hr')       $pool->child_delete($pool->child_select_last_id());
+        if ($last_type == 'p' && $last_item->child_select_first() instanceof text) $pool->child_delete($pool->child_select_last_id());
+        if ($last_type == 'header')   $pool->child_delete($pool->child_select_last_id());
+        if ($last_type == 'hr')       $pool->child_delete($pool->child_select_last_id());
       }
       if (preg_match('%^(?<marker>[#]{1,6})(?<return>.*)$%S', $c_string, $c_matches)) {
         $n_header = new markup('h'.strlen($c_matches['marker']), [], $c_matches['return']);
       }
       if ($n_header) {
       # special case: list|header
-        if ($type_last == 'list') {
-          static::_list_data_insert($item_last, $n_header, $c_indent);
+        if ($last_type == 'list') {
+          static::_list_data_insert($last_item, $n_header, $c_indent);
           continue;
         }
       # default case
@@ -146,40 +146,40 @@ namespace effectivecore {
                        '(?<noises>[ ]{1,})'.
                        '(?<return>[^ ].+)$%S', $c_string, $c_matches)) {
       # special cases: p|list, blockquote|list, code|list
-        if ($type_last == 'p')          {$item_last->child_insert(new text(nl.$c_string)); continue;}
-        if ($type_last == 'blockquote') {$item_last->child_select('text')->text_append(nl.$c_string); continue;}
-        if ($type_last == 'pre')        {$pool->child_insert(new text(htmlspecialchars($c_string))); continue;}
+        if ($last_type == 'p')          {$last_item->child_insert(new text(nl.$c_string)); continue;}
+        if ($last_type == 'blockquote') {$last_item->child_select('text')->text_append(nl.$c_string); continue;}
+        if ($last_type == 'pre')        {$pool->child_insert(new text(htmlspecialchars($c_string))); continue;}
       # create new list container
-        if ($type_last != 'list' && $c_indent < 4) {
-          $item_last = new markup($c_matches['dot'] ? 'ol' : 'ul');
-          $item_last->_p_list[1] = $item_last;
-          $type_last = 'list';
-          $pool->child_insert($item_last);
+        if ($last_type != 'list' && $c_indent < 4) {
+          $last_item = new markup($c_matches['dot'] ? 'ol' : 'ul');
+          $last_item->_p_list[1] = $last_item;
+          $last_type = 'list';
+          $pool->child_insert($last_item);
         }
-        if ($type_last == 'list') {
+        if ($last_type == 'list') {
         # create new list sub container (ol/ul)
-          if (empty($item_last->_p_list[$l_level-0]) &&
-              empty($item_last->_p_list[$l_level-1]) == false) {
+          if (empty($last_item->_p_list[$l_level-0]) &&
+              empty($last_item->_p_list[$l_level-1]) == false) {
             $new_container = new markup($c_matches['dot'] ? 'ol' : 'ul');
-                         $item_last->_p_list[$l_level-0] = $new_container;
-            $parent_li = $item_last->_p_list[$l_level-1]->child_select_last();
+                         $last_item->_p_list[$l_level-0] = $new_container;
+            $parent_li = $last_item->_p_list[$l_level-1]->child_select_last();
             if ($parent_li) $parent_li->child_select('wr_container')
                                       ->child_insert($new_container);
           }
         # remove old pointers to list containers (ol/ul)
-          foreach ($item_last->_p_list as $c_level => $c_pointer) {
+          foreach ($last_item->_p_list as $c_level => $c_pointer) {
             if ($c_level > $l_level) {
-              unset($item_last->_p_list[$c_level]);
+              unset($last_item->_p_list[$c_level]);
             }
           }
         # insert new list item (li)
-          unset($item_last->_wr_name);
+          unset($last_item->_wr_name);
           $new_li = new markup('li');
           $new_li->child_insert(new node(), 'wr_data0');
           $new_li->child_insert(new node(), 'wr_container');
           $new_li->child_insert(new node(), 'wr_data1');
-          $item_last->_p_list[$l_level]->child_insert($new_li);
-          static::_list_data_insert($item_last, $c_matches['return'], $c_indent);
+          $last_item->_p_list[$l_level]->child_insert($new_li);
+          static::_list_data_insert($last_item, $c_matches['return'], $c_indent);
           continue;
         }
       }
@@ -190,13 +190,13 @@ namespace effectivecore {
                        '(?<marker>[>][ ]{0,1})'.
                        '(?<return>.+)$%S', $c_string, $c_matches)) {
       # create new blockquote container
-        if ($type_last != 'blockquote') {
-          $item_last = new markup('blockquote');
-          $item_last->child_insert(new text(''), 'text');
-          $pool->child_insert($item_last);
+        if ($last_type != 'blockquote') {
+          $last_item = new markup('blockquote');
+          $last_item->child_insert(new text(''), 'text');
+          $pool->child_insert($last_item);
         }
       # insert new blockquote string
-        $item_last->child_select('text')->text_append(
+        $last_item->child_select('text')->text_append(
           nl.$c_matches['return']
         );
         continue;
@@ -205,18 +205,18 @@ namespace effectivecore {
     # paragraphs
     # ─────────────────────────────────────────────────────────────────────
     # special cases: list|text, list|nl
-      if ($type_last == 'list') {
-        if (static::_list_data_insert($item_last, $c_string, $c_indent, $p_level)) {
+      if ($last_type == 'list') {
+        if (static::_list_data_insert($last_item, $c_string, $c_indent, $p_level)) {
           continue;
         }
       }
       if (trim($c_string) == '') {
-        if ($type_last == 'text') {$item_last->text_append(nl); continue;}
-        if ($type_last != 'text') {$pool->child_insert(new text(nl)); continue;}
+        if ($last_type == 'text') {$last_item->text_append(nl); continue;}
+        if ($last_type != 'text') {$pool->child_insert(new text(nl)); continue;}
       } else {
       # special cases: blockquote|text, p|text
-        if ($type_last == 'blockquote') {$item_last->child_select('text')->text_append(nl.$c_string); continue;}
-        if ($type_last == 'p')          {$item_last->child_insert(new text(nl.$c_string)); continue;}
+        if ($last_type == 'blockquote') {$last_item->child_select('text')->text_append(nl.$c_string); continue;}
+        if ($last_type == 'p')          {$last_item->child_insert(new text(nl.$c_string)); continue;}
       # special cases: |text, header|text, hr|text
         if ($c_indent < 4) {
           $pool->child_insert(new markup('p', [], $c_string));
@@ -230,13 +230,13 @@ namespace effectivecore {
                        '(?<noises>[ ]{0,})'.
                        '(?<return>[^ ].*)$%S', $c_string, $c_matches)) {
       # create new code container
-        if ($type_last != 'pre') {
-          $item_last = new markup('pre');
-          $item_last->child_insert(new markup('code'), 'code');
-          $pool->child_insert($item_last);
+        if ($last_type != 'pre') {
+          $last_item = new markup('pre');
+          $last_item->child_insert(new markup('code'), 'code');
+          $pool->child_insert($last_item);
         }
       # insert new code string
-        $item_last->child_select('code')->child_insert(
+        $last_item->child_select('code')->child_insert(
           new text(nl.htmlspecialchars($c_matches['return']))
         );
         continue;
