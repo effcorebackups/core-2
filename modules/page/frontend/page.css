@@ -10,7 +10,7 @@
     background: white}
 
   /* page sizes */
-  x-grid      {display: block; max-width: 800px; margin: 0 auto; min-height: 200px}
+  x-grid      {display: block; max-width: 800px; margin: 18px auto 0 auto; min-height: 200px}
   x-copyright {display: block; max-width: 800px; margin: 0 auto; padding: 50px 0; text-align: center; font-size: .8em; font-style: normal}
 
   /* headers */

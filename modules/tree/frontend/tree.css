@@ -2,6 +2,7 @@
   x-tree {display: block; position: relative}
 
   /* menu Main: sizes and orientation */
+  x-tree.main {display: block; max-width: 800px; margin: 0 auto}
   x-tree.main ul,
   x-tree.main li {margin: 0; padding: 0; list-style: none}
   x-tree.main > ul > li {float: left; cursor: default}

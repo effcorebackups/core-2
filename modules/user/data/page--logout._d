@@ -10,7 +10,7 @@ pages
       - registered: registered
     content
     - block_menu_main
-        region: head_1
+        region: main_menu
         type: link
         dpath: trees/core/main
     - block_menu_user
