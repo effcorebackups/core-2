@@ -106,7 +106,7 @@ namespace effectivecore {
         # render meta
           if (isset($c_item->favicons)) {
             foreach ($c_item->favicons as $c_icon) {
-              $c_url = new url('/modules/'.$module_id.'/'.$c_icon->file);
+              $c_url = new url('/system/'.$module_id.'/'.$c_icon->file);
               $return->meta->child_insert(new markup_simple('link', [
                 'rel'   => $c_icon->rel,
                 'type'  => $c_icon->type,
@@ -119,7 +119,7 @@ namespace effectivecore {
         # render styles
           if (isset($c_item->styles)) {
             foreach ($c_item->styles as $c_style) {
-              $c_url = new url('/modules/'.$module_id.'/'.$c_style->file);
+              $c_url = new url('/system/'.$module_id.'/'.$c_style->file);
               $return->styles->child_insert(new markup_simple('link', [
                 'rel'   => 'stylesheet',
                 'media' => $c_style->media,
@@ -131,7 +131,7 @@ namespace effectivecore {
         # render script
           if (isset($c_item->script)) {
             foreach ($c_item->script as $c_script) {
-              $c_url = new url('/modules/'.$module_id.'/'.$c_script->file);
+              $c_url = new url('/system/'.$module_id.'/'.$c_script->file);
               $return->script->child_insert(new markup('script', [
                 'src' => $c_url->get_full()
               ]));

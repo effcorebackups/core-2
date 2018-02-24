@@ -10,19 +10,19 @@ namespace effectivecore {
   ### single entry point ###
   ##########################
 
-  const dir_root        = __DIR__.'/';
-  const dir_dynamic     = __DIR__.'/dynamic/';
-  const dir_modules     = __DIR__.'/modules/';
-  const nl              = "\n";
-  const tb              = "\t";
-  const br              = "<br/>";
+  const dir_root    = __DIR__.'/';
+  const dir_dynamic = __DIR__.'/dynamic/';
+  const dir_system  = __DIR__.'/system/';
+  const nl          = "\n";
+  const tb          = "\t";
+  const br          = "<br/>";
 
-  require_once('modules/core/backend/class_ab--gl--factory.php');
-  require_once('modules/core/backend/class_ab--gl--timer.php');
-  require_once('modules/core/backend/class_ab--gl--console.php');
-  require_once('modules/core/backend/class_ab--gl--dynamic.php');
-  require_once('modules/core/backend/class_ab--gl--cache.php');
-  require_once('modules/core/backend/class--gl--file.php');
+  require_once('system/core/backend/class_ab--gl--factory.php');
+  require_once('system/core/backend/class_ab--gl--timer.php');
+  require_once('system/core/backend/class_ab--gl--console.php');
+  require_once('system/core/backend/class_ab--gl--dynamic.php');
+  require_once('system/core/backend/class_ab--gl--cache.php');
+  require_once('system/core/backend/class--gl--file.php');
   spl_autoload_register('\effectivecore\factory::autoload');
 
   use \effectivecore\url as url;
