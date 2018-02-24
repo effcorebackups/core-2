@@ -1,27 +1,28 @@
 
-  /* console */
   x-console {display: block; max-width: 800px; margin: 100px auto 100px auto}
-  x-console table.logs {border-collapse: collapse; width: 100%; margin: 20px 0; font-size: .9em}
-  x-console table.logs thead {border-bottom: 5px solid %%_color_bg}
-  x-console table.logs thead th {padding: 12px 7px; font-weight: normal; font-size: 1.2em; text-align: left}
-  x-console table.logs thead th:first-child {padding-left: 17px}
-  x-console table.logs td {padding: 3px 7px; vertical-align: top}
-  x-console table.logs td:first-child {padding-left: 17px}
 
-  x-console table.logs tr.autoload    {background-color: papayawhip}
-  x-console table.logs tr.file        {background-color: aliceblue}
-  x-console table.logs tr.event       {background-color: lavender}
-  x-console table.logs tr.storage     {background-color: honeydew}
-  x-console table.logs td.value-error {background-color: pink}
+  /* information structures */
+  table.logs {border-collapse: collapse; width: 100%; margin: 20px 0; font-size: .9em}
+  table.logs thead {border-bottom: 5px solid %%_color_bg}
+  table.logs thead th {padding: 12px 7px; font-weight: normal; font-size: 1.2em; text-align: left}
+  table.logs thead th:first-child {padding-left: 17px}
+  table.logs td {padding: 3px 7px; vertical-align: top}
+  table.logs td:first-child {padding-left: 17px}
+
+  table.logs tr.autoload    {background-color: papayawhip}
+  table.logs tr.file        {background-color: aliceblue}
+  table.logs tr.event       {background-color: lavender}
+  table.logs tr.storage     {background-color: honeydew}
+  table.logs td.value-error {background-color: pink}
   
-  x-console table.logs tr.query td.name {font-size: .9em}
+  table.logs tr.query td.name {font-size: .9em}
 
-  x-console dl.diagram-load {margin: 50px 0; padding: 30px; border: 1px solid %%_color_border; border-top: 5px solid %%_color_bg}
-  x-console dl.diagram-load dt {margin: 0 10px 0 0; padding: 0; float: left; min-width: 290px; font-size: 1.2em; line-height: 1.2em; text-align: right}
-  x-console dl.diagram-load dd {margin: 0 0 0 300px; padding: 0; font-size: .9em}
+  dl.diagram-load {margin: 50px 0; padding: 30px; border: 1px solid %%_color_border; border-top: 5px solid %%_color_bg}
+  dl.diagram-load dt {margin: 0 10px 0 0; padding: 0; float: left; min-width: 290px; font-size: 1.2em; line-height: 1.2em; text-align: right}
+  dl.diagram-load dd {margin: 0 0 0 300px; padding: 0; font-size: .9em}
 
-  x-console dl.info {margin: 50px 0; padding: 5px 0; border: 1px solid %%_color_border; border-top: 5px solid %%_color_bg}
-  x-console dl.info dt {margin: 0 10px 0 0; padding: 3px 3px 3px 14px; float: left; min-width: 200px}
-  x-console dl.info dd {margin: 0 0 0 210px; padding: 3px}
+  dl.info {margin: 50px 0; padding: 5px 0; border: 1px solid %%_color_border; border-top: 5px solid %%_color_bg}
+  dl.info dt {margin: 0 10px 0 0; padding: 3px 3px 3px 14px; float: left; min-width: 200px}
+  dl.info dd {margin: 0 0 0 210px; padding: 3px}
 
   x-scale {display: block; height: 5px; background: %%_color_bg}

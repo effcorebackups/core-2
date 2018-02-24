@@ -21,3 +21,14 @@ tree_items
     - href: /admin/modules
     - class
       - modules: modules
+- info|tree_item
+    id: info
+    id_parent: admin
+    title: Information
+    access
+      roles
+      - admins: admins
+    attributes
+    - href: /admin/info
+    - class
+      - info: info

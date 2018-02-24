@@ -6,6 +6,7 @@
 
 namespace effectivecore\modules\core {
           use const \effectivecore\br;
+          use \effectivecore\node as node;
           use \effectivecore\table as table;
           use \effectivecore\markup as markup;
           use \effectivecore\module as module;
@@ -14,6 +15,14 @@ namespace effectivecore\modules\core {
           use \effectivecore\table_body_row_cell as table_body_row_cell;
           use \effectivecore\control_actions_list as control_actions_list;
           abstract class events_page extends \effectivecore\events_page {
+
+  static function on_show_info($page) {
+    $title = new markup('h2', [], 'Shared information'); # @todo: move title to block settings
+    $info = new markup('dl', ['class' => ['info' => 'info']]);
+    $info->child_insert(new markup('dt', [], 'param'));
+    $info->child_insert(new markup('dd', [], 'value'));
+    return new node([], [$title, $info]);
+  }
 
   static function on_show_modules($page) {
     $thead = [['Module information', 'State', '']];

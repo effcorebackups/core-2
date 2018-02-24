@@ -1,0 +1,37 @@
+pages
+- info|page
+    title: Information
+    https: true
+    display
+      check: url
+      match: %^/admin/info$%
+    access
+      roles
+      - admins: admins
+    content
+    - block_menu_main
+        region: main_menu
+        type: link
+        dpath: trees/core/main
+    - block_menu_user
+        region: head_2
+        type: code
+        handler: \effectivecore\modules\core\events_page::on_show_block_menu_user
+    - block_logo
+        region: head_3
+        type: code
+        handler: \effectivecore\modules\core\events_page::on_show_block_logo
+    # ─────────────────────────────────────────────────────────────────────
+    - block_title
+        region: main_1
+        type: code
+        handler: \effectivecore\modules\core\events_page::on_show_block_title
+    - block_info
+        region: main_1
+        type: code
+        handler: \effectivecore\modules\core\events_page::on_show_info
+    # ─────────────────────────────────────────────────────────────────────
+    - block_copyright
+        region: copyright
+        type: code
+        handler: \effectivecore\modules\core\events_page::on_show_block_copyright
