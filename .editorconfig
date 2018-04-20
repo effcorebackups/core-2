@@ -3,22 +3,29 @@ root = true
 
 # unix-style in every file
 [*]
+charset = utf-8
 end_of_line = lf
 indent_style = space
 indent_size = 2
 trim_trailing_whitespace = false
+insert_final_newline = false
 
 [*.data]
 file_type = yaml
+syntax = yaml
 
 [*.jsd]
 file_type = javascript
+syntax = javascript
 
 [*.cssd]
 file_type = css
+syntax = css
 
 [*.tpl]
 file_type = html
+syntax = html
 
 [*.svgd]
 file_type = xml
+syntax = xml
