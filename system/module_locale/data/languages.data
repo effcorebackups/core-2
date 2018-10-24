@@ -9,4 +9,4 @@ languages
     title
       en: Russian
       native: Русский
-    license_path: license-ru.md
+    license_path: system/module_locale/module_translation_ru/docs/license-ru.md
