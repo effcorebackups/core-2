@@ -9,6 +9,7 @@ namespace effcore {
 
   public $code;
   public $title;
+  public $license_path;
 
   ###########################
   ### static declarations ###
