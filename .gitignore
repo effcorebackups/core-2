@@ -6,4 +6,6 @@
 !/dynamic/files/readme.md
 !/dynamic/logs/readme.md
 !/dynamic/tmp/readme.md
-!/dynamic/modules/readme.md
+
+/modules/*
+!/modules/readme.md
