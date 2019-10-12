@@ -1,6 +1,6 @@
 events
   on_module_enable
-  - translation_by|event
+  - translation_be|event
       for: translation_be
       handler: \effcore\modules\translation_be\events_module::on_enable
   on_module_disable
