@@ -2,4 +2,5 @@ translations
 - ru|translation
     code: ru
     data
-    - Layout "Example": Макет "Пример"
+    - Layout "Profile Classic": Макет "Профиль Классика"
+    - profile classic: профиль классика
