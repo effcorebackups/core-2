@@ -1,81 +1,35 @@
 selections
-- text_about_classic|selection
-    id: text_about_classic
-    title: Text About Us
+- social_networks_classic|selection
+    id: social_networks_classic
+    title: Social networks
     template: content
     decorator_params
     - view_type: template
-    - template: content
-    - template_row: text
+    - template_row: logotype
     - template_row_mapping
-      - text: text.text
+      - title: logotype.title
+      - url: logotype.url
+      - src: logotype.path
     query_params
     - conditions
-      - id_!f: ~text.id
-      - operator: =
-      - id_!v: about_classic
+      - id_!f: ~logotype.id
+      - id_in_begin: in (
+      - id_in_!,
+        - 0_!v: twitter_classic
+        - 1_!v: facebook_classic
+        - 2_!v: instagram_classic
+      - id_in_end: )
     fields
-    - text.text
+    - logotype.title
         type: field
-        entity_name: text
-        entity_field_name: text
-- text_contact_classic|selection
-    id: text_contact_classic
-    title: Text Contact Us
-    template: content
-    decorator_params
-    - view_type: template
-    - template: content
-    - template_row: text
-    - template_row_mapping
-      - text: text.text
-    query_params
-    - conditions
-      - id_!f: ~text.id
-      - operator: =
-      - id_!v: contact_classic
-    fields
-    - text.text
+        entity_name: logotype
+        entity_field_name: title
+        is_apply_translation: true
+    - logotype.url
         type: field
-        entity_name: text
-        entity_field_name: text
-- text_copyright_classic|selection
-    id: text_copyright_classic
-    title: Text Copyright
-    template: content
-    decorator_params
-    - view_type: template
-    - template: content
-    - template_row: text
-    - template_row_mapping
-      - text: text.text
-    query_params
-    - conditions
-      - id_!f: ~text.id
-      - operator: =
-      - id_!v: copyright_classic
-    fields
-    - text.text
+        entity_name: logotype
+        entity_field_name: url
+    - logotype.path
         type: field
-        entity_name: text
-        entity_field_name: text
-- text_front_classic|selection
-    id: text_front_classic
-    title: Text Front
-    template: content
-    decorator_params
-    - view_type: template
-    - template: content
-    - template_row: text
-    - template_row_mapping
-      - text: text.text
-    query_params
-    - conditions
-      - id_!f: ~text.id
-      - operator: =
-      - id_!v: front_classic
-    fields
-    - text.text
-        type: field
-        entity_name: text
-        entity_field_name: text
+        entity_name: logotype
+        entity_field_name: path
