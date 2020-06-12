@@ -49,13 +49,13 @@ namespace effcore\modules\core {
       if ($repo_path_cur !== false) {
         $result = [];
         $commands = [
-          'whoami '                                                                              .$stderr_to_stdout,
-          'git --version '                                                                       .$stderr_to_stdout,
-          'rm -rf '.$repo_path_cur.'/.git '                                                      .$stderr_to_stdout,
-          'rm -rf '.$repo_path_tmp.' '                                                           .$stderr_to_stdout,
-          'git clone --branch='.$bundle->repo_branch.' '.$bundle->repo_url.' '.$repo_path_tmp.' '.$stderr_to_stdout,
-          'mv '    .$repo_path_tmp.'/.git '.$repo_path_cur.                                   ' '.$stderr_to_stdout,
-          'rm -rf '.$repo_path_tmp.                                                           ' '.$stderr_to_stdout];
+          'whoami '                                                                                 .$stderr_to_stdout,
+          'git --version '                                                                          .$stderr_to_stdout,
+          'rm -rf '.$repo_path_cur.'/.git '                                                         .$stderr_to_stdout,
+          'rm -rf '.$repo_path_tmp.' '                                                              .$stderr_to_stdout,
+          'git clone --branch='.$bundle->repo_branch.' '.$bundle->repo_origin.' '.$repo_path_tmp.' '.$stderr_to_stdout,
+          'mv '    .$repo_path_tmp.'/.git '.$repo_path_cur.                                      ' '.$stderr_to_stdout,
+          'rm -rf '.$repo_path_tmp.                                                              ' '.$stderr_to_stdout];
         foreach ($commands as $c_num => $c_command) {
           $return_var = null;
           $result['command-'.$c_num] = '$ '.$c_command;
