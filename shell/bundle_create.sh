@@ -5,6 +5,7 @@ git -C ../ reset --hard
 git -C ../ pull
 
 cd ../
+
 build=$(grep 'build: [0-9]\{4,5\}' system/bundle.data | sed 's/  build: //g')
 bundle_name="../effcore-$build.zip"
 
