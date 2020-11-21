@@ -1,5 +1,3 @@
-/dynamic/data/data.sqlite
-
 /dynamic/*
 !/dynamic/cache/readme.md
 !/dynamic/data/readme.md
