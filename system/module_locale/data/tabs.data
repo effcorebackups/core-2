@@ -1,6 +1,3 @@
 tabs
-- languages|tabs
-    id: languages
-    attributes
-    - class
-      - =: languages
+- locale|tabs
+    id: locale
