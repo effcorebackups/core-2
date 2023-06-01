@@ -1044,7 +1044,7 @@ instances
     values
     - id: user
     - id_layout: original_classic
-    - title: User %%_nickname_page_context{nickname}
+    - title: User %%_nickname_page_context(nickname)
     - url: /user/%%_nickname
     - lang_code: en
     - is_https: 1
@@ -1105,7 +1105,7 @@ instances
     values
     - id: user_edit
     - id_layout: original_classic
-    - title: Edit user %%_nickname_page_context{nickname}
+    - title: Edit user %%_nickname_page_context(nickname)
     - url: /user/%%_nickname/edit
     - lang_code: en
     - is_https: 1
@@ -1682,7 +1682,7 @@ instances
     values
     - id: user_ru
     - id_layout: original_classic
-    - title: Пользователь %%_nickname_page_context{nickname}
+    - title: Пользователь %%_nickname_page_context(nickname)
     - url: /ru/user/%%_nickname
     - lang_code: ru
     - is_https: 1
@@ -1748,7 +1748,7 @@ instances
     values
     - id: user_edit_ru
     - id_layout: original_classic
-    - title: Редактировать пользователя %%_nickname_page_context{nickname}
+    - title: Редактировать пользователя %%_nickname_page_context(nickname)
     - url: /ru/user/%%_nickname/edit
     - lang_code: ru
     - is_https: 1
@@ -2429,7 +2429,7 @@ instances
         - nickname_!v|text
             is_apply_translation: false
             is_apply_tokens: true
-            text: %%_nickname_page_context{nickname}
+            text: %%_nickname_page_context(nickname)
       - limit: 1
     - fields
       - main
