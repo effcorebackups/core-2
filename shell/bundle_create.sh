@@ -28,6 +28,7 @@ rm $bundle_name
   find .                        -maxdepth 1 -type f      -name 'index.php'            & \
   find .                        -maxdepth 1 -type f      -name 'license.md'           & \
   find .                        -maxdepth 1 -type f      -name 'web.config'           & \
+  find .                        -maxdepth 1 -type f      -name 'readme.md'            & \
   find dynamic                  -maxdepth 1 -type f      -name 'readme.md'            & \
   find dynamic/cache            -maxdepth 1 -type f      -name 'readme.md'            & \
   find dynamic/data             -maxdepth 1 -type f      -name 'readme.md'            & \
